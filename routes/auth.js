@@ -96,7 +96,7 @@ router.post(
  * @param {function} controller - ['verifyEmail']
  * @returns {object} - router
  * @access public
- * @method POST
+ * @method GET
  * @example ['/auth/verify-email?token=jwt-token', '/auth/verify-email?redirect=/dashboard]
  */
 router.get("/verify-email", auth.validateVerifyEmail, verifyEmail);
