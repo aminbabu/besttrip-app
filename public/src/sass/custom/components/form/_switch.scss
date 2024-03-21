@@ -1,0 +1,21 @@
+.form-check-input-custom {
+  &:not(:checked) {
+    + .enabled {
+      display: none;
+
+      + .disabled {
+        display: inline-block;
+      }
+    }
+  }
+
+  &:checked {
+    + .enabled {
+      display: inline-block;
+
+      + .disabled {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+[data-kt-app-layout="light-sidebar"] {
+  .kt-file-uploader {
+    &-label {
+      padding: 1rem;
+      border: 1px dashed $primary;
+      border-radius: $border-radius-lg;
+      background-color: $primary-light;
+      cursor: pointer;
+
+      @include media-breakpoint-up(lg) {
+        padding: 1.5rem;
+      }
+    }
+
+    &-input {
+      display: none;
+    }
+
+    &-preview {
+      max-width: 100%;
+      width: 10rem;
+      height: auto;
+      object-fit: cover;
+      border-radius: $border-radius-md;
+    }
+  }
+}
+
+[data-bs-theme="dark"] {
+  .kt-file-uploader {
+    &-label {
+      background-color: $gray-100-dark;
+    }
+  }
+}

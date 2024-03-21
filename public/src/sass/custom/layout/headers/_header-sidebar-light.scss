@@ -1,0 +1,20 @@
+[data-kt-app-layout=light-sidebar] {
+  .app-header {
+    z-index: 100;
+    background-color: $white;
+  }
+}
+
+[data-kt-app-header-minimize="on"] {
+  .app-header {
+    @include media-breakpoint-up(lg) {
+      box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
+    }
+  }
+}
+
+[data-bs-theme="dark"] {
+  .app-header {
+    background-color: $coal-400;
+  }
+}

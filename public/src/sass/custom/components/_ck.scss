@@ -1,0 +1,34 @@
+[data-kt-app-layout="light-sidebar"] {
+  .ck {
+    --ck-color-base-background: #{$gray-100};
+    --ck-color-toolbar-background: #{$gray-100};
+    --ck-color-base-border: #{$gray-100};
+    --ck-color-toolbar-border: #{$gray-100};
+    --ck-color-list-button-on-background: #{$primary};
+    --ck-color-list-button-on-background-focus: #{$primary};
+    --ck-color-focus-outer-shadow: #{$primary-light};
+    --ck-color-focus-disabled-shadow: #{$gray-100};
+    --ck-color-focus-border: #{$primary};
+    --ck-color-base-active-focus: #{$primary};
+    --ck-color-base-active: #{$primary};
+    --ck-color-base-active-focus-border: #{$primary};
+    --ck-focus-outer-shadow: #{$primary-light};
+    --ck-color-button-on-color: #{$primary};
+    --ck-color-button-on-background: #{$primary-light};
+    --ck-color-button-on-hover-background: #{$primary-light};
+    --ck-color-button-on-active-background: #{$primary-light};
+    --ck-focus-ring: 1px solid var(--ck-color-focus-border);
+    --ck-color-dropdown-panel-border: #{$gray-100};
+    --ck-color-text: #99a1b7;
+  }
+}
+
+[data-bs-theme="dark"] {
+  .ck {
+    --ck-color-base-background: #{$gray-100-dark};
+    --ck-color-toolbar-background: #{$gray-100-dark};
+    --ck-color-base-border: #{$gray-100-dark};
+    --ck-color-toolbar-border: #{$gray-100-dark};
+    --ck-color-text: #99a1b7;
+  }
+}
