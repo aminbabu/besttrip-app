@@ -20,6 +20,7 @@
     "mongoose": "^8.2.2",
     "morgan": "~1.9.1",
     "nodemailer": "^6.9.12",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "xss-shield": "^1.0.1"
   }
 }
