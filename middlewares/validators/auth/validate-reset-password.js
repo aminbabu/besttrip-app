@@ -12,7 +12,7 @@ const { expressValidator } = require("../../../handlers/errors");
 
 // validate reset password
 module.exports = [
-  query("token").notEmpty().withMessage("Token is required"),
+  query("token").isJWT().withMessage("Token is required"),
   body("password")
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters long"),
