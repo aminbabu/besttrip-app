@@ -14,6 +14,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
+const { default: xssInstance } = require("xss-shield");
 
 // routers
 const { authRouter } = require("./routes/index");
@@ -38,6 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(helmet());
+app.use(xssInstance.xssShield());
 
 // routes
 app.use("/auth", authRouter);
