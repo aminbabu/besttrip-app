@@ -1,285 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!--begin::Head-->
-  <head>
-    <title><%= company?.name %> | Welcome Message</title>
-    <meta charset="utf-8" />
-    <meta
-      name="description"
-      content="<%= company?.name %> is a travel agency that provides the best services for booking flights, hotels, umrah, and visa. We offer the best packages for umrah and visa. We also provide the best services for booking flights and hotels. We are the best travel agency in the world. We provide the best services for booking flights, hotels, umrah, and visa. We offer the best packages for umrah and visa. We also provide the best services for booking flights and hotels. We are the best travel agency in the world. We provide the best services for booking flights, hotels, umrah, and visa."
-    />
-    <meta
-      name="keywords"
-      content="<%= company?.name?.toLowerCase() %>, flight, hotel, umrah, visa, umrah package, visa package, hotel booking, flight booking, umrah booking, visa booking, umrah package booking, visa package booking, hotel booking"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="<%= company?.name %>" />
-    <meta property="og:url" content="<%= company?.website %>" />
-    <meta property="og:site_name" content="<%= company?.name %>" />
-    <link rel="canonical" href="<%= company?.website %>" />
-    <link rel="shortcut icon" href="cid:favicon" />
-    <!--begin::Fonts(mandatory for all pages)-->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"
-    />
-    <!--end::Fonts-->
-    <!--begin::Global Styles Bundle(used by all pages)-->
-    <style>
-      :root,
-      [data-bs-theme="light"] {
-        --bs-blue: #0d6efd;
-        --bs-indigo: #6610f2;
-        --bs-purple: #6f42c1;
-        --bs-pink: #d63384;
-        --bs-red: #dc3545;
-        --bs-orange: #fd7e14;
-        --bs-yellow: #ffc107;
-        --bs-green: #198754;
-        --bs-teal: #20c997;
-        --bs-cyan: #0dcaf0;
-        --bs-black: #000000;
-        --bs-white: #ffffff;
-        --bs-gray: #78829d;
-        --bs-gray-dark: #252f4a;
-        --bs-gray-100: #f9f9f9;
-        --bs-gray-200: #f1f1f4;
-        --bs-gray-300: #dbdfe9;
-        --bs-gray-400: #c4cada;
-        --bs-gray-500: #99a1b7;
-        --bs-gray-600: #78829d;
-        --bs-gray-700: #4b5675;
-        --bs-gray-800: #252f4a;
-        --bs-gray-900: #071437;
-        --bs-light: #f9f9f9;
-        --bs-primary: #f50308;
-        --bs-secondary: #f9f9f9;
-        --bs-success: #009a34;
-        --bs-info: #0b8cdd;
-        --bs-warning: #f78212;
-        --bs-danger: #f8285a;
-        --bs-dark: #1e2129;
-        --bs-grayish-blue: #6f8593;
-        --bs-light-rgb: 249, 249, 249;
-        --bs-primary-rgb: 245, 3, 8;
-        --bs-secondary-rgb: 249, 249, 249;
-        --bs-success-rgb: 0, 154, 52;
-        --bs-info-rgb: 11, 140, 221;
-        --bs-warning-rgb: 247, 130, 18;
-        --bs-danger-rgb: 248, 40, 90;
-        --bs-dark-rgb: 30, 33, 41;
-        --bs-grayish-blue-rgb: 111, 133, 147;
-        --bs-primary-text-emphasis: #620103;
-        --bs-secondary-text-emphasis: #646464;
-        --bs-success-text-emphasis: #003e15;
-        --bs-info-text-emphasis: #043858;
-        --bs-warning-text-emphasis: #633407;
-        --bs-danger-text-emphasis: #631024;
-        --bs-light-text-emphasis: #4b5675;
-        --bs-dark-text-emphasis: #4b5675;
-        --bs-primary-bg-subtle: #fdcdce;
-        --bs-secondary-bg-subtle: #fefefe;
-        --bs-success-bg-subtle: #ccebd6;
-        --bs-info-bg-subtle: #cee8f8;
-        --bs-warning-bg-subtle: #fde6d0;
-        --bs-danger-bg-subtle: #fed4de;
-        --bs-light-bg-subtle: #fcfcfc;
-        --bs-dark-bg-subtle: #c4cada;
-        --bs-primary-border-subtle: #fb9a9c;
-        --bs-secondary-border-subtle: #fdfdfd;
-        --bs-success-border-subtle: #99d7ae;
-        --bs-info-border-subtle: #9dd1f1;
-        --bs-warning-border-subtle: #fccda0;
-        --bs-danger-border-subtle: #fca9bd;
-        --bs-light-border-subtle: #f1f1f4;
-        --bs-dark-border-subtle: #99a1b7;
-        --bs-white-rgb: 255, 255, 255;
-        --bs-black-rgb: 0, 0, 0;
-        --bs-font-sans-serif: Inter, Helvetica, "sans-serif";
-        --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
-          "Liberation Mono", "Courier New", monospace;
-        --bs-gradient: linear-gradient(
-          180deg,
+<!--begin::Head-->
+
+<head>
+  <title><%= company?.name %> | Welcome Message</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="<%= company?.name %> is a travel agency that provides the best services for booking flights, hotels, umrah, and visa. We offer the best packages for umrah and visa. We also provide the best services for booking flights and hotels. We are the best travel agency in the world. We provide the best services for booking flights, hotels, umrah, and visa. We offer the best packages for umrah and visa. We also provide the best services for booking flights and hotels. We are the best travel agency in the world. We provide the best services for booking flights, hotels, umrah, and visa." />
+  <meta name="keywords" content="<%= company?.name?.toLowerCase() %>, flight, hotel, umrah, visa, umrah package, visa package, hotel booking, flight booking, umrah booking, visa booking, umrah package booking, visa package booking, hotel booking" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="<%= company?.name %>" />
+  <meta property="og:url" content="<%= company?.website %>" />
+  <meta property="og:site_name" content="<%= company?.name %>" />
+  <link rel="canonical" href="<%= company?.website %>" />
+  <link rel="shortcut icon" href="cid:favicon" />
+  <!--begin::Fonts(mandatory for all pages)-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+  <!--end::Fonts-->
+  <!--begin::Global Styles Bundle(used by all pages)-->
+  <style>
+    :root,
+    [data-bs-theme="light"] {
+      --bs-blue: #0d6efd;
+      --bs-indigo: #6610f2;
+      --bs-purple: #6f42c1;
+      --bs-pink: #d63384;
+      --bs-red: #dc3545;
+      --bs-orange: #fd7e14;
+      --bs-yellow: #ffc107;
+      --bs-green: #198754;
+      --bs-teal: #20c997;
+      --bs-cyan: #0dcaf0;
+      --bs-black: #000000;
+      --bs-white: #ffffff;
+      --bs-gray: #78829d;
+      --bs-gray-dark: #252f4a;
+      --bs-gray-100: #f9f9f9;
+      --bs-gray-200: #f1f1f4;
+      --bs-gray-300: #dbdfe9;
+      --bs-gray-400: #c4cada;
+      --bs-gray-500: #99a1b7;
+      --bs-gray-600: #78829d;
+      --bs-gray-700: #4b5675;
+      --bs-gray-800: #252f4a;
+      --bs-gray-900: #071437;
+      --bs-light: #f9f9f9;
+      --bs-primary: #f50308;
+      --bs-secondary: #f9f9f9;
+      --bs-success: #009a34;
+      --bs-info: #0b8cdd;
+      --bs-warning: #f78212;
+      --bs-danger: #f8285a;
+      --bs-dark: #1e2129;
+      --bs-grayish-blue: #6f8593;
+      --bs-light-rgb: 249, 249, 249;
+      --bs-primary-rgb: 245, 3, 8;
+      --bs-secondary-rgb: 249, 249, 249;
+      --bs-success-rgb: 0, 154, 52;
+      --bs-info-rgb: 11, 140, 221;
+      --bs-warning-rgb: 247, 130, 18;
+      --bs-danger-rgb: 248, 40, 90;
+      --bs-dark-rgb: 30, 33, 41;
+      --bs-grayish-blue-rgb: 111, 133, 147;
+      --bs-primary-text-emphasis: #620103;
+      --bs-secondary-text-emphasis: #646464;
+      --bs-success-text-emphasis: #003e15;
+      --bs-info-text-emphasis: #043858;
+      --bs-warning-text-emphasis: #633407;
+      --bs-danger-text-emphasis: #631024;
+      --bs-light-text-emphasis: #4b5675;
+      --bs-dark-text-emphasis: #4b5675;
+      --bs-primary-bg-subtle: #fdcdce;
+      --bs-secondary-bg-subtle: #fefefe;
+      --bs-success-bg-subtle: #ccebd6;
+      --bs-info-bg-subtle: #cee8f8;
+      --bs-warning-bg-subtle: #fde6d0;
+      --bs-danger-bg-subtle: #fed4de;
+      --bs-light-bg-subtle: #fcfcfc;
+      --bs-dark-bg-subtle: #c4cada;
+      --bs-primary-border-subtle: #fb9a9c;
+      --bs-secondary-border-subtle: #fdfdfd;
+      --bs-success-border-subtle: #99d7ae;
+      --bs-info-border-subtle: #9dd1f1;
+      --bs-warning-border-subtle: #fccda0;
+      --bs-danger-border-subtle: #fca9bd;
+      --bs-light-border-subtle: #f1f1f4;
+      --bs-dark-border-subtle: #99a1b7;
+      --bs-white-rgb: 255, 255, 255;
+      --bs-black-rgb: 0, 0, 0;
+      --bs-font-sans-serif: Inter, Helvetica, "sans-serif";
+      --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      --bs-gradient: linear-gradient(180deg,
           rgba(255, 255, 255, 0.15),
-          rgba(255, 255, 255, 0)
-        );
-        --bs-body-font-family: var(--bs-font-sans-serif);
-        --bs-body-font-size: 1rem;
-        --bs-body-font-weight: 400;
-        --bs-body-line-height: 1.5;
-        --bs-body-color: #071437;
-        --bs-body-color-rgb: 7, 20, 55;
-        --bs-body-bg: #ffffff;
-        --bs-body-bg-rgb: 255, 255, 255;
-        --bs-emphasis-color: #000000;
-        --bs-emphasis-color-rgb: 0, 0, 0;
-        --bs-secondary-color: rgba(7, 20, 55, 0.75);
-        --bs-secondary-color-rgb: 7, 20, 55;
-        --bs-secondary-bg: #f1f1f4;
-        --bs-secondary-bg-rgb: 241, 241, 244;
-        --bs-tertiary-color: rgba(7, 20, 55, 0.5);
-        --bs-tertiary-color-rgb: 7, 20, 55;
-        --bs-tertiary-bg: #f9f9f9;
-        --bs-tertiary-bg-rgb: 249, 249, 249;
-        --bs-heading-color: #071437;
-        --bs-link-color: #f50308;
-        --bs-link-color-rgb: 245, 3, 8;
-        --bs-link-decoration: none;
-        --bs-link-hover-color: #cf0003;
-        --bs-link-hover-color-rgb: 207, 0, 3;
-        --bs-link-hover-decoration: none;
-        --bs-code-color: #b93993;
-        --bs-highlight-color: #071437;
-        --bs-highlight-bg: #fff3cd;
-        --bs-border-width: 1px;
-        --bs-border-style: solid;
-        --bs-border-color: #f1f1f4;
-        --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
-        --bs-border-radius: 0.475rem;
-        --bs-border-radius-sm: 0.425rem;
-        --bs-border-radius-lg: 0.625rem;
-        --bs-border-radius-xl: 1rem;
-        --bs-border-radius-xxl: 2rem;
-        --bs-border-radius-2xl: var(--bs-border-radius-xxl);
-        --bs-border-radius-pill: 50rem;
-        --bs-box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, 0.075);
-        --bs-box-shadow-sm: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
-        --bs-box-shadow-lg: 0 1rem 2rem 1rem rgba(0, 0, 0, 0.1);
-        --bs-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
-        --bs-focus-ring-width: 0.25rem;
-        --bs-focus-ring-opacity: 0.25;
-        --bs-focus-ring-color: rgba(245, 3, 8, 0.25);
-        --bs-form-valid-color: #009a34;
-        --bs-form-valid-border-color: #009a34;
-        --bs-form-invalid-color: #f8285a;
-        --bs-form-invalid-border-color: #f8285a;
-      }
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
+          rgba(255, 255, 255, 0));
+      --bs-body-font-family: var(--bs-font-sans-serif);
+      --bs-body-font-size: 1rem;
+      --bs-body-font-weight: 400;
+      --bs-body-line-height: 1.5;
+      --bs-body-color: #071437;
+      --bs-body-color-rgb: 7, 20, 55;
+      --bs-body-bg: #ffffff;
+      --bs-body-bg-rgb: 255, 255, 255;
+      --bs-emphasis-color: #000000;
+      --bs-emphasis-color-rgb: 0, 0, 0;
+      --bs-secondary-color: rgba(7, 20, 55, 0.75);
+      --bs-secondary-color-rgb: 7, 20, 55;
+      --bs-secondary-bg: #f1f1f4;
+      --bs-secondary-bg-rgb: 241, 241, 244;
+      --bs-tertiary-color: rgba(7, 20, 55, 0.5);
+      --bs-tertiary-color-rgb: 7, 20, 55;
+      --bs-tertiary-bg: #f9f9f9;
+      --bs-tertiary-bg-rgb: 249, 249, 249;
+      --bs-heading-color: #071437;
+      --bs-link-color: #f50308;
+      --bs-link-color-rgb: 245, 3, 8;
+      --bs-link-decoration: none;
+      --bs-link-hover-color: #cf0003;
+      --bs-link-hover-color-rgb: 207, 0, 3;
+      --bs-link-hover-decoration: none;
+      --bs-code-color: #b93993;
+      --bs-highlight-color: #071437;
+      --bs-highlight-bg: #fff3cd;
+      --bs-border-width: 1px;
+      --bs-border-style: solid;
+      --bs-border-color: #f1f1f4;
+      --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+      --bs-border-radius: 0.475rem;
+      --bs-border-radius-sm: 0.425rem;
+      --bs-border-radius-lg: 0.625rem;
+      --bs-border-radius-xl: 1rem;
+      --bs-border-radius-xxl: 2rem;
+      --bs-border-radius-2xl: var(--bs-border-radius-xxl);
+      --bs-border-radius-pill: 50rem;
+      --bs-box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, 0.075);
+      --bs-box-shadow-sm: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
+      --bs-box-shadow-lg: 0 1rem 2rem 1rem rgba(0, 0, 0, 0.1);
+      --bs-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+      --bs-focus-ring-width: 0.25rem;
+      --bs-focus-ring-opacity: 0.25;
+      --bs-focus-ring-color: rgba(245, 3, 8, 0.25);
+      --bs-form-valid-color: #009a34;
+      --bs-form-valid-border-color: #009a34;
+      --bs-form-invalid-color: #f8285a;
+      --bs-form-invalid-border-color: #f8285a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      font-size: 13px !important;
+      font-weight: 400;
+      font-family: Inter, Helvetica, "sans-serif";
+    }
+
+    @media screen and (max-width: 991.98px) {
+
       html,
       body {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-text-size-adjust: 100%;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        font-size: 13px !important;
-        font-weight: 400;
-        font-family: Inter, Helvetica, "sans-serif";
+        font-size: 12px !important;
       }
-      @media screen and (max-width: 991.98px) {
-        html,
-        body {
-          font-size: 12px !important;
-        }
-        body {
-          --bs-app-footer-height: auto;
-        }
+
+      body {
+        --bs-app-footer-height: auto;
       }
-      .py-10 {
-        padding-top: 2.5rem !important;
-        padding-bottom: 2.5rem !important;
-      }
-      .px-10 {
-        padding-right: 2.5rem !important;
-        padding-left: 2.5rem !important;
-      }
-      .flex-column-fluid {
-        flex: 1 0 auto;
-      }
+    }
+
+    .py-10 {
+      padding-top: 2.5rem !important;
+      padding-bottom: 2.5rem !important;
+    }
+
+    .px-10 {
+      padding-right: 2.5rem !important;
+      padding-left: 2.5rem !important;
+    }
+
+    .flex-column-fluid {
+      flex: 1 0 auto;
+    }
+
+    .scroll-y,
+    .hover-scroll-y,
+    .hover-scroll-overlay-y {
+      overflow-y: scroll;
+      position: relative;
+    }
+
+    @media screen and ((max-width: 991.98px)) {
+
       .scroll-y,
       .hover-scroll-y,
       .hover-scroll-overlay-y {
-        overflow-y: scroll;
-        position: relative;
+        overflow-y: auto;
       }
-      @media screen and ((max-width: 991.98px)) {
-        .scroll-y,
-        .hover-scroll-y,
-        .hover-scroll-overlay-y {
-          overflow-y: auto;
-        }
-      }
-      table {
-        caption-side: bottom;
-        border-collapse: collapse;
-      }
-      a {
-        transition: color 0.2s ease;
-        color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
-        text-decoration: none;
-      }
-    </style>
-    <!--end::Global Styles Bundle(used by all pages)-->
-  </head>
-  <!--end::Head-->
-  <!--begin::Body-->
-  <body id="kt_body" class="app-blank">
-    <!--begin::Theme mode setup on page load-->
-    <script>
-      var defaultThemeMode = "light";
-      var themeMode;
-      if (document.documentElement) {
-        if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
-          themeMode =
-            document.documentElement.getAttribute("data-bs-theme-mode");
+    }
+
+    table {
+      caption-side: bottom;
+      border-collapse: collapse;
+    }
+
+    a {
+      transition: color 0.2s ease;
+      color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+      text-decoration: none;
+    }
+  </style>
+  <!--end::Global Styles Bundle(used by all pages)-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body" class="app-blank">
+  <!--begin::Theme mode setup on page load-->
+  <script>
+    var defaultThemeMode = "light";
+    var themeMode;
+    if (document.documentElement) {
+      if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+        themeMode =
+          document.documentElement.getAttribute("data-bs-theme-mode");
+      } else {
+        if (localStorage.getItem("data-bs-theme") !== null) {
+          themeMode = localStorage.getItem("data-bs-theme");
         } else {
-          if (localStorage.getItem("data-bs-theme") !== null) {
-            themeMode = localStorage.getItem("data-bs-theme");
-          } else {
-            themeMode = defaultThemeMode;
-          }
+          themeMode = defaultThemeMode;
         }
-        if (themeMode === "system") {
-          themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-        }
-        document.documentElement.setAttribute("data-bs-theme", themeMode);
       }
-    </script>
-    <!--end::Theme mode setup on page load-->
-    <!--begin::Root-->
-    <div class="d-flex flex-column flex-root" id="kt_app_root">
-      <!--begin::Wrapper-->
-      <div class="d-flex flex-column flex-column-fluid">
-        <!--begin::Body-->
-        <div
-          class="scroll-y flex-column-fluid px-10 py-10"
-          data-kt-scroll="true"
-          data-kt-scroll-activate="true"
-          data-kt-scroll-height="auto"
-          data-kt-scroll-dependencies="#kt_app_header_nav"
-          data-kt-scroll-offset="5px"
-          data-kt-scroll-save-state="true"
-          style="
+      if (themeMode === "system") {
+        themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ?
+          "dark" :
+          "light";
+      }
+      document.documentElement.setAttribute("data-bs-theme", themeMode);
+    }
+  </script>
+  <!--end::Theme mode setup on page load-->
+  <!--begin::Root-->
+  <div class="d-flex flex-column flex-root" id="kt_app_root">
+    <!--begin::Wrapper-->
+    <div class="d-flex flex-column flex-column-fluid">
+      <!--begin::Body-->
+      <div class="scroll-y flex-column-fluid px-10 py-10" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_header_nav" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true" style="
             background-color: #d5d9e2;
             --kt-scrollbar-color: #d9d0cc;
             --kt-scrollbar-hover-color: #d9d0cc;
-          "
-        >
-          <!--begin::Email template-->
-          <style>
-            html,
-            body {
-              padding: 0;
-              margin: 0;
-              font-family: Inter, Helvetica, "sans-serif";
-            }
-            a:hover {
-              color: #50cd89;
-            }
-          </style>
-          <div
-            id="#kt_app_body_content"
-            style="
+          ">
+        <!--begin::Email template-->
+        <style>
+          html,
+          body {
+            padding: 0;
+            margin: 0;
+            font-family: Inter, Helvetica, "sans-serif";
+          }
+
+          a:hover {
+            color: #50cd89;
+          }
+        </style>
+        <div id="#kt_app_body_content" style="
               background-color: #d5d9e2;
               font-family: Arial, Helvetica, sans-serif;
               line-height: 1.5;
@@ -290,93 +284,63 @@
               margin: 0;
               padding: 0;
               width: 100%;
-            "
-          >
-            <div
-              style="
+            ">
+          <div style="
                 background-color: #ffffff;
                 padding: 45px 0 34px 0;
                 border-radius: 24px;
                 margin: 40px auto;
                 max-width: 600px;
-              "
-            >
-              <table
-                align="center"
-                border="0"
-                cellpadding="0"
-                cellspacing="0"
-                width="100%"
-                height="auto"
-                style="border-collapse: collapse"
-              >
-                <tbody>
-                  <tr>
-                    <td
-                      align="center"
-                      valign="center"
-                      style="text-align: center; padding-bottom: 10px"
-                    >
-                      <!--begin:Email content-->
-                      <div style="text-align: center; margin: 0 15px 34px 15px">
-                        <!--begin:Logo-->
-                        <div style="margin-bottom: 10px">
-                          <a
-                            href="<%= company?.website %>"
-                            rel="noopener"
-                            target="_blank"
-                          >
-                            <img
-                              alt="Logo"
-                              src="cid:logo"
-                              style="height: 35px"
-                            />
-                          </a>
-                        </div>
-                        <!--end:Logo-->
-                        <!--begin:Media-->
-                        <div style="margin-bottom: 15px">
-                          <img alt="Logo" src="cid:positiveVote" />
-                        </div>
-                        <!--end:Media-->
-                        <!--begin:Text-->
-                        <div
-                          style="
+              ">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" height="auto" style="border-collapse: collapse">
+              <tbody>
+                <tr>
+                  <td align="center" valign="center" style="text-align: center; padding-bottom: 10px">
+                    <!--begin:Email content-->
+                    <div style="text-align: center; margin: 0 15px 34px 15px">
+                      <!--begin:Logo-->
+                      <div style="margin-bottom: 10px">
+                        <a href="<%= company?.website %>" rel="noopener" target="_blank">
+                          <img alt="Logo" src="cid:logo" style="height: 35px" />
+                        </a>
+                      </div>
+                      <!--end:Logo-->
+                      <!--begin:Media-->
+                      <div style="margin-bottom: 15px">
+                        <img alt="Logo" src="cid:positiveVote" />
+                      </div>
+                      <!--end:Media-->
+                      <!--begin:Text-->
+                      <div style="
                             font-size: 14px;
                             font-weight: 500;
                             margin-bottom: 27px;
                             font-family: Arial, Helvetica, sans-serif;
-                          "
-                        >
-                          <p
-                            style="
+                          ">
+                        <p style="
                               margin-bottom: 9px;
                               color: #181c32;
                               font-size: 22px;
                               font-weight: 700;
-                            "
-                          >
-                            Hi <%= user?.name ?? 'Guest' %>, thanks for signing
-                            up!
-                          </p>
-                          <p style="margin-bottom: 2px; color: #7e8299">
-                            Get ready to explore the world like never before
-                          </p>
-                          <p style="margin-bottom: 2px; color: #7e8299">
-                            with <%= company?.name %>. From personalized
-                            recommendations to exclusive
-                          </p>
-                          <p style="margin-bottom: 2px; color: #7e8299">
-                            deals, we've got everything you need to plan your
-                            dream vacation.
-                          </p>
-                        </div>
-                        <!--end:Text-->
-                        <!--begin:Action-->
-                        <a
-                          href="<%= redirectTo ?? '#' %>"
-                          target="_blank"
-                          style="
+                            ">
+                          Hi <%= user?.name ?? 'Guest' %>, thanks for signing
+                          up!
+                        </p>
+                        <p style="margin-bottom: 2px; color: #7e8299">
+                          Get ready to explore the world like never before
+                        </p>
+                        <p style="margin-bottom: 2px; color: #7e8299">
+                          with <%= company?.name %>. From personalized
+                          recommendations to exclusive
+                        </p>
+                        <p style="margin-bottom: 2px; color: #7e8299">
+                          deals, we've got everything you need to plan your
+                          dream vacation.
+                        </p>
+                      </div>
+                      <!--end:Text-->
+                      <!--begin:Action-->
+                      <a href="<%= redirectTo ?? '#' %>" target="_blank" style="
                             background-color: #fb0d11;
                             border-radius: 6px;
                             display: inline-block;
@@ -384,86 +348,69 @@
                             color: #ffffff;
                             font-size: 14px;
                             font-weight: 500;
-                          "
-                          >Activate Account</a
-                        >
-                        <!--begin:Action-->
-                      </div>
-                      <!--end:Email content-->
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      align="center"
-                      valign="center"
-                      style="
+                          ">Activate Account</a>
+                      <!--begin:Action-->
+                    </div>
+                    <!--end:Email content-->
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" valign="center" style="
                         font-size: 13px;
                         text-align: center;
                         padding: 0 10px 10px 10px;
                         font-weight: 500;
                         color: #a1a5b7;
                         font-family: Arial, Helvetica, sans-serif;
-                      "
-                    >
-                      <p
-                        style="
+                      ">
+                    <p style="
                           color: #181c32;
                           font-size: 16px;
                           font-weight: 600;
                           margin-bottom: 9px;
-                        "
-                      >
-                        It’s all about customers!
-                      </p>
-                      <% if (company?.phone) { %>
-                      <p style="margin-bottom: 2px">
-                        Call our customer care number: <%= company?.phone %>
-                      </p>
-                      <% } %>
-                      <p style="margin-bottom: 4px">
-                        You may reach us at
-                        <a
-                          href="<%= company?.website %>"
-                          rel="noopener"
-                          target="_blank"
-                          style="font-weight: 600"
-                          >besttripbd.com</a
-                        >.
-                      </p>
-                      <p>We serve Mon-Fri, 9AM-6PM</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      align="center"
-                      valign="center"
-                      style="text-align: center; padding-bottom: 20px"
-                    >
-                      <a href="#" style="margin-right: 10px">
-                        <img alt="Logo" src="cid:linkedin" />
-                      </a>
-                      <a href="#" style="margin-right: 10px">
-                        <img alt="Logo" src="cid:dribbble" />
-                      </a>
-                      <a href="#" style="margin-right: 10px">
-                        <img alt="Logo" src="cid:facebook" />
-                      </a>
-                      <a href="#">
-                        <img alt="Logo" src="cid:twitter" />
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                        ">
+                      It’s all about customers!
+                    </p>
+                    <% if (company?.phone) { %>
+                    <p style="margin-bottom: 2px">
+                      Call our customer care number: <%= company?.phone %>
+                    </p>
+                    <% } %>
+                    <p style="margin-bottom: 4px">
+                      You may reach us at
+                      <a href="<%= company?.website %>" rel="noopener" target="_blank" style="font-weight: 600">besttripbd.com</a>.
+                    </p>
+                    <p>We serve Mon-Fri, 9AM-6PM</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" valign="center" style="text-align: center; padding-bottom: 20px">
+                    <a href="#" style="margin-right: 10px">
+                      <img alt="Logo" src="cid:linkedin" />
+                    </a>
+                    <a href="#" style="margin-right: 10px">
+                      <img alt="Logo" src="cid:dribbble" />
+                    </a>
+                    <a href="#" style="margin-right: 10px">
+                      <img alt="Logo" src="cid:facebook" />
+                    </a>
+                    <a href="#">
+                      <img alt="Logo" src="cid:twitter" />
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <!--end::Email template-->
         </div>
-        <!--end::Body-->
+        <!--end::Email template-->
       </div>
-      <!--end::Wrapper-->
+      <!--end::Body-->
     </div>
-    <!--end::Root-->
-  </body>
-  <!--end::Body-->
+    <!--end::Wrapper-->
+  </div>
+  <!--end::Root-->
+</body>
+<!--end::Body-->
+
 </html>
