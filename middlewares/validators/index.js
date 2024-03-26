@@ -9,5 +9,5 @@
 
 // export all validators
 module.exports = {
-  auth: require("./auth"),
+    auth: require('./auth'),
 };

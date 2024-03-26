@@ -9,10 +9,10 @@
 
 // export all controllers
 module.exports = {
-  register: require("./register"),
-  login: require("./login"),
-  forgotPassword: require("./forgot-password"),
-  resetPassword: require("./reset-password"),
-  sendVerificationEmail: require("./send-verification-email"),
-  verifyEmail: require("./verify-email"),
+    register: require('./register'),
+    login: require('./login'),
+    forgotPassword: require('./forgot-password'),
+    resetPassword: require('./reset-password'),
+    sendVerificationEmail: require('./send-verification-email'),
+    verifyEmail: require('./verify-email'),
 };

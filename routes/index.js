@@ -9,5 +9,5 @@
 
 // export all routes
 module.exports = {
-  authRouter: require("./auth"),
+    authRouter: require('./auth'),
 };

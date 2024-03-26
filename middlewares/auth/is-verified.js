@@ -8,28 +8,28 @@
  */
 
 // dependencies
-const { User } = require("../../models");
+const { User } = require('../../models');
 
 // is verified middleware
 const isVerified = async (req, res, next) => {
-  try {
-    // get user
-    const user = await User.findOne({ email: req.body.email });
+    try {
+        // get user
+        const user = await User.findOne({ email: req.body.email });
 
-    // check if user is verified
-    if (!user.isVerified) {
-      return res.status(400).json({
-        message: "Please verify your email address",
-      });
+        // check if user is verified
+        if (!user.isVerified) {
+            return res.status(400).json({
+                message: 'Please verify your email address',
+            });
+        }
+
+        // continue to the next middleware
+        return next();
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Internal server error',
+        });
     }
-
-    // continue to the next middleware
-    next();
-  } catch (error) {
-    return res.status(500).json({
-      message: "Internal server error",
-    });
-  }
 };
 
 // export

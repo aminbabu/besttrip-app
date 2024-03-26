@@ -8,32 +8,31 @@
  */
 
 // dependencies
-const { User } = require("../../models");
+const { User } = require('../../models');
 
 // is allowed middleware
 module.exports =
-  (roles = ["admin"]) =>
-  async (req, res, next) => {
-    try {
-      // get user id from request
-      const { _id } = req.user;
+    (roles = ['admin']) =>
+    async (req, res, next) => {
+        try {
+            // get user id from request
+            const { _id } = req.user;
 
-      // get user by id
-      const user = await User.findById(_id);
+            // get user by id
+            const user = await User.findById(_id);
 
-      // check if user is allowed
-      if (!roles.includes(user.role)) {
-        return res.status(403).json({
-          message: "You are not allowed to access this resource",
-        });
-      }
+            // check if user is allowed
+            if (!roles.includes(user.role)) {
+                return res.status(403).json({
+                    message: 'You are not allowed to access this resource',
+                });
+            }
 
-      // continue
-      next();
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        message: "Internal server error",
-      });
-    }
-  };
+            // continue
+            return next();
+        } catch (error) {
+            return res.status(500).json({
+                message: 'Internal server error',
+            });
+        }
+    };

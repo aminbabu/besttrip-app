@@ -8,11 +8,8 @@
  */
 
 // dependencies
-const { query } = require("express-validator");
-const { expressValidator } = require("../../../handlers/errors");
+const { query } = require('express-validator');
+const { expressValidator } = require('../../../handlers/errors');
 
 // validate verify email
-module.exports = [
-  query("token").isJWT().withMessage("Token is not valid"),
-  expressValidator,
-];
+module.exports = [query('token').isJWT().withMessage('Token is not valid'), expressValidator];

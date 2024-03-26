@@ -9,5 +9,5 @@
 
 // export all middlewares
 module.exports = {
-  validators: require("./validators"),
+    validators: require('./validators'),
 };

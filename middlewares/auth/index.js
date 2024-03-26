@@ -9,7 +9,7 @@
 
 // export all middlewares
 module.exports = {
-  isAuthorized: require("./is-authorized"),
-  isVerified: require("./is-verified"),
-  isAllowed: require("./is-allowed"),
+    isAuthorized: require('./is-authorized'),
+    isVerified: require('./is-verified'),
+    isAllowed: require('./is-allowed'),
 };

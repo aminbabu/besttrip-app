@@ -9,8 +9,8 @@
 
 // export all mails
 module.exports = {
-  welcome: require("./welcome"),
-  forgotPassword: require("./forgot-password"),
-  verifyEmail: require("./verify-email"),
-  confirmEmailVerification: require("./confirm-email-verification"),
+    welcome: require('./welcome'),
+    forgotPassword: require('./forgot-password'),
+    verifyEmail: require('./verify-email'),
+    confirmEmailVerification: require('./confirm-email-verification'),
 };

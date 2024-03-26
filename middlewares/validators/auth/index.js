@@ -9,10 +9,10 @@
 
 // export all validators
 module.exports = {
-  validateRegister: require("./validate-register"),
-  validateLogin: require("./validate-login"),
-  validateForgotPassword: require("./validate-forgot-password"),
-  validateResetPassword: require("./validate-reset-password"),
-  validateSendVerificationEmail: require("./validate-send-verification-email"),
-  validateVerifyEmail: require("./validate-verify-email"),
+    validateRegister: require('./validate-register'),
+    validateLogin: require('./validate-login'),
+    validateForgotPassword: require('./validate-forgot-password'),
+    validateResetPassword: require('./validate-reset-password'),
+    validateSendVerificationEmail: require('./validate-send-verification-email'),
+    validateVerifyEmail: require('./validate-verify-email'),
 };

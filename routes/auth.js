@@ -8,22 +8,23 @@
  */
 
 // dependencies
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
 
 // controllers
 const {
-  register,
-  login,
-  forgotPassword,
-  resetPassword,
-  verifyEmail,
-  sendVerificationEmail,
-} = require("../controllers/auth");
+    register,
+    login,
+    forgotPassword,
+    resetPassword,
+    verifyEmail,
+    sendVerificationEmail,
+} = require('../controllers/auth');
 
 // middlewares
-const { auth } = require("../middlewares/validators/");
-const { isVerified, isAuthorized } = require("../middlewares/auth");
+const { auth } = require('../middlewares/validators');
+const { isVerified, isAuthorized } = require('../middlewares/auth');
 
 /**
  * @description register a new user
@@ -35,7 +36,7 @@ const { isVerified, isAuthorized } = require("../middlewares/auth");
  * @method POST
  * @example ['/auth/register', '/auth/register?redirect=/check-email']
  */
-router.post("/register", auth.validateRegister, register);
+router.post('/register', auth.validateRegister, register);
 
 /**
  * @description login a user
@@ -47,7 +48,7 @@ router.post("/register", auth.validateRegister, register);
  * @method POST
  * @example ['/auth/login', '/auth/login?redirect=/dashboard']
  */
-router.post("/login", auth.validateLogin, isVerified, login);
+router.post('/login', auth.validateLogin, isVerified, login);
 
 /**
  * @description forgot password
@@ -59,7 +60,7 @@ router.post("/login", auth.validateLogin, isVerified, login);
  * @method POST
  * @example ['/auth/forgot-password', '/auth/forgot-password?redirect=/check-email']
  */
-router.post("/forgot-password", auth.validateForgotPassword, forgotPassword);
+router.post('/forgot-password', auth.validateForgotPassword, forgotPassword);
 
 /**
  * @description reset password
@@ -71,7 +72,7 @@ router.post("/forgot-password", auth.validateForgotPassword, forgotPassword);
  * @method POST
  * @example ['/auth/reset-password?token=jwt-token', '/auth/reset-password?redirect=/dashboard']
  */
-router.post("/reset-password", auth.validateResetPassword, resetPassword);
+router.post('/reset-password', auth.validateResetPassword, resetPassword);
 
 /**
  * @description send verification email
@@ -84,10 +85,10 @@ router.post("/reset-password", auth.validateResetPassword, resetPassword);
  * @example ['/auth/send-verification-email', '/auth/send-verification-email?redirect=/check-email']
  */
 router.post(
-  "/send-verification-email",
-  auth.validateSendVerificationEmail,
-  isAuthorized,
-  sendVerificationEmail
+    '/send-verification-email',
+    auth.validateSendVerificationEmail,
+    isAuthorized,
+    sendVerificationEmail
 );
 
 /**
@@ -100,7 +101,7 @@ router.post(
  * @method GET
  * @example ['/auth/verify-email?token=jwt-token', '/auth/verify-email?redirect=/dashboard]
  */
-router.get("/verify-email", auth.validateVerifyEmail, verifyEmail);
+router.get('/verify-email', auth.validateVerifyEmail, verifyEmail);
 
 // export
 module.exports = router;

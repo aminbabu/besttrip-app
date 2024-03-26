@@ -9,5 +9,5 @@
 
 // export all error handlers
 module.exports = {
-  expressValidator: require("./express-validator"),
+    expressValidator: require('./express-validator'),
 };

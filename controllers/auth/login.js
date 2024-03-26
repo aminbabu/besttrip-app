@@ -8,44 +8,44 @@
  */
 
 // dependencies
-const { User } = require("../../models/index");
-const { comparePassword, generateToken } = require("../../utils");
+const { User } = require('../../models/index');
+const { comparePassword, generateToken } = require('../../utils');
 
 // login user controller
 const login = async (req, res, next) => {
-  try {
-    // get user input
-    const { email, password } = req.body;
+    try {
+        // get user input
+        const { email, password } = req.body;
 
-    // check if user exists
-    const user = await User.findOne({ email }).select("+password");
+        // check if user exists
+        const user = await User.findOne({ email }).select('+password');
 
-    if (!user) {
-      return res.status(400).json({
-        message: "Invalid email or password",
-      });
+        if (!user) {
+            return res.status(400).json({
+                message: 'Invalid email or password',
+            });
+        }
+
+        // compare password
+        const match = await comparePassword(password, user.password);
+
+        if (!match) {
+            return res.status(400).json({
+                message: 'Invalid email or password',
+            });
+        }
+
+        // generate token
+        const token = generateToken({ user: user.toObject() });
+
+        // return response
+        return res.status(200).json({
+            message: 'Login successful',
+            token,
+        });
+    } catch (error) {
+        return next(error);
     }
-
-    // compare password
-    const match = await comparePassword(password, user.password);
-
-    if (!match) {
-      return res.status(400).json({
-        message: "Invalid email or password",
-      });
-    }
-
-    // generate token
-    const token = generateToken({ user: user.toObject() });
-
-    // return response
-    return res.status(200).json({
-      message: "Login successful",
-      token,
-    });
-  } catch (error) {
-    next(error);
-  }
 };
 
 // export

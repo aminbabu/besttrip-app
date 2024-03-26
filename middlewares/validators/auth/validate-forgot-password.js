@@ -8,11 +8,8 @@
  */
 
 // dependencies
-const { body } = require("express-validator");
-const { expressValidator } = require("../../../handlers/errors");
+const { body } = require('express-validator');
+const { expressValidator } = require('../../../handlers/errors');
 
 // validate forgot password
-module.exports = [
-  body("email").isEmail().withMessage("Email is not valid"),
-  expressValidator,
-];
+module.exports = [body('email').isEmail().withMessage('Email is not valid'), expressValidator];
