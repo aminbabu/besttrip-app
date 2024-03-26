@@ -9,9 +9,16 @@
     "ecmaVersion": "latest"
   },
   "rules": {
-    "no-console": 0,
-    "indent": 0,
-    "linebreak-style": 0,
+    "func-names": "off",
+    "object-curly-newline": "off",
+    "global-require": "off",
+    "comma-dangle": "off",
+    "operator-linebreak": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-underscore-dangle": "off",
+    "no-console": "off",
+    "indent": "off",
+    "linebreak-style": "off",
     "prettier/prettier": [
       "error",
       {
