@@ -1,0 +1,46 @@
+<head>
+  <!-- begin::Page title -->
+  <title><%= title %></title>
+  <!-- end::Page title -->
+  <meta charset="utf-8" />
+  <meta name="description" content="Best Trip is a travel agency that provides the best services for booking flights, hotels, umrah, and visa. We offer the best packages for umrah and visa. We also provide the best services for booking flights and hotels. We are the best travel agency in the world. We provide the best services for booking flights, hotels, umrah, and visa. We offer the best packages for umrah and visa. We also provide the best services for booking flights and hotels. We are the best travel agency in the world. We provide the best services for booking flights, hotels, umrah, and visa." />
+  <meta name="keywords" content="best trip, flight, hotel, umrah, visa, umrah package, visa package, hotel booking, flight booking, umrah booking, visa booking, umrah package booking, visa package booking, hotel booking" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Best Trip" />
+  <meta property="og:url" content="https://besttrip.com" />
+  <meta property="og:site_name" content="Best Trip" />
+  <!-- begin::Meta Tags -->
+  <% if(metaTags) { %>
+  <% metaTags.forEach(function(metaTag) { %>
+  <meta name="<%= metaTag.name %>" content="<%= metaTag.content %>" />
+  <% }); %>
+  <% } %>
+  <!-- end::Meta Tags -->
+  <link rel="canonical" href="https://besttrip.com" />
+  <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+  <!--begin::Fonts(mandatory for all pages)-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+  <!--end::Fonts-->
+  <!--begin::Vendor Stylesheets(used for this page only)-->
+  <% if(vendorStylesheets?.length) { %>
+  <% vendorStylesheets.forEach(function(vendorStylesheet) { %>
+  <link href="<%= vendorStylesheet %>" rel="stylesheet" type="text/css" />
+  <% }); %>
+  <% } %>
+  <!--end::Vendor Stylesheets-->
+  <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+  <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+  <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+  <!--end::Global Stylesheets Bundle-->
+  <!--begin::Custom Stylesheets(used for this page only)-->
+  <% if(customStylesheets?.length) { %>
+  <% customStylesheets.forEach(function(customStylesheet) { %>
+  <link href="<%= customStylesheet %>" rel="stylesheet" type="text/css" />
+  <% }); %>
+  <% } %>
+  <script>
+    // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }
+  </script>
+</head>
