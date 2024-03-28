@@ -1,5 +1,5 @@
 /**
- * @file /controllers/auth/index.js
+ * @file /controllers/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -9,6 +9,5 @@
 
 // export all controllers
 module.exports = {
-    user: require('./user'),
-    customer: require('./customer'),
+    auth: require('./auth/user'),
 };
