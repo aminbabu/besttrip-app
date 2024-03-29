@@ -51,7 +51,7 @@ const resetPassword = async (req, res, next) => {
         await Token.findByIdAndDelete(resetPasswordToken._id);
 
         // generate token
-        const newToken = generateToken({ user });
+        const newToken = generateToken(user);
 
         // return response
         return res.status(200).json({

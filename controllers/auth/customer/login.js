@@ -36,7 +36,7 @@ const login = async (req, res, next) => {
         }
 
         // generate token
-        const token = generateToken({ customer: customer.toObject() });
+        const token = generateToken(customer.toObject());
 
         // return response
         return res.status(200).json({

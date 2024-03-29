@@ -36,7 +36,7 @@ const register = async (req, res, next) => {
         });
 
         // generate token
-        const token = generateToken({ customer: newCustomer.toObject() });
+        const token = generateToken(newCustomer.toObject());
 
         // send mail
         const info = welcome({ customer: newCustomer.toObject(), token });

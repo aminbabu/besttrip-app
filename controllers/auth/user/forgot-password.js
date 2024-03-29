@@ -41,7 +41,7 @@ const forgotPassword = async (req, res, next) => {
         }
 
         // generate token
-        const token = generateToken({ user: user.toObject() });
+        const token = generateToken(user.toObject());
 
         // store token in db
         const tokenDoc = new Token({

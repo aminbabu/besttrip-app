@@ -34,7 +34,7 @@ const sendVerificationEmail = async (req, res, next) => {
         );
 
         // generate token
-        const token = generateToken({ customer });
+        const token = generateToken(customer);
 
         // store token in db
         const tokenDoc = new Token({

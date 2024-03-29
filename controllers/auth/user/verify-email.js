@@ -39,7 +39,7 @@ const verifyEmail = async (req, res, next) => {
         await user.save();
 
         // generate token
-        const newToken = generateToken({ user });
+        const newToken = generateToken(user);
 
         // send email
         const info = await confirmEmailVerification(user);
