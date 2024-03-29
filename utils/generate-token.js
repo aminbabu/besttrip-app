@@ -8,22 +8,24 @@
  */
 
 // dependencies
-const jwt = require("jsonwebtoken");
-const { JWT_SECRET, JWT_EXPIRY } = require("./env");
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET, JWT_EXPIRY } = require('./env');
 
 // generate token
 const generateToken = function (payload) {
-  try {
-    // remove password from payload user
-    delete payload.user.password;
+    try {
+        // check if payload is not an object
+        if (typeof payload !== 'object') {
+            throw new Error('Invalid payload');
+        }
 
-    // generate token
-    return jwt.sign({ user: payload.user }, JWT_SECRET, {
-      expiresIn: JWT_EXPIRY,
-    });
-  } catch (error) {
-    throw new Error(error);
-  }
+        // generate token
+        return jwt.sign({ user: payload }, JWT_SECRET, {
+            expiresIn: JWT_EXPIRY,
+        });
+    } catch (error) {
+        throw new Error(error);
+    }
 };
 
 // export

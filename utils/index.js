@@ -9,8 +9,8 @@
 
 // export all utilities
 module.exports = {
-  generateToken: require("./generate-token"),
-  comparePassword: require("./compare-password"),
-  sendEmail: require("./send-email"),
-  verifyToken: require("./verify-token"),
+    generateToken: require('./generate-token'),
+    comparePassword: require('./compare-password'),
+    sendEmail: require('./send-email'),
+    verifyToken: require('./verify-token'),
 };

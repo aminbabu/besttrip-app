@@ -8,16 +8,16 @@
  */
 
 // dependencies
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 // compare password
 const comparePassword = async (password, hash) => {
-  try {
-    const match = await bcrypt.compare(password, hash);
-    return match;
-  } catch (error) {
-    throw new Error(error);
-  }
+    try {
+        const match = await bcrypt.compare(password, hash);
+        return match;
+    } catch (error) {
+        throw new Error(error);
+    }
 };
 
 // export

@@ -8,20 +8,20 @@
  */
 
 // dependencies
-const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("./env");
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('./env');
 
 // verify token
 const verifyToken = function (token) {
-  try {
-    if (!token) {
-      throw new Error("Unauthorized");
-    }
+    try {
+        if (!token) {
+            throw new Error('Unauthorized');
+        }
 
-    return jwt.verify(token, JWT_SECRET);
-  } catch (error) {
-    throw new Error("Unauthorized");
-  }
+        return jwt.verify(token, JWT_SECRET);
+    } catch (error) {
+        throw new Error('Unauthorized');
+    }
 };
 
 // export
