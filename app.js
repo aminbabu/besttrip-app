@@ -43,11 +43,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(xssInstance.xssShield());
 
-// users route
-app.use('/users', authRouter.users);
-
-// customers route
-app.use('/customers', authRouter.customers);
+/**
+ * @description set headers for all routes
+ * @param {object} req - request
+ * @param {object} res - response
+ * @param {function} next - next
+ * @returns {object} - response
+ */
+// routes
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
