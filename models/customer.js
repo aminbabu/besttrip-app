@@ -1,5 +1,5 @@
 /**
- * @file /models/user.js
+ * @file /models/customer.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -11,7 +11,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// user schema
+// customer schema
 const customerSchema = new mongoose.Schema(
     {
         name: {
