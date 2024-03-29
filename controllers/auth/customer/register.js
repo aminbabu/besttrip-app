@@ -39,7 +39,7 @@ const register = async (req, res, next) => {
         const token = generateToken(newCustomer.toObject());
 
         // send mail
-        const info = welcome({ customer: newCustomer.toObject(), token });
+        const info = welcome({ user: newCustomer.toObject(), token });
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
 
         // save customer
