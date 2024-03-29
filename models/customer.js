@@ -17,7 +17,6 @@ const customerSchema = new mongoose.Schema(
     {
         customerID: {
             type: String,
-            required: [true, 'Customer ID is required'],
             unique: [true, 'Customer ID already exists'],
         },
         avatar: {
