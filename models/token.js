@@ -9,27 +9,26 @@
 
 // dependencies
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
 // token schema
-const tokenSchema = new Schema(
+const tokenSchema = new mongoose.Schema(
     {
         user: {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
-            required: true,
+            required: [true, 'User is required'],
         },
         token: {
             type: String,
-            required: true,
+            required: [true, 'Token is required'],
         },
         type: {
             type: String,
-            required: true,
+            required: [true, 'Type is required'],
         },
         expires: {
             type: Date,
-            required: true,
+            required: [true, 'Expire time is required'],
         },
     },
     {
