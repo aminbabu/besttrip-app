@@ -10,10 +10,19 @@
 // dependencies
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 
 // user schema
 const userSchema = new mongoose.Schema(
     {
+        userID: {
+            type: String,
+            required: [true, 'User ID is required'],
+            unique: [true, 'User ID already exists'],
+        },
+        avatar: {
+            type: String,
+        },
         name: {
             type: String,
             required: [true, 'Name is required'],
@@ -44,6 +53,11 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        status: {
+            type: String,
+            enum: ['active', 'disabled'],
+            default: 'active',
+        },
     },
     {
         timestamps: true,
@@ -60,6 +74,10 @@ userSchema.pre('save', async function (next) {
 
         // hash password
         this.password = await bcrypt.hash(this.password, 10);
+
+        // generate incrementing user ID
+        const count = await this.model('User').countDocuments();
+        this.userID = `BT${moment().format('YYYY')}${count + 1}`; // BTCYYYY0001
 
         return next();
     } catch (error) {
