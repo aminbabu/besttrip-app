@@ -66,7 +66,7 @@ router.post('/reset-password', auth.validateResetPassword, user.resetPassword);
 /**
  * @description send verification email
  * @param {string} path - /auth/users/send-verification-email
- * @param {function} middleware - ['auth.validateSendVerificationEmail']
+ * @param {function} middleware - ['auth.validateSendVerificationEmail', 'isAuthorized']
  * @param {function} controller - ['user.sendVerificationEmail']
  * @returns {object} - router
  * @access private
