@@ -21,67 +21,56 @@ const { isVerified, isAuthorized } = require('../../../middlewares/auth');
 
 /**
  * @description register a new user
- * @param {string} path - /users/register
- * @param {function} middleware - ['validateRegister']
- * @param {function} controller - ['register']
+ * @param {string} path - /auth/users/register
+ * @param {function} middleware - ['auth.validateRegister']
+ * @param {function} controller - ['user.register']
  * @returns {object} - router
  * @access public
  * @method POST
- * @example ['/users/register', '/users/register?redirect=/check-email']
  */
 router.post('/register', auth.validateRegister, user.register);
 
 /**
  * @description login a user
- * @param {string} path - /users/login
- * @param {function} middleware - ['validateLogin']
- * @param {function} controller - ['login']
+ * @param {string} path - /auth/users/login
+ * @param {function} middleware - ['auth.validateLogin']
+ * @param {function} controller - ['user.login']
  * @returns {object} - router
  * @access public
  * @method POST
- * @example ['/users/login', '/users/login?redirect=/dashboard']
  */
 router.post('/login', auth.validateLogin, isVerified, user.login);
 
 /**
  * @description forgot password
- * @param {string} path - /users/forgot-password
- * @param {function} middleware - ['validateForgotPassword']
- * @param {function} controller - ['forgotPassword']
+ * @param {string} path - /auth/users/forgot-password
+ * @param {function} middleware - ['auth.validateForgotPassword']
+ * @param {function} controller - ['user.forgotPassword']
  * @returns {object} - router
  * @access public
  * @method POST
- * @example ['/users/forgot-password', '/users/forgot-password?redirect=/check-email']
  */
 router.post('/forgot-password', auth.validateForgotPassword, user.forgotPassword);
 
 /**
  * @description reset password
- * @param {string} path - /users/reset-password
- * @param {function} middleware - ['validateResetPassword']
- * @param {function} controller - ['resetPassword']
+ * @param {string} path - /auth/users/reset-password
+ * @param {function} middleware - ['auth.validateResetPassword']
+ * @param {function} controller - ['user.resetPassword']
  * @returns {object} - router
  * @access public
  * @method POST
- * @example [
- * '/users/reset-password?token=jwt-token',
- * '/users/reset-password?redirect=/dashboard'
- * ]
  */
 router.post('/reset-password', auth.validateResetPassword, user.resetPassword);
 
 /**
  * @description send verification email
- * @param {string} path - /users/send-verification-email
- * @param {function} middleware - ['validateSendVerificationEmail']
- * @param {function} controller - ['sendVerificationEmail']
+ * @param {string} path - /auth/users/send-verification-email
+ * @param {function} middleware - ['auth.validateSendVerificationEmail']
+ * @param {function} controller - ['user.sendVerificationEmail']
  * @returns {object} - router
  * @access public
  * @method POST
- * @example [
- * '/users/send-verification-email',
- * '/users/send-verification-email?redirect=/check-email'
- * ]
  */
 router.post(
     '/send-verification-email',
@@ -92,13 +81,12 @@ router.post(
 
 /**
  * @description verify email
- * @param {string} path - /users/verify-email
- * @param {function} middleware - ['validateVerifyEmail']
- * @param {function} controller - ['verifyEmail']
+ * @param {string} path - /auth/users/verify-email
+ * @param {function} middleware - ['auth.validateVerifyEmail']
+ * @param {function} controller - ['user.verifyEmail']
  * @returns {object} - router
  * @access public
  * @method GET
- * @example ['/users/verify-email?token=jwt-token', '/users/verify-email?redirect=/dashboard]
  */
 router.get('/verify-email', auth.validateVerifyEmail, user.verifyEmail);
 
