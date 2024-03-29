@@ -10,4 +10,5 @@
 // export all validators
 module.exports = {
     auth: require('./auth'),
+    customers: require('./customers'),
 };

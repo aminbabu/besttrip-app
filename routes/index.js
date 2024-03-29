@@ -10,4 +10,6 @@
 // export all routes
 module.exports = {
     authRouter: require('./auth'),
+    customersRouter: require('./customers'),
+    walletRouter: require('./wallet'),
 };

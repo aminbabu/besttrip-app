@@ -22,6 +22,14 @@ const walletSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        type: {
+            type: String,
+            enum: ['top-up', 'deduct'],
+            default: 'top-up',
+        },
+        description: {
+            type: String,
+        },
     },
     {
         timestamps: true,
