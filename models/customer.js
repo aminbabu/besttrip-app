@@ -20,6 +20,9 @@ const customerSchema = new mongoose.Schema(
             required: [true, 'Customer ID is required'],
             unique: [true, 'Customer ID already exists'],
         },
+        avatar: {
+            type: String,
+        },
         name: {
             type: String,
             required: [true, 'Name is required'],
@@ -45,6 +48,11 @@ const customerSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        status: {
+            type: String,
+            enum: ['active', 'disabled'],
+            default: 'active',
+        },
         dob: {
             type: Date,
         },
@@ -61,9 +69,6 @@ const customerSchema = new mongoose.Schema(
             type: String,
         },
         postalCode: {
-            type: String,
-        },
-        profileImage: {
             type: String,
         },
         flyerNumber: {
