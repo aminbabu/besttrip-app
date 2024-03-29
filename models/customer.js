@@ -10,10 +10,16 @@
 // dependencies
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 
 // customer schema
 const customerSchema = new mongoose.Schema(
     {
+        customerID: {
+            type: String,
+            required: [true, 'Customer ID is required'],
+            unique: [true, 'Customer ID already exists'],
+        },
         name: {
             type: String,
             required: [true, 'Name is required'],
@@ -39,6 +45,34 @@ const customerSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        dob: {
+            type: Date,
+        },
+        address: {
+            type: String,
+        },
+        city: {
+            type: String,
+        },
+        state: {
+            type: String,
+        },
+        country: {
+            type: String,
+        },
+        postalCode: {
+            type: String,
+        },
+        profileImage: {
+            type: String,
+        },
+        flyerNumber: {
+            type: String,
+        },
+        wallet: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Wallet',
+        },
     },
     {
         timestamps: true,
@@ -55,6 +89,10 @@ customerSchema.pre('save', async function (next) {
 
         // hash password
         this.password = await bcrypt.hash(this.password, 10);
+
+        // generate incrementing customer ID
+        const count = await this.constructor.countDocuments();
+        this.customerID = `BTC${moment().format('YYYYMMDD')}${count + 1}`; // BTCYYYYMMDD0001
 
         return next();
     } catch (error) {
