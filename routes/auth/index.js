@@ -18,6 +18,7 @@ const customersRouter = require('./customers');
 
 // users auth routes
 router.use('/users', usersRouter);
+
 // customers auth routes
 router.use('/customers', customersRouter);
 
