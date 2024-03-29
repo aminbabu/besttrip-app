@@ -69,7 +69,7 @@ router.post('/reset-password', auth.validateResetPassword, user.resetPassword);
  * @param {function} middleware - ['auth.validateSendVerificationEmail']
  * @param {function} controller - ['user.sendVerificationEmail']
  * @returns {object} - router
- * @access protected
+ * @access private
  * @method POST
  */
 router.post(
