@@ -17,18 +17,19 @@ const updateCustomerById = async (req, res, next) => {
         // get customer id
         const { id } = req.params;
 
-        // get customer
-        const customer = await Customer.findById(id);
-
-        // update customer
-        await customer.updateOne(req.body);
+        // update customer and return updated customer
+        const updatedCustomer = await Customer.findByIdAndUpdate(id, req.body, {
+            new: true,
+            runValidators: true,
+        });
 
         // generate token
         const token = generateToken(req.user);
 
         // return response
         return res.status(200).json({
-            customer,
+            message: 'Customer updated successfully',
+            customer: updatedCustomer,
             token,
         });
     } catch (error) {
