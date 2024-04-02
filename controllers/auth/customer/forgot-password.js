@@ -19,6 +19,15 @@ const forgotPassword = async (req, res, next) => {
     try {
         // find customer by email
         const customer = await Customer.findOne({ email: req.body.email });
+
+        // check if customer exists
+        if (!customer) {
+            return res.status(400).json({
+                message: 'Customer not found',
+            });
+        }
+
+        // get existing tokens
         const tokens = await Token.find({
             customer: customer._id,
             type: 'reset-password',
@@ -33,12 +42,6 @@ const forgotPassword = async (req, res, next) => {
                     token.deleteOne()
             )
         );
-
-        if (!customer) {
-            return res.status(400).json({
-                message: 'Customer not found',
-            });
-        }
 
         // generate token
         const token = generateToken(customer.toObject());
