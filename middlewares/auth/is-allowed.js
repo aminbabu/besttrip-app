@@ -8,18 +8,23 @@
  */
 
 // dependencies
-const { User } = require('../../models');
+const { User, Customer } = require('../../models');
 
 // is allowed middleware
 module.exports =
     (roles = ['admin']) =>
     async (req, res, next) => {
         try {
+            let user;
             // get user id from request
             const { _id } = req.user;
 
-            // get user by id
-            const user = await User.findById(_id);
+            // find user
+            if (req.user.role === 'customer') {
+                user = await Customer.findById(_id);
+            } else {
+                user = await User.findById(_id);
+            }
 
             // check if user is allowed or user is not found
             if (!user || !roles.includes(user.role)) {
