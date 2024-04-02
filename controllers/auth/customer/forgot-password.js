@@ -57,7 +57,7 @@ const forgotPassword = async (req, res, next) => {
 
         // send mail
         const info = forgotPasswordMailer({
-            customer: customer.toObject(),
+            user: customer.toObject(),
             token,
         });
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
