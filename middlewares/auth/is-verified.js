@@ -56,6 +56,6 @@ const isVerifiedCustomer = async (req, res, next) => {
 
 // export
 module.exports = {
-    isVerifiedUser,
-    isVerifiedCustomer,
+    user: isVerifiedUser,
+    customer: isVerifiedCustomer,
 };
