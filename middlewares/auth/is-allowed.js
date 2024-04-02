@@ -21,6 +21,13 @@ module.exports =
             // get user by id
             const user = await User.findById(_id);
 
+            // check if user exists
+            if (!user) {
+                return res.status(404).json({
+                    message: 'User not found',
+                });
+            }
+
             // check if user is allowed
             if (!roles.includes(user.role)) {
                 return res.status(403).json({
