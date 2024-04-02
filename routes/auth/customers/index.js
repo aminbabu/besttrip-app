@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 28 March 2024
- * @update_date 29 March 2024
+ * @update_date 29 March, 2024
  */
 
 // dependencies
@@ -33,13 +33,13 @@ router.post('/register', auth.validateRegister, customer.register);
 /**
  * @description login a user
  * @param {string} path - /auth/customers/login
- * @param {function} middleware - [auth.'validateLogin']
+ * @param {function} middleware - ['auth.validateLogin']
  * @param {function} controller - ['customer.login']
  * @returns {object} - router
  * @access public
  * @method POST
  */
-router.post('/login', auth.validateLogin, isVerified, customer.login);
+router.post('/login', auth.validateLogin, isVerified.customer, customer.login);
 
 /**
  * @description forgot password
