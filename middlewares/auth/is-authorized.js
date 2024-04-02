@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { User } = require('../../models');
+const { User, Customer } = require('../../models');
 const { verifyToken } = require('../../utils');
 
 // authourize user
@@ -28,11 +28,17 @@ module.exports = async (req, res, next) => {
     const token = authorization.replace('Bearer ', '');
 
     try {
+        let user;
+
         // verify token
         const payload = verifyToken(token);
 
-        // check if user exists
-        const user = await User.findById(payload.user._id);
+        // check user role
+        if (payload.user.role === 'customer') {
+            user = await Customer.findById(payload.user._id);
+        } else {
+            user = await User.findById(payload.user._id);
+        }
 
         if (!user) {
             return res.status(401).json({
