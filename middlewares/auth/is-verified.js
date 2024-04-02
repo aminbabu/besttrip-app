@@ -16,6 +16,13 @@ const isVerifiedUser = async (req, res, next) => {
         // get user
         const user = await User.findOne({ email: req.body.email });
 
+        // check if user exists
+        if (!user) {
+            return res.status(400).json({
+                message: 'Invalid email or password',
+            });
+        }
+
         // check if user is verified
         if (!user.isVerified) {
             return res.status(400).json({
@@ -37,6 +44,13 @@ const isVerifiedCustomer = async (req, res, next) => {
     try {
         // get customer
         const customer = await Customer.findOne({ email: req.body.email });
+
+        // check if customer exists
+        if (!customer) {
+            return res.status(400).json({
+                message: 'Invalid email or password',
+            });
+        }
 
         // check if customer is verified
         if (!customer.isVerified) {
