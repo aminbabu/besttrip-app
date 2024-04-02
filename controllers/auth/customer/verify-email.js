@@ -22,7 +22,7 @@ const verifyEmail = async (req, res, next) => {
         const payload = verifyToken(token);
 
         // check if token is valid
-        const customer = await Customer.findById(payload.customer._id);
+        const customer = await Customer.findById(payload.user._id);
 
         // check if customer exists
         if (!customer) {
