@@ -18,7 +18,7 @@ const getCustomerById = async (req, res, next) => {
         const { id } = req.params;
 
         // get customer
-        const customer = await Customer.findById(id).populate('wallet');
+        const customer = await Customer.findById(id);
 
         // generate token
         const token = generateToken(req.user);
