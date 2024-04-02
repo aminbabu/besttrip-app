@@ -40,11 +40,19 @@ module.exports = [
         .isObject()
         .withMessage('wallet should be an object')
         .custom((value) => {
-            if (value.balance === undefined) {
-                throw new Error('balance is required');
+            const { balance, type, description } = value;
+
+            if (!balance || typeof balance !== 'number' || Number.isNaN(balance)) {
+                throw new Error('balance is required and should be a number');
             }
-            if (value.balance < 0) {
+            if (balance < 0) {
                 throw new Error('balance should be a positive number');
+            }
+            if (!['top-up', 'deduct'].includes(type)) {
+                throw new Error('balance type should be top-up or deduct');
+            }
+            if (description && typeof description !== 'string') {
+                throw new Error('description should be a string');
             }
             return true;
         }),
