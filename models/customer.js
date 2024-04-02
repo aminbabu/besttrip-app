@@ -79,8 +79,18 @@ const customerSchema = new mongoose.Schema(
             type: String,
         },
         wallet: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Wallet',
+            balance: {
+                type: Number,
+                default: 0,
+            },
+            type: {
+                type: String,
+                enum: ['top-up', 'deduct'],
+                default: 'top-up',
+            },
+            description: {
+                type: String,
+            },
         },
     },
     {
