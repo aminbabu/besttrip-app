@@ -17,7 +17,8 @@ const { Token } = require('../../../models');
 const sendVerificationEmail = async (req, res, next) => {
     try {
         // get customer from request
-        const { customer } = req;
+        const { user: customer } = req;
+        console.log(customer);
         const tokens = await Token.find({
             customer: customer._id,
             type: 'verify-email',
