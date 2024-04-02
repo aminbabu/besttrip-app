@@ -43,6 +43,11 @@ const customerSchema = new mongoose.Schema(
             required: [true, 'Password is required'],
             select: false,
         },
+        role: {
+            type: String,
+            enum: ['customer'],
+            default: 'customer',
+        },
         isVerified: {
             type: Boolean,
             default: false,
