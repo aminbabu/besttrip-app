@@ -16,7 +16,12 @@ const tokenSchema = new mongoose.Schema(
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
-            required: [true, 'User is required'],
+            required: [() => this.user, 'User is required'],
+        },
+        customer: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Customer',
+            required: [() => this.customer, 'Customer is required'],
         },
         token: {
             type: String,
