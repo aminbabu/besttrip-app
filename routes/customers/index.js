@@ -37,6 +37,7 @@ router.use(isAuthorized);
 /**
  * @description get all customers
  * @param {string} path - /customers
+ * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getAllCustomers']
  * @returns {object} - router
  * @access private
@@ -47,6 +48,7 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
 /**
  * @description get by mongo id
  * @param {string} path - /customers/:id
+ * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getCustomerById']
  * @returns {object} - router
  * @access private
