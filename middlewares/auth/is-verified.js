@@ -8,10 +8,10 @@
  */
 
 // dependencies
-const { User } = require('../../models');
+const { User, Customer } = require('../../models');
 
-// is verified middleware
-const isVerified = async (req, res, next) => {
+// is verified user middleware
+const isVerifiedUser = async (req, res, next) => {
     try {
         // get user
         const user = await User.findOne({ email: req.body.email });
@@ -32,5 +32,30 @@ const isVerified = async (req, res, next) => {
     }
 };
 
+// is verified customer middleware
+const isVerifiedCustomer = async (req, res, next) => {
+    try {
+        // get customer
+        const customer = await Customer.findOne({ email: req.body.email });
+
+        // check if customer is verified
+        if (!customer.isVerified) {
+            return res.status(400).json({
+                message: 'Please verify your email address',
+            });
+        }
+
+        // continue to the next middleware
+        return next();
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Internal server error',
+        });
+    }
+};
+
 // export
-module.exports = isVerified;
+module.exports = {
+    isVerifiedUser,
+    isVerifiedCustomer,
+};
