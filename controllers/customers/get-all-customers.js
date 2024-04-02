@@ -15,7 +15,7 @@ const { generateToken } = require('../../utils');
 const getAllCustomers = async (req, res, next) => {
     try {
         // get all customers
-        const customers = await Customer.find();
+        const customers = await Customer.find().populate('wallet');
 
         // generate token
         const token = generateToken(req.user);
