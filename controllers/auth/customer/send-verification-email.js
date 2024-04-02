@@ -18,7 +18,14 @@ const sendVerificationEmail = async (req, res, next) => {
     try {
         // get customer from request
         const { user: customer } = req;
-        console.log(customer);
+
+        // check if customer is already verified
+        if (customer.isVerified) {
+            return res.status(200).json({
+                message: 'Customer already verified',
+            });
+        }
+
         const tokens = await Token.find({
             customer: customer._id,
             type: 'verify-email',
