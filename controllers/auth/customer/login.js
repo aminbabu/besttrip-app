@@ -26,8 +26,11 @@ const login = async (req, res, next) => {
             });
         }
 
+        // convert customer to object
+        const customerObject = customer.toObject();
+
         // compare password
-        const match = await comparePassword(password, customer.password);
+        const match = await comparePassword(password, customerObject.password);
 
         if (!match) {
             return res.status(400).json({
@@ -35,8 +38,11 @@ const login = async (req, res, next) => {
             });
         }
 
+        // remove password from customer object
+        delete customerObject.password;
+
         // generate token
-        const token = generateToken(customer.toObject());
+        const token = generateToken(customerObject);
 
         // return response
         return res.status(200).json({
