@@ -27,12 +27,12 @@ const { isAuthorized, isAllowed } = require('../../middlewares/auth');
 /**
  * @description check if user is authorized
  * @param {string} path - /customers
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @access private
  * @method USE
  */
-router.use(isAuthorized, isAllowed(['admin']));
+router.use(isAuthorized);
 
 /**
  * @description get all customers
@@ -42,7 +42,7 @@ router.use(isAuthorized, isAllowed(['admin']));
  * @access private
  * @method GET
  */
-router.get('/', getAllCustomers);
+router.get('/', isAllowed(['admin']), getAllCustomers);
 
 /**
  * @description get by mongo id
@@ -52,7 +52,7 @@ router.get('/', getAllCustomers);
  * @access private
  * @method GET
  */
-router.get('/:id', getCustomerById);
+router.get('/:id', isAllowed(['admin']), getCustomerById);
 
 /**
  * @description update customer by mongo id
