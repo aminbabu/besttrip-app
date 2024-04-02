@@ -9,7 +9,7 @@
 
 // dependencies
 const welcome = require('../../../mails/welcome');
-const { Customer, Wallet } = require('../../../models');
+const { Customer } = require('../../../models');
 const { generateToken, sendEmail } = require('../../../utils');
 
 // register a new customer controller
@@ -33,15 +33,10 @@ const register = async (req, res, next) => {
             email,
             phone,
             password,
+            wallet: {
+                balance: 0,
+            },
         });
-
-        // create an wallet for the customer
-        const wallet = new Wallet({
-            customer: newCustomer._id,
-        });
-
-        // save wallet
-        await wallet.save();
 
         // generate token
         const token = generateToken(newCustomer.toObject());
@@ -49,9 +44,6 @@ const register = async (req, res, next) => {
         // send mail
         const info = welcome({ user: newCustomer.toObject(), token });
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
-
-        // update customer
-        newCustomer.wallet = wallet._id;
 
         // save customer
         await newCustomer.save();
