@@ -54,6 +54,7 @@ const updateCustomerBySelf = async (req, res) => {
         // success response
         return res.status(200).json({
             message: 'Updated successfully',
+            customer,
             token,
         });
     } catch (error) {
