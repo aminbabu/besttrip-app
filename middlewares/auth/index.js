@@ -12,4 +12,5 @@ module.exports = {
     isAuthorized: require('./is-authorized'),
     isVerified: require('./is-verified'),
     isAllowed: require('./is-allowed'),
+    isSelf: require('./customers/is-self'),
 };
