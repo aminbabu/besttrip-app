@@ -61,7 +61,7 @@ const updateCustomerById = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
-            message: 'Customer updated successfully',
+            message: 'Updated customer successfully',
             customer,
             token,
         });
