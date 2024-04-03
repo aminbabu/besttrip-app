@@ -11,6 +11,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
+const { CUSTOMER_STATUS, CUSTOMER_WALLET_TRANSACTION_TYPES } = require('../constants/_customers');
 
 // customer schema
 const customerSchema = new mongoose.Schema(
@@ -54,7 +55,7 @@ const customerSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            enum: ['active', 'disabled'],
+            enum: CUSTOMER_STATUS,
             default: 'active',
         },
         dob: {
@@ -86,7 +87,7 @@ const customerSchema = new mongoose.Schema(
             },
             type: {
                 type: String,
-                enum: ['top-up', 'deduct'],
+                enum: CUSTOMER_WALLET_TRANSACTION_TYPES,
                 default: 'top-up',
             },
             description: {
