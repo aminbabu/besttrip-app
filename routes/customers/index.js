@@ -66,7 +66,7 @@ router.get('/:id', isAllowed(['admin']), getCustomerById);
  * @access private
  * @method PATCH
  */
-router.patch('/:id', isAllowed(['customer', 'admin']), updateCustomer, updateCustomerById);
+router.patch('/:id', isAllowed(['admin']), updateCustomer, updateCustomerById);
 
 /**
  * @description delete customer by mongo id
