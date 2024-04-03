@@ -12,7 +12,7 @@ const { Customer } = require('../../models');
 const { generateToken } = require('../../utils');
 
 // update customer by self controller
-const updateCustomerBySelf = async (req, res) => {
+const updateCustomerBySelf = async (req, res, next) => {
     try {
         // get customer id
         const { id } = req.params;
@@ -58,10 +58,7 @@ const updateCustomerBySelf = async (req, res) => {
             token,
         });
     } catch (error) {
-        // error response
-        return res.status(500).json({
-            message: 'Internal Server Error',
-        });
+        return next(error);
     }
 };
 
