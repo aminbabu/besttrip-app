@@ -81,12 +81,12 @@ const customerSchema = new mongoose.Schema(
         wallet: {
             balance: {
                 type: Number,
+                required: [true, 'Wallet balance is required'],
                 default: 0,
             },
             type: {
                 type: String,
                 enum: ['top-up', 'deduct'],
-                required: [true, 'Transaction type is required'],
                 default: 'top-up',
             },
             description: {
