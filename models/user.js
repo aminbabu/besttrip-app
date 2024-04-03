@@ -11,6 +11,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
+const { USER_STATUS, USER_ROLES } = require('../constants/_users');
 
 // user schema
 const userSchema = new mongoose.Schema(
@@ -46,7 +47,7 @@ const userSchema = new mongoose.Schema(
         },
         role: {
             type: String,
-            enum: ['user', 'admin'],
+            enum: USER_ROLES,
             default: 'user',
         },
         isVerified: {
@@ -55,7 +56,7 @@ const userSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            enum: ['active', 'disabled'],
+            enum: USER_STATUS,
             default: 'active',
         },
     },
