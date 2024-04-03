@@ -86,6 +86,7 @@ const customerSchema = new mongoose.Schema(
             type: {
                 type: String,
                 enum: ['top-up', 'deduct'],
+                required: [true, 'Transaction type is required'],
                 default: 'top-up',
             },
             description: {
