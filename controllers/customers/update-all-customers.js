@@ -13,23 +13,54 @@ const { Customer } = require('../../models');
 // update all customers
 const updateAllCustomers = async (req, res, next) => {
     try {
-        // Update all customers
-        const customers = await Customer.updateMany({}, req.body);
+        // get the wallet object from the request body
+        const { wallet } = req.body;
 
-        // Check if any documents were modified
-        if (customers.matchedCount > 0) {
-            // Fetch all customers after update
-            const updatedCustomers = await Customer.find();
+        // get all customers
+        const customers = await Customer.find();
 
-            // Return response with updated data
-            return res.status(200).json({
-                message: 'All customers updated successfully',
-                customers: updatedCustomers,
+        // check if customers exist
+        if (!customers.length) {
+            return res.status(404).json({
+                message: 'Customers not found',
             });
         }
+
+        // update all customers
+        customers.forEach(async (customerItem) => {
+            // get customer
+            const customer = customerItem;
+
+            // calculate wallet balance based on transaction type
+            if (wallet) {
+                switch (wallet.type) {
+                    case 'top-up':
+                        customer.wallet.balance += wallet.balance;
+                        break;
+                    case 'deduct':
+                        customer.wallet.balance -= wallet.balance;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // update customer
+            customer.set({
+                ...req.body,
+                wallet: {
+                    ...req.body.wallet,
+                    balance: customer.wallet.balance,
+                },
+            });
+
+            // save customer
+            await customer.save();
+        });
+
         return res.status(200).json({
-            message: 'No customers were updated',
-            customers: [],
+            message: 'Customers updated successfully',
+            customers,
         });
     } catch (error) {
         return next(error);
