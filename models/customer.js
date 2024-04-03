@@ -11,7 +11,11 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
-const { CUSTOMER_STATUS, CUSTOMER_WALLET_TRANSACTION_TYPES } = require('../constants/_customers');
+const {
+    CUSTOMER_STATUS,
+    CUSTOMER_WALLET_TRANSACTION_TYPES,
+    CUSTOMER_ROLES,
+} = require('../constants/_customers');
 
 // customer schema
 const customerSchema = new mongoose.Schema(
@@ -46,7 +50,7 @@ const customerSchema = new mongoose.Schema(
         },
         role: {
             type: String,
-            enum: ['customer'],
+            enum: CUSTOMER_ROLES,
             default: 'customer',
         },
         isVerified: {
