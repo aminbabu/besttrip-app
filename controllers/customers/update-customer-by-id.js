@@ -17,9 +17,6 @@ const updateCustomerById = async (req, res, next) => {
         // get customer id
         const { id } = req.params;
 
-        // get the wallet object from the request body
-        const { wallet } = req.body;
-
         // check if customer exists
         const customer = await Customer.findById(id);
 
@@ -30,28 +27,8 @@ const updateCustomerById = async (req, res, next) => {
             });
         }
 
-        // calculate wallet balance based on transaction type
-        if (wallet) {
-            switch (wallet.type) {
-                case 'top-up':
-                    customer.wallet.balance += wallet.balance;
-                    break;
-                case 'deduct':
-                    customer.wallet.balance -= wallet.balance;
-                    break;
-                default:
-                    break;
-            }
-        }
-
         // update customer
-        customer.set({
-            ...req.body,
-            wallet: {
-                ...req.body.wallet,
-                balance: customer.wallet.balance,
-            },
-        });
+        customer.set({ ...req.body });
 
         // save customer
         await customer.save();
