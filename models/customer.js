@@ -110,8 +110,15 @@ customerSchema.pre('save', async function (next) {
         // hash password
         this.password = await bcrypt.hash(this.password, 10);
 
+        // Get the last customer ID if any
+        const lastCustomer = await this.constructor.findOne({}, {}, { sort: { createdAt: -1 } });
+
+        // get count by splitting customer ID (format: BTCYYYYMMDD0001) using moment
+        const count = lastCustomer
+            ? parseInt(lastCustomer.customerID.split(moment().format('YYYYMMDD'))[1], 10)
+            : 0;
+
         // generate incrementing customer ID
-        const count = await this.constructor.countDocuments();
         this.customerID = `BTC${moment().format('YYYYMMDD')}${count + 1}`; // BTCYYYYMMDD0001
 
         return next();
