@@ -5,17 +5,17 @@
 <script src="/assets/plugins/global/plugins.bundle.js"></script>
 <script src="/assets/js/scripts.bundle.js"></script>
 <!--end::Global Javascript Bundle-->
-<!--begin::Vendors Javascript(used for this page only)-->
 <% if(vendorJavascripts?.length) { %>
+<!--begin::Vendors Javascript(used for this page only)-->
 <% vendorJavascripts.forEach(function(vendorJavascript) { %>
 <script src="<%= vendorJavascript %>" type="text/javascript"></script>
 <% }); %>
-<% } %>
 <!--end::Vendors Javascript-->
-<!--begin::Custom Javascript(used for this page only)-->
+<% } %>
 <% if(customJavascripts?.length) { %>
+<!--begin::Custom Javascript(used for this page only)-->
 <% customJavascripts.forEach(function(customJavascript) { %>
 <script src="<%= customJavascript %>" type="text/javascript"></script>
 <% }); %>
-<% } %>
 <!--end::Custom Javascript-->
+<% } %>
