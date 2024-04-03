@@ -17,12 +17,13 @@ const {
     getAllCustomers,
     getCustomerById,
     updateCustomerById,
+    updateCustomerBySelf,
     deleteCustomerById,
 } = require('../../controllers/customers');
 
 // middlewares
 // const { customers } = require('../../middlewares/validators');
-const { isAuthorized, isAllowed } = require('../../middlewares/auth');
+const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
 const { updateCustomer } = require('../../middlewares/validators/customers');
 
 /**
@@ -67,6 +68,17 @@ router.get('/:id', isAllowed(['admin']), getCustomerById);
  * @method PATCH
  */
 router.patch('/:id', isAllowed(['admin']), updateCustomer, updateCustomerById);
+
+/**
+ * @description update customer by self
+ * @param {string} path - /customers/:id
+ * @param {function} middleware - ['isSelf']
+ * @param {function} controller - ['updateCustomerBySelf']
+ * @returns {object} - router
+ * @access private
+ * @method PATCH
+ */
+router.patch('/:id/self', isSelf, isAllowed(['customer']), updateCustomer, updateCustomerBySelf);
 
 /**
  * @description delete customer by mongo id
