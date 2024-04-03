@@ -20,8 +20,15 @@ const deleteCustomerById = async (req, res, next) => {
         // get customer
         const customer = await Customer.findById(id);
 
+        // check if customer exists
+        if (!customer) {
+            return res.status(404).json({
+                message: 'Customer not found',
+            });
+        }
+
         // delete customer
-        await customer.deleteOne();
+        await Customer.findByIdAndDelete(id);
 
         // generate token
         const token = generateToken(req.user);
