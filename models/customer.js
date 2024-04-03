@@ -121,7 +121,7 @@ customerSchema.pre('save', async function (next) {
     }
 });
 
-// generate customer id
+// generate customer id before saving
 customerSchema.pre('save', async function (next) {
     try {
         // check if customer id is modified
@@ -138,35 +138,6 @@ customerSchema.pre('save', async function (next) {
 
         // generate incrementing customer ID
         this.customerID = `BTC${moment().format('YYYYMMDD')}${count + 1}`; // BTCYYYYMMDD0001
-
-        return next();
-    } catch (error) {
-        return next(error);
-    }
-});
-
-// calculate wallet balance based on transaction type
-customerSchema.pre('save', async function (next) {
-    try {
-        // check if wallet is modified
-        if (!this.isModified('wallet')) {
-            return next();
-        }
-
-        // get wallet object
-        const { wallet } = this;
-
-        // calculate wallet balance based on transaction type
-        switch (wallet.type) {
-            case 'top-up':
-                this.wallet.balance += wallet.balance;
-                break;
-            case 'deduct':
-                this.wallet.balance -= wallet.balance;
-                break;
-            default:
-                break;
-        }
 
         return next();
     } catch (error) {
