@@ -25,6 +25,7 @@ const getCustomerById = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
+            message: 'Fetched customer successfully',
             customer,
             token,
         });
