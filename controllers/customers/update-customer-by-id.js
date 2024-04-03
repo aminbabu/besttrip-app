@@ -17,11 +17,44 @@ const updateCustomerById = async (req, res, next) => {
         // get customer id
         const { id } = req.params;
 
-        // update customer and return updated customer
-        const updatedCustomer = await Customer.findByIdAndUpdate(id, req.body, {
-            new: true,
-            runValidators: true,
+        // get the wallet object from the request body
+        const { wallet } = req.body;
+
+        // check if customer exists
+        const customer = await Customer.findById(id);
+
+        // return error if customer does not exist
+        if (!customer) {
+            return res.status(404).json({
+                message: 'Customer not found',
+            });
+        }
+
+        // calculate wallet balance based on transaction type
+        if (wallet) {
+            switch (wallet.type) {
+                case 'top-up':
+                    customer.wallet.balance += wallet.balance;
+                    break;
+                case 'deduct':
+                    customer.wallet.balance -= wallet.balance;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // update customer
+        customer.set({
+            ...req.body,
+            wallet: {
+                ...req.body.wallet,
+                balance: customer.wallet.balance,
+            },
         });
+
+        // save customer
+        await customer.save();
 
         // generate token
         const token = generateToken(req.user);
@@ -29,7 +62,7 @@ const updateCustomerById = async (req, res, next) => {
         // return response
         return res.status(200).json({
             message: 'Customer updated successfully',
-            customer: updatedCustomer,
+            customer,
             token,
         });
     } catch (error) {
