@@ -115,6 +115,19 @@ customerSchema.pre('save', async function (next) {
         // hash password
         this.password = await bcrypt.hash(this.password, 10);
 
+        return next();
+    } catch (error) {
+        return next(error);
+    }
+});
+
+// generate customer id
+customerSchema.pre('save', async function (next) {
+    try {
+        // check if customer id is modified
+        if (!this.isModified('customerID')) {
+            return next();
+        }
         // Get the last customer ID if any
         const lastCustomer = await this.constructor.findOne({}, {}, { sort: { createdAt: -1 } });
 
@@ -125,6 +138,35 @@ customerSchema.pre('save', async function (next) {
 
         // generate incrementing customer ID
         this.customerID = `BTC${moment().format('YYYYMMDD')}${count + 1}`; // BTCYYYYMMDD0001
+
+        return next();
+    } catch (error) {
+        return next(error);
+    }
+});
+
+// calculate wallet balance based on transaction type
+customerSchema.pre('save', async function (next) {
+    try {
+        // check if wallet is modified
+        if (!this.isModified('wallet')) {
+            return next();
+        }
+
+        // get wallet object
+        const { wallet } = this;
+
+        // calculate wallet balance based on transaction type
+        switch (wallet.type) {
+            case 'top-up':
+                this.wallet.balance += wallet.balance;
+                break;
+            case 'deduct':
+                this.wallet.balance -= wallet.balance;
+                break;
+            default:
+                break;
+        }
 
         return next();
     } catch (error) {
