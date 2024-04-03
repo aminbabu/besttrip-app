@@ -76,7 +76,7 @@ router.patch('/:id', isAllowed(['customer', 'admin']), updateCustomer, updateCus
  * @access private
  * @method DELETE
  */
-router.delete('/:id', deleteCustomerById);
+router.delete('/:id', isAllowed(['admin']), deleteCustomerById);
 
 // export
 module.exports = router;
