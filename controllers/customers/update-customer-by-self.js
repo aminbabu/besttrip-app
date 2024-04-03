@@ -20,30 +20,18 @@ const updateCustomerBySelf = async (req, res, next) => {
         // get the wallet object from the request body
         const { wallet } = req.body;
 
-        // get customer
-        const customer = await Customer.findById(id);
-        // calculate wallet balance based on transaction type
+        // check if wallet is present
         if (wallet) {
-            switch (wallet.type) {
-                case 'top-up':
-                    customer.wallet.balance += wallet.balance;
-                    break;
-                case 'deduct':
-                    customer.wallet.balance -= wallet.balance;
-                    break;
-                default:
-                    break;
-            }
+            return res.status(400).json({
+                message: 'You are not allowed to update your wallet',
+            });
         }
 
+        // get customer
+        const customer = await Customer.findById(id);
+
         // update customer
-        customer.set({
-            ...req.body,
-            wallet: {
-                ...req.body.wallet,
-                balance: customer.wallet.balance,
-            },
-        });
+        customer.set({ ...req.body });
 
         // save customer
         await customer.save();
