@@ -16,6 +16,7 @@ const router = express.Router();
 const {
     getAllCustomers,
     getCustomerById,
+    updateAllCustomers,
     updateCustomerById,
     updateCustomerBySelf,
     deleteCustomerById,
@@ -57,6 +58,17 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
  * @method GET
  */
 router.get('/:id', isAllowed(['admin']), getCustomerById);
+
+/**
+ * @description update all customers
+ * @param {string} path - /customers
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} controller - ['updateAllCustomers']
+ * @returns {object} - router
+ * @access private
+ * @method PUT
+ */
+router.put('/', isAllowed(['admin']), updateCustomer, updateAllCustomers);
 
 /**
  * @description update customer by mongo id
