@@ -66,9 +66,9 @@ router.get('/:id', isAllowed(['admin']), getCustomerById);
  * @param {function} controller - ['updateAllCustomers']
  * @returns {object} - router
  * @access private
- * @method PUT
+ * @method PATCH
  */
-router.put('/', isAllowed(['admin']), updateCustomer, updateAllCustomers);
+router.patch('/', isAllowed(['admin']), updateCustomer, updateAllCustomers);
 
 /**
  * @description update customer by mongo id
