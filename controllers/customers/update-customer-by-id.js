@@ -23,7 +23,7 @@ const updateCustomerById = async (req, res, next) => {
         // check if customer exists
         const customer = await Customer.findById(id);
 
-        // return error if customer does not exist
+        // check if customer exists
         if (!customer) {
             return res.status(404).json({
                 message: 'Customer not found',
