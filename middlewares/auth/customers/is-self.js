@@ -29,7 +29,6 @@ module.exports = async (req, res, next) => {
         // next middleware
         return next();
     } catch (error) {
-        console.log(error);
         // error response
         return res.status(500).json({
             message: 'Internal Server Error',
