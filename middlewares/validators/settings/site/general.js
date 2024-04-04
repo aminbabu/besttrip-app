@@ -12,13 +12,29 @@ const { body } = require('express-validator');
 
 // export general site settings validator
 module.exports = [
-    body('logo').optional().isString().withMessage('Logo must be a string'),
-    body('favicon').optional().isString().withMessage('Favicon must be a string'),
+    body('logo')
+        .isEmpty()
+        .withMessage('Logo is required')
+        .isString()
+        .withMessage('Logo must be a string'),
+    body('favicon')
+        .isEmpty()
+        .withMessage('Favicon is required')
+        .isString()
+        .withMessage('Favicon must be a string'),
     body('title')
-        .notEmpty()
-        .withMessage('Title is required')
+        .isLength({ min: 3 })
+        .withMessage('Title is required and must be at least 3 characters')
         .isString()
         .withMessage('Title must be a string'),
-    body('domain').optional().isString().withMessage('Domain must be a string'),
-    body('description').optional().isString().withMessage('Description must be a string'),
+    body('domain')
+        .isEmpty()
+        .withMessage('Domain is required')
+        .isString()
+        .withMessage('Domain must be a string'),
+    body('description')
+        .isEmpty()
+        .withMessage('Description is required')
+        .isString()
+        .withMessage('Description must be a string'),
 ];
