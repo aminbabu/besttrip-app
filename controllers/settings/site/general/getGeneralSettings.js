@@ -13,8 +13,21 @@ const { GeneralSettings } = require('../../../../models');
 // get general site settings controller
 module.exports = async (req, res, next) => {
     try {
+        // get general settings
         const generalSettings = await GeneralSettings.findOne();
-        return res.status(200).json(generalSettings);
+
+        // check if general settings exists
+        if (!generalSettings) {
+            return res.status(404).json({
+                message: 'General settings not found',
+            });
+        }
+
+        // return response
+        return res.status(200).json({
+            message: 'General settings fetched successfully',
+            generalSettings,
+        });
     } catch (error) {
         return next(error);
     }
