@@ -15,7 +15,7 @@ const { isAuthorized } = require('../../../../middlewares/auth');
 const { site } = require('../../../../middlewares/validators/settings');
 
 // controllers
-const { getGeneralSettings } = require('../../../../controllers/settings');
+const { getGeneralSettings, updateGeneralSettings } = require('../../../../controllers/settings');
 
 // express router
 const router = express.Router();
@@ -33,13 +33,24 @@ router.use(isAuthorized);
 /**
  * @description get general site settings
  * @param {string} path - '/settings/site/general'
- * @param {function} middleware - []
+ * @param {function} middleware - ['site']
  * @param {function} controller - ['getGeneralSettings']
  * @returns {object} - router
  * @access private
  * @method GET
  */
-router.get('/', site.general, getGeneralSettings);
+router.get('/', getGeneralSettings);
+
+/**
+ * @description update general site settings
+ * @param {string} path - '/settings/site/general'
+ * @param {function} middleware - ['site']
+ * @param {function} controller - ['updateGeneralSettings']
+ * @returns {object} - router
+ * @access private
+ * @method PATCH
+ */
+router.patch('/', site.general, updateGeneralSettings);
 
 // export router
 module.exports = router;
