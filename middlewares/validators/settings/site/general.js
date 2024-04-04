@@ -13,15 +13,15 @@ const { expressValidator } = require('../../../../handlers/errors');
 
 // export general site settings validator
 module.exports = [
-    body('logo').optional().isString().withMessage('Logo must be a string'),
-    body('favicon').optional().isString().withMessage('Favicon must be a string'),
+    body('logo').optional().isURL().withMessage('Logo must be a valid URL'),
+    body('favicon').optional().isURL().withMessage('Favicon must be a valid URL'),
     body('title')
         .trim()
         .notEmpty()
         .withMessage('Title is required')
         .isString()
         .withMessage('Title must be a string'),
-    body('domain').optional().isString().withMessage('Domain must be a string'),
+    body('domain').optional().isURL().withMessage('Domain must be a valid URL'),
     body('description').optional().isString().withMessage('Description must be a string'),
     expressValidator,
 ];
