@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const generalSettings = await GeneralSettings.findOne();
 
         // update general settings
-        const updatedGeneralSettings = await GeneralSettings.findOneByIdAndUpdate(
+        const updatedGeneralSettings = await GeneralSettings.findByIdAndUpdate(
             generalSettings?._id,
             req.body,
             {
