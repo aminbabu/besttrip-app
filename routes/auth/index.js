@@ -13,14 +13,8 @@ const express = require('express');
 const router = express.Router();
 
 // routers
-const usersRouter = require('./users');
-const customersRouter = require('./customers');
-
-// users auth routes
-router.use('/users', usersRouter);
-
-// customers auth routes
-router.use('/customers', customersRouter);
+router.use('/users', require('./users'));
+router.use('/customers', require('./customers'));
 
 // export router
 module.exports = router;
