@@ -11,4 +11,5 @@
 module.exports = {
     authRouter: require('./auth'),
     customersRouter: require('./customers'),
+    settingsRouter: require('./settings'),
 };

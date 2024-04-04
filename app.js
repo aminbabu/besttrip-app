@@ -19,7 +19,7 @@ const helmet = require('helmet');
 const { default: xssInstance } = require('xss-shield');
 
 // routers
-const { authRouter, customersRouter } = require('./routes/index');
+const { authRouter, customersRouter, settingsRouter } = require('./routes/index');
 
 // config
 dotenv.config();
@@ -46,6 +46,7 @@ app.use(xssInstance.xssShield());
 // routes
 app.use('/auth', authRouter);
 app.use('/customers', customersRouter);
+app.use('/settings', settingsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
