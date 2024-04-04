@@ -9,5 +9,5 @@
 
 // export all settings validators
 module.exports = {
-    general: require('./site/general'),
+    site: require('./site'),
 };
