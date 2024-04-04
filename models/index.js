@@ -12,4 +12,5 @@ module.exports = {
     User: require('./user'),
     Token: require('./token'),
     Customer: require('./customer'),
+    GeneralSettings: require('./settings/site/GeneralSettings'),
 };
