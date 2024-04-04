@@ -9,7 +9,7 @@
 
 // export validate image function
 module.exports =
-    (maxSizeInBytes = 1024 * 1024, allowedTypes = ['image/jpeg', 'image/png', 'image/jpg']) =>
+    (allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'], maxSizeInBytes = 1024 * 1024) =>
     (value, { req }) => {
         // get the field name
         const fieldName = this.path;
