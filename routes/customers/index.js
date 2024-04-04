@@ -23,7 +23,6 @@ const {
 } = require('../../controllers/customers');
 
 // middlewares
-// const { customers } = require('../../middlewares/validators');
 const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
 const { updateCustomer } = require('../../middlewares/validators/customers');
 
