@@ -42,15 +42,15 @@ router.use(isAuthorized);
 router.get('/', getGeneralSettings);
 
 /**
- * @description update general site settings
+ * @description create/update general site settings
  * @param {string} path - '/settings/site/general'
  * @param {function} middleware - ['site']
  * @param {function} controller - ['updateGeneralSettings']
  * @returns {object} - router
  * @access private
- * @method PATCH
+ * @method PUT
  */
-router.patch('/', site.general, updateGeneralSettings);
+router.put('/', site.general, updateGeneralSettings);
 
 // export router
 module.exports = router;
