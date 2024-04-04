@@ -9,6 +9,7 @@
 
 // dependencies
 const { body } = require('express-validator');
+const { expressValidator } = require('../../../../handlers/errors');
 
 // export general site settings validator
 module.exports = [
@@ -37,4 +38,5 @@ module.exports = [
         .withMessage('Description is required')
         .isString()
         .withMessage('Description must be a string'),
+    expressValidator,
 ];
