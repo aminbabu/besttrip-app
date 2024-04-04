@@ -20,6 +20,7 @@ const { default: xssInstance } = require('xss-shield');
 
 // routers
 const { authRouter, customersRouter, settingsRouter } = require('./routes/index');
+const { WHITE_LIST } = require('./constants/_xss-whitelist');
 
 // config
 dotenv.config();
@@ -41,7 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
-app.use(xssInstance.xssShield());
+app.use(xssInstance.xssShield(WHITE_LIST));
 
 // routes
 app.use('/auth', authRouter);
