@@ -11,7 +11,7 @@
 const express = require('express');
 
 // middlewares
-const { isAuthorized } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const { site } = require('../../../../middlewares/validators/settings');
 
 // controllers
@@ -39,7 +39,7 @@ router.use(isAuthorized);
  * @access private
  * @method GET
  */
-router.get('/', getGeneralSettings);
+router.get('/', isAllowed(['customer', 'admin']), getGeneralSettings);
 
 /**
  * @description create/update general site settings
