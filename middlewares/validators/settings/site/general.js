@@ -16,6 +16,7 @@ module.exports = [
     body('logo').optional().isString().withMessage('Logo must be a string'),
     body('favicon').optional().isString().withMessage('Favicon must be a string'),
     body('title')
+        .trim()
         .notEmpty()
         .withMessage('Title is required')
         .isString()
