@@ -10,11 +10,14 @@
 // dependencies
 const { body } = require('express-validator');
 const { expressValidator } = require('../../../../handlers/errors');
+const validateImage = require('../../../../utils/validate-image');
 
 // export general site settings validator
 module.exports = [
-    body('logo').optional().isURL().withMessage('Logo must be a valid URL'),
-    body('favicon').optional().isURL().withMessage('Favicon must be a valid URL'),
+    body('logo').optional().custom(validateImage()),
+    body('favicon')
+        .optional()
+        .custom(validateImage(['image/png', 'image/x-icon'])),
     body('title')
         .trim()
         .notEmpty()
