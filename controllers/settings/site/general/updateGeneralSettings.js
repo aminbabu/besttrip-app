@@ -11,12 +11,28 @@
 const { GeneralSettings } = require('../../../../models');
 
 // update general settings
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
-        // send response
-        res.json({ message: 'General settings updated successfully' });
+        // get general settings
+        const generalSettings = await GeneralSettings.findOne();
+
+        // update general settings
+        const updatedGeneralSettings = await GeneralSettings.findOneByIdAndUpdate(
+            generalSettings._id,
+            req.body,
+            {
+                new: true,
+                upsert: true,
+                setDefaultsOnInsert: true,
+            }
+        );
+
+        // response
+        return res.status(200).json({
+            message: 'General settings updated successfully',
+            generalSettings: updatedGeneralSettings,
+        });
     } catch (error) {
-        // send response
-        res.status(500).json({ message: error.message });
+        return next(error);
     }
 };
