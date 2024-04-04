@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { GeneralSettings } = require('../../../../models/settings');
+const { GeneralSettings } = require('../../../../models');
 
 // get general site settings controller
 module.exports = async (req, res, next) => {
