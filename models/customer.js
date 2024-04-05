@@ -124,6 +124,11 @@ customerSchema.pre('save', async function (next) {
 // generate customer id before saving
 customerSchema.pre('save', async function (next) {
     try {
+        // check if customer is new
+        if (!this.$isNew) {
+            return next();
+        }
+
         // Get the last customer ID if any
         const lastCustomer = await this.constructor.findOne({}, {}, { sort: { createdAt: -1 } });
 
@@ -131,6 +136,8 @@ customerSchema.pre('save', async function (next) {
         const count = lastCustomer
             ? parseInt(lastCustomer.customerID.split(moment().format('YYYYMMDD'))[1], 10)
             : 0;
+
+        console.log(`BTC${moment().format('YYYYMMDD')}${count + 1}`);
 
         // generate incrementing customer ID
         this.customerID = `BTC${moment().format('YYYYMMDD')}${count + 1}`; // BTCYYYYMMDD0001
