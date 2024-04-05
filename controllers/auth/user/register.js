@@ -35,15 +35,15 @@ const register = async (req, res, next) => {
             password,
         });
 
+        // save user
+        await newUser.save();
+
         // generate token
         const token = generateToken(newUser.toObject());
 
         // send mail
         const info = welcome({ user: newUser.toObject(), token });
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
-
-        // save user
-        await newUser.save();
 
         // return response
         return res.status(201).json({
