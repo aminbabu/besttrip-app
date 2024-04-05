@@ -128,6 +128,7 @@ customerSchema.pre('save', async function (next) {
         if (!this.isModified('customerID')) {
             return next();
         }
+
         // Get the last customer ID if any
         const lastCustomer = await this.constructor.findOne({}, {}, { sort: { createdAt: -1 } });
 
