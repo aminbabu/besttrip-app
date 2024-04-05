@@ -10,4 +10,5 @@
 // export all validators
 module.exports = {
     updateCustomer: require('./update-customer'),
+    updateCustomerSelf: require('./update-customer-self'),
 };
