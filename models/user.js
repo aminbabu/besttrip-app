@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema(
     {
         userID: {
             type: String,
-            required: [true, 'User ID is required'],
             unique: [true, 'User ID already exists'],
         },
         avatar: {
@@ -76,9 +75,30 @@ userSchema.pre('save', async function (next) {
         // hash password
         this.password = await bcrypt.hash(this.password, 10);
 
+        return next();
+    } catch (error) {
+        return next(error);
+    }
+});
+
+// generate user id before saving
+userSchema.pre('save', async function (next) {
+    try {
+        // check if user id is modified
+        if (!this.isModified('userID')) {
+            return next();
+        }
+
+        // Get the last user ID if any
+        const lastUser = await this.constructor.findOne({}, {}, { sort: { createdAt: -1 } });
+
+        // get count by splitting user ID (format: BTYYYYMMDD0001) using moment
+        const count = lastUser
+            ? parseInt(lastUser.userID.split(moment().format('YYYYMMDD'))[1], 10)
+            : 0;
+
         // generate incrementing user ID
-        const count = await this.model('User').countDocuments();
-        this.userID = `BT${moment().format('YYYY')}${count + 1}`; // BTCYYYY0001
+        this.userID = `BT${moment().format('YYYYMMDD')}${count + 1}`; // BTYYYYMMDD0001
 
         return next();
     } catch (error) {
