@@ -84,11 +84,6 @@ userSchema.pre('save', async function (next) {
 // generate user id before saving
 userSchema.pre('save', async function (next) {
     try {
-        // check if user id is modified
-        if (!this.isModified('userID')) {
-            return next();
-        }
-
         // Get the last user ID if any
         const lastUser = await this.constructor.findOne({}, {}, { sort: { createdAt: -1 } });
 
@@ -96,6 +91,8 @@ userSchema.pre('save', async function (next) {
         const count = lastUser
             ? parseInt(lastUser.userID.split(moment().format('YYYYMMDD'))[1], 10)
             : 0;
+
+        console.log(count, 'count user');
 
         // generate incrementing user ID
         this.userID = `BT${moment().format('YYYYMMDD')}${count + 1}`; // BTYYYYMMDD0001
