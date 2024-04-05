@@ -17,16 +17,6 @@ const updateCustomerBySelf = async (req, res, next) => {
         // get customer id
         const { id } = req.params;
 
-        // get the wallet object from the request body
-        const { wallet } = req.body;
-
-        // check if wallet is present
-        if (wallet) {
-            return res.status(400).json({
-                message: 'You are not allowed to update your wallet',
-            });
-        }
-
         // get customer
         const customer = await Customer.findById(id);
 
