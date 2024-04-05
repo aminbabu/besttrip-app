@@ -9,6 +9,7 @@
 
 // dependencies
 const { Customer } = require('../../models');
+const { generateToken } = require('../../utils');
 
 // update all customers
 const updateAllCustomers = async (req, res, next) => {
@@ -47,6 +48,7 @@ const updateAllCustomers = async (req, res, next) => {
 
             // update customer
             customer.set({
+                ...customer.toObject(),
                 ...req.body,
                 wallet: {
                     ...req.body.wallet,
@@ -58,9 +60,13 @@ const updateAllCustomers = async (req, res, next) => {
             await customer.save();
         });
 
+        // generate token
+        const token = generateToken(req.user);
+
         return res.status(200).json({
             message: 'Customers updated successfully',
             customers,
+            token,
         });
     } catch (error) {
         return next(error);
