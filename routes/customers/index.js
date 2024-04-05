@@ -24,7 +24,7 @@ const {
 
 // middlewares
 const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
-const { updateCustomer } = require('../../middlewares/validators/customers');
+const { updateCustomer, updateCustomerSelf } = require('../../middlewares/validators/customers');
 
 /**
  * @description check if user is authorized
@@ -89,7 +89,13 @@ router.patch('/:id', isAllowed(['admin']), updateCustomer, updateCustomerById);
  * @access private
  * @method PATCH
  */
-router.patch('/:id/self', isSelf, isAllowed(['customer']), updateCustomer, updateCustomerBySelf);
+router.patch(
+    '/:id/self',
+    isSelf,
+    isAllowed(['customer']),
+    updateCustomerSelf,
+    updateCustomerBySelf
+);
 
 /**
  * @description delete customer by mongo id
