@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const formidable = require('formidable');
+const { formidable } = require('formidable');
 
 // export form data parser
 module.exports = async (req, res, next) => {
