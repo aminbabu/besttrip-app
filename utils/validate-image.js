@@ -9,32 +9,27 @@
 
 // export validate image function
 module.exports =
-    (allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'], maxSizeInBytes = 1024 * 1024) =>
-    (value, { req }) => {
-        // get the field name
-        const fieldName = this.path;
+    (mimetypes = ['image/jpeg', 'image/png', 'image/jpg'], maxSizeInBytes = 1024 * 1024) =>
+    (values) => {
+        // validation values
+        values.forEach((file) => {
+            console.log(file);
+            // get allowed file types extensions
+            const allowedExtensions = mimetypes.map((type) => type.split('/')[1]);
 
-        // check if the image is uploaded
-        if (!req.files || !req.files[fieldName]) {
-            throw new Error(`No ${fieldName} uploaded`);
-        }
+            // maximum file size
+            const maxSizeInMegaBytes = maxSizeInBytes / (1024 * 1024);
 
-        // get the uploaded file
-        const file = req.files[fieldName];
-        // get allowed file types extensions
-        const allowedExtensions = allowedTypes.map((type) => type.split('/')[1]);
-        // maximum file size
-        const maxSizeInMegaBytes = maxSizeInBytes / (1024 * 1024);
+            // check file type
+            if (!mimetypes.includes(file.mimetype)) {
+                throw new Error(`File type must be ${allowedExtensions.join(', .')}`);
+            }
 
-        // check file type
-        if (!allowedTypes.includes(file.mimetype)) {
-            throw new Error(`File type must be ${allowedExtensions.join(', ')}`);
-        }
-
-        // check file size
-        if (file.size > maxSizeInBytes) {
-            throw new Error(`File size exceeds the limit of ${maxSizeInMegaBytes}MB`);
-        }
+            // check file size
+            if (file.size > maxSizeInBytes) {
+                throw new Error(`File size exceeds the limit of ${maxSizeInMegaBytes}MB`);
+            }
+        });
 
         // validation passed
         return true;
