@@ -18,13 +18,13 @@ module.exports = async (req, res, next) => {
 
         // check if logo is empty
         if (logo) {
-            const { filepath } = await fileUploader(logo[0]);
+            const { filepath } = await fileUploader(logo[0], '/uploads/logos');
             req.body.logo = filepath;
         }
 
         // check if favicon is empty
         if (favicon) {
-            const { filepath } = await fileUploader(favicon[0]);
+            const { filepath } = await fileUploader(favicon[0], '/uploads/logos');
             req.body.favicon = filepath;
         }
 
