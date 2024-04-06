@@ -12,7 +12,7 @@ const fileUploader = require('./file-uploader');
 // prepare form data
 module.exports = async (req, res, next) => {
     try {
-        const { logo, favicon, title, description } = req.body;
+        const { logo, favicon } = req.body;
 
         // check if logo is not empty
         if (logo) {
@@ -24,16 +24,10 @@ module.exports = async (req, res, next) => {
             req.body.favicon = await fileUploader(favicon[0]);
         }
 
-        // prepare data
-        req.body = {
-            ...req.body,
-            title: title[0],
-            description: description[0],
-        };
-
         // return next
         return next();
     } catch (error) {
+        console.log(error);
         return next(error);
     }
 };
