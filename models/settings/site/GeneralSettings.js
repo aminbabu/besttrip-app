@@ -24,7 +24,7 @@ const generalSettingsSchema = new mongoose.Schema(
             required: [true, 'Title is required'],
         },
         domain: {
-            type: String,
+            type: Array,
         },
         description: {
             type: String,
