@@ -12,7 +12,7 @@ const fs = require('fs/promises');
 const path = require('path');
 
 // export file uploader
-module.exports = async (file) => {
+module.exports = async (file, distpath) => {
     try {
         // check if file is empty
         if (!file) {
@@ -23,7 +23,7 @@ module.exports = async (file) => {
         const oldPath = file.filepath;
 
         // define new universal path
-        const filepath = path.join('../public/uploads/logos/', file.originalFilename);
+        const filepath = path.join('../public', distpath, file.originalFilename);
 
         // define new path
         const newPath = path.join(__dirname, filepath);
@@ -48,7 +48,7 @@ module.exports = async (file) => {
         // return new file
         return {
             filename: file.originalFilename,
-            filepath,
+            filepath: distpath + file.originalFilename,
             size: file.size,
             type: path.extname(file.originalFilename),
         };
