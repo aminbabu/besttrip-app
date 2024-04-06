@@ -25,8 +25,6 @@ module.exports = async (file) => {
         // define new path
         const newPath = path.join(__dirname, '../public/uploads/logos/', file.originalFilename);
 
-        console.log(newPath, 'newPath');
-
         // check if file exists
         const exists = await fs
             .access(newPath)
