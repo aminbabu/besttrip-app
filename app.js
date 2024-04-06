@@ -17,6 +17,7 @@ const logger = require('morgan');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 const { default: xssInstance } = require('xss-shield');
+const cors = require('cors');
 
 // routers
 const { authRouter, customersRouter, settingsRouter } = require('./routes/index');
@@ -43,6 +44,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(xssInstance.xssShield(WHITE_LIST));
+app.use(cors());
 
 // routes
 app.use('/auth', authRouter);
