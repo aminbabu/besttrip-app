@@ -31,4 +31,5 @@ module.exports = {
     EMAIL_USERNAME: process.env.EMAIL_USERNAME,
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
     EMAIL_FROM: process.env.EMAIL_FROM,
+    COOKIE_SECRET: process.env.COOKIE_SECRET,
 };
