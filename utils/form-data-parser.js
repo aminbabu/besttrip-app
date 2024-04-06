@@ -12,15 +12,19 @@ const { formidable } = require('formidable');
 
 // export form data parser
 module.exports = async (req, res, next) => {
-    // create form data parser
-    const form = formidable({ multiples: true });
+    // create form data parser without multiples option
+    const form = formidable();
 
     try {
         // parse form data
         const [fields, files] = await form.parse(req);
 
-        // set form data to request
-        req.body = { ...req.body, ...fields, files };
+        // assign form to locals
+        req.locals = { ...req.locals, form };
+
+        // assign fields to body
+        req.body = fields;
+        req.files = files;
 
         // next middleware
         return next();
