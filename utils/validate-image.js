@@ -21,7 +21,7 @@ module.exports =
 
             // check file type
             if (!mimetypes.includes(file.mimetype)) {
-                throw new Error(`File type must be ${allowedExtensions.join(', .')}`);
+                throw new Error(`File type must be ${allowedExtensions.join(', ')}`);
             }
 
             // check file size
