@@ -9,7 +9,7 @@
 
 // media file types
 const BRAND_LOGO_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'];
-const FAVICON_TYPES = ['image/png', 'image/x-icon'];
+const FAVICON_TYPES = ['image/png', 'image/x-icon', 'image/vnd.microsoft.icon'];
 
 // export constants
 module.exports = {
