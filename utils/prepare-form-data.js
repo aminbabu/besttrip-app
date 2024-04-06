@@ -16,12 +16,12 @@ module.exports = async (req, res, next) => {
 
         // check if logo is not empty
         if (logo) {
-            req.body.logo = await fileUploader(logo);
+            req.body.logo = await fileUploader(logo[0]);
         }
 
         // check if favicon is not empty
         if (favicon) {
-            req.body.favicon = await fileUploader(favicon);
+            req.body.favicon = await fileUploader(favicon[0]);
         }
 
         // prepare data
