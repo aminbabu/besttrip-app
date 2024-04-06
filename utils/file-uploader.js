@@ -22,8 +22,11 @@ module.exports = async (file) => {
         // get old path
         const oldPath = file.filepath;
 
+        // define new universal path
+        const filepath = path.join('../public/uploads/logos/', file.originalFilename);
+
         // define new path
-        const newPath = path.join(__dirname, '../public/uploads/logos/', file.originalFilename);
+        const newPath = path.join(__dirname, filepath);
 
         // check if file exists
         const exists = await fs
@@ -45,7 +48,7 @@ module.exports = async (file) => {
         // return new file
         return {
             filename: file.originalFilename,
-            filepath: newPath,
+            filepath,
             size: file.size,
             type: path.extname(file.originalFilename),
         };
