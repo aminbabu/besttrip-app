@@ -13,7 +13,6 @@ module.exports =
     (values) => {
         // validation values
         values.forEach((file) => {
-            console.log(file);
             // get allowed file types extensions
             const allowedExtensions = mimetypes.map((type) => type.split('/')[1]);
 
