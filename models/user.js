@@ -97,8 +97,6 @@ userSchema.pre('save', async function (next) {
             ? parseInt(lastUser.userID.split(moment().format('YYYYMMDD'))[1], 10)
             : 0;
 
-        console.log(lastUser);
-
         // generate incrementing user ID
         this.userID = `BT${moment().format('YYYYMMDD')}${count + 1}`; // BTYYYYMMDD0001
 
