@@ -23,8 +23,7 @@ module.exports = async (req, res, next) => {
         req.locals = { ...req.locals, form };
 
         // assign fields to body
-        req.body = fields;
-        req.files = files;
+        req.body = { ...req.body, ...fields, ...files };
 
         // next middleware
         return next();
