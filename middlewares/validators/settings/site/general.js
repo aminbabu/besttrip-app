@@ -11,9 +11,11 @@
 const { body } = require('express-validator');
 const { expressValidator } = require('../../../../handlers/errors');
 const validateImage = require('../../../../utils/validate-image');
+const formDataParser = require('../../../../utils/form-data-parser');
 
 // export general site settings validator
 module.exports = [
+    formDataParser,
     body('logo').optional().custom(validateImage()),
     body('favicon')
         .optional()
