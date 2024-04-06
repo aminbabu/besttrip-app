@@ -11,23 +11,28 @@
 const { formidable } = require('formidable');
 
 // export form data parser
-module.exports = async (req, res, next) => {
-    // create form data parser without multiples option
-    const form = formidable();
+module.exports =
+    (options = {}) =>
+    async (req, res, next) => {
+        // create form data parser without multiples option
+        const form = formidable(options);
 
-    try {
-        // parse form data
-        const [fields, files] = await form.parse(req);
+        try {
+            // parse form data
+            const [fields, files] = await form.parse(req);
 
-        // assign form to locals
-        req.locals = { ...req.locals, form };
+            // assign form to locals
+            req.locals = { ...req.locals, form };
 
-        // assign fields to body
-        req.body = { ...req.body, ...fields, ...files };
+            // assign fields to req
+            req.body = fields;
 
-        // next middleware
-        return next();
-    } catch (error) {
-        return next(error);
-    }
-};
+            // assign files to req
+            req.files = files;
+
+            // next middleware
+            return next();
+        } catch (error) {
+            return next(error);
+        }
+    };
