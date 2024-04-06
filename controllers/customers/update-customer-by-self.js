@@ -3,8 +3,8 @@
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 03 April 2024
- * @update_date 04 April 2024
+ * @date 03 April, 2024
+ * @update_date 04 April, 2024
  */
 
 // dependencies
