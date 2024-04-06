@@ -24,7 +24,7 @@ module.exports =
         // get allowed file types extensions
         const allowedExtensions = allowedTypes.map((type) => type.split('/')[1]);
         // maximum file size
-        const maxSizeInMegaBytes = maxSizeInBytes / 1000000;
+        const maxSizeInMegaBytes = maxSizeInBytes / (1024 * 1024);
 
         // check file type
         if (!allowedTypes.includes(file.mimetype)) {
