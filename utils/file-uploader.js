@@ -48,7 +48,7 @@ module.exports = async (file, distpath) => {
         // return new file
         return {
             filename: file.originalFilename,
-            filepath: distpath + file.originalFilename,
+            filepath: path.join(distpath, file.originalFilename),
             size: file.size,
             type: path.extname(file.originalFilename),
         };
