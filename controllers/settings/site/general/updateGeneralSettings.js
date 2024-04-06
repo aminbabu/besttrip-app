@@ -9,10 +9,38 @@
 
 // dependencies
 const { GeneralSettings } = require('../../../../models');
+const fileUploader = require('../../../../utils/file-uploader');
 
 // update general settings
 module.exports = async (req, res, next) => {
     try {
+        const { logo, favicon, title, domain, description } = req.body;
+
+        // check if logo is empty
+        if (logo) {
+            const { filepath } = await fileUploader(logo[0]);
+            req.body.logo = filepath;
+        }
+
+        // check if favicon is empty
+        if (favicon) {
+            const { filepath } = await fileUploader(favicon[0]);
+            req.body.favicon = filepath;
+        }
+
+        // destructuring title
+        [req.body.title] = title;
+
+        if (domain) {
+            // destructuring domain
+            [req.body.domain] = domain;
+        }
+
+        if (description) {
+            // destructuring description
+            [req.body.description] = description;
+        }
+
         // get general settings
         const generalSettings = await GeneralSettings.findOne();
 
