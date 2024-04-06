@@ -12,6 +12,7 @@ const { body } = require('express-validator');
 const { expressValidator } = require('../../../../handlers/errors');
 const validateImage = require('../../../../utils/validate-image');
 const formDataParser = require('../../../../utils/form-data-parser');
+const prepareFormData = require('../../../../utils/prepare-form-data');
 const { BRAND_LOGO_TYPES, FAVICON_TYPES } = require('../../../../constants/_media-files');
 
 // export general site settings validator
@@ -26,4 +27,5 @@ module.exports = [
         .isArray({ min: 1, max: 1 })
         .withMessage('Description is required'),
     expressValidator,
+    prepareFormData,
 ];
