@@ -19,10 +19,10 @@ const helmet = require('helmet');
 const { default: xssInstance } = require('xss-shield');
 const cors = require('cors');
 const { createDbConnection, env } = require('./config');
+const { WHITE_LIST } = require('./constants');
 
 // routers
 const { authRouter, customersRouter, settingsRouter } = require('./routes/index');
-const { WHITE_LIST } = require('./constants');
 
 // config
 dotenv.config();
