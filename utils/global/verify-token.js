@@ -9,7 +9,7 @@
 
 // dependencies
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('./env');
+const { env } = require('../../config');
 
 // verify token
 const verifyToken = function (token) {
@@ -18,7 +18,7 @@ const verifyToken = function (token) {
             throw new Error('Unauthorized');
         }
 
-        return jwt.verify(token, JWT_SECRET);
+        return jwt.verify(token, env.JWT_SECRET);
     } catch (error) {
         throw new Error('Unauthorized');
     }

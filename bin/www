@@ -7,7 +7,7 @@
 const http = require('http');
 const debug = require('debug')('besttrip-app:server');
 const app = require('../app');
-const { env } = require('../utils');
+const { env } = require('../config');
 
 /**
  * Get port from environment and store in Express.

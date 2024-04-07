@@ -1,5 +1,5 @@
 /**
- * @file /routes/auth.js
+ * @file /routes/js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -16,57 +16,64 @@ const router = express.Router();
 const { customer } = require('../../../controllers/auth');
 
 // middlewares
-const { auth } = require('../../../middlewares/validators');
+const {
+    validateRegister,
+    validateLogin,
+    validateForgotPassword,
+    validateResetPassword,
+    validateSendVerificationEmail,
+    validateVerifyEmail,
+} = require('../../../middlewares/validators');
 const { isVerified, isAuthorized } = require('../../../middlewares/auth');
 
 /**
  * @description register a new user
  * @param {string} path - /auth/customers/register
- * @param {function} middleware - ['auth.validateRegister']
+ * @param {function} middleware - ['validateRegister']
  * @param {function} controller - ['customer.register']
  * @returns {object} - router
  * @access public
  * @method POST
  */
-router.post('/register', auth.validateRegister, customer.register);
+router.post('/register', validateRegister, customer.register);
 
 /**
  * @description login a user
  * @param {string} path - /auth/customers/login
- * @param {function} middleware - ['auth.validateLogin']
+ * @param {function} middleware - ['validateLogin']
  * @param {function} controller - ['customer.login']
  * @returns {object} - router
  * @access public
  * @method POST
  */
-router.post('/login', auth.validateLogin, isVerified.customer, customer.login);
+router.post('/login', validateLogin, isVerified.customer, customer.login);
 
 /**
  * @description forgot password
  * @param {string} path - /auth/customers/forgot-password
- * @param {function} middleware - ['auth.validateForgotPassword']
+ * @param {function} middleware - ['validateForgotPassword']
  * @param {function} controller - ['customer.forgotPassword']
  * @returns {object} - router
  * @access public
  * @method POST
  */
-router.post('/forgot-password', auth.validateForgotPassword, customer.forgotPassword);
+router.post('/forgot-password', validateForgotPassword, customer.forgotPassword);
 
 /**
  * @description reset password
  * @param {string} path - /auth/customers/reset-password
- * @param {function} middleware - ['auth.validateResetPassword']
+ * @param {function} middleware - ['validateResetPassword']
  * @param {function} controller - ['customer.resetPassword']
  * @returns {object} - router
  * @access public
  * @method POST
  */
-router.post('/reset-password', auth.validateResetPassword, customer.resetPassword);
+router.post('/reset-password', validateResetPassword, customer.resetPassword);
 
 /**
  * @description send verification email
  * @param {string} path - /auth/customers/send-verification-email
- * @param {function} middleware - ['auth.validateSendVerificationEmail']
+ * @param {function} middleware - ['validateSendVerificationEmail']
  * @param {function} controller - ['customer.sendVerificationEmail']
  * @returns {object} - router
  * @access private
@@ -74,7 +81,7 @@ router.post('/reset-password', auth.validateResetPassword, customer.resetPasswor
  */
 router.post(
     '/send-verification-email',
-    auth.validateSendVerificationEmail,
+    validateSendVerificationEmail,
     isAuthorized,
     customer.sendVerificationEmail
 );
@@ -82,13 +89,13 @@ router.post(
 /**
  * @description verify email
  * @param {string} path - /auth/customers/verify-email
- * @param {function} middleware - ['auth.validateVerifyEmail']
+ * @param {function} middleware - ['validateVerifyEmail']
  * @param {function} controller - ['customer.verifyEmail']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/verify-email', auth.validateVerifyEmail, customer.verifyEmail);
+router.get('/verify-email', validateVerifyEmail, customer.verifyEmail);
 
 // export
 module.exports = router;

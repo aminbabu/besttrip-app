@@ -9,7 +9,7 @@
 
 // export all validators
 module.exports = {
-    auth: require('./auth'),
-    customers: require('./customers'),
-    settings: require('./settings'),
+    ...require('./auth'),
+    ...require('./customers'),
+    ...require('./settings'),
 };

@@ -18,12 +18,11 @@ const dotenv = require('dotenv');
 const helmet = require('helmet');
 const { default: xssInstance } = require('xss-shield');
 const cors = require('cors');
+const { createDbConnection, env } = require('./config');
 
 // routers
-const multer = require('multer');
 const { authRouter, customersRouter, settingsRouter } = require('./routes/index');
 const { WHITE_LIST } = require('./constants');
-const { env } = require('./utils');
 
 // config
 dotenv.config();
@@ -32,7 +31,7 @@ dotenv.config();
 const app = express();
 
 // database connection
-require('./config/database')();
+createDbConnection();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,17 +55,6 @@ app.use('/settings', settingsRouter);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
     next(createError(404));
-});
-
-// multer error handler
-app.use((err, req, res, next) => {
-    if (err instanceof multer.MulterError) {
-        return res.status(400).json({
-            message: err.message,
-        });
-    }
-
-    return next(err);
 });
 
 // error handler

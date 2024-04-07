@@ -24,7 +24,7 @@ const {
 
 // middlewares
 const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
-const { updateCustomer, updateCustomerSelf } = require('../../middlewares/validators/customers');
+const { customers } = require('../../middlewares/validators');
 
 /**
  * @description check if user is authorized
@@ -61,29 +61,29 @@ router.get('/:id', isAllowed(['admin']), getCustomerById);
 /**
  * @description update all customers
  * @param {string} path - /customers
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAllowed', 'validateCustomer']
  * @param {function} controller - ['updateAllCustomers']
  * @returns {object} - router
  * @access private
  * @method PATCH
  */
-router.patch('/', isAllowed(['admin']), updateCustomer, updateAllCustomers);
+router.patch('/', isAllowed(['admin']), validateCustomer, updateAllCustomers);
 
 /**
  * @description update customer by mongo id
  * @param {string} path - /customers/:id
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAllowed', 'validateCustomer']
  * @param {function} controller - ['updateCustomerById']
  * @returns {object} - router
  * @access private
  * @method PATCH
  */
-router.patch('/:id', isAllowed(['admin']), updateCustomer, updateCustomerById);
+router.patch('/:id', isAllowed(['admin']), validateCustomer, updateCustomerById);
 
 /**
  * @description update customer by self
  * @param {string} path - /customers/:id
- * @param {function} middleware - ['isSelf']
+ * @param {function} middleware - ['isSelf', 'isAllowed', 'validateCustomerSelf']
  * @param {function} controller - ['updateCustomerBySelf']
  * @returns {object} - router
  * @access private
@@ -93,7 +93,7 @@ router.patch(
     '/:id/self',
     isSelf,
     isAllowed(['customer']),
-    updateCustomerSelf,
+    validateCustomerSelf,
     updateCustomerBySelf
 );
 

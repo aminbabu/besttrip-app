@@ -9,7 +9,6 @@
 
 // export all global utils
 module.exports = {
-    env: require('./env'),
     generateToken: require('./generate-token'),
     comparePassword: require('./compare-password'),
     verifyToken: require('./verify-token'),

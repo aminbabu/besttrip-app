@@ -9,7 +9,7 @@
 
 // dependencies
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET, JWT_EXPIRY } = require('./env');
+const { env } = require('../../config');
 
 // generate token
 const generateToken = function (payload) {
@@ -20,8 +20,8 @@ const generateToken = function (payload) {
         }
 
         // generate token
-        return jwt.sign({ user: payload }, JWT_SECRET, {
-            expiresIn: JWT_EXPIRY,
+        return jwt.sign({ user: payload }, env.JWT_SECRET, {
+            expiresIn: env.JWT_EXPIRY,
         });
     } catch (error) {
         throw new Error(error);
