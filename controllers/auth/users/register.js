@@ -14,6 +14,7 @@ const { generateToken, sendEmail } = require('../../../utils');
 
 // export register a new user controller
 module.exports = async (req, res, next) => {
+    console.log(req.body);
     try {
         // get user input
         const { name, email, phone, password } = req.body;

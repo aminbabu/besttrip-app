@@ -10,7 +10,7 @@
 // dependencies
 const fs = require('fs');
 const ejs = require('ejs');
-const { env } = require('../utils');
+const { env } = require('../config');
 
 // export forgot password
 module.exports = ({ user, token }) => {

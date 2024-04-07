@@ -10,7 +10,7 @@
 // dependencies
 const fs = require('fs');
 const ejs = require('ejs');
-const { env } = require('../utils');
+const { env } = require('../config');
 
 // export confirm email verification mail
 module.exports = async (user) => {
