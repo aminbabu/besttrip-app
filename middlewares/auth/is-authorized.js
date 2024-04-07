@@ -10,6 +10,7 @@
 // dependencies
 const { User, Customer } = require('../../models');
 const { verifyToken } = require('../../utils');
+const { generateToken } = require('../../utils');
 
 // authourize user
 module.exports = async (req, res, next) => {
@@ -46,6 +47,15 @@ module.exports = async (req, res, next) => {
                 message: 'Unauthorized',
             });
         }
+
+        // generate token
+        const newToken = generateToken(user);
+
+        // set token in response
+        res.set('authorization', `Bearer ${newToken}`);
+
+        // set token in request
+        req.token = newToken;
 
         // set user in request
         req.user = user.toObject();
