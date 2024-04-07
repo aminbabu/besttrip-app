@@ -28,7 +28,7 @@ module.exports = async (req, res, next) => {
         }
 
         // delete customer
-        await Customer.findByIdAndDelete(id);
+        await customer.delete();
 
         // generate token
         const token = generateToken(req.user);

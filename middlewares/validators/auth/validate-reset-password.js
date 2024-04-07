@@ -15,7 +15,7 @@ const { expressValidator } = require('../../../handlers/errors');
 module.exports = [
     query('token').isJWT().withMessage('Token is required'),
     body('password')
-        .isLength({ min: 6 })
+        .isLength({ min: 8 })
         .withMessage('Password must be at least 6 characters long'),
     body('confirmPassword').custom((value, { req }) => {
         if (value !== req.body.password) {

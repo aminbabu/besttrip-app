@@ -25,7 +25,7 @@ module.exports = [
     body('phone').optional().isMobilePhone().withMessage('phone should be a phone number'),
     body('password')
         .optional()
-        .isLength({ min: 6 })
+        .isLength({ min: 8 })
         .withMessage('password should be at least 6 characters'),
     body('dob').optional().isISO8601().withMessage('dob should be a date'),
     body('status')
