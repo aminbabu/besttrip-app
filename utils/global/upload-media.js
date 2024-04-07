@@ -33,15 +33,19 @@ const createStorage = (distFolder) =>
     });
 
 // export upload media files
-module.exports = (fileSize, fileTypes, distFolder, storage) =>
+module.exports = (
+    fileSize = DEFAULT_FILE_SIZE,
+    mimeTypes = DEFAULT_IMAGE_TYPES,
+    distFolder = 'media',
+    storage = null
+) =>
     multer({
-        storage: storage || createStorage(distFolder || 'media'),
+        storage: storage || createStorage(distFolder),
         limits: {
             fileSize: fileSize || DEFAULT_FILE_SIZE,
         },
         fileFilter: (req, file, cb) => {
             const ext = path.extname(file.originalname).toLowerCase();
-            const mimeTypes = fileTypes || DEFAULT_IMAGE_TYPES;
             if (mimeTypes.includes(ext)) {
                 cb(null, true);
             } else {
