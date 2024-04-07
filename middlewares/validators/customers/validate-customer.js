@@ -20,8 +20,11 @@ module.exports = [
 
         throw new Error('You are not allowed to update the customer ID');
     }),
-    body('name').optional().trim()
-        .isLength({ min: 3 }).withMessage('name should be at least 3 characters'),
+    body('name')
+        .optional()
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('name should be at least 3 characters'),
     body('email').optional().isEmail().withMessage('email should be an email'),
     body('phone').optional().isMobilePhone().withMessage('phone should be a phone number'),
     body('password')
@@ -33,15 +36,19 @@ module.exports = [
         .optional()
         .isIn(['active', 'disabled'])
         .withMessage('status should be active or disabled'),
-    body('address').optional().isString().withMessage('address should be a string'),
-    body('city').optional().isString().withMessage('city should be a string'),
-    body('state').optional().isString().withMessage('state should be a string'),
-    body('country').optional().isString().withMessage('country should be a string'),
+    body('address')
+        .optional()
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('address should be at least 3 characters'),
+    body('city').optional().trim().isLength({ min: 3 }).withMessage('city should be at least 3 characters'),
+    body('state').optional().trim().isLength({ min: 3 }).withMessage('state should be at least 3 characters'),
+    body('country').optional().trim().isLength({ min: 3 }).withMessage('country should be at least 3 characters'),
     body('postalCode')
         .optional()
         .isPostalCode('any')
         .withMessage('postalCode should be a postal code'),
-    body('flyerNumber').optional().isString().withMessage('flyerNumber should be a string'),
+    body('flyerNumber').optional().trim().isString().withMessage('flyerNumber should be a string'),
     body('wallet')
         .optional()
         .isObject()
@@ -63,7 +70,7 @@ module.exports = [
             }
             return true;
         }),
-    body('role').optional().isString().withMessage('role should be a string'),
+    body('role').optional().trim().isString().withMessage('role should be a string'),
     body('isVerified').optional().isBoolean().withMessage('isVerified should be a boolean'),
     expressValidator,
 ];
