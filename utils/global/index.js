@@ -13,6 +13,6 @@ module.exports = {
     generateToken: require('./generate-token'),
     comparePassword: require('./compare-password'),
     verifyToken: require('./verify-token'),
-    uploadMedia: require('./upload-media'),
+    formDataParser: require('./form-data-parser'),
     removeMedia: require('./remove-media'),
 };
