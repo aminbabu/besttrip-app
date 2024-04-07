@@ -20,6 +20,7 @@ const { default: xssInstance } = require('xss-shield');
 const cors = require('cors');
 
 // routers
+const multer = require('multer');
 const { authRouter, customersRouter, settingsRouter } = require('./routes/index');
 const { WHITE_LIST } = require('./constants');
 const { env } = require('./utils');
@@ -63,9 +64,19 @@ app.use((err, req, res, next) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+    // check if error is a multer error
+    if (err instanceof multer.MulterError) {
+        return res.status(400).json({
+            status: 400,
+            message: err.message,
+        });
+    }
+
     // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+    return res.status(err.status || 500).json({
+        status: err.status || 500,
+        message: err.message,
+    });
 });
 
 module.exports = app;
