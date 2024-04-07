@@ -16,7 +16,7 @@ const router = express.Router();
 const {
     getAllCustomers,
     getCustomerById,
-    updateAllCustomers,
+    updateAllCustomersWallet,
     updateCustomerById,
     updateCustomerBySelf,
     deleteCustomerById,
@@ -27,6 +27,7 @@ const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
 const {
     validateCustomer,
     validateCustomerSelf,
+    validateCustomerWallet,
 } = require('../../middlewares/validators/customers');
 
 /**
@@ -62,15 +63,15 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
 router.get('/:id', isAllowed(['admin']), getCustomerById);
 
 /**
- * @description update all customers
- * @param {string} path - /customers
+ * @description update all customers wallet
+ * @param {string} path - /customers/wallet
  * @param {function} middleware - ['isAllowed', 'validateCustomer']
  * @param {function} controller - ['updateAllCustomers']
  * @returns {object} - router
  * @access private
  * @method PATCH
  */
-router.patch('/', isAllowed(['admin']), validateCustomer, updateAllCustomers);
+router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllCustomersWallet);
 
 /**
  * @description update customer by mongo id
