@@ -15,4 +15,5 @@ module.exports = {
     updateCustomerById: require('./update-customer-by-id'),
     updateCustomerBySelf: require('./update-customer-by-self'),
     deleteCustomerById: require('./delete-customer-by-id'),
+    deleteCustomerBySelf: require('./delete-customer-by-self'),
 };
