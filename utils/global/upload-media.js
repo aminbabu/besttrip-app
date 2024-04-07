@@ -26,22 +26,22 @@ const createStorage = (distFolder) =>
         },
         filename: (req, file, cb) => {
             const ext = path.extname(file.originalname);
-            const filename = uuidv4() + ext;
+            const filename = `${file.fieldname.split(' ').join('_').toLowerCase()}-${uuidv4()}${ext}`;
             cb(null, filename);
         },
     });
 
-// export upload media files
+// export default uploader
 module.exports = (
-    fileSize = DEFAULT_FILE_SIZE,
-    mimeTypes = DEFAULT_IMAGE_TYPES,
     distFolder = 'media',
+    mimeTypes = DEFAULT_IMAGE_TYPES,
+    fileSize = DEFAULT_FILE_SIZE,
     storage = null
 ) =>
     multer({
         storage: storage || createStorage(distFolder),
         limits: {
-            fileSize: fileSize || DEFAULT_FILE_SIZE,
+            fileSize,
         },
         fileFilter: (req, file, cb) => {
             // get file extension and mime type
