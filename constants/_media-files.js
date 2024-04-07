@@ -8,6 +8,7 @@
  */
 
 // media file types
+const DEFAULT_IMAGE_TYPES = ['image/png', 'image/jpeg', 'image/jpg'];
 const BRAND_LOGO_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'];
 const FAVICON_TYPES = ['image/png', 'image/x-icon', 'image/vnd.microsoft.icon'];
 
@@ -15,4 +16,5 @@ const FAVICON_TYPES = ['image/png', 'image/x-icon', 'image/vnd.microsoft.icon'];
 module.exports = {
     BRAND_LOGO_TYPES,
     FAVICON_TYPES,
+    DEFAULT_IMAGE_TYPES,
 };
