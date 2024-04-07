@@ -13,6 +13,13 @@ const { expressValidator } = require('../../../handlers/errors');
 
 // update customer validator
 module.exports = [
+    body('customerID').custom((value) => {
+        if (!value) {
+            return true;
+        }
+
+        throw new Error('You are not allowed to update the customer ID');
+    }),
     body('name').optional().isString().withMessage('name should be a string'),
     body('email').optional().isEmail().withMessage('email should be an email'),
     body('phone').optional().isMobilePhone().withMessage('phone should be a phone number'),
@@ -55,5 +62,7 @@ module.exports = [
             }
             return true;
         }),
+    body('role').optional().isString().withMessage('role should be a string'),
+    body('isVerified').optional().isBoolean().withMessage('isVerified should be a boolean'),
     expressValidator,
 ];
