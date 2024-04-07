@@ -20,6 +20,13 @@ module.exports = async (req, res, next) => {
         // get customer
         const customer = await Customer.findById(id);
 
+        // check if customer exists
+        if (!customer) {
+            return res.status(404).json({
+                message: 'Customer not found',
+            });
+        }
+
         // update customer
         customer.set(req.body);
 
