@@ -9,7 +9,8 @@
 
 // export all routes
 module.exports = {
-    authRouter: require('./auth'),
+    usersAuthRouter: require('./auth/users'),
+    customersAuthRouter: require('./auth/customers'),
     customersRouter: require('./customers'),
     settingsRouter: require('./settings'),
 };

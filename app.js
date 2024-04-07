@@ -22,7 +22,12 @@ const { createDbConnection, env } = require('./config');
 const { WHITE_LIST } = require('./constants');
 
 // routers
-const { authRouter, customersRouter, settingsRouter } = require('./routes/index');
+const {
+    usersAuthRouter,
+    customersAuthRouter,
+    customersRouter,
+    settingsRouter,
+} = require('./routes/index');
 
 // config
 dotenv.config();
@@ -48,7 +53,8 @@ app.use(xssInstance.xssShield(WHITE_LIST));
 app.use(cors());
 
 // routes
-app.use('/auth', authRouter);
+app.use('/auth/users', usersAuthRouter);
+app.use('/auth/customers', customersAuthRouter);
 app.use('/customers', customersRouter);
 app.use('/settings', settingsRouter);
 
