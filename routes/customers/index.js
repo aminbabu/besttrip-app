@@ -109,7 +109,7 @@ router.patch(
  * @access private
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['admin']), deleteCustomerById);
+router.delete('/:id', isAllowed(['customer', 'admin']), deleteCustomerById);
 
 // export
 module.exports = router;
