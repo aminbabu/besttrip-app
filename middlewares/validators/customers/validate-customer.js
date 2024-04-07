@@ -20,7 +20,8 @@ module.exports = [
 
         throw new Error('You are not allowed to update the customer ID');
     }),
-    body('name').optional().isString().withMessage('name should be a string'),
+    body('name').optional().trim()
+        .isLength({ min: 3 }).withMessage('name should be at least 3 characters'),
     body('email').optional().isEmail().withMessage('email should be an email'),
     body('phone').optional().isMobilePhone().withMessage('phone should be a phone number'),
     body('password')
