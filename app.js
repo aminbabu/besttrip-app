@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 07 April, 2024
  */
 
 // dependencies
@@ -22,7 +22,7 @@ const cors = require('cors');
 // routers
 const { authRouter, customersRouter, settingsRouter } = require('./routes/index');
 const { WHITE_LIST } = require('./constants/_xss-whitelist');
-const { COOKIE_SECRET } = require('./utils/env');
+const { env } = require('./utils');
 
 // config
 dotenv.config();
@@ -41,7 +41,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser(COOKIE_SECRET));
+app.use(cookieParser(env.COOKIE_SECRET));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(xssInstance.xssShield(WHITE_LIST));

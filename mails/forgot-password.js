@@ -4,13 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 07 April, 2024
  */
 
 // dependencies
 const fs = require('fs');
 const ejs = require('ejs');
-const { APP_NAME, EMAIL_FROM, APP_URL, PORT } = require('../utils/env');
+const { env } = require('../utils');
 
 // forgot password
 const forgotPassword = ({ user, token }) => {
@@ -20,14 +20,14 @@ const forgotPassword = ({ user, token }) => {
     // compile template
     const html = ejs.render(template, {
         company: {
-            name: APP_NAME,
+            name: env.APP_NAME,
             address: '123, Best Trip Street, Best Trip City',
             phone: '+1234567890',
-            email: EMAIL_FROM,
-            website: `${APP_URL}:${PORT}`,
+            email: env.EMAIL_FROM,
+            website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${APP_URL}/auth/reset-password?token=${token}`,
+        redirectTo: `${env.APP_URL}/auth/reset-password?token=${token}`,
     });
 
     // attachments
@@ -71,10 +71,10 @@ const forgotPassword = ({ user, token }) => {
 
     // return mail options
     return {
-        from: EMAIL_FROM,
+        from: env.EMAIL_FROM,
         to: user.email,
-        subject: `Reset Your ${APP_NAME} Password`,
-        text: `Reset your password to ${APP_NAME} by clicking the link below`,
+        subject: `Reset Your ${env.APP_NAME} Password`,
+        text: `Reset your password to ${env.APP_NAME} by clicking the link below`,
         html,
         attachments,
     };

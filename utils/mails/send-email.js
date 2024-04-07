@@ -4,19 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 07 April, 2024
  */
 
 // dependencies
 const nodemailer = require('nodemailer');
-const {
-    EMAIL_FROM,
-    EMAIL_PASSWORD,
-    EMAIL_USERNAME,
-    EMAIL_HOST,
-    EMAIL_PORT,
-    APP_NAME,
-} = require('./env');
+const { env } = require('../global');
 
 // send email
 const sendEmail = async function (
@@ -29,17 +22,17 @@ const sendEmail = async function (
 ) {
     // create transporter
     const transporter = nodemailer.createTransport({
-        host: EMAIL_HOST,
-        port: EMAIL_PORT,
+        host: env.EMAIL_HOST,
+        port: env.EMAIL_PORT,
         auth: {
-            user: EMAIL_USERNAME,
-            pass: EMAIL_PASSWORD,
+            user: env.EMAIL_USERNAME,
+            pass: env.EMAIL_PASSWORD,
         },
     });
 
     // mail options
     const mailOptions = {
-        from: `${APP_NAME} <${EMAIL_FROM}>`,
+        from: `${env.APP_NAME} <${env.EMAIL_FROM}>`,
         to,
         subject,
         text,

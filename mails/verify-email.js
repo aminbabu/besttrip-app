@@ -4,13 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 21 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 07 April, 2024
  */
 
 // dependencies
 const fs = require('fs');
 const ejs = require('ejs');
-const { APP_NAME, EMAIL_FROM, APP_URL, PORT } = require('../utils/env');
+const { env } = require('../utils');
 
 // verify email mail
 const verifyEmail = async (user, token) => {
@@ -20,14 +20,14 @@ const verifyEmail = async (user, token) => {
     // compile template
     const html = ejs.render(template, {
         company: {
-            name: APP_NAME,
+            name: env.APP_NAME,
             address: '123, Best Trip Street, Best Trip City',
             phone: '+1234567890',
-            email: EMAIL_FROM,
-            website: `${APP_URL}:${PORT}`,
+            email: env.EMAIL_FROM,
+            website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${APP_URL}/auth/verify-email?token=${token}`,
+        redirectTo: `${env.APP_URL}/auth/verify-email?token=${token}`,
     });
 
     // attachments

@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 
-const app = require('../app');
-const debug = require('debug')('besttrip-app:server');
 const http = require('http');
+const debug = require('debug')('besttrip-app:server');
+const app = require('../app');
 const { env } = require('../utils');
 
 /**
