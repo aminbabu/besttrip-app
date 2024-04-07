@@ -24,6 +24,7 @@
     "nodemailer": "^6.9.12",
     "nodemon": "^3.1.0",
     "sanitize-html": "^2.13.0",
+    "uuid": "^9.0.1",
     "xss-shield": "^1.0.1"
   },
   "devDependencies": {
