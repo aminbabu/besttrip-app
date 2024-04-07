@@ -10,4 +10,5 @@
 // export all middlewares
 module.exports = {
     validators: require('./validators'),
+    auth: require('./auth'),
 };
