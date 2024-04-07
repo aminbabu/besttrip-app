@@ -13,6 +13,6 @@ module.exports = {
     getCustomerById: require('./get-customer-by-id'),
     updateAllCustomersWallet: require('./update-all-customers-wallet'),
     updateCustomerById: require('./update-customer-by-id'),
-    deleteCustomerById: require('./delete-customer-by-id'),
     updateCustomerBySelf: require('./update-customer-by-self'),
+    deleteCustomerById: require('./delete-customer-by-id'),
 };
