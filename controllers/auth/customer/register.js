@@ -12,8 +12,8 @@ const welcome = require('../../../mails/welcome');
 const { Customer } = require('../../../models');
 const { generateToken, sendEmail } = require('../../../utils');
 
-// register a new customer controller
-const register = async (req, res, next) => {
+// export register a new customer controller
+module.exports = async (req, res, next) => {
     try {
         // get customer input
         const { name, email, phone, password } = req.body;
@@ -57,6 +57,3 @@ const register = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export
-module.exports = register;

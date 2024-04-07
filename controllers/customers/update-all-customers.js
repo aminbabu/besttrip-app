@@ -11,8 +11,8 @@
 const { Customer } = require('../../models');
 const { generateToken } = require('../../utils');
 
-// update all customers
-const updateAllCustomers = async (req, res, next) => {
+// export update all customers
+module.exports = async (req, res, next) => {
     try {
         // get the wallet object from the request body
         const { wallet } = req.body;
@@ -72,6 +72,3 @@ const updateAllCustomers = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export controller
-module.exports = updateAllCustomers;

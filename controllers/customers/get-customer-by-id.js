@@ -11,8 +11,8 @@
 const { Customer } = require('../../models');
 const { generateToken } = require('../../utils');
 
-// get customer by mongo id
-const getCustomerById = async (req, res, next) => {
+// export get customer by mongo id
+module.exports = async (req, res, next) => {
     try {
         // get customer id
         const { id } = req.params;
@@ -40,6 +40,3 @@ const getCustomerById = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export controller
-module.exports = getCustomerById;

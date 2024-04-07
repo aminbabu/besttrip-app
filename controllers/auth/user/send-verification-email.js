@@ -13,8 +13,8 @@ const { verifyEmail } = require('../../../mails');
 const { sendEmail, generateToken } = require('../../../utils');
 const { Token } = require('../../../models');
 
-// send verification email controller
-const sendVerificationEmail = async (req, res, next) => {
+// export send verification email controller
+module.exports = async (req, res, next) => {
     try {
         // get user from request
         const { user } = req;
@@ -65,6 +65,3 @@ const sendVerificationEmail = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export
-module.exports = sendVerificationEmail;

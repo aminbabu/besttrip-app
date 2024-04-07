@@ -12,8 +12,8 @@ const fs = require('fs');
 const ejs = require('ejs');
 const { env } = require('../utils');
 
-// verify email mail
-const verifyEmail = async (user, token) => {
+// export verify email mail
+module.exports = async (user, token) => {
     // read template file
     const template = fs.readFileSync(`${__dirname}/../templates/email/verify-email.ejs`, 'utf-8');
 
@@ -78,6 +78,3 @@ const verifyEmail = async (user, token) => {
         attachments,
     };
 };
-
-// export
-module.exports = verifyEmail;

@@ -11,8 +11,8 @@ const moment = require('moment');
 const { Token, User } = require('../../../models');
 const { generateToken } = require('../../../utils');
 
-// reset password controller
-const resetPassword = async (req, res, next) => {
+// export reset password controller
+module.exports = async (req, res, next) => {
     try {
         // get user input
         const { password } = req.body;
@@ -62,6 +62,3 @@ const resetPassword = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export
-module.exports = resetPassword;

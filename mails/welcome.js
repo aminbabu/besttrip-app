@@ -12,8 +12,8 @@ const fs = require('fs');
 const ejs = require('ejs');
 const { env } = require('../utils');
 
-// welcome mail
-const welcome = ({ user, token }) => {
+// export welcome mail
+module.exports = ({ user, token }) => {
     // read template file
     const template = fs.readFileSync(
         `${__dirname}/../templates/email/welcome-message.ejs`,
@@ -81,6 +81,3 @@ const welcome = ({ user, token }) => {
         attachments,
     };
 };
-
-// export
-module.exports = welcome;

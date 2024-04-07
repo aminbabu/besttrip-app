@@ -12,8 +12,8 @@ const { confirmEmailVerification } = require('../../../mails');
 const { Customer } = require('../../../models');
 const { verifyToken, sendEmail, generateToken } = require('../../../utils');
 
-// verify email controller
-const verifyEmail = async (req, res, next) => {
+// export verify email controller
+module.exports = async (req, res, next) => {
     try {
         // get token from query
         const { token } = req.query;
@@ -54,6 +54,3 @@ const verifyEmail = async (req, res, next) => {
         return next(err);
     }
 };
-
-// export
-module.exports = verifyEmail;

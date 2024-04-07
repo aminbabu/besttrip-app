@@ -11,8 +11,8 @@
 const { Customer } = require('../../models');
 const { generateToken } = require('../../utils');
 
-// delete customer by mongo id
-const deleteCustomerById = async (req, res, next) => {
+// export delete customer by mongo id
+module.exports = async (req, res, next) => {
     try {
         // get customer id
         const { id } = req.params;
@@ -43,6 +43,3 @@ const deleteCustomerById = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export controller
-module.exports = deleteCustomerById;

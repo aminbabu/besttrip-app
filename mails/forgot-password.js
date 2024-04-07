@@ -12,8 +12,8 @@ const fs = require('fs');
 const ejs = require('ejs');
 const { env } = require('../utils');
 
-// forgot password
-const forgotPassword = ({ user, token }) => {
+// export forgot password
+module.exports = ({ user, token }) => {
     // read template file
     const template = fs.readFileSync(`${__dirname}/../templates/email/reset-password.ejs`, 'utf-8');
 
@@ -79,6 +79,3 @@ const forgotPassword = ({ user, token }) => {
         attachments,
     };
 };
-
-// export
-module.exports = forgotPassword;

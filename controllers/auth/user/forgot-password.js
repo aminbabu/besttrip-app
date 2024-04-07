@@ -14,8 +14,8 @@ const { sendEmail, generateToken } = require('../../../utils');
 const { forgotPassword: forgotPasswordMailer } = require('../../../mails');
 const { Token } = require('../../../models');
 
-// forgot password controller
-const forgotPassword = async (req, res, next) => {
+// export forgot password controller
+module.exports = async (req, res, next) => {
     try {
         // find user by email
         const user = await User.findOne({ email: req.body.email });
@@ -70,6 +70,3 @@ const forgotPassword = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export
-module.exports = forgotPassword;

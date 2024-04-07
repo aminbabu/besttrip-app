@@ -11,5 +11,4 @@
 module.exports = {
     auth: require('./auth/user'),
     customers: require('./customers'),
-    wallet: require('./wallet'),
 };

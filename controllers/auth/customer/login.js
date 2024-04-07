@@ -11,8 +11,8 @@
 const { Customer } = require('../../../models/index');
 const { comparePassword, generateToken } = require('../../../utils');
 
-// login customer controller
-const login = async (req, res, next) => {
+// export login customer controller
+module.exports = async (req, res, next) => {
     try {
         // get customer input
         const { email, password } = req.body;
@@ -53,6 +53,3 @@ const login = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export
-module.exports = login;

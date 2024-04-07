@@ -11,8 +11,8 @@
 const { Customer } = require('../../models');
 const { generateToken } = require('../../utils');
 
-// get all customers
-const getAllCustomers = async (req, res, next) => {
+// export get all customers
+module.exports = async (req, res, next) => {
     try {
         // get all customers
         const customers = await Customer.find();
@@ -30,6 +30,3 @@ const getAllCustomers = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export controller
-module.exports = getAllCustomers;

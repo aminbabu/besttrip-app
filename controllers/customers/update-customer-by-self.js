@@ -11,8 +11,8 @@
 const { Customer } = require('../../models');
 const { generateToken } = require('../../utils');
 
-// update customer by self controller
-const updateCustomerBySelf = async (req, res, next) => {
+// export update customer by self controller
+module.exports = async (req, res, next) => {
     try {
         // get customer id
         const { id } = req.params;
@@ -39,6 +39,3 @@ const updateCustomerBySelf = async (req, res, next) => {
         return next(error);
     }
 };
-
-// export controller
-module.exports = updateCustomerBySelf;
