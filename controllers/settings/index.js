@@ -9,6 +9,5 @@
 
 // export all settings controllers
 module.exports = {
-    getGeneralSettings: require('./site/general/getGeneralSettings'),
-    updateGeneralSettings: require('./site/general/updateGeneralSettings'),
+    ...require('./site/general'),
 };
