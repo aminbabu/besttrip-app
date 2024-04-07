@@ -1,5 +1,5 @@
 /**
- * @file /utils/global/uploader.js
+ * @file /utils/global/form-data-parser.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -8,61 +8,32 @@
  */
 
 // dependencies
-const fs = require('fs');
-const path = require('path');
-const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
-const { DEFAULT_FILE_SIZE, DEFAULT_IMAGE_TYPES } = require('../../constants');
+const formidable = require('formidable');
 
-// create default storage
-const createStorage = (distFolder) =>
-    multer.diskStorage({
-        destination: (req, file, cb) => {
-            const uploadPath = path.join(__dirname, '../../public/uploads', distFolder);
-            if (!fs.existsSync(uploadPath)) {
-                fs.mkdirSync(uploadPath, { recursive: true });
-            }
-            cb(null, uploadPath);
-        },
-        filename: (req, file, cb) => {
-            const ext = path.extname(file.originalname);
-            const filename = `${file.fieldname.split(' ').join('_').toLowerCase()}-${uuidv4()}${ext}`;
-            cb(null, filename);
-        },
-    });
+// export form data parser
+module.exports = async (req, res, next) => {
+    // parse form data
+    const form = formidable({ multiples: true });
 
-// create default file filter
-const createFileFilter = (mimeTypes) => (req, file, cb) => {
-    // get file extension and mime type
-    const ext = path.extname(file.originalname).toLowerCase();
-    const mimeType = file.mimetype;
+    try {
+        const [fields, files] = await form.parse(req);
 
-    // check if file type is allowed
-    if (mimeTypes.includes(mimeType)) {
-        cb(null, true);
-    } else {
-        cb(
-            new multer.MulterError(
-                'LIMIT_UNEXPECTED_FILE',
-                `Invalid file type: ${ext}. Only ${mimeTypes.join(', ')} files are allowed.`
-            ),
-            false
-        );
+        // check if there is no file
+        if (!files.length) {
+            return res.status(400).json({
+                message: 'No file uploaded',
+            });
+        }
+
+        // populate req.body with fields
+        req.body = fields;
+
+        // populate req.files with files
+        req.files = files;
+
+        // call next middleware
+        return next();
+    } catch (err) {
+        return next(err);
     }
 };
-
-// export default uploader
-module.exports = (
-    distFolder = 'media',
-    fileFilter = null,
-    mimeTypes = DEFAULT_IMAGE_TYPES,
-    fileSize = DEFAULT_FILE_SIZE,
-    storage = null
-) =>
-    multer({
-        storage: storage || createStorage(distFolder),
-        limits: {
-            fileSize,
-        },
-        fileFilter: fileFilter || createFileFilter(mimeTypes),
-    });
