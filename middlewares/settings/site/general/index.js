@@ -9,5 +9,5 @@
 
 // export all settings middlewares
 module.exports = {
-    generalSettingsUploader: require('./general-settings-uploader'),
+    generalSettingsFileUploader: require('./general-settings-file-uploader'),
 };
