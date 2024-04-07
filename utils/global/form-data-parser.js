@@ -31,9 +31,30 @@ const createStorage = (distFolder) =>
         },
     });
 
+// create default file filter
+const createFileFilter = (mimeTypes) => (req, file, cb) => {
+    // get file extension and mime type
+    const ext = path.extname(file.originalname).toLowerCase();
+    const mimeType = file.mimetype;
+
+    // check if file type is allowed
+    if (mimeTypes.includes(mimeType)) {
+        cb(null, true);
+    } else {
+        cb(
+            new multer.MulterError(
+                'LIMIT_UNEXPECTED_FILE',
+                `Invalid file type: ${ext}. Only ${mimeTypes.join(', ')} files are allowed.`
+            ),
+            false
+        );
+    }
+};
+
 // export default uploader
 module.exports = (
     distFolder = 'media',
+    fileFilter = null,
     mimeTypes = DEFAULT_IMAGE_TYPES,
     fileSize = DEFAULT_FILE_SIZE,
     storage = null
@@ -43,22 +64,5 @@ module.exports = (
         limits: {
             fileSize,
         },
-        fileFilter: (req, file, cb) => {
-            // get file extension and mime type
-            const ext = path.extname(file.originalname).toLowerCase();
-            const mimeType = file.mimetype;
-
-            // check if file type is allowed
-            if (mimeTypes.includes(mimeType)) {
-                cb(null, true);
-            } else {
-                cb(
-                    new multer.MulterError(
-                        'LIMIT_UNEXPECTED_FILE',
-                        `Invalid file type: ${ext}. Only ${mimeTypes.join(', ')} files are allowed.`
-                    ),
-                    false
-                );
-            }
-        },
+        fileFilter: fileFilter || createFileFilter(mimeTypes),
     });
