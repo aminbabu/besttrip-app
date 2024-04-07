@@ -11,11 +11,14 @@
 const express = require('express');
 
 // controllers
-const { getGeneralSettings, updateGeneralSettings } = require('../../../../controllers/settings');
+const {
+    getGeneralSettings,
+    updateGeneralSettings,
+} = require('../../../../controllers/settings/site/general');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
-const { site } = require('../../../../middlewares/validators');
+const { validateGeneralSettings } = require('../../../../middlewares/validators/settings/site');
 
 // express router
 const router = express.Router();
@@ -50,7 +53,7 @@ router.get('/', isAllowed(['customer', 'admin']), getGeneralSettings);
  * @access private
  * @method PUT
  */
-router.put('/', isAllowed(['admin']), site.general, updateGeneralSettings);
+router.put('/', isAllowed(['admin']), validateGeneralSettings, updateGeneralSettings);
 
 // export router
 module.exports = router;
