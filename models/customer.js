@@ -15,7 +15,7 @@ const {
     CUSTOMER_STATUS,
     CUSTOMER_WALLET_TRANSACTION_TYPES,
     CUSTOMER_ROLES,
-} = require('../constants/_customers');
+} = require('../constants');
 
 // customer schema
 const customerSchema = new mongoose.Schema(

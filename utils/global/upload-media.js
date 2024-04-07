@@ -12,8 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
-const { DEFAULT_FILE_SIZE } = require('../../constants/_globals');
-const { DEFAULT_IMAGE_TYPES } = require('../../constants/_media-files');
+const { DEFAULT_FILE_SIZE, DEFAULT_IMAGE_TYPES } = require('../../constants');
 
 // create default storage
 const createStorage = (distFolder) =>

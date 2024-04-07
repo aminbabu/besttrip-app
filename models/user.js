@@ -11,7 +11,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
-const { USER_STATUS, USER_ROLES } = require('../constants/_users');
+const { USER_STATUS, USER_ROLES } = require('../constants');
 
 // user schema
 const userSchema = new mongoose.Schema(

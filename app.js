@@ -21,7 +21,7 @@ const cors = require('cors');
 
 // routers
 const { authRouter, customersRouter, settingsRouter } = require('./routes/index');
-const { WHITE_LIST } = require('./constants/_xss-whitelist');
+const { WHITE_LIST } = require('./constants');
 const { env } = require('./utils');
 
 // config
