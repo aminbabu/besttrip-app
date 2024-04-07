@@ -15,7 +15,7 @@ const { generateToken } = require('../../utils');
 module.exports = async (req, res, next) => {
     try {
         // get customer id
-        const { id } = req.params;
+        const { id } = req.user;
 
         // get customer
         const customer = await Customer.findById(id);

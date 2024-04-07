@@ -20,6 +20,7 @@ const {
     updateCustomerById,
     updateCustomerBySelf,
     deleteCustomerById,
+    deleteCustomerBySelf,
 } = require('../../controllers/customers');
 
 // middlewares
@@ -109,7 +110,18 @@ router.patch(
  * @access private
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['customer', 'admin']), deleteCustomerById);
+router.delete('/:id', isAllowed(['admin']), deleteCustomerById);
+
+/**
+ * @description delete customer by self
+ * @param {string} path - /customers/:id/self
+ * @param {function} middleware - ['isSelf', 'isAllowed']
+ * @param {function} controller - ['deleteCustomerById']
+ * @returns {object} - router
+ * @access private
+ * @method DELETE
+ */
+router.delete('/:id/self', isSelf, isAllowed(['customer']), deleteCustomerBySelf);
 
 // export
 module.exports = router;
