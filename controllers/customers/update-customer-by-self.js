@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
         const customer = await Customer.findById(id);
 
         // update customer
-        customer.set({ ...req.body });
+        customer.set(req.body);
 
         // save customer
         await customer.save();
