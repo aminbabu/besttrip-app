@@ -44,11 +44,21 @@ module.exports = (
             fileSize: fileSize || DEFAULT_FILE_SIZE,
         },
         fileFilter: (req, file, cb) => {
+            // get file extension and mime type
             const ext = path.extname(file.originalname).toLowerCase();
-            if (mimeTypes.includes(ext)) {
+            const mimeType = file.mimetype;
+
+            // check if file type is allowed
+            if (mimeTypes.includes(mimeType)) {
                 cb(null, true);
             } else {
-                cb(new Error(`Invalid file type. Only ${mimeTypes.join(', ')} files are allowed.`));
+                cb(
+                    new multer.MulterError(
+                        'LIMIT_UNEXPECTED_FILE',
+                        `Invalid file type: ${ext}. Only ${mimeTypes.join(', ')} files are allowed.`
+                    ),
+                    false
+                );
             }
         },
     });
