@@ -13,7 +13,6 @@ const { expressValidator } = require('../../../handlers/errors');
 
 // update customer validator
 module.exports = [
-    body('avatar').optional().isURL().withMessage('avatar should be a URL'),
     body('name').optional().isString().withMessage('name should be a string'),
     body('email').optional().isEmail().withMessage('email should be an email'),
     body('phone').optional().isMobilePhone().withMessage('phone should be a phone number'),
