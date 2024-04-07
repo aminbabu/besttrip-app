@@ -10,6 +10,7 @@
 // dependencies
 const { body } = require('express-validator');
 const { expressValidator } = require('../../../handlers/errors');
+const { CUSTOMER_ROLES } = require('../../../constants');
 
 // update customer validator
 module.exports = [
@@ -41,14 +42,26 @@ module.exports = [
         .trim()
         .isLength({ min: 3 })
         .withMessage('address should be at least 3 characters'),
-    body('city').optional().trim().isLength({ min: 3 }).withMessage('city should be at least 3 characters'),
-    body('state').optional().trim().isLength({ min: 3 }).withMessage('state should be at least 3 characters'),
-    body('country').optional().trim().isLength({ min: 3 }).withMessage('country should be at least 3 characters'),
+    body('city')
+        .optional()
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('city should be at least 3 characters'),
+    body('state')
+        .optional()
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('state should be at least 3 characters'),
+    body('country')
+        .optional()
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('country should be at least 3 characters'),
     body('postalCode')
         .optional()
         .isPostalCode('any')
         .withMessage('postalCode should be a postal code'),
-    body('flyerNumber').optional().trim().isString().withMessage('flyerNumber should be a string'),
+    body('flyerNumber').optional().isNumeric().withMessage('flyerNumber should be a number'),
     body('wallet')
         .optional()
         .isObject()
@@ -70,7 +83,7 @@ module.exports = [
             }
             return true;
         }),
-    body('role').optional().trim().isString().withMessage('role should be a string'),
+    body('role').optional().isIn(CUSTOMER_ROLES).withMessage('role should be a customer role'),
     body('isVerified').optional().isBoolean().withMessage('isVerified should be a boolean'),
     expressValidator,
 ];

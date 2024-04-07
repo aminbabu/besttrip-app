@@ -16,6 +16,10 @@ module.exports = [
         .isObject()
         .withMessage('wallet should be an object')
         .custom((value) => {
+            if (!value) {
+                throw new Error('wallet is required');
+            }
+
             const { balance, type, description } = value;
 
             if (!balance || typeof balance !== 'number' || Number.isNaN(balance)) {

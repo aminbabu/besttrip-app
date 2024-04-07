@@ -10,6 +10,7 @@
 // dependencies
 const { body } = require('express-validator');
 const { expressValidator } = require('../../../handlers/errors');
+const { CUSTOMER_STATUS } = require('../../../constants');
 
 // update customer validator
 module.exports = [
@@ -34,7 +35,7 @@ module.exports = [
     body('dob').optional().isISO8601().withMessage('dob should be a date'),
     body('status')
         .optional()
-        .isIn(['active', 'disabled'])
+        .isIn(CUSTOMER_STATUS)
         .withMessage('status should be active or disabled'),
     body('address')
         .optional()
@@ -46,13 +47,21 @@ module.exports = [
         .trim()
         .isLength({ min: 3 })
         .withMessage('city should be at least 3 characters'),
-    body('state').optional().trim().isLength({ min: 3 }).withMessage('state should be at least 3 characters'),
-    body('country').optional().trim().isLength({ min: 3 }).withMessage('country should be at least 3 characters'),
+    body('state')
+        .optional()
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('state should be at least 3 characters'),
+    body('country')
+        .optional()
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('country should be at least 3 characters'),
     body('postalCode')
         .optional()
         .isPostalCode('any')
         .withMessage('postalCode should be a postal code'),
-    body('flyerNumber').optional().trim().isString().withMessage('flyerNumber should be a string'),
+    body('flyerNumber').optional().isNumeric().withMessage('flyerNumber should be a number'),
     body('wallet').custom((value) => {
         // check if wallet exists
         if (!value) {
