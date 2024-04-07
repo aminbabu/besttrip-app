@@ -58,19 +58,23 @@ app.use((req, res, next) => {
     next(createError(404));
 });
 
-// error handler
+// multer error handler
 app.use((err, req, res, next) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // check if error is a multer error
     if (err instanceof multer.MulterError) {
         return res.status(400).json({
             status: 400,
             message: err.field || err.message,
         });
     }
+
+    return next(err);
+});
+
+// error handler
+app.use((err, req, res, next) => {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // render the error page
     return res.status(err.status || 500).json({
