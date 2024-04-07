@@ -48,10 +48,12 @@ module.exports = async (req, res, next) => {
         const info = welcome({ user: newCustomer.toObject(), token });
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
 
+        // set token in response
+        res.set('authorization', `Bearer ${token}`);
+
         // return response
         return res.status(201).json({
             message: 'Customer created successfully',
-            token,
         });
     } catch (error) {
         return next(error);

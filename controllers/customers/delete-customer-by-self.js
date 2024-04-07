@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
         }
 
         // delete customer
-        await customer.delete();
+        await customer.deleteOne();
 
         // return response
         return res.status(200).json({

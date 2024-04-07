@@ -9,7 +9,6 @@
 
 // dependencies
 const { Customer } = require('../../models');
-const { generateToken } = require('../../utils');
 
 // export delete customer by mongo id controller
 module.exports = async (req, res, next) => {
@@ -28,16 +27,12 @@ module.exports = async (req, res, next) => {
         }
 
         // delete customer
-        await customer.delete();
-
-        // generate token
-        const token = generateToken(req.user);
+        await customer.deleteOne();
 
         // return response
         return res.status(200).json({
             message: 'Deleted customer successfully',
             customer,
-            token,
         });
     } catch (error) {
         return next(error);

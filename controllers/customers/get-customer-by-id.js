@@ -9,7 +9,6 @@
 
 // dependencies
 const { Customer } = require('../../models');
-const { generateToken } = require('../../utils');
 
 // export get customer by mongo id controller
 module.exports = async (req, res, next) => {
@@ -27,14 +26,10 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // generate token
-        const token = generateToken(req.user);
-
         // return response
         return res.status(200).json({
             message: 'Fetched customer successfully',
             customer,
-            token,
         });
     } catch (error) {
         return next(error);

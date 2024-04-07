@@ -44,10 +44,12 @@ module.exports = async (req, res, next) => {
         // generate token
         const token = generateToken(customerObject);
 
+        // set token in response
+        res.set('authorization', `Bearer ${token}`);
+
         // return response
         return res.status(200).json({
             message: 'Login successful',
-            token,
         });
     } catch (error) {
         return next(error);

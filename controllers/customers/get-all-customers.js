@@ -9,7 +9,6 @@
 
 // dependencies
 const { Customer } = require('../../models');
-const { generateToken } = require('../../utils');
 
 // export get all customers controller
 module.exports = async (req, res, next) => {
@@ -17,14 +16,10 @@ module.exports = async (req, res, next) => {
         // get all customers
         const customers = await Customer.find();
 
-        // generate token
-        const token = generateToken(req.user);
-
         // return response
         return res.status(200).json({
             message: 'Fetched all customers successfully',
             customers,
-            token,
         });
     } catch (error) {
         return next(error);

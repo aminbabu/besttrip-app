@@ -9,7 +9,6 @@
 
 // dependencies
 const { Customer } = require('../../models');
-const { generateToken } = require('../../utils');
 
 // export update customer by self controller
 module.exports = async (req, res, next) => {
@@ -33,14 +32,10 @@ module.exports = async (req, res, next) => {
         // save customer
         await customer.save();
 
-        // generate token
-        const token = generateToken(req.user);
-
         // success response
         return res.status(200).json({
             message: 'Updated successfully',
             customer,
-            token,
         });
     } catch (error) {
         return next(error);

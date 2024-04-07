@@ -9,7 +9,6 @@
 
 const moment = require('moment');
 const { Token, User } = require('../../../models');
-const { generateToken } = require('../../../utils');
 
 // export reset password controller
 module.exports = async (req, res, next) => {
@@ -50,13 +49,9 @@ module.exports = async (req, res, next) => {
         // delete token
         await Token.findByIdAndDelete(resetPasswordToken._id);
 
-        // generate token
-        const newToken = generateToken(user);
-
         // return response
         return res.status(200).json({
             message: 'Password reset successful',
-            token: newToken,
         });
     } catch (error) {
         return next(error);

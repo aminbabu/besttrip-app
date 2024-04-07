@@ -9,7 +9,6 @@
 
 // dependencies
 const { Customer } = require('../../models');
-const { generateToken } = require('../../utils');
 
 // export update all customers wallet controller
 module.exports = async (req, res, next) => {
@@ -59,13 +58,9 @@ module.exports = async (req, res, next) => {
             await customer.save();
         });
 
-        // generate token
-        const token = generateToken(req.user);
-
         return res.status(200).json({
             message: 'All customers wallet updated successfully',
             customers,
-            token,
         });
     } catch (error) {
         return next(error);

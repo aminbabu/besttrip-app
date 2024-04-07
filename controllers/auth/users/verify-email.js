@@ -45,10 +45,12 @@ module.exports = async (req, res, next) => {
         const info = await confirmEmailVerification(user);
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
 
+        // set token in response
+        res.set('authorization', `Bearer ${newToken}`);
+
         // send response
         return res.status(200).json({
             message: 'Email verified',
-            token: newToken,
         });
     } catch (err) {
         return next(err);

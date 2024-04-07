@@ -10,14 +10,14 @@
 // dependencies
 const moment = require('moment');
 const { verifyEmail } = require('../../../mails');
-const { sendEmail, generateToken } = require('../../../utils');
+const { sendEmail } = require('../../../utils');
 const { Token } = require('../../../models');
 
 // export send verification email controller
 module.exports = async (req, res, next) => {
     try {
         // get customer from request
-        const { user: customer } = req;
+        const { user: customer, token } = req;
 
         // check if customer is already verified
         if (customer.isVerified) {
@@ -34,15 +34,12 @@ module.exports = async (req, res, next) => {
         // delete existing tokens
         await Promise.all(
             tokens.map(
-                (token) =>
-                    moment(token.expires) < moment() &&
-                    token?.type === 'verify-email' &&
-                    token.deleteOne()
+                (tokenItem) =>
+                    moment(tokenItem.expires) < moment() &&
+                    tokenItem?.type === 'verify-email' &&
+                    tokenItem.deleteOne()
             )
         );
-
-        // generate token
-        const token = generateToken(customer);
 
         // store token in db
         const tokenDoc = new Token({
