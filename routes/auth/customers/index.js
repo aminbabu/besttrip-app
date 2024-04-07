@@ -30,7 +30,7 @@ const {
     validateResetPassword,
     validateSendVerificationEmail,
     validateVerifyEmail,
-} = require('../../../middlewares/validators');
+} = require('../../../middlewares/validators/auth');
 const { isVerified, isAuthorized } = require('../../../middlewares/auth');
 
 /**

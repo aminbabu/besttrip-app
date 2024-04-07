@@ -24,7 +24,10 @@ const {
 
 // middlewares
 const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
-const { customers } = require('../../middlewares/validators');
+const {
+    validateCustomer,
+    validateCustomerSelf,
+} = require('../../middlewares/validators/customers');
 
 /**
  * @description check if user is authorized
