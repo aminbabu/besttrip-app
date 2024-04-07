@@ -13,8 +13,8 @@ const path = require('path');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 
-// upload media files
-const uploadMedia = (fileTypes, folder, storage) =>
+// export upload media files
+module.exports = (fileTypes, folder, storage) =>
     multer({
         storage: storage({
             destination: (req, file, cb) => {
@@ -39,8 +39,3 @@ const uploadMedia = (fileTypes, folder, storage) =>
             }
         },
     });
-
-// export module
-module.exports = {
-    uploadMedia,
-};
