@@ -11,4 +11,5 @@
 module.exports = {
     auth: require('./auth'),
     customers: require('./customers'),
+    settings: require('./settings'),
 };
