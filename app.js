@@ -62,8 +62,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     if (err instanceof multer.MulterError) {
         return res.status(400).json({
-            status: 400,
-            message: err.field || err.message,
+            message: err.message,
         });
     }
 
@@ -78,7 +77,6 @@ app.use((err, req, res, next) => {
 
     // render the error page
     return res.status(err.status || 500).json({
-        status: err.status || 500,
         message: err.message,
     });
 });
