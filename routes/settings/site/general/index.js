@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 04 April, 2024
+ * @update_date 07 April, 2024
  */
 
 // dependencies
@@ -15,7 +15,7 @@ const { getGeneralSettings, updateGeneralSettings } = require('../../../../contr
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
-const { site } = require('../../../../middlewares/validators/settings');
+const { site } = require('../../../../middlewares/validators');
 
 // express router
 const router = express.Router();
