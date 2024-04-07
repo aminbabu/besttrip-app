@@ -9,12 +9,12 @@
 
 // dependencies
 const mongoose = require('mongoose');
-const { env } = require('../utils');
+const { MONGODB_URI } = require('./env');
 
 // connect to database
 module.exports = async () => {
     try {
-        await mongoose.connect(env.MONGODB_URI);
+        await mongoose.connect(MONGODB_URI);
         console.log('Connected to database');
     } catch (error) {
         console.error('Database connection failed');
