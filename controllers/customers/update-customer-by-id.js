@@ -11,7 +11,7 @@
 const { Customer } = require('../../models');
 const { generateToken } = require('../../utils');
 
-// export update customer by mongo id
+// export update customer by mongo id controller
 module.exports = async (req, res, next) => {
     try {
         // get customer id
