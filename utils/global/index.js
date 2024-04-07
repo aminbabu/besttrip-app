@@ -13,5 +13,5 @@ module.exports = {
     generateToken: require('./generate-token'),
     comparePassword: require('./compare-password'),
     verifyToken: require('./verify-token'),
-    uploader: require('./uploader'),
+    uploadMedia: require('./upload-media'),
 };
