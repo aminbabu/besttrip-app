@@ -21,14 +21,6 @@ const cors = require('cors');
 const { createDbConnection, env } = require('./config');
 const { WHITE_LIST } = require('./constants');
 
-// routers
-const {
-    usersAuthRouter,
-    customersAuthRouter,
-    customersRouter,
-    settingsRouter,
-} = require('./routes/index');
-
 // config
 dotenv.config();
 
@@ -53,10 +45,10 @@ app.use(xssInstance.xssShield(WHITE_LIST));
 app.use(cors());
 
 // routes
-app.use('/auth/users', usersAuthRouter);
-app.use('/auth/customers', customersAuthRouter);
-app.use('/customers', customersRouter);
-app.use('/settings', settingsRouter);
+app.use('/auth/users', require('./routes/auth/users'));
+app.use('/auth/customers', require('./routes/auth/customers'));
+app.use('/customers', require('./routes/customers'));
+app.use('/settings/site/general', require('./routes/settings/site/general'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

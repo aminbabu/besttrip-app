@@ -18,7 +18,9 @@ const {
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
-const { validateGeneralSettings } = require('../../../../middlewares/validators/settings/site');
+const {
+    validateGeneralSettings,
+} = require('../../../../middlewares/validators/settings/site/general');
 
 // express router
 const router = express.Router();

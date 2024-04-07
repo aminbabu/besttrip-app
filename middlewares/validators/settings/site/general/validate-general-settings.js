@@ -1,15 +1,15 @@
 /**
- * @file /middlewares/validators/settings/site/general.js
+ * @file /middlewares/validators/settings/site/general/validate-general-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 06 April, 2024
+ * @update_date 07 April, 2024
  */
 
 // dependencies
 const { body } = require('express-validator');
-const { expressValidator } = require('../../../../handlers/errors');
+const { expressValidator } = require('../../../../../handlers/errors');
 
 // export general site settings validator
 module.exports = [
