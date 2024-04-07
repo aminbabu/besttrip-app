@@ -31,8 +31,13 @@ module.exports = async (req, res, next) => {
         // populate req.files with files
         req.files = files;
 
-        // call next middleware
-        return next();
+        return res.status(200).json({
+            files,
+            fields,
+        });
+
+        // // call next middleware
+        // return next();
     } catch (err) {
         return next(err);
     }
