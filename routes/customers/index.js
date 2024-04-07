@@ -116,7 +116,7 @@ router.delete('/:id', isAllowed(['admin']), deleteCustomerById);
  * @description delete customer by self
  * @param {string} path - /customers/:id/self
  * @param {function} middleware - ['isSelf', 'isAllowed']
- * @param {function} controller - ['deleteCustomerById']
+ * @param {function} controller - ['deleteCustomerBySelf']
  * @returns {object} - router
  * @access private
  * @method DELETE
