@@ -35,7 +35,7 @@ const uploadMedia = (fileTypes, folder, storage) =>
             if (fileTypes.includes(ext)) {
                 cb(null, true);
             } else {
-                cb(new Error('Invalid file type'));
+                cb(new Error(`Invalid file type. Only ${fileTypes.join(', ')} files are allowed.`));
             }
         },
     });
