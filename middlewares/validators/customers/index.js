@@ -11,4 +11,5 @@
 module.exports = {
     validateCustomer: require('./validate-customer'),
     validateCustomerSelf: require('./validate-customer-self'),
+    validateCustomerWallet: require('./validate-customer-wallet'),
 };
