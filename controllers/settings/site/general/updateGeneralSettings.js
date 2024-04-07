@@ -13,21 +13,24 @@ const { GeneralSettings } = require('../../../../models');
 // update general settings
 module.exports = async (req, res, next) => {
     try {
-        // Find the existing general settings
+        console.log(req.body);
+        console.log(req.files);
+
+        // find the existing general settings
         let generalSettings = await GeneralSettings.findOne();
 
-        // If no settings found, create new settings
+        // if no settings found, create new settings
         if (!generalSettings) {
             generalSettings = new GeneralSettings(req.body);
         } else {
-            // Update existing settings
+            // update existing settings
             generalSettings.set(req.body);
         }
 
-        // Save the updated or new general settings
+        // save the updated or new general settings
         const updatedGeneralSettings = await generalSettings.save();
 
-        // Return success response
+        // return success response
         return res.status(200).json({
             message: 'General settings updated successfully',
             generalSettings: updatedGeneralSettings,
