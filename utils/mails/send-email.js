@@ -9,7 +9,7 @@
 
 // dependencies
 const nodemailer = require('nodemailer');
-const { env } = require('../global');
+const { env } = require('../../config');
 
 // send email
 const sendEmail = async function (
