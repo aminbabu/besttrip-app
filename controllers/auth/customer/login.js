@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { Customer } = require('../../../models/index');
+const { Customer } = require('../../../models');
 const { comparePassword, generateToken } = require('../../../utils');
 
 // export login customer controller
