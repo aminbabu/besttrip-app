@@ -14,4 +14,5 @@ module.exports = {
     comparePassword: require('./compare-password'),
     verifyToken: require('./verify-token'),
     uploadMedia: require('./upload-media'),
+    removeMedia: require('./remove-media'),
 };
