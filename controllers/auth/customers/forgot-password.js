@@ -4,25 +4,28 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
 const moment = require('moment');
-const { Customer } = require('../../../models');
+const { matchedData } = require('express-validator');
+const { Customer, Token } = require('../../../models');
 const { sendEmail, generateToken } = require('../../../utils');
-const { forgotPassword: forgotPasswordMailer } = require('../../../mails');
-const { Token } = require('../../../models');
+const { forgotPassword } = require('../../../mails');
 
 // export forgot password controller
 module.exports = async (req, res, next) => {
     try {
+        // get validated data
+        const { email } = matchedData(req);
+
         // find customer by email
-        const customer = await Customer.findOne({ email: req.body.email });
+        const customer = await Customer.findOne({ email });
 
         // check if customer exists
         if (!customer) {
-            return res.status(400).json({
+            return res.status(404).json({
                 message: 'Customer not found',
             });
         }
@@ -51,12 +54,11 @@ module.exports = async (req, res, next) => {
             customer: customer._id,
             token,
             type: 'reset-password',
-            expires: moment().add(1, 'hour').toDate(),
         });
         await tokenDoc.save();
 
         // send mail
-        const info = forgotPasswordMailer({
+        const info = forgotPassword({
             user: customer.toObject(),
             token,
         });
