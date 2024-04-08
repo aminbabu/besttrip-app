@@ -84,7 +84,13 @@ router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllC
  * @access private - ['admin']
  * @method PATCH
  */
-router.patch('/:id', isAllowed(['admin']), validateCustomer, updateCustomerById);
+router.patch(
+    '/:id',
+    isAllowed(['admin']),
+    validateCustomerId,
+    validateCustomer,
+    updateCustomerById
+);
 
 /**
  * @description update customer by self

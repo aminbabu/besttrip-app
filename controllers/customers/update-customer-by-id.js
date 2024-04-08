@@ -4,22 +4,20 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 29 March, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
+const { matchedData } = require('express-validator');
 const { Customer } = require('../../models');
 
 // export update customer by mongo id controller
 module.exports = async (req, res, next) => {
     try {
-        // get customer id
-        const { id } = req.params;
+        // get validated data
+        const { id, wallet } = matchedData(req);
 
-        // get the wallet object from the request body
-        const { wallet } = req.body;
-
-        // check if customer exists
+        // get customer
         const customer = await Customer.findById(id);
 
         // check if customer exists
@@ -45,9 +43,9 @@ module.exports = async (req, res, next) => {
 
         // update customer
         customer.set({
-            ...req.body,
+            ...customer,
             wallet: {
-                ...req.body.wallet,
+                ...wallet,
                 balance: customer.wallet.balance,
             },
         });
