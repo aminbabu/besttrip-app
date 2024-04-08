@@ -30,7 +30,7 @@ module.exports = async (user) => {
             website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${env.APP_URL}:${env.PORT}/auth/login`,
+        redirectTo: `${env.APP_URL}:${env.PORT}/auth/${user.role === 'customer' ? 'customers' : 'users'}/login`,
     });
 
     // attachments
