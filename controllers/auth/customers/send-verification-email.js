@@ -8,7 +8,6 @@
  */
 
 // dependencies
-const moment = require('moment');
 const { matchedData } = require('express-validator');
 const { verifyEmail } = require('../../../mails');
 const { sendEmail, generateToken } = require('../../../utils');
@@ -47,12 +46,7 @@ module.exports = async (req, res, next) => {
 
         // delete existing tokens
         await Promise.all(
-            tokens.map(
-                (tokenItem) =>
-                    tokenItem.type === 'verify-email' &&
-                    moment(tokenItem.expires).isBefore(moment()) && // check if token is expired
-                    tokenItem.deleteOne()
-            )
+            tokens.map((tokenItem) => tokenItem.type === 'verify-email' && tokenItem.deleteOne())
         );
 
         // generate token
