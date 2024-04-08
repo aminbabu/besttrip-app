@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 07 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
@@ -27,7 +27,7 @@ module.exports = ({ user, token }) => {
             website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${env.APP_URL}/auth/reset-password?token=${token}`,
+        redirectTo: `${env.APP_URL}:${env.PORT}/auth/reset-password?token=${token}`,
     });
 
     // attachments
