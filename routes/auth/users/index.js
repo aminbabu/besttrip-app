@@ -1,10 +1,10 @@
 /**
- * @file /routes/js
+ * @file /routes/auth/users/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 18 March, 2024
- * @update_date 29 March, 2024
+ * @date 08 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
@@ -31,7 +31,7 @@ const {
     validateSendVerificationEmail,
     validateVerifyEmail,
 } = require('../../../middlewares/validators/auth');
-const { isVerified, isAuthorized } = require('../../../middlewares/auth');
+const { isVerified } = require('../../../middlewares/auth');
 
 /**
  * @description register a new user
@@ -80,18 +80,13 @@ router.post('/reset-password', validateResetPassword, resetPassword);
 /**
  * @description send verification email
  * @param {string} path - /auth/users/send-verification-email
- * @param {function} middleware - ['validateSendVerificationEmail', 'isAuthorized']
+ * @param {function} middleware - ['validateSendVerificationEmail']
  * @param {function} controller - ['sendVerificationEmail']
  * @returns {object} - router
- * @access private
+ * @access public
  * @method POST
  */
-router.post(
-    '/send-verification-email',
-    validateSendVerificationEmail,
-    isAuthorized,
-    sendVerificationEmail
-);
+router.post('/send-verification-email', validateSendVerificationEmail, sendVerificationEmail);
 
 /**
  * @description verify email
