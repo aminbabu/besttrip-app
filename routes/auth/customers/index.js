@@ -1,5 +1,5 @@
 /**
- * @file /routes/js
+ * @file /routes/auth/customers/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
