@@ -1,21 +1,23 @@
 /**
- * @file /controllers/auth/reset-password.js
+ * @file /controllers/auth/users/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 08 April, 2024
  */
 
 const moment = require('moment');
+const { matchedData } = require('express-validator');
+const { sendPasswordResetConfirmation } = require('../../../mails');
 const { Token, User } = require('../../../models');
+const { sendEmail } = require('../../../utils');
 
 // export reset password controller
 module.exports = async (req, res, next) => {
     try {
-        // get user input
-        const { password } = req.body;
-        const { token } = req.query;
+        // get validated data
+        const { token, password } = matchedData(req);
 
         // check if the token exists
         const resetPasswordToken = await Token.findOne({
@@ -29,25 +31,33 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // check if the token is valid
-        const isTokenValid = moment(resetPasswordToken.expires) > moment();
-
-        if (!isTokenValid) {
+        // check if token is expired
+        if (moment(resetPasswordToken.expires).isBefore(moment())) {
             return res.status(400).json({
                 message: 'Invalid or expired token',
             });
         }
 
-        // decode token and get user id
-        const userId = resetPasswordToken.user;
-        const user = await User.findById(userId);
+        // get user
+        const user = await User.findById(resetPasswordToken.user);
 
-        // save new password
+        // check if user exists
+        if (!user) {
+            return res.status(404).json({
+                message: 'User not found',
+            });
+        }
+
+        // update user password
         user.password = password;
         await user.save();
 
         // delete token
-        await Token.findByIdAndDelete(resetPasswordToken._id);
+        await resetPasswordToken.deleteOne();
+
+        // send email
+        const info = await sendPasswordResetConfirmation(user.toObject());
+        await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
 
         // return response
         return res.status(200).json({

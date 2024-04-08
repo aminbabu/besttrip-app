@@ -1,21 +1,22 @@
 /**
- * @file /controllers/auth/login.js
+ * @file /controllers/auth/users/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 0
+ * @update_date 08 April, 2024
  */
 
 // dependencies
+const { matchedData } = require('express-validator');
 const { User } = require('../../../models');
 const { comparePassword, generateToken } = require('../../../utils');
 
 // export login user controller
 module.exports = async (req, res, next) => {
     try {
-        // get user input
-        const { email, password } = req.body;
+        // get validated data
+        const { email, password } = matchedData(req);
 
         // check if user exists
         const user = await User.findOne({ email }).select('+password');
@@ -26,8 +27,11 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // convert user to object
+        const userObject = user.toObject();
+
         // compare password
-        const match = await comparePassword(password, user.password);
+        const match = await comparePassword(password, userObject.password);
 
         if (!match) {
             return res.status(400).json({
@@ -35,8 +39,11 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // remove password from user object
+        delete userObject.password;
+
         // generate token
-        const token = generateToken(user.toObject());
+        const token = generateToken(userObject);
 
         // set token in response
         res.set('authorization', `Bearer ${token}`);

@@ -1,27 +1,30 @@
 /**
- * @file /controllers/auth/forgot-password.js
+ * @file /controllers/auth/users/forgot-password.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 07 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
-const moment = require('moment');
+const { matchedData } = require('express-validator');
 const { User, Token } = require('../../../models');
 const { sendEmail, generateToken } = require('../../../utils');
-const { forgotPassword: forgotPasswordMailer } = require('../../../mails');
+const { forgotPassword } = require('../../../mails');
 
 // export forgot password controller
 module.exports = async (req, res, next) => {
     try {
+        // get validated data
+        const { email } = matchedData(req);
+
         // find user by email
-        const user = await User.findOne({ email: req.body.email });
+        const user = await User.findOne({ email });
 
         // check if user exists
         if (!user) {
-            return res.status(400).json({
+            return res.status(404).json({
                 message: 'User not found',
             });
         }
@@ -34,12 +37,7 @@ module.exports = async (req, res, next) => {
 
         // delete existing tokens
         await Promise.all(
-            tokens.map(
-                (token) =>
-                    moment(token.expires) < moment() &&
-                    token?.type === 'reset-password' &&
-                    token.deleteOne()
-            )
+            tokens.map((token) => token?.type === 'reset-password' && token.deleteOne())
         );
 
         // generate token
@@ -50,12 +48,11 @@ module.exports = async (req, res, next) => {
             user: user._id,
             token,
             type: 'reset-password',
-            expires: moment().add(1, 'hour').toDate(),
         });
         await tokenDoc.save();
 
         // send mail
-        const info = forgotPasswordMailer({
+        const info = forgotPassword({
             user: user.toObject(),
             token,
         });

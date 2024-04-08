@@ -1,32 +1,47 @@
 /**
- * @file /controllers/auth/verify-email.js
+ * @file /controllers/auth/users/verify-email.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
+const moment = require('moment');
+const { matchedData } = require('express-validator');
 const { confirmEmailVerification } = require('../../../mails');
-const { User } = require('../../../models');
-const { verifyToken, sendEmail, generateToken } = require('../../../utils');
+const { User, Token } = require('../../../models');
+const { sendEmail } = require('../../../utils');
 
 // export verify email controller
 module.exports = async (req, res, next) => {
     try {
-        // get token from query
-        const { token } = req.query;
+        // get validated data
+        const { token } = matchedData(req);
 
-        // verify token
-        const payload = verifyToken(token);
+        // get token
+        const emailVerificationToken = await Token.findOne({
+            token,
+            type: 'verify-email',
+        });
 
-        // check if token is valid
-        const user = await User.findById(payload.user._id);
+        // check if token exists
+        if (!emailVerificationToken) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        // check if token is expired
+        if (moment(emailVerificationToken.expires).isBefore(moment())) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        // get user
+        const user = await User.findById(emailVerificationToken.user);
 
         // check if user exists
         if (!user) {
-            return res.status(400).json({ message: 'Invalid token' });
+            return res.status(404).json({ message: 'User not found' });
         }
 
         // check if user is already verified
@@ -38,19 +53,16 @@ module.exports = async (req, res, next) => {
         user.isVerified = true;
         await user.save();
 
-        // generate token
-        const newToken = generateToken(user);
+        // delete token
+        await emailVerificationToken.deleteOne();
 
         // send email
-        const info = await confirmEmailVerification(user);
+        const info = await confirmEmailVerification(user.toObject());
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
-
-        // set token in response
-        res.set('authorization', `Bearer ${newToken}`);
 
         // send response
         return res.status(200).json({
-            message: 'Email verified',
+            message: 'Email verified successfully',
         });
     } catch (err) {
         return next(err);

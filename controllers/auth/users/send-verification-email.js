@@ -1,31 +1,42 @@
 /**
- * @file /controllers/auth/send-verification-email.js
+ * @file /controllers/auth/users/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
-const moment = require('moment');
+const { matchedData } = require('express-validator');
 const { verifyEmail } = require('../../../mails');
-const { sendEmail } = require('../../../utils');
-const { Token } = require('../../../models');
+const { sendEmail, generateToken } = require('../../../utils');
+const { Token, User } = require('../../../models');
 
 // export send verification email controller
 module.exports = async (req, res, next) => {
     try {
-        // get user from request
-        const { user, token } = req;
+        // get validated data
+        const { email } = matchedData(req);
 
-        // check if user is already verified
-        if (user.isVerified) {
-            return res.status(200).json({
-                message: 'User already verified',
+        // get user
+        const user = await User.findOne({ email });
+
+        // check if user exists
+        if (!user) {
+            return res.status(404).json({
+                message: 'User not found',
             });
         }
 
+        // check if user is already verified
+        if (user.isVerified) {
+            return res.status(400).json({
+                message: 'User is already verified',
+            });
+        }
+
+        // get existing tokens
         const tokens = await Token.find({
             user: user._id,
             type: 'verify-email',
@@ -33,25 +44,22 @@ module.exports = async (req, res, next) => {
 
         // delete existing tokens
         await Promise.all(
-            tokens.map(
-                (tokenItem) =>
-                    moment(tokenItem.expires) < moment() &&
-                    tokenItem?.type === 'verify-email' &&
-                    tokenItem.deleteOne()
-            )
+            tokens.map((tokenItem) => tokenItem.type === 'verify-email' && tokenItem.deleteOne())
         );
+
+        // generate token
+        const token = generateToken(user.toObject());
 
         // store token in db
         const tokenDoc = new Token({
             user: user._id,
             token,
             type: 'verify-email',
-            expires: moment().add(1, 'hour').toDate(),
         });
         await tokenDoc.save();
 
         // send verification email
-        const info = await verifyEmail(user, token);
+        const info = await verifyEmail(user.toObject(), token);
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
 
         // return response
