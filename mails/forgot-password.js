@@ -27,7 +27,7 @@ module.exports = ({ user, token }) => {
             website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${env.APP_URL}:${env.PORT}/auth/reset-password?token=${token}`,
+        redirectTo: `${env.APP_URL}:${env.PORT}/auth/${user.role === 'customer' ? 'customers' : 'users'}/reset-password?token=${token}`,
     });
 
     // attachments
