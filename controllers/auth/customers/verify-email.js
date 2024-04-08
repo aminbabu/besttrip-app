@@ -64,12 +64,7 @@ module.exports = async (req, res, next) => {
 
         // delete existing tokens
         await Promise.all(
-            tokens.map(
-                (tokenItem) =>
-                    tokenItem.type === 'verify-email' &&
-                    moment(tokenItem.expires).isBefore(moment()) && // check if token is expired
-                    tokenItem.deleteOne()
-            )
+            tokens.map((tokenItem) => tokenItem.type === 'verify-email' && tokenItem.deleteOne())
         );
 
         // generate token
