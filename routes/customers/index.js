@@ -54,9 +54,9 @@ router.use(isAuthorized);
 router.get('/', isAllowed(['admin']), getAllCustomers);
 
 /**
- * @description get by mongo id
+ * @description get customer by mongo id
  * @param {string} path - /customers/:id
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAllowed', 'validateCustomerById']
  * @param {function} controller - ['getCustomerById']
  * @returns {object} - router
  * @access private - ['admin']
@@ -67,7 +67,7 @@ router.get('/:id', isAllowed(['admin']), validateCustomerById, getCustomerById);
 /**
  * @description update all customers wallet
  * @param {string} path - /customers/wallet
- * @param {function} middleware - ['isAllowed', 'validateCustomer']
+ * @param {function} middleware - ['isAllowed', 'validateCustomerWallet']
  * @param {function} controller - ['updateAllCustomers']
  * @returns {object} - router
  * @access private - ['admin']

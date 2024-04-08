@@ -10,7 +10,7 @@
 // export all validators
 module.exports = {
     validateCustomerById: require('./validate-customer-by-id'),
+    validateCustomerWallet: require('./validate-customer-wallet'),
     validateCustomer: require('./validate-customer'),
     validateCustomerSelf: require('./validate-customer-self'),
-    validateCustomerWallet: require('./validate-customer-wallet'),
 };

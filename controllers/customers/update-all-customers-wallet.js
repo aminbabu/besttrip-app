@@ -4,17 +4,18 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 04 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
+const { matchedData } = require('express-validator');
 const { Customer } = require('../../models');
 
 // export update all customers wallet controller
 module.exports = async (req, res, next) => {
     try {
-        // get the wallet object from the request body
-        const { wallet } = req.body;
+        // get validated data
+        const { wallet } = matchedData(req);
 
         // get all customers
         const customers = await Customer.find();
@@ -26,10 +27,10 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // update all customers
-        customers.forEach(async (customerItem) => {
+        // update all customers wallet
+        customers.forEach(async (c) => {
             // get customer
-            const customer = customerItem;
+            const customer = { ...c.toObject() };
 
             // calculate wallet balance based on transaction type
             if (wallet) {
@@ -47,7 +48,7 @@ module.exports = async (req, res, next) => {
 
             // update customer
             customer.set({
-                ...customer.toObject(),
+                ...customer,
                 wallet: {
                     ...wallet,
                     balance: customer.wallet.balance,
@@ -59,7 +60,7 @@ module.exports = async (req, res, next) => {
         });
 
         return res.status(200).json({
-            message: 'All customers wallet updated successfully',
+            message: 'Customers wallet updated successfully',
             customers,
         });
     } catch (error) {
