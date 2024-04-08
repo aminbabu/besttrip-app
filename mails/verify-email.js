@@ -27,7 +27,7 @@ module.exports = async (user, token) => {
             website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${env.APP_URL}/auth/verify-email?token=${token}`,
+        redirectTo: `${env.APP_URL}:${env.PORT}/auth/${user.role === 'customer' ? 'customers' : 'users'}/verify-email?token=${token}`,
     });
 
     // attachments
