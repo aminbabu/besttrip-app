@@ -20,8 +20,6 @@ module.exports = ({ user, token }) => {
         'utf-8'
     );
 
-    console.log(`${env.APP_URL}:${env.PORT}`);
-
     // compile template
     const html = ejs.render(template, {
         company: {
