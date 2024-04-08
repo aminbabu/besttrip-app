@@ -64,7 +64,7 @@ module.exports = async (req, res, next) => {
         const token = generateToken(newCustomer.toObject());
         // store token in db
         const tokenDoc = new Token({
-            customer: customer._id,
+            customer: newCustomer._id,
             token,
             type: 'verify-email',
         });
