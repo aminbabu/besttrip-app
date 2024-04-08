@@ -4,11 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 // token schema
 const tokenSchema = new mongoose.Schema(
@@ -40,6 +41,12 @@ const tokenSchema = new mongoose.Schema(
         timestamps: true,
     }
 );
+
+// set expires after 20 minutes before saving
+tokenSchema.pre('save', function (next) {
+    this.expires = moment().add(20, 'minutes').toDate();
+    next();
+});
 
 // token model
 const Token = mongoose.model('Token', tokenSchema);
