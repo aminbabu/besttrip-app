@@ -4,18 +4,19 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 07 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
+const { matchedData } = require('express-validator');
 const { Customer } = require('../../../models');
 const { comparePassword, generateToken } = require('../../../utils');
 
 // export login customer controller
 module.exports = async (req, res, next) => {
     try {
-        // get customer input
-        const { email, password } = req.body;
+        // get validated data
+        const { email, password } = matchedData(req);
 
         // check if customer exists
         const customer = await Customer.findOne({ email }).select('+password');
