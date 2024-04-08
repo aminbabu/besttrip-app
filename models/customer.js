@@ -106,6 +106,7 @@ const customerSchema = new mongoose.Schema(
 
 // hash password before saving
 customerSchema.pre('save', async function (next) {
+    console.log(this.isModified('password'));
     try {
         // check if password is modified
         if (!this.isModified('password')) {
@@ -123,22 +124,24 @@ customerSchema.pre('save', async function (next) {
 
 // generate customer id before saving
 customerSchema.pre('save', async function (next) {
+    console.log(this.isNew, 'isNew');
     try {
         // check if customer is new
-        if (!this.$isNew) {
+        if (!this.isNew) {
             return next();
         }
 
         // Get the last customer ID if any
         const lastCustomer = await this.constructor.findOne({}, {}, { sort: { createdAt: -1 } });
 
-        // get count by splitting customer ID (format: BTCYYYYMMDD0001) using moment
-        const count = lastCustomer
-            ? parseInt(lastCustomer.customerID.split(moment().format('YYYYMMDD'))[1], 10)
-            : 0;
+        // get count from the last customer ID if any or set to 0
+        let count = lastCustomer ? parseInt(lastCustomer.customerID.slice(11), 10) : 0;
 
-        // generate incrementing customer ID
-        this.customerID = `BTC${moment().format('YYYYMMDD')}${count + 1}`; // BTCYYYYMMDD0001
+        // check pad count with 0 if less than 4 digits and increment by 1
+        count = count > 9999 ? count + 1 : (count + 1).toString().padStart(4, '0');
+
+        // customer ID based on date (YYYYMMDD) and count (0001, 0002, ...) with prefix 'BTC'
+        this.customerID = `BTC${moment().format('YYYYMMDD')}${count}`;
 
         return next();
     } catch (error) {
