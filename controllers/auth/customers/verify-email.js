@@ -12,7 +12,7 @@ const moment = require('moment');
 const { matchedData } = require('express-validator');
 const { confirmEmailVerification } = require('../../../mails');
 const { Customer, Token } = require('../../../models');
-const { verifyToken, sendEmail } = require('../../../utils');
+const { sendEmail } = require('../../../utils');
 
 // export verify email controller
 module.exports = async (req, res, next) => {
@@ -36,11 +36,8 @@ module.exports = async (req, res, next) => {
             return res.status(400).json({ message: 'Invalid or expired token' });
         }
 
-        // verify token
-        const verifiedToken = verifyToken(token);
-
-        // check if token is valid
-        const customer = await Customer.findById(verifiedToken.user._id);
+        // get customer
+        const customer = await Customer.findById(forgotPasswordToken.customer);
 
         // check if customer exists
         if (!customer) {
@@ -56,16 +53,8 @@ module.exports = async (req, res, next) => {
         customer.isVerified = true;
         await customer.save();
 
-        // get existing tokens
-        const tokens = await Token.find({
-            customer: customer._id,
-            type: 'verify-email',
-        });
-
-        // delete existing tokens
-        await Promise.all(
-            tokens.map((tokenItem) => tokenItem.type === 'verify-email' && tokenItem.deleteOne())
-        );
+        // delete token
+        await forgotPasswordToken.deleteOne();
 
         // send email
         const info = await confirmEmailVerification(customer.toObject());
