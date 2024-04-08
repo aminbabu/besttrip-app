@@ -8,7 +8,6 @@
  */
 
 // dependencies
-const moment = require('moment');
 const { matchedData } = require('express-validator');
 const { Customer, Token } = require('../../../models');
 const { sendEmail, generateToken } = require('../../../utils');
@@ -38,12 +37,7 @@ module.exports = async (req, res, next) => {
 
         // delete existing tokens
         await Promise.all(
-            tokens.map(
-                (token) =>
-                    moment(token.expires) < moment() &&
-                    token?.type === 'reset-password' &&
-                    token.deleteOne()
-            )
+            tokens.map((token) => token?.type === 'reset-password' && token.deleteOne())
         );
 
         // generate token
