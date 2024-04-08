@@ -26,7 +26,7 @@ const {
 // middlewares
 const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
 const {
-    validateCustomerById,
+    validateCustomerId,
     validateCustomer,
     validateCustomerSelf,
     validateCustomerWallet,
@@ -56,13 +56,13 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
 /**
  * @description get customer by mongo id
  * @param {string} path - /customers/:id
- * @param {function} middleware - ['isAllowed', 'validateCustomerById']
+ * @param {function} middleware - ['isAllowed', 'validateCustomerId']
  * @param {function} controller - ['getCustomerById']
  * @returns {object} - router
  * @access private - ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), validateCustomerById, getCustomerById);
+router.get('/:id', isAllowed(['admin']), validateCustomerId, getCustomerById);
 
 /**
  * @description update all customers wallet
