@@ -21,18 +21,18 @@ module.exports = async (req, res, next) => {
         const { token } = matchedData(req);
 
         // get token
-        const existingToken = await Token.findOne({
+        const forgotPasswordToken = await Token.findOne({
             token,
             type: 'verify-email',
         });
 
         // check if token exists
-        if (!existingToken) {
+        if (!forgotPasswordToken) {
             return res.status(400).json({ message: 'Invalid or expired token' });
         }
 
         // check if token is expired
-        if (moment(existingToken.expires).isBefore(moment())) {
+        if (moment(forgotPasswordToken.expires).isBefore(moment())) {
             return res.status(400).json({ message: 'Invalid or expired token' });
         }
 
