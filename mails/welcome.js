@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 07 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
@@ -20,6 +20,8 @@ module.exports = ({ user, token }) => {
         'utf-8'
     );
 
+    console.log(`${env.APP_URL}:${env.PORT}`);
+
     // compile template
     const html = ejs.render(template, {
         company: {
@@ -30,7 +32,7 @@ module.exports = ({ user, token }) => {
             website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${env.APP_URL}/auth/verify-email?token=${token}`,
+        redirectTo: `${env.APP_URL}:${env.PORT}/auth/verify-email?token=${token}`,
     });
 
     // attachments
