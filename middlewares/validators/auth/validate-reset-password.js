@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
@@ -17,11 +17,14 @@ module.exports = [
     body('password')
         .isLength({ min: 8 })
         .withMessage('Password must be at least 6 characters long'),
-    body('confirmPassword').custom((value, { req }) => {
-        if (value !== req.body.password) {
-            throw new Error('Passwords do not match');
-        }
-        return true;
-    }),
+    body('confirmPassword')
+        .isLength({ min: 8 })
+        .withMessage('Confirm password must be at least 6 characters long')
+        .custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error('Passwords do not match');
+            }
+            return true;
+        }),
     expressValidator,
 ];
