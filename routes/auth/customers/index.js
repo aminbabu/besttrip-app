@@ -83,7 +83,7 @@ router.post('/reset-password', validateResetPassword, resetPassword);
  * @param {function} middleware - ['validateSendVerificationEmail']
  * @param {function} controller - ['sendVerificationEmail']
  * @returns {object} - router
- * @access private
+ * @access public
  * @method POST
  */
 router.post('/send-verification-email', validateSendVerificationEmail, sendVerificationEmail);
