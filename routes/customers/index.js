@@ -24,7 +24,7 @@ const {
 } = require('../../controllers/customers');
 
 // middlewares
-const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../middlewares/auth');
 const {
     validateCustomerId,
     validateCustomer,
@@ -116,14 +116,14 @@ router.delete('/:id', isAllowed(['admin']), validateCustomerId, deleteCustomerBy
 
 /**
  * @description delete customer by self
- * @param {string} path - /customers/:id/self
- * @param {function} middleware - ['isSelf', 'isAllowed']
+ * @param {string} path - /customers/self
+ * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['deleteCustomerBySelf']
  * @returns {object} - router
  * @access private - ['customer']
  * @method DELETE
  */
-router.delete('/:id/self', isSelf, isAllowed(['customer']), deleteCustomerBySelf);
+router.delete('/self', isAllowed(['customer']), deleteCustomerBySelf);
 
 // export
 module.exports = router;
