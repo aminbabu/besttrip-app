@@ -31,7 +31,7 @@ const {
     validateSendVerificationEmail,
     validateVerifyEmail,
 } = require('../../../middlewares/validators/auth');
-const { isVerified, isAuthorized } = require('../../../middlewares/auth');
+const { isVerified } = require('../../../middlewares/auth');
 
 /**
  * @description register a new user
@@ -86,12 +86,7 @@ router.post('/reset-password', validateResetPassword, resetPassword);
  * @access private
  * @method POST
  */
-router.post(
-    '/send-verification-email',
-    validateSendVerificationEmail,
-    isAuthorized,
-    sendVerificationEmail
-);
+router.post('/send-verification-email', validateSendVerificationEmail, sendVerificationEmail);
 
 /**
  * @description verify email
