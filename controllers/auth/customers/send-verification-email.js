@@ -4,25 +4,38 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
 const moment = require('moment');
+const { matchedData } = require('express-validator');
 const { verifyEmail } = require('../../../mails');
-const { sendEmail } = require('../../../utils');
-const { Token } = require('../../../models');
+const { sendEmail, generateToken } = require('../../../utils');
+const { Token, Customer } = require('../../../models');
 
 // export send verification email controller
 module.exports = async (req, res, next) => {
     try {
-        // get customer from request
-        const { user: customer, token } = req;
+        // get validated data
+        const { email } = matchedData(req);
+
+        // get customer
+        const customer = await Customer.findOne({
+            email,
+        });
+
+        // check if customer exists
+        if (!customer) {
+            return res.status(404).json({
+                message: 'Customer not found',
+            });
+        }
 
         // check if customer is already verified
         if (customer.isVerified) {
-            return res.status(200).json({
-                message: 'Customer already verified',
+            return res.status(400).json({
+                message: 'Customer is already verified',
             });
         }
 
@@ -35,23 +48,25 @@ module.exports = async (req, res, next) => {
         await Promise.all(
             tokens.map(
                 (tokenItem) =>
-                    moment(tokenItem.expires) < moment() &&
-                    tokenItem?.type === 'verify-email' &&
+                    tokenItem.type === 'verify-email' &&
+                    moment(tokenItem.expires).isBefore(moment()) && // check if token is expired
                     tokenItem.deleteOne()
             )
         );
+
+        // generate token
+        const token = generateToken(customer.toObject());
 
         // store token in db
         const tokenDoc = new Token({
             customer: customer._id,
             token,
             type: 'verify-email',
-            expires: moment().add(1, 'hour').toDate(),
         });
         await tokenDoc.save();
 
         // send verification email
-        const info = await verifyEmail(customer, token);
+        const info = await verifyEmail(customer.toObject(), token);
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
 
         // return response
