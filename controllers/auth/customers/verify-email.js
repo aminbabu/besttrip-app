@@ -21,23 +21,23 @@ module.exports = async (req, res, next) => {
         const { token } = matchedData(req);
 
         // get token
-        const verifyEmailToken = await Token.findOne({
+        const emailVerificationToken = await Token.findOne({
             token,
             type: 'verify-email',
         });
 
         // check if token exists
-        if (!verifyEmailToken) {
+        if (!emailVerificationToken) {
             return res.status(400).json({ message: 'Invalid or expired token' });
         }
 
         // check if token is expired
-        if (moment(verifyEmailToken.expires).isBefore(moment())) {
+        if (moment(emailVerificationToken.expires).isBefore(moment())) {
             return res.status(400).json({ message: 'Invalid or expired token' });
         }
 
         // get customer
-        const customer = await Customer.findById(verifyEmailToken.customer);
+        const customer = await Customer.findById(emailVerificationToken.customer);
 
         // check if customer exists
         if (!customer) {
@@ -54,7 +54,7 @@ module.exports = async (req, res, next) => {
         await customer.save();
 
         // delete token
-        await verifyEmailToken.deleteOne();
+        await emailVerificationToken.deleteOne();
 
         // send email
         const info = await confirmEmailVerification(customer.toObject());
