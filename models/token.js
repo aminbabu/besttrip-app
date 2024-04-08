@@ -34,7 +34,6 @@ const tokenSchema = new mongoose.Schema(
         },
         expires: {
             type: Date,
-            required: [true, 'Expire time is required'],
         },
     },
     {
