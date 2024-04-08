@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 21 March, 2024
- * @update_date 07 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
@@ -30,7 +30,7 @@ module.exports = async (user) => {
             website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${env.APP_URL}/auth/login`,
+        redirectTo: `${env.APP_URL}:${env.PORT}/auth/login`,
     });
 
     // attachments
