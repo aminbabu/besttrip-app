@@ -28,12 +28,12 @@ module.exports = async (req, res, next) => {
 
         // check if token exists
         if (!existingToken) {
-            return res.status(404).json({ message: 'Token not found' });
+            return res.status(400).json({ message: 'Invalid or expired token' });
         }
 
         // check if token is expired
         if (moment(existingToken.expires).isBefore(moment())) {
-            return res.status(400).json({ message: 'Token expired' });
+            return res.status(400).json({ message: 'Invalid or expired token' });
         }
 
         // verify token
