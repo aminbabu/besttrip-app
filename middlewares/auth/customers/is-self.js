@@ -4,23 +4,20 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 03 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
-const { Customer } = require('../../../models');
+const { matchedData } = require('express-validator');
 
 // is self middleware
 module.exports = async (req, res, next) => {
     try {
-        // get customer id
-        const { id } = req.params;
-
-        // get customer
-        const customer = await Customer.findById(id);
+        // get validated data
+        const { id } = matchedData(req);
 
         // check if customer is self
-        if (customer?._id.toString() !== req.user?._id.toString()) {
+        if (id !== req.user._id) {
             return res.status(403).json({
                 message: 'Forbidden',
             });

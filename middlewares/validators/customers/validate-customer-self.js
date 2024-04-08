@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 07 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
@@ -13,78 +13,59 @@ const { expressValidator } = require('../../../handlers/errors');
 const { CUSTOMER_STATUS } = require('../../../constants');
 
 // update customer validator
-module.exports = [
-    body('customerID').custom((value) => {
-        if (!value) {
-            return true;
-        }
 
-        throw new Error('You are not allowed to update your customer ID');
-    }),
+// update customer validator
+module.exports = [
+    body('customerID').not().exists().withMessage('You are not allowed to update the customer ID'),
     body('name')
         .optional()
-        .trim()
         .isLength({ min: 3 })
-        .withMessage('name should be at least 3 characters'),
-    body('email').optional().isEmail().withMessage('email should be an email'),
-    body('phone').optional().isMobilePhone().withMessage('phone should be a phone number'),
+        .withMessage('Name should be at least 3 characters'),
+    body('email')
+        .optional()
+        .normalizeEmail()
+        .isEmail()
+        .withMessage('Email should be a valid email'),
+    body('phone').optional().isMobilePhone().withMessage('Phone should be a valid phone number'),
     body('password')
         .optional()
         .isLength({ min: 8 })
-        .withMessage('password should be at least 6 characters'),
-    body('dob').optional().isISO8601().withMessage('dob should be a date'),
+        .withMessage('Password should be at least 8 characters'),
+    body('dob')
+        .optional()
+        .toDate()
+        .isDate()
+        .withMessage('Date of birth should be a valid javascript date'),
     body('status')
         .optional()
         .isIn(CUSTOMER_STATUS)
-        .withMessage('status should be active or disabled'),
+        .withMessage(`Status should be one of ${CUSTOMER_STATUS.join(', ')}`),
     body('address')
         .optional()
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('address should be at least 3 characters'),
+        .isLength({ min: 3, max: 100 })
+        .withMessage('Address should be between 3 and 100 characters'),
     body('city')
         .optional()
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('city should be at least 3 characters'),
+        .isLength({ min: 3, max: 50 })
+        .withMessage('City should be between 3 and 50 characters'),
     body('state')
         .optional()
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('state should be at least 3 characters'),
+        .isLength({ min: 3, max: 50 })
+        .withMessage('State should be between 3 and 50 characters'),
     body('country')
         .optional()
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('country should be at least 3 characters'),
+        .isLength({ min: 3, max: 50 })
+        .withMessage('Country should be between 3 and 50 characters'),
     body('postalCode')
         .optional()
-        .isPostalCode('any')
-        .withMessage('postalCode should be a postal code'),
-    body('flyerNumber').optional().isNumeric().withMessage('flyerNumber should be a number'),
-    body('wallet').custom((value) => {
-        // check if wallet exists
-        if (!value) {
-            return true;
-        }
-
-        throw new Error('You are not allowed to update your wallet');
-    }),
-    body('role').custom((value) => {
-        // check if role exists
-        if (!value) {
-            return true;
-        }
-
-        throw new Error('You are not allowed to update your role');
-    }),
-    body('isVerified').custom((value) => {
-        // check if isVerified exists
-        if (!value) {
-            return true;
-        }
-
-        throw new Error('You are not allowed to update your verification status');
-    }),
+        .isPostalCode()
+        .withMessage('Postal code should be a valid postal code'),
+    body('flyerNumber').optional().isNumeric().withMessage('Flyer number should be a number'),
+    body('wallet').not().exists().withMessage('You are not allowed to update the wallet'),
+    body('role').not().exists().withMessage('You are not allowed to update the role'),
+    body('isVerified')
+        .not()
+        .exists()
+        .withMessage('You are not allowed to update the verification status'),
     expressValidator,
 ];

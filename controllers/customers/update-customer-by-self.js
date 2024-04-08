@@ -4,15 +4,19 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 04 April, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
+const { matchedData } = require('express-validator');
 const { Customer } = require('../../models');
 
 // export update customer by self controller
 module.exports = async (req, res, next) => {
     try {
+        // get validated data
+        const validatedData = matchedData(req);
+
         // get customer id
         const { id } = req.user;
 
@@ -27,14 +31,14 @@ module.exports = async (req, res, next) => {
         }
 
         // update customer
-        customer.set(req.body);
+        customer.set(validatedData);
 
         // save customer
         await customer.save();
 
         // success response
         return res.status(200).json({
-            message: 'Updated successfully',
+            message: 'Updated customer successfully',
             customer,
         });
     } catch (error) {
