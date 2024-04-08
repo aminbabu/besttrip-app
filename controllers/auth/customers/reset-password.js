@@ -1,5 +1,5 @@
 /**
- * @file /controllers/auth/reset-password.js
+ * @file /controllers/auth/customers/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

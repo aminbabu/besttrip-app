@@ -1,5 +1,5 @@
 /**
- * @file /controllers/auth/verify-email.js
+ * @file /controllers/auth/customers/verify-email.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

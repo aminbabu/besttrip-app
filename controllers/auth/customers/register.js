@@ -1,5 +1,5 @@
 /**
- * @file /controllers/auth/register.js
+ * @file /controllers/auth/customers/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
