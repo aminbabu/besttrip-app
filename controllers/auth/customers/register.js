@@ -8,6 +8,7 @@
  */
 
 // dependencies
+const { matchedData } = require('express-validator');
 const { welcome } = require('../../../mails');
 const { Customer } = require('../../../models');
 const { generateToken, sendEmail } = require('../../../utils');
@@ -15,8 +16,8 @@ const { generateToken, sendEmail } = require('../../../utils');
 // export register a new customer controller
 module.exports = async (req, res, next) => {
     try {
-        // get customer input
-        const { name, email, phone, password } = req.body;
+        // get validated data
+        const { name, email, phone, password } = matchedData(req);
 
         // check if customer already exists
         const customer = await Customer.findOne({ email });
