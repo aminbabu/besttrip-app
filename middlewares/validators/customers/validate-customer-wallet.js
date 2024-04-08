@@ -15,28 +15,29 @@ const { CUSTOMER_WALLET_TRANSACTION_TYPES } = require('../../../constants');
 module.exports = [
     body('wallet')
         .exists()
-        .withMessage('wallet is required')
+        .withMessage('Wallet is required')
         .isObject()
         .withMessage('Wallet should be an object'),
     body('wallet.balance')
         .exists()
-        .withMessage('balance is required')
+        .withMessage('Balance is required')
         .isNumeric()
-        .withMessage('balance should be a number')
+        .withMessage('Balance should be a number')
         .custom((value) => {
             if (value < 0) {
-                throw new Error('balance should be a positive number');
+                throw new Error('Balance should be a positive number');
             }
             return true;
         }),
     body('wallet.type')
         .exists()
-        .withMessage('type is required')
+        .withMessage('Balance type is required')
         .isIn(CUSTOMER_WALLET_TRANSACTION_TYPES)
-        .withMessage('balance type should be top-up or deduct'),
+        .withMessage(
+            `Balance type should be one of ${CUSTOMER_WALLET_TRANSACTION_TYPES.join(', ')}`
+        ),
     body('wallet.description')
         .optional()
-        .trim()
-        .isString()
-        .withMessage('description should be a string'),
+        .isLength({ min: 3, max: 100 })
+        .withMessage('Description should be between 3 and 100 characters'),
 ];
