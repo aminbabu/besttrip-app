@@ -8,14 +8,16 @@
  */
 
 const moment = require('moment');
+const { matchedData } = require('express-validator');
+const { sendPasswordResetConfirmation } = require('../../../mails');
 const { Token, Customer } = require('../../../models');
+const { sendEmail } = require('../../../utils');
 
 // export reset password controller
 module.exports = async (req, res, next) => {
     try {
-        // get customer input
-        const { password } = req.body;
-        const { token } = req.query;
+        // get validated data
+        const { token, password } = matchedData(req);
 
         // check if the token exists
         const resetPasswordToken = await Token.findOne({
@@ -29,25 +31,33 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // check if the token is valid
-        const isTokenValid = moment(resetPasswordToken.expires) > moment();
-
-        if (!isTokenValid) {
+        // check if token is expired
+        if (moment(resetPasswordToken.expires).isBefore(moment())) {
             return res.status(400).json({
                 message: 'Invalid or expired token',
             });
         }
 
-        // decode token and get customer id
-        const customerId = resetPasswordToken.customer;
-        const customer = await Customer.findById(customerId);
+        // get customer
+        const customer = await Customer.findById(resetPasswordToken.customer);
 
-        // save new password
+        // check if customer exists
+        if (!customer) {
+            return res.status(404).json({
+                message: 'Customer not found',
+            });
+        }
+
+        // update customer password
         customer.password = password;
         await customer.save();
 
         // delete token
         await resetPasswordToken.deleteOne();
+
+        // send email
+        const info = await sendPasswordResetConfirmation(customer.toObject());
+        await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
 
         // return response
         return res.status(200).json({
