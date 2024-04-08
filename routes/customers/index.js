@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 29 March, 2024
+ * @update_date 08 April, 2024
  */
 
 // dependencies
@@ -26,6 +26,7 @@ const {
 // middlewares
 const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
 const {
+    validateCustomerById,
     validateCustomer,
     validateCustomerSelf,
     validateCustomerWallet,
@@ -47,7 +48,7 @@ router.use(isAuthorized);
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getAllCustomers']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method GET
  */
 router.get('/', isAllowed(['admin']), getAllCustomers);
@@ -58,10 +59,10 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getCustomerById']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), getCustomerById);
+router.get('/:id', isAllowed(['admin']), validateCustomerById, getCustomerById);
 
 /**
  * @description update all customers wallet
@@ -69,7 +70,7 @@ router.get('/:id', isAllowed(['admin']), getCustomerById);
  * @param {function} middleware - ['isAllowed', 'validateCustomer']
  * @param {function} controller - ['updateAllCustomers']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method PATCH
  */
 router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllCustomersWallet);
@@ -80,7 +81,7 @@ router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllC
  * @param {function} middleware - ['isAllowed', 'validateCustomer']
  * @param {function} controller - ['updateCustomerById']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method PATCH
  */
 router.patch('/:id', isAllowed(['admin']), validateCustomer, updateCustomerById);
@@ -91,7 +92,7 @@ router.patch('/:id', isAllowed(['admin']), validateCustomer, updateCustomerById)
  * @param {function} middleware - ['isSelf', 'isAllowed', 'validateCustomerSelf']
  * @param {function} controller - ['updateCustomerBySelf']
  * @returns {object} - router
- * @access private
+ * @access private - ['customer']
  * @method PATCH
  */
 router.patch(
@@ -107,7 +108,7 @@ router.patch(
  * @param {string} path - /customers/:id
  * @param {function} controller - ['deleteCustomerById']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method DELETE
  */
 router.delete('/:id', isAllowed(['admin']), deleteCustomerById);
@@ -118,7 +119,7 @@ router.delete('/:id', isAllowed(['admin']), deleteCustomerById);
  * @param {function} middleware - ['isSelf', 'isAllowed']
  * @param {function} controller - ['deleteCustomerBySelf']
  * @returns {object} - router
- * @access private
+ * @access private - ['customer']
  * @method DELETE
  */
 router.delete('/:id/self', isSelf, isAllowed(['customer']), deleteCustomerBySelf);
