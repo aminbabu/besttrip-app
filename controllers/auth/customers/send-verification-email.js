@@ -39,6 +39,7 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // get existing tokens
         const tokens = await Token.find({
             customer: customer._id,
             type: 'verify-email',
