@@ -95,8 +95,7 @@ router.patch(
 /**
  * @description update customer by self
  * @param {string} path - /customers/self
- * @param {function} middleware -
- * ['validateCustomerId', 'isSelf', 'isAllowed', 'validateCustomerSelf']
+ * @param {function} middleware - ['isAllowed', 'validateCustomerSelf']
  * @param {function} controller - ['updateCustomerBySelf']
  * @returns {object} - router
  * @access private - ['customer']
@@ -107,12 +106,13 @@ router.patch('/self', isAllowed(['customer']), validateCustomerSelf, updateCusto
 /**
  * @description delete customer by mongo id
  * @param {string} path - /customers/:id
+ * @param {function} middleware - ['isAllowed', 'validateCustomerId']
  * @param {function} controller - ['deleteCustomerById']
  * @returns {object} - router
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['admin']), deleteCustomerById);
+router.delete('/:id', isAllowed(['admin']), validateCustomerId, deleteCustomerById);
 
 /**
  * @description delete customer by self
