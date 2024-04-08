@@ -106,12 +106,13 @@ const customerSchema = new mongoose.Schema(
 
 // hash password before saving
 customerSchema.pre('save', async function (next) {
-    console.log(this.isModified('password'));
     try {
         // check if password is modified
         if (!this.isModified('password')) {
             return next();
         }
+
+        console.log(this.isModified('password'), 'isModified password');
 
         // hash password
         this.password = await bcrypt.hash(this.password, 10);
@@ -124,12 +125,13 @@ customerSchema.pre('save', async function (next) {
 
 // generate customer id before saving
 customerSchema.pre('save', async function (next) {
-    console.log(this.isNew, 'isNew');
     try {
         // check if customer is new
         if (!this.isNew) {
             return next();
         }
+
+        console.log(this.isNew, 'isNew customer');
 
         // Get the last customer ID if any
         const lastCustomer = await this.constructor.findOne({}, {}, { sort: { createdAt: -1 } });
