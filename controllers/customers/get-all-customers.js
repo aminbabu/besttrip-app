@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
-            message: 'Fetched all customers successfully',
+            message: 'Fetched customers successfully',
             customers,
         });
     } catch (error) {
