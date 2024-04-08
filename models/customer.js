@@ -107,12 +107,10 @@ const customerSchema = new mongoose.Schema(
 // hash password before saving
 customerSchema.pre('save', async function (next) {
     try {
-        // check if password is modified
+        // check if password is not modified
         if (!this.isModified('password')) {
             return next();
         }
-
-        console.log(this.isModified('password'), 'isModified password');
 
         // hash password
         this.password = await bcrypt.hash(this.password, 10);
