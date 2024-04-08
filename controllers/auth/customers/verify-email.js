@@ -12,7 +12,7 @@ const moment = require('moment');
 const { matchedData } = require('express-validator');
 const { confirmEmailVerification } = require('../../../mails');
 const { Customer, Token } = require('../../../models');
-const { verifyToken, sendEmail, generateToken } = require('../../../utils');
+const { verifyToken, sendEmail } = require('../../../utils');
 
 // export verify email controller
 module.exports = async (req, res, next) => {
@@ -67,15 +67,9 @@ module.exports = async (req, res, next) => {
             tokens.map((tokenItem) => tokenItem.type === 'verify-email' && tokenItem.deleteOne())
         );
 
-        // generate token
-        const newToken = generateToken(customer.toObject());
-
         // send email
         const info = await confirmEmailVerification(customer.toObject());
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
-
-        // set token in response
-        res.set('authorization', `Bearer ${newToken}`);
 
         // send response
         return res.status(200).json({
