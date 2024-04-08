@@ -8,9 +8,10 @@
  */
 
 // dependencies
+const moment = require('moment');
 const { matchedData } = require('express-validator');
 const { welcome } = require('../../../mails');
-const { Customer } = require('../../../models');
+const { Customer, Token } = require('../../../models');
 const { generateToken, sendEmail } = require('../../../utils');
 
 // export register a new customer controller
@@ -22,6 +23,7 @@ module.exports = async (req, res, next) => {
         // check if customer already exists
         const customer = await Customer.findOne({ email });
 
+        // check if customer already exists
         if (customer) {
             return res.status(400).json({
                 message: 'Customer already exists',
@@ -42,8 +44,31 @@ module.exports = async (req, res, next) => {
         // save customer
         await newCustomer.save();
 
+        // get existing tokens
+        const tokens = await Token.find({
+            customer: newCustomer._id,
+            type: 'verify-email',
+        });
+
+        // delete existing tokens
+        await Promise.all(
+            tokens.map(
+                (tokenItem) =>
+                    tokenItem.type === 'verify-email' &&
+                    moment(tokenItem.expires).isBefore(moment()) && // check if token is expired
+                    tokenItem.deleteOne()
+            )
+        );
+
         // generate token
         const token = generateToken(newCustomer.toObject());
+        // store token in db
+        const tokenDoc = new Token({
+            customer: customer._id,
+            token,
+            type: 'verify-email',
+        });
+        await tokenDoc.save();
 
         // send mail
         const info = welcome({ user: newCustomer.toObject(), token });
