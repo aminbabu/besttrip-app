@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 08 April, 2024
+ * @update_date 09 April, 2024
  */
 
 // dependencies
@@ -15,7 +15,7 @@ const { Customer } = require('../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const validatedData = matchedData(req);
+        const validatedCustomer = matchedData(req);
 
         // get customer id
         const { id } = req.user;
@@ -31,7 +31,10 @@ module.exports = async (req, res, next) => {
         }
 
         // update customer
-        customer.set(validatedData);
+        customer.set({
+            ...customer,
+            ...validatedCustomer,
+        });
 
         // save customer
         await customer.save();
