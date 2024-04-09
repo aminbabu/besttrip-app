@@ -15,13 +15,21 @@ const { Customer } = require('../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const validatedCustomer = matchedData(req);
+        let validatedCustomer = matchedData(req);
+
+        // filter out empty fields
+        validatedCustomer = Object.keys(validatedCustomer).reduce((acc, key) => {
+            if (validatedCustomer[key]) {
+                acc[key] = validatedCustomer[key];
+            }
+            return acc;
+        }, {});
 
         // get customer id
-        const { id } = req.user;
+        const { _id } = req.user;
 
         // get customer
-        const customer = await Customer.findById(id);
+        const customer = await Customer.findById(_id);
 
         // check if customer exists
         if (!customer) {
@@ -32,7 +40,7 @@ module.exports = async (req, res, next) => {
 
         // update customer
         customer.set({
-            ...customer,
+            ...customer.toObject(),
             ...validatedCustomer,
         });
 

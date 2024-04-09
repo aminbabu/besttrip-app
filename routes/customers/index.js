@@ -76,6 +76,17 @@ router.get('/:id', isAllowed(['admin']), validateCustomerId, getCustomerById);
 router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllCustomersWallet);
 
 /**
+ * @description update customer by self
+ * @param {string} path - /customers/self
+ * @param {function} middleware - ['isAllowed', 'validateCustomerSelf']
+ * @param {function} controller - ['updateCustomerBySelf']
+ * @returns {object} - router
+ * @access private - ['customer']
+ * @method PATCH
+ */
+router.patch('/self', isAllowed(['customer']), validateCustomerSelf, updateCustomerBySelf);
+
+/**
  * @description update customer by mongo id
  * @param {string} path - /customers/:id
  * @param {function} middleware - ['isAllowed', 'validateCustomer']
@@ -91,17 +102,6 @@ router.patch(
     validateCustomer,
     updateCustomerById
 );
-
-/**
- * @description update customer by self
- * @param {string} path - /customers/self
- * @param {function} middleware - ['isAllowed', 'validateCustomerSelf']
- * @param {function} controller - ['updateCustomerBySelf']
- * @returns {object} - router
- * @access private - ['customer']
- * @method PATCH
- */
-router.patch('/self', isAllowed(['customer']), validateCustomerSelf, updateCustomerBySelf);
 
 /**
  * @description delete customer by mongo id
