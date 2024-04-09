@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
         // update all customers wallet
         customers.forEach(async (c) => {
             // get customer
-            const customer = c;
+            const customer = { ...c.toObject() };
 
             // calculate wallet balance based on transaction type
             if (wallet) {
@@ -47,7 +47,7 @@ module.exports = async (req, res, next) => {
             }
 
             // update customer
-            customer.set({
+            c.set({
                 ...customer,
                 wallet: {
                     ...wallet,
@@ -56,7 +56,7 @@ module.exports = async (req, res, next) => {
             });
 
             // save customer
-            await customer.save();
+            await c.save();
         });
 
         return res.status(200).json({
