@@ -15,10 +15,10 @@ const { Customer } = require('../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { id, wallet } = matchedData(req);
+        const body = matchedData(req);
 
         // get customer
-        const customer = await Customer.findById(id);
+        const customer = await Customer.findById(body.id);
 
         // check if customer exists
         if (!customer) {
@@ -28,13 +28,13 @@ module.exports = async (req, res, next) => {
         }
 
         // calculate wallet balance based on transaction type
-        if (wallet) {
-            switch (wallet.type) {
+        if (body.wallet) {
+            switch (body.wallet.type) {
                 case 'top-up':
-                    customer.wallet.balance += wallet.balance;
+                    customer.wallet.balance += body.wallet.balance;
                     break;
                 case 'deduct':
-                    customer.wallet.balance -= wallet.balance;
+                    customer.wallet.balance -= body.wallet.balance;
                     break;
                 default:
                     break;
@@ -44,8 +44,9 @@ module.exports = async (req, res, next) => {
         // update customer
         customer.set({
             ...customer,
+            ...body,
             wallet: {
-                ...wallet,
+                ...body.wallet,
                 balance: customer.wallet.balance,
             },
         });
