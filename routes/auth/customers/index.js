@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 28 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 09 April, 2024
  */
 
 // dependencies
@@ -47,7 +47,7 @@ router.post('/register', validateRegister, register);
 /**
  * @description login a user
  * @param {string} path - /auth/customers/login
- * @param {function} middleware - ['validateLogin']
+ * @param {function} middleware - ['validateLogin', 'isVerified.customer']
  * @param {function} controller - ['login']
  * @returns {object} - router
  * @access public
