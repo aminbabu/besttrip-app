@@ -4,12 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 07 April, 2024
- * @update_date 08 April, 2024
+ * @update_date 09 April, 2024
  */
 
 // dependencies
 const { body } = require('express-validator');
 const { CUSTOMER_WALLET_TRANSACTION_TYPES } = require('../../../constants');
+const { expressValidator } = require('../../../handlers/errors');
 
 // export customer wallet validator
 module.exports = [
@@ -40,4 +41,5 @@ module.exports = [
         .optional()
         .isLength({ min: 3, max: 100 })
         .withMessage('Description should be between 3 and 100 characters'),
+    expressValidator,
 ];
