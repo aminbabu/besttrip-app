@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 08 April, 2024
+ * @update_date 09 April, 2024
  */
 
 // dependencies
@@ -85,7 +85,7 @@ module.exports = [
     body('role')
         .optional()
         .isIn(CUSTOMER_ROLES)
-        .withMessage(`Role should be one of ${CUSTOMER_ROLES.join(', ')}`),
+        .withMessage(`Role should be only ${CUSTOMER_ROLES.join(', ')}`),
     body('isVerified')
         .optional()
         .isBoolean()
