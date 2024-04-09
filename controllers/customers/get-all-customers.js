@@ -31,8 +31,6 @@ module.exports = async (req, res, next) => {
             },
         ]);
 
-        console.log(JSON.stringify(customers, null, 2));
-
         // return response
         return res.status(200).json({
             message: 'Fetched customers successfully',
