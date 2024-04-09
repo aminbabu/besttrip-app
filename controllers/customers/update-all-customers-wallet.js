@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 08 April, 2024
+ * @update_date 09 April, 2024
  */
 
 // dependencies
@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
         // update all customers wallet
         customers.forEach(async (c) => {
             // get customer
-            const customer = { ...c.toObject() };
+            const customer = c;
 
             // calculate wallet balance based on transaction type
             if (wallet) {
