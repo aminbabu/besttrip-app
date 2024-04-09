@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 09 April, 2024
  */
 
 // dependencies
@@ -15,10 +15,10 @@ const { Customer } = require('../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const body = matchedData(req);
+        const validatedCustomer = matchedData(req);
 
         // get customer
-        const customer = await Customer.findById(body.id);
+        const customer = await Customer.findById(validatedCustomer.id);
 
         // check if customer exists
         if (!customer) {
@@ -28,13 +28,13 @@ module.exports = async (req, res, next) => {
         }
 
         // calculate wallet balance based on transaction type
-        if (body.wallet) {
-            switch (body.wallet.type) {
+        if (validatedCustomer.wallet) {
+            switch (validatedCustomer.wallet.type) {
                 case 'top-up':
-                    customer.wallet.balance += body.wallet.balance;
+                    customer.wallet.balance += validatedCustomer.wallet.balance;
                     break;
                 case 'deduct':
-                    customer.wallet.balance -= body.wallet.balance;
+                    customer.wallet.balance -= validatedCustomer.wallet.balance;
                     break;
                 default:
                     break;
@@ -44,9 +44,9 @@ module.exports = async (req, res, next) => {
         // update customer
         customer.set({
             ...customer,
-            ...body,
+            ...validatedCustomer,
             wallet: {
-                ...body.wallet,
+                ...validatedCustomer.wallet,
                 balance: customer.wallet.balance,
             },
         });
