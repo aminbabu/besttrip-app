@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 10 April, 2024
  */
 
 // dependencies
@@ -24,6 +24,13 @@ module.exports = async (req, res, next) => {
         if (!customer) {
             return res.status(400).json({
                 message: 'Invalid email or password',
+            });
+        }
+
+        // check if customer status is active
+        if (customer.status !== 'active') {
+            return res.status(400).json({
+                message: 'Customer is not active',
             });
         }
 
