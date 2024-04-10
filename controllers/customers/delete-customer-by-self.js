@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const { _id } = req.user;
 
         // delete customer
-        const customer = await Customer.findByIdAndDelete(_id);
+        const customer = await Customer.findById(_id);
 
         // check if customer exists
         if (!customer) {
@@ -25,6 +25,9 @@ module.exports = async (req, res, next) => {
                 message: 'Customer not found',
             });
         }
+
+        // delete customer
+        await customer.deleteOne();
 
         // return response
         return res.status(200).json({
