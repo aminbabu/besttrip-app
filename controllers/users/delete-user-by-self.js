@@ -3,8 +3,8 @@
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 07 April, 2024
- * @update_date 07 April, 2024
+ * @date 08 April, 2024
+ * @update_date 10 April, 2024
  */
 
 // dependencies
@@ -16,8 +16,8 @@ module.exports = async (req, res, next) => {
         // get user id
         const { _id } = req.user;
 
-        // get user
-        const user = await User.findById(id);
+        // delete user
+        const user = await User.findById(_id);
 
         // check if user exists
         if (!user) {

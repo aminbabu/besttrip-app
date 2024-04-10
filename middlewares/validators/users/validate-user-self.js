@@ -1,80 +1,57 @@
 /**
- * @file /middlewares/validators/users/validate-user-self.js
+ * @file /middlewares/validators/users/update-user-self.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 07 April, 2024
- * @update_date 07 April, 2024
+ * @date 0
+ * @update_date 08 April, 2024
  */
 
 // dependencies
 const { body } = require('express-validator');
 const { expressValidator } = require('../../../handlers/errors');
+const { USER_STATUS } = require('../../../constants');
+
+// update user validator
 
 // update user validator
 module.exports = [
-    body('userID').custom((value) => {
-        if (!value) {
-            return true;
-        }
-
-        throw new Error('You are not allowed to update the user ID');
-    }),
-    body('name')
-        .optional()
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('name should be at least 3 characters'),
-    body('email').optional().isEmail().withMessage('email should be an email'),
-    body('phone').optional().isMobilePhone().withMessage('phone should be a phone number'),
+    body('userID').not().exists().withMessage('You are not allowed to update the user ID'),
+    body('name').isLength({ min: 3 }).withMessage('Name should be at least 3 characters'),
+    body('email').normalizeEmail().isEmail().withMessage('Email should be a valid email'),
+    body('phone').isMobilePhone().withMessage('Phone should be a valid phone number'),
     body('password')
         .optional()
         .isLength({ min: 8 })
-        .withMessage('password should be at least 6 characters'),
-    body('status').custom((value) => {
-        if (!value) {
-            return true;
-        }
-
-        throw new Error('You are not allowed to update the status');
-    }),
+        .withMessage('Password should be at least 8 characters'),
+    body('status')
+        .optional()
+        .isIn(USER_STATUS)
+        .withMessage(`Status should be one of ${USER_STATUS.join(', ')}`),
     body('address')
         .optional()
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('address should be at least 3 characters'),
+        .isLength({ min: 3, max: 100 })
+        .withMessage('Address should be between 3 and 100 characters'),
     body('city')
         .optional()
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('city should be at least 3 characters'),
+        .isLength({ min: 3, max: 50 })
+        .withMessage('City should be between 3 and 50 characters'),
     body('state')
         .optional()
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('state should be at least 3 characters'),
+        .isLength({ min: 3, max: 50 })
+        .withMessage('State should be between 3 and 50 characters'),
     body('country')
         .optional()
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('country should be at least 3 characters'),
+        .isLength({ min: 3, max: 50 })
+        .withMessage('Country should be between 3 and 50 characters'),
     body('postalCode')
         .optional()
-        .isPostalCode('any')
-        .withMessage('postalCode should be a postal code'),
-    body('role').custom((value) => {
-        if (!value) {
-            return true;
-        }
-
-        throw new Error('You are not allowed to update the role');
-    }),
-    body('isVerified').custom((value) => {
-        if (!value) {
-            return true;
-        }
-
-        throw new Error('You are not allowed to update the verification status');
-    }),
+        .isPostalCode()
+        .withMessage('Postal code should be a valid postal code'),
+    body('role').not().exists().withMessage('You are not allowed to update the role'),
+    body('isVerified')
+        .not()
+        .exists()
+        .withMessage('You are not allowed to update the verification status'),
     expressValidator,
 ];

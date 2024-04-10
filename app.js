@@ -48,6 +48,7 @@ app.use(cors());
 app.use('/auth/users', require('./routes/auth/users'));
 app.use('/auth/customers', require('./routes/auth/customers'));
 app.use('/customers', require('./routes/customers'));
+app.use('/users', require('./routes/users'));
 app.use('/settings/site/general', require('./routes/settings/site/general'));
 
 // catch 404 and forward to error handler

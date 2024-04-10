@@ -3,8 +3,8 @@
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 07 April, 2024
- * @update_date 07 April, 2024
+ * @date 08 April, 2024
+ * @update_date 10 April, 2024
  */
 
 // dependencies
@@ -23,8 +23,12 @@ const {
 } = require('../../controllers/users');
 
 // middlewares
-const { isAuthorized, isAllowed, isSelf } = require('../../middlewares/auth');
-const { validateUser, validateUserSelf } = require('../../middlewares/validators/users');
+const { isAuthorized, isAllowed } = require('../../middlewares/auth');
+const {
+    validateUserId,
+    validateUser,
+    validateUserSelf,
+} = require('../../middlewares/validators/users');
 
 /**
  * @description check if user is authorized
@@ -42,21 +46,32 @@ router.use(isAuthorized);
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getAllUsers']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method GET
  */
 router.get('/', isAllowed(['admin']), getAllUsers);
 
 /**
- * @description get by mongo id
+ * @description get user by mongo id
  * @param {string} path - /users/:id
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAllowed', 'validateUserId']
  * @param {function} controller - ['getUserById']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), getUserById);
+router.get('/:id', isAllowed(['admin']), validateUserId, getUserById);
+
+/**
+ * @description update user by self
+ * @param {string} path - /users/self
+ * @param {function} middleware - ['isAllowed', 'validateUserSelf']
+ * @param {function} controller - ['updateUserBySelf']
+ * @returns {object} - router
+ * @access private - ['user']
+ * @method PATCH
+ */
+router.patch('/self', isAllowed(['user']), validateUserSelf, updateUserBySelf);
 
 /**
  * @description update user by mongo id
@@ -64,42 +79,32 @@ router.get('/:id', isAllowed(['admin']), getUserById);
  * @param {function} middleware - ['isAllowed', 'validateUser']
  * @param {function} controller - ['updateUserById']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method PATCH
  */
-router.patch('/:id', isAllowed(['admin']), validateUser, updateUserById);
-
-/**
- * @description update user by self
- * @param {string} path - /users/:id
- * @param {function} middleware - ['isSelf', 'isAllowed', 'validateUserSelf']
- * @param {function} controller - ['updateUserBySelf']
- * @returns {object} - router
- * @access private
- * @method PATCH
- */
-router.patch('/:id/self', isSelf, isAllowed(['user']), validateUserSelf, updateUserBySelf);
+router.patch('/:id', isAllowed(['admin']), validateUserId, validateUser, updateUserById);
 
 /**
  * @description delete user by mongo id
  * @param {string} path - /users/:id
+ * @param {function} middleware - ['isAllowed', 'validateUserId']
  * @param {function} controller - ['deleteUserById']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['admin']), deleteUserById);
+router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUserById);
 
 /**
  * @description delete user by self
- * @param {string} path - /users/:id/self
- * @param {function} middleware - ['isSelf', 'isAllowed']
+ * @param {string} path - /users/self
+ * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['deleteUserBySelf']
  * @returns {object} - router
- * @access private
+ * @access private - ['user']
  * @method DELETE
  */
-router.delete('/:id/self', isSelf, isAllowed(['user']), deleteUserBySelf);
+router.delete('/', isAllowed(['user']), deleteUserBySelf);
 
 // export
 module.exports = router;
