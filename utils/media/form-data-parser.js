@@ -18,9 +18,6 @@ module.exports = async (req, res, next) => {
     try {
         const [fields, files] = await form.parse(req);
 
-        console.log('fields:', fields);
-        console.log('files:', files);
-
         // check if there is no file
         if (!files || Object.keys(files).length === 0) {
             return res.status(400).json({
