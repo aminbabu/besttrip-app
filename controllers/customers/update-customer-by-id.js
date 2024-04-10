@@ -27,6 +27,21 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // get duplicate customer by email or phone, but not the same customer
+        const duplicateCustomer = await Customer.findOne({
+            $or: [{ email: validatedCustomer.email }, { phone: validatedCustomer.phone }],
+            _id: { $ne: validatedCustomer.id },
+        });
+
+        console.log(customer, duplicateCustomer);
+
+        // check if duplicate customer exists
+        if (duplicateCustomer) {
+            return res.status(400).json({
+                message: 'Customer already exists with this email',
+            });
+        }
+
         // calculate wallet balance based on transaction type
         if (validatedCustomer.wallet) {
             switch (validatedCustomer.wallet.type) {
