@@ -29,6 +29,7 @@ const {
     validateUser,
     validateUserSelf,
 } = require('../../middlewares/validators/users');
+const { USER_ROLES } = require('../../constants');
 
 /**
  * @description check if user is authorized
@@ -68,10 +69,10 @@ router.get('/:id', isAllowed(['admin']), validateUserId, getUserById);
  * @param {function} middleware - ['isAllowed', 'validateUserSelf']
  * @param {function} controller - ['updateUserBySelf']
  * @returns {object} - router
- * @access private - ['user']
+ * @access private - [USER_ROLES]
  * @method PATCH
  */
-router.patch('/self', isAllowed(['user']), validateUserSelf, updateUserBySelf);
+router.patch('/self', isAllowed(USER_ROLES), validateUserSelf, updateUserBySelf);
 
 /**
  * @description update user by mongo id
