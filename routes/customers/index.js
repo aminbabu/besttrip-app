@@ -123,7 +123,7 @@ router.delete('/:id', isAllowed(['admin']), validateCustomerId, deleteCustomerBy
  * @access private - ['customer']
  * @method DELETE
  */
-router.delete('/self', isAllowed(['customer']), deleteCustomerBySelf);
+router.delete('/', isAllowed(['customer']), deleteCustomerBySelf);
 
 // export
 module.exports = router;

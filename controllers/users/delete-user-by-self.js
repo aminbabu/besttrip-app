@@ -14,7 +14,7 @@ const { User } = require('../../models');
 module.exports = async (req, res, next) => {
     try {
         // get user id
-        const { id } = req.user;
+        const { _id } = req.user;
 
         // get user
         const user = await User.findById(id);
