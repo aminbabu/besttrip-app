@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 10 April, 2024
  */
 
 // dependencies
@@ -100,20 +100,21 @@ userSchema.pre('save', async function (next) {
 userSchema.pre('save', async function (next) {
     try {
         // check if user is new
-        if (!this.$isNew) {
+        if (!this.isNew) {
             return next();
         }
 
         // Get the last user ID if any
         const lastUser = await this.constructor.findOne({}, {}, { sort: { createdAt: -1 } });
 
-        // get count by splitting user ID (format: BTYYYYMMDD0001) using moment
-        const count = lastUser
-            ? parseInt(lastUser.userID.split(moment().format('YYYYMMDD'))[1], 10)
-            : 0;
+        // get count from the last user ID if any or set to 0
+        let count = lastUser ? parseInt(lastUser.userID.slice(11), 10) : 0;
 
-        // generate incrementing user ID
-        this.userID = `BT${moment().format('YYYYMMDD')}${count + 1}`; // BTYYYYMMDD0001
+        // check pad count with 0 if less than 4 digits and increment by 1
+        count = count > 9999 ? count + 1 : (count + 1).toString().padStart(4, '0');
+
+        // user ID based on date (YYYYMMDD) and count (0001, 0002, ...) with prefix 'BT'
+        this.userID = `BT${moment().format('YYYYMMDD')}${count}`;
 
         return next();
     } catch (error) {
