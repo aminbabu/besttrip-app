@@ -13,7 +13,7 @@ const { formidable } = require('formidable');
 // export form data parser
 module.exports = async (req, res, next) => {
     // parse form data
-    const form = formidable({ multiples: true });
+    const form = formidable({});
 
     try {
         const [fields, files] = await form.parse(req);
