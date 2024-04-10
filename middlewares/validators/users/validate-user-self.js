@@ -3,8 +3,8 @@
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 0
- * @update_date 08 April, 2024
+ * @date 08 April, 2024
+ * @update_date 10 April, 2024
  */
 
 // dependencies
@@ -18,7 +18,7 @@ const { USER_STATUS } = require('../../../constants');
 module.exports = [
     body('userID').not().exists().withMessage('You are not allowed to update the user ID'),
     body('name').isLength({ min: 3 }).withMessage('Name should be at least 3 characters'),
-    body('email').normalizeEmail().isEmail().withMessage('Email should be a valid email'),
+    body('email').isEmail().withMessage('Email should be a valid email'),
     body('phone').isMobilePhone().withMessage('Phone should be a valid phone number'),
     body('password')
         .optional()
