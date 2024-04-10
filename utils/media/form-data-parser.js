@@ -10,7 +10,7 @@
 // dependencies
 const { formidable } = require('formidable');
 
-// export form data parser
+// export form data parser middleware
 module.exports = async (req, res, next) => {
     // parse form data
     const form = formidable({});

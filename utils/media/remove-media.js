@@ -11,7 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// export remove media files
+// export remove media files middleware
 module.exports = (mediaPaths) => {
     try {
         // remove media files
