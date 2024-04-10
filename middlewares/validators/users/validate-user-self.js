@@ -10,7 +10,7 @@
 // dependencies
 const { body } = require('express-validator');
 const { expressValidator } = require('../../../handlers/errors');
-const { USER_STATUS } = require('../../../constants');
+const { USER_STATUS, USER_ROLES } = require('../../../constants');
 
 // update user validator
 
@@ -48,7 +48,18 @@ module.exports = [
         .optional()
         .isPostalCode()
         .withMessage('Postal code should be a valid postal code'),
-    body('role').not().exists().withMessage('You are not allowed to update the role'),
+    body('role')
+        .optional()
+        .isIn(USER_ROLES)
+        .withMessage(`Role should be one of ${USER_ROLES.join(', ')}`)
+        .custom((value, { req }) => {
+            // check if user is an admin
+            if (req.user.role === 'admin') {
+                return true;
+            }
+
+            throw new Error('You are not allowed to update the role');
+        }),
     body('isVerified')
         .not()
         .exists()
