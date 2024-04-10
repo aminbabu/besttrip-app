@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 09 April, 2024
+ * @update_date 10 April, 2024
  */
 
 // dependencies
@@ -43,7 +43,7 @@ module.exports = async (req, res, next) => {
 
         // update customer
         customer.set({
-            ...customer,
+            ...customer.toObject(),
             ...validatedCustomer,
             wallet: {
                 ...validatedCustomer.wallet,
