@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 10 April, 2024
  */
 
 // dependencies
@@ -34,11 +34,19 @@ module.exports = async (req, res, next) => {
         // verify token
         const payload = verifyToken(token);
 
-        // check user role
+        // check if user exists based on role by id, email, and status
         if (payload.user.role === 'customer') {
-            user = await Customer.findById(payload.user._id);
+            user = await Customer.findOne({
+                _id: payload.user._id,
+                email: payload.user.email,
+                status: 'active',
+            });
         } else {
-            user = await User.findById(payload.user._id);
+            user = await User.findOne({
+                _id: payload.user._id,
+                email: payload.user.email,
+                status: 'active',
+            });
         }
 
         if (!user) {
