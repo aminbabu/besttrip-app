@@ -9,7 +9,7 @@
 
 // export all validators
 module.exports = {
-    validateCustomerId: require('./validate-user-id'),
-    validateCustomer: require('./validate-user'),
-    validateCustomerSelf: require('./validate-user-self'),
+    validateUserId: require('./validate-user-id'),
+    validateUser: require('./validate-user'),
+    validateUserSelf: require('./validate-user-self'),
 };
