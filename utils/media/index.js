@@ -10,5 +10,6 @@
 // export all media utils
 module.exports = {
     formDataParser: require('./form-data-parser'),
+    uploadMedia: require('./upload-media'),
     removeMedia: require('./remove-media'),
 };
