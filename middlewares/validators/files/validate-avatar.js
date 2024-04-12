@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
     // check if file is not an array
     if (!Array.isArray(req.files.avatar)) {
         return res.status(400).json({
-            message: 'Please upload an avatar',
+            message: 'Please upload a valid avatar',
         });
     }
 
