@@ -11,7 +11,6 @@
 module.exports = {
     ...require('./globals'),
     ...require('./media'),
-    ...require('./express-fileupload'),
     ...require('./xss-whitelist'),
     ...require('./users'),
     ...require('./customers'),
