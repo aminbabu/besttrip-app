@@ -8,14 +8,13 @@
  */
 
 // dependencies
-const { DEFAULT_IMAGE_TYPES, HALF_MEGA_BYTE } = require('../../../constants');
+const { DEFAULT_IMAGE_TYPES, HALF_MEGA_BYTE, ONE_MEGA_BYTE } = require('../../../constants');
 
 // export validate avatar middleware
 module.exports = (req, res, next) => {
     // check if file is not uploaded
     if (!req.files || !req.files.avatar) {
         return res.status(400).json({
-            success: false,
             message: 'Please upload an avatar',
         });
     }
@@ -23,7 +22,6 @@ module.exports = (req, res, next) => {
     // check if file is not an image of type jpeg, jpg, png
     if (!DEFAULT_IMAGE_TYPES.includes(req.files.avatar.mimetype)) {
         return res.status(400).json({
-            success: false,
             message: `Please upload an image of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
         });
     }
@@ -31,8 +29,7 @@ module.exports = (req, res, next) => {
     // check if file size is greater than 5MB
     if (req.files.avatar.size > HALF_MEGA_BYTE) {
         return res.status(400).json({
-            success: false,
-            message: 'Please upload an image less than 5MB',
+            message: `Please upload an image of size less than ${(HALF_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
         });
     }
 
