@@ -11,7 +11,12 @@ const { MAX_FILE_SIZE } = require('./globals');
 
 // express-fileupload configuration
 const expressFileUploadConf = {
-    LIMIT: MAX_FILE_SIZE,
+    safeFileNames: true,
+    preserveExtension: true,
+    parseNested: true,
+    limits: {
+        fileSize: MAX_FILE_SIZE,
+    },
 };
 
 module.exports = {
