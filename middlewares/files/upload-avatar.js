@@ -28,7 +28,7 @@ module.exports =
 
             // check if user exists
             if (!user) {
-                return res.status(404).json({ message: 'Customer not found' });
+                return res.status(404).json({ message: 'User not found' });
             }
 
             // check if user has avatar
