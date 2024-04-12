@@ -7,13 +7,30 @@
  * @update_date 12 April, 2024
  */
 
+// dependencies
+const path = require('path');
+
 // export upload avatar middleware
 module.exports =
     (dir = '/uploads') =>
-    (req, res, next) => {
-        console.log('dir', dir);
-        console.log(req.files);
+    async (req, res, next) => {
+        try {
+            // get avatar
+            const { avatar } = req.files;
 
-        // continue to next middleware
-        return next();
+            // prepare file path
+            const filePath = path.join(`${dir}/${avatar.name}`);
+            const uploadPath = path.join(__dirname, '../../public/', filePath);
+
+            // move file to upload path
+            await avatar.mv(uploadPath);
+
+            // set file path to request body
+            req.body.avatar = filePath;
+
+            // call next middleware
+            return next();
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
     };
