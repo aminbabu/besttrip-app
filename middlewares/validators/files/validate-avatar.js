@@ -15,14 +15,14 @@ module.exports = (req, res, next) => {
     // check if file is not uploaded
     if (!req.files || !req.files.avatar) {
         return res.status(400).json({
-            message: 'Please upload an avatar',
+            message: 'Please upload a valid image',
         });
     }
 
     // check if file is an array
     if (Array.isArray(req.files.avatar)) {
         return res.status(400).json({
-            message: 'Please upload a valid avatar',
+            message: 'Please upload a valid image',
         });
     }
 
