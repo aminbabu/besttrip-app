@@ -19,8 +19,8 @@ module.exports =
             const { avatar } = req.files;
 
             // prepare file path
-            const filePath = path.join(`${dir}/${avatar.name}`);
-            const uploadPath = path.join(__dirname, '../../public/uploads/', filePath);
+            const filePath = path.join('uploads/', `${dir}/${avatar.name}`);
+            const uploadPath = path.join(__dirname, '../../public/', filePath);
 
             // move file to upload path
             await avatar.mv(uploadPath);
