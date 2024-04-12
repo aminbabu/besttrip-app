@@ -14,9 +14,7 @@ const { DEFAULT_IMAGE_TYPES, HALF_MEGA_BYTE, ONE_MEGA_BYTE } = require('../../..
 module.exports = (req, res, next) => {
     // check if file is not uploaded
     if (!req.files || !req.files.avatar) {
-        return res.status(400).json({
-            message: 'Please upload a valid image',
-        });
+        return next();
     }
 
     // check if file is an array
