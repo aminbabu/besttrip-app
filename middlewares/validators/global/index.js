@@ -10,4 +10,5 @@
 // export all global validators
 module.exports = {
     validateExistedCustomerAccount: require('./validate-existed-customer-account'),
+    validateExistedUserAccount: require('./validate-existed-user-account'),
 };
