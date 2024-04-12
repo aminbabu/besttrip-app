@@ -32,7 +32,7 @@ const {
     validateCustomerWallet,
 } = require('../../middlewares/validators/customers');
 const { validateAvatar } = require('../../middlewares/validators/files');
-const { validateExistedAccount } = require('../../middlewares/validators/global');
+const { validateExistedCustomerAccount } = require('../../middlewares/validators/global');
 const { uploadAvatar } = require('../../middlewares/files');
 
 /**
@@ -83,7 +83,7 @@ router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllC
  * @param {string} path - /customers/self
  * @param {function} middleware - [
  * 'isAllowed', 'validateAvatar',
- * 'validateExistedAccount', 'validateCustomerSelf'
+ * 'validateExistedCustomerAccount', 'validateCustomerSelf'
  * ]
  * @param {function} controller - ['updateCustomerBySelf']
  * @returns {object} - router
@@ -94,7 +94,7 @@ router.patch(
     '/self',
     isAllowed(['customer']),
     validateAvatar,
-    validateExistedAccount,
+    validateExistedCustomerAccount,
     validateCustomerSelf,
     uploadAvatar('customers'),
     updateCustomerBySelf
@@ -105,7 +105,7 @@ router.patch(
  * @param {string} path - /customers/:id
  * @param {function} middleware - [
  * 'isAllowed', 'validateCustomerId', 'validateAvatar',
- * 'validateExistedAccount', 'validateCustomer'
+ * 'validateExistedCustomerAccount', 'validateCustomer'
  * ]
  * @param {function} controller - ['updateCustomerById']
  * @returns {object} - router
@@ -117,7 +117,7 @@ router.patch(
     isAllowed(['admin']),
     validateCustomerId,
     validateAvatar,
-    validateExistedAccount,
+    validateExistedCustomerAccount,
     validateCustomer,
     uploadAvatar('customers'),
     updateCustomerById
