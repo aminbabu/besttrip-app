@@ -29,6 +29,9 @@ const {
     validateUser,
     validateUserSelf,
 } = require('../../middlewares/validators/users');
+const { validateAvatar } = require('../../middlewares/validators/files');
+
+// validators
 const { USER_ROLES } = require('../../constants');
 
 /**
@@ -83,7 +86,14 @@ router.patch('/self', isAllowed(USER_ROLES), validateUserSelf, updateUserBySelf)
  * @access private - ['admin']
  * @method PATCH
  */
-router.patch('/:id', isAllowed(['admin']), validateUserId, validateUser, updateUserById);
+router.patch(
+    '/:id',
+    isAllowed(['admin']),
+    validateAvatar,
+    validateUserId,
+    validateUser,
+    updateUserById
+);
 
 /**
  * @description delete user by mongo id
