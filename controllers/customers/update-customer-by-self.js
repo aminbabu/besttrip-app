@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 09 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
@@ -16,6 +16,7 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         let validatedCustomer = matchedData(req);
+        const { avatar } = req.body;
 
         // filter out empty fields
         validatedCustomer = Object.keys(validatedCustomer).reduce((acc, key) => {
@@ -42,6 +43,7 @@ module.exports = async (req, res, next) => {
         customer.set({
             ...customer.toObject(),
             ...validatedCustomer,
+            avatar,
         });
 
         // save customer
