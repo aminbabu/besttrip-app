@@ -31,6 +31,8 @@ const {
     validateCustomerSelf,
     validateCustomerWallet,
 } = require('../../middlewares/validators/customers');
+const { validateAvatar } = require('../../middlewares/validators/files');
+const { uploadAvatar } = require('../../middlewares/files');
 
 /**
  * @description check if user is authorized
@@ -99,7 +101,9 @@ router.patch(
     '/:id',
     isAllowed(['admin']),
     validateCustomerId,
+    validateAvatar,
     validateCustomer,
+    uploadAvatar('customers'),
     updateCustomerById
 );
 

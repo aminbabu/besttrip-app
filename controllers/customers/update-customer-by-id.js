@@ -16,6 +16,7 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const validatedCustomer = matchedData(req);
+        const { avatar } = req.body;
 
         // get customer
         const customer = await Customer.findById(validatedCustomer.id);
@@ -57,6 +58,7 @@ module.exports = async (req, res, next) => {
         // update customer
         customer.set({
             ...customer.toObject(),
+            avatar,
             ...validatedCustomer,
             wallet: {
                 ...validatedCustomer.wallet,
