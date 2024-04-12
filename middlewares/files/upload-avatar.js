@@ -17,6 +17,11 @@ module.exports =
     (dir = '/uploads') =>
     async (req, res, next) => {
         try {
+            // check if file is not uploaded
+            if (!req.files || !req.files.avatar) {
+                return next();
+            }
+
             // get id
             const { id } = req.params;
 
