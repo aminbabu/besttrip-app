@@ -17,6 +17,8 @@ module.exports =
     (dir = '/uploads') =>
     async (req, res, next) => {
         try {
+            let customer;
+
             // get id
             const { id } = req.params;
 
@@ -24,7 +26,11 @@ module.exports =
             const { avatar } = req.files;
 
             // get customer
-            const customer = await Customer.findById(id);
+            if (!id) {
+                customer = req.user;
+            } else {
+                customer = await Customer.findById(id);
+            }
 
             // check if customer exists
             if (!customer) {
