@@ -63,15 +63,19 @@ module.exports = [
         .withMessage('You are not allowed to update the verification status'),
     expressValidator,
     async (req, res, next) => {
-        // get email from the request body
-        const { email } = req.body;
+        // check if customer is updating self
+        if (req.user.email === req.body.email) {
+            return next();
+        }
 
         // get customer by email
-        const customer = await Customer.findOne({ email });
+        const customer = await Customer.findOne({ email: req.body.email });
 
         // check if customer exists
         if (customer) {
-            return res.status(400).json({ message: `Customer with email ${email} already exists` });
+            return res
+                .status(400)
+                .json({ message: `Customer with email ${req.body.email} already exists` });
         }
 
         // continue to the next middleware
