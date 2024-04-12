@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 07 April, 2024
+ * @update_date 12 April, 2024
  */
 
 // dependencies
@@ -18,8 +18,13 @@ const dotenv = require('dotenv');
 const helmet = require('helmet');
 const { default: xssInstance } = require('xss-shield');
 const cors = require('cors');
+const expressFileUpload = require('express-fileupload');
+
+// config
 const { createDbConnection, env } = require('./config');
-const { WHITE_LIST } = require('./constants');
+
+// constants
+const { WHITE_LIST, expressFileUploadConf } = require('./constants');
 
 // config
 dotenv.config();
@@ -43,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(xssInstance.xssShield(WHITE_LIST));
 app.use(cors());
+app.use(expressFileUpload(expressFileUploadConf));
 
 // routes
 app.use('/auth/users', require('./routes/auth/users'));
