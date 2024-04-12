@@ -111,6 +111,7 @@ router.patch(
     isAllowed(['admin']),
     validateCustomerId,
     validateAvatar,
+    validateExistedEmail,
     validateCustomer,
     uploadAvatar('customers'),
     updateCustomerById
