@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/customers/validate-existed-email.js
+ * @file /middlewares/validators/users/validate-existed-email.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -8,26 +8,32 @@
  */
 
 // dependencies
-const { Customer } = require('../../../models');
+const { Customer, User } = require('../../../models');
 
 // export validate existed email middleware
 module.exports = async (req, res, next) => {
-    // check if customer is updating self
+    // check if user is updating self
     if (req.user.email === req.body.email || req.user.phone === req.body.phone) {
         return next();
     }
 
     // get email, phone and id
-    const { email, phone, id } = req.body;
+    const { email, phone } = req.body;
+    const { id } = req.params;
 
-    // get customer by email
-    const customer = await Customer.findOne({
-        $or: [{ email }, { phone }],
-        _id: { $ne: id },
-    });
+    // get user by email or phone
+    const user =
+        (await Customer.findOne({
+            $or: [{ email }, { phone }],
+            _id: { $ne: id },
+        })) ||
+        (await User.findOne({
+            $or: [{ email }, { phone }],
+            _id: { $ne: id },
+        }));
 
-    // check if customer exists
-    if (customer) {
+    // check if user exists
+    if (user) {
         return res.status(400).json({ message: 'Email or phone already exists' });
     }
 
