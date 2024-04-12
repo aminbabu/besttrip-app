@@ -10,6 +10,10 @@
 const { MAX_FILE_SIZE } = require('./globals');
 
 // express-fileupload configuration
-module.exports = {
+const expressFileUploadConf = {
     LIMIT: MAX_FILE_SIZE,
+};
+
+module.exports = {
+    expressFileUploadConf,
 };
