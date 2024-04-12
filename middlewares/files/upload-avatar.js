@@ -23,16 +23,6 @@ module.exports =
             // get avatar
             const { avatar } = req.files;
 
-            // prepare file path
-            const filePath = path.join('uploads/avatars/', `${dir}/${Date.now()}_${avatar.name}`);
-            const uploadPath = path.join(__dirname, '../../public/', filePath);
-
-            // move file to upload path
-            await avatar.mv(uploadPath);
-
-            // set file path to request body
-            req.body.avatar = filePath;
-
             // get customer
             const customer = await Customer.findById(id);
 
@@ -46,6 +36,19 @@ module.exports =
                 // delete previous avatar
                 fs.unlinkSync(path.join(__dirname, '../../public/', customer.avatar));
             }
+
+            // prepare file path
+            const filePath = path.join(
+                'uploads/avatars/',
+                `${dir}/${Date.now()}_${customer._id}_${avatar.name}`
+            );
+            const uploadPath = path.join(__dirname, '../../public/', filePath);
+
+            // move file to upload path
+            await avatar.mv(uploadPath);
+
+            // set file path to request body
+            req.body.avatar = filePath;
 
             // continue to next middleware
             return next();
