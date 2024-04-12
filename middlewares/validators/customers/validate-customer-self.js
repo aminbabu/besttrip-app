@@ -4,13 +4,14 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 10 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
 const { body } = require('express-validator');
 const { expressValidator } = require('../../../handlers/errors');
 const { CUSTOMER_STATUS } = require('../../../constants');
+const { Customer } = require('../../../models');
 
 // update customer validator
 
@@ -60,5 +61,20 @@ module.exports = [
         .not()
         .exists()
         .withMessage('You are not allowed to update the verification status'),
+    async (req, res, next) => {
+        // get email from the request body
+        const { email } = req.body;
+
+        // get customer by email
+        const customer = await Customer.findOne({ email });
+
+        // check if customer exists
+        if (customer) {
+            return res.status(400).json({ message: `Customer with email ${email} already exists` });
+        }
+
+        // continue to the next middleware
+        return next();
+    },
     expressValidator,
 ];
