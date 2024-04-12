@@ -13,18 +13,22 @@ const { Customer } = require('../../../models');
 // export validate existed email middleware
 module.exports = async (req, res, next) => {
     // check if customer is updating self
-    if (req.user.email === req.body.email) {
+    if (req.user.email === req.body.email || req.user.phone === req.body.phone) {
         return next();
     }
 
+    // get email, phone and id
+    const { email, phone, id } = req.body;
+
     // get customer by email
-    const customer = await Customer.findOne({ email: req.body.email });
+    const customer = await Customer.findOne({
+        $or: [{ email }, { phone }],
+        _id: { $ne: id },
+    });
 
     // check if customer exists
     if (customer) {
-        return res
-            .status(400)
-            .json({ message: `Customer with email ${req.body.email} already exists` });
+        return res.status(400).json({ message: 'Email or phone already exists' });
     }
 
     // continue to the next middleware
