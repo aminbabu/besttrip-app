@@ -11,4 +11,5 @@
 module.exports = {
     createDbConnection: require('./database'),
     env: require('./env'),
+    expressFileUploadConf: require('./express-fileupload'),
 };

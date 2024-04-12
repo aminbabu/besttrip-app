@@ -7,18 +7,14 @@
  * @update_date 12 April, 2024
  */
 
-const { MAX_FILE_SIZE } = require('./globals');
+const { MAX_FILE_SIZE } = require('../constants/globals');
 
-// express-fileupload configuration
-const EXPRESS_FILEUPLOAD_CONF = {
+// export express-fileupload configuration
+module.exports = {
     safeFileNames: true,
     preserveExtension: true,
     parseNested: true,
     limits: {
         fileSize: MAX_FILE_SIZE,
     },
-};
-
-module.exports = {
-    EXPRESS_FILEUPLOAD_CONF,
 };
