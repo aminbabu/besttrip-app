@@ -11,6 +11,7 @@ const { MAX_FILE_SIZE } = require('../constants/globals');
 
 // export express-fileupload configuration
 module.exports = {
+    createParentPath: true,
     safeFileNames: true,
     preserveExtension: true,
     parseNested: true,
