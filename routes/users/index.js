@@ -31,7 +31,7 @@ const {
 } = require('../../middlewares/validators/users');
 const { validateAvatar } = require('../../middlewares/validators/files');
 const { uploadAvatar } = require('../../middlewares/files');
-const { validateExistedAccount } = require('../../middlewares/validators/global');
+const { validateExistedUserAccount } = require('../../middlewares/validators/global');
 
 // constants
 const { USER_ROLES } = require('../../constants');
@@ -81,7 +81,7 @@ router.patch(
     '/self',
     isAllowed(USER_ROLES),
     validateAvatar,
-    validateExistedAccount,
+    validateExistedUserAccount,
     validateUserSelf,
     uploadAvatar('users'),
     updateUserBySelf
@@ -101,7 +101,7 @@ router.patch(
     isAllowed(['admin']),
     validateUserId,
     validateAvatar,
-    validateExistedAccount,
+    validateExistedUserAccount,
     validateUser,
     uploadAvatar('users'),
     updateUserById
