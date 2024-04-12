@@ -16,6 +16,7 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const validatedUser = matchedData(req);
+        const { avatar } = req.body;
 
         // get user
         const user = await User.findById(validatedUser.id);
@@ -31,6 +32,7 @@ module.exports = async (req, res, next) => {
         user.set({
             ...user.toObject(),
             ...validatedUser,
+            avatar,
         });
 
         // save user
