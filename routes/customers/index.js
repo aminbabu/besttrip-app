@@ -27,12 +27,12 @@ const {
 const { isAuthorized, isAllowed } = require('../../middlewares/auth');
 const {
     validateCustomerId,
-    validateExistedEmail,
     validateCustomer,
     validateCustomerSelf,
     validateCustomerWallet,
 } = require('../../middlewares/validators/customers');
 const { validateAvatar } = require('../../middlewares/validators/files');
+const { validateExistedAccount } = require('../../middlewares/validators/global');
 const { uploadAvatar } = require('../../middlewares/files');
 
 /**
@@ -91,7 +91,7 @@ router.patch(
     '/self',
     isAllowed(['customer']),
     validateAvatar,
-    validateExistedEmail,
+    validateExistedAccount,
     validateCustomerSelf,
     uploadAvatar('customers'),
     updateCustomerBySelf
@@ -111,7 +111,7 @@ router.patch(
     isAllowed(['admin']),
     validateCustomerId,
     validateAvatar,
-    validateExistedEmail,
+    validateExistedAccount,
     validateCustomer,
     uploadAvatar('customers'),
     updateCustomerById
