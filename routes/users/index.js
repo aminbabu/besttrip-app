@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 10 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
@@ -30,8 +30,10 @@ const {
     validateUserSelf,
 } = require('../../middlewares/validators/users');
 const { validateAvatar } = require('../../middlewares/validators/files');
+const { uploadAvatar } = require('../../middlewares/files');
+const { validateExistedAccount } = require('../../middlewares/validators/global');
 
-// validators
+// constants
 const { USER_ROLES } = require('../../constants');
 
 /**
@@ -75,7 +77,15 @@ router.get('/:id', isAllowed(['admin']), validateUserId, getUserById);
  * @access private - [USER_ROLES]
  * @method PATCH
  */
-router.patch('/self', isAllowed(USER_ROLES), validateUserSelf, updateUserBySelf);
+router.patch(
+    '/self',
+    isAllowed(USER_ROLES),
+    validateAvatar,
+    validateExistedAccount,
+    validateUserSelf,
+    uploadAvatar('users'),
+    updateUserBySelf
+);
 
 /**
  * @description update user by mongo id
@@ -89,9 +99,11 @@ router.patch('/self', isAllowed(USER_ROLES), validateUserSelf, updateUserBySelf)
 router.patch(
     '/:id',
     isAllowed(['admin']),
-    validateAvatar,
     validateUserId,
+    validateAvatar,
+    validateExistedAccount,
     validateUser,
+    uploadAvatar('users'),
     updateUserById
 );
 
