@@ -19,6 +19,13 @@ module.exports = (req, res, next) => {
         });
     }
 
+    // check if file is not an array
+    if (!Array.isArray(req.files.avatar)) {
+        return res.status(400).json({
+            message: 'Please upload an avatar',
+        });
+    }
+
     // check if file is not an image of type jpeg, jpg, png
     if (!DEFAULT_IMAGE_TYPES.includes(req.files.avatar.mimetype)) {
         return res.status(400).json({
