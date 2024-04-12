@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 13 April, 2024
+ * @update_date 10 April, 2024
  */
 
 // dependencies
@@ -15,7 +15,6 @@ const {
     CUSTOMER_STATUS,
     CUSTOMER_WALLET_TRANSACTION_TYPES,
 } = require('../../../constants');
-const { Customer } = require('../../../models');
 
 // update customer validator
 module.exports = [
@@ -85,19 +84,4 @@ module.exports = [
         .isBoolean()
         .withMessage('Customer verification status should be a boolean'),
     expressValidator,
-    async (req, res, next) => {
-        // get email from the request body
-        const { email } = req.body;
-
-        // get customer by email
-        const customer = await Customer.findOne({ email });
-
-        // check if customer exists
-        if (customer) {
-            return res.status(400).json({ message: `Customer with email ${email} already exists` });
-        }
-
-        // continue to the next middleware
-        return next();
-    },
 ];
