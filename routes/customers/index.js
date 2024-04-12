@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
@@ -27,6 +27,7 @@ const {
 const { isAuthorized, isAllowed } = require('../../middlewares/auth');
 const {
     validateCustomerId,
+    validateExistedEmail,
     validateCustomer,
     validateCustomerSelf,
     validateCustomerWallet,
@@ -90,6 +91,7 @@ router.patch(
     '/self',
     isAllowed(['customer']),
     validateAvatar,
+    validateExistedEmail,
     validateCustomerSelf,
     uploadAvatar('customers'),
     updateCustomerBySelf
