@@ -4,49 +4,43 @@
  * @version 0.0.0
  * @author best-trip
  * @date 12 April, 2024
- * @update_date 12 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
 const fs = require('fs');
 const path = require('path');
-const { Customer } = require('../../models');
+const { Customer, User } = require('../../models');
 
 // export upload avatar middleware
 module.exports =
     (dir = '/uploads') =>
     async (req, res, next) => {
         try {
-            let customer;
-
             // get id
             const { id } = req.params;
 
             // get avatar
             const { avatar } = req.files;
 
-            // get customer
-            if (!id) {
-                customer = req.user;
-            } else {
-                customer = await Customer.findById(id);
-            }
+            // get user
+            const user = id ? (await Customer.findById(id)) || (await User.findById(id)) : req.user;
 
-            // check if customer exists
-            if (!customer) {
+            // check if user exists
+            if (!user) {
                 return res.status(404).json({ message: 'Customer not found' });
             }
 
-            // check if customer has avatar
-            if (customer.avatar) {
+            // check if user has avatar
+            if (user.avatar) {
                 // delete previous avatar
-                fs.unlinkSync(path.join(__dirname, '../../public/', customer.avatar));
+                fs.unlinkSync(path.join(__dirname, '../../public/', user.avatar));
             }
 
             // prepare file path
             const filePath = path.join(
                 'uploads/avatars/',
-                `${dir}/${Date.now()}_${customer._id}_${avatar.name}`
+                `${dir}/${Date.now()}_${user._id}_${avatar.name}`
             );
             const uploadPath = path.join(__dirname, '../../public/', filePath);
 
