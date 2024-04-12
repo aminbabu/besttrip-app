@@ -21,10 +21,10 @@ const cors = require('cors');
 const expressFileUpload = require('express-fileupload');
 
 // config
-const { createDbConnection, env } = require('./config');
+const { createDbConnection, env, expressFileUploadConf } = require('./config');
 
 // constants
-const { WHITE_LIST, EXPRESS_FILEUPLOAD_CONF } = require('./constants');
+const { WHITE_LIST } = require('./constants');
 
 // config
 dotenv.config();
@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(xssInstance.xssShield(WHITE_LIST));
 app.use(cors());
-app.use(expressFileUpload(EXPRESS_FILEUPLOAD_CONF));
+app.use(expressFileUpload(expressFileUploadConf));
 
 // routes
 app.use('/auth/users', require('./routes/auth/users'));
