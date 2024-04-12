@@ -61,6 +61,7 @@ module.exports = [
         .not()
         .exists()
         .withMessage('You are not allowed to update the verification status'),
+    expressValidator,
     async (req, res, next) => {
         // get email from the request body
         const { email } = req.body;
@@ -76,5 +77,4 @@ module.exports = [
         // continue to the next middleware
         return next();
     },
-    expressValidator,
 ];
