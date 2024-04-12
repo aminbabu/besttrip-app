@@ -1,17 +1,17 @@
 /**
- * @file /utils/global/remove-media.js
+ * @file /utils/media/form-data-parser.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 07 April, 2024
- * @update_date 07 April, 2024
+ * @update_date 10 April, 2024
  */
 
 // dependencies
 const fs = require('fs');
 const path = require('path');
 
-// export remove media files
+// export remove media files middleware
 module.exports = (mediaPaths) => {
     try {
         // remove media files
