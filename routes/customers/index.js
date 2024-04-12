@@ -86,7 +86,14 @@ router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllC
  * @access private - ['customer']
  * @method PATCH
  */
-router.patch('/self', isAllowed(['customer']), validateCustomerSelf, updateCustomerBySelf);
+router.patch(
+    '/self',
+    isAllowed(['customer']),
+    validateAvatar,
+    validateCustomerSelf,
+    uploadAvatar('customers'),
+    updateCustomerBySelf
+);
 
 /**
  * @description update customer by mongo id
