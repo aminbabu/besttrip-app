@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 10 April, 2024
+ * @update_date 12 April, 2024
  */
 
 // dependencies
@@ -32,8 +32,6 @@ module.exports = async (req, res, next) => {
             $or: [{ email: validatedCustomer.email }, { phone: validatedCustomer.phone }],
             _id: { $ne: validatedCustomer.id },
         });
-
-        console.log(customer, duplicateCustomer);
 
         // check if duplicate customer exists
         if (duplicateCustomer) {
