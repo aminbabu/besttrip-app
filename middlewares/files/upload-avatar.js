@@ -20,7 +20,7 @@ module.exports =
 
             // prepare file path
             const filePath = path.join(`${dir}/${avatar.name}`);
-            const uploadPath = path.join(__dirname, '../../public/', filePath);
+            const uploadPath = path.join(__dirname, '../../public/uploads/', filePath);
 
             // move file to upload path
             await avatar.mv(uploadPath);
