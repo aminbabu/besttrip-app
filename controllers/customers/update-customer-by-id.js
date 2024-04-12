@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 12 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
@@ -25,19 +25,6 @@ module.exports = async (req, res, next) => {
         if (!customer) {
             return res.status(404).json({
                 message: 'Customer not found',
-            });
-        }
-
-        // get duplicate customer by email or phone, but not the same customer
-        const duplicateCustomer = await Customer.findOne({
-            $or: [{ email: validatedCustomer.email }, { phone: validatedCustomer.phone }],
-            _id: { $ne: validatedCustomer.id },
-        });
-
-        // check if duplicate customer exists
-        if (duplicateCustomer) {
-            return res.status(400).json({
-                message: 'Customer already exists with this email',
             });
         }
 
