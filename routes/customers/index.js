@@ -81,7 +81,10 @@ router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllC
 /**
  * @description update customer by self
  * @param {string} path - /customers/self
- * @param {function} middleware - ['isAllowed', 'validateCustomerSelf']
+ * @param {function} middleware - [
+ * 'isAllowed', 'validateAvatar',
+ * 'validateExistedAccount', 'validateCustomerSelf'
+ * ]
  * @param {function} controller - ['updateCustomerBySelf']
  * @returns {object} - router
  * @access private - ['customer']
@@ -100,7 +103,10 @@ router.patch(
 /**
  * @description update customer by mongo id
  * @param {string} path - /customers/:id
- * @param {function} middleware - ['isAllowed', 'validateCustomer']
+ * @param {function} middleware - [
+ * 'isAllowed', 'validateCustomerId', 'validateAvatar',
+ * 'validateExistedAccount', 'validateCustomer'
+ * ]
  * @param {function} controller - ['updateCustomerById']
  * @returns {object} - router
  * @access private - ['admin']
