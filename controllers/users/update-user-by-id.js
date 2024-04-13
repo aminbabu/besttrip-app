@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 10 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const validatedUser = matchedData(req);
-        const { avatar } = req.body;
+        const { avatar } = req.files;
 
         // get user
         const user = await User.findById(validatedUser.id);
@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
         user.set({
             ...user.toObject(),
             ...validatedUser,
-            avatar,
+            avatar: avatar?.path || user.avatar,
         });
 
         // save user
