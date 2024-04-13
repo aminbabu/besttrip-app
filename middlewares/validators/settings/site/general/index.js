@@ -7,7 +7,7 @@
  * @update_date 13 April, 2024
  */
 
-// export all settings validators
+// export general settings validators
 module.exports = {
     validateGeneralSettings: require('./validate-general-settings'),
     validateGeneralSettingsFiles: require('./validate-general-settings-files'),
