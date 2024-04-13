@@ -48,7 +48,7 @@ module.exports =
             await avatar.mv(uploadPath);
 
             // set file path to request body
-            req.body.avatar = filePath;
+            req.files.avatar.path = filePath;
 
             // continue to next middleware
             return next();
