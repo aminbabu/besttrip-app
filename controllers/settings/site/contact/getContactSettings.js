@@ -10,7 +10,7 @@
 // dependencies
 const { ContactSettings } = require('../../../../models');
 
-// get contact site settings controller
+// get contact settings controller
 module.exports = async (req, res, next) => {
     try {
         // get contact settings

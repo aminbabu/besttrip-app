@@ -11,7 +11,7 @@
 const { body } = require('express-validator');
 const { expressValidator } = require('../../../../../handlers/errors');
 
-// export contact site settings validator
+// export contact settings validator
 module.exports = [
     body('email').optional().isEmail().withMessage('Please provide a valid email address'),
     body('phone').optional().isMobilePhone().withMessage('Please provide a valid phone number'),
