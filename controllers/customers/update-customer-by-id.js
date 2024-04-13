@@ -8,14 +8,14 @@
  */
 
 // dependencies
-const { matchedData } = require('express-validator');
 const { Customer } = require('../../models');
+const { filterEmptyFields } = require('../../utils');
 
 // export update customer by mongo id controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const validatedCustomer = matchedData(req);
+        const validatedCustomer = filterEmptyFields(req);
         const { avatar } = req.files;
 
         // get customer
