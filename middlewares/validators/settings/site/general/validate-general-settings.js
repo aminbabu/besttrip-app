@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 07 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
@@ -18,7 +18,7 @@ module.exports = [
         .withMessage('Title must be between 3 and 255 characters'),
     body('domain').isArray({ min: 1 }).withMessage('Domain is required'),
     body('description')
-        .isLength({ min: 3, max: 500 })
-        .withMessage('Description must be between 3 and 255 characters'),
+        .isLength({ min: 3, max: 1000 })
+        .withMessage('Description must be between 3 and 1000 characters'),
     expressValidator,
 ];
