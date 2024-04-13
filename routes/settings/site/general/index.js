@@ -28,7 +28,7 @@ const { uploadGeneralSettingsFile } = require('../../../../middlewares/settings/
 const router = express.Router();
 
 /**
- * @description get general site settings
+ * @description get general settings
  * @param {string} path - '/settings/site/general'
  * @param {function} middleware - ['site']
  * @param {function} controller - ['getGeneralSettings']
@@ -39,7 +39,7 @@ const router = express.Router();
 router.get('/', getGeneralSettings);
 
 /**
- * @description create/update general site settings
+ * @description create/update general settings
  * @param {string} path - '/settings/site/general'
  * @param {function} middleware - ['site']
  * @param {function} controller - ['updateGeneralSettings']

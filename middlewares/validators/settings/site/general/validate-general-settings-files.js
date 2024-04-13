@@ -14,7 +14,7 @@ const {
     HALF_MEGA_BYTE,
 } = require('../../../../../constants');
 
-// export general site settings files validator middleware
+// export general settings files validator middleware
 module.exports = async (req, res, next) => {
     // get logo and favicon files
     const { logo, favicon } = req.files;

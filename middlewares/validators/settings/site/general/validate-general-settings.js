@@ -11,7 +11,7 @@
 const { body } = require('express-validator');
 const { expressValidator } = require('../../../../../handlers/errors');
 
-// export general site settings validator
+// export general settings validator
 module.exports = [
     body('logo').not().exists().withMessage('Logo should be a valid image file'),
     body('favicon').not().exists().withMessage('Favicon should be a valid image file'),

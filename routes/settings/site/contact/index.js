@@ -26,7 +26,7 @@ const {
 const router = express.Router();
 
 /**
- * @description get general site settings
+ * @description get general settings
  * @param {string} path - '/settings/site/contact'
  * @param {function} middleware - ['site']
  * @param {function} controller - ['getContactSettings']
@@ -37,7 +37,7 @@ const router = express.Router();
 router.get('/', getContactSettings);
 
 /**
- * @description create/update general site settings
+ * @description create/update general settings
  * @param {string} path - '/settings/site/contact'
  * @param {function} middleware - ['site']
  * @param {function} controller - ['updateContactSettings']

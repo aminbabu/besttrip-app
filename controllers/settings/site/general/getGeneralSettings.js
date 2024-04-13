@@ -10,7 +10,7 @@
 // dependencies
 const { GeneralSettings } = require('../../../../models');
 
-// get general site settings controller
+// get general settings controller
 module.exports = async (req, res, next) => {
     try {
         // get general settings
