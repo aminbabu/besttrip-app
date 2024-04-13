@@ -22,7 +22,7 @@ const {
     validateGeneralSettings,
     validateGeneralSettingsFiles,
 } = require('../../../../middlewares/validators/settings/site/general');
-const uploadGeneralSettingsFile = require('../../../../middlewares/settings/site/general');
+const { uploadGeneralSettingsFile } = require('../../../../middlewares/settings/site/general');
 
 // express router
 const router = express.Router();
@@ -53,7 +53,8 @@ router.put(
     isAllowed(['admin']),
     validateGeneralSettingsFiles,
     validateGeneralSettings,
-    uploadGeneralSettingsFile('/logos'),
+    uploadGeneralSettingsFile.logo('/logos'),
+    uploadGeneralSettingsFile.favicon('/logos'),
     updateGeneralSettings
 );
 
