@@ -10,4 +10,5 @@
 // export all settings validators
 module.exports = {
     validateGeneralSettings: require('./validate-general-settings'),
+    validateGeneralSettingsFiles: require('./validate-general-settings-files'),
 };
