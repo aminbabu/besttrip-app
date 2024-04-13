@@ -8,23 +8,15 @@
  */
 
 // dependencies
-const { matchedData } = require('express-validator');
 const { Customer } = require('../../models');
+const { filterEmptyFields } = require('../../utils');
 
 // export update customer by self controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        let validatedCustomer = matchedData(req);
+        const validatedCustomer = filterEmptyFields(req);
         const { avatar } = req.files;
-
-        // filter out empty fields
-        validatedCustomer = Object.keys(validatedCustomer).reduce((acc, key) => {
-            if (validatedCustomer[key]) {
-                acc[key] = validatedCustomer[key];
-            }
-            return acc;
-        }, {});
 
         // get customer id
         const { _id } = req.user;
