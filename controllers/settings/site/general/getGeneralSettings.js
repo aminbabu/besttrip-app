@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 04 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
-            message: 'General settings fetched successfully',
+            message: 'Fetched general settings successfully',
             generalSettings,
         });
     } catch (error) {
