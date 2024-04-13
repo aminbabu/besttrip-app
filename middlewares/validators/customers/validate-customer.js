@@ -19,7 +19,7 @@ const {
 // update customer validator
 module.exports = [
     body('customerID').not().exists().withMessage('You are not allowed to update the customer ID'),
-    body('avatar').not().exists().withMessage('Avatar is not allowed'),
+    body('avatar').not().exists().withMessage('Avatar should be a valid image file'),
     body('name').isLength({ min: 3 }).withMessage('Name should be at least 3 characters'),
     body('email').isEmail().withMessage('Email should be a valid email'),
     body('phone').isMobilePhone().withMessage('Phone should be a valid phone number'),
