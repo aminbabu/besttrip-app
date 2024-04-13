@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const validatedData = matchedData(req);
-        const { logo, favicon } = req.body;
+        const { logo, favicon } = req.files;
 
         // find the existing general settings
         let generalSettings = await GeneralSettings.findOne();
@@ -25,15 +25,15 @@ module.exports = async (req, res, next) => {
         if (!generalSettings) {
             generalSettings = new GeneralSettings({
                 ...validatedData,
-                logo,
-                favicon,
+                logo: logo.path,
+                favicon: favicon.path,
             });
         } else {
             // update existing settings
             generalSettings.set({
                 ...validatedData,
-                logo,
-                favicon,
+                logo: logo?.path || generalSettings.logo,
+                favicon: favicon?.path || generalSettings.favicon,
             });
         }
 
