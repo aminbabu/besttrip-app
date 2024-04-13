@@ -31,11 +31,6 @@ module.exports =
             // get user
             const user = id ? (await Customer.findById(id)) || (await User.findById(id)) : req.user;
 
-            // check if user exists
-            if (!user) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-
             // check if user has avatar
             if (user.avatar) {
                 // delete previous avatar
