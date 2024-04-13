@@ -28,10 +28,10 @@ const {
     validateUserId,
     validateUser,
     validateUserSelf,
+    validateExistedUserAccount,
 } = require('../../middlewares/validators/users');
 const { validateAvatar } = require('../../middlewares/validators/files');
 const { uploadAvatar } = require('../../middlewares/files');
-const { validateExistedUserAccount } = require('../../middlewares/validators/global');
 
 // constants
 const { USER_ROLES } = require('../../constants');

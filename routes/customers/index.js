@@ -30,9 +30,9 @@ const {
     validateCustomer,
     validateCustomerSelf,
     validateCustomerWallet,
+    validateExistedCustomerAccount,
 } = require('../../middlewares/validators/customers');
 const { validateAvatar } = require('../../middlewares/validators/files');
-const { validateExistedCustomerAccount } = require('../../middlewares/validators/global');
 const { uploadAvatar } = require('../../middlewares/files');
 
 /**
