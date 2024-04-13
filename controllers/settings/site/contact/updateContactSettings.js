@@ -25,7 +25,10 @@ module.exports = async (req, res, next) => {
             contactSettings = new ContactSettings(validatedData);
         } else {
             // update existing settings
-            contactSettings.set(validatedData);
+            contactSettings.set({
+                ...contactSettings,
+                ...validatedData,
+            });
         }
 
         // save the updated or new contact settings

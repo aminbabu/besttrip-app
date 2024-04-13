@@ -31,6 +31,7 @@ module.exports = async (req, res, next) => {
         } else {
             // update existing settings
             generalSettings.set({
+                ...generalSettings,
                 ...validatedData,
                 logo: logo?.path || generalSettings.logo,
                 favicon: favicon?.path || generalSettings.favicon,
