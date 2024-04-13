@@ -13,4 +13,5 @@ module.exports = {
     Token: require('./token'),
     Customer: require('./customer'),
     GeneralSettings: require('./settings/site/GeneralSettings'),
+    ContactSettings: require('./settings/site/ContactSettings'),
 };
