@@ -8,14 +8,14 @@
  */
 
 // dependencies
-const { matchedData } = require('express-validator');
 const { GeneralSettings } = require('../../../../models');
+const { filterEmptyFields } = require('../../../../utils');
 
 // update general settings
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const validatedData = matchedData(req);
+        const validatedData = filterEmptyFields(req);
         const { logo, favicon } = req.files;
 
         // find the existing general settings
