@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 10 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
@@ -19,6 +19,7 @@ const {
 // update customer validator
 module.exports = [
     body('customerID').not().exists().withMessage('You are not allowed to update the customer ID'),
+    body('avatar').not().exists().withMessage('Avatar is not allowed'),
     body('name').isLength({ min: 3 }).withMessage('Name should be at least 3 characters'),
     body('email').isEmail().withMessage('Email should be a valid email'),
     body('phone').isMobilePhone().withMessage('Phone should be a valid phone number'),
