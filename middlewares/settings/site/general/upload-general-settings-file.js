@@ -41,7 +41,7 @@ const uploadLogo =
         await logo.mv(uploadLogoPath);
 
         // set file path to request body
-        req.body.logo = logoPath;
+        req.files.logo.path = logoPath;
 
         // continue to next middleware
         return next();
@@ -76,7 +76,7 @@ const uploadFavicon =
         await favicon.mv(uploadFaviconPath);
 
         // set file path to request body
-        req.body.favicon = faviconPath;
+        req.files.favicon.path = faviconPath;
 
         // continue to next middleware
         return next();
