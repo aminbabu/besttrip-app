@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 07 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
@@ -41,10 +41,10 @@ router.use(isAuthorized);
  * @param {function} middleware - ['site']
  * @param {function} controller - ['getGeneralSettings']
  * @returns {object} - router
- * @access private
+ * @access public
  * @method GET
  */
-router.get('/', isAllowed(['customer', 'admin']), getGeneralSettings);
+router.get('/', getGeneralSettings);
 
 /**
  * @description create/update general site settings
