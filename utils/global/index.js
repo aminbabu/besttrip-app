@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 07 April, 2024
- * @update_date 10 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // export all global utils
@@ -12,4 +12,5 @@ module.exports = {
     generateToken: require('./generate-token'),
     comparePassword: require('./compare-password'),
     verifyToken: require('./verify-token'),
+    filterEmptyFields: require('./filter-empty-fields'),
 };
