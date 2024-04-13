@@ -19,10 +19,17 @@ module.exports = async (req, res, next) => {
     // get logo and favicon files
     const { logo, favicon } = req.files;
 
-    // check if logo/favicon is an array
-    if (Array.isArray(logo) || Array.isArray(favicon)) {
+    // check if logo is an array
+    if (Array.isArray(logo)) {
         return res.status(400).json({
-            message: 'Please upload a valid image',
+            message: 'Please upload a valid logo image',
+        });
+    }
+
+    // check if favicon is an array
+    if (Array.isArray(favicon)) {
+        return res.status(400).json({
+            message: 'Please upload a valid favicon image',
         });
     }
 
@@ -40,10 +47,17 @@ module.exports = async (req, res, next) => {
         });
     }
 
-    // check if logo/favicon size is greater than 0.5 MB
-    if (logo.size > HALF_MEGA_BYTE || favicon.size > HALF_MEGA_BYTE) {
+    // check if favicon size is greater than 0.5 MB
+    if (logo?.size > HALF_MEGA_BYTE) {
         return res.status(400).json({
-            message: `Please upload a logo/favicon of size less than ${(HALF_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+            message: `Please upload a logo of size less than ${(HALF_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+        });
+    }
+
+    // check if favicon size is greater than 0.5 MB
+    if (favicon?.size > HALF_MEGA_BYTE) {
+        return res.status(400).json({
+            message: `Please upload a favicon of size less than ${(HALF_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
         });
     }
 
