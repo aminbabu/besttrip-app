@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         let validatedCustomer = matchedData(req);
-        const { avatar } = req.body;
+        const { avatar } = req.files;
 
         // filter out empty fields
         validatedCustomer = Object.keys(validatedCustomer).reduce((acc, key) => {
@@ -43,7 +43,7 @@ module.exports = async (req, res, next) => {
         customer.set({
             ...customer.toObject(),
             ...validatedCustomer,
-            avatar,
+            avatar: avatar?.path || customer.avatar,
         });
 
         // save customer
