@@ -16,11 +16,6 @@ const {
 
 // export general site settings files validator middleware
 module.exports = async (req, res, next) => {
-    // continue if files are not uploaded
-    if (!req.files || !req.files.length) {
-        return next();
-    }
-
     // get logo and favicon files
     const { logo, favicon } = req.files;
 
@@ -32,14 +27,14 @@ module.exports = async (req, res, next) => {
     }
 
     // check if logo is not an image of type jpeg, jpg, png
-    if (!BRAND_LOGO_TYPES.includes(logo.mimetype)) {
+    if (logo && !BRAND_LOGO_TYPES.includes(logo.mimetype)) {
         return res.status(400).json({
             message: `Please upload a logo of type ${BRAND_LOGO_TYPES.join(', ')}`,
         });
     }
 
     // check if favicon is not an image of type png, ico, svg
-    if (!FAVICON_TYPES.includes(favicon.mimetype)) {
+    if (favicon && !FAVICON_TYPES.includes(favicon.mimetype)) {
         return res.status(400).json({
             message: `Please upload a favicon of type ${FAVICON_TYPES.join(', ')}`,
         });
