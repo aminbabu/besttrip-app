@@ -83,7 +83,7 @@ router.patch(
     validateAvatar,
     validateExistedUserAccount,
     validateUserSelf,
-    uploadAvatar('users'),
+    uploadAvatar('avatars/users'),
     updateUserBySelf
 );
 
@@ -103,7 +103,7 @@ router.patch(
     validateAvatar,
     validateExistedUserAccount,
     validateUser,
-    uploadAvatar('users'),
+    uploadAvatar('avatars/users'),
     updateUserById
 );
 

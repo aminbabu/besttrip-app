@@ -96,7 +96,7 @@ router.patch(
     validateAvatar,
     validateExistedCustomerAccount,
     validateCustomerSelf,
-    uploadAvatar('customers'),
+    uploadAvatar('avatars/customers'),
     updateCustomerBySelf
 );
 
@@ -119,7 +119,7 @@ router.patch(
     validateAvatar,
     validateExistedCustomerAccount,
     validateCustomer,
-    uploadAvatar('customers'),
+    uploadAvatar('avatars/customers'),
     updateCustomerById
 );
 
