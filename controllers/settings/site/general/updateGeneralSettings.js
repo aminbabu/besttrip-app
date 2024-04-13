@@ -4,27 +4,37 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 07 April, 2024
+ * @update_date 13 April, 2024
  */
 
 // dependencies
+const { matchedData } = require('express-validator');
 const { GeneralSettings } = require('../../../../models');
 
 // update general settings
 module.exports = async (req, res, next) => {
     try {
-        console.log(req.body);
-        console.log(req.files);
+        // get validated data
+        const validatedData = matchedData(req);
+        const { logo, favicon } = req.body;
 
         // find the existing general settings
         let generalSettings = await GeneralSettings.findOne();
 
         // if no settings found, create new settings
         if (!generalSettings) {
-            generalSettings = new GeneralSettings(req.body);
+            generalSettings = new GeneralSettings({
+                ...validatedData,
+                logo,
+                favicon,
+            });
         } else {
             // update existing settings
-            generalSettings.set(req.body);
+            generalSettings.set({
+                ...validatedData,
+                logo,
+                favicon,
+            });
         }
 
         // save the updated or new general settings

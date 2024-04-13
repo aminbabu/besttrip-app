@@ -20,20 +20,12 @@ const {
 const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateGeneralSettings,
+    validateGeneralSettingsFiles,
 } = require('../../../../middlewares/validators/settings/site/general');
+const generalSettingsFileUploader = require('../../../../middlewares/settings/site/general/general-settings-file-uploader');
 
 // express router
 const router = express.Router();
-
-/**
- * @description check if user is authorized
- * @param {string} path - '/settings/site/general'
- * @param {function} middleware - ['isAuthorized']
- * @returns {object} - router
- * @access private
- * @method USE
- */
-router.use(isAuthorized);
 
 /**
  * @description get general site settings
@@ -55,7 +47,15 @@ router.get('/', getGeneralSettings);
  * @access private
  * @method PUT
  */
-router.put('/', isAllowed(['admin']), validateGeneralSettings, updateGeneralSettings);
+router.put(
+    '/',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateGeneralSettingsFiles,
+    validateGeneralSettings,
+    generalSettingsFileUploader('/logos'),
+    updateGeneralSettings
+);
 
 // export router
 module.exports = router;
