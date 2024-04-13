@@ -13,6 +13,8 @@ const { expressValidator } = require('../../../../../handlers/errors');
 
 // export general site settings validator
 module.exports = [
+    body('logo').not().exists().withMessage('Logo is not allowed'),
+    body('favicon').not().exists().withMessage('Favicon is not allowed'),
     body('title')
         .isLength({ min: 3, max: 50 })
         .withMessage('Title must be between 3 and 255 characters'),
