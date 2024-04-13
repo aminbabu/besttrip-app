@@ -14,7 +14,7 @@ const { Customer, User } = require('../../models');
 
 // export upload avatar middleware
 module.exports =
-    (dir = '/uploads') =>
+    (dir = '/avatars') =>
     async (req, res, next) => {
         try {
             // continue if no file uploaded
@@ -39,7 +39,7 @@ module.exports =
 
             // prepare file path
             const filePath = path.join(
-                'uploads/avatars/',
+                'uploads/',
                 `${dir}/${Date.now()}_${user._id}_${avatar.name}`
             );
             const uploadPath = path.join(__dirname, '../../public/', filePath);
