@@ -16,7 +16,14 @@ module.exports = [
     body('email').optional().isEmail().withMessage('Please provide a valid email address'),
     body('phone').optional().isMobilePhone().withMessage('Please provide a valid phone number'),
     body('social').optional().isArray({ min: 1 }).withMessage('Social is required'),
-    body('social.*').optional().isURL().withMessage('Please provide a valid URL'),
+    body('social.*.name')
+        .optional()
+        .isLength({ min: 3, max: 255 })
+        .withMessage('Name must be between 3 and 255 characters'),
+    body('social.*.url')
+        .optional()
+        .isURL()
+        .withMessage('Please provide a valid URL for social media'),
     body('address')
         .optional()
         .isLength({ min: 3, max: 255 })
