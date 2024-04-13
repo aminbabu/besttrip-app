@@ -17,16 +17,16 @@ module.exports =
     (dir = '/avatars') =>
     async (req, res, next) => {
         try {
-            // continue if no file uploaded
-            if (!req.files || !req.files.avatar) {
-                return next();
-            }
-
             // get id
             const { id } = req.params;
 
             // get avatar
             const { avatar } = req.files;
+
+            // continue if no avatar uploaded
+            if (!avatar) {
+                return next();
+            }
 
             // get user
             const user = id ? (await Customer.findById(id)) || (await User.findById(id)) : req.user;
