@@ -10,7 +10,7 @@
 // dependencies
 const { ContactSettings } = require('../../../../models');
 
-// update contact settings
+// export update contact settings controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data

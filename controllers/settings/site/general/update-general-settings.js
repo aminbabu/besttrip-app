@@ -10,7 +10,7 @@
 // dependencies
 const { GeneralSettings } = require('../../../../models');
 
-// update general settings
+// export update general settings controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
