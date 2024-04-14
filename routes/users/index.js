@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 13 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
@@ -99,7 +99,6 @@ router.patch(
 router.patch(
     '/:id',
     isAllowed(['admin']),
-    validateUserId,
     validateAvatar,
     validateExistedUserAccount,
     validateUser,

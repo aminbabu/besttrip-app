@@ -4,18 +4,17 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 10 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const { matchedData } = require('express-validator');
 const { User } = require('../../models');
 
 // export get user by mongo id controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { id } = matchedData(req);
+        const { id } = req.body;
 
         // get user
         const user = await User.findById(id);
