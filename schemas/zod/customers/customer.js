@@ -73,7 +73,7 @@ module.exports = z
                 message: 'Address must be at least 3 characters long.',
             })
             .max(100, {
-                message: 'Address must be between 3 and 100 characters long.',
+                message: 'Address must not be more than 100 characters',
             })
             .optional(),
         city: z
@@ -83,7 +83,7 @@ module.exports = z
                 message: 'City must be at least 3 characters long.',
             })
             .max(50, {
-                message: 'City must be between 3 and 50 characters long.',
+                message: 'City must not be more than 50 characters',
             })
             .optional(),
         state: z
@@ -93,7 +93,7 @@ module.exports = z
                 message: 'State must be at least 3 characters long.',
             })
             .max(50, {
-                message: 'State must be between 3 and 50 characters long.',
+                message: 'State must not be more than 50 characters',
             })
             .optional(),
         country: z
@@ -103,7 +103,7 @@ module.exports = z
                 message: 'Country must be at least 3 characters long.',
             })
             .max(50, {
-                message: 'Country must be between 3 and 50 characters long.',
+                message: 'Country must not be more than 50 characters',
             })
             .optional(),
         postalCode: z
@@ -132,8 +132,7 @@ module.exports = z
                             message: 'Wallet description must be at least 3 characters long.',
                         })
                         .max(100, {
-                            message:
-                                'Wallet description must be between 3 and 100 characters long.',
+                            message: 'Wallet description must not be more than 100 characters',
                         })
                         .optional(),
                 },
