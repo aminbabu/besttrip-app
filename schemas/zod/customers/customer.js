@@ -22,6 +22,7 @@ module.exports = z
         id: z
             .string({
                 required_error: 'Id is required.',
+                invalid_type_error: 'Please enter a valid id.',
             })
             .refine((id) => isMongoId(id), {
                 message: 'Please enter a valid id.',
@@ -137,6 +138,7 @@ module.exports = z
                         .optional(),
                 },
                 {
+                    required_error: 'Wallet is required.',
                     invalid_type_error: 'Please enter a valid wallet balance and transaction type.',
                 }
             )
