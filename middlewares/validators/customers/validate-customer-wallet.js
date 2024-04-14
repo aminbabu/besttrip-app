@@ -4,42 +4,29 @@
  * @version 0.0.0
  * @author best-trip
  * @date 07 April, 2024
- * @update_date 09 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const { body } = require('express-validator');
-const { CUSTOMER_WALLET_TRANSACTION_TYPES } = require('../../../constants');
-const { expressValidator } = require('../../../handlers/errors');
+const { customerSchema } = require('../../../schemas/zod/customers');
+const { zodErrorHandler } = require('../../../handlers/errors');
 
-// export customer wallet validator
-module.exports = [
-    body('wallet')
-        .exists()
-        .withMessage('Wallet is required')
-        .isObject()
-        .withMessage('Wallet should be an object'),
-    body('wallet.balance')
-        .exists()
-        .withMessage('Balance is required')
-        .isNumeric()
-        .withMessage('Balance should be a number')
-        .custom((value) => {
-            if (value < 0) {
-                throw new Error('Balance should be a positive number');
-            }
-            return true;
-        }),
-    body('wallet.type')
-        .exists()
-        .withMessage('Balance type is required')
-        .isIn(CUSTOMER_WALLET_TRANSACTION_TYPES)
-        .withMessage(
-            `Balance type should be one of ${CUSTOMER_WALLET_TRANSACTION_TYPES.join(', ')}`
-        ),
-    body('wallet.description')
-        .optional()
-        .isLength({ min: 3, max: 100 })
-        .withMessage('Description should be between 3 and 100 characters'),
-    expressValidator,
-];
+// export validate customer wallet middleware
+module.exports = (req, res, next) => {
+    // validate request body
+    const { data, error, success } = customerSchema
+        .pick({ wallet: true })
+        .safeParse({ ...req.params, ...req.body });
+
+    // check for errors
+    if (!success) {
+        // return error response
+        return zodErrorHandler(res, error);
+    }
+
+    // set validated data
+    req.body = data;
+
+    // proceed to next middleware
+    return next();
+};

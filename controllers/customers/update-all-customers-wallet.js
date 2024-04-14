@@ -4,18 +4,17 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 09 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const { matchedData } = require('express-validator');
 const { Customer } = require('../../models');
 
 // export update all customers wallet controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { wallet } = matchedData(req);
+        const { wallet } = req.body;
 
         // get all customers
         const customers = await Customer.find();
