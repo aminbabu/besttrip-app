@@ -8,7 +8,6 @@
  */
 
 // dependencies
-const { matchedData } = require('express-validator');
 const { Customer } = require('../../../models');
 const { comparePassword, generateToken } = require('../../../utils');
 
@@ -16,7 +15,7 @@ const { comparePassword, generateToken } = require('../../../utils');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { email, password } = matchedData(req);
+        const { email, password } = req.body;
 
         // check if customer exists
         const customer = await Customer.findOne({ email }).select('+password');

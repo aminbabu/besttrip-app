@@ -4,18 +4,27 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 10 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const { body } = require('express-validator');
-const { expressValidator } = require('../../../handlers/errors');
+const { zodErrorHandler } = require('../../../handlers/errors');
+const { loginSchema } = require('../../../schemas/zod');
 
 // validate login
-module.exports = [
-    body('email').isEmail().withMessage('Email is not valid'),
-    body('password')
-        .isLength({ min: 8 })
-        .withMessage('Password must be at least 6 characters long'),
-    expressValidator,
-];
+module.exports = (req, res, next) => {
+    // validate request body
+    const { data, error } = loginSchema.safeParse(req.body);
+
+    // check for errors
+    if (error) {
+        // return error response
+        return zodErrorHandler(res, error);
+    }
+
+    // set validated data
+    req.body = data;
+
+    // proceed to next middleware
+    return next();
+};
