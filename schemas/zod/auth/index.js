@@ -14,4 +14,5 @@ module.exports = {
     forgotPasswordSchema: require('./forgot-password'),
     resetPasswordSchema: require('./reset-password'),
     sendVerificationEmailSchema: require('./send-verification-email'),
+    verifyEmailSchema: require('./verify-email'),
 };
