@@ -28,7 +28,6 @@ const {
 /**
  * @description get general settings
  * @param {string} path - '/settings/site/contact'
- * @param {function} middleware - ['site']
  * @param {function} controller - ['getContactSettings']
  * @returns {object} - router
  * @access public
@@ -39,7 +38,7 @@ router.get('/', getContactSettings);
 /**
  * @description create/update general settings
  * @param {string} path - '/settings/site/contact'
- * @param {function} middleware - ['site']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validateContactSettings']
  * @param {function} controller - ['updateContactSettings']
  * @returns {object} - router
  * @access private
