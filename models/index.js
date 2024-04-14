@@ -14,4 +14,5 @@ module.exports = {
     Customer: require('./customer'),
     GeneralSettings: require('./settings/site/general-settings'),
     ContactSettings: require('./settings/site/contact-settings'),
+    PoliciesSettings: require('./settings/site/policies-settings'),
 };

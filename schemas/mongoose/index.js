@@ -14,4 +14,5 @@ module.exports = {
     tokenSchema: require('./token'),
     generalSettingsSchema: require('./settings/site/general'),
     contactSettingsSchema: require('./settings/site/contact'),
+    policiesSettingsSchema: require('./settings/site/policies'),
 };

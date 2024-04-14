@@ -11,4 +11,5 @@
 module.exports = {
     generalSettingsSchema: require('./general'),
     contactSettingsSchema: require('./contact'),
+    policySettingsSchema: require('./policies'),
 };
