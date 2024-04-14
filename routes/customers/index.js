@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 13 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
@@ -104,7 +104,7 @@ router.patch(
  * @description update customer by mongo id
  * @param {string} path - /customers/:id
  * @param {function} middleware - [
- * 'isAllowed', 'validateCustomerId', 'validateAvatar',
+ * 'isAllowed', 'validateAvatar',
  * 'validateExistedCustomerAccount', 'validateCustomer'
  * ]
  * @param {function} controller - ['updateCustomerById']
@@ -115,7 +115,6 @@ router.patch(
 router.patch(
     '/:id',
     isAllowed(['admin']),
-    validateCustomerId,
     validateAvatar,
     validateExistedCustomerAccount,
     validateCustomer,
