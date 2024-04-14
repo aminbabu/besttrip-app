@@ -121,7 +121,7 @@ module.exports = z
                         required_error: 'Wallet balance is required.',
                         invalid_type_error: 'Please enter a valid wallet balance.',
                     }),
-                    transactions: z.enum(CUSTOMER_WALLET_TRANSACTION_TYPES, {
+                    type: z.enum(CUSTOMER_WALLET_TRANSACTION_TYPES, {
                         required_error: 'Wallet transaction type is required.',
                         invalid_type_error: 'Please enter a valid wallet transaction type.',
                     }),
