@@ -16,7 +16,7 @@ const { zodErrorHandler } = require('../../../handlers/errors');
 // export validate verify email middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { data, error, success } = verifyEmailSchema.safeParse(req.params);
+    const { data, error, success } = verifyEmailSchema.safeParse(req.query);
 
     // check for errors
     if (!success) {
