@@ -10,4 +10,5 @@
 // export site settings schemas
 module.exports = {
     generalSettingsSchema: require('./general'),
+    contactSettingsSchema: require('./contact'),
 };

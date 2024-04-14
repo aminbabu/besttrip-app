@@ -4,18 +4,17 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 13 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
 const { ContactSettings } = require('../../../../models');
-const { filterEmptyFields } = require('../../../../utils');
 
 // update contact settings
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const validatedData = filterEmptyFields(req);
+        const validatedData = req.body;
 
         // find the existing contact settings
         let contactSettings = await ContactSettings.findOne();

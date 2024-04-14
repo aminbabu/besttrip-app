@@ -4,29 +4,27 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 13 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const { body } = require('express-validator');
-const { expressValidator } = require('../../../../../handlers/errors');
+const { contactSettingsSchema } = require('../../../../../schemas/zod/settings/site');
+const { zodErrorHandler } = require('../../../../../handlers/errors');
 
-// export contact settings validator
-module.exports = [
-    body('email').optional().isEmail().withMessage('Please provide a valid email address'),
-    body('phone').optional().isMobilePhone().withMessage('Please provide a valid phone number'),
-    body('social').optional().isArray({ min: 1 }).withMessage('Social is required'),
-    body('social.*.name')
-        .optional()
-        .isLength({ min: 3, max: 255 })
-        .withMessage('Name must be between 3 and 255 characters'),
-    body('social.*.url')
-        .optional()
-        .isURL()
-        .withMessage('Please provide a valid URL for social media'),
-    body('address')
-        .optional()
-        .isLength({ min: 3, max: 255 })
-        .withMessage('Address must be between 3 and 255 characters'),
-    expressValidator,
-];
+// export contact settings validator middleware
+module.exports = (req, res, next) => {
+    // validate request body
+    const { data, error, success } = contactSettingsSchema.safeParse(req.body);
+
+    // check for errors
+    if (!success) {
+        // return error response
+        return zodErrorHandler(res, error);
+    }
+
+    // set validated data
+    req.body = data;
+
+    // proceed to next middleware
+    return next();
+};
