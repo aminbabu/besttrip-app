@@ -11,7 +11,7 @@
 const { forgotPasswordSchema } = require('../../../schemas/zod/auth');
 const { zodErrorHandler } = require('../../../handlers/errors');
 
-// export validate forgot password
+// export validate forgot password middleware
 module.exports = (req, res, next) => {
     // validate request body
     const { data, error, success } = forgotPasswordSchema.safeParse(req.body);

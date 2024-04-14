@@ -13,7 +13,7 @@ const { zodErrorHandler } = require('../../../handlers/errors');
 
 // dependencies
 
-// export validate reset password
+// export validate reset password middleware
 module.exports = (req, res, next) => {
     // validate request body
     const { data, error, success } = resetPasswordSchema.safeParse(req.body);

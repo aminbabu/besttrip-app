@@ -11,7 +11,7 @@
 const { loginSchema } = require('../../../schemas/zod/auth');
 const { zodErrorHandler } = require('../../../handlers/errors');
 
-// export validate login
+// export validate login middleware
 module.exports = (req, res, next) => {
     // validate request body
     const { data, error, success } = loginSchema.safeParse(req.body);

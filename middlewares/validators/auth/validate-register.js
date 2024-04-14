@@ -11,7 +11,7 @@
 const { registerSchema } = require('../../../schemas/zod/auth');
 const { zodErrorHandler } = require('../../../handlers/errors');
 
-// export validate register
+// export validate register middleware
 module.exports = (req, res, next) => {
     // validate request body
     const { data, error, success } = registerSchema.safeParse({ ...req.params, ...req.body });
