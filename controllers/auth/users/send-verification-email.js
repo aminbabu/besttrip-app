@@ -4,11 +4,10 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const { matchedData } = require('express-validator');
 const { verifyEmail } = require('../../../mails');
 const { sendEmail, generateToken } = require('../../../utils');
 const { Token, User } = require('../../../models');
@@ -17,7 +16,7 @@ const { Token, User } = require('../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { email } = matchedData(req);
+        const { email } = req.body;
 
         // get user
         const user = await User.findOne({ email });

@@ -4,12 +4,11 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
 const moment = require('moment');
-const { matchedData } = require('express-validator');
 const { confirmEmailVerification } = require('../../../mails');
 const { User, Token } = require('../../../models');
 const { sendEmail } = require('../../../utils');
@@ -18,7 +17,7 @@ const { sendEmail } = require('../../../utils');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { token } = matchedData(req);
+        const { token } = req.body;
 
         // get token
         const emailVerificationToken = await Token.findOne({

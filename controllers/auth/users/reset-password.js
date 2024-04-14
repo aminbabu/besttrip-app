@@ -4,11 +4,10 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 14 April, 2024
  */
 
 const moment = require('moment');
-const { matchedData } = require('express-validator');
 const { sendPasswordResetConfirmation } = require('../../../mails');
 const { Token, User } = require('../../../models');
 const { sendEmail } = require('../../../utils');
@@ -17,7 +16,7 @@ const { sendEmail } = require('../../../utils');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { token, password } = matchedData(req);
+        const { token, password } = req.body;
 
         // check if the token exists
         const resetPasswordToken = await Token.findOne({
