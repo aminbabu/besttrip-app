@@ -9,5 +9,5 @@
 
 // export all zod schemas
 module.exports = {
-    loginSchema: require('./login'),
+    loginSchema: require('./auth/login'),
 };
