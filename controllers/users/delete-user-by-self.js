@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
         await user.deleteOne();
 
         // remove token from headers
-        res.set('Authorization', '');
+        res.removeHeader('Authorization');
 
         // return response
         return res.status(200).json({
