@@ -12,4 +12,5 @@ module.exports = {
     loginSchema: require('./login'),
     registerSchema: require('./register'),
     forgotPasswordSchema: require('./forgot-password'),
+    resetPasswordSchema: require('./reset-password'),
 };

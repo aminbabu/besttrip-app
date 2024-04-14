@@ -14,7 +14,7 @@ const { zodErrorHandler } = require('../../../handlers/errors');
 // export validate register
 module.exports = (req, res, next) => {
     // validate request body
-    const { data, error, success } = registerSchema.safeParse(req.body);
+    const { data, error, success } = registerSchema.safeParse({ ...req.params, ...req.body });
 
     // check for errors
     if (!success) {
