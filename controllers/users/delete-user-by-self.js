@@ -29,6 +29,9 @@ module.exports = async (req, res, next) => {
         // delete user
         await user.deleteOne();
 
+        // remove token from headers
+        res.set('Authorization', '');
+
         // return response
         return res.status(200).json({
             message: 'Deleted user successfully',
