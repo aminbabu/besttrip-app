@@ -4,61 +4,34 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 10 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const { body } = require('express-validator');
-const { expressValidator } = require('../../../handlers/errors');
-const { CUSTOMER_STATUS } = require('../../../constants');
+const { customerSchema } = require('../../../schemas/zod/customers');
+const { zodErrorHandler } = require('../../../handlers/errors');
 
 // update customer validator
+module.exports = (req, res, next) => {
+    // validate request body
+    const { data, error, success } = customerSchema
+        .omit({
+            id: true,
+            wallet: true,
+            role: true,
+            isVerified: true,
+        })
+        .safeParse({ ...req.params, ...req.body });
 
-// update customer validator
-module.exports = [
-    body('customerID').not().exists().withMessage('You are not allowed to update the customer ID'),
-    body('name').isLength({ min: 3 }).withMessage('Name should be at least 3 characters'),
-    body('email').isEmail().withMessage('Email should be a valid email'),
-    body('phone').isMobilePhone().withMessage('Phone should be a valid phone number'),
-    body('password')
-        .optional()
-        .isLength({ min: 8 })
-        .withMessage('Password should be at least 8 characters'),
-    body('dob')
-        .optional()
-        .toDate()
-        .isDate()
-        .withMessage('Date of birth should be a valid javascript date'),
-    body('status')
-        .optional()
-        .isIn(CUSTOMER_STATUS)
-        .withMessage(`Status should be one of ${CUSTOMER_STATUS.join(', ')}`),
-    body('address')
-        .optional()
-        .isLength({ min: 3, max: 100 })
-        .withMessage('Address should be between 3 and 100 characters'),
-    body('city')
-        .optional()
-        .isLength({ min: 3, max: 50 })
-        .withMessage('City should be between 3 and 50 characters'),
-    body('state')
-        .optional()
-        .isLength({ min: 3, max: 50 })
-        .withMessage('State should be between 3 and 50 characters'),
-    body('country')
-        .optional()
-        .isLength({ min: 3, max: 50 })
-        .withMessage('Country should be between 3 and 50 characters'),
-    body('postalCode')
-        .optional()
-        .isPostalCode()
-        .withMessage('Postal code should be a valid postal code'),
-    body('flyerNumber').optional().isNumeric().withMessage('Flyer number should be a number'),
-    body('wallet').not().exists().withMessage('You are not allowed to update the wallet'),
-    body('role').not().exists().withMessage('You are not allowed to update the role'),
-    body('isVerified')
-        .not()
-        .exists()
-        .withMessage('You are not allowed to update the verification status'),
-    expressValidator,
-];
+    // check for errors
+    if (!success) {
+        // return error response
+        return zodErrorHandler(res, error);
+    }
+
+    // set validated data
+    req.body = data;
+
+    // proceed to next middleware
+    return next();
+};
