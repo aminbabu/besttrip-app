@@ -4,12 +4,27 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 10 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const { body } = require('express-validator');
-const { expressValidator } = require('../../../handlers/errors');
+const { forgotPasswordSchema } = require('../../../schemas/zod');
+const { zodErrorHandler } = require('../../../handlers/errors');
 
-// validate forgot password
-module.exports = [body('email').isEmail().withMessage('Email is not valid'), expressValidator];
+// export validate forgot password
+module.exports = (req, res, next) => {
+    // validate request body
+    const { data, error, success } = forgotPasswordSchema.safeParse(req.body);
+
+    // check for errors
+    if (!success) {
+        // return error response
+        return zodErrorHandler(res, error);
+    }
+
+    // set validated data
+    req.body = data;
+
+    // proceed to next middleware
+    return next();
+};

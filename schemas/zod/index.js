@@ -12,6 +12,7 @@ module.exports = {
     // auth
     loginSchema: require('./auth/login'),
     registerSchema: require('./auth/register'),
+    forgotPasswordSchema: require('./auth/forgot-password'),
 
     // customers
     customerSchema: require('./customers/customer'),
