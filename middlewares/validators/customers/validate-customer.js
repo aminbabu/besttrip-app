@@ -11,7 +11,7 @@
 const { customerSchema } = require('../../../schemas/zod/customers');
 const { zodErrorHandler } = require('../../../handlers/errors');
 
-// update customer validator
+// export validate customer middleware
 module.exports = (req, res, next) => {
     // validate request body
     const { data, error, success } = customerSchema.safeParse({ ...req.params, ...req.body });
