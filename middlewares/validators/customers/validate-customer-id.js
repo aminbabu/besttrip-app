@@ -11,7 +11,7 @@
 const { customerSchema } = require('../../../schemas/zod/customers');
 const { zodErrorHandler } = require('../../../handlers/errors');
 
-// export customer id validator middleware
+// export validate customer by id middleware
 module.exports = (req, res, next) => {
     // validate request body
     const { data, error, success } = customerSchema.pick({ id: true }).safeParse(req.params);
