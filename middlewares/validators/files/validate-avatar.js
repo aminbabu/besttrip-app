@@ -36,6 +36,6 @@ module.exports = (req, res, next) => {
         });
     }
 
-    // continue to next middleware
+    // proceed to next middleware
     return next();
 };

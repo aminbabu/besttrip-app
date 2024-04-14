@@ -50,7 +50,7 @@ module.exports =
             // set file path to request body
             req.files.avatar.path = filePath;
 
-            // continue to next middleware
+            // proceed to next middleware
             return next();
         } catch (error) {
             return res.status(500).json({ message: error.message });

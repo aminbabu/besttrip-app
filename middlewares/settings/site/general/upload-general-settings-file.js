@@ -43,7 +43,7 @@ const uploadLogo =
         // set file path to request body
         req.files.logo.path = logoPath;
 
-        // continue to next middleware
+        // proceed to next middleware
         return next();
     };
 
@@ -78,7 +78,7 @@ const uploadFavicon =
         // set file path to request body
         req.files.favicon.path = faviconPath;
 
-        // continue to next middleware
+        // proceed to next middleware
         return next();
     };
 // export

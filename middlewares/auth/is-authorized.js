@@ -68,7 +68,7 @@ module.exports = async (req, res, next) => {
         // set user in request
         req.user = user.toObject();
 
-        // continue to next middleware
+        // proceed to next middleware
         return next();
     } catch (err) {
         return res.status(401).json({
