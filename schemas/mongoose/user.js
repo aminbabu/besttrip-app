@@ -56,6 +56,9 @@ module.exports = new Schema(
             enum: USER_STATUS,
             default: 'active',
         },
+        dob: {
+            type: Date,
+        },
         address: {
             type: String,
         },
