@@ -10,6 +10,9 @@
 // dependencies
 const express = require('express');
 
+// express router
+const router = express.Router();
+
 // controllers
 const {
     getGeneralSettings,
@@ -23,9 +26,6 @@ const {
     validateGeneralSettingsFiles,
 } = require('../../../../middlewares/validators/settings/site/general');
 const { uploadGeneralSettingsFile } = require('../../../../middlewares/settings/site/general');
-
-// express router
-const router = express.Router();
 
 /**
  * @description get general settings

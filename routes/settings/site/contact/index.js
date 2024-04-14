@@ -10,6 +10,9 @@
 // dependencies
 const express = require('express');
 
+// express router
+const router = express.Router();
+
 // controllers
 const {
     getContactSettings,
@@ -21,9 +24,6 @@ const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateContactSettings,
 } = require('../../../../middlewares/validators/settings/site/contact');
-
-// express router
-const router = express.Router();
 
 /**
  * @description get general settings
