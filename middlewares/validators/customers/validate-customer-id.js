@@ -14,9 +14,7 @@ const { zodErrorHandler } = require('../../../handlers/errors');
 // update customer validator
 module.exports = (req, res, next) => {
     // validate request body
-    const { data, error, success } = customerSchema
-        .pick({ id: true })
-        .safeParse({ ...req.params, ...req.body });
+    const { data, error, success } = customerSchema.pick({ id: true }).safeParse(req.params);
 
     // check for errors
     if (!success) {
