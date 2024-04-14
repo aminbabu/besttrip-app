@@ -7,7 +7,7 @@
  * @update_date 08 April, 2024
  */
 
-// export all validators
+// export customer validators
 module.exports = {
     validateCustomerId: require('./validate-customer-id'),
     validateCustomerWallet: require('./validate-customer-wallet'),
