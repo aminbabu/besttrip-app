@@ -9,5 +9,9 @@
 
 // export all zod schemas
 module.exports = {
+    // auth
     loginSchema: require('./auth/login'),
+
+    // customers
+    customerSchema: require('./customers/customer'),
 };

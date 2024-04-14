@@ -4,18 +4,17 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 13 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
 const { Customer } = require('../../models');
-const { filterEmptyFields } = require('../../utils');
 
 // export update customer by mongo id controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const validatedCustomer = filterEmptyFields(req);
+        const validatedCustomer = req.body;
         const { avatar } = req.files;
 
         // get customer
