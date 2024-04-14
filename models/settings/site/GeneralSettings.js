@@ -4,34 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 04 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const mongoose = require('mongoose');
-
-// general settings schema
-const generalSettingsSchema = new mongoose.Schema(
-    {
-        logo: {
-            type: String,
-        },
-        favicon: {
-            type: String,
-        },
-        title: {
-            type: String,
-            required: [true, 'Title is required'],
-        },
-        domain: {
-            type: Array,
-        },
-        description: {
-            type: String,
-        },
-    },
-    { timestamps: true }
-);
+const { model } = require('mongoose');
+const { generalSettingsSchema } = require('../../../schemas/mongoose');
 
 // export model
-module.exports = mongoose.model('GeneralSettings', generalSettingsSchema);
+module.exports = model('GeneralSettings', generalSettingsSchema);

@@ -4,42 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 13 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const mongoose = require('mongoose');
-
-// contact settings schema
-const contactSettingsSchema = new mongoose.Schema(
-    {
-        email: {
-            type: String,
-        },
-        phone: {
-            type: String,
-        },
-        social: {
-            type: [
-                {
-                    name: {
-                        type: String,
-                    },
-                    url: {
-                        type: String,
-                    },
-                },
-            ],
-        },
-        address: {
-            type: String,
-        },
-        map: {
-            type: String,
-        },
-    },
-    { timestamps: true }
-);
+const { model } = require('mongoose');
+const { contactSettingsSchema } = require('../../../schemas/mongoose');
 
 // export model
-module.exports = mongoose.model('ContactSettings', contactSettingsSchema);
+module.exports = model('ContactSettings', contactSettingsSchema);
