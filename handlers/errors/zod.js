@@ -8,9 +8,9 @@
  */
 
 // export zod error handler
-module.exports = (res, error) => {
+module.exports = (res, zodErr) => {
     // parse errors from zod
-    const errors = error.errors.map((err) => ({
+    const errors = zodErr.errors.map((err) => ({
         field: err.path.join('.'),
         message: err.message,
     }));
