@@ -8,8 +8,8 @@
  */
 
 // dependencies
+const { loginSchema } = require('../../../schemas/zod/auth');
 const { zodErrorHandler } = require('../../../handlers/errors');
-const { loginSchema } = require('../../../schemas/zod');
 
 // export validate login
 module.exports = (req, res, next) => {

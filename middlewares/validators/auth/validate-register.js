@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { registerSchema } = require('../../../schemas/zod');
+const { registerSchema } = require('../../../schemas/zod/auth');
 const { zodErrorHandler } = require('../../../handlers/errors');
 
 // export validate register

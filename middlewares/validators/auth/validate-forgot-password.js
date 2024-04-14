@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { forgotPasswordSchema } = require('../../../schemas/zod');
+const { forgotPasswordSchema } = require('../../../schemas/zod/auth');
 const { zodErrorHandler } = require('../../../handlers/errors');
 
 // export validate forgot password

@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { customerSchema } = require('../../../schemas/zod');
+const { customerSchema } = require('../../../schemas/zod/customers');
 const { zodErrorHandler } = require('../../../handlers/errors');
 
 // update customer validator
