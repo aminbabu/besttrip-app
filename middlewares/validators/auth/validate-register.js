@@ -4,20 +4,27 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 10 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
-const { body } = require('express-validator');
-const { expressValidator } = require('../../../handlers/errors');
+const { registerSchema } = require('../../../schemas/zod');
+const { zodErrorHandler } = require('../../../handlers/errors');
 
 // validate register
-module.exports = [
-    body('name').trim().isLength({ min: 3 }).withMessage('Name must be at least 3 characters long'),
-    body('email').isEmail().withMessage('Email is not valid'),
-    body('phone').isMobilePhone().withMessage('Phone number is not valid'),
-    body('password')
-        .isLength({ min: 8 })
-        .withMessage('Password must be at least 6 characters long'),
-    expressValidator,
-];
+module.exports = (req, res, next) => {
+    // validate request body
+    const { data, error, success } = registerSchema.safeParse(req.body);
+
+    // check for errors
+    if (!success) {
+        // return error response
+        return zodErrorHandler(res, error);
+    }
+
+    // set validated data
+    req.body = data;
+
+    // proceed to next middleware
+    return next();
+};

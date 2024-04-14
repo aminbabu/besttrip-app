@@ -11,6 +11,7 @@
 module.exports = {
     // auth
     loginSchema: require('./auth/login'),
+    registerSchema: require('./auth/register'),
 
     // customers
     customerSchema: require('./customers/customer'),
