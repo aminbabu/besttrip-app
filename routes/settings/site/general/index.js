@@ -30,7 +30,6 @@ const { uploadGeneralSettingsFile } = require('../../../../middlewares/settings/
 /**
  * @description get general settings
  * @param {string} path - '/settings/site/general'
- * @param {function} middleware - ['site']
  * @param {function} controller - ['getGeneralSettings']
  * @returns {object} - router
  * @access public
@@ -41,7 +40,11 @@ router.get('/', getGeneralSettings);
 /**
  * @description create/update general settings
  * @param {string} path - '/settings/site/general'
- * @param {function} middleware - ['site']
+ * @param {function} middleware - [
+ * 'isAuthorized', 'isAllowed',
+ * 'validateGeneralSettingsFiles', 'validateGeneralSettings',
+ * 'uploadGeneralSettingsFile
+ * ]
  * @param {function} controller - ['updateGeneralSettings']
  * @returns {object} - router
  * @access private
