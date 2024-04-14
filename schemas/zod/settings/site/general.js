@@ -35,8 +35,8 @@ module.exports = z
                         message: 'Domain must be a valid URL',
                     })
             )
-            .min(1, {
-                message: 'Domain is required',
+            .nonempty({
+                message: 'At least one domain is required',
             }),
         description: z
             .string({

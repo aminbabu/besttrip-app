@@ -16,7 +16,8 @@ module.exports = (req, res, next) => {
     // validate request body
     const { data, error, success } = customerSchema
         .pick({ wallet: true })
-        .safeParse({ ...req.params, ...req.body });
+        .required()
+        .safeParse(req.body);
 
     // check for errors
     if (!success) {
