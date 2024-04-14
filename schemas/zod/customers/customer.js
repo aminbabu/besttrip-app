@@ -124,6 +124,18 @@ module.exports = z
                         required_error: 'Wallet transaction type is required.',
                         invalid_type_error: 'Please enter a valid wallet transaction type.',
                     }),
+                    description: z
+                        .string({
+                            invalid_type_error: 'Please enter a valid wallet description.',
+                        })
+                        .min(3, {
+                            message: 'Wallet description must be at least 3 characters long.',
+                        })
+                        .max(100, {
+                            message:
+                                'Wallet description must be between 3 and 100 characters long.',
+                        })
+                        .optional(),
                 },
                 {
                     invalid_type_error: 'Please enter a valid wallet balance and transaction type.',
