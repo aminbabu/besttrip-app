@@ -9,6 +9,5 @@
 
 // export all error handlers
 module.exports = {
-    expressValidator: require('./express-validator'),
     zodErrorHandler: require('./zod'),
 };
