@@ -54,8 +54,8 @@ module.exports = z
                         }),
                 })
             )
-            .min(1, {
-                message: 'At least one social media handle is required',
+            .nonempty({
+                message: 'At least one social media is required',
             }),
         address: z
             .string({
