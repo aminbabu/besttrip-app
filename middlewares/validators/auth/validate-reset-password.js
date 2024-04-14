@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 14 April, 2024
  */
 
 // dependencies
@@ -16,7 +16,7 @@ const { zodErrorHandler } = require('../../../handlers/errors');
 // export validate reset password middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { data, error, success } = resetPasswordSchema.safeParse(req.body);
+    const { data, error, success } = resetPasswordSchema.safeParse(req.query);
 
     // check for errors
     if (!success) {
