@@ -14,10 +14,10 @@ const { loginSchema } = require('../../../schemas/zod');
 // validate login
 module.exports = (req, res, next) => {
     // validate request body
-    const { data, error } = loginSchema.safeParse(req.body);
+    const { data, error, success } = loginSchema.safeParse(req.body);
 
     // check for errors
-    if (error) {
+    if (!success) {
         // return error response
         return zodErrorHandler(res, error);
     }
