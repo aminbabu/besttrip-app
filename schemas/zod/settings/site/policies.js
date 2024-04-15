@@ -11,25 +11,33 @@
 const { z } = require('zod');
 
 // export site policies settings schema
-module.exports = z.array(
-    z.object({
-        key: z
-            .string({
-                required_error: `${this.key} is required`,
-                invalid_type_error: `${this.key} should be a string`,
-            })
-            .min(3, {
-                message: `${this.key} should have at least 3 characters`,
-            })
-            .optional(),
-        content: z
-            .string({
-                required_error: `${this.content} is required`,
-                invalid_type_error: `${this.content} should be a string`,
-            })
-            .min(3, {
-                message: `${this.content} should have at least 3 characters`,
-            })
-            .optional(),
-    })
-);
+module.exports = z
+    .object(
+        z.array(
+            z.object({
+                key: z
+                    .string({
+                        required_error: `${this.key} is required`,
+                        invalid_type_error: `${this.key} should be a string`,
+                    })
+                    .min(3, {
+                        message: `${this.key} should have at least 3 characters`,
+                    })
+                    .optional(),
+                content: z
+                    .string({
+                        required_error: `${this.content} is required`,
+                        invalid_type_error: `${this.content} should be a string`,
+                    })
+                    .min(3, {
+                        message: `${this.content} should have at least 3 characters`,
+                    })
+                    .optional(),
+            }),
+            {
+                required_error: 'Policies settings is required',
+                invalid_type_error: 'Policies settings should be an array',
+            }
+        )
+    )
+    .strict();
