@@ -9,7 +9,7 @@
 
 // dependencies
 const { model } = require('mongoose');
-const { policiesSettingsSchema } = require('../../../schemas/mongoose');
+const { policySettingsSchema } = require('../../../schemas/mongoose');
 
 // export model
-module.exports = model('policiesSettings', policiesSettingsSchema);
+module.exports = model('policySettings', policySettingsSchema);

@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 13 April, 2024
+ * @update_date 16 April, 2024
  */
 
 // dependencies
@@ -57,7 +57,7 @@ app.use('/users', require('./routes/users'));
 app.use('/customers', require('./routes/customers'));
 app.use('/settings/site/general', require('./routes/settings/site/general'));
 app.use('/settings/site/contact', require('./routes/settings/site/contact'));
-app.use('/settings/site/policies', require('./routes/settings/site/policies'));
+app.use('/settings/site/policy', require('./routes/settings/site/policy'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

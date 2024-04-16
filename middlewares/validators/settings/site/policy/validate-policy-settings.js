@@ -1,17 +1,17 @@
 /**
- * @file /middlewares/validators/settings/site/policies/validate-policy-settings.js
+ * @file /middlewares/validators/settings/site/policy/validate-policy-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 16 April, 2024
  */
 
 // dependencies
 const { policySettingsSchema } = require('../../../../../schemas/zod/settings/site');
 const { zodErrorHandler } = require('../../../../../handlers/errors');
 
-// export site policies settings validator middleware
+// export site policy settings validator middleware
 module.exports = (req, res, next) => {
     // validate request body
     const { data, error, success } = policySettingsSchema.safeParse(req.body);

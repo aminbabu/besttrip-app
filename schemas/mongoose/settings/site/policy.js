@@ -1,10 +1,10 @@
 /**
- * @file /schemas/mongoose/settings/site/policies.js
+ * @file /schemas/mongoose/settings/site/policy.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 16 April, 2024
  */
 
 // dependencies
@@ -19,7 +19,7 @@ module.exports = new Schema(
         },
         content: {
             type: String,
-            required: [() => this.key, `Value - ${this.content} is required`],
+            required: [true, `Content - ${this.content} is required`],
         },
     },
     { timestamps: true }

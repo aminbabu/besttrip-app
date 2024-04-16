@@ -14,4 +14,5 @@ module.exports = {
     ...require('./xss-whitelist'),
     ...require('./users'),
     ...require('./customers'),
+    ...require('./policy'),
 };
