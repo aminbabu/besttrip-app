@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 16 April, 2024
  */
 
 // dependencies
@@ -63,8 +63,9 @@ module.exports = z
             })
             .optional(),
         status: z
-            .enum(CUSTOMER_STATUS, {
-                invalid_type_error: 'Please enter a valid status.',
+            .string()
+            .refine((status) => CUSTOMER_STATUS.includes(status), {
+                message: 'Please enter a valid status.',
             })
             .optional(),
         address: z
