@@ -63,7 +63,10 @@ module.exports = z
             })
             .optional(),
         status: z
-            .string()
+            .string({
+                required_error: 'Status is required.',
+                invalid_type_error: 'Please enter a valid status.',
+            })
             .refine((status) => CUSTOMER_STATUS.includes(status), {
                 message: 'Please enter a valid status.',
             })
@@ -122,10 +125,14 @@ module.exports = z
                         required_error: 'Wallet balance is required.',
                         invalid_type_error: 'Please enter a valid wallet balance.',
                     }),
-                    type: z.enum(CUSTOMER_WALLET_TRANSACTION_TYPES, {
-                        required_error: 'Wallet transaction type is required.',
-                        invalid_type_error: 'Please enter a valid wallet transaction type.',
-                    }),
+                    type: z
+                        .string({
+                            required_error: 'Wallet transaction type is required.',
+                            invalid_type_error: 'Please enter a valid wallet transaction type.',
+                        })
+                        .refine((type) => CUSTOMER_WALLET_TRANSACTION_TYPES.includes(type), {
+                            message: 'Please enter a valid wallet transaction type.',
+                        }),
                     description: z
                         .string({
                             invalid_type_error: 'Please enter a valid wallet description.',
@@ -145,8 +152,12 @@ module.exports = z
             )
             .optional(),
         role: z
-            .enum(CUSTOMER_ROLES, {
+            .string({
+                required_error: 'Role is required.',
                 invalid_type_error: 'Please enter a valid role.',
+            })
+            .refine((role) => CUSTOMER_ROLES.includes(role), {
+                message: 'Please enter a valid role.',
             })
             .optional(),
         isVerified: z

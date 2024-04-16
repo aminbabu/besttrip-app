@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 16 April, 2024
  */
 
 // dependencies
@@ -59,8 +59,12 @@ module.exports = z
             })
             .optional(),
         status: z
-            .enum(USER_STATUS, {
+            .string({
+                required_error: 'Status is required.',
                 invalid_type_error: 'Please enter a valid status.',
+            })
+            .refine((status) => USER_STATUS.includes(status), {
+                message: 'Please enter a valid status.',
             })
             .optional(),
         address: z
@@ -110,8 +114,12 @@ module.exports = z
             })
             .optional(),
         role: z
-            .enum(USER_ROLES, {
+            .string({
+                required_error: 'Role is required.',
                 invalid_type_error: 'Please enter a valid role.',
+            })
+            .refine((role) => USER_ROLES.includes(role), {
+                message: 'Please enter a valid role.',
             })
             .optional(),
         isVerified: z
