@@ -34,6 +34,9 @@ module.exports = async (req, res, next) => {
             favicon: favicon.path,
         });
 
+        // save general settings
+        await newGeneralSettings.save();
+
         // return response
         return res.status(201).json({
             message: 'Created general settings successfully',
