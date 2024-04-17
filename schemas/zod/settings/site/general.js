@@ -46,8 +46,8 @@ module.exports = z
             .min(3, {
                 message: 'Description must be at least 3 characters',
             })
-            .max(1000, {
-                message: 'Description must not be more than 1000 characters',
+            .max(255, {
+                message: 'Description must not be more than 255 characters',
             }),
     })
     .strict();
