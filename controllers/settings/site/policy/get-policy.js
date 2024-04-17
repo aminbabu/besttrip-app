@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 16 April, 2024
- * @update_date 16 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -23,7 +23,6 @@ module.exports = async (req, res, next) => {
 
         // check if policy exists
         if (!policy) {
-            // send response
             return res.status(404).json({
                 message: `No ${key.split('-').join(' ')} found`,
             });

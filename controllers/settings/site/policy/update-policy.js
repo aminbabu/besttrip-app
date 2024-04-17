@@ -21,7 +21,6 @@ module.exports = async (req, res, next) => {
 
         // check if policy exists
         if (!policy) {
-            // send response
             return res.status(404).json({
                 message: `No ${key.split('-').join(' ')} found`,
             });

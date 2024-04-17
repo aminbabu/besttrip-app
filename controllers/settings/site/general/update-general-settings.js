@@ -22,7 +22,6 @@ module.exports = async (req, res, next) => {
 
         // check if general settings exists
         if (!generalSettings) {
-            // send response
             return res.status(404).json({
                 message: 'General settings not found',
             });

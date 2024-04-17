@@ -22,7 +22,6 @@ module.exports = async (req, res, next) => {
 
         // check if general settings exists
         if (generalSettings) {
-            // send response
             return res.status(400).json({
                 message: 'General settings already exists',
             });
