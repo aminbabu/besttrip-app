@@ -26,6 +26,9 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // delete meta settings
+        await metaSetting.deleteOne();
+
         // return response
         return res.status(200).json({
             message: 'Meta settings deleted successfully',
