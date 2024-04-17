@@ -12,8 +12,8 @@ module.exports = {
     User: require('./user'),
     Token: require('./token'),
     Customer: require('./customer'),
-    GeneralSettings: require('./settings/site/general-settings'),
-    ContactSettings: require('./settings/site/contact-settings'),
-    PolicySettings: require('./settings/site/policy-settings'),
-    MetaSettings: require('./settings/site/meta-settings'),
+    GeneralSettings: require('./settings/site/general'),
+    ContactSettings: require('./settings/site/contact'),
+    PolicySettings: require('./settings/site/policy'),
+    MetaSettings: require('./settings/site/meta'),
 };
