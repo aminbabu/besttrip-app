@@ -14,7 +14,8 @@ const { MetaSettings } = require('../../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { id, name, content } = req.body;
+        const { name, content } = req.body;
+        const { id } = req.locals;
 
         // find the existing meta settings
         const metaSetting = await MetaSettings.findOne({ _id: id, name });

@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
     }
 
     // set validated data
-    req.body = data;
+    req.locals = { id: data.id };
 
     // proceed to next middleware
     return next();
