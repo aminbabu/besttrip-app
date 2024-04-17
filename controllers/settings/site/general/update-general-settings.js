@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -18,32 +18,30 @@ module.exports = async (req, res, next) => {
         const { logo, favicon } = req.files;
 
         // find the existing general settings
-        let generalSettings = await GeneralSettings.findOne();
+        const generalSettings = await GeneralSettings.findOne();
 
-        // if no settings found, create new settings
+        // check if general settings exists
         if (!generalSettings) {
-            generalSettings = new GeneralSettings({
-                ...validatedData,
-                logo: logo.path,
-                favicon: favicon.path,
-            });
-        } else {
-            // update existing settings
-            generalSettings.set({
-                ...generalSettings,
-                ...validatedData,
-                logo: logo?.path || generalSettings.logo,
-                favicon: favicon?.path || generalSettings.favicon,
+            // send response
+            return res.status(404).json({
+                message: 'General settings not found',
             });
         }
 
-        // save the updated or new general settings
-        const updatedGeneralSettings = await generalSettings.save();
+        // update general settings
+        generalSettings.set({
+            ...validatedData,
+            logo: logo ? logo[0].path : generalSettings.logo,
+            favicon: favicon ? favicon[0].path : generalSettings.favicon,
+        });
+
+        // save general settings
+        await generalSettings.save();
 
         // return success response
         return res.status(200).json({
             message: 'General settings updated successfully',
-            generalSettings: updatedGeneralSettings,
+            generalSettings,
         });
     } catch (error) {
         return next(error);

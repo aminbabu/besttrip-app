@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -16,6 +16,7 @@ const router = express.Router();
 // controllers
 const {
     getGeneralSettings,
+    createGeneralSettings,
     updateGeneralSettings,
 } = require('../../../../controllers/settings/site/general');
 
@@ -38,19 +39,41 @@ const { uploadGeneralSettingsFile } = require('../../../../middlewares/settings/
 router.get('/', getGeneralSettings);
 
 /**
- * @description create/update general settings
+ * @description create general settings
  * @param {string} path - '/settings/site/general'
  * @param {function} middleware - [
- * 'isAuthorized', 'isAllowed',
- * 'validateGeneralSettingsFiles', 'validateGeneralSettings',
- * 'uploadGeneralSettingsFile
+ * 'isAuthorized', 'isAllowed', 'validateGeneralSettingsFiles',
+ * 'validateGeneralSettings', 'uploadGeneralSettingsFile
+ * ]
+ * @param {function} controller - ['createGeneralSettings']
+ * @returns {object} - router
+ * @access private
+ * @method POST
+ */
+router.post(
+    '/',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateGeneralSettingsFiles,
+    validateGeneralSettings,
+    uploadGeneralSettingsFile.logo('/logos'),
+    uploadGeneralSettingsFile.favicon('/logos'),
+    createGeneralSettings
+);
+
+/**
+ * @description update general settings
+ * @param {string} path - '/settings/site/general'
+ * @param {function} middleware - [
+ * 'isAuthorized', 'isAllowed', 'validateGeneralSettingsFiles',
+ * 'validateGeneralSettings', 'uploadGeneralSettingsFile
  * ]
  * @param {function} controller - ['updateGeneralSettings']
  * @returns {object} - router
  * @access private
- * @method PUT
+ * @method PATCH
  */
-router.put(
+router.patch(
     '/',
     isAuthorized,
     isAllowed(['admin']),
