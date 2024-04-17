@@ -56,8 +56,13 @@ module.exports = z
                     },
                     {
                         required_error: 'At least one social media is required',
+                        invalid_type_error: 'At least one social media is required',
                     }
-                )
+                ),
+                {
+                    required_error: 'At least one social media is required',
+                    invalid_type_error: 'Social media should be an array',
+                }
             )
             .nonempty({
                 message: 'At least one social media is required',
