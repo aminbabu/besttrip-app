@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -17,26 +17,25 @@ module.exports = async (req, res, next) => {
         const validatedData = req.body;
 
         // find the existing contact settings
-        let contactSettings = await ContactSettings.findOne();
+        const contactSettings = await ContactSettings.findOne();
 
-        // if no settings found, create new settings
+        // check if contact settings exists
         if (!contactSettings) {
-            contactSettings = new ContactSettings(validatedData);
-        } else {
-            // update existing settings
-            contactSettings.set({
-                ...contactSettings,
-                ...validatedData,
+            return res.status(404).json({
+                message: 'Contact settings not found',
             });
         }
 
-        // save the updated or new contact settings
-        const updatedContactSettings = await contactSettings.save();
+        // update contact settings
+        contactSettings.set(validatedData);
 
-        // return success response
+        // save contact settings
+        await contactSettings.save();
+
+        // return response
         return res.status(200).json({
-            message: 'Contact settings updated successfully',
-            contactSettings: updatedContactSettings,
+            message: 'Updated contact settings successfully',
+            contactSettings,
         });
     } catch (error) {
         return next(error);
