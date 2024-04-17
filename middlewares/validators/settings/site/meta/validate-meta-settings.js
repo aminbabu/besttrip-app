@@ -14,7 +14,7 @@ const { zodErrorHandler } = require('../../../../../handlers/errors');
 // export meta settings validator middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { data, error, success } = metaSettingsSchema.safeParse(req.body);
+    const { data, error, success } = metaSettingsSchema.omit({ id: true }).safeParse(req.body);
 
     // check for errors
     if (!success) {
