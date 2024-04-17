@@ -54,8 +54,8 @@ router.post(
     '/',
     isAuthorized,
     isAllowed(['admin']),
-    validateGeneralSettingsFiles,
     validateGeneralSettings,
+    validateGeneralSettingsFiles,
     uploadGeneralSettingsFile.logo('/logos'),
     uploadGeneralSettingsFile.favicon('/logos'),
     createGeneralSettings
@@ -77,8 +77,8 @@ router.patch(
     '/',
     isAuthorized,
     isAllowed(['admin']),
-    validateGeneralSettingsFiles,
     validateGeneralSettings,
+    validateGeneralSettingsFiles,
     uploadGeneralSettingsFile.logo('/logos'),
     uploadGeneralSettingsFile.favicon('/logos'),
     updateGeneralSettings

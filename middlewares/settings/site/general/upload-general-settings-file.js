@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 13 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -28,7 +28,7 @@ const uploadLogo =
         }
 
         // check if general settings has logo
-        if (generalSettings.logo) {
+        if (generalSettings?.logo) {
             // delete previous logo
             fs.unlinkSync(path.join(__dirname, '../../../../public/', generalSettings.logo));
         }
@@ -63,7 +63,7 @@ const uploadFavicon =
         }
 
         // check if general settings has favicon
-        if (generalSettings.favicon) {
+        if (generalSettings?.favicon) {
             // delete previous favicon
             fs.unlinkSync(path.join(__dirname, '../../../../public/', generalSettings.favicon));
         }
