@@ -41,10 +41,9 @@ router.get('/', getGeneralSettings);
 /**
  * @description create general settings
  * @param {string} path - '/settings/site/general'
- * @param {function} middleware - [
- * 'isAuthorized', 'isAllowed', 'validateGeneralSettingsFiles',
- * 'validateGeneralSettings', 'uploadGeneralSettingsFile
- * ]
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} middleware - ['validateGeneralSettingsFiles', 'validateGeneralSettings']
+ * @param {function} middleware - ['uploadGeneralSettingsFile']
  * @param {function} controller - ['createGeneralSettings']
  * @returns {object} - router
  * @access private
@@ -64,10 +63,9 @@ router.post(
 /**
  * @description update general settings
  * @param {string} path - '/settings/site/general'
- * @param {function} middleware - [
- * 'isAuthorized', 'isAllowed', 'validateGeneralSettingsFiles',
- * 'validateGeneralSettings', 'uploadGeneralSettingsFile
- * ]
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} middleware - ['validateGeneralSettingsFiles', 'validateGeneralSettings']
+ * @param {function} middleware - ['uploadGeneralSettingsFile']
  * @param {function} controller - ['updateGeneralSettings']
  * @returns {object} - router
  * @access private
