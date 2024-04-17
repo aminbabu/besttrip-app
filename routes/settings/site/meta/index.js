@@ -71,7 +71,14 @@ router.post('/', isAuthorized, isAllowed('admin'), validateMetaSettings, createM
  * @access private - ['admin']
  * @method PATCH
  */
-router.patch('/:id', isAuthorized, isAllowed('admin'), validateMetaSettings, updateMetaSettings);
+router.patch(
+    '/:id',
+    isAuthorized,
+    isAllowed('admin'),
+    validateMetaSettingsId,
+    validateMetaSettings,
+    updateMetaSettings
+);
 
 /**
  * @description delete meta settings
