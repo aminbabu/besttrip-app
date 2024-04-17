@@ -46,7 +46,7 @@ router.get('/', getGeneralSettings);
  * @param {function} middleware - ['uploadGeneralSettingsFile']
  * @param {function} controller - ['createGeneralSettings']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method POST
  */
 router.post(
@@ -68,7 +68,7 @@ router.post(
  * @param {function} middleware - ['uploadGeneralSettingsFile']
  * @param {function} controller - ['updateGeneralSettings']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method PATCH
  */
 router.patch(

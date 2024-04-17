@@ -44,7 +44,7 @@ router.get('/', validatePolicySettingsKey, getPolicy);
  * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validatePolicySettings']
  * @param {function} controller - ['createPolicy']
  * @returns {object} - router
- * @access public
+ * @access private - ['admin']
  * @method POST
  */
 router.post('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, createPolicy);
@@ -55,7 +55,7 @@ router.post('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, cre
  * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validatePolicySettings']
  * @param {function} controller - ['updatePolicy']
  * @returns {object} - router
- * @access public
+ * @access private - ['admin']
  * @method PATCH
  */
 router.patch('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, updatePolicy);

@@ -42,7 +42,7 @@ router.get('/', getContactSettings);
  * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validateContactSettings']
  * @param {function} controller - ['createContactSettings']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method POST
  */
 router.post(
@@ -59,7 +59,7 @@ router.post(
  * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validateContactSettings']
  * @param {function} controller - ['updateContactSettings']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method PATCH
  */
 router.patch(

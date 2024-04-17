@@ -56,7 +56,7 @@ router.get('/:id', validateMetaSettingsId, getMetaSettingsById);
  * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validateMetaSettings']
  * @param {function} controller - ['createMetaSettings']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method POST
  */
 router.post('/', isAuthorized, isAllowed('admin'), validateMetaSettings, createMetaSettings);
@@ -68,7 +68,7 @@ router.post('/', isAuthorized, isAllowed('admin'), validateMetaSettings, createM
  * @param {function} middleware - ['validateMetaSettingsId', 'validateMetaSettings']
  * @param {function} controller - ['updateMetaSettings']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method PATCH
  */
 router.patch(
@@ -86,7 +86,7 @@ router.patch(
  * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validateMetaSettingsId']
  * @param {function} controller - ['deleteMetaSettings']
  * @returns {object} - router
- * @access private
+ * @access private - ['admin']
  * @method DELETE
  */
 router.delete('/:id', isAuthorized, isAllowed('admin'), validateMetaSettingsId, deleteMetaSettings);
