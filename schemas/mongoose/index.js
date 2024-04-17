@@ -15,5 +15,5 @@ module.exports = {
     generalSettingsSchema: require('./settings/site/general'),
     contactSettingsSchema: require('./settings/site/contact'),
     policySettingsSchema: require('./settings/site/policy'),
-    metaSettingsSchema: require('./settings/site/meta-settings'),
+    metaSettingsSchema: require('./settings/site/meta'),
 };
