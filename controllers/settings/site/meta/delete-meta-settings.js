@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
-            message: 'Meta settings deleted successfully',
+            message: 'Deleted meta settings successfully',
             metaSetting,
         });
     } catch (error) {
