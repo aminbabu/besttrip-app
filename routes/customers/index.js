@@ -41,7 +41,6 @@ const { uploadAvatar } = require('../../middlewares/files');
  * @param {string} path - /customers
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
- * @access private
  * @method USE
  */
 router.use(isAuthorized);
