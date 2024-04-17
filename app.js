@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 16 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -21,7 +21,7 @@ const cors = require('cors');
 const expressFileUpload = require('express-fileupload');
 
 // config
-const { createDbConnection, env, expressFileUploadConf } = require('./config');
+const { createDBConnection, env, expressFileUploadConf } = require('./config');
 
 // constants
 const { WHITE_LIST } = require('./constants');
@@ -33,7 +33,7 @@ dotenv.config();
 const app = express();
 
 // database connection
-createDbConnection();
+createDBConnection();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
