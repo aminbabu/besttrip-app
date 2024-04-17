@@ -27,7 +27,10 @@ module.exports = async (req, res, next) => {
         }
 
         // create policy
-        const newPolicy = await PolicySettings.create({ key, content });
+        const newPolicy = new PolicySettings({ key, content });
+
+        // save policy
+        await newPolicy.save();
 
         // return response
         return res.status(201).json({

@@ -27,7 +27,10 @@ module.exports = async (req, res, next) => {
         }
 
         // create contact settings
-        const contactSettings = await ContactSettings.create(validatedData);
+        const contactSettings = new ContactSettings(validatedData);
+
+        // save contact settings
+        await contactSettings.save();
 
         // return response
         return res.status(201).json({
