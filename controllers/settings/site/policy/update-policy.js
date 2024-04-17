@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 16 April, 2024
- * @update_date 16 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -31,12 +31,12 @@ module.exports = async (req, res, next) => {
         policy.set({ content });
 
         // save policy
-        const updatedPolicy = await policy.save();
+        await policy.save();
 
         // return response
         return res.status(200).json({
             message: `Policy with key - ${key.split('-').join(' ')} updated successfully`,
-            policy: updatedPolicy,
+            policy,
         });
     } catch (error) {
         return next(error);
