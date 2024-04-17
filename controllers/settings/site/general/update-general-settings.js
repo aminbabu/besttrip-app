@@ -37,7 +37,7 @@ module.exports = async (req, res, next) => {
         // save general settings
         await generalSettings.save();
 
-        // return success response
+        // return response
         return res.status(200).json({
             message: 'General settings updated successfully',
             generalSettings,
