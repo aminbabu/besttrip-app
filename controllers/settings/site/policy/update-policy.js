@@ -34,7 +34,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
-            message: `Policy with key - ${key.split('-').join(' ')} updated successfully`,
+            message: `Updated ${key.split('-').join(' ')} successfully`,
             policy,
         });
     } catch (error) {

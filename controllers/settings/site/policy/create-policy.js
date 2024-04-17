@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(201).json({
-            message: `Policy with key - ${key.split('-').join(' ')} created successfully`,
+            message: `Created ${key.split('-').join(' ')} successfully`,
             policy: newPolicy,
         });
     } catch (error) {
