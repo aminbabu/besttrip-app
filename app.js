@@ -59,6 +59,7 @@ app.use('/settings/site/general', require('./routes/settings/site/general'));
 app.use('/settings/site/contact', require('./routes/settings/site/contact'));
 app.use('/settings/site/policy', require('./routes/settings/site/policy'));
 app.use('/settings/site/meta', require('./routes/settings/site/meta'));
+app.use('/settings/payments', require('./routes/settings/payments'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
