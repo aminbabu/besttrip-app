@@ -10,7 +10,8 @@
 // export meta settings controllers
 module.exports = {
     getMetaSettings: require('./get-meta-settings'),
-    getMetaSettingById: require('./get-meta-setting-by-id'),
+    getMetaSettingsById: require('./get-meta-settings-by-id'),
     createMetaSettings: require('./create-meta-settings'),
     updateMetaSettings: require('./update-meta-settings'),
+    deleteMetaSettings: require('./delete-meta-settings'),
 };
