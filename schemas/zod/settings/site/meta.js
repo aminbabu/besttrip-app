@@ -11,41 +11,23 @@
 const { z } = require('zod');
 
 // export meta data schema
-module.exports = z
-    .object(
-        z
-            .array(
-                z.object({
-                    name: z
-                        .string({
-                            required_error: 'Meta name is required',
-                            invalid_type_error: 'Meta name must be a string',
-                        })
-                        .trim()
-                        .min(3, {
-                            message: 'Meta name must be at least 3 characters',
-                        }),
-                    content: z
-                        .string({
-                            required_error: 'Meta content is required',
-                            invalid_type_error: 'Meta content must be a string',
-                        })
-                        .trim()
-                        .min(3, {
-                            message: 'Meta content must be at least 3 characters',
-                        }),
-                }),
-                {
-                    required_error: 'Meta data is required',
-                    invalid_type_error: 'Meta data must be an array',
-                }
-            )
-            .nonempty({
-                message: 'Meta data is required',
-            }),
-        {
-            required_error: 'Meta data is required',
-            invalid_type_error: 'Meta data must be an object',
-        }
-    )
-    .strict();
+(module.exports = z.object({
+    name: z
+        .string({
+            required_error: 'Meta name is required',
+            invalid_type_error: 'Meta name must be a string',
+        })
+        .trim()
+        .min(3, {
+            message: 'Meta name must be at least 3 characters',
+        }),
+    content: z
+        .string({
+            required_error: 'Meta content is required',
+            invalid_type_error: 'Meta content must be a string',
+        })
+        .trim()
+        .min(3, {
+            message: 'Meta content must be at least 3 characters',
+        }),
+})).strict();
