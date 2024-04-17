@@ -39,7 +39,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
-            message: 'General settings updated successfully',
+            message: 'Updated general settings successfully',
             generalSettings,
         });
     } catch (error) {
