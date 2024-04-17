@@ -1,10 +1,10 @@
 /**
- * @file /models/settings/GeneralSettings.js
+ * @file /models/settings/site/general-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
