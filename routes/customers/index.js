@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 14 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -82,10 +82,9 @@ router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllC
 /**
  * @description update customer by self
  * @param {string} path - /customers/self
- * @param {function} middleware - [
- * 'isAllowed', 'validateAvatar',
- * 'validateExistedCustomerAccount', 'validateCustomerSelf'
- * ]
+ * @param {function} middleware - ['isAllowed', 'validateAvatar']
+ * @param {function} middleware - ['validateExistedCustomerAccount', 'validateCustomerSelf']
+ * @param {function} middleware - ['uploadAvatar']
  * @param {function} controller - ['updateCustomerBySelf']
  * @returns {object} - router
  * @access private - ['customer']
@@ -104,10 +103,9 @@ router.patch(
 /**
  * @description update customer by mongo id
  * @param {string} path - /customers/:id
- * @param {function} middleware - [
- * 'isAllowed', 'validateAvatar',
- * 'validateExistedCustomerAccount', 'validateCustomer'
- * ]
+ * @param {function} middleware - ['isAllowed', 'validateAvatar']
+ * @param {function} middleware - ['validateExistedCustomerAccount', 'validateCustomer']
+ * @param {function} middleware - ['uploadAvatar']
  * @param {function} controller - ['updateCustomerById']
  * @returns {object} - router
  * @access private - ['admin']
