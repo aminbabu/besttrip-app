@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -32,27 +32,32 @@ module.exports = z
             }),
         social: z
             .array(
-                z.object({
-                    name: z
-                        .string({
-                            required_error: 'Name is required',
-                            invalid_type_error: 'Name must be a string',
-                        })
-                        .min(3, {
-                            message: 'Name must be at least 3 characters',
-                        })
-                        .max(255, {
-                            message: 'Name must not be more than 255 characters',
-                        }),
-                    url: z
-                        .string({
-                            required_error: 'URL is required',
-                            invalid_type_error: 'URL must be a string',
-                        })
-                        .url({
-                            message: 'URL must be a valid URL',
-                        }),
-                })
+                z.object(
+                    {
+                        name: z
+                            .string({
+                                required_error: 'Name is required',
+                                invalid_type_error: 'Name must be a string',
+                            })
+                            .min(3, {
+                                message: 'Name must be at least 3 characters',
+                            })
+                            .max(255, {
+                                message: 'Name must not be more than 255 characters',
+                            }),
+                        url: z
+                            .string({
+                                required_error: 'URL is required',
+                                invalid_type_error: 'URL must be a string',
+                            })
+                            .url({
+                                message: 'URL must be a valid URL',
+                            }),
+                    },
+                    {
+                        required_error: 'At least one social media is required',
+                    }
+                )
             )
             .nonempty({
                 message: 'At least one social media is required',
