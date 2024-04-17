@@ -30,8 +30,8 @@ module.exports = async (req, res, next) => {
         // update general settings
         generalSettings.set({
             ...validatedData,
-            logo: logo ? logo[0].path : generalSettings.logo,
-            favicon: favicon ? favicon[0].path : generalSettings.favicon,
+            logo: logo?.path || generalSettings.logo,
+            favicon: favicon?.path || generalSettings.favicon,
         });
 
         // save general settings
