@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 16 April, 2024
+ * @update_date 17 April, 2024
  */
 
 // dependencies
@@ -22,10 +22,10 @@ module.exports = z
         id: z
             .string({
                 required_error: 'Id is required.',
-                invalid_type_error: 'Please enter a valid id.',
+                invalid_type_error: 'Please provide a valid id.',
             })
             .refine((id) => isMongoId(id), {
-                message: 'Please enter a valid id.',
+                message: 'Please provide a valid id.',
             }),
         name: z
             .string({
