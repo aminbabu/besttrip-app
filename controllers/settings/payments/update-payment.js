@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 17 April, 2024
- * @update_date 17 April 2024
+ * @update_date 18 April 2024
  */
 
 // dependencies
@@ -14,7 +14,8 @@ const { PaymentsSettings } = require('../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { id, ...validatedData } = req.body;
+        const { id } = req.params;
+        const validatedData = req.body;
 
         // get payments settings
         const paymentsSetting = await PaymentsSettings.findById(id);

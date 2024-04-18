@@ -14,7 +14,7 @@ const { PaymentsSettings } = require('../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { id } = req.body;
+        const { id } = req.params;
 
         // get payments settings
         const paymentsSetting = await PaymentsSettings.findById(id);
