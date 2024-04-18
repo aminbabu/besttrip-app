@@ -14,7 +14,7 @@ const { MetaSettings } = require('../../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { id } = req.locals;
+        const { id } = req.params;
 
         // get meta settings by id
         const metaSetting = await MetaSettings.findById(id);
