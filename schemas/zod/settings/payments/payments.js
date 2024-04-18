@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 17 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 18 April, 2024
  */
 
 // dependencies
@@ -76,6 +76,7 @@ module.exports = z
                 required_error: 'Status is required',
                 invalid_type_error: 'Status should be a string',
             })
+            .default('active')
             .refine((status) => PAYMENTS_STATUS.includes(status), {
                 message: 'Invalid status value',
             }),
