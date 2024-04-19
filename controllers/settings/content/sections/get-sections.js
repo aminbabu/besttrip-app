@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
-            message: 'Content sections settings fetched successfully',
+            message: 'Fetched content sections successfully',
             sections,
         });
     } catch (error) {
