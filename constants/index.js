@@ -19,4 +19,5 @@ module.exports = {
     ...require('./sections'),
     ...require('./exclusive-offers'),
     ...require('./hotel-offers'),
+    ...require('./flight-offers'),
 };

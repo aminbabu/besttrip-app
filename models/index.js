@@ -20,4 +20,5 @@ module.exports = {
     SectionSettings: require('./settings/content/section'),
     ExclusiveOffer: require('./settings/content/exclusive-offer'),
     HotelOffer: require('./settings/content/hotel-offer'),
+    FlightOffer: require('./settings/content/flight-offer'),
 };

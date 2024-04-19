@@ -12,4 +12,5 @@ module.exports = {
     sectionSettingsSchema: require('./section'),
     exclusiveOfferSchema: require('./exclusive-offer'),
     hotelOfferSchema: require('./hotel-offer'),
+    flightOfferSchema: require('./flight-offer'),
 };
