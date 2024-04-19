@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { EXCLUSIVE_STATUS } = require('../../../../constants');
+const { HOTEL_STATUS } = require('../../../../constants');
 
 // export hotel content settings schema
 module.exports = new Schema(
@@ -40,7 +40,7 @@ module.exports = new Schema(
         },
         status: {
             type: String,
-            enum: EXCLUSIVE_STATUS,
+            enum: HOTEL_STATUS,
             required: [true, 'Status is required'],
         },
     },
