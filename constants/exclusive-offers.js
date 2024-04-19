@@ -10,7 +10,7 @@
 // exclusive status
 const EXCLUSIVE_STATUS = ['active', 'disabled'];
 
-// export payments constants
+// export exclusive constants
 module.exports = {
     EXCLUSIVE_STATUS,
 };
