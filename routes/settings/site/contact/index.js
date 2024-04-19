@@ -16,8 +16,7 @@ const router = express.Router();
 // controllers
 const {
     getContactSettings,
-    createContactSettings,
-    updateContactSettings,
+    updateOrCreateContactSettings,
 } = require('../../../../controllers/settings/site/contact');
 
 // middlewares
@@ -37,24 +36,6 @@ const {
 router.get('/', getContactSettings);
 
 /**
- * @description create contact settings
- * @param {string} path - '/settings/site/contact'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} validator - ['validateContactSettings']
- * @param {function} controller - ['createContactSettings']
- * @returns {object} - router
- * @access private - ['admin']
- * @method POST
- */
-router.post(
-    '/',
-    isAuthorized,
-    isAllowed(['admin']),
-    validateContactSettings,
-    createContactSettings
-);
-
-/**
  * @description update contact settings
  * @param {string} path - '/settings/site/contact'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
@@ -69,7 +50,7 @@ router.patch(
     isAuthorized,
     isAllowed(['admin']),
     validateContactSettings,
-    updateContactSettings
+    updateOrCreateContactSettings
 );
 
 // export router

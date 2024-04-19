@@ -1,33 +1,30 @@
 /**
- * @file /controllers/settings/site/contact/updateContactSettings.js
+ * @file /controllers/settings/site/contact/update-or-create-contact-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
 const { ContactSettings } = require('../../../../models');
 
-// export update contact settings controller
+// export update/create contact settings controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
         const validatedData = req.body;
 
         // find the existing contact settings
-        const contactSettings = await ContactSettings.findOne();
+        let contactSettings = await ContactSettings.findOne();
 
         // check if contact settings exists
-        if (!contactSettings) {
-            return res.status(404).json({
-                message: 'Contact settings not found',
-            });
+        if (contactSettings) {
+            contactSettings.set(validatedData);
+        } else {
+            contactSettings = new ContactSettings(validatedData);
         }
-
-        // update contact settings
-        contactSettings.set(validatedData);
 
         // save contact settings
         await contactSettings.save();
