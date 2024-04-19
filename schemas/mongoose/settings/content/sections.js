@@ -13,6 +13,11 @@ const { Schema } = require('mongoose');
 // export section content settings schema
 module.exports = new Schema(
     {
+        section: {
+            type: String,
+            required: [true, 'Section is required'],
+            unique: true,
+        },
         title: {
             type: String,
             required: [true, 'Title is required'],

@@ -9,18 +9,20 @@
 
 // dependencies
 const { z } = require('zod');
-const { isMongoId } = require('validator');
 
 // export content sections settings schema
 module.exports = z
     .object({
-        id: z
+        section: z
             .string({
-                required_error: 'Id is required.',
-                invalid_type_error: 'Please provide a valid id.',
+                required_error: 'Section is required.',
+                invalid_type_error: 'Please provide a valid section.',
             })
-            .refine((id) => isMongoId(id), {
-                message: 'Please provide a valid id.',
+            .min(3, {
+                message: 'Section should be at least 3 characters.',
+            })
+            .max(255, {
+                message: 'Section should not be more than 255 characters.',
             }),
         title: z
             .string({
