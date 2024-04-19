@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -42,7 +42,7 @@ router.get('/', getGeneralSettings);
  * @description create general settings
  * @param {string} path - '/settings/site/general'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} middleware - ['validateGeneralSettingsFiles', 'validateGeneralSettings']
+ * @param {function} validator - ['validateGeneralSettingsFiles', 'validateGeneralSettings']
  * @param {function} middleware - ['uploadGeneralSettingsFile']
  * @param {function} controller - ['createGeneralSettings']
  * @returns {object} - router
@@ -64,7 +64,7 @@ router.post(
  * @description update general settings
  * @param {string} path - '/settings/site/general'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} middleware - ['validateGeneralSettingsFiles', 'validateGeneralSettings']
+ * @param {function} validator - ['validateGeneralSettingsFiles', 'validateGeneralSettings']
  * @param {function} middleware - ['uploadGeneralSettingsFile']
  * @param {function} controller - ['updateGeneralSettings']
  * @returns {object} - router

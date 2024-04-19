@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 17 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -42,7 +42,7 @@ router.get('/', getMetaSettings);
 /**
  * @description get meta settings by id
  * @param {string} path - '/settings/site/meta/:id'
- * @param {function} middleware - ['validateMetaSettingsId']
+ * @param {function} validator - ['validateMetaSettingsId']
  * @param {function} controller - ['getMetaSettingsById']
  * @returns {object} - router
  * @access public
@@ -53,7 +53,8 @@ router.get('/:id', validateMetaSettingsId, getMetaSettingsById);
 /**
  * @description create meta settings
  * @param {string} path - '/settings/site/meta'
- * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validateMetaSettings']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validateMetaSettings']
  * @param {function} controller - ['createMetaSettings']
  * @returns {object} - router
  * @access private - ['admin']
@@ -65,7 +66,7 @@ router.post('/', isAuthorized, isAllowed('admin'), validateMetaSettings, createM
  * @description update meta settings
  * @param {string} path - '/settings/site/meta/:id'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} middleware - ['validateMetaSettingsId', 'validateMetaSettings']
+ * @param {function} validator - ['validateMetaSettingsId', 'validateMetaSettings']
  * @param {function} controller - ['updateMetaSettings']
  * @returns {object} - router
  * @access private - ['admin']
@@ -83,7 +84,8 @@ router.patch(
 /**
  * @description delete meta settings
  * @param {string} path - '/settings/site/meta/:id'
- * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validateMetaSettingsId']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validateMetaSettingsId']
  * @param {function} controller - ['deleteMetaSettings']
  * @returns {object} - router
  * @access private - ['admin']

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 17 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -42,6 +42,7 @@ router.get('/', getPayments);
 /**
  * @description - get payments settings by id
  * @param {string} path - '/settings/payments/:id'
+ * @param {function} validator - ['validatePaymentId']
  * @param {function} controller - ['getPayment']
  * @returns {object} - router
  * @access public
@@ -52,7 +53,8 @@ router.get('/:id', validatePaymentId, getPayment);
 /**
  * @description - create payments settings
  * @param {string} path - '/settings/payments'
- * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validatePayment']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validatePayment']
  * @param {function} controller - ['createPayment']
  * @returns {object} - router
  * @access private - ['admin']
@@ -64,7 +66,7 @@ router.post('/', isAuthorized, isAllowed('admin'), validatePayment, createPaymen
  * @description - update payments settings
  * @param {string} path - '/settings/payments/:id'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} middleware - ['validatePaymentId', 'validatePayment']
+ * @param {function} validator - ['validatePaymentId', 'validatePayment']
  * @param {function} controller - ['updatePayment']
  * @returns {object} - router
  * @access private - ['admin']
@@ -83,7 +85,7 @@ router.patch(
  * @description - delete payments settings
  * @param {string} path - '/settings/payments/:id'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} middleware - ['validatePaymentId']
+ * @param {function} validator - ['validatePaymentId']
  * @param {function} controller - ['deletePayment']
  * @returns {object} - router
  * @access private - ['admin']

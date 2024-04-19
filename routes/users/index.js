@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -61,7 +61,8 @@ router.get('/', isAllowed(['admin']), getAllUsers);
 /**
  * @description get user by mongo id
  * @param {string} path - /users/:id
- * @param {function} middleware - ['isAllowed', 'validateUserId']
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateUserId']
  * @param {function} controller - ['getUserById']
  * @returns {object} - router
  * @access private - ['admin']
@@ -72,7 +73,9 @@ router.get('/:id', isAllowed(['admin']), validateUserId, getUserById);
 /**
  * @description update user by self
  * @param {string} path - /users/self
- * @param {function} middleware - ['isAllowed', 'validateUserSelf']
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateAvatar', 'validateExistedUserAccount']
+ * @param {function} validator - ['validateUserSelf']
  * @param {function} controller - ['updateUserBySelf']
  * @returns {object} - router
  * @access private - [USER_ROLES]
@@ -91,7 +94,9 @@ router.patch(
 /**
  * @description update user by mongo id
  * @param {string} path - /users/:id
- * @param {function} middleware - ['isAllowed', 'validateUser']
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateAvatar', 'validateExistedUserAccount']
+ * @param {function} validator - ['validateUser']
  * @param {function} controller - ['updateUserById']
  * @returns {object} - router
  * @access private - ['admin']
@@ -110,7 +115,8 @@ router.patch(
 /**
  * @description delete user by mongo id
  * @param {string} path - /users/:id
- * @param {function} middleware - ['isAllowed', 'validateUserId']
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateUserId']
  * @param {function} controller - ['deleteUserById']
  * @returns {object} - router
  * @access private - ['admin']

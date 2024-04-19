@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 16 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -30,7 +30,8 @@ const {
 /**
  * @description get policy settings
  * @param {string} path - '/settings/site/policy/'
- * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validatePolicySettingsKey']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validatePolicySettingsKey']
  * @param {function} controller - ['getPolicy']
  * @returns {object} - router
  * @access public
@@ -41,7 +42,8 @@ router.get('/', validatePolicySettingsKey, getPolicy);
 /**
  * @description create policy settings
  * @param {string} path - '/settings/site/policy'
- * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validatePolicySettings']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validatePolicySettings']
  * @param {function} controller - ['createPolicy']
  * @returns {object} - router
  * @access private - ['admin']
@@ -52,7 +54,8 @@ router.post('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, cre
 /**
  * @description update policy settings
  * @param {string} path - '/settings/site/policy'
- * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validatePolicySettings']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validatePolicySettings']
  * @param {function} controller - ['updatePolicy']
  * @returns {object} - router
  * @access private - ['admin']

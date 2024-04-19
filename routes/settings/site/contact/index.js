@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -39,7 +39,8 @@ router.get('/', getContactSettings);
 /**
  * @description create contact settings
  * @param {string} path - '/settings/site/contact'
- * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validateContactSettings']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validateContactSettings']
  * @param {function} controller - ['createContactSettings']
  * @returns {object} - router
  * @access private - ['admin']
@@ -56,7 +57,8 @@ router.post(
 /**
  * @description update contact settings
  * @param {string} path - '/settings/site/contact'
- * @param {function} middleware - ['isAuthorized', 'isAllowed', 'validateContactSettings']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validateContactSettings']
  * @param {function} controller - ['updateContactSettings']
  * @returns {object} - router
  * @access private - ['admin']

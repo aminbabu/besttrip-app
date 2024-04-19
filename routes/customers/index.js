@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -59,7 +59,8 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
 /**
  * @description get customer by mongo id
  * @param {string} path - /customers/:id
- * @param {function} middleware - ['isAllowed', 'validateCustomerId']
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateCustomerId']
  * @param {function} controller - ['getCustomerById']
  * @returns {object} - router
  * @access private - ['admin']
@@ -70,7 +71,8 @@ router.get('/:id', isAllowed(['admin']), validateCustomerId, getCustomerById);
 /**
  * @description update all customers wallet
  * @param {string} path - /customers/wallet
- * @param {function} middleware - ['isAllowed', 'validateCustomerWallet']
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateCustomerWallet']
  * @param {function} controller - ['updateAllCustomers']
  * @returns {object} - router
  * @access private - ['admin']
@@ -81,9 +83,9 @@ router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllC
 /**
  * @description update customer by self
  * @param {string} path - /customers/self
- * @param {function} middleware - ['isAllowed', 'validateAvatar']
- * @param {function} middleware - ['validateExistedCustomerAccount', 'validateCustomerSelf']
- * @param {function} middleware - ['uploadAvatar']
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateAvatar', 'validateExistedCustomerAccount']
+ * @param {function} validator - ['validateCustomerSelf']
  * @param {function} controller - ['updateCustomerBySelf']
  * @returns {object} - router
  * @access private - ['customer']
@@ -102,8 +104,9 @@ router.patch(
 /**
  * @description update customer by mongo id
  * @param {string} path - /customers/:id
- * @param {function} middleware - ['isAllowed', 'validateAvatar']
- * @param {function} middleware - ['validateExistedCustomerAccount', 'validateCustomer']
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateAvatar', 'validateExistedCustomerAccount']
+ * @param {function} validator - ['validateCustomer']
  * @param {function} middleware - ['uploadAvatar']
  * @param {function} controller - ['updateCustomerById']
  * @returns {object} - router
@@ -123,7 +126,8 @@ router.patch(
 /**
  * @description delete customer by mongo id
  * @param {string} path - /customers/:id
- * @param {function} middleware - ['isAllowed', 'validateCustomerId']
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateCustomerId']
  * @param {function} controller - ['deleteCustomerById']
  * @returns {object} - router
  * @access private - ['admin']
