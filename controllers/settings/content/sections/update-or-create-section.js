@@ -27,6 +27,7 @@ module.exports = async (req, res, next) => {
             });
         } else {
             section = new ContentSectionsSettings({
+                key,
                 title,
                 description,
             });
