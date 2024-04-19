@@ -14,7 +14,10 @@ const { zodErrorHandler } = require('../../../../../handlers/errors');
 // export payments settings validator middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { data, error, success } = contentSectionsSettingsSchema.safeParse(req.body);
+    const { data, error, success } = contentSectionsSettingsSchema.safeParse({
+        ...req.query,
+        ...req.body,
+    });
 
     // check for errors
     if (!success) {

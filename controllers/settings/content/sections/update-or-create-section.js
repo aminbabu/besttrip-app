@@ -14,32 +14,31 @@ const { ContentSectionsSettings } = require('../../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get section id
-        const { id } = req.params;
-        const { title, description } = req.body;
+        const { section, title, description } = req.body;
 
         // get section
-        let section = await ContentSectionsSettings.findById(id);
+        let existingSection = await ContentSectionsSettings.findById(section);
 
         // check if section exists
-        if (section) {
+        if (existingSection) {
             section.set({
                 title,
                 description,
             });
         } else {
-            section = new ContentSectionsSettings({
+            existingSection = new ContentSectionsSettings({
                 title,
                 description,
             });
         }
 
         // save section
-        await section.save();
+        await existingSection.save();
 
         // return response
         return res.status(200).json({
             message: 'Updated content section settings successfully',
-            section,
+            section: existingSection,
         });
     } catch (error) {
         return next(error);
