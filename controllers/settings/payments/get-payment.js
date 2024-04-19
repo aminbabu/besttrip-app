@@ -4,11 +4,11 @@
  * @version 0.0.0
  * @author best-trip
  * @date 17 April, 2024
- * @update_date 17 April 2024
+ * @update_date 19 April 2024
  */
 
 // dependencies
-const { PaymentsSettings } = require('../../../models');
+const { PaymentSettings } = require('../../../models');
 
 // export get payments settings by id controller
 module.exports = async (req, res, next) => {
@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const { id } = req.params;
 
         // get payments settings
-        const paymentsSetting = await PaymentsSettings.findById(id);
+        const paymentsSetting = await PaymentSettings.findById(id);
 
         // check if payments settings exist
         if (!paymentsSetting) {

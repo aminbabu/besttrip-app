@@ -16,10 +16,10 @@ const router = express.Router();
 // controllers
 const {
     getMetaSettings,
-    getMetaSettingsById,
-    createMetaSettings,
-    updateMetaSettings,
-    deleteMetaSettings,
+    getMetaSetting,
+    createMetaSetting,
+    updateMetaSetting,
+    deleteMetaSetting,
 } = require('../../../../controllers/settings/site/meta');
 
 // middlewares
@@ -43,31 +43,31 @@ router.get('/', getMetaSettings);
  * @description get meta settings by id
  * @param {string} path - '/settings/site/meta/:id'
  * @param {function} validator - ['validateMetaSettingsId']
- * @param {function} controller - ['getMetaSettingsById']
+ * @param {function} controller - ['getMetaSetting']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/:id', validateMetaSettingsId, getMetaSettingsById);
+router.get('/:id', validateMetaSettingsId, getMetaSetting);
 
 /**
  * @description create meta settings
  * @param {string} path - '/settings/site/meta'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateMetaSettings']
- * @param {function} controller - ['createMetaSettings']
+ * @param {function} controller - ['createMetaSetting']
  * @returns {object} - router
  * @access private - ['admin']
  * @method POST
  */
-router.post('/', isAuthorized, isAllowed('admin'), validateMetaSettings, createMetaSettings);
+router.post('/', isAuthorized, isAllowed('admin'), validateMetaSettings, createMetaSetting);
 
 /**
  * @description update meta settings
  * @param {string} path - '/settings/site/meta/:id'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateMetaSettingsId', 'validateMetaSettings']
- * @param {function} controller - ['updateMetaSettings']
+ * @param {function} controller - ['updateMetaSetting']
  * @returns {object} - router
  * @access private - ['admin']
  * @method PATCH
@@ -78,7 +78,7 @@ router.patch(
     isAllowed('admin'),
     validateMetaSettingsId,
     validateMetaSettings,
-    updateMetaSettings
+    updateMetaSetting
 );
 
 /**
@@ -86,12 +86,12 @@ router.patch(
  * @param {string} path - '/settings/site/meta/:id'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateMetaSettingsId']
- * @param {function} controller - ['deleteMetaSettings']
+ * @param {function} controller - ['deleteMetaSetting']
  * @returns {object} - router
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAuthorized, isAllowed('admin'), validateMetaSettingsId, deleteMetaSettings);
+router.delete('/:id', isAuthorized, isAllowed('admin'), validateMetaSettingsId, deleteMetaSetting);
 
 // export router
 module.exports = router;

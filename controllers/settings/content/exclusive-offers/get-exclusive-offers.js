@@ -8,13 +8,13 @@
  */
 
 // dependencies
-const { ContentExclusiveOffers } = require('../../../../models');
+const { ExclusiveOffer } = require('../../../../models');
 
 // export get exclusive offers controller
 module.exports = async (req, res, next) => {
     try {
         // get exclusive offers
-        const exclusiveOffers = await ContentExclusiveOffers.find();
+        const exclusiveOffers = await ExclusiveOffer.find();
 
         // send response
         return res.send({

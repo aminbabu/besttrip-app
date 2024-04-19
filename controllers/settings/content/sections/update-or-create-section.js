@@ -8,16 +8,17 @@
  */
 
 // dependencies
-const { ContentSectionsSettings } = require('../../../../models');
+const { SectionSettings } = require('../../../../models');
 
 // export update/create content section settings controller
 module.exports = async (req, res, next) => {
     try {
-        // get section id
-        const { key, title, description } = req.body;
+        // get validated data
+        const { key } = req.params;
+        const { title, description } = req.body;
 
         // get section
-        let section = await ContentSectionsSettings.findOne({ key });
+        let section = await SectionSettings.findOne({ key });
 
         // check if section exists
         if (section) {
@@ -26,7 +27,7 @@ module.exports = async (req, res, next) => {
                 description,
             });
         } else {
-            section = new ContentSectionsSettings({
+            section = new SectionSettings({
                 key,
                 title,
                 description,

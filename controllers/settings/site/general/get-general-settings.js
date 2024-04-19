@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 13 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -15,13 +15,6 @@ module.exports = async (req, res, next) => {
     try {
         // get general settings
         const generalSettings = await GeneralSettings.findOne();
-
-        // check if general settings exists
-        if (!generalSettings) {
-            return res.status(404).json({
-                message: 'General settings not found',
-            });
-        }
 
         // return response
         return res.status(200).json({

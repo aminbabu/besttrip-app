@@ -9,7 +9,7 @@
 
 // dependencies
 const { model } = require('mongoose');
-const { contentExclusiveOffersSchema } = require('../../../schemas/mongoose');
+const { exclusiveOfferSchema } = require('../../../schemas/mongoose');
 
 // export model
-module.exports = model('ContentExclusiveOffers', contentExclusiveOffersSchema);
+module.exports = model('ExclusiveOffer', exclusiveOfferSchema);

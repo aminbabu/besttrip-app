@@ -8,13 +8,13 @@
  */
 
 // dependencies
-const { contentExclusiveOffersSchema } = require('../../../../../schemas/zod/settings/content');
+const { exclusiveOfferSchema } = require('../../../../../schemas/zod/settings/content');
 const { zodErrorHandler } = require('../../../../../handlers/errors');
 
 // export exclusive offer validator middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = contentExclusiveOffersSchema.omit({ id: true }).safeParse(req.body);
+    const { error, success } = exclusiveOfferSchema.omit({ id: true }).safeParse(req.body);
 
     // check for errors
     if (!success) {

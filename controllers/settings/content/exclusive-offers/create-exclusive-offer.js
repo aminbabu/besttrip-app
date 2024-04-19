@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { ContentExclusiveOffers } = require('../../../../models');
+const { ExclusiveOffer } = require('../../../../models');
 
 // export create exclusive offer controller
 module.exports = async (req, res, next) => {
@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const { link, status } = req.body;
 
         // create exclusive offer
-        const exclusiveOffer = await ContentExclusiveOffers.create({
+        const exclusiveOffer = await ExclusiveOffer.create({
             link,
             status,
         });

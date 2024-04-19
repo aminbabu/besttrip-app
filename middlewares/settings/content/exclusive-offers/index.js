@@ -9,5 +9,5 @@
 
 // export exclusive offers middlewares
 module.exports = {
-    uploadExclusiveOffersFile: require('./upload-exclusive-offers-file'),
+    uploadExclusiveOfferFile: require('./upload-exclusive-offers-file'),
 };

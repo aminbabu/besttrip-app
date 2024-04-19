@@ -16,7 +16,7 @@ module.exports = {
     contactSettingsSchema: require('./settings/site/contact'),
     policySettingsSchema: require('./settings/site/policy'),
     metaSettingsSchema: require('./settings/site/meta'),
-    paymentsSettingsSchema: require('./settings/payments'),
-    contentSectionsSettingsSchema: require('./settings/content/sections'),
-    contentExclusiveOffersSchema: require('./settings/content/exclusive-offer'),
+    paymentSettingsSchema: require('./settings/payment'),
+    sectionSettingsSchema: require('./settings/content/section'),
+    exclusiveOfferSchema: require('./settings/content/exclusive-offer'),
 };

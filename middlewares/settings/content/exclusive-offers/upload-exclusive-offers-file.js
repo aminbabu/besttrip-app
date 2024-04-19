@@ -10,7 +10,7 @@
 // dependencies
 const fs = require('fs');
 const path = require('path');
-const { ContentExclusiveOffers } = require('../../../../models');
+const { ExclusiveOffer } = require('../../../../models');
 
 // export upload thumbnail middleware
 module.exports =
@@ -21,7 +21,7 @@ module.exports =
         const { thumbnail } = req.files;
 
         // get exclusive offer
-        const exclusiveOffer = await ContentExclusiveOffers.findOne({ key });
+        const exclusiveOffer = await ExclusiveOffer.findOne({ key });
 
         // check if exclusive offer thumbnail exists
         if (exclusiveOffer?.thumbnail) {

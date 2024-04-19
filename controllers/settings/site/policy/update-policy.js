@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 16 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -14,7 +14,8 @@ const { PolicySettings } = require('../../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { key, content } = req.body;
+        const { key } = req.params;
+        const { content } = req.body;
 
         // check if policy exists
         const policy = await PolicySettings.findOne({ key });

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 08 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // export customer validators
@@ -13,5 +13,5 @@ module.exports = {
     validateCustomerWallet: require('./validate-customer-wallet'),
     validateCustomer: require('./validate-customer'),
     validateCustomerSelf: require('./validate-customer-self'),
-    validateExistedCustomerAccount: require('./validate-existed-customer-account'),
+    validateCustomerAccount: require('./validate-customer-account'),
 };

@@ -10,5 +10,6 @@
 // export section content settings controllers
 module.exports = {
     getSections: require('./get-sections'),
+    getSection: require('./get-section'),
     updateOrCreateSection: require('./update-or-create-section'),
 };

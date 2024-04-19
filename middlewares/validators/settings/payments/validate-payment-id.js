@@ -4,17 +4,17 @@
  * @version 0.0.0
  * @author best-trip
  * @date 17 April, 2024
- * @update_date 18 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
-const { paymentsSettingsSchema } = require('../../../../schemas/zod/settings/payments');
+const { paymentSettingsSchema } = require('../../../../schemas/zod/settings/payments');
 const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // export payments settings id validator middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = paymentsSettingsSchema.pick({ id: true }).safeParse(req.params);
+    const { error, success } = paymentSettingsSchema.pick({ id: true }).safeParse(req.params);
 
     // check for errors
     if (!success) {

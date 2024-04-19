@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -15,13 +15,6 @@ module.exports = async (req, res, next) => {
     try {
         // get contact settings
         const contactSettings = await ContactSettings.findOne();
-
-        // check if contact settings exists
-        if (!contactSettings) {
-            return res.status(404).json({
-                message: 'Contact settings not found',
-            });
-        }
 
         // return response
         return res.status(200).json({

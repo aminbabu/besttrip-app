@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -14,11 +14,12 @@ const { User } = require('../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
+        const { id } = req.params;
         const validatedUser = req.body;
         const { avatar } = req.files;
 
         // get user
-        const user = await User.findById(validatedUser.id);
+        const user = await User.findById(id);
 
         // check if user exists
         if (!user) {

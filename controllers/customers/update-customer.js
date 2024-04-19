@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 14 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -14,11 +14,12 @@ const { Customer } = require('../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
+        const { id } = req.params;
         const validatedCustomer = req.body;
         const { avatar } = req.files;
 
         // get customer
-        const customer = await Customer.findById(validatedCustomer.id);
+        const customer = await Customer.findById(id);
 
         // check if customer exists
         if (!customer) {

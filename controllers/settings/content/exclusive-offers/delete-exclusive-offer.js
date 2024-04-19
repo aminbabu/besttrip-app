@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { ContentExclusiveOffers } = require('../../../../models');
+const { ExclusiveOffer } = require('../../../../models');
 
 // export delete exclusive offer controller
 module.exports = async (req, res, next) => {
@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
         const { id } = req.params;
 
         // get exclusive offer
-        const exclusiveOffer = await ContentExclusiveOffers.findById(id);
+        const exclusiveOffer = await ExclusiveOffer.findById(id);
 
         // check if exclusive offer exists
         if (!exclusiveOffer) {

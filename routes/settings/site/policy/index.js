@@ -15,6 +15,7 @@ const router = express.Router();
 
 // controllers
 const {
+    getPolicies,
     getPolicy,
     createPolicy,
     updatePolicy,
@@ -28,8 +29,19 @@ const {
 } = require('../../../../middlewares/validators/settings/site/policy');
 
 /**
+ * @description get policies settings
+ * @param {string} path - '/settings/site/policy'
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} controller - ['getPolicies']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/', getPolicies);
+
+/**
  * @description get policy settings
- * @param {string} path - '/settings/site/policy/'
+ * @param {string} path - '/settings/site/policy/:key'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePolicySettingsKey']
  * @param {function} controller - ['getPolicy']
@@ -37,7 +49,7 @@ const {
  * @access public
  * @method GET
  */
-router.get('/', validatePolicySettingsKey, getPolicy);
+router.get('/:key', validatePolicySettingsKey, getPolicy);
 
 /**
  * @description create policy settings
@@ -53,15 +65,22 @@ router.post('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, cre
 
 /**
  * @description update policy settings
- * @param {string} path - '/settings/site/policy'
+ * @param {string} path - '/settings/site/policy/:key'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} validator - ['validatePolicySettings']
+ * @param {function} validator - ['validatePolicySettingsKey', 'validatePolicySettings']
  * @param {function} controller - ['updatePolicy']
  * @returns {object} - router
  * @access private - ['admin']
  * @method PATCH
  */
-router.patch('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, updatePolicy);
+router.patch(
+    '/:key',
+    isAuthorized,
+    isAllowed(['admin']),
+    validatePolicySettingsKey,
+    validatePolicySettings,
+    updatePolicy
+);
 
 // export router
 module.exports = router;

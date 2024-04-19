@@ -16,10 +16,10 @@ const router = express.Router();
 // controllers
 const {
     getAllUsers,
-    getUserById,
-    updateUserById,
+    getUser,
+    updateUser,
     updateUserBySelf,
-    deleteUserById,
+    deleteUser,
     deleteUserBySelf,
 } = require('../../controllers/users');
 
@@ -29,7 +29,7 @@ const {
     validateUserId,
     validateUser,
     validateUserSelf,
-    validateExistedUserAccount,
+    validateUserAccount,
 } = require('../../middlewares/validators/users');
 const { validateAvatar } = require('../../middlewares/validators/files');
 const { uploadAvatar } = require('../../middlewares/files');
@@ -63,18 +63,18 @@ router.get('/', isAllowed(['admin']), getAllUsers);
  * @param {string} path - /users/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateUserId']
- * @param {function} controller - ['getUserById']
+ * @param {function} controller - ['getUser']
  * @returns {object} - router
  * @access private - ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), validateUserId, getUserById);
+router.get('/:id', isAllowed(['admin']), validateUserId, getUser);
 
 /**
  * @description update user by self
  * @param {string} path - /users/self
  * @param {function} middleware - ['isAllowed']
- * @param {function} validator - ['validateAvatar', 'validateExistedUserAccount']
+ * @param {function} validator - ['validateAvatar', 'validateUserAccount']
  * @param {function} validator - ['validateUserSelf']
  * @param {function} controller - ['updateUserBySelf']
  * @returns {object} - router
@@ -85,7 +85,7 @@ router.patch(
     '/self',
     isAllowed(USER_ROLES),
     validateAvatar,
-    validateExistedUserAccount,
+    validateUserAccount,
     validateUserSelf,
     uploadAvatar('avatars/users'),
     updateUserBySelf
@@ -95,9 +95,9 @@ router.patch(
  * @description update user by mongo id
  * @param {string} path - /users/:id
  * @param {function} middleware - ['isAllowed']
- * @param {function} validator - ['validateAvatar', 'validateExistedUserAccount']
+ * @param {function} validator - ['validateAvatar', 'validateUserAccount']
  * @param {function} validator - ['validateUser']
- * @param {function} controller - ['updateUserById']
+ * @param {function} controller - ['updateUser']
  * @returns {object} - router
  * @access private - ['admin']
  * @method PATCH
@@ -106,10 +106,10 @@ router.patch(
     '/:id',
     isAllowed(['admin']),
     validateAvatar,
-    validateExistedUserAccount,
+    validateUserAccount,
     validateUser,
     uploadAvatar('avatars/users'),
-    updateUserById
+    updateUser
 );
 
 /**
@@ -117,12 +117,12 @@ router.patch(
  * @param {string} path - /users/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateUserId']
- * @param {function} controller - ['deleteUserById']
+ * @param {function} controller - ['deleteUser']
  * @returns {object} - router
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUserById);
+router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUser);
 
 /**
  * @description delete user by self

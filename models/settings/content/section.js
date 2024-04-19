@@ -9,7 +9,7 @@
 
 // dependencies
 const { model } = require('mongoose');
-const { contentSectionsSettingsSchema } = require('../../../schemas/mongoose');
+const { sectionSettingsSchema } = require('../../../schemas/mongoose');
 
 // export model
-module.exports = model('ContentSectionsSettings', contentSectionsSettingsSchema);
+module.exports = model('SectionSettings', sectionSettingsSchema);

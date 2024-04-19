@@ -4,11 +4,11 @@
  * @version 0.0.0
  * @author best-trip
  * @date 17 April, 2024
- * @update_date 17 April 2024
+ * @update_date 19 April 2024
  */
 
 // dependencies
-const { PaymentsSettings } = require('../../../models');
+const { PaymentSettings } = require('../../../models');
 
 // export create payments settings controller
 module.exports = async (req, res, next) => {
@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const validatedData = req.body;
 
         // get payments settings
-        const existingPaymentsSetting = await PaymentsSettings.findOne({
+        const existingPaymentsSetting = await PaymentSettings.findOne({
             accountNumber: validatedData.accountNumber,
         });
 
@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
         }
 
         // create payments settings
-        const paymentsSetting = new PaymentsSettings(validatedData);
+        const paymentsSetting = new PaymentSettings(validatedData);
 
         // save payments settings
         await paymentsSetting.save();

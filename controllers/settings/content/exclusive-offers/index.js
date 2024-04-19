@@ -10,7 +10,7 @@
 // export exclusive offers controllers
 module.exports = {
     getExclusiveOffers: require('./get-exclusive-offers'),
-    getExclusiveOffersById: require('./get-exclusive-offers-by-id'),
+    getExclusiveOffer: require('./get-exclusive-offer'),
     createExclusiveOffer: require('./create-exclusive-offer'),
     updateExclusiveOffer: require('./update-exclusive-offer'),
     deleteExclusiveOffer: require('./delete-exclusive-offer'),

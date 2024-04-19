@@ -14,7 +14,7 @@ module.exports = {
     ...require('./xss-whitelist'),
     ...require('./users'),
     ...require('./customers'),
-    ...require('./policy'),
+    ...require('./policies'),
     ...require('./payments'),
     ...require('./sections'),
     ...require('./exclusive-offers'),

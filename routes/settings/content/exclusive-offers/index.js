@@ -16,7 +16,7 @@ const router = express.Router();
 // controllers
 const {
     getExclusiveOffers,
-    getExclusiveOffersById,
+    getExclusiveOffer,
     createExclusiveOffer,
     updateExclusiveOffer,
     deleteExclusiveOffer,
@@ -30,13 +30,13 @@ const {
     validateExclusiveOfferFile,
 } = require('../../../../middlewares/validators/settings/content/exclusive-offers');
 const {
-    uploadExclusiveOffersFile,
+    uploadExclusiveOfferFile,
 } = require('../../../../middlewares/settings/content/exclusive-offers');
 
 /**
  * @description - get exclusive offers
  * @param {string} path - '/settings/content/exclusive'
- * @param {function} controller - ['getExclusiveOffers']
+ * @param {function} controller - ['getExclusiveOffer']
  * @returns {object} - router
  * @access public
  * @method GET
@@ -46,19 +46,19 @@ router.get('/', getExclusiveOffers);
 /**
  * @description - get exclusive offer by id
  * @param {string} path - '/settings/content/exclusive/:id'
- * @param {function} validator - ['getExclusiveOffersById']
- * @param {function} controller - ['getExclusiveOffersById']
+ * @param {function} validator - ['getExclusiveOffer']
+ * @param {function} controller - ['getExclusiveOffer']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/:id', validateExclusiveOfferId, getExclusiveOffersById);
+router.get('/:id', validateExclusiveOfferId, getExclusiveOffer);
 
 /**
  * @description - create exclusive offer
  * @param {string} path - '/settings/content/exclusive'
  * @param {function} validator - ['validateExclusiveOfferFile', 'validateExclusiveOffer']
- * @param {function} middleware - ['uploadExclusiveOffersFile']
+ * @param {function} middleware - ['uploadExclusiveOfferFile']
  * @param {function} controller - ['createExclusiveOffer']
  * @returns {object} - router
  * @access private ['admin']
@@ -70,7 +70,7 @@ router.post(
     isAllowed(['admin']),
     validateExclusiveOfferFile,
     validateExclusiveOffer,
-    uploadExclusiveOffersFile('/offers'),
+    uploadExclusiveOfferFile('/offers'),
     createExclusiveOffer
 );
 
@@ -78,7 +78,7 @@ router.post(
  * @description - update exclusive offer
  * @param {string} path - '/settings/content/exclusive/:id'
  * @param {function} validator - ['validateExclusiveOfferId', 'validateExclusiveOffer']
- * @param {function} middleware - ['uploadExclusiveOffersFile']
+ * @param {function} middleware - ['uploadExclusiveOfferFile']
  * @param {function} controller - ['updateExclusiveOffer']
  * @returns {object} - router
  * @access private ['admin']
@@ -90,7 +90,7 @@ router.put(
     isAllowed(['admin']),
     validateExclusiveOfferId,
     validateExclusiveOffer,
-    uploadExclusiveOffersFile('/offers'),
+    uploadExclusiveOfferFile('/offers'),
     updateExclusiveOffer
 );
 

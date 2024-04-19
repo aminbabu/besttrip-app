@@ -8,13 +8,13 @@
  */
 
 // dependencies
-const { ContentSectionsSettings } = require('../../../../models');
+const { SectionSettings } = require('../../../../models');
 
 // export get content sections settings controller
 module.exports = async (req, res, next) => {
     try {
         // get all sections
-        const sections = await ContentSectionsSettings.find();
+        const sections = await SectionSettings.find();
 
         // return response
         return res.status(200).json({

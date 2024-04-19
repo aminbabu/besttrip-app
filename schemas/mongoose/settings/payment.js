@@ -4,14 +4,14 @@
  * @version 0.0.0
  * @author best-trip
  * @date 17 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
 const { Schema } = require('mongoose');
 const { PAYMENTS_STATUS } = require('../../../constants');
 
-// export payments settings schema
+// export payment settings schema
 module.exports = new Schema(
     {
         accountHolderName: {

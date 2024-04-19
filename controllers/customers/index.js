@@ -4,16 +4,16 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 29 March, 2024
+ * @update_date 19 April, 2024
  */
 
 // export all controllers
 module.exports = {
     getAllCustomers: require('./get-all-customers'),
-    getCustomerById: require('./get-customer-by-id'),
+    getCustomer: require('./get-customer'),
     updateAllCustomersWallet: require('./update-all-customers-wallet'),
-    updateCustomerById: require('./update-customer-by-id'),
+    updateCustomer: require('./update-customer'),
     updateCustomerBySelf: require('./update-customer-by-self'),
-    deleteCustomerById: require('./delete-customer-by-id'),
+    deleteCustomer: require('./delete-customer'),
     deleteCustomerBySelf: require('./delete-customer-by-self'),
 };

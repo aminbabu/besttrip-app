@@ -1,20 +1,20 @@
 /**
- * @file /controllers/users/delete-user-by-id.js
+ * @file /controllers/users/get-user-by-id.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
 const { User } = require('../../models');
 
-// export delete user by mongo id controller
+// export get user by mongo id controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { id } = req.body;
+        const { id } = req.params;
 
         // get user
         const user = await User.findById(id);
@@ -26,12 +26,9 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // delete user
-        await user.deleteOne();
-
         // return response
         return res.status(200).json({
-            message: 'Deleted user successfully',
+            message: 'Fetched user successfully',
             user,
         });
     } catch (error) {

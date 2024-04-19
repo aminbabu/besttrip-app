@@ -9,5 +9,6 @@
 
 // export content sections settings validator middlewares
 module.exports = {
+    validateContentSectionKey: require('./validate-content-section-key'),
     validateContentSection: require('./validate-content-section'),
 };

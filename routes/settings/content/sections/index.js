@@ -16,14 +16,27 @@ const router = express.Router();
 // controllers
 const {
     getSections,
+    getSection,
     updateOrCreateSection,
 } = require('../../../../controllers/settings/content/sections');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
+    validateContentSectionKey,
     validateContentSection,
 } = require('../../../../middlewares/validators/settings/content/sections');
+
+/**
+ * @description - Get content section by key
+ * @param {string} path - '/settings/content/sections/:key'
+ * @param {function} validator - ['validateContentSectionKey']
+ * @param {function} controller - ['getSection']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/:key', validateContentSectionKey, getSection);
 
 /**
  * @description - Get all content sections
@@ -37,7 +50,7 @@ router.get('/', getSections);
 
 /**
  * @description - Update/Create content section
- * @param {string} path - '/settings/content/sections'
+ * @param {string} path - '/settings/content/sections/:key'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validators - ['validateContentSection']
  * @param {function} controller - ['updateOrCreateSection']
@@ -45,7 +58,13 @@ router.get('/', getSections);
  * @access private ['admin']
  * @method PUT
  */
-router.put('/', isAuthorized, isAllowed(['admin']), validateContentSection, updateOrCreateSection);
+router.put(
+    '/:key',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateContentSection,
+    updateOrCreateSection
+);
 
 // export router
 module.exports = router;
