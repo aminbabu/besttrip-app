@@ -42,7 +42,7 @@ router.get('/', getSections);
  * @param {function} validators - ['validateContentSection']
  * @param {function} controller - ['updateOrCreateSection']
  * @returns {object} - router
- * @access private
+ * @access private ['admin']
  * @method PUT
  */
 router.put('/', isAuthorized, isAllowed(['admin']), validateContentSection, updateOrCreateSection);
