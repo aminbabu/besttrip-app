@@ -9,18 +9,18 @@
 
 // dependencies
 const { z } = require('zod');
-const { SECTIONS } = require('../../../../constants');
+const { SECTION_NAMES } = require('../../../../constants');
 
 // export content sections settings schema
 module.exports = z
     .object({
-        section: z
+        key: z
             .string({
-                required_error: 'Section is required.',
-                invalid_type_error: 'Please provide a valid section.',
+                required_error: 'Section key is required.',
+                invalid_type_error: 'Please provide a valid section key.',
             })
-            .refine((section) => SECTIONS.includes(section), {
-                message: 'Please provide a valid section.',
+            .refine((name) => SECTION_NAMES.includes(name), {
+                message: 'Please provide a valid section key.',
             }),
         title: z
             .string({

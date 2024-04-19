@@ -8,9 +8,9 @@
  */
 
 // payments status
-const SECTIONS = ['hotels', 'destinations', 'umrah-ziyarah', 'beautiful-places'];
+const SECTION_NAMES = ['hotels', 'destinations', 'umrah-ziyarah', 'beautiful-places'];
 
 // export payments constants
 module.exports = {
-    SECTIONS,
+    SECTION_NAMES,
 };

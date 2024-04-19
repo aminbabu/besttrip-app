@@ -37,7 +37,7 @@ router.get('/', getSections);
 
 /**
  * @description - Update/Create content section
- * @param {string} path - '/settings/content/sections/:id'
+ * @param {string} path - '/settings/content/sections'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validators - ['validateContentSection']
  * @param {function} controller - ['updateOrCreateSection']
@@ -45,13 +45,7 @@ router.get('/', getSections);
  * @access private
  * @method PUT
  */
-router.put(
-    '/:id',
-    isAuthorized,
-    isAllowed(['admin']),
-    validateContentSection,
-    updateOrCreateSection
-);
+router.put('/', isAuthorized, isAllowed(['admin']), validateContentSection, updateOrCreateSection);
 
 // export router
 module.exports = router;
