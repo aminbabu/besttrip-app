@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // export all models
@@ -17,4 +17,5 @@ module.exports = {
     PolicySettings: require('./settings/site/policy'),
     MetaSettings: require('./settings/site/meta'),
     PaymentsSettings: require('./settings/payments'),
+    ContentSectionsSettings: require('./settings/content/sections'),
 };
