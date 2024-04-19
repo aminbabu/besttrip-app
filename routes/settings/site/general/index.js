@@ -16,8 +16,7 @@ const router = express.Router();
 // controllers
 const {
     getGeneralSettings,
-    createGeneralSettings,
-    updateGeneralSettings,
+    updateOrCreateGeneralSettings,
 } = require('../../../../controllers/settings/site/general');
 
 // middlewares
@@ -39,28 +38,6 @@ const { uploadGeneralSettingsFile } = require('../../../../middlewares/settings/
 router.get('/', getGeneralSettings);
 
 /**
- * @description create general settings
- * @param {string} path - '/settings/site/general'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} validator - ['validateGeneralSettingsFiles', 'validateGeneralSettings']
- * @param {function} middleware - ['uploadGeneralSettingsFile']
- * @param {function} controller - ['createGeneralSettings']
- * @returns {object} - router
- * @access private - ['admin']
- * @method POST
- */
-router.post(
-    '/',
-    isAuthorized,
-    isAllowed(['admin']),
-    validateGeneralSettings,
-    validateGeneralSettingsFiles,
-    uploadGeneralSettingsFile.logo('/logos'),
-    uploadGeneralSettingsFile.favicon('/logos'),
-    createGeneralSettings
-);
-
-/**
  * @description update general settings
  * @param {string} path - '/settings/site/general'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
@@ -79,7 +56,7 @@ router.patch(
     validateGeneralSettingsFiles,
     uploadGeneralSettingsFile.logo('/logos'),
     uploadGeneralSettingsFile.favicon('/logos'),
-    updateGeneralSettings
+    updateOrCreateGeneralSettings
 );
 
 // export router

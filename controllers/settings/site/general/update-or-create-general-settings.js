@@ -1,16 +1,16 @@
 /**
- * @file /controllers/settings/site/general/updateGeneralSettings.js
+ * @file /controllers/settings/site/general/update-or-create-general-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
 const { GeneralSettings } = require('../../../../models');
 
-// export update general settings controller
+// export update/create general settings controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
@@ -18,21 +18,22 @@ module.exports = async (req, res, next) => {
         const { logo, favicon } = req.files;
 
         // find the existing general settings
-        const generalSettings = await GeneralSettings.findOne();
+        let generalSettings = await GeneralSettings.findOne();
 
         // check if general settings exists
-        if (!generalSettings) {
-            return res.status(404).json({
-                message: 'General settings not found',
+        if (generalSettings) {
+            generalSettings.set({
+                ...validatedData,
+                logo: logo?.path || generalSettings.logo,
+                favicon: favicon?.path || generalSettings.favicon,
+            });
+        } else {
+            generalSettings = new GeneralSettings({
+                ...validatedData,
+                logo: logo?.path,
+                favicon: favicon?.path,
             });
         }
-
-        // update general settings
-        generalSettings.set({
-            ...validatedData,
-            logo: logo?.path || generalSettings.logo,
-            favicon: favicon?.path || generalSettings.favicon,
-        });
 
         // save general settings
         await generalSettings.save();
