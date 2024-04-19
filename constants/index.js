@@ -17,4 +17,5 @@ module.exports = {
     ...require('./policy'),
     ...require('./payments'),
     ...require('./sections'),
+    ...require('./exclusive-offers'),
 };

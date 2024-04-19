@@ -18,4 +18,5 @@ module.exports = {
     MetaSettings: require('./settings/site/meta'),
     PaymentsSettings: require('./settings/payments'),
     ContentSectionsSettings: require('./settings/content/sections'),
+    ContentExclusiveOffers: require('./settings/content/exclusive-offer'),
 };

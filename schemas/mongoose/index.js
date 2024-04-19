@@ -18,4 +18,5 @@ module.exports = {
     metaSettingsSchema: require('./settings/site/meta'),
     paymentsSettingsSchema: require('./settings/payments'),
     contentSectionsSettingsSchema: require('./settings/content/sections'),
+    contentExclusiveOffersSchema: require('./settings/content/exclusive-offer'),
 };

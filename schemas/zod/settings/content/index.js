@@ -10,4 +10,5 @@
 // export content sections settings schemas
 module.exports = {
     contentSectionsSettingsSchema: require('./section'),
+    contentExclusiveOffersSchema: require('./exclusive-offer'),
 };
