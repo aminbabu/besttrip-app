@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 20 April, 2024
  */
 
 // export all schemas
@@ -21,4 +21,5 @@ module.exports = {
     exclusiveOfferSchema: require('./settings/content/exclusive-offer'),
     hotelOfferSchema: require('./settings/content/hotel-offer'),
     flightOfferSchema: require('./settings/content/flight-offer'),
+    umrahOfferSchema: require('./settings/content/umrah-offer'),
 };

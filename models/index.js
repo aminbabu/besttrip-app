@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 19 April, 2024
+ * @update_date 20 April, 2024
  */
 
 // export all models
@@ -21,4 +21,5 @@ module.exports = {
     ExclusiveOffer: require('./settings/content/exclusive-offer'),
     HotelOffer: require('./settings/content/hotel-offer'),
     FlightOffer: require('./settings/content/flight-offer'),
+    UmrahOffer: require('./settings/content/umrah-offer'),
 };
