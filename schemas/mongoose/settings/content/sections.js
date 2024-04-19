@@ -9,12 +9,14 @@
 
 // dependencies
 const { Schema } = require('mongoose');
+const { SECTIONS } = require('../../../../constants');
 
 // export section content settings schema
 module.exports = new Schema(
     {
         section: {
             type: String,
+            enum: SECTIONS,
             required: [true, 'Section is required'],
             unique: true,
         },

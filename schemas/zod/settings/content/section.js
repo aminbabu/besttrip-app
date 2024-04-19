@@ -9,6 +9,7 @@
 
 // dependencies
 const { z } = require('zod');
+const { SECTIONS } = require('../../../../constants');
 
 // export content sections settings schema
 module.exports = z
@@ -18,11 +19,8 @@ module.exports = z
                 required_error: 'Section is required.',
                 invalid_type_error: 'Please provide a valid section.',
             })
-            .min(3, {
-                message: 'Section should be at least 3 characters.',
-            })
-            .max(255, {
-                message: 'Section should not be more than 255 characters.',
+            .refine((section) => SECTIONS.includes(section), {
+                message: 'Please provide a valid section.',
             }),
         title: z
             .string({
