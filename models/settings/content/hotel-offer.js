@@ -1,5 +1,5 @@
 /**
- * @file /models/settings/content/hotel.js
+ * @file /models/settings/content/hotel-offer.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

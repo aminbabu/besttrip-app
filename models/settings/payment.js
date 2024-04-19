@@ -1,5 +1,5 @@
 /**
- * @file /models/settings/payments.js
+ * @file /models/settings/payment.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

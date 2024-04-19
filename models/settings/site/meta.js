@@ -1,5 +1,5 @@
 /**
- * @file /models/settings/site/meta-data.js
+ * @file /models/settings/site/meta.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

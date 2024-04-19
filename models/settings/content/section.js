@@ -1,5 +1,5 @@
 /**
- * @file /models/settings/content/sections.js
+ * @file /models/settings/content/section.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

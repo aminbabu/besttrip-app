@@ -1,5 +1,5 @@
 /**
- * @file /models/settings/site/general-settings.js
+ * @file /models/settings/site/general.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
