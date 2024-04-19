@@ -19,4 +19,5 @@ module.exports = {
     paymentSettingsSchema: require('./settings/payment'),
     sectionSettingsSchema: require('./settings/content/section'),
     exclusiveOfferSchema: require('./settings/content/exclusive-offer'),
+    hotelOfferSchema: require('./settings/content/hotel-offer'),
 };

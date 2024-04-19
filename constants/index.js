@@ -18,4 +18,5 @@ module.exports = {
     ...require('./payments'),
     ...require('./sections'),
     ...require('./exclusive-offers'),
+    ...require('./hotel-offers'),
 };

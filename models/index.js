@@ -19,4 +19,5 @@ module.exports = {
     PaymentSettings: require('./settings/payment'),
     SectionSettings: require('./settings/content/section'),
     ExclusiveOffer: require('./settings/content/exclusive-offer'),
+    HotelOffer: require('./settings/content/hotel-offer'),
 };
