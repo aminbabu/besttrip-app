@@ -49,6 +49,7 @@ router.post('/register', validateRegister, register);
  * @description login a user
  * @param {string} path - /auth/users/login
  * @param {function} validator - ['validateLogin']
+ * @param {function} middleware - ['isVerified.user']
  * @param {function} controller - ['login']
  * @returns {object} - router
  * @access public

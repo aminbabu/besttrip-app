@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 28 March, 2024
- * @update_date 14 April, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -37,7 +37,7 @@ const { isVerified } = require('../../../middlewares/auth');
 /**
  * @description register a new user
  * @param {string} path - /auth/customers/register
- * @param {function} middleware - ['validateRegister']
+ * @param {function} validator - ['validateRegister']
  * @param {function} controller - ['register']
  * @returns {object} - router
  * @access public
@@ -48,7 +48,8 @@ router.post('/register', validateRegister, register);
 /**
  * @description login a user
  * @param {string} path - /auth/customers/login
- * @param {function} middleware - ['validateLogin', 'isVerified.customer']
+ * @param {function} validator - ['validateLogin']
+ * @param {function} middleware - ['isVerified.customer']
  * @param {function} controller - ['login']
  * @returns {object} - router
  * @access public
@@ -59,7 +60,7 @@ router.post('/login', validateLogin, isVerified.customer, login);
 /**
  * @description forgot password
  * @param {string} path - /auth/customers/forgot-password
- * @param {function} middleware - ['validateForgotPassword']
+ * @param {function} validator - ['validateForgotPassword']
  * @param {function} controller - ['forgotPassword']
  * @returns {object} - router
  * @access public
@@ -70,7 +71,7 @@ router.post('/forgot-password', validateForgotPassword, forgotPassword);
 /**
  * @description reset password
  * @param {string} path - /auth/customers/reset-password
- * @param {function} middleware - ['validateResetPassword']
+ * @param {function} validator - ['validateResetPassword']
  * @param {function} controller - ['resetPassword']
  * @returns {object} - router
  * @access public
@@ -81,7 +82,7 @@ router.post('/reset-password', validateResetPassword, resetPassword);
 /**
  * @description send verification email
  * @param {string} path - /auth/customers/send-verification-email
- * @param {function} middleware - ['validateSendVerificationEmail']
+ * @param {function} validator - ['validateSendVerificationEmail']
  * @param {function} controller - ['sendVerificationEmail']
  * @returns {object} - router
  * @access public
@@ -92,7 +93,7 @@ router.post('/send-verification-email', validateSendVerificationEmail, sendVerif
 /**
  * @description verify email
  * @param {string} path - /auth/customers/verify-email
- * @param {function} middleware - ['validateVerifyEmail']
+ * @param {function} validator - ['validateVerifyEmail']
  * @param {function} controller - ['verifyEmail']
  * @returns {object} - router
  * @access public
