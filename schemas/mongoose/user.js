@@ -44,7 +44,7 @@ module.exports = new Schema(
         role: {
             type: String,
             enum: USER_ROLES,
-            default: 'user',
+            default: USER_ROLES[0],
         },
         isVerified: {
             type: Boolean,
@@ -53,7 +53,7 @@ module.exports = new Schema(
         status: {
             type: String,
             enum: USER_STATUS,
-            default: 'active',
+            default: USER_STATUS[0],
         },
         dob: {
             type: Date,

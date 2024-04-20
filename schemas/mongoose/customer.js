@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 20 April, 2024
  */
 
 // dependencies
@@ -48,7 +48,7 @@ module.exports = new Schema(
         role: {
             type: String,
             enum: CUSTOMER_ROLES,
-            default: 'customer',
+            default: CUSTOMER_ROLES[0],
         },
         isVerified: {
             type: Boolean,
@@ -57,7 +57,7 @@ module.exports = new Schema(
         status: {
             type: String,
             enum: CUSTOMER_STATUS,
-            default: 'active',
+            default: CUSTOMER_STATUS[0],
         },
         dob: {
             type: Date,
@@ -89,7 +89,7 @@ module.exports = new Schema(
             type: {
                 type: String,
                 enum: CUSTOMER_WALLET_TRANSACTION_TYPES,
-                default: 'top-up',
+                default: CUSTOMER_WALLET_TRANSACTION_TYPES[0],
             },
             description: {
                 type: String,

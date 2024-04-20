@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 17 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 20 April, 2024
  */
 
 // dependencies
@@ -41,7 +41,7 @@ module.exports = new Schema(
         status: {
             type: String,
             enum: PAYMENTS_STATUS,
-            default: 'active',
+            default: PAYMENTS_STATUS[0],
         },
     },
     { timestamps: true }
