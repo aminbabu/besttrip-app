@@ -73,7 +73,7 @@ module.exports = async (user, token) => {
     return {
         to: user?.email,
         subject: 'Verify your email',
-        text: 'Verify your email by clicking the link below.',
+        text: 'Verify your email by clicking the link below',
         html,
         attachments,
     };

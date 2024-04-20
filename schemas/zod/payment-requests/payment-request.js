@@ -17,11 +17,11 @@ module.exports = z
     .object({
         id: z
             .string({
-                required_error: 'Id is required.',
-                invalid_type_error: 'Please provide a valid id.',
+                required_error: 'Id is required',
+                invalid_type_error: 'Please provide a valid id',
             })
             .refine((id) => isMongoId(id), {
-                message: 'Please provide a valid id.',
+                message: 'Please provide a valid id',
             }),
         title: z
             .string({
@@ -86,7 +86,7 @@ module.exports = z
                 invalid_type_error: 'Customer should be a string',
             })
             .refine((id) => isMongoId(id), {
-                message: 'Please provide a valid customer id.',
+                message: 'Please provide a valid customer id',
             }),
     })
     .strict();

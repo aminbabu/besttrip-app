@@ -15,11 +15,11 @@ module.exports = z
     .object({
         email: z
             .string({
-                required_error: 'Email is required.',
-                invalid_type_error: 'Please enter a valid email address.',
+                required_error: 'Email is required',
+                invalid_type_error: 'Please enter a valid email address',
             })
             .email({
-                message: 'Please enter a valid email address.',
+                message: 'Please enter a valid email address',
             }),
     })
     .strict();

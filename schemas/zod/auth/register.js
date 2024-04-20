@@ -16,30 +16,30 @@ module.exports = z
     .object({
         name: z
             .string({
-                required_error: 'Name is required.',
-                invalid_type_error: 'Please enter a valid name.',
+                required_error: 'Name is required',
+                invalid_type_error: 'Please enter a valid name',
             })
             .trim()
             .min(3, {
-                message: 'Name must be at least 3 characters long.',
+                message: 'Name must be at least 3 characters long',
             }),
         email: z
             .string({
-                required_error: 'Email is required.',
-                invalid_type_error: 'Please enter a valid email address.',
+                required_error: 'Email is required',
+                invalid_type_error: 'Please enter a valid email address',
             })
             .email({
-                message: 'Please enter a valid email address.',
+                message: 'Please enter a valid email address',
             }),
         phone: z
             .string({
-                required_error: 'Phone number is required.',
+                required_error: 'Phone number is required',
             })
             .refine((phone) => isMobilePhone(phone), {
-                message: 'Please enter a valid phone number.',
+                message: 'Please enter a valid phone number',
             }),
         password: z.string().min(8, {
-            message: 'Password must be at least 8 characters long.',
+            message: 'Password must be at least 8 characters long',
         }),
     })
     .strict();

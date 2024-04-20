@@ -17,79 +17,79 @@ module.exports = z
     .object({
         id: z
             .string({
-                required_error: 'Id is required.',
-                invalid_type_error: 'Please provide a valid id.',
+                required_error: 'Id is required',
+                invalid_type_error: 'Please provide a valid id',
             })
             .refine((id) => isMongoId(id), {
-                message: 'Please provide a valid id.',
+                message: 'Please provide a valid id',
             }),
         title: z
             .string({
-                required_error: 'Title is required.',
-                invalid_type_error: 'Please provide a valid title.',
+                required_error: 'Title is required',
+                invalid_type_error: 'Please provide a valid title',
             })
             .trim()
             .min(3, {
-                message: 'Title must be at least 3 characters.',
+                message: 'Title must be at least 3 characters',
             })
             .max(255, {
-                message: 'Title must not be greater than 255 characters.',
+                message: 'Title must not be greater than 255 characters',
             }),
         location: z
             .string({
-                required_error: 'Location is required.',
-                invalid_type_error: 'Please provide a valid location.',
+                required_error: 'Location is required',
+                invalid_type_error: 'Please provide a valid location',
             })
             .trim()
             .min(3, {
-                message: 'Location must be at least 3 characters.',
+                message: 'Location must be at least 3 characters',
             })
             .max(255, {
-                message: 'Location must not be greater than 255 characters.',
+                message: 'Location must not be greater than 255 characters',
             }),
         duration: z
             .string({
-                required_error: 'Duration is required.',
-                invalid_type_error: 'Please provide a valid duration.',
+                required_error: 'Duration is required',
+                invalid_type_error: 'Please provide a valid duration',
             })
             .trim()
             .min(3, {
-                message: 'Duration must be at least 3 characters.',
+                message: 'Duration must be at least 3 characters',
             })
             .max(255, {
-                message: 'Duration must not be greater than 255 characters.',
+                message: 'Duration must not be greater than 255 characters',
             }),
         inclusions: z
             .string({
-                required_error: 'Inclusions is required.',
-                invalid_type_error: 'Please provide a valid inclusions.',
+                required_error: 'Inclusions is required',
+                invalid_type_error: 'Please provide a valid inclusions',
             })
             .refine((inclusions) => UMRAH_INCLUSIONS.includes(inclusions), {
-                message: 'Please provide a valid inclusions.',
+                message: 'Please provide a valid inclusions',
             }),
         price: z
             .number({
-                required_error: 'Price is required.',
-                invalid_type_error: 'Please provide a valid price.',
+                required_error: 'Price is required',
+                invalid_type_error: 'Please provide a valid price',
             })
             .min(0, {
-                message: 'Price must be at least 0.',
+                message: 'Price must be at least 0',
             }),
         link: z
             .string({
-                required_error: 'Link is required.',
-                invalid_type_error: 'Please provide a valid link.',
+                required_error: 'Link is required',
+                invalid_type_error: 'Please provide a valid link',
             })
             .url({
-                message: 'Please provide a valid link.',
+                message: 'Please provide a valid link',
             }),
         status: z
             .string({
-                required_error: 'Status is required.',
-                invalid_type_error: 'Please provide a valid status.',
+                required_error: 'Status is required',
+                invalid_type_error: 'Please provide a valid status',
             })
             .refine((status) => UMRAH_STATUS.includes(status), {
-                message: 'Please provide a valid status.',
+                message: 'Please provide a valid status',
             }),
     })
     .strict();

@@ -16,11 +16,11 @@ module.exports = z
     .object({
         token: z
             .string({
-                required_error: 'Token is required.',
-                invalid_type_error: 'Please enter a valid token.',
+                required_error: 'Token is required',
+                invalid_type_error: 'Please enter a valid token',
             })
             .refine((value) => isJWT(value), {
-                message: 'Please enter a valid token.',
+                message: 'Please enter a valid token',
             }),
     })
     .strict();

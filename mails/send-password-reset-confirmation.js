@@ -76,7 +76,7 @@ module.exports = async (user) => {
     return {
         to: user?.email,
         subject: 'Password Reset Confirmation',
-        text: 'Successfully your password has been reset. You can now login to your account.',
+        text: 'Successfully your password has been reset. You can now login to your account',
         html,
         attachments,
     };

@@ -76,7 +76,7 @@ module.exports = async (user) => {
     return {
         to: user?.email,
         subject: 'Email Verification Confirmation - Best Trip',
-        text: 'Email verification has been successful. You can now login to your account.',
+        text: 'Email verification has been successful. You can now login to your account',
         html,
         attachments,
     };

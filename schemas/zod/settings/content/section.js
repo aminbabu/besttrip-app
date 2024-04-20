@@ -16,33 +16,33 @@ module.exports = z
     .object({
         key: z
             .string({
-                required_error: 'Section key is required.',
-                invalid_type_error: 'Please provide a valid section key.',
+                required_error: 'Section key is required',
+                invalid_type_error: 'Please provide a valid section key',
             })
             .refine((name) => SECTION_NAMES.includes(name), {
-                message: 'Please provide a valid section key.',
+                message: 'Please provide a valid section key',
             }),
         title: z
             .string({
-                required_error: 'Title is required.',
-                invalid_type_error: 'Please provide a valid title.',
+                required_error: 'Title is required',
+                invalid_type_error: 'Please provide a valid title',
             })
             .min(3, {
-                message: 'Title should be at least 3 characters.',
+                message: 'Title should be at least 3 characters',
             })
             .max(255, {
-                message: 'Title should not be more than 255 characters.',
+                message: 'Title should not be more than 255 characters',
             }),
         description: z
             .string({
-                required_error: 'Description is required.',
-                invalid_type_error: 'Please provide a valid description.',
+                required_error: 'Description is required',
+                invalid_type_error: 'Please provide a valid description',
             })
             .min(3, {
-                message: 'Description should be at least 3 characters.',
+                message: 'Description should be at least 3 characters',
             })
             .max(500, {
-                message: 'Description should not be more than 500 characters.',
+                message: 'Description should not be more than 500 characters',
             }),
     })
     .strict();
