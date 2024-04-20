@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 20 April, 2024
  */
 
 // dependencies
@@ -25,7 +25,7 @@ module.exports =
 
         // check if hotel offer thumbnail exists
         if (hotelOffer?.thumbnail) {
-            // delete previous logo
+            // delete previous thumbnail
             fs.unlinkSync(path.join(__dirname, '../../../../public/', hotelOffer.thumbnail));
         }
 

@@ -25,7 +25,7 @@ module.exports =
 
         // check if umrah offer thumbnail exists
         if (umrahOffer?.thumbnail) {
-            // delete previous logo
+            // delete previous thumbnail
             fs.unlinkSync(path.join(__dirname, '../../../../public/', umrahOffer.thumbnail));
         }
 
