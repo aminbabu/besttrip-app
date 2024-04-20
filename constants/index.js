@@ -21,4 +21,5 @@ module.exports = {
     ...require('./hotel-offers'),
     ...require('./flight-offers'),
     ...require('./umrah-offers'),
+    ...require('./blog-posts'),
 };
