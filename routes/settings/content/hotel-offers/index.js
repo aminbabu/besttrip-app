@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 20 April, 2024
  */
 
 // dependencies
@@ -33,7 +33,7 @@ const { uploadHotelOfferFile } = require('../../../../middlewares/settings/conte
 
 /**
  * @description - get hotel offers
- * @param {string} path - '/settings/content/hotel'
+ * @param {string} path - '/settings/content/hotel-offers'
  * @param {function} controller - ['getHotelOffer']
  * @returns {object} - router
  * @access public
@@ -43,7 +43,7 @@ router.get('/', getHotelOffers);
 
 /**
  * @description - get hotel offer by id
- * @param {string} path - '/settings/content/hotel/:id'
+ * @param {string} path - '/settings/content/hotel-offers/:id'
  * @param {function} validator - ['getHotelOffer']
  * @param {function} controller - ['getHotelOffer']
  * @returns {object} - router
@@ -54,7 +54,7 @@ router.get('/:id', validateHotelOfferId, getHotelOffer);
 
 /**
  * @description - create hotel offer
- * @param {string} path - '/settings/content/hotel'
+ * @param {string} path - '/settings/content/hotel-offers'
  * @param {function} validator - ['validateHotelOfferFile', 'validateHotelOffer']
  * @param {function} middleware - ['uploadHotelOfferFile']
  * @param {function} controller - ['createHotelOffer']
@@ -74,7 +74,7 @@ router.post(
 
 /**
  * @description - update hotel offer
- * @param {string} path - '/settings/content/hotel/:id'
+ * @param {string} path - '/settings/content/hotel-offers/:id'
  * @param {function} validator - ['validateHotelOfferId', 'validateHotelOffer']
  * @param {function} middleware - ['uploadHotelOfferFile']
  * @param {function} controller - ['updateHotelOffer']
@@ -87,6 +87,7 @@ router.put(
     isAuthorized,
     isAllowed(['admin']),
     validateHotelOfferId,
+    validateHotelOfferFile,
     validateHotelOffer,
     uploadHotelOfferFile('/offers'),
     updateHotelOffer
@@ -94,7 +95,7 @@ router.put(
 
 /**
  * @description - delete hotel offer
- * @param {string} path - '/settings/content/hotel/:id'
+ * @param {string} path - '/settings/content/hotel-offers/:id'
  * @param {function} validator - ['validateHotelOfferId']
  * @param {function} controller - ['deleteHotelOffer']
  * @returns {object} - router

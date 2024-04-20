@@ -35,7 +35,7 @@ const {
 
 /**
  * @description - get exclusive offers
- * @param {string} path - '/settings/content/exclusive'
+ * @param {string} path - '/settings/content/exclusive-offers'
  * @param {function} controller - ['getExclusiveOffer']
  * @returns {object} - router
  * @access public
@@ -45,7 +45,7 @@ router.get('/', getExclusiveOffers);
 
 /**
  * @description - get exclusive offer by id
- * @param {string} path - '/settings/content/exclusive/:id'
+ * @param {string} path - '/settings/content/exclusive-offers/:id'
  * @param {function} validator - ['getExclusiveOffer']
  * @param {function} controller - ['getExclusiveOffer']
  * @returns {object} - router
@@ -56,7 +56,7 @@ router.get('/:id', validateExclusiveOfferId, getExclusiveOffer);
 
 /**
  * @description - create exclusive offer
- * @param {string} path - '/settings/content/exclusive'
+ * @param {string} path - '/settings/content/exclusive-offers'
  * @param {function} validator - ['validateExclusiveOfferFile', 'validateExclusiveOffer']
  * @param {function} middleware - ['uploadExclusiveOfferFile']
  * @param {function} controller - ['createExclusiveOffer']
@@ -76,7 +76,7 @@ router.post(
 
 /**
  * @description - update exclusive offer
- * @param {string} path - '/settings/content/exclusive/:id'
+ * @param {string} path - '/settings/content/exclusive-offers/:id'
  * @param {function} validator - ['validateExclusiveOfferId', 'validateExclusiveOffer']
  * @param {function} middleware - ['uploadExclusiveOfferFile']
  * @param {function} controller - ['updateExclusiveOffer']
@@ -89,6 +89,7 @@ router.put(
     isAuthorized,
     isAllowed(['admin']),
     validateExclusiveOfferId,
+    validateExclusiveOfferFile,
     validateExclusiveOffer,
     uploadExclusiveOfferFile('/offers'),
     updateExclusiveOffer
@@ -96,7 +97,7 @@ router.put(
 
 /**
  * @description - delete exclusive offer
- * @param {string} path - '/settings/content/exclusive/:id'
+ * @param {string} path - '/settings/content/exclusive-offers/:id'
  * @param {function} validator - ['validateExclusiveOfferId']
  * @param {function} controller - ['deleteExclusiveOffer']
  * @returns {object} - router

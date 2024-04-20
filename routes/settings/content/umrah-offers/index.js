@@ -33,7 +33,7 @@ const { uploadUmrahOfferFile } = require('../../../../middlewares/settings/conte
 
 /**
  * @description - get umrah offers
- * @param {string} path - '/settings/content/umrah'
+ * @param {string} path - '/settings/content/umrah-offers'
  * @param {function} controller - ['getUmrahOffer']
  * @returns {object} - router
  * @access public
@@ -43,7 +43,7 @@ router.get('/', getUmrahOffers);
 
 /**
  * @description - get umrah offer by id
- * @param {string} path - '/settings/content/umrah/:id'
+ * @param {string} path - '/settings/content/umrah-offers/:id'
  * @param {function} validator - ['getUmrahOffer']
  * @param {function} controller - ['getUmrahOffer']
  * @returns {object} - router
@@ -54,7 +54,7 @@ router.get('/:id', validateUmrahOfferId, getUmrahOffer);
 
 /**
  * @description - create umrah offer
- * @param {string} path - '/settings/content/umrah'
+ * @param {string} path - '/settings/content/umrah-offers'
  * @param {function} validator - ['validateUmrahOfferFile', 'validateUmrahOffer']
  * @param {function} middleware - ['uploadUmrahOfferFile']
  * @param {function} controller - ['createUmrahOffer']
@@ -74,7 +74,7 @@ router.post(
 
 /**
  * @description - update umrah offer
- * @param {string} path - '/settings/content/umrah/:id'
+ * @param {string} path - '/settings/content/umrah-offers/:id
  * @param {function} validator - ['validateUmrahOfferId', 'validateUmrahOffer']
  * @param {function} middleware - ['uploadUmrahOfferFile']
  * @param {function} controller - ['updateUmrahOffer']
@@ -87,6 +87,7 @@ router.put(
     isAuthorized,
     isAllowed(['admin']),
     validateUmrahOfferId,
+    validateUmrahOfferFile,
     validateUmrahOffer,
     uploadUmrahOfferFile('/offers'),
     updateUmrahOffer
@@ -94,7 +95,7 @@ router.put(
 
 /**
  * @description - delete umrah offer
- * @param {string} path - '/settings/content/umrah/:id'
+ * @param {string} path - '/settings/content/umrah-offers/:id'
  * @param {function} validator - ['validateUmrahOfferId']
  * @param {function} controller - ['deleteUmrahOffer']
  * @returns {object} - router

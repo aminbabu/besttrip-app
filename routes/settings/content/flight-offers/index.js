@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 20 April, 2024
  */
 
 // dependencies
@@ -33,7 +33,7 @@ const { uploadFlightOfferFile } = require('../../../../middlewares/settings/cont
 
 /**
  * @description - get flight offers
- * @param {string} path - '/settings/content/flight'
+ * @param {string} path - '/settings/content/flight-offers'
  * @param {function} controller - ['getFlightOffer']
  * @returns {object} - router
  * @access public
@@ -43,7 +43,7 @@ router.get('/', getFlightOffers);
 
 /**
  * @description - get flight offer by id
- * @param {string} path - '/settings/content/flight/:id'
+ * @param {string} path - '/settings/content/flight-offers/:id'
  * @param {function} validator - ['getFlightOffer']
  * @param {function} controller - ['getFlightOffer']
  * @returns {object} - router
@@ -54,7 +54,7 @@ router.get('/:id', validateFlightOfferId, getFlightOffer);
 
 /**
  * @description - create flight offer
- * @param {string} path - '/settings/content/flight'
+ * @param {string} path - '/settings/content/flight-offers'
  * @param {function} validator - ['validateFlightOfferFile', 'validateFlightOffer']
  * @param {function} middleware - ['uploadFlightOfferFile']
  * @param {function} controller - ['createFlightOffer']
@@ -74,7 +74,7 @@ router.post(
 
 /**
  * @description - update flight offer
- * @param {string} path - '/settings/content/flight/:id'
+ * @param {string} path - '/settings/content/flight-offers/:id'
  * @param {function} validator - ['validateFlightOfferId', 'validateFlightOffer']
  * @param {function} middleware - ['uploadFlightOfferFile']
  * @param {function} controller - ['updateFlightOffer']
@@ -87,6 +87,7 @@ router.put(
     isAuthorized,
     isAllowed(['admin']),
     validateFlightOfferId,
+    validateFlightOfferFile,
     validateFlightOffer,
     uploadFlightOfferFile('/offers'),
     updateFlightOffer
@@ -94,7 +95,7 @@ router.put(
 
 /**
  * @description - delete flight offer
- * @param {string} path - '/settings/content/flight/:id'
+ * @param {string} path - '/settings/content/flight-offers/:id'
  * @param {function} validator - ['validateFlightOfferId']
  * @param {function} controller - ['deleteFlightOffer']
  * @returns {object} - router
