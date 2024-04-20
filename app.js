@@ -65,6 +65,7 @@ app.use('/settings/content/exclusive-offer', require('./routes/settings/content/
 app.use('/settings/content/hotel-offer', require('./routes/settings/content/hotel-offers'));
 app.use('/settings/content/flight-offer', require('./routes/settings/content/flight-offers'));
 app.use('/settings/content/umrah-offers', require('./routes/settings/content/umrah-offers'));
+app.use('/settings/content/blog-posts', require('./routes/settings/content/blog-posts'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -22,4 +22,5 @@ module.exports = {
     HotelOffer: require('./settings/content/hotel-offer'),
     FlightOffer: require('./settings/content/flight-offer'),
     UmrahOffer: require('./settings/content/umrah-offer'),
+    BlogPost: require('./settings/content/blog-post'),
 };
