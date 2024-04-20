@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 20 April, 2024
  */
 
 // dependencies
@@ -28,6 +28,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
+            message: 'Fetched content section successfully',
             section,
         });
     } catch (error) {
