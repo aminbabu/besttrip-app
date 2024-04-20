@@ -22,4 +22,5 @@ module.exports = {
     ...require('./flight-offers'),
     ...require('./umrah-offers'),
     ...require('./blog-posts'),
+    ...require('./themes'),
 };

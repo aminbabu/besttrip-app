@@ -23,4 +23,5 @@ module.exports = {
     FlightOffer: require('./settings/content/flight-offer'),
     UmrahOffer: require('./settings/content/umrah-offer'),
     BlogPost: require('./settings/content/blog-post'),
+    ThemeSettings: require('./settings/theme'),
 };
