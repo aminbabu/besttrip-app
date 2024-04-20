@@ -23,4 +23,5 @@ module.exports = {
     ...require('./umrah-offers'),
     ...require('./blog-posts'),
     ...require('./themes'),
+    ...require('./payment-requests'),
 };

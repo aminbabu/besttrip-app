@@ -24,4 +24,5 @@ module.exports = {
     umrahOfferSchema: require('./settings/content/umrah-offer'),
     blogPostSchema: require('./settings/content/blog-post'),
     themeSettingsSchema: require('./settings/theme'),
+    paymentRequestSchema: require('./payment-request'),
 };
