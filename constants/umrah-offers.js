@@ -1,5 +1,5 @@
 /**
- * @file /constants/umrah.js
+ * @file /constants/umrah-offers.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -13,7 +13,7 @@ const UMRAH_STATUS = ['active', 'disabled'];
 // umrah inclusions
 const UMRAH_INCLUSIONS = ['flight', 'hotel', 'visa', 'food', 'transport'];
 
-// export payments constants
+// export umrah constants
 module.exports = {
     UMRAH_STATUS,
     UMRAH_INCLUSIONS,

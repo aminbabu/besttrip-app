@@ -7,10 +7,10 @@
  * @update_date 19 April, 2024
  */
 
-// payments status
+// section names
 const SECTION_NAMES = ['hotels', 'destinations', 'umrah-ziyarah', 'beautiful-places'];
 
-// export payments constants
+// export sections constants
 module.exports = {
     SECTION_NAMES,
 };
