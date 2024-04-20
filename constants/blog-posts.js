@@ -10,7 +10,7 @@
 // blog status
 const BLOG_STATUS = ['active', 'disabled'];
 
-// export payments constants
+// export blog posts constants
 module.exports = {
     BLOG_STATUS,
 };
