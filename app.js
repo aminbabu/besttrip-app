@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 20 April, 2024
+ * @update_date 22 April, 2024
  */
 
 // dependencies
@@ -61,10 +61,13 @@ app.use('/settings/site/policy', require('./routes/settings/site/policy'));
 app.use('/settings/site/meta', require('./routes/settings/site/meta'));
 app.use('/settings/payments', require('./routes/settings/payments'));
 app.use('/settings/content/sections', require('./routes/settings/content/sections'));
-app.use('/settings/content/exclusive-offer', require('./routes/settings/content/exclusive-offers'));
-app.use('/settings/content/hotel-offer', require('./routes/settings/content/hotel-offers'));
-app.use('/settings/content/flight-offer', require('./routes/settings/content/flight-offers'));
-app.use('/settings/content/umrah-offers', require('./routes/settings/content/umrah-offers'));
+app.use(
+    '/settings/content/exclusive-offers',
+    require('./routes/settings/content/exclusive-offers')
+);
+app.use('/settings/content/hotel-offers', require('./routes/settings/content/hotel-offers'));
+app.use('/settings/content/flight-offers', require('./routes/settings/content/flight-offers'));
+app.use('/settings/content/umrah-offerss', require('./routes/settings/content/umrah-offers'));
 app.use('/settings/content/blog-posts', require('./routes/settings/content/blog-posts'));
 app.use('/settings/themes', require('./routes/settings/themes'));
 app.use('/payment-requests', require('./routes/payment-requests'));
