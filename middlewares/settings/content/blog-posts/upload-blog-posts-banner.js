@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 22 April, 2024
  */
 
 // dependencies
@@ -17,8 +17,8 @@ module.exports =
     (dir = '/offers') =>
     async (req, res, next) => {
         // get validated data
-        const { id } = req.params;
-        const { banner } = req.files;
+        const { id } = req.params || {};
+        const { banner } = req.files || {};
 
         // check if id exists
         if (id) {

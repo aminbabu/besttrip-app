@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 12 April, 2024
- * @update_date 13 April, 2024
+ * @update_date 22 April, 2024
  */
 
 // dependencies
@@ -13,7 +13,7 @@ const { DEFAULT_IMAGE_TYPES, HALF_MEGA_BYTE, ONE_MEGA_BYTE } = require('../../..
 // export validate avatar middleware
 module.exports = (req, res, next) => {
     // get avatar file
-    const { avatar } = req.files;
+    const { avatar } = req.files || {};
 
     // check if file is an array
     if (avatar && Array.isArray(avatar)) {

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 12 April, 2024
- * @update_date 13 April, 2024
+ * @update_date 22 April, 2024
  */
 
 // dependencies
@@ -18,10 +18,10 @@ module.exports =
     async (req, res, next) => {
         try {
             // get id
-            const { id } = req.params;
+            const { id } = req.params || {};
 
             // get avatar
-            const { avatar } = req.files;
+            const { avatar } = req.files || {};
 
             // continue if no avatar uploaded
             if (!avatar) {

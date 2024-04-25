@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 22 April, 2024
  */
 
 // dependencies
@@ -17,8 +17,8 @@ module.exports =
     (dir = '/offers') =>
     async (req, res, next) => {
         // get validated data
-        const { key } = req.body;
-        const { thumbnail } = req.files;
+        const { key } = req.body || {};
+        const { thumbnail } = req.files || {};
 
         // get exclusive offer
         const exclusiveOffer = await ExclusiveOffer.findOne({ key });

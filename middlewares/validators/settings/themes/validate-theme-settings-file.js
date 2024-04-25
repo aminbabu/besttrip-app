@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 22 April, 2024
  */
 
 const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE, DEFAULT_FILE_SIZE } = require('../../../../constants');
@@ -12,7 +12,7 @@ const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE, DEFAULT_FILE_SIZE } = require('../..
 // export theme settings file validator middleware
 module.exports = async (req, res, next) => {
     // get illustration from request body
-    const { illustration } = req.files;
+    const { illustration } = req.files || {};
 
     // check if illustration is an array
     if (Array.isArray(illustration)) {

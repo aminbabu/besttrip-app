@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 22 April, 2024
  */
 
 const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants');
@@ -13,7 +13,7 @@ const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants
 // export hotel offer file validator middleware
 module.exports = async (req, res, next) => {
     // get thumbnail
-    const { thumbnail } = req.files;
+    const { thumbnail } = req.files || {};
 
     // check if thumbnail is an array
     if (Array.isArray(thumbnail)) {

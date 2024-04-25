@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 21 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 22 April, 2024
  */
 
 // dependencies
@@ -13,8 +13,11 @@ const { User, Customer } = require('../../models');
 // is verified user middleware
 const isVerifiedUser = async (req, res, next) => {
     try {
+        // get email
+        const { email } = req.body || {};
+
         // get user
-        const user = await User.findOne({ email: req.body.email });
+        const user = await User.findOne({ email });
 
         // check if user exists
         if (!user) {
@@ -33,17 +36,18 @@ const isVerifiedUser = async (req, res, next) => {
         // continue to the next middleware
         return next();
     } catch (error) {
-        return res.status(500).json({
-            message: 'Internal server error',
-        });
+        return next(error);
     }
 };
 
 // is verified customer middleware
 const isVerifiedCustomer = async (req, res, next) => {
     try {
+        // get email
+        const { email } = req.body || {};
+
         // get customer
-        const customer = await Customer.findOne({ email: req.body.email });
+        const customer = await Customer.findOne({ email });
 
         // check if customer exists
         if (!customer) {
@@ -62,9 +66,7 @@ const isVerifiedCustomer = async (req, res, next) => {
         // continue to the next middleware
         return next();
     } catch (error) {
-        return res.status(500).json({
-            message: 'Internal server error',
-        });
+        return next(error);
     }
 };
 

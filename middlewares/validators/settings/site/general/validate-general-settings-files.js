@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 22 April, 2024
  */
 
 const {
@@ -17,7 +17,7 @@ const {
 // export general settings files validator middleware
 module.exports = async (req, res, next) => {
     // get logo and favicon files
-    const { logo, favicon } = req.files;
+    const { logo, favicon } = req.files || {};
 
     // check if logo is an array
     if (Array.isArray(logo)) {

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 25 April, 2024
  */
 
 // dependencies
@@ -17,7 +17,7 @@ const uploadLogo =
     (dir = '/logos') =>
     async (req, res, next) => {
         // get logo
-        const { logo } = req.files;
+        const { logo } = req.files || {};
 
         // get general settings
         const generalSettings = await GeneralSettings.findOne();
@@ -52,7 +52,7 @@ const uploadFavicon =
     (dir = '/logos') =>
     async (req, res, next) => {
         // get favicon
-        const { favicon } = req.files;
+        const { favicon } = req.files || {};
 
         // get general settings
         const generalSettings = await GeneralSettings.findOne();
