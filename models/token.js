@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 14 April, 2024
+ * @update_date 27 April, 2024
  */
 
 // dependencies
@@ -18,8 +18,5 @@ tokenSchema.pre('save', function (next) {
     next();
 });
 
-// token model
-const Token = model('Token', tokenSchema);
-
 // export model
-module.exports = Token;
+module.exports = model('Token', tokenSchema);
