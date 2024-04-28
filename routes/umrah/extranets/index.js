@@ -40,7 +40,7 @@ router.use(isAuthorized);
 
 /**
  * @description get all umrah extranets packages
- * @param {string} path - /umrah-extranets
+ * @param {string} path - /umrah/extranets
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getUmrahExtranets']
  * @returns {object} - router
@@ -51,7 +51,7 @@ router.get('/', isAllowed(['admin']), getUmrahExtranets);
 
 /**
  * @description get umrah extranet package
- * @param {string} path - /umrah-extranets/:id
+ * @param {string} path - /umrah/extranets/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateUmrahExtranetId']
  * @param {function} controller - ['getUmrahExtranet']
@@ -63,7 +63,7 @@ router.get('/:id', isAllowed(['admin']), validateUmrahExtranetId, getUmrahExtran
 
 /**
  * @description create umrah extranet package
- * @param {string} path - /umrah-extranets
+ * @param {string} path - /umrah/extranets
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateUmrahExtranet']
  * @param {function} controller - ['createUmrahExtranet']
@@ -75,7 +75,7 @@ router.post('/', isAllowed(['admin']), validateUmrahExtranet, createUmrahExtrane
 
 /**
  * @description update umrah extranet package
- * @param {string} path - /umrah-extranets/:id
+ * @param {string} path - /umrah/extranets/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateUmrahExtranetId', 'validateUmrahExtranet']
  * @param {function} controller - ['updateUmrahExtranet']
@@ -93,7 +93,7 @@ router.patch(
 
 /**
  * @description delete umrah extranet package
- * @param {string} path - /umrah-extranets/:id
+ * @param {string} path - /umrah/extranets/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateUmrahExtranetId']
  * @param {function} controller - ['deleteUmrahExtranet']
