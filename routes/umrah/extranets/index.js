@@ -102,3 +102,6 @@ router.patch(
  * @method DELETE
  */
 router.delete('/:id', isAllowed(['admin']), validateUmrahExtranetId, deleteUmrahExtranet);
+
+// export router
+module.exports = router;
