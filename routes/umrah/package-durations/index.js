@@ -1,5 +1,5 @@
 /**
- * @file /routes/umrah/package-duration/index.js
+ * @file /routes/umrah/package-durations/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
