@@ -72,6 +72,7 @@ app.use('/settings/content/blog-posts', require('./routes/settings/content/blog-
 app.use('/settings/themes', require('./routes/settings/themes'));
 app.use('/payment-requests', require('./routes/payment-requests'));
 app.use('/umrah/extranets', require('./routes/umrah/extranets'));
+app.use('/umrah/package-duration', require('./routes/umrah/package-duration'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

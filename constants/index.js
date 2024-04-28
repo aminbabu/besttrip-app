@@ -25,4 +25,5 @@ module.exports = {
     ...require('./themes'),
     ...require('./payment-requests'),
     ...require('./umrah-extranets'),
+    ...require('./umrah-package-durations'),
 };
