@@ -27,4 +27,5 @@ module.exports = {
     PaymentRequest: require('./payment-request'),
     UmrahExtranet: require('./umrah/extranet'),
     UmrahPackageDuration: require('./umrah/package-duration'),
+    UmrahPackageType: require('./umrah/package-type'),
 };
