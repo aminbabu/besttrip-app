@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validation/umrah-extranets/validate-umrah-extranet-id.js
+ * @file /middlewares/validation/umrah/extranets/validate-umrah-extranet-id.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

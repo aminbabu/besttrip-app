@@ -1,5 +1,5 @@
 /**
- * @file /controllers/umrah-extranets/get-umrah-extranets.js
+ * @file /controllers/umrah/extranets/get-umrah-extranets.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
