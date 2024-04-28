@@ -1,20 +1,21 @@
 /**
- * @file /controllers/umrah-extranets/delete-umrah-extranet.js
+ * @file /controllers/umrah-extranets/update-umrah-extranet.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 25 April, 2024
- * @update_date 25 April, 2024
+ * @update_date 28 April, 2024
  */
 
 // dependencies
-const { UmrahExtranet } = require('../../models');
+const { UmrahExtranet } = require('../../../models');
 
-// export delete umrah extranet controller
+// export update umrah extranet controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
         const { id } = req.params;
+        const validatedData = req.body;
 
         // get umrah extranet
         const umrahExtranet = await UmrahExtranet.findById(id);
@@ -26,12 +27,15 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // delete umrah extranet
-        await umrahExtranet.deleteOne();
+        // update umrah extranet
+        umrahExtranet.set(validatedData);
+
+        // save umrah extranet
+        await umrahExtranet.save();
 
         // send response
         return res.status(200).json({
-            message: 'Deleted umrah extranet package successfully',
+            message: 'Updated umrah extranet package successfully',
             umrahExtranet,
         });
     } catch (error) {

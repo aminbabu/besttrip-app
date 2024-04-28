@@ -4,11 +4,11 @@
  * @version 0.0.0
  * @author best-trip
  * @date 25 April, 2024
- * @update_date 25 April, 2024
+ * @update_date 28 April, 2024
  */
 
 // dependencies
-const { UmrahExtranet } = require('../../models');
+const { UmrahExtranet } = require('../../../models');
 
 // export get umrah extranet controller
 module.exports = async (req, res, next) => {

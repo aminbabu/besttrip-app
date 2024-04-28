@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 25 April, 2024
- * @update_date 25 April, 2024
+ * @update_date 28 April, 2024
  */
 
 // dependencies
@@ -20,14 +20,14 @@ const {
     createUmrahExtranet,
     updateUmrahExtranet,
     deleteUmrahExtranet,
-} = require('../../controllers/umrah-extranets');
+} = require('../../../controllers/umrah/extranets');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
     validateUmrahExtranetId,
     validateUmrahExtranet,
-} = require('../../middlewares/validators/umrah-extranets');
+} = require('../../../middlewares/validators/umrah/extranets');
 
 /**
  * @description check if user is authorized

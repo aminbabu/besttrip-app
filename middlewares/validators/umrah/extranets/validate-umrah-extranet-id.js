@@ -4,12 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 April, 2024
- * @update_date 27 April, 2024
+ * @update_date 28 April, 2024
  */
 
 // dependencies
-const { umrahExtranetSchema } = require('../../../schemas/zod/umrah-extranets');
-const { zodErrorHandler } = require('../../../handlers/errors');
+const { umrahExtranetSchema } = require('../../../../schemas/zod/umrah-extranets');
+const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // export umrah extranet id validator middleware
 module.exports = (req, res, next) => {
