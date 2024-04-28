@@ -12,7 +12,7 @@ const { z } = require('zod');
 const { isMongoId } = require('validator');
 const { UMRAH_PACKAGE_STATUS } = require('../../../../constants');
 
-// export umdah extranet schema
+// export umdah package duration schema
 module.exports = z
     .object({
         id: z
