@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { UMRAH_PACKAGE_STATUS } = require('../../../constants');
+const { UMRAH_PACKAGE_DURATION_STATUS } = require('../../../constants');
 
 // export umrah package duration schema
 module.exports = new Schema(
@@ -24,7 +24,7 @@ module.exports = new Schema(
         },
         status: {
             type: String,
-            enum: UMRAH_PACKAGE_STATUS,
+            enum: UMRAH_PACKAGE_DURATION_STATUS,
             default: 'active',
         },
     },

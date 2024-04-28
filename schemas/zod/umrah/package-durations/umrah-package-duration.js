@@ -10,7 +10,7 @@
 // dependencies
 const { z } = require('zod');
 const { isMongoId } = require('validator');
-const { UMRAH_PACKAGE_STATUS } = require('../../../../constants');
+const { UMRAH_PACKAGE_DURATION_STATUS } = require('../../../../constants');
 
 // export umdah package duration schema
 module.exports = z
@@ -44,7 +44,7 @@ module.exports = z
                 required_error: 'Status is required',
                 invalid_type_error: 'Please provide a valid status',
             })
-            .refine((status) => UMRAH_PACKAGE_STATUS.includes(status), {
+            .refine((status) => UMRAH_PACKAGE_DURATION_STATUS.includes(status), {
                 message: 'Please provide a valid status',
             }),
     })
