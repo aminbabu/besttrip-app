@@ -1,10 +1,10 @@
 /**
- * @file /schemas/zod/umdah-extranets/umdah-extranet.js
+ * @file /schemas/zod/umdah/extranets/umrah-extranet.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 27 April, 2024
- * @update_date 27 April, 2024
+ * @update_date 28 April, 2024
  */
 
 // dependencies
@@ -15,7 +15,7 @@ const {
     UMDAH_EXTRANET_INCLUSIONS,
     UMDAH_EXTRANET_TYPES,
     UMDAH_EXTRANET_OUTBOUND_FLIGHT_STOPS,
-} = require('../../../constants');
+} = require('../../../../constants');
 
 // export umdah extranet schema
 module.exports = z

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 25 April, 2024
+ * @update_date 28 April, 2024
  */
 
 // export all models
@@ -25,5 +25,5 @@ module.exports = {
     BlogPost: require('./settings/content/blog-post'),
     ThemeSettings: require('./settings/theme'),
     PaymentRequest: require('./payment-request'),
-    UmrahExtranet: require('./umrah-extranet'),
+    UmrahExtranet: require('./umrah/extranet'),
 };

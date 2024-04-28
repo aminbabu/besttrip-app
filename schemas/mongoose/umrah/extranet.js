@@ -1,5 +1,5 @@
 /**
- * @file /schemas/mongoose/umrah-extranet.js
+ * @file /schemas/mongoose/umrah/extranet.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -14,7 +14,7 @@ const {
     UMDAH_EXTRANET_TYPES,
     UMDAH_EXTRANET_OUTBOUND_FLIGHT_STOPS,
     UMDAH_EXTRANET_INCLUSIONS,
-} = require('../../constants');
+} = require('../../../constants');
 
 // export umrah extranet schema
 module.exports = new Schema(
