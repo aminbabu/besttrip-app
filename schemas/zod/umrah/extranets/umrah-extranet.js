@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 April, 2024
- * @update_date 28 April, 2024
+ * @update_date 04 May, 2024
  */
 
 // dependencies
@@ -376,15 +376,15 @@ module.exports = z
             .max(255, {
                 message: 'Outbound infant baggage cabin must be at most 255 characters',
             }),
-        makkaHotelThumbnail: z.string({
+        makkahHotelThumbnail: z.string({
             required_error: 'Makka hotel thumbnail is required',
             invalid_type_error: 'Please provide a valid makka hotel thumbnail',
         }),
-        makkaHotelNoOfNights: z.number({
+        makkahHotelNoOfNights: z.number({
             required_error: 'Makka hotel no of nights is required',
             invalid_type_error: 'Please provide a valid no. of nights in Makka hotel',
         }),
-        makkaHotelName: z
+        makkahHotelName: z
             .string({
                 required_error: 'Makka hotel name is required',
                 invalid_type_error: 'Please provide a valid makka hotel name',
@@ -396,7 +396,7 @@ module.exports = z
             .max(255, {
                 message: 'Makka hotel name must be at most 255 characters',
             }),
-        makkaHotelAddress: z
+        makkahHotelAddress: z
             .string({
                 required_error: 'Makka hotel address is required',
                 invalid_type_error: 'Please provide a valid makka hotel address',
@@ -408,11 +408,11 @@ module.exports = z
             .max(255, {
                 message: 'Makka hotel address must be at most 255 characters',
             }),
-        makkaHotelRating: z.number({
+        makkahHotelRating: z.number({
             required_error: 'Makka hotel rating is required',
             invalid_type_error: 'Please provide a valid makka hotel rating',
         }),
-        makkaHotelDistance: z
+        makkahHotelDistance: z
             .string({
                 required_error: 'Makka hotel distance is required',
                 invalid_type_error: 'Please provide a valid makka hotel distance',
@@ -424,7 +424,7 @@ module.exports = z
             .max(255, {
                 message: 'Makka hotel distance must be at most 255 characters',
             }),
-        makkaHotelWalkDuration: z
+        makkahHotelWalkDuration: z
             .string({
                 required_error: 'Makka hotel walk duration is required',
                 invalid_type_error: 'Please provide a valid makka hotel walk duration',
@@ -436,7 +436,7 @@ module.exports = z
             .max(255, {
                 message: 'Makka hotel walk duration must be at most 255 characters',
             }),
-        makkaHotelLocation: z
+        makkahHotelLocation: z
             .string({
                 required_error: 'Makka hotel location is required',
                 invalid_type_error: 'Please provide a valid makka hotel location',
@@ -448,7 +448,7 @@ module.exports = z
             .max(255, {
                 message: 'Makka hotel location must be at most 255 characters',
             }),
-        makkaHotelNote: z
+        makkahHotelNote: z
             .string({
                 required_error: 'Makka hotel note is required',
                 invalid_type_error: 'Please provide a valid makka hotel note',
@@ -460,7 +460,7 @@ module.exports = z
             .max(255, {
                 message: 'Makka hotel note must be at most 255 characters',
             }),
-        makkaHotelExtraThumbnails: z
+        makkahHotelExtraThumbnails: z
             .array(
                 z.string({
                     required_error: 'Makka hotel extra thumbnail is required',
@@ -471,15 +471,15 @@ module.exports = z
                 message: 'At least one makka hotel extra thumbnail is required',
             })
             .optional(),
-        madinaHotelThumbnail: z.string({
+        madinahHotelThumbnail: z.string({
             required_error: 'Madina hotel thumbnail is required',
             invalid_type_error: 'Please provide a valid madina hotel thumbnail',
         }),
-        madinaHotelNoOfNights: z.number({
+        madinahHotelNoOfNights: z.number({
             required_error: 'Madina hotel no of nights is required',
             invalid_type_error: 'Please provide a valid no. of nights in Madina hotel',
         }),
-        madinaHotelName: z
+        madinahHotelName: z
             .string({
                 required_error: 'Madina hotel name is required',
                 invalid_type_error: 'Please provide a valid madina hotel name',
@@ -491,7 +491,7 @@ module.exports = z
             .max(255, {
                 message: 'Madina hotel name must be at most 255 characters',
             }),
-        madinaHotelAddress: z
+        madinahHotelAddress: z
             .string({
                 required_error: 'Madina hotel address is required',
                 invalid_type_error: 'Please provide a valid madina hotel address',
@@ -503,11 +503,11 @@ module.exports = z
             .max(255, {
                 message: 'Madina hotel address must be at most 255 characters',
             }),
-        madinaHotelRating: z.number({
+        madinahHotelRating: z.number({
             required_error: 'Madina hotel rating is required',
             invalid_type_error: 'Please provide a valid madina hotel rating',
         }),
-        madinaHotelDistance: z
+        madinahHotelDistance: z
             .string({
                 required_error: 'Madina hotel distance is required',
                 invalid_type_error: 'Please provide a valid madina hotel distance',
@@ -519,7 +519,7 @@ module.exports = z
             .max(255, {
                 message: 'Madina hotel distance must be at most 255 characters',
             }),
-        madinaHotelWalkDuration: z
+        madinahHotelWalkDuration: z
             .string({
                 required_error: 'Madina hotel walk duration is required',
                 invalid_type_error: 'Please provide a valid madina hotel walk duration',
@@ -531,7 +531,7 @@ module.exports = z
             .max(255, {
                 message: 'Madina hotel walk duration must be at most 255 characters',
             }),
-        madinaHotelLocation: z
+        madinahHotelLocation: z
             .string({
                 required_error: 'Madina hotel location is required',
                 invalid_type_error: 'Please provide a valid madina hotel location',
@@ -543,7 +543,7 @@ module.exports = z
             .max(255, {
                 message: 'Madina hotel location must be at most 255 characters',
             }),
-        madinaHotelNote: z
+        madinahHotelNote: z
             .string({
                 required_error: 'Madina hotel note is required',
                 invalid_type_error: 'Please provide a valid madina hotel note',
@@ -555,7 +555,7 @@ module.exports = z
             .max(255, {
                 message: 'Madina hotel note must be at most 255 characters',
             }),
-        madinaHotelExtraThumbnails: z
+        madinahHotelExtraThumbnails: z
             .array(
                 z.string({
                     required_error: 'Madina hotel extra thumbnail is required',
