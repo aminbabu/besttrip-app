@@ -5,9 +5,10 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 22 April, 2024
+ * @update_date 04 May, 2024
  */
 
+// dependencies
 const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants');
 
 // export blog post file validator middleware
