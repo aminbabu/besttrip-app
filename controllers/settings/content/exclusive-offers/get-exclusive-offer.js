@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 06 May, 2024
  */
 
 // dependencies
@@ -15,8 +15,10 @@ module.exports = async (req, res, next) => {
     try {
         const { id } = req.params;
 
+        console.log('id: ', id);
+
         // get exclusive offers
-        const exclusiveOffer = await ExclusiveOffer.findOne({ id });
+        const exclusiveOffer = await ExclusiveOffer.findById(id);
 
         // check if exclusive offer exists
         if (!exclusiveOffer) {
