@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 06 May, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -69,8 +69,8 @@ router.post(
     isAuthorized,
     isAllowed(['admin']),
     validateExclusiveOfferFile,
-    uploadExclusiveOfferFile('/offers'),
     validateExclusiveOffer,
+    uploadExclusiveOfferFile('/offers'),
     createExclusiveOffer
 );
 
