@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 06 May, 2024
  */
 
 // dependencies
@@ -16,6 +16,7 @@ module.exports = async (req, res, next) => {
         // get validated data
         const { id } = req.params;
         const { link, status } = req.body;
+        const { thumbnail } = req.files;
 
         // get exclusive offer
         const exclusiveOffer = await ExclusiveOffer.findById(id);
@@ -31,6 +32,7 @@ module.exports = async (req, res, next) => {
         exclusiveOffer.set({
             link,
             status,
+            thumbnail: thumbnail.path,
         });
 
         // save exclusive offer
