@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 06 May, 2024
+ * @update_date 19 April, 2024
  */
 
 // dependencies
@@ -23,10 +23,6 @@ module.exports = z
             .refine((id) => isMongoId(id), {
                 message: 'Please provide a valid id',
             }),
-        thumbnail: z.string({
-            required_error: 'Thumbnail is required',
-            invalid_type_error: 'Please provide a valid thumbnail',
-        }),
         link: z
             .string({
                 required_error: 'Link is required',
