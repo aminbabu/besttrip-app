@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 06 May, 2024
  */
 
 // dependencies
@@ -15,12 +15,17 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const { link, status } = req.body;
+        const { thumbnail } = req.files;
 
         // create hotel offer
-        const hotelOffer = await HotelOffer.create({
+        const hotelOffer = new HotelOffer({
             link,
             status,
+            thumbnail: thumbnail.path,
         });
+
+        // save hotel offer
+        await hotelOffer.save();
 
         // send response
         return res.status(201).send({
