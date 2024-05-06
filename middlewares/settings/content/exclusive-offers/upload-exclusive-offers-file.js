@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 22 April, 2024
+ * @update_date 06 May, 2024
  */
 
 // dependencies
@@ -16,12 +16,17 @@ const { ExclusiveOffer } = require('../../../../models');
 module.exports =
     (dir = '/offers') =>
     async (req, res, next) => {
+        let exclusiveOffer = {};
+
         // get validated data
-        const { key } = req.body || {};
+        const { id } = req.params || {};
         const { thumbnail } = req.files || {};
 
-        // get exclusive offer
-        const exclusiveOffer = await ExclusiveOffer.findOne({ key });
+        // check if id exists
+        if (id) {
+            // get exclusive offer
+            exclusiveOffer = await ExclusiveOffer.findById(id);
+        }
 
         // check if exclusive offer thumbnail exists
         if (exclusiveOffer?.thumbnail) {
