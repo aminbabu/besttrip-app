@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 06 May, 2024
+ * @update_date 07 May, 2024
  */
 
 // dependencies
@@ -14,13 +14,12 @@ const { FlightOffer } = require('../../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { link, status } = req.body;
+        const validatedData = req.body;
         const { thumbnail } = req.files;
 
         // create flight offer
         const flightOffer = new FlightOffer({
-            link,
-            status,
+            ...validatedData,
             thumbnail: thumbnail.path,
         });
 
