@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
         const { id } = req.params;
 
         // get flight offers
-        const flightOffer = await FlightOffer.findOne({ id });
+        const flightOffer = await FlightOffer.findById(id);
 
         // check if flight offer exists
         if (!flightOffer) {
