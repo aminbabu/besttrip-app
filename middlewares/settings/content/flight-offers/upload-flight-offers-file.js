@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 22 April, 2024
+ * @update_date 07 May, 2024
  */
 
 // dependencies
@@ -16,12 +16,17 @@ const { FlightOffer } = require('../../../../models');
 module.exports =
     (dir = '/offers') =>
     async (req, res, next) => {
+        let flightOffer = {};
+
         // get validated data
-        const { key } = req.body || {};
+        const { id } = req.params || {};
         const { thumbnail } = req.files || {};
 
-        // get flight offer
-        const flightOffer = await FlightOffer.findOne({ key });
+        // check if id is provided
+        if (id) {
+            // get flight offer
+            flightOffer = await FlightOffer.findById(id);
+        }
 
         // check if flight offer thumbnail exists
         if (flightOffer?.thumbnail) {
