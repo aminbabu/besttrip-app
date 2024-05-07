@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 07 May, 2024
  */
 
 // dependencies
@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
         const { id } = req.params;
 
         // get hotel offers
-        const hotelOffer = await HotelOffer.findOne({ id });
+        const hotelOffer = await HotelOffer.findById(id);
 
         // check if hotel offer exists
         if (!hotelOffer) {
