@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 07 May, 2024
  */
 
 // dependencies
@@ -68,7 +68,7 @@ router.post(
     isAllowed(['admin']),
     validateHotelOfferFile,
     validateHotelOffer,
-    uploadHotelOfferFile('/offers'),
+    uploadHotelOfferFile('/offers/hotel'),
     createHotelOffer
 );
 
@@ -89,7 +89,7 @@ router.put(
     validateHotelOfferId,
     validateHotelOfferFile,
     validateHotelOffer,
-    uploadHotelOfferFile('/offers'),
+    uploadHotelOfferFile('/offers/hotel'),
     updateHotelOffer
 );
 
