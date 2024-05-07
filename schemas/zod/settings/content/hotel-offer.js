@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 07 May, 2024
  */
 
 // dependencies
@@ -48,23 +48,20 @@ module.exports = z
                 message: 'Location must not be greater than 255 characters',
             }),
         rating: z
-            .number({
+            .string({
                 required_error: 'Rating is required',
                 invalid_type_error: 'Please provide a valid rating',
             })
-            .min(0, {
-                message: 'Rating must be at least 1',
-            })
-            .max(5, {
-                message: 'Rating must not be greater than 5',
+            .refine((rating) => Number(rating) >= 0 && Number(rating) <= 5, {
+                message: 'Please provide a valid rating',
             }),
         price: z
-            .number({
+            .string({
                 required_error: 'Price is required',
                 invalid_type_error: 'Please provide a valid price',
             })
-            .min(0, {
-                message: 'Price must be at least 0',
+            .refine((price) => Number(price) >= 0, {
+                message: 'Please provide a valid price',
             }),
         link: z
             .string({
