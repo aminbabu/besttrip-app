@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 28 April, 2024
+ * @update_date 07 May, 2024
  */
 
 // dependencies
@@ -86,11 +86,13 @@ app.use((err, req, res, next) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+    // send error response
+    return res.status(err.status || 500).json({
+        message: err.message,
+    });
+
     // render the error page
-    // return res.status(err.status || 500).json({
-    //     message: err.message,
-    // });
-    return res.status(err.status || 500).render('error');
+    // return res.status(err.status || 500).render('error');
 });
 
 module.exports = app;
