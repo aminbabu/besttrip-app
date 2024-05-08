@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -68,7 +68,7 @@ router.post(
     isAllowed(['admin']),
     validateUmrahOfferFile,
     validateUmrahOffer,
-    uploadUmrahOfferFile('/offers'),
+    uploadUmrahOfferFile('/offers/umrah'),
     createUmrahOffer
 );
 
@@ -89,7 +89,7 @@ router.put(
     validateUmrahOfferId,
     validateUmrahOfferFile,
     validateUmrahOffer,
-    uploadUmrahOfferFile('/offers'),
+    uploadUmrahOfferFile('/offers/umrah'),
     updateUmrahOffer
 );
 
