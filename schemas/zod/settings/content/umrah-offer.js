@@ -55,18 +55,10 @@ module.exports = z
             .refine((duration) => duration >= 0, {
                 message: 'Please provide a valid duration',
             }),
-        inclusions: z
-            .string({
-                required_error: 'Inclusions is required',
-                invalid_type_error: 'Please provide a valid inclusions',
-            })
-            .refine(
-                (inclusions) =>
-                    inclusions.every((inclusion) => UMRAH_INCLUSIONS.includes(inclusion)),
-                {
-                    message: `Please provide a valid inclusions from ${UMRAH_INCLUSIONS.join(', ')}`,
-                }
-            ),
+        inclusions: z.enum(UMRAH_INCLUSIONS, {
+            required_error: 'Inclusions is required',
+            invalid_type_error: `Please provide a valid inclusions. Available options are ${UMRAH_INCLUSIONS.join(', ')}`,
+        }),
         price: z
             .string({
                 required_error: 'Price is required',
@@ -83,13 +75,9 @@ module.exports = z
             .url({
                 message: 'Please provide a valid link',
             }),
-        status: z
-            .string({
-                required_error: 'Status is required',
-                invalid_type_error: 'Please provide a valid status',
-            })
-            .refine((status) => UMRAH_STATUS.includes(status), {
-                message: `Please provide a valid status from ${UMRAH_STATUS.join(', ')}`,
-            }),
+        status: z.enum(UMRAH_STATUS, {
+            required_error: 'Status is required',
+            invalid_type_error: `Please provide a valid status. Available options are ${UMRAH_STATUS.join(', ')}`,
+        }),
     })
     .strict();
