@@ -14,7 +14,7 @@ const { zodErrorHandler } = require('../../../../handlers/errors');
 // export theme settings validator middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = themeSettingsSchema.omit({ theme: true }).safeParse(req.params);
+    const { error, success } = themeSettingsSchema.omit({ theme: true }).safeParse(req.body);
 
     // check for errors
     if (!success) {
