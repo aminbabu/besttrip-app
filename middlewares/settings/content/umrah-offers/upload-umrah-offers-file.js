@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 25 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -16,12 +16,17 @@ const { UmrahOffer } = require('../../../../models');
 module.exports =
     (dir = '/offers') =>
     async (req, res, next) => {
+        let umrahOffer = {};
+
         // get validated data
-        const { key } = req.body || {};
+        const { id } = req.params || {};
         const { thumbnail } = req.files || {};
 
-        // get umrah offer
-        const umrahOffer = await UmrahOffer.findOne({ key });
+        // check if thumbnail exists
+        if (!thumbnail) {
+            // get umrah offer
+            umrahOffer = await UmrahOffer.findById(id);
+        }
 
         // check if umrah offer thumbnail exists
         if (umrahOffer?.thumbnail) {
