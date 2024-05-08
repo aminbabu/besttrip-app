@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
         const { illustration } = req.files;
 
         // get theme
-        let theme = await ThemeSettings.findOne({ key });
+        let theme = await ThemeSettings.findOne({ theme: key });
 
         // check if theme exists
         if (theme) {
@@ -45,7 +45,7 @@ module.exports = async (req, res, next) => {
         await theme.save();
 
         // return response
-        return res.status(200).json({
+        return res.status(isUpdated ? 200 : 201).json({
             message: `${isUpdated ? 'Updated' : 'Created'} theme successfully`,
             theme,
         });
