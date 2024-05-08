@@ -60,9 +60,9 @@ router.get('/:key', validateThemeSettingsKey, getTheme);
  * @param {function} controller - ['updateOrCreateTheme']
  * @returns {object} - router
  * @access private - ['admin']
- * @method PUT
+ * @method POST
  */
-router.put(
+router.post(
     '/',
     isAuthorized,
     isAllowed(['admin']),
