@@ -26,6 +26,7 @@ module.exports = async (req, res, next) => {
         // check if theme exists
         if (theme) {
             theme.set({
+                ...theme,
                 illustration: illustration?.path || theme.illustration,
                 title,
                 description,
