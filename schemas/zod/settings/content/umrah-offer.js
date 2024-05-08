@@ -64,7 +64,7 @@ module.exports = z
                 (inclusions) =>
                     inclusions.every((inclusion) => UMRAH_INCLUSIONS.includes(inclusion)),
                 {
-                    message: 'Please provide a valid inclusions',
+                    message: `Please provide a valid inclusions from ${UMRAH_INCLUSIONS.join(', ')}`,
                 }
             ),
         price: z
@@ -89,7 +89,7 @@ module.exports = z
                 invalid_type_error: 'Please provide a valid status',
             })
             .refine((status) => UMRAH_STATUS.includes(status), {
-                message: 'Please provide a valid status',
+                message: `Please provide a valid status from ${UMRAH_STATUS.join(', ')}`,
             }),
     })
     .strict();
