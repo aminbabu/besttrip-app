@@ -71,8 +71,8 @@ router.post(
     isAuthorized,
     isAllowed(['admin']),
     validateThemeSettingsKey,
-    validateThemeSettings,
     validateThemeSettingsFile,
+    validateThemeSettings,
     uploadThemeSettingsFile('themes'),
     updateOrCreateTheme
 );
