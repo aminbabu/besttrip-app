@@ -63,7 +63,11 @@ router.get('/:key', validateThemeSettingsKey, getTheme);
  * @method POST
  */
 router.post(
-    '/theme',
+    '/:theme',
+    (req, res, next) => {
+        console.log('req.body', req.body);
+        next();
+    },
     isAuthorized,
     isAllowed(['admin']),
     validateThemeSettingsKey,

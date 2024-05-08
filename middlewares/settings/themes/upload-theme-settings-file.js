@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 25 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -16,12 +16,18 @@ const { ThemeSettings } = require('../../../models');
 module.exports =
     (dir = '/themes') =>
     async (req, res, next) => {
+        // initialize theme settings
+        let themeSettings = {};
+
         // get validated data
-        const { key } = req.body || {};
+        const { theme } = req.params || {};
         const { illustration } = req.files || {};
 
-        // get theme settings
-        const themeSettings = await ThemeSettings.findOne({ key });
+        // check if illustration exists
+        if (theme) {
+            // get theme settings
+            themeSettings = await ThemeSettings.findOne({ theme });
+        }
 
         // check if illustration exists
         if (themeSettings?.illustration) {

@@ -14,15 +14,6 @@ const { THEME_NAMES } = require('../../../../constants');
 // export theme settings schema
 module.exports = z
     .object({
-        illustration: z
-            .string({
-                required_error: 'Illustration is required',
-                invalid_type_error: 'Please provide a valid illustration',
-            })
-            .trim()
-            .min(3, {
-                message: 'Illustration should be at least 3 characters',
-            }),
         title: z
             .string({
                 required_error: 'Title is required',
