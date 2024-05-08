@@ -4,23 +4,24 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
 const { z } = require('zod');
-const { SECTION_NAMES } = require('../../../../constants');
+const { isMongoId } = require('validator');
+const { THEME_NAMES } = require('../../../../constants');
 
 // export theme settings schema
 module.exports = z
     .object({
-        key: z
+        id: z
             .string({
-                required_error: 'Section key is required',
-                invalid_type_error: 'Please provide a valid section key',
+                required_error: 'Id is required',
+                invalid_type_error: 'Please provide a valid id',
             })
-            .refine((name) => SECTION_NAMES.includes(name), {
-                message: 'Please provide a valid section key',
+            .refine((id) => isMongoId(id), {
+                message: 'Please provide a valid id',
             }),
         illustration: z
             .string({
@@ -52,6 +53,14 @@ module.exports = z
             })
             .max(500, {
                 message: 'Description should not be more than 500 characters',
+            }),
+        theme: z
+            .string({
+                required_error: 'Theme is required',
+                invalid_type_error: 'Please provide a valid theme',
+            })
+            .refine((theme) => THEME_NAMES.includes(theme), {
+                message: 'Please provide a valid theme',
             }),
     })
     .strict();
