@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -43,9 +43,9 @@ router.get('/', getContactSettings);
  * @param {function} controller - ['updateContactSettings']
  * @returns {object} - router
  * @access private - ['admin']
- * @method PATCH
+ * @method POST
  */
-router.patch(
+router.post(
     '/',
     isAuthorized,
     isAllowed(['admin']),
