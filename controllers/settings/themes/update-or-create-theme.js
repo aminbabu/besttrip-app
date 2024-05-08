@@ -33,7 +33,7 @@ module.exports = async (req, res, next) => {
             isUpdated = true;
         } else {
             theme = new ThemeSettings({
-                key,
+                theme: key,
                 illustration: illustration?.path,
                 title,
                 description,
