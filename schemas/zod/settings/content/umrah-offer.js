@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 07 May, 2024
  */
 
 // dependencies
@@ -64,9 +64,13 @@ module.exports = z
                 required_error: 'Inclusions is required',
                 invalid_type_error: 'Please provide a valid inclusions',
             })
-            .refine((inclusions) => UMRAH_INCLUSIONS.includes(inclusions), {
-                message: 'Please provide a valid inclusions',
-            }),
+            .refine(
+                (inclusions) =>
+                    inclusions.every((inclusion) => UMRAH_INCLUSIONS.includes(inclusion)),
+                {
+                    message: 'Please provide a valid inclusions',
+                }
+            ),
         price: z
             .number({
                 required_error: 'Price is required',
