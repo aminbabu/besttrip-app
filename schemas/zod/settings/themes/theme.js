@@ -47,11 +47,11 @@ module.exports = z
             }),
         theme: z
             .string({
-                required_error: 'Theme is required',
-                invalid_type_error: 'Please provide a valid theme',
+                required_error: 'Theme name is required',
+                invalid_type_error: 'Please provide a valid theme name',
             })
             .refine((theme) => THEME_NAMES.includes(theme), {
-                message: 'Please provide a valid theme',
+                message: 'Please provide a valid theme name',
             }),
     })
     .strict();
