@@ -46,9 +46,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(env.COOKIE_SECRET));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
-app.use(xssInstance.xssShield(WHITE_LIST));
 app.use(cors());
 app.use(expressFileUpload(expressFileUploadConf));
+app.use(xssInstance.xssShield(WHITE_LIST));
 
 // routes
 app.use('/auth/users', require('./routes/auth/users'));
