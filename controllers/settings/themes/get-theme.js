@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -14,7 +14,7 @@ const { ThemeSettings } = require('../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { key } = req.params;
+        const { theme: key } = req.params;
 
         // get theme
         const theme = await ThemeSettings.findOne({ key });
