@@ -16,18 +16,12 @@ const { ThemeSettings } = require('../../../models');
 module.exports =
     (dir = '/themes') =>
     async (req, res, next) => {
-        // initialize theme settings
-        let themeSettings = {};
-
         // get validated data
         const { theme } = req.params || {};
         const { illustration } = req.files || {};
 
-        // check if illustration exists
-        if (illustration) {
-            // get theme settings
-            themeSettings = await ThemeSettings.findOne({ theme });
-        }
+        // get theme settings
+        const themeSettings = await ThemeSettings.findOne({ theme });
 
         // check if illustration exists
         if (themeSettings?.illustration) {
