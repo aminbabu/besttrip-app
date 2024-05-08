@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 07 May, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -67,7 +67,7 @@ app.use(
 );
 app.use('/settings/content/hotel-offers', require('./routes/settings/content/hotel-offers'));
 app.use('/settings/content/flight-offers', require('./routes/settings/content/flight-offers'));
-app.use('/settings/content/umrah-offerss', require('./routes/settings/content/umrah-offers'));
+app.use('/settings/content/umrah-offers', require('./routes/settings/content/umrah-offers'));
 app.use('/settings/content/blog-posts', require('./routes/settings/content/blog-posts'));
 app.use('/settings/themes', require('./routes/settings/themes'));
 app.use('/payment-requests', require('./routes/payment-requests'));
