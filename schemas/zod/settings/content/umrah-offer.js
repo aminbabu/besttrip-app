@@ -52,12 +52,8 @@ module.exports = z
                 required_error: 'Duration is required',
                 invalid_type_error: 'Please provide a valid duration',
             })
-            .trim()
-            .min(3, {
-                message: 'Duration must be at least 3 characters',
-            })
-            .max(255, {
-                message: 'Duration must not be greater than 255 characters',
+            .refine((duration) => duration >= 0, {
+                message: 'Please provide a valid duration',
             }),
         inclusions: z
             .string({
