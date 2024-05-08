@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
         const { id } = req.params;
 
         // get blog posts
-        const blogPost = await BlogPost.findOne({ id });
+        const blogPost = await BlogPost.findById(id);
 
         // check if blog post exists
         if (!blogPost) {

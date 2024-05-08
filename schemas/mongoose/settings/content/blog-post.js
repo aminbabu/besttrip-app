@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -17,6 +17,10 @@ module.exports = new Schema(
         thumbnail: {
             type: String,
             required: [true, 'Thumbnail is required'],
+        },
+        banner: {
+            type: String,
+            required: [true, 'Banner is required'],
         },
         title: {
             type: String,

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -73,8 +73,8 @@ router.post(
     validateBlogPostThumbnail,
     validateBlogPostBanner,
     validateBlogPost,
-    uploadBlogPostThumbnail('/offers'),
-    uploadBlogPostBanner('/offers'),
+    uploadBlogPostThumbnail('/offers/blogs'),
+    uploadBlogPostBanner('/offers/blogs'),
     createBlogPost
 );
 
@@ -96,8 +96,8 @@ router.put(
     validateBlogPostBanner,
     validateBlogPostId,
     validateBlogPost,
-    uploadBlogPostThumbnail('/offers'),
-    uploadBlogPostBanner('/offers'),
+    uploadBlogPostThumbnail('/offers/blogs'),
+    uploadBlogPostBanner('/offers/blogs'),
     updateBlogPost
 );
 

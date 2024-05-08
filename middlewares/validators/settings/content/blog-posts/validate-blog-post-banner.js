@@ -16,6 +16,13 @@ module.exports = async (req, res, next) => {
     // get banner
     const { banner } = req.files || {};
 
+    // check if banner is not uploaded
+    if (!banner) {
+        return res.status(400).json({
+            message: 'Please upload a banner',
+        });
+    }
+
     // check if banner is an array
     if (Array.isArray(banner)) {
         return res.status(400).json({

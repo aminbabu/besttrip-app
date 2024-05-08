@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 06 May, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -14,14 +14,14 @@ const { BlogPost } = require('../../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { link, status } = req.body;
-        const { thumbnail } = req.files;
+        const validatedData = req.body;
+        const { thumbnail, banner } = req.files;
 
         // create blog post
         const blogPost = new BlogPost({
-            link,
-            status,
+            ...validatedData,
             thumbnail: thumbnail.path,
+            banner: banner.path,
         });
 
         // save blog post
