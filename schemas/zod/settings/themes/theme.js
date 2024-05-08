@@ -9,20 +9,11 @@
 
 // dependencies
 const { z } = require('zod');
-const { isMongoId } = require('validator');
 const { THEME_NAMES } = require('../../../../constants');
 
 // export theme settings schema
 module.exports = z
     .object({
-        id: z
-            .string({
-                required_error: 'Id is required',
-                invalid_type_error: 'Please provide a valid id',
-            })
-            .refine((id) => isMongoId(id), {
-                message: 'Please provide a valid id',
-            }),
         illustration: z
             .string({
                 required_error: 'Illustration is required',
