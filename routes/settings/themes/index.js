@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 08 May, 2024
  */
 
 // dependencies
@@ -60,9 +60,9 @@ router.get('/:key', validateThemeSettingsKey, getTheme);
  * @param {function} controller - ['updateOrCreateTheme']
  * @returns {object} - router
  * @access private - ['admin']
- * @method PATCH
+ * @method PUT
  */
-router.patch(
+router.put(
     '/',
     isAuthorized,
     isAllowed(['admin']),
