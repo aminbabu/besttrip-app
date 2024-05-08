@@ -47,13 +47,13 @@ module.exports = z
             .max(255, {
                 message: 'Subtitle must not be greater than 255 characters',
             }),
-        ratting: z
+        rating: z
             .string({
-                required_error: 'Ratting is required',
-                invalid_type_error: 'Please provide a valid ratting',
+                required_error: 'Rating is required',
+                invalid_type_error: 'Please provide a valid rating',
             })
             .refine((ratting) => ratting >= 0 && ratting <= 5, {
-                message: 'Please provide a valid ratting',
+                message: 'Please provide a valid rating',
             }),
         description: z
             .string({
