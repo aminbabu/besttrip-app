@@ -24,7 +24,7 @@ module.exports =
         const { illustration } = req.files || {};
 
         // check if illustration exists
-        if (theme) {
+        if (illustration) {
             // get theme settings
             themeSettings = await ThemeSettings.findOne({ theme });
         }
