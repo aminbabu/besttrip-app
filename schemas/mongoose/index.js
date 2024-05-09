@@ -25,7 +25,7 @@ module.exports = {
     blogPostSchema: require('./settings/content/blog-post'),
     themeSettingsSchema: require('./settings/theme'),
     paymentRequestSchema: require('./payment-request'),
-    umrahExtranetSchema: require('./umrah/extranet'),
+    umrahPackageSchema: require('./umrah/package'),
     umrahPackageDurationSchema: require('./umrah/package-duration'),
     umrahPackageTypeSchema: require('./umrah/package-type'),
 };
