@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 08 May, 2024
+ * @update_date 09 May, 2024
  */
 
 // dependencies
@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const { theme: key } = req.params;
 
         // get theme
-        const theme = await ThemeSettings.findOne({ key });
+        const theme = await ThemeSettings.findOne({ theme: key });
 
         // check if theme exists
         if (!theme) {
