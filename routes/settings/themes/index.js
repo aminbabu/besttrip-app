@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 08 May, 2024
+ * @update_date 09 May, 2024
  */
 
 // dependencies
@@ -48,7 +48,7 @@ router.get('/', getThemes);
  * @access public
  * @method GET
  */
-router.get('/:key', validateThemeSettingsKey, getTheme);
+router.get('/:theme', validateThemeSettingsKey, getTheme);
 
 /**
  * @description update or create theme
