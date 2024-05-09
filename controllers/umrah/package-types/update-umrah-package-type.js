@@ -27,6 +27,16 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // check if umrah package type already exists
+        const existingUmrahPackageType = await UmrahPackageType.findOne({ name, _id: { $ne: id } });
+
+        // check if umrah package type already exists
+        if (existingUmrahPackageType) {
+            return res.status(400).json({
+                message: 'Umrah package type already exists',
+            });
+        }
+
         // update umrah package type
         umrahPackageType.set({
             name,
