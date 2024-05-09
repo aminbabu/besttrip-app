@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 28 April, 2024
- * @update_date 28 April, 2024
+ * @update_date 09 May, 2024
  */
 
 // dependencies
@@ -24,6 +24,20 @@ module.exports = async (req, res, next) => {
         if (!umrahPackageDuration) {
             return res.status(404).json({
                 message: 'Umrah package duration not found',
+            });
+        }
+
+        // check if umrah package duration already exists
+        const existingUmrahPackageDuration = await UmrahPackageDuration.findOne({
+            days,
+            nights,
+            _id: { $ne: id },
+        });
+
+        // check if umrah package duration already exists
+        if (existingUmrahPackageDuration) {
+            return res.status(400).json({
+                message: 'Umrah package duration already exists',
             });
         }
 

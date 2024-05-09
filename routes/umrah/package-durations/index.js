@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 28 April, 2024
- * @update_date 28 April, 2024
+ * @update_date 09 May, 2024
  */
 
 // dependencies
@@ -70,7 +70,7 @@ router.get('/:id', isAllowed(['admin']), validateUmrahPackageDurationId, getUmra
  * @access private - ['admin']
  * @method POST
  */
-router.post('/', isAllowed(['admin']), createUmrahPackageDuration);
+router.post('/', isAllowed(['admin']), validateUmrahPackageDuration, createUmrahPackageDuration);
 
 /**
  * @description update umrah package duration
@@ -80,9 +80,9 @@ router.post('/', isAllowed(['admin']), createUmrahPackageDuration);
  * @param {function} controller - ['updateUmrahPackageDuration']
  * @returns {object} - router
  * @access private - ['admin']
- * @method PATCH
+ * @method PUT
  */
-router.patch(
+router.put(
     '/:id',
     isAllowed(['admin']),
     validateUmrahPackageDurationId,
