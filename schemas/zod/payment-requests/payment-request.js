@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 09 May, 2024
  */
 
 // dependencies
@@ -79,14 +79,6 @@ module.exports = z
             .default('active')
             .refine((status) => PAYMENT_REQUEST_STATUS.includes(status), {
                 message: 'Invalid status value',
-            }),
-        customer: z
-            .string({
-                required_error: 'Customer is required',
-                invalid_type_error: 'Customer should be a string',
-            })
-            .refine((id) => isMongoId(id), {
-                message: 'Please provide a valid customer id',
             }),
     })
     .strict();
