@@ -32,7 +32,7 @@ module.exports =
         // check if illustration exists
         if (themeSettings?.illustration) {
             // delete previous illustration
-            fs.unlinkSync(path.join(__dirname, '../../../../public/', themeSettings.illustration));
+            fs.unlinkSync(path.join(__dirname, '../../../public/', themeSettings.illustration));
         }
 
         // prepare file path
