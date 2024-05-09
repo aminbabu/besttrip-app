@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const { id } = req.params;
-        const { days, nights, status } = req.body;
+        const { name, status } = req.body;
 
         // get umrah package type
         const umrahPackageType = await UmrahPackageType.findById(id);
@@ -29,8 +29,7 @@ module.exports = async (req, res, next) => {
 
         // update umrah package type
         umrahPackageType.set({
-            days,
-            nights,
+            name,
             status,
         });
 

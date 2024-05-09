@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 28 April, 2024
- * @update_date 28 April, 2024
+ * @update_date 09 May, 2024
  */
 
 // dependencies
@@ -14,12 +14,11 @@ const { UmrahPackageType } = require('../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { days, nights, status } = req.body;
+        const { name, status } = req.body;
 
         // create umrah package type
         const umrahPackageType = new UmrahPackageType({
-            days,
-            nights,
+            name,
             status,
         });
 
