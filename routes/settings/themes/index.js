@@ -37,7 +37,7 @@ const { uploadThemeSettingsFile } = require('../../../middlewares/settings/theme
  * @access public
  * @method GET
  */
-router.get('/', getThemes);
+router.get('/', isAuthorized, isAllowed(['admin']), getThemes);
 
 /**
  * @description get theme by key
