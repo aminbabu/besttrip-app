@@ -42,6 +42,8 @@ module.exports =
         // set file path to request body
         req.files.thumbnail.path = thumbnailPath;
 
+        console.log('1. passed upload package thumbnail middleware.');
+
         // proceed to next middleware
         return next();
     };
