@@ -24,13 +24,6 @@ module.exports = z
             .refine((id) => isMongoId(id), {
                 message: 'Please provide a valid id',
             }),
-        title: z
-            .string({
-                required_error: 'Title is required',
-                invalid_type_error: 'Title should be a string',
-            })
-            .min(3, 'Title should be at least 3 characters long')
-            .max(255, 'Title should not be more than 255 characters long'),
         amount: z
             .number({
                 required_error: 'Amount is required',
@@ -51,13 +44,6 @@ module.exports = z
             })
             .min(3, 'Payment method should be at least 3 characters long')
             .max(50, 'Payment method should not be more than 50 characters long'),
-        paymentType: z
-            .string({
-                required_error: 'Payment type is required',
-                invalid_type_error: 'Payment type should be a string',
-            })
-            .min(3, 'Payment type should be at least 3 characters long')
-            .max(50, 'Payment type should not be more than 50 characters long'),
         paymentDate: z
             .string({
                 required_error: 'Payment date is required',
