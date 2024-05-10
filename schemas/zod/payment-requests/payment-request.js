@@ -57,11 +57,6 @@ module.exports = z
                 invalid_type_error: 'Attachment should be a string',
             })
             .optional(),
-        remarks: z
-            .string({
-                invalid_type_error: 'Remarks should be a string',
-            })
-            .optional(),
         status: z
             .string({
                 required_error: 'Status is required',
