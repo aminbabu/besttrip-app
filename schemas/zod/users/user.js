@@ -4,12 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 16 April, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
 const { z } = require('zod');
 const { isMobilePhone, isPostalCode, isMongoId } = require('validator');
+const moment = require('moment');
 const { USER_STATUS, USER_ROLES } = require('../../../constants');
 
 // export user schema
@@ -54,8 +55,12 @@ module.exports = z
             })
             .optional(),
         dob: z
-            .date({
+            .string({
+                required_error: 'Date of birth is required',
                 invalid_type_error: 'Please enter a valid date of birth',
+            })
+            .refine((dob) => moment(dob, 'YYYY-MM-DD', true).isValid(), {
+                message: 'Please enter a valid date of birth',
             })
             .optional(),
         status: z
