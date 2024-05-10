@@ -28,7 +28,7 @@ module.exports = z
                 required_error: 'Name is required',
                 invalid_type_error: 'Please provide a valid name',
             })
-            .refine((name) => UMRAH_PACKAGE_TYPE_NAME.includes(name.toLocaleLowerCase()), {
+            .refine((name) => UMRAH_PACKAGE_TYPE_NAME.includes(name.toLowerCase()), {
                 message: `Please provide a valid name. Valid names are: ${UMRAH_PACKAGE_TYPE_NAME.join(', ')}`,
             }),
         status: z
