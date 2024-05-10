@@ -47,6 +47,8 @@ module.exports =
         // set file path to request body
         req.files.umrahThumbnail.path = umrahThumbnailPath;
 
+        console.log('7. passed upload package umrah thumbnail middleware.');
+
         // proceed to next middleware
         return next();
     };
