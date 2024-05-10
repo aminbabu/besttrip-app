@@ -52,11 +52,6 @@ module.exports = z
             .refine((date) => moment(date, 'YYYY-MM-DD', true).isValid(), {
                 message: 'Please enter a valid payment date',
             }),
-        attachment: z
-            .string({
-                invalid_type_error: 'Attachment should be a string',
-            })
-            .optional(),
         status: z
             .string({
                 required_error: 'Status is required',
