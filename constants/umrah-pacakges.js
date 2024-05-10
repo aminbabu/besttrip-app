@@ -8,10 +8,10 @@
  */
 
 // umrah package package status
-const UMDAH_PACKAGE_STATUS = ['active', 'disabled'];
+const UMRAH_PACKAGE_STATUS = ['active', 'disabled'];
 
 // umrah package package schudle
-const UMDAH_PACKAGE_SCHEDULES = [
+const UMRAH_PACKAGE_SCHEDULES = [
     'january',
     'february',
     'march',
@@ -27,15 +27,15 @@ const UMDAH_PACKAGE_SCHEDULES = [
 ];
 
 // umrah package package inclusions
-const UMDAH_PACKAGE_INCLUSIONS = ['flight', 'hotel', 'visa', 'transport', 'food'];
+const UMRAH_PACKAGE_INCLUSIONS = ['flight', 'hotel', 'visa', 'transport', 'food'];
 
 // umrah package outbound flight stops
-const UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS = [0, 1, 2];
+const UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS = [0, 1, 2];
 
 // export umdah packages constants
 module.exports = {
-    UMDAH_PACKAGE_STATUS,
-    UMDAH_PACKAGE_SCHEDULES,
-    UMDAH_PACKAGE_INCLUSIONS,
-    UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
+    UMRAH_PACKAGE_STATUS,
+    UMRAH_PACKAGE_SCHEDULES,
+    UMRAH_PACKAGE_INCLUSIONS,
+    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
 };
