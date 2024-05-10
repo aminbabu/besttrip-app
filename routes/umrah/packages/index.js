@@ -42,7 +42,7 @@ const {
     uploadPackageMakkaHotelGallery,
     uploadPackageMadinahHotelThumbnail,
     uploadPackageMadinahHotelGallery,
-    uploadPackageUmrahPackageThumbnail,
+    uploadUmrahThumbnail,
 } = require('../../../middlewares/umrah/packages');
 
 /**
@@ -92,7 +92,7 @@ router.get('/:id', isAllowed(['admin']), validateUmrahPackageId, getUmrahPackage
  * @param {function} middleware - [
  * 'uploadPackageMadinahHotelThumbnail', 'uploadPackageMadinahHotelGallery'
  * ]
- * @param {function} middleware - ['uploadPackageUmrahPackageThumbnail']
+ * @param {function} middleware - ['uploadUmrahThumbnail']
  * @param {function} validator - ['validateUmrahPackage']
  * @param {function} controller - ['createUmrahPackage']
  * @returns {object} - router
@@ -115,7 +115,7 @@ router.post(
     uploadPackageMakkaHotelGallery,
     uploadPackageMadinahHotelThumbnail,
     uploadPackageMadinahHotelGallery,
-    uploadPackageUmrahPackageThumbnail,
+    uploadUmrahThumbnail,
     validateUmrahPackage,
     createUmrahPackage
 );
@@ -135,7 +135,7 @@ router.post(
  * @param {function} middleware - [
  * 'uploadPackageMadinahHotelThumbnail', 'uploadPackageMadinahHotelGallery'
  * ]
- * @param {function} middleware - ['uploadPackageUmrahPackageThumbnail']
+ * @param {function} middleware - ['uploadUmrahThumbnail']
  * @param {function} validator - ['validateUmrahPackage']
  * @param {function} controller - ['updateUmrahPackage']
  * @returns {object} - router
@@ -159,7 +159,7 @@ router.patch(
     uploadPackageMakkaHotelGallery,
     uploadPackageMadinahHotelThumbnail,
     uploadPackageMadinahHotelGallery,
-    uploadPackageUmrahPackageThumbnail,
+    uploadUmrahThumbnail,
     validateUmrahPackage,
     updateUmrahPackage
 );

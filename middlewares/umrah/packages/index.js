@@ -15,5 +15,5 @@ module.exports = {
     uploadPackageMakkaHotelGallery: require('./upload-makka-hotel-gallery'),
     uploadPackageMadinahHotelThumbnail: require('./upload-madinah-hotel-thumbnail'),
     uploadPackageMadinahHotelGallery: require('./upload-madinah-hotel-gallery'),
-    uploadPackageUmrahPackageThumbnail: require('./upload-umrah-thumbnail'),
+    uploadUmrahThumbnail: require('./upload-umrah-thumbnail'),
 };
