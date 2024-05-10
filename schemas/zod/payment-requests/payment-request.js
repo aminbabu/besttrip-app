@@ -4,12 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 09 May, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
 const { z } = require('zod');
 const { isMongoId } = require('validator');
+const moment = require('moment');
 const { PAYMENT_REQUEST_STATUS } = require('../../../constants');
 
 // export payment settings schema
@@ -57,10 +58,14 @@ module.exports = z
             })
             .min(3, 'Payment type should be at least 3 characters long')
             .max(50, 'Payment type should not be more than 50 characters long'),
-        paymentDate: z.date({
-            required_error: 'Payment date is required',
-            invalid_type_error: 'Payment date should be a date',
-        }),
+        paymentDate: z
+            .string({
+                required_error: 'Payment date is required',
+                invalid_type_error: 'Payment date should be a string',
+            })
+            .refine((date) => moment(date, 'YYYY-MM-DD', true).isValid(), {
+                message: 'Please enter a valid payment date',
+            }),
         attachment: z
             .string({
                 invalid_type_error: 'Attachment should be a string',
