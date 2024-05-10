@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 25 April, 2024
- * @update_date 09 May, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
@@ -36,13 +36,13 @@ const {
     validateUmrahPackage,
 } = require('../../../middlewares/validators/umrah/packages');
 const {
-    uploadExtranetThumbnail,
-    uploadExtranetGallery,
-    uploadExtranetMakkaHotelThumbnail,
-    uploadExtranetMakkaHotelGallery,
-    uploadExtranetMadinahHotelThumbnail,
-    uploadExtranetMadinahHotelGallery,
-    uploadExtranetUmrahPackageThumbnail,
+    uploadPackageThumbnail,
+    uploadPackageGallery,
+    uploadPackageMakkaHotelThumbnail,
+    uploadPackageMakkaHotelGallery,
+    uploadPackageMadinahHotelThumbnail,
+    uploadPackageMadinahHotelGallery,
+    uploadPackageUmrahPackageThumbnail,
 } = require('../../../middlewares/umrah/packages');
 
 /**
@@ -85,14 +85,14 @@ router.get('/:id', isAllowed(['admin']), validateUmrahPackageId, getUmrahPackage
  * @param {function} validator - ['validateMakkahHotelTumbnail', 'validateMakkahHotelGallery']
  * @param {function} validator - ['validateMadinahHotelTumbnail', 'validateMadinahHotelGallery']
  * @param {function} validator - ['validateUmrahPackageThumbnail']
- * @param {function} middleware - ['uploadExtranetThumbnail', 'uploadExtranetGallery']
+ * @param {function} middleware - ['uploadPackageThumbnail', 'uploadPackageGallery']
  * @param {function} middleware - [
- * 'uploadExtranetMakkaHotelThumbnail', 'uploadExtranetMakkaHotelGallery'
+ * 'uploadPackageMakkaHotelThumbnail', 'uploadPackageMakkaHotelGallery'
  * ]
  * @param {function} middleware - [
- * 'uploadExtranetMadinahHotelThumbnail', 'uploadExtranetMadinahHotelGallery'
+ * 'uploadPackageMadinahHotelThumbnail', 'uploadPackageMadinahHotelGallery'
  * ]
- * @param {function} middleware - ['uploadExtranetUmrahPackageThumbnail']
+ * @param {function} middleware - ['uploadPackageUmrahPackageThumbnail']
  * @param {function} validator - ['validateUmrahPackage']
  * @param {function} controller - ['createUmrahPackage']
  * @returns {object} - router
@@ -109,13 +109,13 @@ router.post(
     validateMadinahHotelTumbnail,
     validateMadinahHotelGallery,
     validateUmrahPackageThumbnail,
-    uploadExtranetThumbnail,
-    uploadExtranetGallery,
-    uploadExtranetMakkaHotelThumbnail,
-    uploadExtranetMakkaHotelGallery,
-    uploadExtranetMadinahHotelThumbnail,
-    uploadExtranetMadinahHotelGallery,
-    uploadExtranetUmrahPackageThumbnail,
+    uploadPackageThumbnail,
+    uploadPackageGallery,
+    uploadPackageMakkaHotelThumbnail,
+    uploadPackageMakkaHotelGallery,
+    uploadPackageMadinahHotelThumbnail,
+    uploadPackageMadinahHotelGallery,
+    uploadPackageUmrahPackageThumbnail,
     validateUmrahPackage,
     createUmrahPackage
 );
@@ -128,14 +128,14 @@ router.post(
  * @param {function} validator - ['validateUmrahPackageGallery', 'validateMakkahHotelTumbnail']
  * @param {function} validator - ['validateMakkahHotelGallery', 'validateMadinahHotelTumbnail']
  * @param {function} validator - ['validateMadinahHotelGallery', 'validateUmrahPackageThumbnail']
- * @param {function} middleware - ['uploadExtranetThumbnail', 'uploadExtranetGallery']
+ * @param {function} middleware - ['uploadPackageThumbnail', 'uploadPackageGallery']
  * @param {function} middleware - [
- * 'uploadExtranetMakkaHotelThumbnail', 'uploadExtranetMakkaHotelGallery'
+ * 'uploadPackageMakkaHotelThumbnail', 'uploadPackageMakkaHotelGallery'
  * ]
  * @param {function} middleware - [
- * 'uploadExtranetMadinahHotelThumbnail', 'uploadExtranetMadinahHotelGallery'
+ * 'uploadPackageMadinahHotelThumbnail', 'uploadPackageMadinahHotelGallery'
  * ]
- * @param {function} middleware - ['uploadExtranetUmrahPackageThumbnail']
+ * @param {function} middleware - ['uploadPackageUmrahPackageThumbnail']
  * @param {function} validator - ['validateUmrahPackage']
  * @param {function} controller - ['updateUmrahPackage']
  * @returns {object} - router
@@ -153,13 +153,13 @@ router.patch(
     validateMadinahHotelTumbnail,
     validateMadinahHotelGallery,
     validateUmrahPackageThumbnail,
-    uploadExtranetThumbnail,
-    uploadExtranetGallery,
-    uploadExtranetMakkaHotelThumbnail,
-    uploadExtranetMakkaHotelGallery,
-    uploadExtranetMadinahHotelThumbnail,
-    uploadExtranetMadinahHotelGallery,
-    uploadExtranetUmrahPackageThumbnail,
+    uploadPackageThumbnail,
+    uploadPackageGallery,
+    uploadPackageMakkaHotelThumbnail,
+    uploadPackageMakkaHotelGallery,
+    uploadPackageMadinahHotelThumbnail,
+    uploadPackageMadinahHotelGallery,
+    uploadPackageUmrahPackageThumbnail,
     validateUmrahPackage,
     updateUmrahPackage
 );
