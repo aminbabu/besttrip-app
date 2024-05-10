@@ -4,16 +4,17 @@
  * @version 0.0.0
  * @author best-trip
  * @date 25 April, 2024
- * @update_date 09 May, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
 const { Schema } = require('mongoose');
 const {
-    UMDAH_PACKAGE_STATUS,
-    UMDAH_PACKAGE_TYPES,
-    UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
-    UMDAH_PACKAGE_INCLUSIONS,
+    UMRAH_PACKAGE_STATUS,
+    UMRAH_PACKAGE_TYPES,
+    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
+    UMRAH_PACKAGE_INCLUSIONS,
+    UMRAH_PACKAGE_SCHEDULES,
 } = require('../../../constants');
 
 // export umrah package schema
@@ -37,6 +38,7 @@ module.exports = new Schema(
         },
         schedule: {
             type: String,
+            enum: UMRAH_PACKAGE_SCHEDULES,
             required: [true, 'Schedule is required'],
         },
         journeyDate: {
@@ -49,12 +51,12 @@ module.exports = new Schema(
         },
         type: {
             type: String,
-            enum: UMDAH_PACKAGE_TYPES,
+            enum: UMRAH_PACKAGE_TYPES,
             required: [true, 'Type is required'],
         },
         status: {
             type: String,
-            enum: UMDAH_PACKAGE_STATUS,
+            enum: UMRAH_PACKAGE_STATUS,
             default: 'active',
         },
         adultPrice: {
@@ -63,6 +65,7 @@ module.exports = new Schema(
         },
         adultPartialPrice: {
             type: Number,
+            default: 0,
         },
         childPrice: {
             type: Number,
@@ -70,6 +73,7 @@ module.exports = new Schema(
         },
         childPartialPrice: {
             type: Number,
+            default: 0,
         },
         infantPrice: {
             type: Number,
@@ -77,6 +81,7 @@ module.exports = new Schema(
         },
         infantPartialPrice: {
             type: Number,
+            default: 0,
         },
         seats: {
             type: Number,
@@ -84,7 +89,7 @@ module.exports = new Schema(
         },
         inclusions: {
             type: [String],
-            enum: UMDAH_PACKAGE_INCLUSIONS,
+            enum: UMRAH_PACKAGE_INCLUSIONS,
             required: [true, 'Inclusions is required'],
         },
         extraThumbnails: {
@@ -124,34 +129,34 @@ module.exports = new Schema(
         },
         outboundFlightStops: {
             type: Number,
-            enum: UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
+            enum: UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
             required: [true, 'Flight stops is required'],
         },
         outboundLayoverFirstDuration: {
             type: String,
             required: [
-                () => this.outboundFlightStops === UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
+                () => this.outboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
                 'Layover 1st duration is required',
             ],
         },
         outboundLayoverFirstAirport: {
             type: String,
             required: [
-                () => this.outboundFlightStops === UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
+                () => this.outboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
                 'Layover 1st airport is required',
             ],
         },
         outboundLayoverSecondDuration: {
             type: String,
             required: [
-                () => this.outboundFlightStops === UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
+                () => this.outboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
                 'Layover 2nd duration is required',
             ],
         },
         outboundLayoverSecondAirport: {
             type: String,
             required: [
-                () => this.outboundFlightStops === UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
+                () => this.outboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
                 'Layover 2nd airport is required',
             ],
         },
@@ -297,34 +302,34 @@ module.exports = new Schema(
         },
         inboundFlightStops: {
             type: Number,
-            enum: UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
+            enum: UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
             required: [true, 'Flight stops is required'],
         },
         inboundLayoverFirstDuration: {
             type: String,
             required: [
-                () => this.inboundFlightStops === UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
+                () => this.inboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
                 'Layover 1st duration is required',
             ],
         },
         inboundLayoverFirstAirport: {
             type: String,
             required: [
-                () => this.inboundFlightStops === UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
+                () => this.inboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
                 'Layover 1st airport is required',
             ],
         },
         inboundLayoverSecondDuration: {
             type: String,
             required: [
-                () => this.inboundFlightStops === UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
+                () => this.inboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
                 'Layover 2nd duration is required',
             ],
         },
         inboundLayoverSecondAirport: {
             type: String,
             required: [
-                () => this.inboundFlightStops === UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
+                () => this.inboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
                 'Layover 2nd airport is required',
             ],
         },
