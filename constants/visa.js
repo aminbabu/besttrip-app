@@ -11,7 +11,7 @@
 const VISA_STATUS = ['active', 'disabled'];
 
 // visa types
-const VISA_TYPES = ['tourist', 'umrah', 'ziyarah', 'hajj'];
+const VISA_TYPES = ['umrah', 'ziyarah', 'hajj'];
 
 // export visa constants
 module.exports = {
