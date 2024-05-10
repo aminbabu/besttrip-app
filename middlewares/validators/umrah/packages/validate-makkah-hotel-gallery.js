@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 09 May, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
@@ -17,10 +17,8 @@ module.exports = async (req, res, next) => {
     const { makkahHotelExtraThumbnails } = req.files || {};
 
     // check if makka hotel extra thumbnails is not an array
-    if (!Array.isArray(makkahHotelExtraThumbnails)) {
-        return res.status(400).json({
-            message: 'Gallery must be an array of images',
-        });
+    if (!makkahHotelExtraThumbnails?.length) {
+        return next();
     }
 
     // check if makka hotel extra thumbnails is not an image of type jpg, jpeg, png

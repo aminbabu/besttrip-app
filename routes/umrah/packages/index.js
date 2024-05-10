@@ -25,13 +25,13 @@ const {
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
-    validateUmrahPackageTumbnail,
+    validateUmrahPackageThumbnail,
     validateUmrahPackageGallery,
     validateMakkahHotelTumbnail,
     validateMakkahHotelGallery,
     validateMadinahHotelTumbnail,
     validateMadinahHotelGallery,
-    validateUmrahPackageThumbnail,
+    validateUmrahThumbnail,
     validateUmrahPackageId,
     validateUmrahPackage,
 } = require('../../../middlewares/validators/umrah/packages');
@@ -81,7 +81,7 @@ router.get('/:id', isAllowed(['admin']), validateUmrahPackageId, getUmrahPackage
  * @description create umrah package package
  * @param {string} path - /umrah/packages
  * @param {function} middleware - ['isAllowed']
- * @param {function} validator - ['validateUmrahPackageTumbnail', 'validateUmrahPackageGallery']
+ * @param {function} validator - ['validateUmrahPackageThumbnail', 'validateUmrahPackageGallery']
  * @param {function} validator - ['validateMakkahHotelTumbnail', 'validateMakkahHotelGallery']
  * @param {function} validator - ['validateMadinahHotelTumbnail', 'validateMadinahHotelGallery']
  * @param {function} validator - ['validateUmrahPackageThumbnail']
@@ -102,13 +102,13 @@ router.get('/:id', isAllowed(['admin']), validateUmrahPackageId, getUmrahPackage
 router.post(
     '/',
     isAllowed(['admin']),
-    validateUmrahPackageTumbnail,
+    validateUmrahPackageThumbnail,
     validateUmrahPackageGallery,
     validateMakkahHotelTumbnail,
     validateMakkahHotelGallery,
     validateMadinahHotelTumbnail,
     validateMadinahHotelGallery,
-    validateUmrahPackageThumbnail,
+    validateUmrahThumbnail,
     uploadPackageThumbnail,
     uploadPackageGallery,
     uploadPackageMakkaHotelThumbnail,
@@ -124,7 +124,7 @@ router.post(
  * @description update umrah package package
  * @param {string} path - /umrah/packages/:id
  * @param {function} middleware - ['isAllowed']
- * @param {function} validator - ['validateUmrahPackageId', 'validateUmrahPackageTumbnail']
+ * @param {function} validator - ['validateUmrahPackageId', 'validateUmrahPackageThumbnail']
  * @param {function} validator - ['validateUmrahPackageGallery', 'validateMakkahHotelTumbnail']
  * @param {function} validator - ['validateMakkahHotelGallery', 'validateMadinahHotelTumbnail']
  * @param {function} validator - ['validateMadinahHotelGallery', 'validateUmrahPackageThumbnail']
@@ -146,13 +146,13 @@ router.patch(
     '/:id',
     isAllowed(['admin']),
     validateUmrahPackageId,
-    validateUmrahPackageTumbnail,
+    validateUmrahPackageThumbnail,
     validateUmrahPackageGallery,
     validateMakkahHotelTumbnail,
     validateMakkahHotelGallery,
     validateMadinahHotelTumbnail,
     validateMadinahHotelGallery,
-    validateUmrahPackageThumbnail,
+    validateUmrahThumbnail,
     uploadPackageThumbnail,
     uploadPackageGallery,
     uploadPackageMakkaHotelThumbnail,

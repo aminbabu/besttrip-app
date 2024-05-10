@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 09 May, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
@@ -17,10 +17,8 @@ module.exports = async (req, res, next) => {
     const { extraThumbnails } = req.files || {};
 
     // check if extra thumbnails is not an array
-    if (!Array.isArray(extraThumbnails)) {
-        return res.status(400).json({
-            message: 'Gallery must be an array of images',
-        });
+    if (!extraThumbnails?.length) {
+        return next();
     }
 
     // check if extra thumbnails is not an image of type jpg, jpeg, png
