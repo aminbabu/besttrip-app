@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 April, 2024
- * @update_date 09 May, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
@@ -12,6 +12,7 @@ const { z } = require('zod');
 const { isMongoId } = require('validator');
 const {
     UMDAH_PACKAGE_STATUS,
+    UMDAH_PACKAGE_SCHEDULES,
     UMDAH_PACKAGE_INCLUSIONS,
     UMDAH_PACKAGE_TYPES,
     UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
@@ -28,10 +29,6 @@ module.exports = z
             .refine((id) => isMongoId(id), {
                 message: 'Please provide a valid id',
             }),
-        thumbnail: z.string({
-            required_error: 'Thumbnail is required',
-            invalid_type_error: 'Please provide a valid thumbnail',
-        }),
         title: z
             .string({
                 required_error: 'Title is required',
@@ -70,12 +67,8 @@ module.exports = z
                 required_error: 'Schedule is required',
                 invalid_type_error: 'Please provide a valid schedule',
             })
-            .trim()
-            .min(3, {
-                message: 'Schedule must be at least 3 characters',
-            })
-            .max(255, {
-                message: 'Schedule must be at most 255 characters',
+            .refine((schedule) => UMDAH_PACKAGE_SCHEDULES.includes(schedule.toLowerCase()), {
+                message: `Please provide a valid schedule. Available schedules are: ${UMDAH_PACKAGE_SCHEDULES.join(', ')}`,
             }),
         journeyDate: z.date({
             required_error: 'Journey date is required',
@@ -149,17 +142,6 @@ module.exports = z
             .nonempty({
                 message: 'At least one inclusion is required',
             }),
-        extraThumbnails: z
-            .array(
-                z.string({
-                    required_error: 'Extra thumbnail is required',
-                    invalid_type_error: 'Please provide a valid extra thumbnail',
-                })
-            )
-            .nonempty({
-                message: 'At least one extra thumbnail is required',
-            })
-            .optional(),
         outboundAirlineCode: z
             .string({
                 required_error: 'Outbound airline code is required',
@@ -376,10 +358,6 @@ module.exports = z
             .max(255, {
                 message: 'Outbound infant baggage cabin must be at most 255 characters',
             }),
-        makkahHotelThumbnail: z.string({
-            required_error: 'Makka hotel thumbnail is required',
-            invalid_type_error: 'Please provide a valid makka hotel thumbnail',
-        }),
         makkahHotelNoOfNights: z.number({
             required_error: 'Makka hotel no of nights is required',
             invalid_type_error: 'Please provide a valid no. of nights in Makka hotel',
@@ -460,21 +438,6 @@ module.exports = z
             .max(255, {
                 message: 'Makka hotel note must be at most 255 characters',
             }),
-        makkahHotelExtraThumbnails: z
-            .array(
-                z.string({
-                    required_error: 'Makka hotel extra thumbnail is required',
-                    invalid_type_error: 'Please provide a valid makka hotel extra thumbnail',
-                })
-            )
-            .nonempty({
-                message: 'At least one makka hotel extra thumbnail is required',
-            })
-            .optional(),
-        madinahHotelThumbnail: z.string({
-            required_error: 'Madina hotel thumbnail is required',
-            invalid_type_error: 'Please provide a valid madina hotel thumbnail',
-        }),
         madinahHotelNoOfNights: z.number({
             required_error: 'Madina hotel no of nights is required',
             invalid_type_error: 'Please provide a valid no. of nights in Madina hotel',
@@ -555,17 +518,6 @@ module.exports = z
             .max(255, {
                 message: 'Madina hotel note must be at most 255 characters',
             }),
-        madinahHotelExtraThumbnails: z
-            .array(
-                z.string({
-                    required_error: 'Madina hotel extra thumbnail is required',
-                    invalid_type_error: 'Please provide a valid madina hotel extra thumbnail',
-                })
-            )
-            .nonempty({
-                message: 'At least one madina hotel extra thumbnail is required',
-            })
-            .optional(),
         inboundAirlineCode: z
             .string({
                 required_error: 'Inbound airline code is required',
@@ -981,12 +933,6 @@ module.exports = z
         itineraryDays: z
             .array(
                 z.object({
-                    thumbnail: z
-                        .string({
-                            required_error: 'Itinerary day thumbnail is required',
-                            invalid_type_error: 'Please provide a valid itinerary day thumbnail',
-                        })
-                        .optional(),
                     title: z
                         .string({
                             required_error: 'Itinerary day title is required',
@@ -1016,10 +962,6 @@ module.exports = z
                 })
             )
             .optional(),
-        umrahThumbnail: z.string({
-            required_error: 'Umrah thumbnail is required',
-            invalid_type_error: 'Please provide a valid umrah thumbnail',
-        }),
         umrahTitle: z
             .string({
                 required_error: 'Umrah title is required',
