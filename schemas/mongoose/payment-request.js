@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
@@ -18,10 +18,6 @@ module.exports = new Schema(
             type: String,
             unique: [true, 'Reference ID must be unique'],
         },
-        title: {
-            type: String,
-            required: [true, 'Title is required'],
-        },
         amount: {
             type: Number,
             required: [true, 'Amount is required'],
@@ -34,20 +30,12 @@ module.exports = new Schema(
             type: String,
             required: [true, 'Payment method is required'],
         },
-        paymentType: {
-            type: String,
-            required: [true, 'Payment type is required'],
-        },
         paymentDate: {
             type: Date,
             required: [true, 'Payment date is required'],
         },
         attachment: {
             type: String,
-        },
-        remarks: {
-            type: String,
-            required: [() => this.status === PAYMENT_REQUEST_STATUS[2], 'Remarks is required'],
         },
         status: {
             type: String,
