@@ -57,9 +57,9 @@ module.exports = z
                 required_error: 'Status is required',
                 invalid_type_error: 'Status should be a string',
             })
-            .default('active')
             .refine((status) => PAYMENT_REQUEST_STATUS.includes(status), {
-                message: 'Invalid status value',
-            }),
+                message: `Status should be one of ${PAYMENT_REQUEST_STATUS.join(', ')}`,
+            })
+            .optional(),
     })
     .strict();
