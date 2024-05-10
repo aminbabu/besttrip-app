@@ -4,11 +4,11 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
-const { PaymentSettings } = require('../../models');
+const { PaymentRequest } = require('../../models');
 
 // export create payment request controller
 module.exports = async (req, res, next) => {
@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
         const validatedData = req.body;
 
         // create payment request
-        const paymentsRequest = new PaymentSettings({
+        const paymentsRequest = new PaymentRequest({
             ...validatedData,
             customer: _id,
         });
