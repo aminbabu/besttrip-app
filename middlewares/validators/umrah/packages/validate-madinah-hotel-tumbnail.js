@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 09 May, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
@@ -15,6 +15,13 @@ const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../constants');
 module.exports = async (req, res, next) => {
     // get makka hotel thumbnail
     const { madinahHotelThumbnail } = req.files || {};
+
+    // check if makka hotel thumbnail is not provided
+    if (!madinahHotelThumbnail) {
+        return res.status(400).json({
+            message: 'Please upload a thumbnail',
+        });
+    }
 
     // check if makka hotel thumbnail is an array
     if (Array.isArray(madinahHotelThumbnail)) {
