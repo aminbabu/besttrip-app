@@ -36,20 +36,20 @@ module.exports =
 
         // prepare file path
         const updateExtraThumbnails = makkahHotelExtraThumbnails.map((thumbnail) => {
-            const newThumbnail = { ...thumbnail };
+            const updatedThumbnail = { ...thumbnail };
             const thumbnailPath = path.join(
                 'uploads/',
-                `${dir}/${Date.now()}_${newThumbnail.name}`
+                `${dir}/${Date.now()}_${updatedThumbnail.name}`
             );
             const uploadLogoPath = path.join(__dirname, '../../../public/', thumbnailPath);
 
             // move file to upload path
-            newThumbnail.mv(uploadLogoPath);
+            updatedThumbnail.mv(uploadLogoPath);
 
             // set file path to thumbnail object
-            newThumbnail.path = thumbnailPath;
+            updatedThumbnail.path = thumbnailPath;
 
-            return newThumbnail;
+            return updatedThumbnail;
         });
 
         // set file path to request body
