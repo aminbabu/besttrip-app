@@ -4,13 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 28 April, 2024
- * @update_date 09 May, 2024
+ * @update_date 10 May, 2024
  */
 
 // dependencies
 const { z } = require('zod');
 const { isMongoId } = require('validator');
-const { UMRAH_PACKAGE_TYPE_NAME, UMRAH_PACKAGE_TYPE_STATUS } = require('../../../../constants');
+const { UMRAH_PACKAGE_TYPES, UMRAH_PACKAGE_TYPE_STATUS } = require('../../../../constants');
 
 // export umdah package type schema
 module.exports = z
@@ -28,8 +28,8 @@ module.exports = z
                 required_error: 'Name is required',
                 invalid_type_error: 'Please provide a valid name',
             })
-            .refine((name) => UMRAH_PACKAGE_TYPE_NAME.includes(name.toLowerCase()), {
-                message: `Please provide a valid name. Valid names are: ${UMRAH_PACKAGE_TYPE_NAME.join(', ')}`,
+            .refine((name) => UMRAH_PACKAGE_TYPES.includes(name.toLowerCase()), {
+                message: `Please provide a valid name. Valid names are: ${UMRAH_PACKAGE_TYPES.join(', ')}`,
             }),
         status: z
             .string({
