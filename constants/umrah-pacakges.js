@@ -29,9 +29,6 @@ const UMDAH_PACKAGE_SCHEDULES = [
 // umrah package package inclusions
 const UMDAH_PACKAGE_INCLUSIONS = ['flight', 'hotel', 'visa', 'transport', 'food'];
 
-// umrah package package types
-const UMDAH_PACKAGE_TYPES = ['economy', 'standard', 'premium'];
-
 // umrah package outbound flight stops
 const UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS = [0, 1, 2];
 
@@ -40,6 +37,5 @@ module.exports = {
     UMDAH_PACKAGE_STATUS,
     UMDAH_PACKAGE_SCHEDULES,
     UMDAH_PACKAGE_INCLUSIONS,
-    UMDAH_PACKAGE_TYPES,
     UMDAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
 };
