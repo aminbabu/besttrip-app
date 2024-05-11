@@ -8,6 +8,8 @@
  */
 
 // dependencies
+const fs = require('fs');
+const path = require('path');
 const { User } = require('../../models');
 
 // export delete user by self controller
@@ -28,6 +30,13 @@ module.exports = async (req, res, next) => {
 
         // delete user
         await user.deleteOne();
+
+        // delete user avatar
+        if (user.avatar) {
+            fs.unlinkSync(
+                path.join(__dirname, `../../public/uploads/avatars/users/${user.avatar}`)
+            );
+        }
 
         // remove token from headers
         res.removeHeader('Authorization');
