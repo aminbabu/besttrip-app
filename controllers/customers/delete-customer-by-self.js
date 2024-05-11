@@ -4,10 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 07 April, 2024
- * @update_date 10 April, 2024
+ * @update_date 11 April, 2024
  */
 
 // dependencies
+const fs = require('fs');
+const path = require('path');
 const { Customer } = require('../../models');
 
 // export delete customer by self controller
@@ -28,6 +30,13 @@ module.exports = async (req, res, next) => {
 
         // delete customer
         await customer.deleteOne();
+
+        // delete customer avatar
+        if (customer.avatar) {
+            fs.unlinkSync(
+                path.join(__dirname, `../../public/uploads/avatars/customers/${customer.avatar}`)
+            );
+        }
 
         // remove token from headers
         res.removeHeader('Authorization');
