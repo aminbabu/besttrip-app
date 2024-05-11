@@ -4,10 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 11 May, 2024
  */
 
 // dependencies
+const fs = require('fs');
+const path = require('path');
 const { HotelOffer } = require('../../../../models');
 
 // export delete hotel offer controller
@@ -27,6 +29,11 @@ module.exports = async (req, res, next) => {
 
         // delete hotel offer
         await hotelOffer.deleteOne();
+
+        // delete hotel offer thumbnail
+        if (hotelOffer?.thumbnail) {
+            fs.unlinkSync(path.join(__dirname, '../../../../public/', hotelOffer.thumbnail));
+        }
 
         // send response
         return res.send({
