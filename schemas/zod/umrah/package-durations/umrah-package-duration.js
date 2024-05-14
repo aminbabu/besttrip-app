@@ -1,10 +1,10 @@
 /**
- * @file /schemas/zod/umdah/package-durations/umdah-package-duration.js
+ * @file /schemas/zod/umrah/package-durations/umrah-package-duration.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 28 April, 2024
- * @update_date 28 April, 2024
+ * @update_date 12 May, 2024
  */
 
 // dependencies
@@ -12,7 +12,7 @@ const { z } = require('zod');
 const { isMongoId } = require('validator');
 const { UMRAH_PACKAGE_DURATION_STATUS } = require('../../../../constants');
 
-// export umdah package duration schema
+// export umrah package duration schema
 module.exports = z
     .object({
         id: z
