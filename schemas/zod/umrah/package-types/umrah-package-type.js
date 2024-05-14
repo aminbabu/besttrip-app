@@ -1,5 +1,5 @@
 /**
- * @file /schemas/zod/umdah/package-types/umrah-package-type.js
+ * @file /schemas/zod/umrah/package-types/umrah-package-type.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -12,7 +12,7 @@ const { z } = require('zod');
 const { isMongoId } = require('validator');
 const { UMRAH_PACKAGE_TYPES, UMRAH_PACKAGE_TYPE_STATUS } = require('../../../../constants');
 
-// export umdah package type schema
+// export umrah package type schema
 module.exports = z
     .object({
         id: z
