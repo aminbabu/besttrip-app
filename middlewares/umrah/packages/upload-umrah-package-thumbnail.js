@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 09 May, 2024
+ * @update_date 14 May, 2024
  */
 
 // dependencies
@@ -41,8 +41,6 @@ module.exports =
 
         // set file path to request body
         req.files.thumbnail.path = thumbnailPath;
-
-        console.log('1. passed upload package thumbnail middleware.');
 
         // proceed to next middleware
         return next();

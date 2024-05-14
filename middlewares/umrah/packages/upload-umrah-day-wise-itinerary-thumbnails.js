@@ -1,9 +1,9 @@
 /**
- * @file /middlewares/umrah/packages/upload-package-madinah-hotel-gallery.js
+ * @file /middlewares/umrah/packages/upload-umrah-day-wise-itinerary-thumbnail.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 04 May, 2024
+ * @date 14 May, 2024
  * @update_date 14 May, 2024
  */
 
@@ -12,30 +12,30 @@ const fs = require('fs');
 const path = require('path');
 const { UmrahPackage } = require('../../../models');
 
-// export umrah package madinah hotel gallery upload middleware
+// export umrah day wise itinerary thumbnail upload middleware
 module.exports =
     (dir = '/umrah/package') =>
     async (req, res, next) => {
         // get validated data
         const { id } = req.params || {};
-        const { madinahhHotelExtraThumbnails } = req.files || {};
+        const { itineraryThumbnails } = req.files || {};
 
         // check if id exists
         if (id) {
             // get umrah package
             const umrahPackage = await UmrahPackage.findById(id);
 
-            // check if umrah package madinahh hotel extra thumbnails exists
-            if (umrahPackage?.madinahhHotelExtraThumbnails?.length > 0) {
+            // check if umrah package extra thumbnails exists
+            if (umrahPackage?.itineraryThumbnails?.length > 0) {
                 // delete previous extra thumbnails
-                madinahhHotelExtraThumbnails.forEach((thumbnail) => {
+                itineraryThumbnails.forEach((thumbnail) => {
                     fs.unlinkSync(path.join(__dirname, '../../../public/', thumbnail));
                 });
             }
         }
 
         // prepare file path
-        const updateExtraThumbnails = madinahhHotelExtraThumbnails.map((thumbnail) => {
+        const updateItineraryThumbnails = itineraryThumbnails.map((thumbnail) => {
             const updatedThumbnail = { ...thumbnail };
             const thumbnailPath = path.join(
                 'uploads/',
@@ -53,7 +53,7 @@ module.exports =
         });
 
         // set file path to request body
-        req.files.madinahhHotelExtraThumbnails = updateExtraThumbnails;
+        req.files.itineraryThumbnails = updateItineraryThumbnails;
 
         // proceed to next middleware
         return next();

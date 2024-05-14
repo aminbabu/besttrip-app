@@ -4,17 +4,17 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 April, 2024
- * @update_date 09 May, 2024
+ * @update_date 14 May, 2024
  */
 
 // dependencies
-const { umrahPackageSchema } = require('../../../../schemas/zod/umrah/packages');
+const { umrahPackageIdSchema } = require('../../../../schemas/zod/umrah/packages');
 const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // export umrah package id validator middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = umrahPackageSchema.pick({ id: true }).safeParse(req.params);
+    const { error, success } = umrahPackageIdSchema.safeParse(req.params);
 
     // check for errors
     if (!success) {

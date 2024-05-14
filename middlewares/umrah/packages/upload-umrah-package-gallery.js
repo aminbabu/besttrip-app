@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 10 May, 2024
+ * @update_date 14 May, 2024
  */
 
 // dependencies
@@ -26,7 +26,7 @@ module.exports =
             const umrahPackage = await UmrahPackage.findById(id);
 
             // check if umrah package extra thumbnails exists
-            if (umrahPackage?.extraThumbnails) {
+            if (umrahPackage?.extraThumbnails?.length > 0) {
                 // delete previous extra thumbnails
                 extraThumbnails.forEach((thumbnail) => {
                     fs.unlinkSync(path.join(__dirname, '../../../public/', thumbnail));

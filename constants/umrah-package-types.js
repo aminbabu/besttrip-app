@@ -1,5 +1,5 @@
 /**
- * @file /constants/umdah/package-types.js
+ * @file /constants/umrah/package-types.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

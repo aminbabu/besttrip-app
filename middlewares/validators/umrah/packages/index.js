@@ -4,18 +4,28 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 April, 2024
- * @update_date 10 May, 2024
+ * @update_date 14 May, 2024
  */
 
 // export umrah package validators
 module.exports = {
+    validateUmrahPackageId: require('./validate-umrah-package-id'),
     validateUmrahPackageThumbnail: require('./validate-umrah-package-thumbnail'),
+    validateUmrahPackage: require('./validate-umrah-package'),
     validateUmrahPackageGallery: require('./validate-umrah-package-gallery'),
+    validateUmrahOutbound: require('./validate-umrah-outbound'),
     validateMakkahHotelTumbnail: require('./validate-makkah-hotel-thumbnail'),
+    validateMakkahHotel: require('./validate-makkah-hotel'),
     validateMakkahHotelGallery: require('./validate-makkah-hotel-gallery'),
     validateMadinahHotelTumbnail: require('./validate-madinah-hotel-thumbnail'),
+    validateMadinahHotel: require('./validate-madinah-hotel'),
     validateMadinahHotelGallery: require('./validate-madinah-hotel-gallery'),
+    validateUmrahInbound: require('./validate-umrah-inbound'),
+    validateUmrahVisa: require('./validate-umrah-visa'),
+    validateUmrahTransportation: require('./validate-umrah-transportation'),
+    validateUmrahZiyarah: require('./validate-umrah-ziyarah'),
+    validateUmrahDayWiseItinerary: require('./validate-umrah-day-wise-itinerary'),
     validateUmrahThumbnail: require('./validate-umrah-thumbnail'),
-    validateUmrahPackageId: require('./validate-umrah-package-id'),
-    validateUmrahPackage: require('./validate-umrah-package'),
+    validateUmrah: require('./validate-umrah'),
+    validateTermsAndConditions: require('./validate-terms-and-conditions'),
 };

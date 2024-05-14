@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 09 May, 2024
+ * @update_date 14 May, 2024
  */
 
 // dependencies
@@ -26,7 +26,7 @@ module.exports =
             const umrahPackage = await UmrahPackage.findById(id);
 
             // check if umrah package makkah hotel extra thumbnails exists
-            if (umrahPackage?.makkahHotelExtraThumbnails) {
+            if (umrahPackage?.makkahHotelExtraThumbnails?.length > 0) {
                 // delete previous extra thumbnails
                 makkahHotelExtraThumbnails.forEach((thumbnail) => {
                     fs.unlinkSync(path.join(__dirname, '../../../public/', thumbnail));

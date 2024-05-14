@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 25 April, 2024
- * @update_date 10 May, 2024
+ * @update_date 14 May, 2024
  */
 
 // dependencies
@@ -25,23 +25,34 @@ const {
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
+    validateUmrahPackageId,
     validateUmrahPackageThumbnail,
+    validateUmrahPackage,
     validateUmrahPackageGallery,
+    validateUmrahOutbound,
     validateMakkahHotelTumbnail,
     validateMakkahHotelGallery,
+    validateMakkahHotel,
     validateMadinahHotelTumbnail,
     validateMadinahHotelGallery,
+    validateMadinahHotel,
+    validateUmrahInbound,
+    validateUmrahVisa,
+    validateUmrahTransportation,
+    validateUmrahZiyarah,
+    validateUmrahDayWiseItinerary,
     validateUmrahThumbnail,
-    validateUmrahPackageId,
-    validateUmrahPackage,
+    validateUmrah,
+    validateTermsAndConditions,
 } = require('../../../middlewares/validators/umrah/packages');
 const {
     uploadPackageThumbnail,
     uploadPackageGallery,
-    uploadPackageMakkaHotelThumbnail,
-    uploadPackageMakkaHotelGallery,
-    uploadPackageMadinahHotelThumbnail,
-    uploadPackageMadinahHotelGallery,
+    uploadMakkahHotelThumbnail,
+    uploadMakkahHotelGallery,
+    uploadMadinahHotelThumbnail,
+    uploadMadinahHotelGallery,
+    uploadUmrahDayWiseItineraryThumbnails,
     uploadUmrahThumbnail,
 } = require('../../../middlewares/umrah/packages');
 
@@ -81,19 +92,6 @@ router.get('/:id', isAllowed(['admin']), validateUmrahPackageId, getUmrahPackage
  * @description create umrah package package
  * @param {string} path - /umrah/packages
  * @param {function} middleware - ['isAllowed']
- * @param {function} validator - ['validateUmrahPackageThumbnail', 'validateUmrahPackageGallery']
- * @param {function} validator - ['validateMakkahHotelTumbnail', 'validateMakkahHotelGallery']
- * @param {function} validator - ['validateMadinahHotelTumbnail', 'validateMadinahHotelGallery']
- * @param {function} validator - ['validateUmrahPackageThumbnail']
- * @param {function} middleware - ['uploadPackageThumbnail', 'uploadPackageGallery']
- * @param {function} middleware - [
- * 'uploadPackageMakkaHotelThumbnail', 'uploadPackageMakkaHotelGallery'
- * ]
- * @param {function} middleware - [
- * 'uploadPackageMadinahHotelThumbnail', 'uploadPackageMadinahHotelGallery'
- * ]
- * @param {function} middleware - ['uploadUmrahThumbnail']
- * @param {function} validator - ['validateUmrahPackage']
  * @param {function} controller - ['createUmrahPackage']
  * @returns {object} - router
  * @access private - ['admin']
@@ -103,20 +101,31 @@ router.post(
     '/',
     isAllowed(['admin']),
     validateUmrahPackageThumbnail,
+    validateUmrahPackage,
     validateUmrahPackageGallery,
+    validateUmrahOutbound,
     validateMakkahHotelTumbnail,
     validateMakkahHotelGallery,
+    validateMakkahHotel,
     validateMadinahHotelTumbnail,
     validateMadinahHotelGallery,
+    validateMadinahHotel,
+    validateUmrahInbound,
+    validateUmrahVisa,
+    validateUmrahTransportation,
+    validateUmrahZiyarah,
+    validateUmrahDayWiseItinerary,
     validateUmrahThumbnail,
+    validateUmrah,
+    validateTermsAndConditions,
     uploadPackageThumbnail,
     uploadPackageGallery,
-    uploadPackageMakkaHotelThumbnail,
-    uploadPackageMakkaHotelGallery,
-    uploadPackageMadinahHotelThumbnail,
-    uploadPackageMadinahHotelGallery,
+    uploadMakkahHotelThumbnail,
+    uploadMakkahHotelGallery,
+    uploadMadinahHotelThumbnail,
+    uploadMadinahHotelGallery,
+    uploadUmrahDayWiseItineraryThumbnails,
     uploadUmrahThumbnail,
-    validateUmrahPackage,
     createUmrahPackage
 );
 
@@ -130,10 +139,10 @@ router.post(
  * @param {function} validator - ['validateMadinahHotelGallery', 'validateUmrahPackageThumbnail']
  * @param {function} middleware - ['uploadPackageThumbnail', 'uploadPackageGallery']
  * @param {function} middleware - [
- * 'uploadPackageMakkaHotelThumbnail', 'uploadPackageMakkaHotelGallery'
+ * 'uploadMakkahHotelThumbnail', 'uploadMakkahHotelGallery'
  * ]
  * @param {function} middleware - [
- * 'uploadPackageMadinahHotelThumbnail', 'uploadPackageMadinahHotelGallery'
+ * 'uploadMadinahHotelThumbnail', 'uploadMadinahHotelGallery'
  * ]
  * @param {function} middleware - ['uploadUmrahThumbnail']
  * @param {function} validator - ['validateUmrahPackage']
@@ -145,22 +154,32 @@ router.post(
 router.patch(
     '/:id',
     isAllowed(['admin']),
-    validateUmrahPackageId,
     validateUmrahPackageThumbnail,
+    validateUmrahPackage,
     validateUmrahPackageGallery,
+    validateUmrahOutbound,
     validateMakkahHotelTumbnail,
     validateMakkahHotelGallery,
+    validateMakkahHotel,
     validateMadinahHotelTumbnail,
     validateMadinahHotelGallery,
+    validateMadinahHotel,
+    validateUmrahInbound,
+    validateUmrahVisa,
+    validateUmrahTransportation,
+    validateUmrahZiyarah,
+    validateUmrahDayWiseItinerary,
     validateUmrahThumbnail,
+    validateUmrah,
+    validateTermsAndConditions,
     uploadPackageThumbnail,
     uploadPackageGallery,
-    uploadPackageMakkaHotelThumbnail,
-    uploadPackageMakkaHotelGallery,
-    uploadPackageMadinahHotelThumbnail,
-    uploadPackageMadinahHotelGallery,
+    uploadMakkahHotelThumbnail,
+    uploadMakkahHotelGallery,
+    uploadMadinahHotelThumbnail,
+    uploadMadinahHotelGallery,
+    uploadUmrahDayWiseItineraryThumbnails,
     uploadUmrahThumbnail,
-    validateUmrahPackage,
     updateUmrahPackage
 );
 
