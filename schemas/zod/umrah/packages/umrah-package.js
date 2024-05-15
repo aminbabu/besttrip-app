@@ -4,12 +4,11 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 April, 2024
- * @update_date 14 May, 2024
+ * @update_date 15 May, 2024
  */
 
 // dependencies
 const { z } = require('zod');
-const { isMongoId } = require('validator');
 const moment = require('moment');
 const {
     UMRAH_PACKAGE_STATUS,
@@ -21,14 +20,6 @@ const {
 // export umrah package schema
 module.exports = z
     .object({
-        id: z
-            .string({
-                required_error: 'Id is required',
-                invalid_type_error: 'Please provide a valid id',
-            })
-            .refine((id) => isMongoId(id), {
-                message: 'Please provide a valid id',
-            }),
         title: z
             .string({
                 required_error: 'Title is required',
