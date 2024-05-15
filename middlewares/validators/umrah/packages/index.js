@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 April, 2024
- * @update_date 14 May, 2024
+ * @update_date 15 May, 2024
  */
 
 // export umrah package validators
@@ -24,6 +24,7 @@ module.exports = {
     validateUmrahVisa: require('./validate-umrah-visa'),
     validateUmrahTransportation: require('./validate-umrah-transportation'),
     validateUmrahZiyarah: require('./validate-umrah-ziyarah'),
+    validateDayWiseItineraryThumbnails: require('./validate-day-wise-itinerary-thumbnails'),
     validateUmrahDayWiseItinerary: require('./validate-umrah-day-wise-itinerary'),
     validateUmrahThumbnail: require('./validate-umrah-thumbnail'),
     validateUmrah: require('./validate-umrah'),
