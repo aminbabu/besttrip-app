@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 10 May, 2024
+ * @update_date 15 May, 2024
  */
 
 // dependencies
@@ -33,7 +33,7 @@ module.exports = async (req, res, next) => {
     // check if thumbnail is not an image of type jpg, jpeg, png
     if (thumbnail && !DEFAULT_IMAGE_TYPES.includes(thumbnail.mimetype)) {
         return res.status(400).json({
-            message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+            message: `Please upload a thumbnail of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
         });
     }
 

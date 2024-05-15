@@ -4,17 +4,21 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 May, 2024
- * @update_date 14 May, 2024
+ * @update_date 15 May, 2024
  */
 
 // dependencies
 const { umrahDayWiseItinerarySchema } = require('../../../../schemas/zod/umrah/packages');
 const { zodErrorHandler } = require('../../../../handlers/errors');
+const { filterReqFromZodSchema } = require('../../../../utils/umrah/package');
 
 // export umrah day wise itinerary validation middleware
 module.exports = (req, res, next) => {
+    // filter request body object according to schema
+    const data = filterReqFromZodSchema(req.body, umrahDayWiseItinerarySchema.shape);
+
     // validate request body
-    const { error, success } = umrahDayWiseItinerarySchema.safeParse(req.body);
+    const { error, success } = umrahDayWiseItinerarySchema.safeParse(data);
 
     // check for errors
     if (!success) {

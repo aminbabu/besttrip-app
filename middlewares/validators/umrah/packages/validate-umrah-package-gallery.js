@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 10 May, 2024
+ * @update_date 15 May, 2024
  */
 
 // dependencies
@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
         (image) =>
             !DEFAULT_IMAGE_TYPES.includes(image.mimetype) &&
             res.status(400).json({
-                message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+                message: `Please upload valid thumbnail images of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
             })
     );
 
@@ -35,7 +35,9 @@ module.exports = async (req, res, next) => {
         (image) =>
             image.size > ONE_MEGA_BYTE &&
             res.status(400).json({
-                message: `Please upload images of size less than ${(ONE_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+                message: `Please upload thumbnail images of size less than ${(
+                    ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                ).toFixed(2)} MB`,
             })
     );
 

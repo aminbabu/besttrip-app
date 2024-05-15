@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 10 May, 2024
+ * @update_date 15 May, 2024
  */
 
 // dependencies
@@ -19,28 +19,28 @@ module.exports = async (req, res, next) => {
     // check if umrah thumbnail is not provided
     if (!umrahThumbnail) {
         return res.status(400).json({
-            message: 'Please upload a thumbnail',
+            message: 'Please upload a thumbnail of umrah package',
         });
     }
 
     // check if makka hotel thumbnail is an array
     if (Array.isArray(umrahThumbnail)) {
         return res.status(400).json({
-            message: 'Please upload only one thumbnail',
+            message: 'Please upload only one thumbnail of umrah package',
         });
     }
 
     // check if umrah thumbnail is not an image of type jpg, jpeg, png
     if (umrahThumbnail && !DEFAULT_IMAGE_TYPES.includes(umrahThumbnail.mimetype)) {
         return res.status(400).json({
-            message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+            message: `Please upload a thumbnail of umrah package of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
         });
     }
 
     // check if umrah thumbnail size is greater than 1 MB
     if (umrahThumbnail?.size > ONE_MEGA_BYTE) {
         return res.status(400).json({
-            message: `Please upload a thumbnail of size less than ${(ONE_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+            message: `Please upload a thumbnail of umrah package of size less than ${(ONE_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
         });
     }
 

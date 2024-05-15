@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
         (image) =>
             !DEFAULT_IMAGE_TYPES.includes(image.mimetype) &&
             res.status(400).json({
-                message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+                message: `Please upload a valid day wise itinerary image of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
             })
     );
 
@@ -35,7 +35,9 @@ module.exports = async (req, res, next) => {
         (image) =>
             image.size > ONE_MEGA_BYTE &&
             res.status(400).json({
-                message: `Please upload images of size less than ${(ONE_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+                message: `Please upload day wise itinerary images of size less than ${(
+                    ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                ).toFixed(2)} MB`,
             })
     );
 
