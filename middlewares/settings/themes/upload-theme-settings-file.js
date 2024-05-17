@@ -4,12 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 09 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const { ThemeSettings } = require('../../../models');
 
 // export upload illustration middleware
@@ -36,7 +37,7 @@ module.exports =
         }
 
         // prepare file path
-        const illustrationPath = path.join('uploads/', `${dir}/${Date.now()}_${illustration.name}`);
+        const illustrationPath = path.join('uploads/', `${dir}/${uuidv4()}_${illustration.name}`);
         const uploadIllustrationPath = path.join(__dirname, '../../../public/', illustrationPath);
 
         // move file to upload path

@@ -10,6 +10,7 @@
 // dependencies
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const { BlogPost } = require('../../../../models');
 
 // export upload banner middleware
@@ -35,7 +36,7 @@ module.exports =
         }
 
         // prepare file path
-        const bannerPath = path.join('uploads/', `${dir}/${Date.now()}_${banner.name}`);
+        const bannerPath = path.join('uploads/', `${dir}/${uuidv4()}_${banner.name}`);
         const uploadLogoPath = path.join(__dirname, '../../../../public/', bannerPath);
 
         // move file to upload path

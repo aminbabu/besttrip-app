@@ -4,12 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 25 April, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const { GeneralSettings } = require('../../../../models');
 
 // upload logo middleware
@@ -34,7 +35,7 @@ const uploadLogo =
         }
 
         // prepare file path
-        const logoPath = path.join('uploads/', `${dir}/${Date.now()}_${logo.name}`);
+        const logoPath = path.join('uploads/', `${dir}/${uuidv4()}_${logo.name}`);
         const uploadLogoPath = path.join(__dirname, '../../../../public/', logoPath);
 
         // move file to upload path
@@ -69,7 +70,7 @@ const uploadFavicon =
         }
 
         // prepare file path
-        const faviconPath = path.join('uploads/', `${dir}/${Date.now()}_${favicon.name}`);
+        const faviconPath = path.join('uploads/', `${dir}/${uuidv4()}_${favicon.name}`);
         const uploadFaviconPath = path.join(__dirname, '../../../../public/', faviconPath);
 
         // move file to upload path

@@ -4,12 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 14 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const { UmrahPackage } = require('../../../models');
 
 // export umrah package umrah package thumbnail upload middleware
@@ -37,7 +38,7 @@ module.exports =
         // prepare file path
         const umrahThumbnailPath = path.join(
             'uploads/',
-            `${dir}/${Date.now()}_${umrahThumbnail.name}`
+            `${dir}/${uuidv4()}_${umrahThumbnail.name}`
         );
         const uploadLogoPath = path.join(__dirname, '../../../public/', umrahThumbnailPath);
 

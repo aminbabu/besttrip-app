@@ -10,6 +10,7 @@
 // dependencies
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const { BlogPost } = require('../../../../models');
 
 // export upload thumbnail middleware
@@ -35,7 +36,7 @@ module.exports =
         }
 
         // prepare file path
-        const thumbnailPath = path.join('uploads/', `${dir}/${Date.now()}_${thumbnail.name}`);
+        const thumbnailPath = path.join('uploads/', `${dir}/${uuidv4()}_${thumbnail.name}`);
         const uploadLogoPath = path.join(__dirname, '../../../../public/', thumbnailPath);
 
         // move file to upload path

@@ -4,12 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 06 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const { ExclusiveOffer } = require('../../../../models');
 
 // export upload thumbnail middleware
@@ -35,7 +36,7 @@ module.exports =
         }
 
         // prepare file path
-        const thumbnailPath = path.join('uploads/', `${dir}/${Date.now()}_${thumbnail.name}`);
+        const thumbnailPath = path.join('uploads/', `${dir}/${uuidv4()}_${thumbnail.name}`);
         const uploadLogoPath = path.join(__dirname, '../../../../public/', thumbnailPath);
 
         // move file to upload path

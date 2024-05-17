@@ -10,6 +10,7 @@
 // dependencies
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const { UmrahPackage } = require('../../../models');
 
 // export umrah package gallery upload middleware
@@ -47,7 +48,7 @@ module.exports =
             const updatedThumbnail = { ...thumbnail };
             const thumbnailPath = path.join(
                 'uploads/',
-                `${dir}/${Date.now()}_${updatedThumbnail.name}`
+                `${dir}/${uuidv4()}_${updatedThumbnail.name}`
             );
             const uploadLogoPath = path.join(__dirname, '../../../public/', thumbnailPath);
 

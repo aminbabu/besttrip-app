@@ -10,6 +10,7 @@
 // dependencies
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const { UmrahPackage } = require('../../../models');
 
 // export umrah day wise itinerary thumbnail upload middleware
@@ -48,7 +49,7 @@ module.exports =
             const updatedItinerary = { ...itinerary };
             const thumbnailPath = path.join(
                 'uploads/',
-                `${dir}/${Date.now()}_${updatedItinerary.thumbnail.name}`
+                `${dir}/${uuidv4()}_${updatedItinerary.thumbnail.name}`
             );
             const uploadLogoPath = path.join(__dirname, '../../../public/', thumbnailPath);
 
