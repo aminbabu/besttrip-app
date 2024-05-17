@@ -13,6 +13,10 @@ const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../constants');
 
 // export umrah package extra thumbnails validator middleware
 module.exports = async (req, res, next) => {
+    let isThumbnailArray = false;
+    let isInValidImageType = false;
+    let isInValidImageSize = false;
+
     // get extra thumbnails
     const { extraThumbnails } = req.files || {};
 
@@ -21,25 +25,47 @@ module.exports = async (req, res, next) => {
         return next();
     }
 
-    // check if extra thumbnails is not an image of type jpg, jpeg, png
-    extraThumbnails.forEach(
-        (image) =>
-            !DEFAULT_IMAGE_TYPES.includes(image.mimetype) &&
-            res.status(400).json({
-                message: `Please upload valid thumbnail images of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
-            })
-    );
+    // Check each itinerary thumbnail
+    extraThumbnails.forEach((thumbnail) => {
+        // Check if thumbnail is not an array
+        if (Array.isArray(thumbnail)) {
+            isThumbnailArray = true;
+        }
 
-    // check if each image size is greater than 1 MB
-    extraThumbnails.forEach(
-        (image) =>
-            image.size > ONE_MEGA_BYTE &&
-            res.status(400).json({
-                message: `Please upload thumbnail images of size less than ${(
-                    ONE_MEGA_BYTE / ONE_MEGA_BYTE
-                ).toFixed(2)} MB`,
-            })
-    );
+        // Check if thumbnail is not an image of type jpg, jpeg, png
+        if (!DEFAULT_IMAGE_TYPES.includes(thumbnail.mimetype)) {
+            isInValidImageType = true;
+        }
+
+        // Check if image size is greater than 1 MB
+        if (thumbnail.size > ONE_MEGA_BYTE) {
+            isInValidImageSize = true;
+        }
+
+        // Add return statement at the end of the arrow function
+        return null;
+    });
+
+    // Check if all checks pass
+    if (isThumbnailArray) {
+        return res.status(400).json({
+            message: 'Please upload valid extra thumbnails images instead of array of images',
+        });
+    }
+
+    if (isInValidImageType) {
+        return res.status(400).json({
+            message: `Please upload valid extra thumbnails images of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+        });
+    }
+
+    if (isInValidImageSize) {
+        return res.status(400).json({
+            message: `Please upload extra thumbnails images of size less than ${
+                ONE_MEGA_BYTE / ONE_MEGA_BYTE
+            } MB`,
+        });
+    }
 
     // proceed to next middleware
     return next();
