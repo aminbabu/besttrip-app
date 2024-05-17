@@ -37,7 +37,7 @@ module.exports =
         // check if umrah package extra thumbnails exists
         if (umrahPackage?.extraThumbnails?.length > 0) {
             // delete previous extra thumbnails
-            extraThumbnails.forEach(
+            umrahPackage.extraThumbnails.forEach(
                 (thumbnail) =>
                     thumbnail && fs.unlinkSync(path.join(__dirname, '../../../public/', thumbnail))
             );
