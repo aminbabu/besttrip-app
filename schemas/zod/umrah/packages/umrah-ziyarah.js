@@ -4,11 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 May, 2024
- * @update_date 14 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
 const { z } = require('zod');
+const { UMRAH_PACKAGE_BOOLEAN } = require('../../../../constants');
 
 // export umrah ziyarah schema
 module.exports = z
@@ -26,24 +27,18 @@ module.exports = z
                 required_error: 'Ziyarah Makkah is required',
                 invalid_type_error: 'Please provide a valid ziyarah Makkah',
             })
-            .refine(
-                (ziyarahMakka) => ['included', 'not_included'].includes(ziyarahMakka.toLowerCase()),
-                {
-                    message:
-                        'Please provide a valid ziyarah Makkah. Available options are: included, not_included',
-                }
-            ),
+            .refine((ziyarahMakka) => UMRAH_PACKAGE_BOOLEAN.includes(ziyarahMakka.toLowerCase()), {
+                message: `Please provide a valid ziyarah Makkah. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(', ')}`,
+            }),
         ziyarahMadinah: z
             .string({
                 required_error: 'Ziyarah Madinah is required',
                 invalid_type_error: 'Please provide a valid ziyarah Madinah',
             })
             .refine(
-                (ziyarahMadinah) =>
-                    ['included', 'not_included'].includes(ziyarahMadinah.toLowerCase()),
+                (ziyarahMadinah) => UMRAH_PACKAGE_BOOLEAN.includes(ziyarahMadinah.toLowerCase()),
                 {
-                    message:
-                        'Please provide a valid ziyarah Madinah. Available options are: included, not_included',
+                    message: `Please provide a valid ziyarah Madinah. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(', ')}`,
                 }
             ),
         ziyarahTaif: z
@@ -51,13 +46,9 @@ module.exports = z
                 required_error: 'Ziyarah Taif is required',
                 invalid_type_error: 'Please provide a valid ziyarah Taif',
             })
-            .refine(
-                (ziyarahTaif) => ['included', 'not_included'].includes(ziyarahTaif.toLowerCase()),
-                {
-                    message:
-                        'Please provide a valid ziyarah Taif. Available options are: included, not_included',
-                }
-            ),
+            .refine((ziyarahTaif) => UMRAH_PACKAGE_BOOLEAN.includes(ziyarahTaif.toLowerCase()), {
+                message: `Please provide a valid ziyarah Taif. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(', ')}`,
+            }),
         ziyarahMakkahDetails: z
             .array(
                 z
