@@ -16,6 +16,8 @@ const { UmrahPackage } = require('../../../models');
 module.exports =
     (dir = '/umrah/package') =>
     async (req, res, next) => {
+        let umrahPackage = {};
+
         // get validated data
         const { id } = req.params || {};
         const { madinahHotelThumbnail } = req.files || {};
@@ -23,15 +25,15 @@ module.exports =
         // check if id exists
         if (id) {
             // get umrah package
-            const umrahPackage = await UmrahPackage.findById(id);
+            umrahPackage = await UmrahPackage.findById(id);
+        }
 
-            // check if umrah package madinah hotel thumbnail exists
-            if (umrahPackage?.madinahHotelThumbnail) {
-                // delete previous madinah hotel thumbnail
-                fs.unlinkSync(
-                    path.join(__dirname, '../../../public/', umrahPackage.madinahHotelThumbnail)
-                );
-            }
+        // check if umrah package madinah hotel thumbnail exists
+        if (umrahPackage?.madinahHotelThumbnail) {
+            // delete previous madinah hotel thumbnail
+            fs.unlinkSync(
+                path.join(__dirname, '../../../public/', umrahPackage.madinahHotelThumbnail)
+            );
         }
 
         // prepare file path

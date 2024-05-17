@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 14 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
@@ -16,6 +16,8 @@ const { UmrahPackage } = require('../../../models');
 module.exports =
     (dir = '/umrah/package') =>
     async (req, res, next) => {
+        let umrahPackage = {};
+
         // get validated data
         const { id } = req.params || {};
         const { thumbnail } = req.files || {};
@@ -23,13 +25,13 @@ module.exports =
         // check if id exists
         if (id) {
             // get umrah package
-            const umrahPackage = await UmrahPackage.findById(id);
+            umrahPackage = await UmrahPackage.findById(id);
+        }
 
-            // check if umrah package thumbnail exists
-            if (umrahPackage?.thumbnail) {
-                // delete previous thumbnail
-                fs.unlinkSync(path.join(__dirname, '../../../public/', umrahPackage.thumbnail));
-            }
+        // check if umrah package thumbnail exists
+        if (umrahPackage?.thumbnail) {
+            // delete previous thumbnail
+            fs.unlinkSync(path.join(__dirname, '../../../public/', umrahPackage.thumbnail));
         }
 
         // prepare file path

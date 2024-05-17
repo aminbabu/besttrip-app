@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 09 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
@@ -16,6 +16,8 @@ const { UmrahPackage } = require('../../../models');
 module.exports =
     (dir = '/umrah/package') =>
     async (req, res, next) => {
+        let umrahPackage = {};
+
         // get validated data
         const { id } = req.params || {};
         const { makkahHotelThumbnail } = req.files || {};
@@ -23,15 +25,15 @@ module.exports =
         // check if id exists
         if (id) {
             // get umrah package
-            const umrahPackage = await UmrahPackage.findById(id);
+            umrahPackage = await UmrahPackage.findById(id);
+        }
 
-            // check if umrah package makka hotel thumbnail exists
-            if (umrahPackage?.makkahHotelThumbnail) {
-                // delete previous makka hotel thumbnail
-                fs.unlinkSync(
-                    path.join(__dirname, '../../../public/', umrahPackage.makkahHotelThumbnail)
-                );
-            }
+        // check if umrah package makka hotel thumbnail exists
+        if (umrahPackage?.makkahHotelThumbnail) {
+            // delete previous makka hotel thumbnail
+            fs.unlinkSync(
+                path.join(__dirname, '../../../public/', umrahPackage.makkahHotelThumbnail)
+            );
         }
 
         // prepare file path

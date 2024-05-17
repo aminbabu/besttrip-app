@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 22 April, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
@@ -16,6 +16,8 @@ const { BlogPost } = require('../../../../models');
 module.exports =
     (dir = '/offers') =>
     async (req, res, next) => {
+        let blogPost = {};
+
         // get validated data
         const { id } = req.params || {};
         const { thumbnail } = req.files || {};
@@ -23,13 +25,13 @@ module.exports =
         // check if id exists
         if (id) {
             // get blog post
-            const blogPost = await BlogPost.findById(id);
+            blogPost = await BlogPost.findById(id);
+        }
 
-            // check if blog post thumbnail exists
-            if (blogPost?.thumbnail) {
-                // delete previous thumbnail
-                fs.unlinkSync(path.join(__dirname, '../../../../public/', blogPost.thumbnail));
-            }
+        // check if blog post thumbnail exists
+        if (blogPost?.thumbnail) {
+            // delete previous thumbnail
+            fs.unlinkSync(path.join(__dirname, '../../../../public/', blogPost.thumbnail));
         }
 
         // prepare file path
