@@ -36,9 +36,10 @@ module.exports =
         // check if umrah package makkah hotel extra thumbnails exists
         if (umrahPackage?.makkahHotelExtraThumbnails?.length > 0) {
             // delete previous extra thumbnails
-            makkahHotelExtraThumbnails.forEach((thumbnail) => {
-                fs.unlinkSync(path.join(__dirname, '../../../public/', thumbnail));
-            });
+            makkahHotelExtraThumbnails.forEach(
+                (thumbnail) =>
+                    thumbnail && fs.unlinkSync(path.join(__dirname, '../../../public/', thumbnail))
+            );
         }
 
         // prepare file path
