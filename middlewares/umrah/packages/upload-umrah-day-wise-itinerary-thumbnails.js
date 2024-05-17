@@ -38,7 +38,7 @@ module.exports =
             // delete previous extra thumbnails
             itineraryDays.forEach(
                 (itinerary) =>
-                    itinerary.thumbnail &&
+                    itinerary?.thumbnail &&
                     fs.unlinkSync(path.join(__dirname, '../../../public/', itinerary.thumbnail))
             );
         }
