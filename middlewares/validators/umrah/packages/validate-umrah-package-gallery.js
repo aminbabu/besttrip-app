@@ -13,25 +13,26 @@ const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../constants');
 
 // export umrah package extra thumbnails validator middleware
 module.exports = async (req, res, next) => {
-    let isThumbnailArray = true;
     let isInValidImageType = false;
     let isInValidImageSize = false;
 
     // get extra thumbnails
     const { extraThumbnails } = req.files || {};
 
-    // check if extra thumbnails is not an array
-    if (!extraThumbnails?.length) {
+    // check if extra thumbnails is not provided
+    if (!extraThumbnails) {
         return next();
+    }
+
+    // Check if extra thumbnails is not an array
+    if (!Array.isArray(extraThumbnails)) {
+        return res.status(400).json({
+            message: 'Please upload valid extra thumbnails images',
+        });
     }
 
     // Check each extra thumbnail
     extraThumbnails.forEach((thumbnail) => {
-        // Check if thumbnail is not an array
-        if (!Array.isArray(thumbnail)) {
-            isThumbnailArray = false;
-        }
-
         // Check if thumbnail is not an image of type jpg, jpeg, png
         if (!DEFAULT_IMAGE_TYPES.includes(thumbnail.mimetype)) {
             isInValidImageType = true;
@@ -47,12 +48,6 @@ module.exports = async (req, res, next) => {
     });
 
     // Check if all checks pass
-    if (!isThumbnailArray) {
-        return res.status(400).json({
-            message: 'Please upload valid extra thumbnails images',
-        });
-    }
-
     if (isInValidImageType) {
         return res.status(400).json({
             message: `Please upload valid extra thumbnails images of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
