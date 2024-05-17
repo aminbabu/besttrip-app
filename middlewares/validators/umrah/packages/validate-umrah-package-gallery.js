@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
         return next();
     }
 
-    // Check each itinerary thumbnail
+    // Check each extra thumbnail
     extraThumbnails.forEach((thumbnail) => {
         // Check if thumbnail is not an array
         if (!Array.isArray(thumbnail)) {
