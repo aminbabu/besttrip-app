@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 09 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
@@ -18,7 +18,7 @@ module.exports =
     async (req, res, next) => {
         // get validated data
         const { id } = req.params || {};
-        const { madinahhHotelThumbnail } = req.files || {};
+        const { madinahHotelThumbnail } = req.files || {};
 
         // check if id exists
         if (id) {
@@ -26,26 +26,26 @@ module.exports =
             const umrahPackage = await UmrahPackage.findById(id);
 
             // check if umrah package madinah hotel thumbnail exists
-            if (umrahPackage?.madinahhHotelThumbnail) {
+            if (umrahPackage?.madinahHotelThumbnail) {
                 // delete previous madinah hotel thumbnail
                 fs.unlinkSync(
-                    path.join(__dirname, '../../../public/', umrahPackage.madinahhHotelThumbnail)
+                    path.join(__dirname, '../../../public/', umrahPackage.madinahHotelThumbnail)
                 );
             }
         }
 
         // prepare file path
-        const madinahhHotelThumbnailPath = path.join(
+        const madinahHotelThumbnailPath = path.join(
             'uploads/',
-            `${dir}/${Date.now()}_${madinahhHotelThumbnail.name}`
+            `${dir}/${Date.now()}_${madinahHotelThumbnail.name}`
         );
-        const uploadLogoPath = path.join(__dirname, '../../../public/', madinahhHotelThumbnailPath);
+        const uploadLogoPath = path.join(__dirname, '../../../public/', madinahHotelThumbnailPath);
 
         // move file to upload path
-        await madinahhHotelThumbnail.mv(uploadLogoPath);
+        await madinahHotelThumbnail.mv(uploadLogoPath);
 
         // set file path to request body
-        req.files.madinahhHotelThumbnail.path = madinahhHotelThumbnailPath;
+        req.files.madinahHotelThumbnail.path = madinahHotelThumbnailPath;
 
         // proceed to next middleware
         return next();
