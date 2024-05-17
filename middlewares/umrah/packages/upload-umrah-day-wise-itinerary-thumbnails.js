@@ -36,9 +36,11 @@ module.exports =
         // check if umrah package extra thumbnails exists
         if (umrahPackage?.itineraryDays?.length > 0) {
             // delete previous extra thumbnails
-            itineraryDays.forEach((itinerary) => {
-                fs.unlinkSync(path.join(__dirname, '../../../public/', itinerary.thumbnail.path));
-            });
+            itineraryDays.forEach(
+                (itinerary) =>
+                    itinerary.thumbnail &&
+                    fs.unlinkSync(path.join(__dirname, '../../../public/', itinerary.thumbnail))
+            );
         }
 
         // prepare file path
