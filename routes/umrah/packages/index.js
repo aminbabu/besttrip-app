@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 25 April, 2024
- * @update_date 15 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
@@ -128,14 +128,14 @@ router.post(
     validateUmrahThumbnail,
     validateUmrah,
     validateTermsAndConditions,
-    uploadPackageThumbnail,
-    uploadPackageGallery,
-    uploadMakkahHotelThumbnail,
-    uploadMakkahHotelGallery,
-    uploadMadinahHotelThumbnail,
-    uploadMadinahHotelGallery,
-    uploadUmrahDayWiseItineraryThumbnails,
-    uploadUmrahThumbnail,
+    uploadPackageThumbnail('/umrah/package'),
+    uploadPackageGallery('/umrah/package'),
+    uploadMakkahHotelThumbnail('/umrah/package'),
+    uploadMakkahHotelGallery('/umrah/package'),
+    uploadMadinahHotelThumbnail('/umrah/package'),
+    uploadMadinahHotelGallery('/umrah/package'),
+    uploadUmrahDayWiseItineraryThumbnails('/umrah/package'),
+    uploadUmrahThumbnail('/umrah/package'),
     createUmrahPackage
 );
 
@@ -179,14 +179,14 @@ router.patch(
     validateUmrahThumbnail,
     validateUmrah,
     validateTermsAndConditions,
-    uploadPackageThumbnail,
-    uploadPackageGallery,
-    uploadMakkahHotelThumbnail,
-    uploadMakkahHotelGallery,
-    uploadMadinahHotelThumbnail,
-    uploadMadinahHotelGallery,
-    uploadUmrahDayWiseItineraryThumbnails,
-    uploadUmrahThumbnail,
+    uploadPackageThumbnail('/umrah/package'),
+    uploadPackageGallery('/umrah/package'),
+    uploadMakkahHotelThumbnail('/umrah/package'),
+    uploadMakkahHotelGallery('/umrah/package'),
+    uploadMadinahHotelThumbnail('/umrah/package'),
+    uploadMadinahHotelGallery('/umrah/package'),
+    uploadUmrahDayWiseItineraryThumbnails('/umrah/package'),
+    uploadUmrahThumbnail('/umrah/package'),
     updateUmrahPackage
 );
 
