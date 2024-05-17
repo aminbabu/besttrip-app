@@ -51,7 +51,7 @@ module.exports =
             const uploadLogoPath = path.join(__dirname, '../../../public/', thumbnailPath);
 
             // move file to upload path
-            updatedItinerary.mv(uploadLogoPath);
+            updatedItinerary.thumbnail.mv(uploadLogoPath);
 
             // set file path to thumbnail object
             updatedItinerary.thumbnail.path = thumbnailPath;
