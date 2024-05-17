@@ -12,7 +12,7 @@ const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../constants');
 
 // export umrah day wise itinerary thumbnails validator
 module.exports = async (req, res, next) => {
-    let isThumbnailArray = false;
+    let isThumbnailArray = true;
     let isInValidImageType = false;
     let isInValidImageSize = false;
 
@@ -27,8 +27,8 @@ module.exports = async (req, res, next) => {
     // Check each itinerary thumbnail
     itineraryDays.forEach((itinerary) => {
         // Check if thumbnail is not an array
-        if (Array.isArray(itinerary?.thumbnail)) {
-            isThumbnailArray = true;
+        if (!Array.isArray(itinerary?.thumbnail)) {
+            isThumbnailArray = false;
         }
 
         // Check if thumbnail is not an image of type jpg, jpeg, png
@@ -46,9 +46,9 @@ module.exports = async (req, res, next) => {
     });
 
     // Check if all checks pass
-    if (isThumbnailArray) {
+    if (!isThumbnailArray) {
         return res.status(400).json({
-            message: 'Please upload valid day wise itinerary images.',
+            message: 'Please upload valid day wise itinerary images',
         });
     }
 
