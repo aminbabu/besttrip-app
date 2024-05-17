@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 May, 2024
- * @update_date 14 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
@@ -18,7 +18,7 @@ module.exports =
     async (req, res, next) => {
         // get validated data
         const { id } = req.params || {};
-        const { itineraryThumbnails } = req.files || {};
+        const { itineraryDays } = req.files || {};
 
         // check if id exists
         if (id) {
@@ -26,34 +26,36 @@ module.exports =
             const umrahPackage = await UmrahPackage.findById(id);
 
             // check if umrah package extra thumbnails exists
-            if (umrahPackage?.itineraryThumbnails?.length > 0) {
+            if (umrahPackage?.itineraryDays?.length > 0) {
                 // delete previous extra thumbnails
-                itineraryThumbnails.forEach((thumbnail) => {
-                    fs.unlinkSync(path.join(__dirname, '../../../public/', thumbnail));
+                itineraryDays.forEach((itinerary) => {
+                    fs.unlinkSync(
+                        path.join(__dirname, '../../../public/', itinerary.thumbnail.path)
+                    );
                 });
             }
         }
 
         // prepare file path
-        const updateItineraryThumbnails = itineraryThumbnails.map((thumbnail) => {
-            const updatedThumbnail = { ...thumbnail };
+        const updateItineraryDays = itineraryDays.map((itinerary) => {
+            const updatedItinerary = { ...itinerary };
             const thumbnailPath = path.join(
                 'uploads/',
-                `${dir}/${Date.now()}_${updatedThumbnail.name}`
+                `${dir}/${Date.now()}_${updatedItinerary.thumbnail.name}`
             );
             const uploadLogoPath = path.join(__dirname, '../../../public/', thumbnailPath);
 
             // move file to upload path
-            updatedThumbnail.mv(uploadLogoPath);
+            updatedItinerary.mv(uploadLogoPath);
 
             // set file path to thumbnail object
-            updatedThumbnail.path = thumbnailPath;
+            updatedItinerary.thumbnail.path = thumbnailPath;
 
-            return updatedThumbnail;
+            return updatedItinerary;
         });
 
         // set file path to request body
-        req.files.itineraryThumbnails = updateItineraryThumbnails;
+        req.files.itineraryDays = updateItineraryDays;
 
         // proceed to next middleware
         return next();
