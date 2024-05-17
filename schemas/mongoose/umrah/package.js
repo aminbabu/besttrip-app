@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 25 April, 2024
- * @update_date 10 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
@@ -15,6 +15,7 @@ const {
     UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS,
     UMRAH_PACKAGE_INCLUSIONS,
     UMRAH_PACKAGE_SCHEDULES,
+    UMRAH_PACKAGE_BOOLEAN,
 } = require('../../../constants');
 
 // export umrah package schema
@@ -184,88 +185,88 @@ module.exports = new Schema(
             type: String,
             required: [true, 'Infant cabin is required'],
         },
-        makkaHotelThumbnail: {
+        makkahHotelThumbnail: {
             type: String,
             required: [true, 'Hotel thumbnail is required'],
         },
-        makkaHotelNoOfNights: {
+        makkahHotelNoOfNights: {
             type: Number,
             required: [true, 'Hotel nights is required'],
         },
-        makkaHotelName: {
+        makkahHotelName: {
             type: String,
             required: [true, 'Hotel name is required'],
         },
-        makkaHotelAddress: {
+        makkahHotelAddress: {
             type: String,
             required: [true, 'Hotel address is required'],
         },
-        makkaHotelRating: {
+        makkahHotelRating: {
             type: Number,
             required: [true, 'Hotel rating is required'],
         },
-        makkaHotelDistance: {
+        makkahHotelDistance: {
             type: String,
             required: [true, 'Hotel distance is required'],
         },
-        makkaHotelDistanceUnit: {
+        makkahHotelDistanceUnit: {
             type: String,
             required: [true, 'Hotel distance unit is required'],
         },
-        makkaHotelWalkDuration: {
+        makkahHotelWalkDuration: {
             type: String,
             required: [true, 'Hotel walk duration is required'],
         },
-        makkaHotelLocation: {
+        makkahHotelLocation: {
             type: String,
             required: [true, 'Hotel location is required'],
         },
-        makkaHotelNote: {
+        makkahHotelNote: {
             type: String,
         },
-        makkaHotelExtraThumbnails: {
+        makkahHotelExtraThumbnails: {
             type: [String],
         },
-        madinaHotelThumbnail: {
+        madinahHotelThumbnail: {
             type: String,
             required: [true, 'Hotel thumbnail is required'],
         },
-        madinaHotelNoOfNights: {
+        madinahHotelNoOfNights: {
             type: Number,
             required: [true, 'Hotel nights is required'],
         },
-        madinaHotelName: {
+        madinahHotelName: {
             type: String,
             required: [true, 'Hotel name is required'],
         },
-        madinaHotelAddress: {
+        madinahHotelAddress: {
             type: String,
             required: [true, 'Hotel address is required'],
         },
-        madinaHotelRating: {
+        madinahHotelRating: {
             type: Number,
             required: [true, 'Hotel rating is required'],
         },
-        madinaHotelDistance: {
+        madinahHotelDistance: {
             type: String,
             required: [true, 'Hotel distance is required'],
         },
-        madinaHotelDistanceUnit: {
+        madinahHotelDistanceUnit: {
             type: String,
             required: [true, 'Hotel distance unit is required'],
         },
-        madinaHotelWalkDuration: {
+        madinahHotelWalkDuration: {
             type: String,
             required: [true, 'Hotel walk duration is required'],
         },
-        madinaHotelLocation: {
+        madinahHotelLocation: {
             type: String,
             required: [true, 'Hotel location is required'],
         },
-        madinaHotelNote: {
+        madinahHotelNote: {
             type: String,
         },
-        madinaHotelExtraThumbnails: {
+        madinahHotelExtraThumbnails: {
             type: [String],
         },
         inboundAirlineCode: {
@@ -407,35 +408,38 @@ module.exports = new Schema(
         transportNote: {
             type: String,
         },
-        ziyaraDays: {
+        ziyarahDays: {
             type: Number,
             required: [true, 'Ziyara days is required'],
         },
-        ziyaraMakka: {
-            type: Boolean,
-            required: [true, 'Ziyara makka is required'],
+        ziyarahMakkah: {
+            type: String,
+            enum: UMRAH_PACKAGE_BOOLEAN,
+            required: [true, 'Ziyara makkah is required'],
         },
-        ziyaraMadina: {
-            type: Boolean,
-            required: [true, 'Ziyara madina is required'],
+        ziyarahMadinah: {
+            type: String,
+            enum: UMRAH_PACKAGE_BOOLEAN,
+            required: [true, 'Ziyara madinah is required'],
         },
-        ziyaraTaif: {
-            type: Boolean,
+        ziyarahTaif: {
+            type: String,
+            enum: UMRAH_PACKAGE_BOOLEAN,
             required: [true, 'Ziyara taif is required'],
         },
-        ziyaraMakkaDetails: {
+        ziyarahMakkaDetails: {
             type: [String],
-            required: [true, 'Ziyara makka details is required'],
+            required: [true, 'Ziyara makkah details is required'],
         },
-        ziyaraMadinaDetails: {
+        ziyarahMadinaDetails: {
             type: [String],
-            required: [true, 'Ziyara madina details is required'],
+            required: [true, 'Ziyara madinah details is required'],
         },
-        ziyaraTaifDetails: {
+        ziyarahTaifDetails: {
             type: [String],
             required: [true, 'Ziyara taif details is required'],
         },
-        ziyaraNote: {
+        ziyarahNote: {
             type: String,
         },
         itineraryDays: {
