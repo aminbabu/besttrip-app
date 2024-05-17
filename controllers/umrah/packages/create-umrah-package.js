@@ -26,8 +26,6 @@ module.exports = async (req, res, next) => {
             umrahThumbnail,
         } = req.files;
 
-        console.log(JSON.stringify(validatedData, null, 2));
-
         // create umrah package
         const umrahPackage = new UmrahPackage({
             ...validatedData,
@@ -58,7 +56,6 @@ module.exports = async (req, res, next) => {
             umrahPackage,
         });
     } catch (error) {
-        console.log(error);
         return next(error);
     }
 };
