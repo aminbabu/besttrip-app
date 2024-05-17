@@ -48,7 +48,7 @@ module.exports = async (req, res, next) => {
     // Check if all checks pass
     if (isThumbnailArray) {
         return res.status(400).json({
-            message: 'Please upload valid day wise itinerary images instead of array of images',
+            message: 'Please upload valid day wise itinerary images.',
         });
     }
 
