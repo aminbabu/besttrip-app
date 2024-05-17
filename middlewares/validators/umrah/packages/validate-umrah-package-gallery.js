@@ -56,9 +56,9 @@ module.exports = async (req, res, next) => {
 
     if (isInValidImageSize) {
         return res.status(400).json({
-            message: `Please upload extra thumbnails images of size less than ${
+            message: `Please upload extra thumbnails images of size less than ${(
                 ONE_MEGA_BYTE / ONE_MEGA_BYTE
-            } MB`,
+            ).toFixed(2)} MB`,
         });
     }
 
