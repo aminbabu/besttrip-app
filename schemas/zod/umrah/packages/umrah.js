@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 May, 2024
- * @update_date 14 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
@@ -25,7 +25,7 @@ module.exports = z
             .max(255, {
                 message: 'Umrah title must be at most 255 characters',
             }),
-        umrahExerpt: z
+        umrahExcerpt: z
             .string({
                 required_error: 'Umrah exerpt is required',
                 invalid_type_error: 'Please provide a valid umrah exerpt',
