@@ -20,6 +20,11 @@ module.exports =
         const { id } = req.params || {};
         const { itineraryDays } = req.files || {};
 
+        // check if extra thumbnails exists
+        if (!itineraryDays) {
+            return next();
+        }
+
         // check if id exists
         if (id) {
             // get umrah package

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 14 May, 2024
+ * @update_date 17 May, 2024
  */
 
 // dependencies
@@ -19,6 +19,11 @@ module.exports =
         // get validated data
         const { id } = req.params || {};
         const { extraThumbnails } = req.files || {};
+
+        // check if extra thumbnails exists
+        if (!extraThumbnails) {
+            return next();
+        }
 
         // check if id exists
         if (id) {
