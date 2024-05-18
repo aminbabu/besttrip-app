@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 09 May, 2024
+ * @update_date 18 May, 2024
  */
 
 // dependencies
@@ -52,6 +52,29 @@ app.use(xssInstance.xssShield(WHITE_LIST));
 
 // routes
 app.use('/api', require('./routes/api'));
+app.use('/auth/users', require('./routes/auth/users'));
+app.use('/auth/customers', require('./routes/auth/customers'));
+app.use('/users', require('./routes/users'));
+app.use('/customers', require('./routes/customers'));
+app.use('/settings/site/general', require('./routes/settings/site/general'));
+app.use('/settings/site/contact', require('./routes/settings/site/contact'));
+app.use('/settings/site/policy', require('./routes/settings/site/policy'));
+app.use('/settings/site/meta', require('./routes/settings/site/meta'));
+app.use('/settings/payments', require('./routes/settings/payments'));
+app.use('/settings/content/sections', require('./routes/settings/content/sections'));
+app.use(
+    '/settings/content/exclusive-offers',
+    require('./routes/settings/content/exclusive-offers')
+);
+app.use('/settings/content/hotel-offers', require('./routes/settings/content/hotel-offers'));
+app.use('/settings/content/flight-offers', require('./routes/settings/content/flight-offers'));
+app.use('/settings/content/umrah-offers', require('./routes/settings/content/umrah-offers'));
+app.use('/settings/content/blog-posts', require('./routes/settings/content/blog-posts'));
+app.use('/settings/themes', require('./routes/settings/themes'));
+app.use('/payment-requests', require('./routes/payment-requests'));
+app.use('/umrah/packages', require('./routes/umrah/packages'));
+app.use('/umrah/package-durations', require('./routes/umrah/package-durations'));
+app.use('/umrah/package-types', require('./routes/umrah/package-types'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
