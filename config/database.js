@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 07 April, 2024
+ * @update_date 18 May, 2024
  */
 
 // dependencies
@@ -15,7 +15,7 @@ const { MONGODB_URI } = require('./env');
 module.exports = async () => {
     try {
         await mongoose.connect(MONGODB_URI);
-        console.log('Connected to database');
+        console.log(`Database connected in ${process.env.NODE_ENV} mode`);
     } catch (error) {
         console.error('Database connection failed');
     }
