@@ -1,10 +1,10 @@
 /**
- * @file /controllers/api/auth/customers/index.js
+ * @file /controllers/api/auth/customers/register.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 22 May, 2024
  */
 
 // dependencies
