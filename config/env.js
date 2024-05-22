@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 07 April, 2024
+ * @update_date 22 May, 2024
  */
 
 // dependencies
@@ -20,7 +20,7 @@ module.exports = {
     APP_URL: process.env.APP_URL,
     PORT: process.env.PORT,
     MONGODB_URI:
-        this.NODE_ENV === 'development'
+        process.env.NODE_ENV === 'development'
             ? process.env.MONGODB_URI_DEV
             : process.env.MONGODB_URI_PROD,
     JWT_SECRET: process.env.JWT_SECRET,
