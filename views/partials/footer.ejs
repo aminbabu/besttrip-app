@@ -3,8 +3,8 @@
   <div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
     <!--begin::Copyright-->
     <div class="text-gray-900 order-2 order-md-1">
-      <a href="index.html" target="_blank" class="text-gray-800 text-hover-primary">
-        <%= APP_NAME ?? 'Best Trip' %>
+      <a href="/" target="_blank" class="text-gray-800 text-hover-primary">
+        <%= typeof APP_NAME !== 'undefined' ? APP_NAME : 'Best Trip' %>
       </a>
       |
       <span class="text-muted fw-semibold me-1">
