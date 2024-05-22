@@ -13,6 +13,8 @@ const express = require('express');
 // express router
 const router = express.Router();
 
+// middlewares
+
 // routes for api
 router.use('/auth/users', require('./auth/users'));
 router.use('/users', require('./users'));

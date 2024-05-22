@@ -24,15 +24,15 @@ const {
 } = require('../../controllers/api/users');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../middlewares/api/auth');
 const {
     validateUserId,
     validateUser,
     validateUserSelf,
     validateUserAccount,
-} = require('../../middlewares/validators/users');
-const { validateAvatar } = require('../../middlewares/validators/files');
-const { uploadAvatar } = require('../../middlewares/files');
+} = require('../../middlewares/validators/api/users');
+const { validateAvatar } = require('../../middlewares/validators/api/files');
+const { uploadAvatar } = require('../../middlewares/api/files');
 
 // constants
 const { USER_ROLES } = require('../../constants');

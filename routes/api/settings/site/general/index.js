@@ -20,12 +20,14 @@ const {
 } = require('../../../../../controllers/api/settings/site/general');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
     validateGeneralSettings,
     validateGeneralSettingsFiles,
-} = require('../../../../../middlewares/validators/settings/site/general');
-const { uploadGeneralSettingsFile } = require('../../../../../middlewares/settings/site/general');
+} = require('../../../../../middlewares/validators/api/settings/site/general');
+const {
+    uploadGeneralSettingsFile,
+} = require('../../../../../middlewares/api/settings/site/general');
 
 /**
  * @description get general settings

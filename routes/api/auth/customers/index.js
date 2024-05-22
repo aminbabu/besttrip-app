@@ -31,8 +31,8 @@ const {
     validateResetPassword,
     validateSendVerificationEmail,
     validateVerifyEmail,
-} = require('../../../../middlewares/validators/auth');
-const { isVerified } = require('../../../../middlewares/auth');
+} = require('../../../../middlewares/validators/api/auth');
+const { isVerified } = require('../../../../middlewares/api/auth');
 
 /**
  * @description register a new user

@@ -23,17 +23,17 @@ const {
 } = require('../../../../../controllers/api/settings/content/blog-posts');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
     validateBlogPostId,
     validateBlogPost,
     validateBlogPostThumbnail,
     validateBlogPostBanner,
-} = require('../../../../../middlewares/validators/settings/content/blog-posts');
+} = require('../../../../../middlewares/validators/api/settings/content/blog-posts');
 const {
     uploadBlogPostBanner,
     uploadBlogPostThumbnail,
-} = require('../../../../../middlewares/settings/content/blog-posts');
+} = require('../../../../../middlewares/api/settings/content/blog-posts');
 
 /**
  * @description - get blog posts

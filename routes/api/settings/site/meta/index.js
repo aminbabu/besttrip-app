@@ -23,11 +23,11 @@ const {
 } = require('../../../../../controllers/api/settings/site/meta');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
     validateMetaSettingsId,
     validateMetaSettings,
-} = require('../../../../../middlewares/validators/settings/site/meta');
+} = require('../../../../../middlewares/validators/api/settings/site/meta');
 
 /**
  * @description get meta settings

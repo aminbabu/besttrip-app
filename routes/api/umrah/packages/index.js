@@ -23,7 +23,7 @@ const {
 } = require('../../../../controllers/api/umrah/packages');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
 const {
     validateUmrahPackageId,
     validateUmrahPackageThumbnail,
@@ -45,7 +45,7 @@ const {
     validateUmrahThumbnail,
     validateUmrah,
     validateTermsAndConditions,
-} = require('../../../../middlewares/validators/umrah/packages');
+} = require('../../../../middlewares/validators/api/umrah/packages');
 const {
     uploadPackageThumbnail,
     uploadPackageGallery,
@@ -55,7 +55,7 @@ const {
     uploadMadinahHotelGallery,
     uploadUmrahDayWiseItineraryThumbnails,
     uploadUmrahThumbnail,
-} = require('../../../../middlewares/umrah/packages');
+} = require('../../../../middlewares/api/umrah/packages');
 
 /**
  * @description check if user is authorized

@@ -23,13 +23,15 @@ const {
 } = require('../../../../controllers/api/settings/content/flight-offers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
 const {
     validateFlightOfferId,
     validateFlightOffer,
     validateFlightOfferFile,
-} = require('../../../../middlewares/validators/settings/content/flight-offers');
-const { uploadFlightOfferFile } = require('../../../../middlewares/settings/content/flight-offers');
+} = require('../../../../middlewares/validators/api/settings/content/flight-offers');
+const {
+    uploadFlightOfferFile,
+} = require('../../../../middlewares/api/settings/content/flight-offers');
 
 /**
  * @description - get flight offers
