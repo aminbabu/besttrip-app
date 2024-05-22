@@ -11,6 +11,8 @@
   <meta property="og:title" content="Best Trip" />
   <meta property="og:url" content="https://besttrip.com" />
   <meta property="og:site_name" content="Best Trip" />
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' ">
+
   <!-- begin::Metatags -->
   <% if(typeof metaTags !== 'undefined' && metaTags.length) { %>
   <% metaTags.forEach(function(metaTag) { %>
@@ -24,7 +26,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
   <!--end::Fonts-->
   <!--begin::Vendor Stylesheets(used for this page only)-->
-  <% if(typeof vendorStylesheets !== 'undefined' && vendorStylesheets.length) { %>
+  <% if(typeof vendorStylesheets !== 'undefined' && vendorStylesheets?.length) { %>
   <% vendorStylesheets.forEach(function(vendorStylesheet) { %>
   <link href="<%= vendorStylesheet %>" rel="stylesheet" type="text/css" />
   <% }); %>
@@ -35,7 +37,7 @@
   <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
   <!--end::Global Stylesheets Bundle-->
   <!--begin::Custom Stylesheets(used for this page only)-->
-  <% if(typeof customStylesheets !== 'undefined' && customStylesheets.length) { %>
+  <% if(typeof customStylesheets !== 'undefined' && customStylesheets?.length) { %>
   <% customStylesheets.forEach(function(customStylesheet) { %>
   <link href="<%= customStylesheet %>" rel="stylesheet" type="text/css" />
   <% }); %>
