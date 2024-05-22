@@ -14,7 +14,6 @@ const express = require('express');
 const router = express.Router();
 
 // routes for api
-router.use('/api', require('./api'));
 router.use('/auth/users', require('./auth/users'));
 router.use('/users', require('./users'));
 router.use('/customers', require('./customers'));

@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 18 May, 2024
+ * @update_date 22 May, 2024
  */
 
 // dependencies
@@ -51,6 +51,7 @@ app.use(expressFileUpload(expressFileUploadConf));
 app.use(xssInstance.xssShield(WHITE_LIST));
 
 // routes
+app.use('/api', require('./routes/api'));
 app.use('/', require('./routes'));
 
 // catch 404 and forward to error handler
