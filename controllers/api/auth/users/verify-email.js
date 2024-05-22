@@ -1,0 +1,69 @@
+/**
+ * @file /controllers/auth/users/verify-email.js
+ * @project best-trip
+ * @version 0.0.0
+ * @author best-trip
+ * @date 18 March, 2024
+ * @update_date 17 April, 2024
+ */
+
+// dependencies
+const moment = require('moment');
+const { confirmEmailVerification } = require('../../../../mails');
+const { User, Token } = require('../../../../models');
+const { sendEmail } = require('../../../../utils');
+
+// export verify email controller
+module.exports = async (req, res, next) => {
+    try {
+        // get validated data
+        const { token } = req.body;
+
+        // get token
+        const emailVerificationToken = await Token.findOne({
+            token,
+            type: 'verify-email',
+        });
+
+        // check if token exists
+        if (!emailVerificationToken) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        // check if token is expired
+        if (moment(emailVerificationToken.expires).isBefore(moment())) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        // get user
+        const user = await User.findById(emailVerificationToken.user);
+
+        // check if user exists
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // check if user is already verified
+        if (user.isVerified) {
+            return res.status(400).json({ message: 'Email already verified' });
+        }
+
+        // update user
+        user.isVerified = true;
+        await user.save();
+
+        // delete token
+        await emailVerificationToken.deleteOne();
+
+        // send email
+        const info = await confirmEmailVerification(user.toObject());
+        await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
+
+        // return response
+        return res.status(200).json({
+            message: 'Email verified successfully',
+        });
+    } catch (err) {
+        return next(err);
+    }
+};
