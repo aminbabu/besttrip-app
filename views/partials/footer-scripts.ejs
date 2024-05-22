@@ -1,21 +1,21 @@
 <script>
   var hostUrl = "/assets/";
 </script>
-<!--begin::Vendors Javascript(used for this page only)-->
 <% if(typeof vendorJavascripts !== 'undefined' && vendorJavascripts?.length) { %>
+<!--begin::Vendors Javascript(used for this page only)-->
 <% vendorJavascripts.forEach(function(vendorJavascript) { %>
 <script src="<%= vendorJavascript %>" type="text/javascript"></script>
 <% }); %>
-<% } %>
 <!--end::Vendors Javascript-->
+<% } %>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="/assets/plugins/global/plugins.bundle.js"></script>
 <script src="/assets/js/scripts.bundle.js"></script>
 <!--end::Global Javascript Bundle-->
-<!--begin::Custom Javascript(used for this page only)-->
 <% if(typeof customJavascripts !== 'undefined' && customJavascripts?.length) { %>
+<!--begin::Custom Javascript(used for this page only)-->
 <% customJavascripts.forEach(function(customJavascript) { %>
 <script src="<%= customJavascript %>" type="text/javascript"></script>
 <% }); %>
-<% } %>
 <!--end::Custom Javascript-->
+<% } %>
