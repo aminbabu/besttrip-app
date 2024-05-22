@@ -1,5 +1,5 @@
 /**
- * @file /controllers/customers/update-all-customers-wallet.js
+ * @file /controllers/api/customers/update-all-customers-wallet.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

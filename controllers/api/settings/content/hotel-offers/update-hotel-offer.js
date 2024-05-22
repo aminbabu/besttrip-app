@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/content/hotel-offers/get-hotel-offers.js
+ * @file /controllers/api/settings/content/hotel-offers/get-hotel-offers.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

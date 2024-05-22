@@ -1,5 +1,5 @@
 /**
- * @file /controllers/customers/delete-customer-by-self.js
+ * @file /controllers/api/customers/delete-customer-by-self.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

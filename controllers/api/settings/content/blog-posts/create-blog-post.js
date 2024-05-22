@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/content/blog-post/create-blog-post.js
+ * @file /controllers/api/settings/content/blog-post/create-blog-post.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

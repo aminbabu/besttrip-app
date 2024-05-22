@@ -1,5 +1,5 @@
 /**
- * @file /controllers/users/update-user-by-id.js
+ * @file /controllers/api/users/update-user-by-id.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

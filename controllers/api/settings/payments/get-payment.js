@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/payments/get-payments-settings-by-id.js
+ * @file /controllers/api/settings/payments/get-payments-settings-by-id.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

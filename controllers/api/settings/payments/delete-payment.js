@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/payments/delete-payments-settings.js
+ * @file /controllers/api/settings/payments/delete-payments-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

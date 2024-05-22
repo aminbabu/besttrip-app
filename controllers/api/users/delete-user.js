@@ -1,5 +1,5 @@
 /**
- * @file /controllers/users/delete-user-by-id.js
+ * @file /controllers/api/users/delete-user-by-id.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

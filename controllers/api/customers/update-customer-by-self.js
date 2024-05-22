@@ -1,5 +1,5 @@
 /**
- * @file /controllers/customers/update-customer-by-self.js
+ * @file /controllers/api/customers/update-customer-by-self.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

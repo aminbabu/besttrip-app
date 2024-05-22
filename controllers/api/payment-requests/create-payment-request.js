@@ -1,5 +1,5 @@
 /**
- * @file /controllers/payment-requests/create-payment-request.js
+ * @file /controllers/api/payment-requests/create-payment-request.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

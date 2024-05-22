@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/site/policy/get-policy.js
+ * @file /controllers/api/settings/site/policy/get-policy.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

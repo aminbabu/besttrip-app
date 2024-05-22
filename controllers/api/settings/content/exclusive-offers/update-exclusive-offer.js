@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/content/exclusive-offers/get-exclusive-offers.js
+ * @file /controllers/api/settings/content/exclusive-offers/get-exclusive-offers.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

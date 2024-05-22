@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/site/meta/update-meta-settings.js
+ * @file /controllers/api/settings/site/meta/update-meta-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

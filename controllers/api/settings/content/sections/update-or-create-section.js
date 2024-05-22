@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/content/sections/update-or-create-section.js
+ * @file /controllers/api/settings/content/sections/update-or-create-section.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

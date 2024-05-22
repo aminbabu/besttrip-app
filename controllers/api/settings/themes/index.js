@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/themes/index.js
+ * @file /controllers/api/settings/themes/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

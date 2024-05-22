@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/site/contact/update-or-create-contact-settings.js
+ * @file /controllers/api/settings/site/contact/update-or-create-contact-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

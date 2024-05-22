@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/site/general/update-or-create-general-settings.js
+ * @file /controllers/api/settings/site/general/update-or-create-general-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

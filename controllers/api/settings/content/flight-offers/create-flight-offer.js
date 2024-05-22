@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/content/flight-offer/create-flight-offer.js
+ * @file /controllers/api/settings/content/flight-offer/create-flight-offer.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

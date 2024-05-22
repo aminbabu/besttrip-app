@@ -1,5 +1,5 @@
 /**
- * @file /controllers/customers/index.js
+ * @file /controllers/api/customers/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

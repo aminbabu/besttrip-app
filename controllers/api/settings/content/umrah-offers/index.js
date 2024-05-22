@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/content/umrah-offers/index.js
+ * @file /controllers/api/settings/content/umrah-offers/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

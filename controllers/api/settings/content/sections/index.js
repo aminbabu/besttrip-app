@@ -1,5 +1,5 @@
 /**
- * @file /controllers/settings/content/sections/index.js
+ * @file /controllers/api/settings/content/sections/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

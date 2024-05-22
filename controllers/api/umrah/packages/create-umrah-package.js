@@ -1,5 +1,5 @@
 /**
- * @file /controllers/umrah/packages/create-umrah-package.js
+ * @file /controllers/api/umrah/packages/create-umrah-package.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
