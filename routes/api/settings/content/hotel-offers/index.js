@@ -20,7 +20,7 @@ const {
     createHotelOffer,
     updateHotelOffer,
     deleteHotelOffer,
-} = require('../../../../../controllers/settings/content/hotel-offers');
+} = require('../../../../../controllers/api/settings/content/hotel-offers');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');

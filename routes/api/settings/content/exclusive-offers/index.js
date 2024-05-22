@@ -20,7 +20,7 @@ const {
     createExclusiveOffer,
     updateExclusiveOffer,
     deleteExclusiveOffer,
-} = require('../../../../../controllers/settings/content/exclusive-offers');
+} = require('../../../../../controllers/api/settings/content/exclusive-offers');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');

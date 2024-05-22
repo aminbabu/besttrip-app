@@ -21,7 +21,7 @@ const {
     resetPassword,
     sendVerificationEmail,
     verifyEmail,
-} = require('../../../controllers/auth/users');
+} = require('../../../controllers/api/auth/users');
 
 // middlewares
 const {

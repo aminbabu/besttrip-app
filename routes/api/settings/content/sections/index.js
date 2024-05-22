@@ -18,7 +18,7 @@ const {
     getSections,
     getSection,
     updateOrCreateSection,
-} = require('../../../../../controllers/settings/content/sections');
+} = require('../../../../../controllers/api/settings/content/sections');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');

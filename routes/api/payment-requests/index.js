@@ -20,7 +20,7 @@ const {
     createPaymentRequest,
     updatePaymentRequest,
     deletePaymentRequest,
-} = require('../../../controllers/payment-requests');
+} = require('../../../controllers/api/payment-requests');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../middlewares/auth');

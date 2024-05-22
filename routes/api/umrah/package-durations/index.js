@@ -20,7 +20,7 @@ const {
     createUmrahPackageDuration,
     updateUmrahPackageDuration,
     deleteUmrahPackageDuration,
-} = require('../../../../controllers/umrah/package-durations');
+} = require('../../../../controllers/api/umrah/package-durations');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');

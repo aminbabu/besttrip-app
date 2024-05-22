@@ -18,7 +18,7 @@ const {
     getThemes,
     getTheme,
     updateOrCreateTheme,
-} = require('../../../controllers/settings/themes');
+} = require('../../../controllers/api/settings/themes');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../middlewares/auth');

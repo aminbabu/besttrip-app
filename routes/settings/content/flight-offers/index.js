@@ -20,7 +20,7 @@ const {
     createFlightOffer,
     updateFlightOffer,
     deleteFlightOffer,
-} = require('../../../../controllers/settings/content/flight-offers');
+} = require('../../../../controllers/api/settings/content/flight-offers');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');

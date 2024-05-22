@@ -20,7 +20,7 @@ const {
     createBlogPost,
     updateBlogPost,
     deleteBlogPost,
-} = require('../../../../controllers/settings/content/blog-posts');
+} = require('../../../../controllers/api/settings/content/blog-posts');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');

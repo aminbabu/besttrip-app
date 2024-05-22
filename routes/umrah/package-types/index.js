@@ -20,7 +20,7 @@ const {
     createUmrahPackageType,
     updateUmrahPackageType,
     deleteUmrahPackageType,
-} = require('../../../controllers/umrah/package-types');
+} = require('../../../controllers/api/umrah/package-types');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
