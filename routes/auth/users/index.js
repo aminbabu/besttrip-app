@@ -3,8 +3,8 @@
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 08 April, 2024
- * @update_date 19 April, 2024
+ * @date 22 May, 2024
+ * @update_date 22 May, 2024
  */
 
 // dependencies
@@ -21,85 +21,67 @@ const {
     resetPassword,
     sendVerificationEmail,
     verifyEmail,
-} = require('../../../controllers/api/auth/users');
-
-// middlewares
-const {
-    validateRegister,
-    validateLogin,
-    validateForgotPassword,
-    validateResetPassword,
-    validateSendVerificationEmail,
-    validateVerifyEmail,
-} = require('../../../middlewares/validators/auth');
-const { isVerified } = require('../../../middlewares/auth');
+} = require('../../../controllers/auth/users');
 
 /**
  * @description register a new user
  * @param {string} path - /auth/users/register
- * @param {function} middleware - ['validateRegister']
  * @param {function} controller - ['register']
  * @returns {object} - router
  * @access public
- * @method POST
+ * @method GET
  */
-router.post('/register', validateRegister, register);
+router.get('/register', register);
 
 /**
  * @description login a user
  * @param {string} path - /auth/users/login
- * @param {function} validator - ['validateLogin']
- * @param {function} middleware - ['isVerified.user']
  * @param {function} controller - ['login']
  * @returns {object} - router
  * @access public
- * @method POST
+ * @method GET
  */
-router.post('/login', validateLogin, isVerified.user, login);
+router.get('/login', login);
 
 /**
  * @description forgot password
  * @param {string} path - /auth/users/forgot-password
- * @param {function} validator - ['validateForgotPassword']
  * @param {function} controller - ['forgotPassword']
  * @returns {object} - router
  * @access public
- * @method POST
+ * @method GET
  */
-router.post('/forgot-password', validateForgotPassword, forgotPassword);
+router.get('/forgot-password', forgotPassword);
 
 /**
  * @description reset password
  * @param {string} path - /auth/users/reset-password
- * @param {function} validator - ['validateResetPassword']
  * @param {function} controller - ['resetPassword']
  * @returns {object} - router
  * @access public
- * @method POST
+ * @method GET
  */
-router.post('/reset-password', validateResetPassword, resetPassword);
+router.get('/reset-password', resetPassword);
 
 /**
  * @description send verification email
  * @param {string} path - /auth/users/send-verification-email
- * @param {function} validator - ['validateSendVerificationEmail']
  * @param {function} controller - ['sendVerificationEmail']
  * @returns {object} - router
  * @access public
- * @method POST
+ * @method GET
  */
-router.post('/send-verification-email', validateSendVerificationEmail, sendVerificationEmail);
+router.get('/send-verification-email', sendVerificationEmail);
 
 /**
  * @description verify email
  * @param {string} path - /auth/users/verify-email
- * @param {function} validator - ['validateVerifyEmail']
  * @param {function} controller - ['verifyEmail']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/verify-email', validateVerifyEmail, verifyEmail);
+router.get('/verify-email', verifyEmail);
 
 // export
 module.exports = router;

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 May, 2024
- * @update_date 18 May, 2024
+ * @update_date 22 May, 2024
  */
 
 // dependencies
@@ -16,7 +16,6 @@ const router = express.Router();
 // routes for api
 router.use('/api', require('./api'));
 router.use('/auth/users', require('./auth/users'));
-router.use('/auth/customers', require('./auth/customers'));
 router.use('/users', require('./users'));
 router.use('/customers', require('./customers'));
 router.use('/settings/site/general', require('./settings/site/general'));
