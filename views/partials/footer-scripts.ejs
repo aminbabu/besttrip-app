@@ -4,7 +4,7 @@
 <% if(typeof vendorJavascripts !== 'undefined' && vendorJavascripts?.length) { %>
 <!--begin::Vendors Javascript(used for this page only)-->
 <% vendorJavascripts.forEach(function(vendorJavascript) { %>
-<script src="<%= vendorJavascript %>" type="text/javascript"></script>
+<script src="<%= vendorJavascript %>"></script>
 <% }); %>
 <!--end::Vendors Javascript-->
 <% } %>
@@ -15,7 +15,7 @@
 <% if(typeof customJavascripts !== 'undefined' && customJavascripts?.length) { %>
 <!--begin::Custom Javascript(used for this page only)-->
 <% customJavascripts.forEach(function(customJavascript) { %>
-<script src="<%= customJavascript %>" type="text/javascript"></script>
+<script src="<%= customJavascript %>"></script>
 <% }); %>
 <!--end::Custom Javascript-->
 <% } %>
