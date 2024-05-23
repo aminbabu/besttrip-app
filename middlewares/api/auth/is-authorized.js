@@ -4,10 +4,11 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 10 April, 2024
+ * @update_date 24 May, 2024
  */
 
 // dependencies
+const { JWT_EXPIRY } = require('../../../config/env');
 const { User, Customer } = require('../../../models');
 const { verifyToken } = require('../../../utils');
 const { generateToken } = require('../../../utils');
@@ -61,6 +62,14 @@ module.exports = async (req, res, next) => {
 
         // set token in response
         res.set('authorization', `Bearer ${newToken}`);
+
+        // set cookie in response
+        res.cookie('token', newToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            expires: JWT_EXPIRY,
+        });
 
         // set token in request
         req.token = newToken;
