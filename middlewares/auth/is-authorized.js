@@ -80,6 +80,10 @@ module.exports = async (req, res, next) => {
         // proceed to next middleware
         return next();
     } catch (err) {
+        // remove token from cookie and header
+        res.clearCookie('token');
+        res.removeHeader('authorization');
+
         return res.status(401).json({
             status: 'error',
             message: 'Unauthorized',
