@@ -16,7 +16,7 @@ const { generateToken } = require('../../../utils');
 // authourize user
 module.exports = async (req, res, next) => {
     // get authorization from header
-    const authorization = req.header('authorization');
+    const authorization = req.header('authorization') || req.cookies.token;
 
     // check if token exists
     if (!authorization) {
@@ -68,7 +68,7 @@ module.exports = async (req, res, next) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            expires: JWT_EXPIRY,
+            maxAge: JWT_EXPIRY,
         });
 
         // set token in request
