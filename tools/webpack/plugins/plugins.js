@@ -2,14 +2,18 @@
 // 3rd-Party Plugins JavaScript Includes
 //
 
-
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-////  Mandatory Plugins Includes(do not remove or change order!)  ////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// /  Mandatory Plugins Includes(do not remove or change order!)  ////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 // Jquery - jQuery is a popular and feature-rich JavaScript library. Learn more: https://jquery.com/
+import { Bootstrap5 } from '@form-validation/plugin-bootstrap5';
+
+// Chart.js - Simple yet flexible JavaScript charting for designers & developers
+import Chart from 'chart.js/auto';
+
 window.jQuery = window.$ = require('jquery');
 
 // Bootstrap - The most popular framework uses as the foundation. Learn more: http://getbootstrap.com
@@ -25,13 +29,13 @@ window.wNumb = require('wnumb');
 window.moment = require('moment');
 
 // ES6-Shim - ECMAScript 6 compatibility shims for legacy JS engines.  Learn more: https://github.com/paulmillr/es6-shim
-require("es6-shim/es6-shim.min.js");
+require('es6-shim/es6-shim.min.js');
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 ///  Optional Plugins Includes(you can remove or add)  ///////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 // Apexcharts - modern charting library that helps developers to create beautiful and interactive visualizations for web pages: https://apexcharts.com/
 window.ApexCharts = require('apexcharts/dist/apexcharts.min.js');
@@ -39,7 +43,7 @@ window.ApexCharts = require('apexcharts/dist/apexcharts.min.js');
 // FormValidation - Best premium validation library for JavaScript. Zero dependencies. Learn more: https://formvalidation.io/
 window.FormValidation = require('@/src/plugins/@form-validation/umd/bundle/popular.min.js');
 require('@/src/plugins/@form-validation/umd/bundle/full.min.js');
-import { Bootstrap5 } from '@form-validation/plugin-bootstrap5';
+
 window.FormValidation.plugins.Bootstrap5 = Bootstrap5;
 
 // Date Range Picker - A JavaScript component for choosing date ranges, dates and times: https://www.daterangepicker.com/
@@ -102,8 +106,6 @@ require('@/src/js/vendors/plugins/sweetalert2.init.js');
 // CountUp.js - is a dependency-free, lightweight JavaScript class that can be used to quickly create animations that display numerical data in a more interesting way.
 window.countUp = require('countup.js/dist/countUp.min.js');
 
-// Chart.js - Simple yet flexible JavaScript charting for designers & developers
-import Chart from 'chart.js/auto';
 window.Chart = Chart;
 
 // Tiny slider - for all purposes, inspired by Owl Carousel.
@@ -114,3 +116,6 @@ window.SmoothScroll = require('smooth-scroll/dist/smooth-scroll.js');
 
 // Highly performant, light and configurable lazy loader in pure JS using IntersectionObserver API: https://apoorv.pro/lozad.js/
 window.lozad = require('lozad/dist/lozad.min.js');
+
+// Axios - Promise based HTTP client for the browser and node.js:
+window.axios = require('axios');
