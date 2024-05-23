@@ -10,7 +10,7 @@
 // export get dashboard controller
 module.exports = (req, res) => {
     try {
-        return res.render('dashboard', {
+        return res.render('index', {
             title: 'Dashboard',
             user: req.user,
         });
