@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 24 May, 2024
  */
 
 // dependencies
@@ -30,7 +30,7 @@ module.exports = ({ user, token }) => {
             website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${env.APP_URL}:${env.PORT}/auth/${user.role === 'customer' ? 'customers' : 'users'}/verify-email?token=${token}`,
+        redirectTo: `${env.APP_URL}:${env.PORT}/api/auth/${user.role === 'customer' ? 'customers' : 'users'}/verify-email?token=${token}`,
     });
 
     // attachments
