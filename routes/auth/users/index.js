@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 22 May, 2024
- * @update_date 22 May, 2024
+ * @update_date 24 May, 2024
  */
 
 // dependencies
@@ -23,6 +23,7 @@ const {
     verifyEmail,
 } = require('../../../controllers/auth/users');
 const isNotAuthorized = require('../../../middlewares/auth/is-not-authorized');
+const { isAuthorized } = require('../../../middlewares/auth');
 
 /**
  * @description register a new user
@@ -38,12 +39,13 @@ router.get('/register', isNotAuthorized, register);
 /**
  * @description login a user
  * @param {string} path - /auth/users/login
+ * @param {function} middleware - ['isNotAuthorized']
  * @param {function} controller - ['login']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/login', login);
+router.get('/login', isNotAuthorized, login);
 
 /**
  * @description forgot password
@@ -73,7 +75,7 @@ router.get('/reset-password', resetPassword);
  * @access public
  * @method GET
  */
-router.get('/send-verification-email', sendVerificationEmail);
+router.get('/send-verification-email', isAuthorized, sendVerificationEmail);
 
 /**
  * @description verify email
