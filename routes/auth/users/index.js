@@ -22,16 +22,18 @@ const {
     sendVerificationEmail,
     verifyEmail,
 } = require('../../../controllers/auth/users');
+const isNotAuthorized = require('../../../middlewares/auth/is-not-authorized');
 
 /**
  * @description register a new user
  * @param {string} path - /auth/users/register
+ * @param {function} middleware - ['isNotAuthorized']
  * @param {function} controller - ['register']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/register', register);
+router.get('/register', isNotAuthorized, register);
 
 /**
  * @description login a user
