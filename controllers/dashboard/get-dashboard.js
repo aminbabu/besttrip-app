@@ -8,15 +8,16 @@
  */
 
 // export get dashboard controller
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     try {
-        return res.status(200).json({
-            message: 'Dashboard data',
-            data: {
-                user: req.user,
-            },
+        return res.render('dashboard', {
+            title: 'Dashboard',
+            user: req.user,
         });
     } catch (error) {
-        return next(error);
+        return res.render('errors/500', {
+            title: `Error ${error.status}`,
+            message: error.message,
+        });
     }
 };
