@@ -8,7 +8,6 @@
  */
 
 // dependencies
-const { JWT_EXPIRY } = require('../../../../config/env');
 const { welcome } = require('../../../../mails');
 const { User, Token } = require('../../../../models');
 const { generateToken, sendEmail } = require('../../../../utils');
@@ -64,17 +63,6 @@ module.exports = async (req, res, next) => {
         // send mail
         const info = welcome({ user: newUser.toObject(), token });
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
-
-        // set token in response
-        res.set('authorization', `Bearer ${token}`);
-
-        // set cookie in response
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            maxAge: JWT_EXPIRY,
-        });
 
         // return response
         return res.status(201).json({
