@@ -32,7 +32,7 @@ const {
     validateSendVerificationEmail,
     validateVerifyEmail,
 } = require('../../../../middlewares/validators/api/auth');
-const { isVerified } = require('../../../../middlewares/api/auth');
+const { isVerified } = require('../../../../middlewares/auth');
 
 /**
  * @description register a new user

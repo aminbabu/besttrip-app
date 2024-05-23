@@ -21,7 +21,7 @@ const {
 } = require('../../../../controllers/api/settings/content/sections');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateContentSectionKey,
     validateContentSection,

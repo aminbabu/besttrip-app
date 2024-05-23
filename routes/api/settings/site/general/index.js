@@ -20,7 +20,7 @@ const {
 } = require('../../../../../controllers/api/settings/site/general');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
 const {
     validateGeneralSettings,
     validateGeneralSettingsFiles,

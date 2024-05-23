@@ -8,10 +8,10 @@
  */
 
 // dependencies
-const { JWT_EXPIRY } = require('../../../config/env');
-const { User, Customer } = require('../../../models');
-const { verifyToken } = require('../../../utils');
-const { generateToken } = require('../../../utils');
+const { JWT_EXPIRY } = require('../../config/env');
+const { User, Customer } = require('../../models');
+const { verifyToken } = require('../../utils');
+const { generateToken } = require('../../utils');
 
 // authourize user
 module.exports = async (req, res, next) => {

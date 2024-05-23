@@ -23,7 +23,7 @@ const {
 } = require('../../../../../controllers/api/settings/content/flight-offers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
 const {
     validateFlightOfferId,
     validateFlightOffer,

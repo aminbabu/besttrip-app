@@ -20,7 +20,7 @@ const {
 } = require('../../../../controllers/api/settings/site/contact');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateContactSettings,
 } = require('../../../../middlewares/validators/api/settings/site/contact');

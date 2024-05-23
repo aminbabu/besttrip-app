@@ -23,7 +23,7 @@ const {
 } = require('../../../../../controllers/api/settings/content/blog-posts');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
 const {
     validateBlogPostId,
     validateBlogPost,

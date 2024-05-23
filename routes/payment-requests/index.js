@@ -23,7 +23,7 @@ const {
 } = require('../../controllers/api/payment-requests');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../middlewares/auth');
 const {
     validatePaymentRequestId,
     validatePaymentRequest,
