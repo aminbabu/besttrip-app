@@ -26,6 +26,7 @@ const { csp } = require('../middlewares/global');
 router.use(csp);
 
 // routes for api
+router.use('/dashboard', require('./dashboard'));
 router.use('/auth/users', require('./auth/users'));
 router.use('/users', require('./users'));
 router.use('/customers', require('./customers'));
