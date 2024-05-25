@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { User, Customer } = require('../../models');
+const { User, Customer } = require('../../../models');
 
 // is allowed middleware
 module.exports =
