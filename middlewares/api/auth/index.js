@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/auth/index.js
+ * @file /middlewares/api/auth/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
