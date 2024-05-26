@@ -13,8 +13,7 @@ const { FRONTEND_KEY, BACKEND_KEY } = require('../../config');
 // export api key validation middleware
 module.exports = (req, res, next) => {
     // get api key
-    const apiKey = req.headers['x-api-key'];
-
+    const apiKey = req.header('x-api-key');
     // check if api key is valid for frontend
     if (apiKey === FRONTEND_KEY) {
         res.locals.api = 'frontend';
