@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 May, 2024
+ * @update_date 26 May, 2024
  */
 
 // dependencies
@@ -32,4 +32,6 @@ module.exports = {
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
     EMAIL_FROM: process.env.EMAIL_FROM,
     COOKIE_SECRET: process.env.COOKIE_SECRET,
+    FRONTEND_KEY: process.env.FRONTEND_API_KEY,
+    BACKEND_KEY: process.env.BACKEND_API_KEY,
 };
