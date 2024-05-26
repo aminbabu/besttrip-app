@@ -15,10 +15,18 @@ module.exports = (req, res, next) => {
     // get api key
     const apiKey = req.headers['x-api-key'];
 
-    // check if api key is valid
-    if (apiKey === FRONTEND_KEY || apiKey === BACKEND_KEY) {
-        next();
-    } else {
-        res.status(401).json({ message: 'Unauthorized' });
+    // check if api key is valid for frontend
+    if (apiKey === FRONTEND_KEY) {
+        res.locals.api = 'frontend';
+        return next();
     }
+
+    // check if api key is valid for backend
+    if (apiKey === BACKEND_KEY) {
+        res.locals.api = 'backend';
+        return next();
+    }
+
+    // return unauthorized
+    return res.status(401).json({ message: 'Unauthorized' });
 };
