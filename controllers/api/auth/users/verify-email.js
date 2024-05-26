@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 24 May, 2024
+ * @update_date 27 May, 2024
  */
 
 // dependencies
@@ -12,7 +12,7 @@ const moment = require('moment');
 const { confirmEmailVerification } = require('../../../../mails');
 const { User, Token } = require('../../../../models');
 const { sendEmail, generateToken } = require('../../../../utils');
-const { JWT_EXPIRY } = require('../../../../config/env');
+const { env } = require('../../../../config');
 
 // export verify email controller
 module.exports = async (req, res, next) => {
@@ -71,7 +71,7 @@ module.exports = async (req, res, next) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: JWT_EXPIRY,
+            maxAge: env.JWT_EXPIRY,
         });
 
         // return response

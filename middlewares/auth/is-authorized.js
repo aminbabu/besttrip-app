@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { JWT_EXPIRY } = require('../../config/env');
+const { env } = require('../../config');
 const { User, Customer } = require('../../models');
 const { verifyToken, generateToken } = require('../../utils');
 
@@ -66,7 +66,7 @@ module.exports = async (req, res, next) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: JWT_EXPIRY,
+            maxAge: env.JWT_EXPIRY,
         });
 
         // set token in request
