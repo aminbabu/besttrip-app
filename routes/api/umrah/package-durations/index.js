@@ -27,7 +27,7 @@ const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateUmrahPackageDurationId,
     validateUmrahPackageDuration,
-} = require('../../../../middlewares/validators/api/umrah/package-durations');
+} = require('../../../../middlewares/api/validators/umrah/package-durations');
 
 /**
  * @description check if user is authorized

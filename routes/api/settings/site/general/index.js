@@ -24,7 +24,7 @@ const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
 const {
     validateGeneralSettings,
     validateGeneralSettingsFiles,
-} = require('../../../../../middlewares/validators/api/settings/site/general');
+} = require('../../../../../middlewares/api/validators/settings/site/general');
 const {
     uploadGeneralSettingsFile,
 } = require('../../../../../middlewares/api/settings/site/general');

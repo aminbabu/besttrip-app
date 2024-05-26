@@ -26,7 +26,7 @@ const {
     validateThemeSettingsKey,
     validateThemeSettings,
     validateThemeSettingsFile,
-} = require('../../../../middlewares/validators/api/settings/themes');
+} = require('../../../../middlewares/api/validators/settings/themes');
 const { uploadThemeSettingsFile } = require('../../../../middlewares/api/settings/themes');
 
 /**

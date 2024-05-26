@@ -25,7 +25,7 @@ const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
 const {
     validateContentSectionKey,
     validateContentSection,
-} = require('../../../../../middlewares/validators/api/settings/content/sections');
+} = require('../../../../../middlewares/api/validators/settings/content/sections');
 
 /**
  * @description - Get content section by key

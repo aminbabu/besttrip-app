@@ -32,8 +32,8 @@ const {
     validateCustomerSelf,
     validateCustomerWallet,
     validateCustomerAccount,
-} = require('../../../middlewares/validators/api/customers');
-const { validateAvatar } = require('../../../middlewares/validators/api/files');
+} = require('../../../middlewares/api/validators/customers');
+const { validateAvatar } = require('../../../middlewares/api/validators/files');
 const { uploadAvatar } = require('../../../middlewares/api/files');
 
 /**

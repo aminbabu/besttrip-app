@@ -30,8 +30,8 @@ const {
     validateUser,
     validateUserSelf,
     validateUserAccount,
-} = require('../../../middlewares/validators/api/users');
-const { validateAvatar } = require('../../../middlewares/validators/api/files');
+} = require('../../../middlewares/api/validators/users');
+const { validateAvatar } = require('../../../middlewares/api/validators/files');
 const { uploadAvatar } = require('../../../middlewares/api/files');
 
 // constants

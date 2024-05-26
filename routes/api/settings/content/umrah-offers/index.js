@@ -28,7 +28,7 @@ const {
     validateUmrahOfferId,
     validateUmrahOffer,
     validateUmrahOfferFile,
-} = require('../../../../../middlewares/validators/api/settings/content/umrah-offers');
+} = require('../../../../../middlewares/api/validators/settings/content/umrah-offers');
 const {
     uploadUmrahOfferFile,
 } = require('../../../../../middlewares/api/settings/content/umrah-offers');

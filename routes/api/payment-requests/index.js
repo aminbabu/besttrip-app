@@ -27,7 +27,7 @@ const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
     validatePaymentRequestId,
     validatePaymentRequest,
-} = require('../../../middlewares/validators/api/payment-requests');
+} = require('../../../middlewares/api/validators/payment-requests');
 
 /**
  * @description check if user is authorized

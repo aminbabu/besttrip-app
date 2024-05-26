@@ -27,7 +27,7 @@ const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validatePaymentId,
     validatePayment,
-} = require('../../../../middlewares/validators/api/settings/payments');
+} = require('../../../../middlewares/api/validators/settings/payments');
 
 /**
  * @description - get payments settings
