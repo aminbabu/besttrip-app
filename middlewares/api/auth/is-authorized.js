@@ -4,12 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 24 May, 2024
+ * @update_date 26 May, 2024
  */
 
 // dependencies
 const { JWT_EXPIRY } = require('../../../config/env');
-const { User, Customer } = require('../../../models');
+const { User } = require('../../../models');
 const { verifyToken } = require('../../../utils');
 const { generateToken } = require('../../../utils');
 
@@ -30,25 +30,15 @@ module.exports = async (req, res, next) => {
     const token = authorization.replace('Bearer ', '');
 
     try {
-        let user;
-
         // verify token
         const payload = verifyToken(token);
 
         // check if user exists based on role by id, email, and status
-        if (payload.user.role === 'customer') {
-            user = await Customer.findOne({
-                _id: payload.user._id,
-                email: payload.user.email,
-                status: 'active',
-            });
-        } else {
-            user = await User.findOne({
-                _id: payload.user._id,
-                email: payload.user.email,
-                status: 'active',
-            });
-        }
+        const user = await User.findOne({
+            _id: payload.user._id,
+            email: payload.user.email,
+            status: 'active',
+        });
 
         if (!user) {
             return res.status(401).json({
@@ -80,9 +70,9 @@ module.exports = async (req, res, next) => {
         // proceed to next middleware
         return next();
     } catch (err) {
-        // remove token from cookie and header
-        res.clearCookie('token');
+        // remove token from header and cookie
         res.removeHeader('authorization');
+        res.clearCookie('token');
 
         return res.status(401).json({
             status: 'error',
