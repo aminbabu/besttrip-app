@@ -4,14 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 26 May, 2024
+ * @update_date 27 May, 2024
  */
 
 // dependencies
 const { JWT_EXPIRY } = require('../../config/env');
 const { User, Customer } = require('../../models');
-const { verifyToken } = require('../../utils');
-const { generateToken } = require('../../utils');
+const { verifyToken, generateToken } = require('../../utils');
 
 // authourize user
 module.exports = async (req, res, next) => {
