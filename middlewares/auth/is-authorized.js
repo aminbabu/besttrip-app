@@ -17,13 +17,8 @@ module.exports = async (req, res, next) => {
     // get authorization from header
     const authorization = req.header('authorization') || req.cookies.token;
 
-    // check if authorization is not exist and api is frontend
-    if (!authorization && res.locals.api === 'frontend') {
-        return res.render('errors/401');
-    }
-
-    // check if authorization is not exist and api is backend
-    if (!authorization && res.locals.api === 'backend') {
+    // check if authorization is not exist
+    if (!authorization) {
         return res.status(401).json({
             message: 'Unauthorized',
         });
@@ -53,13 +48,8 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // check if user is not exist and api is frontend
-        if (!user && res.locals.api === 'frontend') {
-            return res.render('errors/401');
-        }
-
         // check if user is not exist and api is backend
-        if (!user && res.locals.api === 'backend') {
+        if (!user) {
             return res.status(401).json({
                 message: 'Unauthorized',
             });
