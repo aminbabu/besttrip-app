@@ -52,7 +52,7 @@ app.use(xssInstance.xssShield(WHITE_LIST));
 
 // routes
 app.use('/api', require('./routes/api'));
-app.use('/', require('./routes'));
+app.use('/dashboard', require('./routes'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
