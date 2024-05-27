@@ -252,9 +252,6 @@ const KTSignupGeneral = (function () {
                         })
                         .then((response) => {
                             if (response) {
-                                // Get the redirect URL from the form
-                                const redirectUrl = form.getAttribute('data-kt-redirect-url');
-
                                 Swal.fire({
                                     text: 'Please check your inbox and click on the link to verify your email address.',
                                     icon: 'success',
@@ -268,10 +265,11 @@ const KTSignupGeneral = (function () {
                                     // Reset form
                                     form.reset();
 
-                                    if (result.isConfirmed) {
-                                        if (redirectUrl) {
-                                            location.href = redirectUrl;
-                                        }
+                                    // Get the redirect URL from the form
+                                    const redirectUrl = form.getAttribute('data-kt-redirect-url');
+
+                                    if (result.isConfirmed && redirectUrl) {
+                                        location.href = redirectUrl;
                                     }
                                 });
                             } else {
