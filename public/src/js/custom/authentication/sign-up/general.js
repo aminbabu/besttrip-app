@@ -286,7 +286,6 @@ const KTSignupGeneral = (function () {
                             }
                         })
                         .catch((error) => {
-                            console.log(Object.values(error));
                             const errors = error.response.data.message
                                 ? error.response.data.message
                                 : error.response.data.errors;
