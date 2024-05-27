@@ -159,10 +159,18 @@ const KTSigninGeneral = (function () {
                             }
                         })
                         .catch((error) => {
+                            const errors = error.response.data.message
+                                ? error.response.data.message
+                                : error.response.data.errors;
+
                             Swal.fire({
-                                text:
-                                    error.response.data.message ||
-                                    'Sorry, looks like there are some errors detected, please try again.',
+                                html: `${
+                                    errors instanceof Array
+                                        ? `<ul class="text-start">${Object.values(
+                                              error.response.data.errors
+                                          ).map((err) => `<li>${err?.message}</li>`)}</ul>`
+                                        : errors
+                                }`,
                                 icon: 'error',
                                 buttonsStyling: false,
                                 confirmButtonText: 'Ok, got it!',
