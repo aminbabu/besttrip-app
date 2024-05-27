@@ -3,13 +3,13 @@
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 18 March, 2024
+ * @date 27 May, 2024
  * @update_date 27 May, 2024
  */
 
 // dependencies
 const { env } = require('../../config');
-const { User, Customer } = require('../../models');
+const { User } = require('../../models');
 const { verifyToken, generateToken } = require('../../utils');
 
 // authourize user
@@ -17,42 +17,28 @@ module.exports = async (req, res, next) => {
     // get authorization from header
     const authorization = req.header('authorization') || req.cookies.token;
 
-    // check if authorization is not exist
+    // check if authorization is not exist and redirect to login
     if (!authorization) {
-        return res.status(401).json({
-            message: 'Unauthorized',
-        });
+        return res.redirect('/dashboard/login');
     }
 
     // get token
     const token = authorization.replace('Bearer ', '');
 
     try {
-        let user;
-
         // verify token
         const payload = verifyToken(token);
 
         // check if user exists based on role by id, email, and status
-        if (payload.user.role === 'customer') {
-            user = await Customer.findOne({
-                _id: payload.user._id,
-                email: payload.user.email,
-                status: 'active',
-            });
-        } else {
-            user = await User.findOne({
-                _id: payload.user._id,
-                email: payload.user.email,
-                status: 'active',
-            });
-        }
+        const user = await User.findOne({
+            _id: payload.user._id,
+            email: payload.user.email,
+            status: 'active',
+        });
 
-        // check if user is not exist and api is backend
+        // check if user is not exist and redirect to login
         if (!user) {
-            return res.status(401).json({
-                message: 'Unauthorized',
-            });
+            return res.redirect('/dashboard/login');
         }
 
         // generate token
