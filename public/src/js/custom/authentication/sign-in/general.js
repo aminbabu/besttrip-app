@@ -124,8 +124,6 @@ const KTSigninGeneral = (function () {
                         )
                         .then((response) => {
                             if (response) {
-                                form.reset();
-
                                 // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
                                     text: 'You have successfully logged in!',
@@ -135,13 +133,18 @@ const KTSigninGeneral = (function () {
                                     customClass: {
                                         confirmButton: 'btn btn-primary',
                                     },
+                                    allowOutsideClick: false,
+                                }).then((result) => {
+                                    // Reset form
+                                    form.reset();
+
+                                    // Get redirect URL from the form
+                                    const redirectUrl = form.getAttribute('data-kt-redirect-url');
+
+                                    if (result.isConfirmed && redirectUrl) {
+                                        location.href = redirectUrl;
+                                    }
                                 });
-
-                                const redirectUrl = form.getAttribute('data-kt-redirect-url');
-
-                                if (redirectUrl) {
-                                    location.href = redirectUrl;
-                                }
                             } else {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
@@ -157,7 +160,9 @@ const KTSigninGeneral = (function () {
                         })
                         .catch((error) => {
                             Swal.fire({
-                                text: 'Sorry, looks like there are some errors detected, please try again.',
+                                text:
+                                    error.response.data.message ||
+                                    'Sorry, looks like there are some errors detected, please try again.',
                                 icon: 'error',
                                 buttonsStyling: false,
                                 confirmButtonText: 'Ok, got it!',
@@ -214,7 +219,7 @@ const KTSigninGeneral = (function () {
             // }
         },
     };
-})();
+}());
 
 // On document ready
 KTUtil.onDOMContentLoaded(() => {
