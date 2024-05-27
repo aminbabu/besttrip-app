@@ -22,8 +22,7 @@ const {
     sendVerificationEmail,
     verifyEmail,
 } = require('../../../controllers/auth/users');
-const isNotAuthorized = require('../../../middlewares/auth/is-not-authorized');
-const { isAuthorized } = require('../../../middlewares/auth');
+const { isAuthorized, isNotAuthorized } = require('../../../middlewares/auth');
 
 /**
  * @description register a new user

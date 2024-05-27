@@ -1,14 +1,14 @@
 /**
- * @file /middlewares/auth/is-verified.js
+ * @file /middlewares/api/auth/is-verified.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 21 March, 2024
- * @update_date 22 April, 2024
+ * @update_date 27 May, 2024
  */
 
 // dependencies
-const { User, Customer } = require('../../models');
+const { User, Customer } = require('../../../models');
 
 // is verified user middleware
 const isVerifiedUser = async (req, res, next) => {

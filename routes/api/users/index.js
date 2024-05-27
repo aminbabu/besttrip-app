@@ -24,7 +24,7 @@ const {
 } = require('../../../controllers/api/users');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
     validateUserId,
     validateUser,

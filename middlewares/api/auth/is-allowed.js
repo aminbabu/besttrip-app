@@ -1,14 +1,14 @@
 /**
- * @file /middlewares/auth/is-allowed.js
+ * @file /middlewares/api/auth/is-allowed.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 22 March, 2024
- * @update_date 22 March, 2024
+ * @update_date 27 May, 2024
  */
 
 // dependencies
-const { User, Customer } = require('../../models');
+const { User, Customer } = require('../../../models');
 
 // is allowed middleware
 module.exports =
