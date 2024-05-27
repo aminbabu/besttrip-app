@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 17 April, 2024
+ * @update_date 27 May, 2024
  */
 
 // dependencies
@@ -17,7 +17,7 @@ const { sendEmail } = require('../../../../utils');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { token } = req.body;
+        const { token } = req.query;
 
         // get token
         const emailVerificationToken = await Token.findOne({

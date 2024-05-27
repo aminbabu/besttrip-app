@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 May, 2024
+ * @update_date 27 May, 2024
  */
 
 const moment = require('moment');
@@ -16,7 +16,8 @@ const { sendEmail } = require('../../../../utils');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { token, password } = req.body;
+        const { password } = req.body;
+        const { token } = req.query;
 
         // check if the token exists
         const resetPasswordToken = await Token.findOne({

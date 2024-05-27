@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 21 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 27 May, 2024
  */
 
 // dependencies
@@ -14,11 +14,20 @@ const { env } = require('../config');
 
 // export confirm email verification mail
 module.exports = async (user) => {
+    let redirectTo;
+
     // read template file
     const template = fs.readFileSync(
         `${__dirname}/../templates/email/confirm-email-verification.ejs`,
         'utf-8'
     );
+
+    // set redirect url
+    if (user.role === 'customer') {
+        redirectTo = `${env.APP_URL}:${env.PORT}/auth/customers/login`;
+    } else {
+        redirectTo = `${env.APP_URL}:${env.PORT}/admin/login`;
+    }
 
     // compile template
     const html = ejs.render(template, {
@@ -30,7 +39,7 @@ module.exports = async (user) => {
             website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${env.APP_URL}:${env.PORT}/auth/${user.role === 'customer' ? 'customers' : 'users'}/login`,
+        redirectTo,
     });
 
     // attachments

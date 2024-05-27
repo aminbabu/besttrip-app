@@ -18,7 +18,7 @@ const { env } = require('../../../../config');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { token } = req.body;
+        const { token } = req.query;
 
         // get token
         const emailVerificationToken = await Token.findOne({
