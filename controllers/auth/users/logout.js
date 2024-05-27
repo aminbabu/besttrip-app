@@ -18,7 +18,6 @@ module.exports = (req, res) => {
         return res.redirect('/admin/login');
     } catch (error) {
         return res.render('errors/500', {
-            title: `Error ${error.status}`,
             message: error.message,
         });
     }
