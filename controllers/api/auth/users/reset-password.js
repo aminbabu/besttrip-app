@@ -25,6 +25,8 @@ module.exports = async (req, res, next) => {
             type: 'reset-password',
         });
 
+        console.log(resetPasswordToken, 'resetPasswordToken');
+
         if (!resetPasswordToken) {
             return res.status(400).json({
                 message: 'Invalid or expired token',
