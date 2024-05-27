@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { HOTEL_STATUS } = require('../../../../constants');
+const { HOTEL_STATUS } = require('../../../../constants/api');
 
 // export hotel content settings schema
 module.exports = new Schema(

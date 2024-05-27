@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { UMRAH_PACKAGE_TYPE_STATUS } = require('../../../constants');
+const { UMRAH_PACKAGE_TYPE_STATUS } = require('../../../constants/api');
 
 // export umrah package type schema
 module.exports = new Schema(

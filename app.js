@@ -24,7 +24,7 @@ const expressFileUpload = require('express-fileupload');
 const { createDBConnection, env, expressFileUploadConf } = require('./config');
 
 // constants
-const { WHITE_LIST } = require('./constants');
+const { WHITE_LIST } = require('./constants/api');
 
 // config
 dotenv.config();

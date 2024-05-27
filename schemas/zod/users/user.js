@@ -11,7 +11,7 @@
 const { z } = require('zod');
 const { isMobilePhone, isPostalCode, isMongoId } = require('validator');
 const moment = require('moment');
-const { USER_STATUS, USER_ROLES } = require('../../../constants');
+const { USER_STATUS, USER_ROLES } = require('../../../constants/api');
 
 // export user schema
 module.exports = z

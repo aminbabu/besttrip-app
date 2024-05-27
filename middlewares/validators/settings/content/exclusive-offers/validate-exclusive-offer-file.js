@@ -8,7 +8,7 @@
  * @update_date 22 April, 2024
  */
 
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants');
+const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants/api');
 
 // export exclusive offer file validator middleware
 module.exports = async (req, res, next) => {

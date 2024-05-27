@@ -10,7 +10,7 @@
 // dependencies
 const { isMongoId } = require('validator');
 const { z } = require('zod');
-const { BLOG_STATUS, BLOG_DOMESTIC_AIRLINES } = require('../../../../constants');
+const { BLOG_STATUS, BLOG_DOMESTIC_AIRLINES } = require('../../../../constants/api');
 
 // export blog post schema
 module.exports = z

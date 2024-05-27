@@ -35,7 +35,7 @@ const { validateAvatar } = require('../../../middlewares/validators/files');
 const { uploadAvatar } = require('../../../middlewares/api/files');
 
 // constants
-const { USER_ROLES } = require('../../../constants');
+const { USER_ROLES } = require('../../../constants/api');
 
 /**
  * @description check if user is authorized

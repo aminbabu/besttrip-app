@@ -10,7 +10,7 @@
 // dependencies
 const { isMongoId } = require('validator');
 const { z } = require('zod');
-const { FLIGHT_STATUS, FLIGHT_TYPE } = require('../../../../constants');
+const { FLIGHT_STATUS, FLIGHT_TYPE } = require('../../../../constants/api');
 
 // export flight content settings schema
 module.exports = z

@@ -10,7 +10,7 @@
 // dependencies
 const { z } = require('zod');
 const { isMongoId } = require('validator');
-const { UMRAH_PACKAGE_DURATION_STATUS } = require('../../../../constants');
+const { UMRAH_PACKAGE_DURATION_STATUS } = require('../../../../constants/api');
 
 // export umrah package duration schema
 module.exports = z

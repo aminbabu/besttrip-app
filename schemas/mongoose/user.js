@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { USER_STATUS, USER_ROLES } = require('../../constants');
+const { USER_STATUS, USER_ROLES } = require('../../constants/api');
 
 // export user schema
 module.exports = new Schema(

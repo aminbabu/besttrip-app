@@ -10,7 +10,7 @@
 // dependencies
 const { isMongoId } = require('validator');
 const { z } = require('zod');
-const { HOTEL_STATUS } = require('../../../../constants');
+const { HOTEL_STATUS } = require('../../../../constants/api');
 
 // export hotel content settings schema
 module.exports = z

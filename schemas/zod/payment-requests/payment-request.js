@@ -11,7 +11,7 @@
 const { z } = require('zod');
 const { isMongoId } = require('validator');
 const moment = require('moment');
-const { PAYMENT_REQUEST_STATUS } = require('../../../constants');
+const { PAYMENT_REQUEST_STATUS } = require('../../../constants/api');
 
 // export payment settings schema
 module.exports = z

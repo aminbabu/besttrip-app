@@ -15,7 +15,7 @@ const {
     UMRAH_PACKAGE_SCHEDULES,
     UMRAH_PACKAGE_INCLUSIONS,
     UMRAH_PACKAGE_TYPES,
-} = require('../../../../constants');
+} = require('../../../../constants/api');
 
 // export umrah package schema
 module.exports = z

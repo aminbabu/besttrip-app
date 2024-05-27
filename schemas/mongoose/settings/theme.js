@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { THEME_NAMES } = require('../../../constants');
+const { THEME_NAMES } = require('../../../constants/api');
 
 // export theme settings schema
 module.exports = new Schema(

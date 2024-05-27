@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { FLIGHT_STATUS, FLIGHT_TYPE } = require('../../../../constants');
+const { FLIGHT_STATUS, FLIGHT_TYPE } = require('../../../../constants/api');
 
 // export flight content settings schema
 module.exports = new Schema(

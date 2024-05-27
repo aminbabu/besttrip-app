@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { UMRAH_STATUS, UMRAH_INCLUSIONS } = require('../../../../constants');
+const { UMRAH_STATUS, UMRAH_INCLUSIONS } = require('../../../../constants/api');
 
 // export umrah content settings schema
 module.exports = new Schema(

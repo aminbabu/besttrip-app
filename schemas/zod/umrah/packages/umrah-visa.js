@@ -9,7 +9,7 @@
 
 // dependencies
 const { z } = require('zod');
-const { VISA_TYPES } = require('../../../../constants');
+const { VISA_TYPES } = require('../../../../constants/api');
 
 // export umrah visa schema
 module.exports = z
