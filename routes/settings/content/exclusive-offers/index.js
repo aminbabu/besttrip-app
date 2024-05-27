@@ -28,7 +28,7 @@ const {
     validateExclusiveOfferId,
     validateExclusiveOffer,
     validateExclusiveOfferFile,
-} = require('../../../../middlewares/validators/api/settings/content/exclusive-offers');
+} = require('../../../../middlewares/validators/settings/content/exclusive-offers');
 const {
     uploadExclusiveOfferFile,
 } = require('../../../../middlewares/api/settings/content/exclusive-offers');

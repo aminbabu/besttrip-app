@@ -28,7 +28,7 @@ const {
     validateHotelOfferId,
     validateHotelOffer,
     validateHotelOfferFile,
-} = require('../../../../../middlewares/api/validators/settings/content/hotel-offers');
+} = require('../../../../../middlewares/validators/settings/content/hotel-offers');
 const {
     uploadHotelOfferFile,
 } = require('../../../../../middlewares/api/settings/content/hotel-offers');

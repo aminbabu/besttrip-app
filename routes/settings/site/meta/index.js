@@ -27,7 +27,7 @@ const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateMetaSettingsId,
     validateMetaSettings,
-} = require('../../../../middlewares/validators/api/settings/site/meta');
+} = require('../../../../middlewares/validators/settings/site/meta');
 
 /**
  * @description get meta settings

@@ -26,7 +26,7 @@ const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth
 const {
     validatePolicySettingsKey,
     validatePolicySettings,
-} = require('../../../../../middlewares/api/validators/settings/site/policy');
+} = require('../../../../../middlewares/validators/settings/site/policy');
 
 /**
  * @description get policies settings

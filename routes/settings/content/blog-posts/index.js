@@ -29,7 +29,7 @@ const {
     validateBlogPost,
     validateBlogPostThumbnail,
     validateBlogPostBanner,
-} = require('../../../../middlewares/validators/api/settings/content/blog-posts');
+} = require('../../../../middlewares/validators/settings/content/blog-posts');
 const {
     uploadBlogPostBanner,
     uploadBlogPostThumbnail,

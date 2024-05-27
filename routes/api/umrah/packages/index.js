@@ -45,7 +45,7 @@ const {
     validateUmrahThumbnail,
     validateUmrah,
     validateTermsAndConditions,
-} = require('../../../../middlewares/api/validators/umrah/packages');
+} = require('../../../../middlewares/validators/umrah/packages');
 const {
     uploadPackageThumbnail,
     uploadPackageGallery,

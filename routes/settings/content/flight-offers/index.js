@@ -28,7 +28,7 @@ const {
     validateFlightOfferId,
     validateFlightOffer,
     validateFlightOfferFile,
-} = require('../../../../middlewares/validators/api/settings/content/flight-offers');
+} = require('../../../../middlewares/validators/settings/content/flight-offers');
 const {
     uploadFlightOfferFile,
 } = require('../../../../middlewares/api/settings/content/flight-offers');

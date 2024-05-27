@@ -23,7 +23,7 @@ const {
 const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateContactSettings,
-} = require('../../../../middlewares/validators/api/settings/site/contact');
+} = require('../../../../middlewares/validators/settings/site/contact');
 
 /**
  * @description get contact settings
