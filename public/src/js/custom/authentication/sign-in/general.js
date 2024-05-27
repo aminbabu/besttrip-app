@@ -124,27 +124,15 @@ const KTSigninGeneral = (function () {
                         )
                         .then((response) => {
                             if (response) {
-                                // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                                Swal.fire({
-                                    text: 'You have successfully logged in!',
-                                    icon: 'success',
-                                    buttonsStyling: false,
-                                    confirmButtonText: 'Ok, got it!',
-                                    customClass: {
-                                        confirmButton: 'btn btn-primary',
-                                    },
-                                    allowOutsideClick: false,
-                                }).then((result) => {
-                                    // Reset form
-                                    form.reset();
+                                // Reset form
+                                form.reset();
 
-                                    // Get redirect URL from the form
-                                    const redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                // Get redirect URL from the form
+                                const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
-                                    if (result.isConfirmed && redirectUrl) {
-                                        location.href = redirectUrl;
-                                    }
-                                });
+                                if (redirectUrl) {
+                                    location.href = redirectUrl;
+                                }
                             } else {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
