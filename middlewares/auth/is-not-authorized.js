@@ -9,7 +9,7 @@
 
 // dependencies
 const { verifyToken } = require('../../utils');
-const { Customer } = require('../../models');
+const { User } = require('../../models');
 
 // export unauthorized user middleware
 module.exports = async (req, res, next) => {
@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
         const payload = verifyToken(token);
 
         // check if user exists based on role by id, email, and status
-        const user = await Customer.findOne({
+        const user = await User.findOne({
             _id: payload.user._id,
             email: payload.user.email,
             status: 'active',
