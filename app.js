@@ -20,9 +20,6 @@ const { default: xssInstance } = require('xss-shield');
 const cors = require('cors');
 const expressFileUpload = require('express-fileupload');
 
-// middlewares
-// const { isApiValid } = require('./middlewares/auth');
-
 // config
 const { createDBConnection, env, expressFileUploadConf } = require('./config');
 
@@ -52,7 +49,6 @@ app.use(helmet());
 app.use(cors());
 app.use(expressFileUpload(expressFileUploadConf));
 app.use(xssInstance.xssShield(WHITE_LIST));
-// app.use(isApiValid);
 
 // routes
 app.use('/api', require('./routes/api'));
