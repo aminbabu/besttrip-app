@@ -16,6 +16,11 @@ module.exports = async (req, res, next) => {
     // get authorization from header or cookies
     const authorization = req.header('authorization') || req.cookies.token;
 
+    // check if authorization is not exist
+    if (!authorization) {
+        return next();
+    }
+
     // get token
     const token = authorization.replace('Bearer ', '');
 
