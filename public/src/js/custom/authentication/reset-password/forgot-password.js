@@ -124,7 +124,6 @@ const KTAuthResetPassword = (function () {
                                     customClass: {
                                         confirmButton: 'btn btn-primary',
                                     },
-                                    allowOutsideClick: false,
                                 }).then((result) => {
                                     const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
