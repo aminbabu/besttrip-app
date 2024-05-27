@@ -1,14 +1,996 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<!--begin::Head-->
+<%- include('partials/head', { title: 'Dashboard' }) %>
+<!--end::Head-->
+<!--begin::Body-->
 
-<head>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
+<body id="kt_app_body" data-kt-app-layout="light-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+  <!--begin::Theme mode setup on page load-->
+  <%- include('partials/theme-mode.ejs') %>
+  <!--end::Theme mode setup on page load-->
+  <!--begin::App-->
+  <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+    <!--begin::Page-->
+    <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+      <!--begin::Header-->
+      <%- include('partials/header', { user }) %>
+      <!--end::Header-->
+      <!--begin::Wrapper-->
+      <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+        <!--begin::Sidebar-->
+        <%- include('partials/sidebar') %>
+        <!--end::Sidebar-->
+        <!--begin::Main-->
+        <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+          <!--begin::Content wrapper-->
+          <div class="d-flex flex-column flex-column-fluid">
+            <!--begin::Content-->
+            <div id="kt_app_content" class="app-content flex-column-fluid">
+              <!--begin::Content container-->
+              <div id="kt_app_content_container" class="app-container container">
+                <!--begin::Title-->
+                <h2 class="text-gray-800 fw-semibold fs-5 mt-8 mb-5">
+                  Today status !
+                </h2>
+                <!--end::Title-->
+                <!--begin::Row-->
+                <div class="row g-5 mb-5 mb-lg-10">
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py-7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #f7142f">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10085)">
+                                <path d="M0.585891 19.1321H1.75767C2.08124 19.1321 2.34356 18.8698 2.34356 18.5462V12.1014H0.585891C0.262323 12.1014 0 12.3638 0 12.6873V18.5462C0 18.8698 0.262323 19.1321 0.585891 19.1321Z" fill="currentColor" />
+                                <path d="M15.3113 1.55542C12.7226 1.55542 10.6241 3.65388 10.6241 6.24254C10.6241 8.83113 12.7226 10.9297 15.3113 10.9297C17.8999 10.9297 19.9984 8.83113 19.9984 6.24254C19.9984 3.65388 17.8999 1.55542 15.3113 1.55542ZM16.2931 8.3512C16.1662 8.41464 16.0332 8.46459 15.8971 8.5024V8.6643C15.8971 8.98787 15.6348 9.25019 15.3112 9.25019C14.9876 9.25019 14.7253 8.98787 14.7253 8.6643V8.52072C14.4814 8.45932 14.254 8.35609 14.0613 8.21161C13.8024 8.01748 13.7499 7.65024 13.9441 7.39136C14.1383 7.13255 14.5055 7.08002 14.7644 7.27418C14.9987 7.44995 15.4495 7.46299 15.7691 7.30316C15.8976 7.23891 15.9669 7.16157 15.9669 7.12146C15.9669 7.05135 15.9669 7.04053 15.8889 6.99893C15.736 6.91733 15.4658 6.86718 15.2043 6.81871C14.8553 6.75395 14.4945 6.687 14.1818 6.5201C13.7251 6.27637 13.4837 5.87652 13.4837 5.36379C13.4837 4.85047 13.7915 4.40214 14.3283 4.13381C14.4555 4.07018 14.5888 4.01983 14.7253 3.98198V3.82094C14.7253 3.49737 14.9876 3.23505 15.3112 3.23505C15.6348 3.23505 15.8971 3.49737 15.8971 3.82094V3.96441C16.141 4.02585 16.3684 4.12916 16.5611 4.27364C16.82 4.4678 16.8724 4.83504 16.6783 5.09389C16.4841 5.35273 16.1169 5.40523 15.858 5.21106C15.6233 5.03502 15.1722 5.02198 14.8523 5.18185C14.7231 5.24645 14.6555 5.32227 14.6555 5.36375C14.6555 5.4339 14.6555 5.44468 14.7335 5.48632C14.8863 5.56791 15.1567 5.61806 15.4181 5.66654C15.7671 5.7313 16.1279 5.79824 16.4407 5.96514C16.8973 6.20888 17.1387 6.60873 17.1387 7.12146C17.1387 7.63427 16.8305 8.08251 16.2931 8.3512Z" fill="currentColor" />
+                                <path d="M10.5773 19.4446H10.7062C12.6748 19.4211 14.5613 18.8626 16.2253 17.8548L19.4945 15.5699C20.0452 15.1832 20.1507 14.4567 19.7875 13.9411C19.4125 13.4021 18.686 13.2732 18.1587 13.6482L15.0183 15.8511C14.0106 16.437 12.7803 16.5659 11.6671 16.1909L8.05406 14.9957C7.7494 14.9019 7.58531 14.5621 7.69081 14.2575C7.78451 13.9646 8.08917 13.8005 8.39384 13.8825C8.40555 13.8825 12.4521 15.1949 12.4521 15.1949C13.1335 15.3992 13.739 15.0136 13.9285 14.445C14.1277 13.8239 13.7879 13.1677 13.1786 12.9685L7.66733 11.164C6.46188 10.7252 4.83744 10.8158 3.51532 11.5551V18.1141L8.11261 19.1556C8.95477 19.3408 9.78111 19.4446 10.5773 19.4446Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10085">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.5)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Payment Request</h3>
+                            <span class="fw-bold fs-5">275</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #ff7027">
+                            <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M7.03125 3.59008C7.03125 5.37796 8.4858 6.8022 10.2434 6.8022C10.91 6.8022 11.5161 6.62038 12.0009 6.25675C12.0312 6.25675 12.0312 6.22644 12.0616 6.22644C12.91 5.65069 13.4555 4.68099 13.4555 3.55978C13.4555 1.7719 12.0009 0.347656 10.2434 0.347656C8.4858 0.347656 7.03125 1.8022 7.03125 3.59008Z" fill="currentColor" />
+                              <path d="M16.1218 12.3784C16.1218 9.89358 14.5764 7.68146 12.243 6.86328C11.0309 7.59055 9.51574 7.62086 8.27332 6.86328C5.93999 7.71177 4.39453 9.89358 4.39453 12.3784C4.39453 13.833 7.42484 14.6209 10.2733 14.6209C13.1218 14.6209 16.1218 13.833 16.1218 12.3784Z" fill="currentColor" />
+                              <path d="M2.60547 8.10606C2.60547 9.10606 3.48426 9.80303 4.36304 9.71212C4.69638 8.95455 5.18123 8.28788 5.78729 7.71212C5.60547 7.01515 4.9691 6.5 4.24183 6.5C3.33274 6.5 2.60547 7.22727 2.60547 8.10606Z" fill="currentColor" />
+                              <path d="M0.667969 12.4386C0.667969 12.5901 0.758878 12.7416 0.910393 12.8628C1.48615 13.3477 2.84979 13.5901 4.21342 13.4992C3.48615 12.9537 3.30433 12.378 3.30433 11.9234C3.30433 11.1961 3.42554 10.5295 3.63767 9.86281C3.30433 9.83251 2.971 9.7416 2.66797 9.59009C1.42554 10.0446 0.667969 11.1658 0.667969 12.4386Z" fill="currentColor" />
+                              <path d="M19.3355 12.8915C19.3355 11.6187 18.5476 10.4975 17.3658 10.043C17.0627 10.2248 16.7294 10.3157 16.3961 10.3157C16.6082 10.9521 16.7294 11.649 16.7294 12.3763C16.7294 13.0127 16.3961 13.5278 15.8203 13.9521C16.9415 14.0127 19.3355 13.7702 19.3355 12.8915Z" fill="currentColor" />
+                              <path d="M16.3033 6.5C15.5457 6.5 14.9396 6.98485 14.7578 7.71212C15.3639 8.28788 15.8487 8.95455 16.1821 9.74242C17.0911 9.83333 17.9093 9.10606 17.9093 8.13636C17.9093 7.22727 17.1821 6.5 16.3033 6.5Z" fill="currentColor" />
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">New Customer</h3>
+                            <span class="fw-bold fs-5">275</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #1aa8dc">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10122)">
+                                <path d="M10 20.5007C7.17789 20.5007 4.14062 19.7671 4.14062 18.157C4.14062 17.2386 5.15457 16.5119 6.99535 16.1113L7.24484 17.2569C5.66898 17.5996 5.3125 18.0826 5.3125 18.157C5.3125 18.4579 6.92441 19.3288 10 19.3288C13.0756 19.3288 14.6875 18.4579 14.6875 18.157C14.6875 18.0826 14.331 17.5996 12.7552 17.2569L13.0046 16.1113C14.8454 16.5119 15.8594 17.2386 15.8594 18.157C15.8594 19.7671 12.8221 20.5007 10 20.5007Z" fill="currentColor" />
+                                <path d="M12.0508 6.35938H11.1719V6.94531H12.0508C12.2121 6.94531 12.3438 6.81371 12.3438 6.65234C12.3438 6.49098 12.2121 6.35938 12.0508 6.35938Z" fill="currentColor" />
+                                <path d="M10 0.5C6.44605 0.5 3.55469 3.39137 3.55469 6.94531C3.55469 8.40445 4.05594 9.83438 4.96633 10.9708L10 17.3357L15.0337 10.9708C15.9441 9.83438 16.4453 8.40445 16.4453 6.94531C16.4453 3.39137 13.5539 0.5 10 0.5ZM8.82812 9.875H7.65625V5.1875H8.82812V9.875ZM12.0508 8.11719H11.1719V9.875H10V8.11719V7.53125V5.1875H12.0508C12.8588 5.1875 13.5156 5.84438 13.5156 6.65234C13.5156 7.46031 12.8588 8.11719 12.0508 8.11719Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10122">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.5)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Last Login Ip</h3>
+                            <span class="fw-bold fs-5">101.188.67.134</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #f49e09">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10141)">
+                                <path d="M14.7266 9.95312C11.8187 9.95312 9.45312 12.3187 9.45312 15.2266C9.45312 18.1344 11.8187 20.5 14.7266 20.5C17.6344 20.5 20 18.1344 20 15.2266C20 12.3187 17.6344 9.95312 14.7266 9.95312ZM17.0703 15.8125H14.7266C14.4027 15.8125 14.1406 15.5504 14.1406 15.2266V12.8828C14.1406 12.559 14.4027 12.2969 14.7266 12.2969C15.0504 12.2969 15.3125 12.559 15.3125 12.8828V14.6406H17.0703C17.3941 14.6406 17.6562 14.9027 17.6562 15.2266C17.6562 15.5504 17.3941 15.8125 17.0703 15.8125ZM18.7891 2.29688C18.7891 1.96867 18.5313 1.71094 18.2031 1.71094H15.2734V3.46875C15.2734 3.7968 15.0157 4.05469 14.6875 4.05469C14.3593 4.05469 14.1016 3.7968 14.1016 3.46875V1.71094H11.7578V3.46875C11.7578 3.7968 11.5001 4.05469 11.1719 4.05469C10.8437 4.05469 10.5859 3.7968 10.5859 3.46875V1.71094H8.24219V3.46875C8.24219 3.7968 7.98445 4.05469 7.65625 4.05469C7.32805 4.05469 7.07031 3.7968 7.07031 3.46875V1.71094H4.72656V3.46875C4.72656 3.7968 4.46883 4.05469 4.14062 4.05469C3.81242 4.05469 3.55469 3.7968 3.55469 3.46875V1.71094H0.585938C0.257734 1.71094 0 1.96867 0 2.29688V5.22656H18.7891V2.29688Z" fill="currentColor" />
+                                <path d="M8.82812 12.2578H8.96883C9.18273 11.8422 9.42414 11.4432 9.71953 11.0859H8.82812C8.5043 11.0859 8.24219 10.8238 8.24219 10.5C8.24219 10.1762 8.5043 9.91406 8.82812 9.91406H10C10.24 9.91406 10.4449 10.0589 10.5355 10.2653C11.6582 9.31699 13.1062 8.74219 14.6875 8.74219H13.5156C13.1918 8.74219 12.9297 8.48008 12.9297 8.15625C12.9297 7.83242 13.1918 7.57031 13.5156 7.57031H14.6875C15.0113 7.57031 15.2734 7.83242 15.2734 8.15625C15.2734 8.48008 15.0113 8.74219 14.6875 8.74219C16.2443 8.74219 17.6739 9.29727 18.7891 10.2195V6.39844H0V17.5312C0 17.8551 0.262109 18.1172 0.585938 18.1172H8.95371C8.50219 17.2371 8.24219 16.2428 8.24219 15.1875C8.24219 14.5425 8.35781 13.9279 8.535 13.34C8.36305 13.2379 8.24219 13.0584 8.24219 12.8438C8.24219 12.5199 8.5043 12.2578 8.82812 12.2578ZM8.82812 7.57031H10C10.3238 7.57031 10.5859 7.83242 10.5859 8.15625C10.5859 8.48008 10.3238 8.74219 10 8.74219H8.82812C8.5043 8.74219 8.24219 8.48008 8.24219 8.15625C8.24219 7.83242 8.5043 7.57031 8.82812 7.57031ZM5.3125 15.7734H4.14062C3.8168 15.7734 3.55469 15.5113 3.55469 15.1875C3.55469 14.8637 3.8168 14.6016 4.14062 14.6016H5.3125C5.63633 14.6016 5.89844 14.8637 5.89844 15.1875C5.89844 15.5113 5.63633 15.7734 5.3125 15.7734ZM5.3125 13.4297H4.14062C3.8168 13.4297 3.55469 13.1676 3.55469 12.8438C3.55469 12.5199 3.8168 12.2578 4.14062 12.2578H5.3125C5.63633 12.2578 5.89844 12.5199 5.89844 12.8438C5.89844 13.1676 5.63633 13.4297 5.3125 13.4297ZM5.3125 11.0859H4.14062C3.8168 11.0859 3.55469 10.8238 3.55469 10.5C3.55469 10.1762 3.8168 9.91406 4.14062 9.91406H5.3125C5.63633 9.91406 5.89844 10.1762 5.89844 10.5C5.89844 10.8238 5.63633 11.0859 5.3125 11.0859ZM5.3125 8.74219H4.14062C3.8168 8.74219 3.55469 8.48008 3.55469 8.15625C3.55469 7.83242 3.8168 7.57031 4.14062 7.57031H5.3125C5.63633 7.57031 5.89844 7.83242 5.89844 8.15625C5.89844 8.48008 5.63633 8.74219 5.3125 8.74219ZM4.72656 1.08594C4.72656 0.757734 4.46883 0.5 4.14062 0.5C3.81242 0.5 3.55469 0.757734 3.55469 1.08594V1.71094H4.72656V1.08594ZM8.24219 1.08594C8.24219 0.757734 7.98445 0.5 7.65625 0.5C7.32805 0.5 7.07031 0.757734 7.07031 1.08594V1.71094H8.24219V1.08594ZM11.7578 1.08594C11.7578 0.757734 11.5001 0.5 11.1719 0.5C10.8437 0.5 10.5859 0.757734 10.5859 1.08594V1.71094H11.7578V1.08594ZM15.2734 1.08594C15.2734 0.757734 15.0157 0.5 14.6875 0.5C14.3593 0.5 14.1016 0.757734 14.1016 1.08594V1.71094H15.2734V1.08594Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10141">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.5)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Last Login Date</h3>
+                            <span class="fw-bold fs-5">
+                              12 Dec, 23 - 2:15
+                            </span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
 
-<body>
-  <h1><%= title %></h1>
-  <p>Welcome to <%= title %></p>
+                <!--begin::Title-->
+                <h2 class="text-gray-800 fw-semibold fs-5 mb-5">
+                  Umrah Booking status !
+                </h2>
+                <!--end::Title-->
+                <!--begin::Row-->
+                <div class="row g-5 mb-5 mb-lg-10">
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #f7142f">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10160)">
+                                <path d="M8.75 6.3501V5.1001H1.25C0.56125 5.1001 0 5.66135 0 6.3501V8.8501H9.01375C8.84 8.08635 8.75 7.26385 8.75 6.3501ZM19.9487 11.3501C19.0962 12.6638 17.7962 13.7813 15.9338 14.8513C15.6475 15.0151 15.325 15.1001 15 15.1001C14.675 15.1001 14.3525 15.0151 14.07 14.8538C12.2075 13.7813 10.9075 12.6626 10.0538 11.3501H0V17.6001C0 18.2901 0.56125 18.8501 1.25 18.8501H18.75C19.44 18.8501 20 18.2901 20 17.6001V11.3501H19.9487ZM5.625 15.1001H3.125C2.78 15.1001 2.5 14.8201 2.5 14.4751C2.5 14.1301 2.78 13.8501 3.125 13.8501H5.625C5.97 13.8501 6.25 14.1301 6.25 14.4751C6.25 14.8201 5.97 15.1001 5.625 15.1001Z" fill="currentColor" />
+                                <path d="M19.6214 3.27572L15.2464 1.40072C15.1684 1.36732 15.0844 1.3501 14.9995 1.3501C14.9146 1.3501 14.8306 1.36732 14.7526 1.40072L10.3776 3.27572C10.1489 3.37322 10.0001 3.59947 10.0001 3.84947V6.34947C10.0001 9.78822 11.2714 11.7982 14.6889 13.767C14.7851 13.822 14.8926 13.8495 15.0001 13.8495C15.1076 13.8495 15.2151 13.822 15.3114 13.767C18.7289 11.8032 20.0001 9.79322 20.0001 6.34947V3.84947C20.0001 3.59947 19.8514 3.37322 19.6214 3.27572ZM17.3639 6.11572L14.8639 9.24072C14.7439 9.38822 14.5639 9.47447 14.3751 9.47447H14.3489C14.2506 9.47018 14.1547 9.44283 14.0689 9.39462C13.9831 9.34642 13.9099 9.27871 13.8551 9.19697L12.6051 7.32197C12.4139 7.03447 12.4914 6.64697 12.7789 6.45572C13.0639 6.26572 13.4526 6.34072 13.6451 6.62947L14.4214 7.79322L16.3864 5.33572C16.6026 5.06697 16.9964 5.02447 17.2651 5.23822C17.5351 5.45197 17.5776 5.84572 17.3639 6.11572Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10160">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.100098)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Success</h3>
+                            <span class="fw-bold fs-5">275</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #f7142f">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10176)">
+                                <path d="M15.353 6.55496C15.8465 6.12592 16.1271 5.50336 16.1271 4.8485V1.39046H17.4174C17.7723 1.39046 18.0626 1.10013 18.0626 0.745277C18.0626 0.390426 17.7723 0.100098 17.4175 0.100098H2.57877C2.22392 0.100098 1.93359 0.390426 1.93359 0.745277C1.93359 1.10013 2.22392 1.39046 2.57877 1.39046H3.86908V5.16467C3.86908 5.82275 4.15296 6.44853 4.65298 6.87758L7.51747 9.36143C7.73361 9.54856 7.85621 9.81305 7.85621 10.1002C7.85621 10.3873 7.73683 10.6517 7.51747 10.8389L4.65298 13.3195C4.15296 13.7518 3.86908 14.3776 3.86908 15.0356V18.8098H2.57877C2.22392 18.8098 1.93359 19.1002 1.93359 19.455C1.93359 19.8099 2.22392 20.1002 2.57877 20.1002H17.4174C17.7723 20.1002 18.0626 19.8099 18.0626 19.455C18.0626 19.1002 17.7723 18.8098 17.4174 18.8098H16.1271V15.3518C16.127 15.0286 16.0579 14.7092 15.9244 14.4149C15.7909 14.1206 15.596 13.8583 15.353 13.6453L12.1401 10.8356C11.9239 10.6485 11.8078 10.3873 11.8078 10.1002C11.8078 9.81305 11.9272 9.55178 12.1401 9.36466L15.353 6.55496ZM11.2916 11.8066L14.5045 14.6163C14.6091 14.7081 14.6928 14.8213 14.7501 14.9481C14.8074 15.0749 14.837 15.2126 14.8368 15.3517V18.8098H5.15939V15.0356C5.15939 14.7517 5.28199 14.484 5.4949 14.2969L8.35939 11.8162C8.85619 11.384 9.14329 10.7614 9.14329 10.1033C9.14329 9.44525 8.85941 8.81946 8.35939 8.39042L5.4949 5.90656C5.38951 5.81379 5.30508 5.69965 5.24724 5.57173C5.18939 5.4438 5.15944 5.30502 5.15939 5.16462V1.39041H14.8368V4.84845C14.8368 5.12911 14.7142 5.39682 14.5013 5.58394L11.2884 8.39364C10.7981 8.82269 10.5142 9.44525 10.5142 10.1001C10.5142 10.7549 10.7981 11.3775 11.2916 11.8066Z" fill="currentColor" />
+                                <path d="M14.1916 4.84862V4.33249C14.1916 4.13247 14.0304 3.97119 13.8336 3.97119H6.16264C5.96585 3.97119 5.80457 4.13247 5.80457 4.32927V5.16474C5.80457 5.35509 5.88843 5.53571 6.03037 5.65831L8.84974 8.10348C9.19814 8.4067 9.48525 8.78412 9.63686 9.21961C10.0046 10.2648 9.68204 11.3745 8.89492 12.0551L6.03042 14.539C5.88848 14.6648 5.80462 14.8422 5.80462 15.0325V17.8745C5.80462 18.0357 5.93366 18.1648 6.09172 18.1648H13.9046C13.9807 18.1646 14.0537 18.1343 14.1075 18.0805C14.1613 18.0267 14.1916 17.9538 14.1917 17.8777V15.3519C14.1917 15.1615 14.1111 14.9841 13.9692 14.8583L10.8111 12.0938C10.4659 11.7906 10.1821 11.4164 10.0272 10.9841C9.65625 9.94216 9.97559 8.8357 10.7563 8.14861L13.9692 5.33892C14.111 5.21637 14.1916 5.03569 14.1916 4.84862Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10176">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.100098)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">In Process</h3>
+                            <span class="fw-bold fs-5">01</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #f7142f">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M19.6002 14.6718L12.5933 2.53541C11.4489 0.530515 8.55474 0.530515 7.41438 2.53541L0.403419 14.6718C-0.741059 16.6767 0.683363 19.1674 2.9929 19.1674H16.986C19.2955 19.1674 20.7447 16.652 19.6002 14.6718ZM9.99974 16.475C9.39045 16.475 8.88408 15.9686 8.88408 15.3593C8.88408 14.75 9.39045 14.2437 9.99974 14.2437C10.609 14.2437 11.1154 14.75 11.0907 15.3881C11.1195 15.9686 10.5843 16.475 9.99974 16.475ZM11.0166 9.2623C10.9672 10.1268 10.9137 10.9873 10.8643 11.8518C10.8396 12.1317 10.8396 12.387 10.8396 12.6628C10.8149 13.1198 10.4567 13.4738 9.99974 13.4738C9.54278 13.4738 9.18873 13.1445 9.15991 12.6875C9.08581 11.3413 9.00759 10.0198 8.93348 8.6736C8.90878 8.31955 8.88408 7.96139 8.85526 7.60734C8.85526 7.02275 9.18461 6.54108 9.7198 6.38876C10.255 6.26114 10.7861 6.51638 11.0166 7.02275C11.0948 7.19977 11.1195 7.3768 11.1195 7.58264C11.0948 8.14665 11.0413 8.70653 11.0166 9.2623Z" fill="#FFFAFA" />
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Under Review</h3>
+                            <span class="fw-bold fs-5">10</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #f7142f">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0013 1.14111C5.05714 1.14111 1.04297 5.15528 1.04297 10.0994C1.04297 15.0436 5.05714 19.0578 10.0013 19.0578C14.9455 19.0578 18.9596 15.0436 18.9596 10.0994C18.9596 5.15528 14.9455 1.14111 10.0013 1.14111ZM7.70964 6.76611V13.4328C7.70964 13.5985 7.77548 13.7575 7.89269 13.8747C8.0099 13.9919 8.16888 14.0578 8.33464 14.0578C8.5004 14.0578 8.65937 13.9919 8.77658 13.8747C8.89379 13.7575 8.95964 13.5985 8.95964 13.4328V6.76611C8.95964 6.60035 8.89379 6.44138 8.77658 6.32417C8.65937 6.20696 8.5004 6.14111 8.33464 6.14111C8.16888 6.14111 8.0099 6.20696 7.89269 6.32417C7.77548 6.44138 7.70964 6.60035 7.70964 6.76611ZM11.043 6.76611V13.4328C11.043 13.5985 11.1088 13.7575 11.226 13.8747C11.3432 13.9919 11.5022 14.0578 11.668 14.0578C11.8337 14.0578 11.9927 13.9919 12.1099 13.8747C12.2271 13.7575 12.293 13.5985 12.293 13.4328V6.76611C12.293 6.60035 12.2271 6.44138 12.1099 6.32417C11.9927 6.20696 11.8337 6.14111 11.668 6.14111C11.5022 6.14111 11.3432 6.20696 11.226 6.32417C11.1088 6.44138 11.043 6.60035 11.043 6.76611Z" fill="currentColor" />
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Booked</h3>
+                            <span class="fw-bold fs-5">09</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
+
+                <!--begin::Title-->
+                <h2 class="text-gray-800 fw-semibold fs-5 mb-5">
+                  Flight Booking status !
+                </h2>
+                <!--end::Title-->
+                <!--begin::Row-->
+                <div class="row g-5 mb-5 mb-lg-10">
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #e64264">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10225)">
+                                <path d="M8.75 6.94995V5.69995H1.25C0.56125 5.69995 0 6.2612 0 6.94995V9.44995H9.01375C8.84 8.6862 8.75 7.8637 8.75 6.94995ZM19.9487 11.95C19.0962 13.2637 17.7962 14.3812 15.9338 15.4512C15.6475 15.615 15.325 15.7 15 15.7C14.675 15.7 14.3525 15.615 14.07 15.4537C12.2075 14.3812 10.9075 13.2625 10.0538 11.95H0V18.2C0 18.89 0.56125 19.45 1.25 19.45H18.75C19.44 19.45 20 18.89 20 18.2V11.95H19.9487ZM5.625 15.7H3.125C2.78 15.7 2.5 15.42 2.5 15.075C2.5 14.73 2.78 14.45 3.125 14.45H5.625C5.97 14.45 6.25 14.73 6.25 15.075C6.25 15.42 5.97 15.7 5.625 15.7Z" fill="currentColor" />
+                                <path d="M19.6214 3.87558L15.2464 2.00058C15.1684 1.96717 15.0844 1.94995 14.9995 1.94995C14.9146 1.94995 14.8306 1.96717 14.7526 2.00058L10.3776 3.87558C10.1489 3.97308 10.0001 4.19933 10.0001 4.44933V6.94933C10.0001 10.3881 11.2714 12.3981 14.6889 14.3668C14.7851 14.4218 14.8926 14.4493 15.0001 14.4493C15.1076 14.4493 15.2151 14.4218 15.3114 14.3668C18.7289 12.4031 20.0001 10.3931 20.0001 6.94933V4.44933C20.0001 4.19933 19.8514 3.97308 19.6214 3.87558ZM17.3639 6.71558L14.8639 9.84058C14.7439 9.98808 14.5639 10.0743 14.3751 10.0743H14.3489C14.2506 10.07 14.1547 10.0427 14.0689 9.99448C13.9831 9.94627 13.9099 9.87856 13.8551 9.79683L12.6051 7.92183C12.4139 7.63433 12.4914 7.24683 12.7789 7.05558C13.0639 6.86558 13.4526 6.94058 13.6451 7.22933L14.4214 8.39308L16.3864 5.93558C16.6026 5.66683 16.9964 5.62433 17.2651 5.83808C17.5351 6.05183 17.5776 6.44558 17.3639 6.71558Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10225">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.699951)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Ticketed</h3>
+                            <span class="fw-bold fs-5">275</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #e64264">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10176)">
+                                <path d="M15.353 6.55496C15.8465 6.12592 16.1271 5.50336 16.1271 4.8485V1.39046H17.4174C17.7723 1.39046 18.0626 1.10013 18.0626 0.745277C18.0626 0.390426 17.7723 0.100098 17.4175 0.100098H2.57877C2.22392 0.100098 1.93359 0.390426 1.93359 0.745277C1.93359 1.10013 2.22392 1.39046 2.57877 1.39046H3.86908V5.16467C3.86908 5.82275 4.15296 6.44853 4.65298 6.87758L7.51747 9.36143C7.73361 9.54856 7.85621 9.81305 7.85621 10.1002C7.85621 10.3873 7.73683 10.6517 7.51747 10.8389L4.65298 13.3195C4.15296 13.7518 3.86908 14.3776 3.86908 15.0356V18.8098H2.57877C2.22392 18.8098 1.93359 19.1002 1.93359 19.455C1.93359 19.8099 2.22392 20.1002 2.57877 20.1002H17.4174C17.7723 20.1002 18.0626 19.8099 18.0626 19.455C18.0626 19.1002 17.7723 18.8098 17.4174 18.8098H16.1271V15.3518C16.127 15.0286 16.0579 14.7092 15.9244 14.4149C15.7909 14.1206 15.596 13.8583 15.353 13.6453L12.1401 10.8356C11.9239 10.6485 11.8078 10.3873 11.8078 10.1002C11.8078 9.81305 11.9272 9.55178 12.1401 9.36466L15.353 6.55496ZM11.2916 11.8066L14.5045 14.6163C14.6091 14.7081 14.6928 14.8213 14.7501 14.9481C14.8074 15.0749 14.837 15.2126 14.8368 15.3517V18.8098H5.15939V15.0356C5.15939 14.7517 5.28199 14.484 5.4949 14.2969L8.35939 11.8162C8.85619 11.384 9.14329 10.7614 9.14329 10.1033C9.14329 9.44525 8.85941 8.81946 8.35939 8.39042L5.4949 5.90656C5.38951 5.81379 5.30508 5.69965 5.24724 5.57173C5.18939 5.4438 5.15944 5.30502 5.15939 5.16462V1.39041H14.8368V4.84845C14.8368 5.12911 14.7142 5.39682 14.5013 5.58394L11.2884 8.39364C10.7981 8.82269 10.5142 9.44525 10.5142 10.1001C10.5142 10.7549 10.7981 11.3775 11.2916 11.8066Z" fill="currentColor" />
+                                <path d="M14.1916 4.84862V4.33249C14.1916 4.13247 14.0304 3.97119 13.8336 3.97119H6.16264C5.96585 3.97119 5.80457 4.13247 5.80457 4.32927V5.16474C5.80457 5.35509 5.88843 5.53571 6.03037 5.65831L8.84974 8.10348C9.19814 8.4067 9.48525 8.78412 9.63686 9.21961C10.0046 10.2648 9.68204 11.3745 8.89492 12.0551L6.03042 14.539C5.88848 14.6648 5.80462 14.8422 5.80462 15.0325V17.8745C5.80462 18.0357 5.93366 18.1648 6.09172 18.1648H13.9046C13.9807 18.1646 14.0537 18.1343 14.1075 18.0805C14.1613 18.0267 14.1916 17.9538 14.1917 17.8777V15.3519C14.1917 15.1615 14.1111 14.9841 13.9692 14.8583L10.8111 12.0938C10.4659 11.7906 10.1821 11.4164 10.0272 10.9841C9.65625 9.94216 9.97559 8.8357 10.7563 8.14861L13.9692 5.33892C14.111 5.21637 14.1916 5.03569 14.1916 4.84862Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10176">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.100098)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Pending</h3>
+                            <span class="fw-bold fs-5">01</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #e64264">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10257)">
+                                <path d="M17.9266 3.46448L15.4688 1.00659V3.4599L17.9266 3.46448Z" fill="currentColor" />
+                                <path d="M18.2764 4.64283H14.8763C14.5501 4.64222 14.2858 4.37763 14.2858 4.05125V0.660889H4.40814C4.0813 0.660889 3.81641 0.925782 3.81641 1.25247V11.8363C4.4324 11.5789 5.10776 11.4365 5.81592 11.4365C6.08616 11.4365 6.35151 11.4573 6.61075 11.4972C6.59138 11.4388 6.58054 11.3765 6.58054 11.3117C6.58054 10.985 6.84543 10.7201 7.17228 10.7201H14.2977C14.6244 10.7201 14.8893 10.985 14.8893 11.3117C14.8893 11.6384 14.6244 11.9033 14.2977 11.9033H7.96909C9.76704 12.7239 11.0198 14.5385 11.0198 16.6404C11.0198 17.4532 10.8323 18.2232 10.4984 18.9092H17.6848C18.0115 18.9092 18.2764 18.6443 18.2764 18.3176V4.64283ZM12.1679 6.6576C12.1679 6.98445 11.903 7.24919 11.5763 7.24919H7.17228C6.84543 7.24919 6.58054 6.98445 6.58054 6.6576C6.58054 6.33091 6.84543 6.06602 7.17228 6.06602H11.5763C11.903 6.06602 12.1679 6.33091 12.1679 6.6576ZM14.2977 9.57631H7.17228C6.84543 9.57631 6.58054 9.31142 6.58054 8.98473C6.58054 8.65788 6.84543 8.39299 7.17228 8.39299H14.2977C14.6244 8.39299 14.8893 8.65788 14.8893 8.98473C14.8893 9.31142 14.6244 9.57631 14.2977 9.57631Z" fill="currentColor" />
+                                <path d="M9.83795 16.6404C9.83795 14.4235 8.03436 12.6199 5.81741 12.6199C3.60045 12.6199 1.79686 14.4235 1.79686 16.6404C1.79686 18.8574 3.60045 20.661 5.81741 20.661C8.03436 20.661 9.83795 18.8574 9.83795 16.6404ZM7.509 18.3694C7.39349 18.4849 7.24212 18.5427 7.09075 18.5427C6.93939 18.5427 6.78787 18.4849 6.67236 18.3694L5.81741 17.5144L4.96245 18.3694C4.84694 18.4849 4.69558 18.5427 4.54421 18.5427C4.39269 18.5427 4.24132 18.4851 4.12581 18.3694C3.89479 18.1384 3.89479 17.7638 4.12581 17.5328L4.98076 16.6778L4.12581 15.8229C3.89479 15.5918 3.89479 15.2172 4.12581 14.9862C4.35683 14.7552 4.73144 14.7552 4.96245 14.9862L5.81756 15.8412L6.67251 14.9862C6.90353 14.7552 7.27813 14.755 7.50915 14.9862C7.74017 15.2172 7.74017 15.5918 7.50915 15.8229L6.6542 16.6778L7.50915 17.5328C7.74002 17.7638 7.74002 18.1384 7.509 18.3694Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10257">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.699951)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Cancelled</h3>
+                            <span class="fw-bold fs-5">10</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #e64264">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M19.6002 15.2717L12.5933 3.13526C11.4489 1.13037 8.55474 1.13037 7.41438 3.13526L0.403419 15.2717C-0.741059 17.2766 0.683363 19.7672 2.9929 19.7672H16.986C19.2955 19.7672 20.7447 17.2519 19.6002 15.2717ZM9.99974 17.0748C9.39045 17.0748 8.88408 16.5685 8.88408 15.9592C8.88408 15.3499 9.39045 14.8435 9.99974 14.8435C10.609 14.8435 11.1154 15.3499 11.0907 15.988C11.1195 16.5685 10.5843 17.0748 9.99974 17.0748ZM11.0166 9.86216C10.9672 10.7267 10.9137 11.5871 10.8643 12.4516C10.8396 12.7316 10.8396 12.9868 10.8396 13.2627C10.8149 13.7196 10.4567 14.0737 9.99974 14.0737C9.54278 14.0737 9.18873 13.7443 9.15991 13.2874C9.08581 11.9412 9.00759 10.6197 8.93348 9.27345C8.90878 8.9194 8.88408 8.56124 8.85526 8.20719C8.85526 7.6226 9.18461 7.14094 9.7198 6.98861C10.255 6.86099 10.7861 7.11623 11.0166 7.6226C11.0948 7.79963 11.1195 7.97665 11.1195 8.18249C11.0948 8.7465 11.0413 9.30639 11.0166 9.86216Z" fill="#FFFAFA" />
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Failed</h3>
+                            <span class="fw-bold fs-5">100</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
+
+                <!--begin::Title-->
+                <h2 class="text-gray-800 fw-semibold fs-5 mb-5">
+                  Hotel Booking status !
+                </h2>
+                <!--end::Title-->
+                <!--begin::Row-->
+                <div class="row g-5 mb-5 mb-lg-10">
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #ff7027">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10225)">
+                                <path d="M8.75 6.94995V5.69995H1.25C0.56125 5.69995 0 6.2612 0 6.94995V9.44995H9.01375C8.84 8.6862 8.75 7.8637 8.75 6.94995ZM19.9487 11.95C19.0962 13.2637 17.7962 14.3812 15.9338 15.4512C15.6475 15.615 15.325 15.7 15 15.7C14.675 15.7 14.3525 15.615 14.07 15.4537C12.2075 14.3812 10.9075 13.2625 10.0538 11.95H0V18.2C0 18.89 0.56125 19.45 1.25 19.45H18.75C19.44 19.45 20 18.89 20 18.2V11.95H19.9487ZM5.625 15.7H3.125C2.78 15.7 2.5 15.42 2.5 15.075C2.5 14.73 2.78 14.45 3.125 14.45H5.625C5.97 14.45 6.25 14.73 6.25 15.075C6.25 15.42 5.97 15.7 5.625 15.7Z" fill="currentColor" />
+                                <path d="M19.6214 3.87558L15.2464 2.00058C15.1684 1.96717 15.0844 1.94995 14.9995 1.94995C14.9146 1.94995 14.8306 1.96717 14.7526 2.00058L10.3776 3.87558C10.1489 3.97308 10.0001 4.19933 10.0001 4.44933V6.94933C10.0001 10.3881 11.2714 12.3981 14.6889 14.3668C14.7851 14.4218 14.8926 14.4493 15.0001 14.4493C15.1076 14.4493 15.2151 14.4218 15.3114 14.3668C18.7289 12.4031 20.0001 10.3931 20.0001 6.94933V4.44933C20.0001 4.19933 19.8514 3.97308 19.6214 3.87558ZM17.3639 6.71558L14.8639 9.84058C14.7439 9.98808 14.5639 10.0743 14.3751 10.0743H14.3489C14.2506 10.07 14.1547 10.0427 14.0689 9.99448C13.9831 9.94627 13.9099 9.87856 13.8551 9.79683L12.6051 7.92183C12.4139 7.63433 12.4914 7.24683 12.7789 7.05558C13.0639 6.86558 13.4526 6.94058 13.6451 7.22933L14.4214 8.39308L16.3864 5.93558C16.6026 5.66683 16.9964 5.62433 17.2651 5.83808C17.5351 6.05183 17.5776 6.44558 17.3639 6.71558Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10225">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.699951)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Success</h3>
+                            <span class="fw-bold fs-5">275</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #ff7027">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10176)">
+                                <path d="M15.353 6.55496C15.8465 6.12592 16.1271 5.50336 16.1271 4.8485V1.39046H17.4174C17.7723 1.39046 18.0626 1.10013 18.0626 0.745277C18.0626 0.390426 17.7723 0.100098 17.4175 0.100098H2.57877C2.22392 0.100098 1.93359 0.390426 1.93359 0.745277C1.93359 1.10013 2.22392 1.39046 2.57877 1.39046H3.86908V5.16467C3.86908 5.82275 4.15296 6.44853 4.65298 6.87758L7.51747 9.36143C7.73361 9.54856 7.85621 9.81305 7.85621 10.1002C7.85621 10.3873 7.73683 10.6517 7.51747 10.8389L4.65298 13.3195C4.15296 13.7518 3.86908 14.3776 3.86908 15.0356V18.8098H2.57877C2.22392 18.8098 1.93359 19.1002 1.93359 19.455C1.93359 19.8099 2.22392 20.1002 2.57877 20.1002H17.4174C17.7723 20.1002 18.0626 19.8099 18.0626 19.455C18.0626 19.1002 17.7723 18.8098 17.4174 18.8098H16.1271V15.3518C16.127 15.0286 16.0579 14.7092 15.9244 14.4149C15.7909 14.1206 15.596 13.8583 15.353 13.6453L12.1401 10.8356C11.9239 10.6485 11.8078 10.3873 11.8078 10.1002C11.8078 9.81305 11.9272 9.55178 12.1401 9.36466L15.353 6.55496ZM11.2916 11.8066L14.5045 14.6163C14.6091 14.7081 14.6928 14.8213 14.7501 14.9481C14.8074 15.0749 14.837 15.2126 14.8368 15.3517V18.8098H5.15939V15.0356C5.15939 14.7517 5.28199 14.484 5.4949 14.2969L8.35939 11.8162C8.85619 11.384 9.14329 10.7614 9.14329 10.1033C9.14329 9.44525 8.85941 8.81946 8.35939 8.39042L5.4949 5.90656C5.38951 5.81379 5.30508 5.69965 5.24724 5.57173C5.18939 5.4438 5.15944 5.30502 5.15939 5.16462V1.39041H14.8368V4.84845C14.8368 5.12911 14.7142 5.39682 14.5013 5.58394L11.2884 8.39364C10.7981 8.82269 10.5142 9.44525 10.5142 10.1001C10.5142 10.7549 10.7981 11.3775 11.2916 11.8066Z" fill="currentColor" />
+                                <path d="M14.1916 4.84862V4.33249C14.1916 4.13247 14.0304 3.97119 13.8336 3.97119H6.16264C5.96585 3.97119 5.80457 4.13247 5.80457 4.32927V5.16474C5.80457 5.35509 5.88843 5.53571 6.03037 5.65831L8.84974 8.10348C9.19814 8.4067 9.48525 8.78412 9.63686 9.21961C10.0046 10.2648 9.68204 11.3745 8.89492 12.0551L6.03042 14.539C5.88848 14.6648 5.80462 14.8422 5.80462 15.0325V17.8745C5.80462 18.0357 5.93366 18.1648 6.09172 18.1648H13.9046C13.9807 18.1646 14.0537 18.1343 14.1075 18.0805C14.1613 18.0267 14.1916 17.9538 14.1917 17.8777V15.3519C14.1917 15.1615 14.1111 14.9841 13.9692 14.8583L10.8111 12.0938C10.4659 11.7906 10.1821 11.4164 10.0272 10.9841C9.65625 9.94216 9.97559 8.8357 10.7563 8.14861L13.9692 5.33892C14.111 5.21637 14.1916 5.03569 14.1916 4.84862Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10176">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.100098)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Pending</h3>
+                            <span class="fw-bold fs-5">01</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #ff7027">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10257)">
+                                <path d="M17.9266 3.46448L15.4688 1.00659V3.4599L17.9266 3.46448Z" fill="currentColor" />
+                                <path d="M18.2764 4.64283H14.8763C14.5501 4.64222 14.2858 4.37763 14.2858 4.05125V0.660889H4.40814C4.0813 0.660889 3.81641 0.925782 3.81641 1.25247V11.8363C4.4324 11.5789 5.10776 11.4365 5.81592 11.4365C6.08616 11.4365 6.35151 11.4573 6.61075 11.4972C6.59138 11.4388 6.58054 11.3765 6.58054 11.3117C6.58054 10.985 6.84543 10.7201 7.17228 10.7201H14.2977C14.6244 10.7201 14.8893 10.985 14.8893 11.3117C14.8893 11.6384 14.6244 11.9033 14.2977 11.9033H7.96909C9.76704 12.7239 11.0198 14.5385 11.0198 16.6404C11.0198 17.4532 10.8323 18.2232 10.4984 18.9092H17.6848C18.0115 18.9092 18.2764 18.6443 18.2764 18.3176V4.64283ZM12.1679 6.6576C12.1679 6.98445 11.903 7.24919 11.5763 7.24919H7.17228C6.84543 7.24919 6.58054 6.98445 6.58054 6.6576C6.58054 6.33091 6.84543 6.06602 7.17228 6.06602H11.5763C11.903 6.06602 12.1679 6.33091 12.1679 6.6576ZM14.2977 9.57631H7.17228C6.84543 9.57631 6.58054 9.31142 6.58054 8.98473C6.58054 8.65788 6.84543 8.39299 7.17228 8.39299H14.2977C14.6244 8.39299 14.8893 8.65788 14.8893 8.98473C14.8893 9.31142 14.6244 9.57631 14.2977 9.57631Z" fill="currentColor" />
+                                <path d="M9.83795 16.6404C9.83795 14.4235 8.03436 12.6199 5.81741 12.6199C3.60045 12.6199 1.79686 14.4235 1.79686 16.6404C1.79686 18.8574 3.60045 20.661 5.81741 20.661C8.03436 20.661 9.83795 18.8574 9.83795 16.6404ZM7.509 18.3694C7.39349 18.4849 7.24212 18.5427 7.09075 18.5427C6.93939 18.5427 6.78787 18.4849 6.67236 18.3694L5.81741 17.5144L4.96245 18.3694C4.84694 18.4849 4.69558 18.5427 4.54421 18.5427C4.39269 18.5427 4.24132 18.4851 4.12581 18.3694C3.89479 18.1384 3.89479 17.7638 4.12581 17.5328L4.98076 16.6778L4.12581 15.8229C3.89479 15.5918 3.89479 15.2172 4.12581 14.9862C4.35683 14.7552 4.73144 14.7552 4.96245 14.9862L5.81756 15.8412L6.67251 14.9862C6.90353 14.7552 7.27813 14.755 7.50915 14.9862C7.74017 15.2172 7.74017 15.5918 7.50915 15.8229L6.6542 16.6778L7.50915 17.5328C7.74002 17.7638 7.74002 18.1384 7.509 18.3694Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10257">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.699951)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Cancelled</h3>
+                            <span class="fw-bold fs-5">10</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #ff7027">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M19.6002 15.2717L12.5933 3.13526C11.4489 1.13037 8.55474 1.13037 7.41438 3.13526L0.403419 15.2717C-0.741059 17.2766 0.683363 19.7672 2.9929 19.7672H16.986C19.2955 19.7672 20.7447 17.2519 19.6002 15.2717ZM9.99974 17.0748C9.39045 17.0748 8.88408 16.5685 8.88408 15.9592C8.88408 15.3499 9.39045 14.8435 9.99974 14.8435C10.609 14.8435 11.1154 15.3499 11.0907 15.988C11.1195 16.5685 10.5843 17.0748 9.99974 17.0748ZM11.0166 9.86216C10.9672 10.7267 10.9137 11.5871 10.8643 12.4516C10.8396 12.7316 10.8396 12.9868 10.8396 13.2627C10.8149 13.7196 10.4567 14.0737 9.99974 14.0737C9.54278 14.0737 9.18873 13.7443 9.15991 13.2874C9.08581 11.9412 9.00759 10.6197 8.93348 9.27345C8.90878 8.9194 8.88408 8.56124 8.85526 8.20719C8.85526 7.6226 9.18461 7.14094 9.7198 6.98861C10.255 6.86099 10.7861 7.11623 11.0166 7.6226C11.0948 7.79963 11.1195 7.97665 11.1195 8.18249C11.0948 8.7465 11.0413 9.30639 11.0166 9.86216Z" fill="#FFFAFA" />
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Failed</h3>
+                            <span class="fw-bold fs-5">100</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
+
+                <!--begin::Title-->
+                <h2 class="text-gray-800 fw-semibold fs-5 mb-5">
+                  Visa Booking status !
+                </h2>
+                <!--end::Title-->
+                <!--begin::Row-->
+                <div class="row g-5 mb-5 mb-lg-10">
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #1aa8dc">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10225)">
+                                <path d="M8.75 6.94995V5.69995H1.25C0.56125 5.69995 0 6.2612 0 6.94995V9.44995H9.01375C8.84 8.6862 8.75 7.8637 8.75 6.94995ZM19.9487 11.95C19.0962 13.2637 17.7962 14.3812 15.9338 15.4512C15.6475 15.615 15.325 15.7 15 15.7C14.675 15.7 14.3525 15.615 14.07 15.4537C12.2075 14.3812 10.9075 13.2625 10.0538 11.95H0V18.2C0 18.89 0.56125 19.45 1.25 19.45H18.75C19.44 19.45 20 18.89 20 18.2V11.95H19.9487ZM5.625 15.7H3.125C2.78 15.7 2.5 15.42 2.5 15.075C2.5 14.73 2.78 14.45 3.125 14.45H5.625C5.97 14.45 6.25 14.73 6.25 15.075C6.25 15.42 5.97 15.7 5.625 15.7Z" fill="currentColor" />
+                                <path d="M19.6214 3.87558L15.2464 2.00058C15.1684 1.96717 15.0844 1.94995 14.9995 1.94995C14.9146 1.94995 14.8306 1.96717 14.7526 2.00058L10.3776 3.87558C10.1489 3.97308 10.0001 4.19933 10.0001 4.44933V6.94933C10.0001 10.3881 11.2714 12.3981 14.6889 14.3668C14.7851 14.4218 14.8926 14.4493 15.0001 14.4493C15.1076 14.4493 15.2151 14.4218 15.3114 14.3668C18.7289 12.4031 20.0001 10.3931 20.0001 6.94933V4.44933C20.0001 4.19933 19.8514 3.97308 19.6214 3.87558ZM17.3639 6.71558L14.8639 9.84058C14.7439 9.98808 14.5639 10.0743 14.3751 10.0743H14.3489C14.2506 10.07 14.1547 10.0427 14.0689 9.99448C13.9831 9.94627 13.9099 9.87856 13.8551 9.79683L12.6051 7.92183C12.4139 7.63433 12.4914 7.24683 12.7789 7.05558C13.0639 6.86558 13.4526 6.94058 13.6451 7.22933L14.4214 8.39308L16.3864 5.93558C16.6026 5.66683 16.9964 5.62433 17.2651 5.83808C17.5351 6.05183 17.5776 6.44558 17.3639 6.71558Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10225">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.699951)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Success</h3>
+                            <span class="fw-bold fs-5">275</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #1aa8dc">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10176)">
+                                <path d="M15.353 6.55496C15.8465 6.12592 16.1271 5.50336 16.1271 4.8485V1.39046H17.4174C17.7723 1.39046 18.0626 1.10013 18.0626 0.745277C18.0626 0.390426 17.7723 0.100098 17.4175 0.100098H2.57877C2.22392 0.100098 1.93359 0.390426 1.93359 0.745277C1.93359 1.10013 2.22392 1.39046 2.57877 1.39046H3.86908V5.16467C3.86908 5.82275 4.15296 6.44853 4.65298 6.87758L7.51747 9.36143C7.73361 9.54856 7.85621 9.81305 7.85621 10.1002C7.85621 10.3873 7.73683 10.6517 7.51747 10.8389L4.65298 13.3195C4.15296 13.7518 3.86908 14.3776 3.86908 15.0356V18.8098H2.57877C2.22392 18.8098 1.93359 19.1002 1.93359 19.455C1.93359 19.8099 2.22392 20.1002 2.57877 20.1002H17.4174C17.7723 20.1002 18.0626 19.8099 18.0626 19.455C18.0626 19.1002 17.7723 18.8098 17.4174 18.8098H16.1271V15.3518C16.127 15.0286 16.0579 14.7092 15.9244 14.4149C15.7909 14.1206 15.596 13.8583 15.353 13.6453L12.1401 10.8356C11.9239 10.6485 11.8078 10.3873 11.8078 10.1002C11.8078 9.81305 11.9272 9.55178 12.1401 9.36466L15.353 6.55496ZM11.2916 11.8066L14.5045 14.6163C14.6091 14.7081 14.6928 14.8213 14.7501 14.9481C14.8074 15.0749 14.837 15.2126 14.8368 15.3517V18.8098H5.15939V15.0356C5.15939 14.7517 5.28199 14.484 5.4949 14.2969L8.35939 11.8162C8.85619 11.384 9.14329 10.7614 9.14329 10.1033C9.14329 9.44525 8.85941 8.81946 8.35939 8.39042L5.4949 5.90656C5.38951 5.81379 5.30508 5.69965 5.24724 5.57173C5.18939 5.4438 5.15944 5.30502 5.15939 5.16462V1.39041H14.8368V4.84845C14.8368 5.12911 14.7142 5.39682 14.5013 5.58394L11.2884 8.39364C10.7981 8.82269 10.5142 9.44525 10.5142 10.1001C10.5142 10.7549 10.7981 11.3775 11.2916 11.8066Z" fill="currentColor" />
+                                <path d="M14.1916 4.84862V4.33249C14.1916 4.13247 14.0304 3.97119 13.8336 3.97119H6.16264C5.96585 3.97119 5.80457 4.13247 5.80457 4.32927V5.16474C5.80457 5.35509 5.88843 5.53571 6.03037 5.65831L8.84974 8.10348C9.19814 8.4067 9.48525 8.78412 9.63686 9.21961C10.0046 10.2648 9.68204 11.3745 8.89492 12.0551L6.03042 14.539C5.88848 14.6648 5.80462 14.8422 5.80462 15.0325V17.8745C5.80462 18.0357 5.93366 18.1648 6.09172 18.1648H13.9046C13.9807 18.1646 14.0537 18.1343 14.1075 18.0805C14.1613 18.0267 14.1916 17.9538 14.1917 17.8777V15.3519C14.1917 15.1615 14.1111 14.9841 13.9692 14.8583L10.8111 12.0938C10.4659 11.7906 10.1821 11.4164 10.0272 10.9841C9.65625 9.94216 9.97559 8.8357 10.7563 8.14861L13.9692 5.33892C14.111 5.21637 14.1916 5.03569 14.1916 4.84862Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10176">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.100098)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Pending</h3>
+                            <span class="fw-bold fs-5">01</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #1aa8dc">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2612_10257)">
+                                <path d="M17.9266 3.46448L15.4688 1.00659V3.4599L17.9266 3.46448Z" fill="currentColor" />
+                                <path d="M18.2764 4.64283H14.8763C14.5501 4.64222 14.2858 4.37763 14.2858 4.05125V0.660889H4.40814C4.0813 0.660889 3.81641 0.925782 3.81641 1.25247V11.8363C4.4324 11.5789 5.10776 11.4365 5.81592 11.4365C6.08616 11.4365 6.35151 11.4573 6.61075 11.4972C6.59138 11.4388 6.58054 11.3765 6.58054 11.3117C6.58054 10.985 6.84543 10.7201 7.17228 10.7201H14.2977C14.6244 10.7201 14.8893 10.985 14.8893 11.3117C14.8893 11.6384 14.6244 11.9033 14.2977 11.9033H7.96909C9.76704 12.7239 11.0198 14.5385 11.0198 16.6404C11.0198 17.4532 10.8323 18.2232 10.4984 18.9092H17.6848C18.0115 18.9092 18.2764 18.6443 18.2764 18.3176V4.64283ZM12.1679 6.6576C12.1679 6.98445 11.903 7.24919 11.5763 7.24919H7.17228C6.84543 7.24919 6.58054 6.98445 6.58054 6.6576C6.58054 6.33091 6.84543 6.06602 7.17228 6.06602H11.5763C11.903 6.06602 12.1679 6.33091 12.1679 6.6576ZM14.2977 9.57631H7.17228C6.84543 9.57631 6.58054 9.31142 6.58054 8.98473C6.58054 8.65788 6.84543 8.39299 7.17228 8.39299H14.2977C14.6244 8.39299 14.8893 8.65788 14.8893 8.98473C14.8893 9.31142 14.6244 9.57631 14.2977 9.57631Z" fill="currentColor" />
+                                <path d="M9.83795 16.6404C9.83795 14.4235 8.03436 12.6199 5.81741 12.6199C3.60045 12.6199 1.79686 14.4235 1.79686 16.6404C1.79686 18.8574 3.60045 20.661 5.81741 20.661C8.03436 20.661 9.83795 18.8574 9.83795 16.6404ZM7.509 18.3694C7.39349 18.4849 7.24212 18.5427 7.09075 18.5427C6.93939 18.5427 6.78787 18.4849 6.67236 18.3694L5.81741 17.5144L4.96245 18.3694C4.84694 18.4849 4.69558 18.5427 4.54421 18.5427C4.39269 18.5427 4.24132 18.4851 4.12581 18.3694C3.89479 18.1384 3.89479 17.7638 4.12581 17.5328L4.98076 16.6778L4.12581 15.8229C3.89479 15.5918 3.89479 15.2172 4.12581 14.9862C4.35683 14.7552 4.73144 14.7552 4.96245 14.9862L5.81756 15.8412L6.67251 14.9862C6.90353 14.7552 7.27813 14.755 7.50915 14.9862C7.74017 15.2172 7.74017 15.5918 7.50915 15.8229L6.6542 16.6778L7.50915 17.5328C7.74002 17.7638 7.74002 18.1384 7.509 18.3694Z" fill="currentColor" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2612_10257">
+                                  <rect width="20" height="20" fill="currentColor" transform="translate(0 0.699951)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Rejected</h3>
+                            <span class="fw-bold fs-5">10</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-5 py7">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-fill">
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle me-5 text-white d-inline-flex flex-center" style="background-color: #1aa8dc">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M19.6002 15.2717L12.5933 3.13526C11.4489 1.13037 8.55474 1.13037 7.41438 3.13526L0.403419 15.2717C-0.741059 17.2766 0.683363 19.7672 2.9929 19.7672H16.986C19.2955 19.7672 20.7447 17.2519 19.6002 15.2717ZM9.99974 17.0748C9.39045 17.0748 8.88408 16.5685 8.88408 15.9592C8.88408 15.3499 9.39045 14.8435 9.99974 14.8435C10.609 14.8435 11.1154 15.3499 11.0907 15.988C11.1195 16.5685 10.5843 17.0748 9.99974 17.0748ZM11.0166 9.86216C10.9672 10.7267 10.9137 11.5871 10.8643 12.4516C10.8396 12.7316 10.8396 12.9868 10.8396 13.2627C10.8149 13.7196 10.4567 14.0737 9.99974 14.0737C9.54278 14.0737 9.18873 13.7443 9.15991 13.2874C9.08581 11.9412 9.00759 10.6197 8.93348 9.27345C8.90878 8.9194 8.88408 8.56124 8.85526 8.20719C8.85526 7.6226 9.18461 7.14094 9.7198 6.98861C10.255 6.86099 10.7861 7.11623 11.0166 7.6226C11.0948 7.79963 11.1195 7.97665 11.1195 8.18249C11.0948 8.7465 11.0413 9.30639 11.0166 9.86216Z" fill="#FFFAFA" />
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 class="h6 text-gray-700">Failed</h3>
+                            <span class="fw-bold fs-5">100</span>
+                          </div>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Separator-->
+                        <div class="separator mt-7 mb-4"></div>
+                        <!--end::Separator-->
+                        <a href="#" class="link-gray fw-semibold fs-6 me-2 d-flex flex-stack">
+                          View Details
+                          <!--begin::Icon-->
+                          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M12.025 5.44165L17.0834 10.5L12.025 15.5583" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.91669 10.5H16.9417" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          <!--end::Icon-->
+                        </a>
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
+              </div>
+              <!--end::Content container-->
+            </div>
+            <!--end::Content-->
+          </div>
+          <!--end::Content wrapper-->
+          <!--begin::Footer-->
+          <%- include('partials/footer.ejs'); %>
+          <!--end::Footer-->
+        </div>
+        <!--end:::Main-->
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+  </div>
+  <!--end::App-->
+  <!--begin::Drawers-->
+  <!--begin::Activities drawer-->
+  <%- include('partials/activities-drawer.ejs'); %>
+  <!--end::Activities drawer-->
+  <!--end::Drawers-->
+  <!--begin::Scrolltop-->
+  <%- include('partials/scroll-top.ejs'); %>
+  <!--end::Scrolltop-->
+  <!--begin::Javascript-->
+  <%- include('partials/footer-scripts.ejs'); %>
+  <!--end::Javascript-->
 </body>
+<!--end::Body-->
 
 </html>
