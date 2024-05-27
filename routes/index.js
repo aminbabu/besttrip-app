@@ -27,7 +27,7 @@ router.use(csp);
 
 // routes for api
 router.use('/dashboard', require('./dashboard'));
-router.use('/dashboard', require('./auth/users'));
+router.use('/admin', require('./auth/users'));
 // router.use('/users', require('./users'));
 // router.use('/customers', require('./customers'));
 // router.use('/settings/site/general', require('./settings/site/general'));
