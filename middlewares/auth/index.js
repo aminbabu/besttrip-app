@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 26 May, 2024
+ * @update_date 27 May, 2024
  */
 
 // export all middlewares
@@ -14,4 +14,5 @@ module.exports = {
     isNotAuthorized: require('./is-not-authorized'),
     isVerified: require('./is-verified'),
     isAllowed: require('./is-allowed'),
+    isNotAllowed: require('./is-not-allowed'),
 };
