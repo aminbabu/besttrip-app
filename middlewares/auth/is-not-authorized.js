@@ -37,7 +37,7 @@ module.exports = async (req, res, next) => {
 
         // return redirect to dashboard
         return res.redirect('/dashboard');
-    } catch (err) {
-        return next(err);
+    } catch (error) {
+        return next(error);
     }
 };
