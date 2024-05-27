@@ -17,8 +17,13 @@ module.exports = async (req, res, next) => {
     // get authorization from header
     const authorization = req.header('authorization') || req.cookies.token;
 
-    // check if token exists
-    if (!authorization) {
+    // check if authorization is not exist and api is frontend
+    if (!authorization && res.locals.api === 'frontend') {
+        return res.render('errors/401');
+    }
+
+    // check if authorization is not exist and api is backend
+    if (!authorization && res.locals.api === 'backend') {
         return res.status(401).json({
             message: 'Unauthorized',
         });
@@ -48,9 +53,14 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        if (!user) {
+        // check if user is not exist and api is frontend
+        if (!user && res.locals.api === 'frontend') {
+            return res.render('errors/401');
+        }
+
+        // check if user is not exist and api is backend
+        if (!user && res.locals.api === 'backend') {
             return res.status(401).json({
-                status: 'error',
                 message: 'Unauthorized',
             });
         }
@@ -77,14 +87,7 @@ module.exports = async (req, res, next) => {
 
         // proceed to next middleware
         return next();
-    } catch (err) {
-        // remove token from cookie and header
-        res.clearCookie('token');
-        res.removeHeader('authorization');
-
-        return res.status(401).json({
-            status: 'error',
-            message: 'Unauthorized',
-        });
+    } catch (error) {
+        return next(error);
     }
 };
