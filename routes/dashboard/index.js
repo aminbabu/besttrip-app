@@ -17,18 +17,18 @@ const router = express.Router();
 const { viewDashboard } = require('../../controllers/dashboard');
 
 // middlewares
-const { isAuthorized } = require('../../middlewares/auth');
+const { isUserAuthorized } = require('../../middlewares/auth');
 
 /**
  * @description - dashboard view route
  * @param {string} path - '/dashboard'
- * @param {function} middleware - ['isAuthorized']
+ * @param {function} middleware - ['isUserAuthorized']
  * @param {function} controller - ['viewDashboard']
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/', isAuthorized, viewDashboard);
+router.get('/', isUserAuthorized, viewDashboard);
 
 /**
  * @description - admin route
