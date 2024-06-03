@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 22 May, 2024
- * @update_date 27 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // export all controllers
@@ -13,7 +13,6 @@ module.exports = {
     login: require('./login'),
     forgotPassword: require('./forgot-password'),
     resetPassword: require('./reset-password'),
-    sendVerificationEmail: require('./send-verification-email'),
     verifyEmail: require('./verify-email'),
     logout: require('./logout'),
 };
