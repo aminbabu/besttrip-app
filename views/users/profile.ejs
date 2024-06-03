@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--begin::Head-->
-<%- include('../partials/head', { title: user.name }) %>
+<%- include('../partials/head', { title }) %>
 <!--end::Head-->
 <!--begin::Body-->
 
@@ -76,7 +76,11 @@
                         <div class="d-flex flex-center flex-column py-5">
                           <!--begin::Avatar-->
                           <div class="symbol symbol-100px symbol-circle mb-7">
+                            <% if (user.avatar) { %>
                             <img src="/<%= user.avatar %>" alt="<%= user.name %>" />
+                            <% } else { %>
+                            <span class="symbol-label fs-2 fw-bold text-uppercase"><%= user.name.charAt(0) %></span>
+                            <% } %>
                           </div>
                           <!--end::Avatar-->
                           <!--begin::Name-->
