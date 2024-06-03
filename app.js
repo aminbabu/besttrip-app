@@ -19,14 +19,15 @@ const helmet = require('helmet');
 const { default: xssInstance } = require('xss-shield');
 const cors = require('cors');
 const expressFileUpload = require('express-fileupload');
+const { expressCspHeader } = require('express-csp-header');
 
 // config
-const { createDBConnection, env, expressFileUploadConf } = require('./config');
+const { createDBConnection, env, expressFileUploadConf, CSP_DIRECTIVES } = require('./config');
 
 // constants
 const { WHITE_LIST } = require('./constants');
 
-// config
+// dotenv config
 dotenv.config();
 
 // app
@@ -49,6 +50,7 @@ app.use(helmet());
 app.use(cors());
 app.use(expressFileUpload(expressFileUploadConf));
 app.use(xssInstance.xssShield(WHITE_LIST));
+app.use(expressCspHeader(CSP_DIRECTIVES));
 
 // routes
 app.use('/api', require('./routes/api'));
