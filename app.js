@@ -53,8 +53,7 @@ app.use(xssInstance.xssShield(WHITE_LIST));
 app.use(expressCspHeader(cspDirectives));
 
 // routes
-app.use('/api', require('./routes/api'));
-app.use('/dashboard', require('./routes'));
+app.use('/', require('./routes'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
