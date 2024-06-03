@@ -17,8 +17,6 @@ module.exports = (req, res) => {
         // return redirect to login
         return res.redirect('/dashboard/login');
     } catch (error) {
-        return res.render('errors/500', {
-            message: error.message,
-        });
+        return res.redirect('/errors/500');
     }
 };
