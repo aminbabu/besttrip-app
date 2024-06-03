@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 May, 2024
- * @update_date 22 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -27,7 +27,7 @@ router.use(csp);
 
 // routes for api
 router.use('/', require('./dashboard'));
-router.use('/admin', require('./auth/users'));
+router.use('/', require('./auth/users'));
 router.use('/users', require('./users'));
 // router.use('/customers', require('./customers'));
 // router.use('/settings/site/general', require('./settings/site/general'));
