@@ -14,9 +14,9 @@ const express = require('express');
 const router = express.Router();
 
 // routes
-router.use('/dashboard', require('./dashboard'));
 router.use('/auth/users', require('./auth/users'));
 router.use('/auth/customers', require('./auth/customers'));
+router.use('/dashboard', require('./dashboard'));
 router.use('/users', require('./users'));
 router.use('/customers', require('./customers'));
 router.use('/settings/site/general', require('./settings/site/general'));
