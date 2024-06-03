@@ -26,7 +26,7 @@ module.exports = async (user) => {
     if (user.role === 'customer') {
         redirectTo = `${env.APP_URL}:${env.PORT}/auth/customers/login`;
     } else {
-        redirectTo = `${env.APP_URL}:${env.PORT}/admin/login`;
+        redirectTo = `${env.APP_URL}:${env.PORT}/dashboard/login`;
     }
 
     // compile template
