@@ -7,7 +7,7 @@
  * @update_date 12 April, 2024
  */
 
-const { MAX_FILE_SIZE } = require('../constants/api/globals');
+const { MAX_FILE_SIZE } = require('../constants/globals');
 
 // export express-fileupload configuration
 module.exports = {

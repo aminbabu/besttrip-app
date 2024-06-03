@@ -10,7 +10,7 @@
 // dependencies
 const { z } = require('zod');
 const moment = require('moment');
-const { UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS } = require('../../../../constants/api');
+const { UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS } = require('../../../../constants');
 
 // export umrah outbound schema
 module.exports = z

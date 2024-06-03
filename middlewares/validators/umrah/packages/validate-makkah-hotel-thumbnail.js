@@ -9,7 +9,7 @@
  */
 
 // dependencies
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../constants/api');
+const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../constants');
 
 // export umrah package makkah hotel tumbnail validator middleware
 module.exports = async (req, res, next) => {

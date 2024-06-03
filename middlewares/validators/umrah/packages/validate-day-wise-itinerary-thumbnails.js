@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../constants/api');
+const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../constants');
 
 // export umrah day wise itinerary thumbnails validator
 module.exports = async (req, res, next) => {

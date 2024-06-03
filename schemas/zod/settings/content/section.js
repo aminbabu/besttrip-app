@@ -9,7 +9,7 @@
 
 // dependencies
 const { z } = require('zod');
-const { SECTION_NAMES } = require('../../../../constants/api');
+const { SECTION_NAMES } = require('../../../../constants');
 
 // export content sections settings schema
 module.exports = z

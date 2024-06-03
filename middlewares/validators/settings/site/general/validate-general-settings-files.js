@@ -12,7 +12,7 @@ const {
     FAVICON_TYPES,
     ONE_MEGA_BYTE,
     HALF_MEGA_BYTE,
-} = require('../../../../../constants/api');
+} = require('../../../../../constants');
 
 // export general settings files validator middleware
 module.exports = async (req, res, next) => {

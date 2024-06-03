@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { EXCLUSIVE_STATUS } = require('../../../../constants/api');
+const { EXCLUSIVE_STATUS } = require('../../../../constants');
 
 // export exclusive content settings schema
 module.exports = new Schema(

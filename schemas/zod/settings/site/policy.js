@@ -9,7 +9,7 @@
 
 // dependencies
 const { z } = require('zod');
-const { POLICY_KEYS } = require('../../../../constants/api');
+const { POLICY_KEYS } = require('../../../../constants');
 
 // export site policy settings schema
 module.exports = z

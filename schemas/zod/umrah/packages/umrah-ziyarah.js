@@ -9,7 +9,7 @@
 
 // dependencies
 const { z } = require('zod');
-const { UMRAH_PACKAGE_BOOLEAN } = require('../../../../constants/api');
+const { UMRAH_PACKAGE_BOOLEAN } = require('../../../../constants');
 
 // export umrah ziyarah schema
 module.exports = z

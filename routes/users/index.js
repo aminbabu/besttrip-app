@@ -15,12 +15,13 @@ const router = express.Router();
 
 // controllers
 const {
+    getUsers,
     getUser,
     updateUser,
     updateUserBySelf,
     deleteUser,
     deleteUserBySelf,
-} = require('../../controllers/api/users');
+} = require('../../controllers/users');
 
 // middlewares
 const { isAuthorized, isNotAllowed } = require('../../middlewares/auth');
@@ -31,10 +32,10 @@ const {
     validateUserAccount,
 } = require('../../middlewares/validators/users');
 const { validateAvatar } = require('../../middlewares/validators/files');
-const { uploadAvatar } = require('../../middlewares/api/files');
+const { uploadAvatar } = require('../../middlewares/files');
 
 // constants
-const { USER_ROLES } = require('../../constants/api');
+const { USER_ROLES } = require('../../constants');
 
 /**
  * @description check if user is authorized
@@ -45,6 +46,17 @@ const { USER_ROLES } = require('../../constants/api');
  * @method USE
  */
 router.use(isAuthorized);
+
+/**
+ * @description get all users
+ * @param {string} path - /dashboard/users
+ * @param {function} middleware - ['isNotAllowed']
+ * @param {function} controller - ['getUsers']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method GET
+ */
+router.get('/', isNotAllowed(['admin']), getUsers);
 
 /**
  * @description get user by mongo id

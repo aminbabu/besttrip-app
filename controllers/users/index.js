@@ -3,13 +3,13 @@
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 08 April, 2024
- * @update_date 19 April, 2024
+ * @date 03 June, 2024
+ * @update_date 03 June, 2024
  */
 
 // export all controllers
 module.exports = {
-    getAllUsers: require('./get-all-users'),
+    getUsers: require('./get-users'),
     getUser: require('./get-user'),
     updateUser: require('./update-user'),
     updateUserBySelf: require('./update-user-by-self'),

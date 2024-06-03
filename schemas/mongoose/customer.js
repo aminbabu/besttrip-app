@@ -13,7 +13,7 @@ const {
     CUSTOMER_WALLET_TRANSACTION_TYPES,
     CUSTOMER_ROLES,
     CUSTOMER_STATUS,
-} = require('../../constants/api');
+} = require('../../constants');
 
 // export customer schema
 module.exports = new Schema(

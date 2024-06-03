@@ -9,7 +9,7 @@
 
 // dependencies
 const { z } = require('zod');
-const { UMRAH_PACKAGE_DISTANCE_UNITS } = require('../../../../constants/api');
+const { UMRAH_PACKAGE_DISTANCE_UNITS } = require('../../../../constants');
 
 // export umrah madinah hotel schema
 module.exports = z

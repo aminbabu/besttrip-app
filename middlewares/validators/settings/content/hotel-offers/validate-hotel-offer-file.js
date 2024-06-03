@@ -8,7 +8,7 @@
  * @update_date 07 May, 2024
  */
 
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants/api');
+const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants');
 
 // export hotel offer file validator middleware
 module.exports = async (req, res, next) => {

@@ -15,7 +15,7 @@ const {
     CUSTOMER_STATUS,
     CUSTOMER_WALLET_TRANSACTION_TYPES,
     CUSTOMER_ROLES,
-} = require('../../../constants/api');
+} = require('../../../constants');
 
 // export customer schema
 module.exports = z

@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { DEFAULT_IMAGE_TYPES, HALF_MEGA_BYTE, ONE_MEGA_BYTE } = require('../../../constants/api');
+const { DEFAULT_IMAGE_TYPES, HALF_MEGA_BYTE, ONE_MEGA_BYTE } = require('../../../constants');
 
 // export validate avatar middleware
 module.exports = (req, res, next) => {

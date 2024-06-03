@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { BLOG_STATUS } = require('../../../../constants/api');
+const { BLOG_STATUS } = require('../../../../constants');
 
 // export blog post content settings schema
 module.exports = new Schema(

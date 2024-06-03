@@ -7,7 +7,7 @@
  * @update_date 08 May, 2024
  */
 
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE, DEFAULT_FILE_SIZE } = require('../../../../constants/api');
+const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE, DEFAULT_FILE_SIZE } = require('../../../../constants');
 
 // export theme settings file validator middleware
 module.exports = async (req, res, next) => {

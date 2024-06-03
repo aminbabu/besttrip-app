@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { PAYMENT_REQUEST_STATUS } = require('../../constants/api');
+const { PAYMENT_REQUEST_STATUS } = require('../../constants');
 
 // export payment request schema
 module.exports = new Schema(

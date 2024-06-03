@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { SECTION_NAMES } = require('../../../../constants/api');
+const { SECTION_NAMES } = require('../../../../constants');
 
 // export section content settings schema
 module.exports = new Schema(
