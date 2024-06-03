@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/api/auth/is-user-authorized.js
+ * @file /middlewares/api/auth/is-authorized.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
