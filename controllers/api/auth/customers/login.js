@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -26,22 +26,23 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // check if customer status is active
-        if (customer.status !== 'active') {
-            return res.status(400).json({
-                message: 'Customer is not active',
-            });
-        }
-
         // convert customer to object
         const customerObject = customer.toObject();
 
         // compare password
         const match = await comparePassword(password, customerObject.password);
 
+        // check if password match
         if (!match) {
             return res.status(400).json({
                 message: 'Invalid email or password',
+            });
+        }
+
+        // check if customer status is active
+        if (customer.status !== 'active') {
+            return res.status(400).json({
+                message: 'Customer is not active',
             });
         }
 
