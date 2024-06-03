@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
         ]);
 
         // return rendered users
-        return res.render('users', { users, totalCount });
+        return res.render('users', { users, totalUser: totalCount });
     } catch (error) {
         return res.redirect('/errors/500');
     }
