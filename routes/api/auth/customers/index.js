@@ -32,7 +32,6 @@ const {
     validateSendVerificationEmail,
     validateVerifyEmail,
 } = require('../../../../middlewares/validators/auth');
-const { isVerified } = require('../../../../middlewares/api/auth');
 
 /**
  * @description register a new user
@@ -49,13 +48,12 @@ router.post('/register', validateRegister, register);
  * @description login a user
  * @param {string} path - /auth/customers/login
  * @param {function} validator - ['validateLogin']
- * @param {function} middleware - ['isVerified.customer']
  * @param {function} controller - ['login']
  * @returns {object} - router
  * @access public
  * @method POST
  */
-router.post('/login', validateLogin, isVerified.customer, login);
+router.post('/login', validateLogin, login);
 
 /**
  * @description forgot password

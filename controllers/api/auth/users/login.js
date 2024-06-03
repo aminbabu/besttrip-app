@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 27 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -31,6 +31,13 @@ module.exports = async (req, res, next) => {
         if (user.status !== 'active') {
             return res.status(400).json({
                 message: 'User is not active',
+            });
+        }
+
+        // check if user is verified
+        if (!user.isVerified) {
+            return res.status(400).json({
+                message: 'User is not verified',
             });
         }
 

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 18 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -32,7 +32,6 @@ const {
     validateSendVerificationEmail,
     validateVerifyEmail,
 } = require('../../../../middlewares/validators/auth');
-const { isVerified } = require('../../../../middlewares/api/auth');
 
 /**
  * @description register a new user
@@ -49,13 +48,12 @@ router.post('/register', validateRegister, register);
  * @description login a user
  * @param {string} path - /auth/users/login
  * @param {function} validator - ['validateLogin']
- * @param {function} middleware - ['isVerified.user']
  * @param {function} controller - ['login']
  * @returns {object} - router
  * @access public
  * @method POST
  */
-router.post('/login', validateLogin, isVerified.user, login);
+router.post('/login', validateLogin, login);
 
 /**
  * @description forgot password
