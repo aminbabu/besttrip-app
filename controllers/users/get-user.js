@@ -1,17 +1,17 @@
 /**
- * @file /controllers/users/get-user-by-id.js
+ * @file /controllers/users/get-user.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 08 April, 2024
- * @update_date 19 April, 2024
+ * @date 03 June, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
 const { User } = require('../../models');
 
-// export get user by mongo id controller
-module.exports = async (req, res, next) => {
+// export get user view controller
+module.exports = async (req, res) => {
     try {
         // get validated data
         const { id } = req.params;
@@ -21,17 +21,12 @@ module.exports = async (req, res, next) => {
 
         // check if user exists
         if (!user) {
-            return res.status(404).json({
-                message: 'User not found',
-            });
+            return res.redirect('/errors/404');
         }
 
-        // return response
-        return res.status(200).json({
-            message: 'Fetched user successfully',
-            user,
-        });
+        // return rendered user
+        return res.render('user', { user });
     } catch (error) {
-        return next(error);
+        return res.redirect('/errors/500');
     }
 };
