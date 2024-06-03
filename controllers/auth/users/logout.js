@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 May, 2024
- * @update_date 27 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // export logout controller
@@ -15,7 +15,7 @@ module.exports = (req, res) => {
         res.removeHeader('authorization');
 
         // return redirect to login
-        return res.redirect('/admin/login');
+        return res.redirect('/dashboard/login');
     } catch (error) {
         return res.render('errors/500', {
             message: error.message,
