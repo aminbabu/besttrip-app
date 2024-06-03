@@ -13,18 +13,6 @@ const express = require('express');
 // express router
 const router = express.Router();
 
-// middlewares
-const { csp } = require('../middlewares/global');
-
-/**
- * @description - csp middleware
- * @param {string} path - '/'
- * @param {function} middleware - ['csp']
- * @returns {object} - router
- * @method USE
- */
-router.use(csp);
-
 // routes for api
 router.use('/', require('./dashboard'));
 router.use('/', require('./auth/users'));
