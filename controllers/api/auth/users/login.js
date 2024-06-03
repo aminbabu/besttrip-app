@@ -42,7 +42,9 @@ module.exports = async (req, res, next) => {
 
         // check if user status is active
         if (user.status !== 'active') {
-            return res.render('auth/account-deactivated');
+            return res.status(400).json({
+                message: 'User is not active. Please contact support',
+            });
         }
 
         // check if user is verified
