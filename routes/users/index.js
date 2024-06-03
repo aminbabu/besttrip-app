@@ -50,3 +50,6 @@ router.get('/', isNotAllowed(['customer']), getUsers);
  * @method GET
  */
 router.get('/:id', isNotAllowed(['customer']), getUser);
+
+// export router
+module.exports = router;
