@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 27 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -24,7 +24,7 @@ const expressFileUpload = require('express-fileupload');
 const { createDBConnection, env, expressFileUploadConf } = require('./config');
 
 // constants
-const { WHITE_LIST } = require('./constants/api');
+const { WHITE_LIST } = require('./constants');
 
 // config
 dotenv.config();
