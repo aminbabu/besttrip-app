@@ -14,6 +14,6 @@ module.exports = (req, res) => {
             user: req.user,
         });
     } catch (error) {
-        return res.redirect('/500');
+        return res.redirect('/errors/500');
     }
 };
