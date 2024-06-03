@@ -26,6 +26,9 @@ dependencies:
   express:
     specifier: ~4.16.1
     version: 4.16.4
+  express-csp-header:
+    specifier: ^5.2.1
+    version: 5.2.1
   express-fileupload:
     specifier: ^1.5.0
     version: 1.5.0
@@ -580,6 +583,11 @@ packages:
       which: 2.0.2
     dev: true
 
+  /csp-header@5.2.1:
+    resolution: {integrity: sha512-qOJNu39JZkPrbrAM40a1tQCePEPYVIoI6nMDhX4RA07QjU8efS+zyd/zE83XJu85KKazH9NjKlvvlswFMteMgg==}
+    engines: {node: '>=10'}
+    dev: false
+
   /cssfilter@0.0.10:
     resolution: {integrity: sha512-FAaLDaplstoRsDR8XGYH51znUN0UY7nMc6Z9/fvE8EXGwvJE9hu7W2vHwx1+bd6gCYnln9nLbzxFTrcO9YQDZw==}
     dev: false
@@ -1081,6 +1089,14 @@ packages:
   /etag@1.8.1:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /express-csp-header@5.2.1:
+    resolution: {integrity: sha512-HvVCUa3GwqH9m4rG0y+s6bHENNxtPzLccM1bSmZNiMIWwMc38Q2Gkz6byiDkrqmnqaCJ9+9cc/p2Pd4QqOmx9Q==}
+    engines: {node: '>=10'}
+    dependencies:
+      csp-header: 5.2.1
+      psl: 1.8.0
     dev: false
 
   /express-fileupload@1.5.0:
@@ -2186,6 +2202,10 @@ packages:
     dependencies:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
+    dev: false
+
+  /psl@1.8.0:
+    resolution: {integrity: sha512-RIdOzyoavK+hA18OGGWDqUTsCLhtA7IcZ/6NCs4fFJaHBDab+pDDmDIByWFRQJq2Cd7r1OoQxBGKOaztq+hjIQ==}
     dev: false
 
   /pstree.remy@1.1.8:
