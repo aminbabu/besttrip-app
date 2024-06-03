@@ -11,7 +11,7 @@
 module.exports = async (req, res) => {
     try {
         // render register view
-        // return res.render('auth/users/register');
+        // return res.render('auth/register');
         return res.redirect('/');
     } catch (error) {
         return res.redirect('/errors/500');

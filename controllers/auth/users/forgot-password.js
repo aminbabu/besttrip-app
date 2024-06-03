@@ -11,7 +11,7 @@
 module.exports = async (req, res) => {
     try {
         // render forgot-password view
-        return res.render('auth/users/forgot-password');
+        return res.render('auth/forgot-password');
     } catch (error) {
         return res.redirect('/errors/500');
     }

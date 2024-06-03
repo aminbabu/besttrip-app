@@ -19,6 +19,7 @@ const {
     login,
     forgotPassword,
     resetPassword,
+    resendVerificationEmail,
     logout,
 } = require('../../../controllers/auth/users');
 const { isNotAuthorized } = require('../../../middlewares/auth');
@@ -66,6 +67,17 @@ router.get('/forgot-password', isNotAuthorized, forgotPassword);
  * @method GET
  */
 router.get('/reset-password', isNotAuthorized, resetPassword);
+
+/**
+ * @description resend verification email
+ * @param {string} path - /dashboard/resend-verification-email
+ * @param {function} middleware - ['isNotAuthorized']
+ * @param {function} controller - ['resendVerificationEmail']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/resend-verification-email', isNotAuthorized, resendVerificationEmail);
 
 /**
  * @description logout user

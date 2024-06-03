@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
         const { token } = req.query;
 
         // render reset-password view
-        return res.render('auth/users/reset-password', {
+        return res.render('auth/reset-password', {
             token,
         });
     } catch (error) {
