@@ -50,6 +50,17 @@ const { USER_ROLES } = require('../../constants');
 router.get('/', isAuthorized, isAllowed(['admin']), getAllUsers);
 
 /**
+ * @description view user profile by self
+ * @param {string} path - /users/profile
+ * @param {function} middleware - ['isUserAuthorized']
+ * @param {function} controller - ['viewUserProfile']
+ * @returns {object} - router
+ * @access private - []
+ * @method GET
+ */
+router.get('/profile', isUserAuthorized, viewUserProfile);
+
+/**
  * @description get user by mongo id
  * @param {string} path - /users/:id
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
@@ -60,17 +71,6 @@ router.get('/', isAuthorized, isAllowed(['admin']), getAllUsers);
  * @method GET
  */
 router.get('/:id', isAuthorized, isAllowed(['admin']), validateUserId, getUser);
-
-/**
- * @description view user profile by self
- * @param {string} path - /users/profile
- * @param {function} middleware - ['isUserAuthorized']
- * @param {function} controller - ['viewUserProfile']
- * @returns {object} - router
- * @access private - []
- * @method GET
- */
-router.get('/profile', isUserAuthorized, viewUserProfile);
 
 /**
  * @description update user by self
