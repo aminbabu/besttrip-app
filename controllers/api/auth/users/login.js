@@ -27,6 +27,19 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // convert user to object
+        const userObject = user.toObject();
+
+        // compare password
+        const match = await comparePassword(password, userObject.password);
+
+        // check if password match
+        if (!match) {
+            return res.status(400).json({
+                message: 'Invalid email or password',
+            });
+        }
+
         // check if user status is active
         if (user.status !== 'active') {
             return res.status(400).json({
@@ -38,18 +51,6 @@ module.exports = async (req, res, next) => {
         if (!user.isVerified) {
             return res.status(400).json({
                 message: 'User is not verified',
-            });
-        }
-
-        // convert user to object
-        const userObject = user.toObject();
-
-        // compare password
-        const match = await comparePassword(password, userObject.password);
-
-        if (!match) {
-            return res.status(400).json({
-                message: 'Invalid email or password',
             });
         }
 
