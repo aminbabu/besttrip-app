@@ -15,7 +15,7 @@ module.exports = (req, res) => {
         res.removeHeader('Authorization');
 
         // render redirect to login page
-        return res.redirect('/auth/login');
+        return res.redirect('/auth/users/login');
     } catch (error) {
         console.error(error);
         return res.status(500).json({
