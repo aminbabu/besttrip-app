@@ -23,7 +23,7 @@ const {
 } = require('../../../../controllers/settings/content/exclusive-offers');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateExclusiveOfferId,
     validateExclusiveOffer,
@@ -66,7 +66,7 @@ router.get('/:id', validateExclusiveOfferId, getExclusiveOffer);
  */
 router.post(
     '/',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateExclusiveOfferFile,
     validateExclusiveOffer,
@@ -86,7 +86,7 @@ router.post(
  */
 router.put(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateExclusiveOfferId,
     validateExclusiveOfferFile,
@@ -106,7 +106,7 @@ router.put(
  */
 router.delete(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateExclusiveOfferId,
     deleteExclusiveOffer

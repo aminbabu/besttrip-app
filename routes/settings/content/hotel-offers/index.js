@@ -23,7 +23,7 @@ const {
 } = require('../../../../controllers/settings/content/hotel-offers');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateHotelOfferId,
     validateHotelOffer,
@@ -64,7 +64,7 @@ router.get('/:id', validateHotelOfferId, getHotelOffer);
  */
 router.post(
     '/',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateHotelOfferFile,
     validateHotelOffer,
@@ -84,7 +84,7 @@ router.post(
  */
 router.put(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateHotelOfferId,
     validateHotelOfferFile,
@@ -104,7 +104,7 @@ router.put(
  */
 router.delete(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateHotelOfferId,
     deleteHotelOffer

@@ -23,7 +23,7 @@ const {
 } = require('../../../../controllers/settings/content/umrah-offers');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateUmrahOfferId,
     validateUmrahOffer,
@@ -64,7 +64,7 @@ router.get('/:id', validateUmrahOfferId, getUmrahOffer);
  */
 router.post(
     '/',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateUmrahOfferFile,
     validateUmrahOffer,
@@ -84,7 +84,7 @@ router.post(
  */
 router.put(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateUmrahOfferId,
     validateUmrahOfferFile,
@@ -104,7 +104,7 @@ router.put(
  */
 router.delete(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateUmrahOfferId,
     deleteUmrahOffer

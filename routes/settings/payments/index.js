@@ -23,7 +23,7 @@ const {
 } = require('../../../controllers/settings/payments');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
     validatePaymentId,
     validatePayment,
@@ -53,19 +53,19 @@ router.get('/:id', validatePaymentId, getPayment);
 /**
  * @description - create payments settings
  * @param {string} path - '/settings/payments'
- * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePayment']
  * @param {function} controller - ['createPayment']
  * @returns {object} - router
  * @access private - ['admin']
  * @method POST
  */
-router.post('/', isUserAuthorized, isAllowed('admin'), validatePayment, createPayment);
+router.post('/', isAuthorized, isAllowed('admin'), validatePayment, createPayment);
 
 /**
  * @description - update payments settings
  * @param {string} path - '/settings/payments/:id'
- * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePaymentId', 'validatePayment']
  * @param {function} controller - ['updatePayment']
  * @returns {object} - router
@@ -74,7 +74,7 @@ router.post('/', isUserAuthorized, isAllowed('admin'), validatePayment, createPa
  */
 router.patch(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed('admin'),
     validatePaymentId,
     validatePayment,
@@ -84,14 +84,14 @@ router.patch(
 /**
  * @description - delete payments settings
  * @param {string} path - '/settings/payments/:id'
- * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePaymentId']
  * @param {function} controller - ['deletePayment']
  * @returns {object} - router
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isUserAuthorized, isAllowed('admin'), validatePaymentId, deletePayment);
+router.delete('/:id', isAuthorized, isAllowed('admin'), validatePaymentId, deletePayment);
 
 // export router
 module.exports = router;

@@ -23,7 +23,7 @@ const {
 } = require('../../../controllers/umrah/packages');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
     validateUmrahPackageId,
     validateUmrahPackageThumbnail,
@@ -60,11 +60,11 @@ const {
 /**
  * @description check if user is authorized
  * @param {string} path - /customers
- * @param {function} middleware - ['isUserAuthorized']
+ * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
  */
-router.use(isUserAuthorized);
+router.use(isAuthorized);
 
 /**
  * @description get all umrah packages packages

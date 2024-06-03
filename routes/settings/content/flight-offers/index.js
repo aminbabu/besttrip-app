@@ -23,7 +23,7 @@ const {
 } = require('../../../../controllers/settings/content/flight-offers');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateFlightOfferId,
     validateFlightOffer,
@@ -64,7 +64,7 @@ router.get('/:id', validateFlightOfferId, getFlightOffer);
  */
 router.post(
     '/',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateFlightOfferFile,
     validateFlightOffer,
@@ -84,7 +84,7 @@ router.post(
  */
 router.put(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateFlightOfferId,
     validateFlightOfferFile,
@@ -104,7 +104,7 @@ router.put(
  */
 router.delete(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateFlightOfferId,
     deleteFlightOffer

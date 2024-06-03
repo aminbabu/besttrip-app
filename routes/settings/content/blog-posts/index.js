@@ -23,7 +23,7 @@ const {
 } = require('../../../../controllers/settings/content/blog-posts');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateBlogPostId,
     validateBlogPost,
@@ -68,7 +68,7 @@ router.get('/:id', validateBlogPostId, getBlogPost);
  */
 router.post(
     '/',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateBlogPostThumbnail,
     validateBlogPostBanner,
@@ -90,7 +90,7 @@ router.post(
  */
 router.put(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateBlogPostThumbnail,
     validateBlogPostBanner,
@@ -110,7 +110,7 @@ router.put(
  * @access private ['admin']
  * @method DELETE
  */
-router.delete('/:id', isUserAuthorized, isAllowed(['admin']), validateBlogPostId, deleteBlogPost);
+router.delete('/:id', isAuthorized, isAllowed(['admin']), validateBlogPostId, deleteBlogPost);
 
 // export router
 module.exports = router;

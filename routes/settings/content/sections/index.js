@@ -21,7 +21,7 @@ const {
 } = require('../../../../controllers/settings/content/sections');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateContentSectionKey,
     validateContentSection,
@@ -51,7 +51,7 @@ router.get('/', getSections);
 /**
  * @description - Update/Create content section
  * @param {string} path - '/settings/content/sections/:key'
- * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validators - ['validateContentSection']
  * @param {function} controller - ['updateOrCreateSection']
  * @returns {object} - router
@@ -60,7 +60,7 @@ router.get('/', getSections);
  */
 router.put(
     '/:key',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateContentSection,
     updateOrCreateSection

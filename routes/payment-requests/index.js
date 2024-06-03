@@ -23,7 +23,7 @@ const {
 } = require('../../controllers/payment-requests');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../middlewares/auth');
 const {
     validatePaymentRequestId,
     validatePaymentRequest,
@@ -32,11 +32,11 @@ const {
 /**
  * @description check if user is authorized
  * @param {string} path - '/payment-requests'
- * @param {function} middleware - ['isUserAuthorized']
+ * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
  */
-router.use(isUserAuthorized);
+router.use(isAuthorized);
 
 /**
  * @description - get payment requests

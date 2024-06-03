@@ -23,7 +23,7 @@ const {
 } = require('../../../../controllers/settings/site/meta');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateMetaSettingsId,
     validateMetaSettings,
@@ -53,19 +53,19 @@ router.get('/:id', validateMetaSettingsId, getMetaSetting);
 /**
  * @description create meta settings
  * @param {string} path - '/settings/site/meta'
- * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateMetaSettings']
  * @param {function} controller - ['createMetaSetting']
  * @returns {object} - router
  * @access private - ['admin']
  * @method POST
  */
-router.post('/', isUserAuthorized, isAllowed('admin'), validateMetaSettings, createMetaSetting);
+router.post('/', isAuthorized, isAllowed('admin'), validateMetaSettings, createMetaSetting);
 
 /**
  * @description update meta settings
  * @param {string} path - '/settings/site/meta/:id'
- * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateMetaSettingsId', 'validateMetaSettings']
  * @param {function} controller - ['updateMetaSetting']
  * @returns {object} - router
@@ -74,7 +74,7 @@ router.post('/', isUserAuthorized, isAllowed('admin'), validateMetaSettings, cre
  */
 router.patch(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed('admin'),
     validateMetaSettingsId,
     validateMetaSettings,
@@ -84,7 +84,7 @@ router.patch(
 /**
  * @description delete meta settings
  * @param {string} path - '/settings/site/meta/:id'
- * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateMetaSettingsId']
  * @param {function} controller - ['deleteMetaSetting']
  * @returns {object} - router
@@ -93,7 +93,7 @@ router.patch(
  */
 router.delete(
     '/:id',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed('admin'),
     validateMetaSettingsId,
     deleteMetaSetting

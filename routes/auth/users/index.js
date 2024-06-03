@@ -28,7 +28,7 @@ const {
     viewVerifyEmail,
     verifyEmail,
 } = require('../../../controllers/auth/users');
-const { isUserAuthorized, isUserNotAuthorized } = require('../../../middlewares/auth');
+const { isAuthorized, isUserNotAuthorized } = require('../../../middlewares/auth');
 
 // middlewares
 const {
@@ -153,13 +153,13 @@ router.post('/send-verification-email', validateSendVerificationEmail, resendVer
 /**
  * @description view verify email page
  * @param {string} path - /auth/users/verify-email
- * @param {function} middleware ['isUserAuthorized']
+ * @param {function} middleware ['isAuthorized']
  * @param {function} controller - ['viewVerifyEmail']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/verify-email', isUserAuthorized, viewVerifyEmail);
+router.get('/verify-email', isAuthorized, viewVerifyEmail);
 
 /**
  * @description verify email

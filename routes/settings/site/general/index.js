@@ -20,7 +20,7 @@ const {
 } = require('../../../../controllers/settings/site/general');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateGeneralSettings,
     validateGeneralSettingsFiles,
@@ -40,7 +40,7 @@ router.get('/', getGeneralSettings);
 /**
  * @description update general settings
  * @param {string} path - '/settings/site/general'
- * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateGeneralSettingsFiles', 'validateGeneralSettings']
  * @param {function} middleware - ['uploadGeneralSettingsFile']
  * @param {function} controller - ['updateGeneralSettings']
@@ -50,7 +50,7 @@ router.get('/', getGeneralSettings);
  */
 router.post(
     '/',
-    isUserAuthorized,
+    isAuthorized,
     isAllowed(['admin']),
     validateGeneralSettings,
     validateGeneralSettingsFiles,

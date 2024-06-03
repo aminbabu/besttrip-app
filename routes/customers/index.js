@@ -25,7 +25,7 @@ const {
 } = require('../../controllers/customers');
 
 // middlewares
-const { isUserAuthorized, isAllowed } = require('../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../middlewares/auth');
 const {
     validateCustomerId,
     validateCustomer,
@@ -39,11 +39,11 @@ const { uploadAvatar } = require('../../middlewares/files');
 /**
  * @description check if user is authorized
  * @param {string} path - /customers
- * @param {function} middleware - ['isUserAuthorized']
+ * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
  */
-router.use(isUserAuthorized);
+router.use(isAuthorized);
 
 /**
  * @description get all customers
