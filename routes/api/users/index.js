@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 18 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -32,7 +32,7 @@ const {
     validateUserAccount,
 } = require('../../../middlewares/validators/users');
 const { validateAvatar } = require('../../../middlewares/validators/files');
-const { uploadAvatar } = require('../../../middlewares/api/files');
+const { uploadAvatar } = require('../../../middlewares/files');
 
 // constants
 const { USER_ROLES } = require('../../../constants/api');
