@@ -75,9 +75,12 @@ module.exports = async (req, res, next) => {
         });
 
         // return response
-        return res.status(200).json({
-            message: 'Email verified successfully',
-        });
+        // return res.status(200).json({
+        //     message: 'Email verified successfully',
+        // });
+
+        // return response view
+        return res.render('email-verification');
     } catch (err) {
         return next(err);
     }
