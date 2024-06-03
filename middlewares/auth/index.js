@@ -12,4 +12,5 @@ module.exports = {
     isAuthorized: require('./is-authorized'),
     isUserNotAuthorized: require('./is-not-authorized'),
     isAllowed: require('./is-allowed'),
+    isUserAuthorized: require('./is-user-authorized'),
 };
