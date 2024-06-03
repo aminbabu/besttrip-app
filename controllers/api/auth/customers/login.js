@@ -42,7 +42,14 @@ module.exports = async (req, res, next) => {
         // check if customer status is active
         if (customer.status !== 'active') {
             return res.status(400).json({
-                message: 'Customer is not active',
+                message: 'Customer is not active. Please contact support',
+            });
+        }
+
+        // check if customer is verified
+        if (!customer.isVerified) {
+            return res.status(400).json({
+                message: 'Please verify your email',
             });
         }
 

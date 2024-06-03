@@ -43,7 +43,7 @@ module.exports = async (req, res, next) => {
         // check if user status is active
         if (user.status !== 'active') {
             return res.status(400).json({
-                message: 'Please contact support',
+                message: 'User is not active. Please contact support',
             });
         }
 
