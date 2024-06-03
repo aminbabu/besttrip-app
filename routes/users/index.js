@@ -25,7 +25,7 @@ const {
 } = require('../../controllers/users');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../middlewares/auth');
+const { isAuthorized, isAllowed, isUserAuthorized } = require('../../middlewares/auth');
 const {
     validateUserId,
     validateUser,
@@ -39,53 +39,43 @@ const { uploadAvatar } = require('../../middlewares/files');
 const { USER_ROLES } = require('../../constants');
 
 /**
- * @description check if user is authorized
- * @param {string} path - /users
- * @param {function} middleware - ['isAuthorized']
- * @returns {object} - router
- * @access private
- * @method USE
- */
-router.use(isAuthorized);
-
-/**
  * @description get all users
  * @param {string} path - /users
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} controller - ['getAllUsers']
  * @returns {object} - router
  * @access private - ['admin']
  * @method GET
  */
-router.get('/', isAllowed(['admin']), getAllUsers);
+router.get('/', isAuthorized, isAllowed(['admin']), getAllUsers);
 
 /**
  * @description get user by mongo id
  * @param {string} path - /users/:id
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateUserId']
  * @param {function} controller - ['getUser']
  * @returns {object} - router
  * @access private - ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), validateUserId, getUser);
+router.get('/:id', isAuthorized, isAllowed(['admin']), validateUserId, getUser);
 
 /**
  * @description view user profile by self
  * @param {string} path - /users/profile
- * @param {function} middleware - []
+ * @param {function} middleware - ['isUserAuthorized']
  * @param {function} controller - ['viewUserProfile']
  * @returns {object} - router
  * @access private - []
  * @method GET
  */
-router.get('/profile', viewUserProfile);
+router.get('/profile', isUserAuthorized, viewUserProfile);
 
 /**
  * @description update user by self
  * @param {string} path - /users/self
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateAvatar', 'validateUserAccount']
  * @param {function} validator - ['validateUserSelf']
  * @param {function} controller - ['updateUserBySelf']
@@ -95,6 +85,7 @@ router.get('/profile', viewUserProfile);
  */
 router.patch(
     '/self',
+    isAuthorized,
     isAllowed(USER_ROLES),
     validateAvatar,
     validateUserAccount,
@@ -106,7 +97,7 @@ router.patch(
 /**
  * @description update user by mongo id
  * @param {string} path - /users/:id
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateAvatar', 'validateUserAccount']
  * @param {function} validator - ['validateUser']
  * @param {function} controller - ['updateUser']
@@ -116,6 +107,7 @@ router.patch(
  */
 router.patch(
     '/:id',
+    isAuthorized,
     isAllowed(['admin']),
     validateAvatar,
     validateUserAccount,
@@ -127,25 +119,25 @@ router.patch(
 /**
  * @description delete user by mongo id
  * @param {string} path - /users/:id
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateUserId']
  * @param {function} controller - ['deleteUser']
  * @returns {object} - router
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUser);
+router.delete('/:id', isAuthorized, isAllowed(['admin']), validateUserId, deleteUser);
 
 /**
  * @description delete user by self
  * @param {string} path - /users/self
- * @param {function} middleware - ['isAllowed']
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} controller - ['deleteUserBySelf']
  * @returns {object} - router
  * @access private - ['user']
  * @method DELETE
  */
-router.delete('/', isAllowed(['user']), deleteUserBySelf);
+router.delete('/', isAuthorized, isAllowed(['user']), deleteUserBySelf);
 
 // export
 module.exports = router;
