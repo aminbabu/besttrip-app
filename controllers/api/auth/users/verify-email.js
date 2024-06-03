@@ -81,8 +81,8 @@ module.exports = async (req, res, next) => {
 
         // return email verification view
         return res.render('auth/email-verification', {
-            title: 'Email Verification',
-            message: 'Email verified successfully',
+            title: 'Email Verified!',
+            message: 'Your email has been verified successfully',
         });
     } catch (err) {
         return next(err);
