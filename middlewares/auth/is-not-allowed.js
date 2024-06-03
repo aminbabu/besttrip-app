@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 May, 2024
- * @update_date 27 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -12,7 +12,7 @@ const { User, Customer } = require('../../models');
 
 // is allowed middleware
 module.exports =
-    (roles = ['admin']) =>
+    (roles = ['customer']) =>
     async (req, res, next) => {
         try {
             let user;
