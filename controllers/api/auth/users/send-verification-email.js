@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 22 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -35,16 +35,12 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // get existing tokens
-        const tokens = await Token.find({
+        // delete existing expired tokens
+        await Token.deleteMany({
             user: user._id,
             type: 'verify-email',
+            expiresAt: { $lt: new Date() },
         });
-
-        // delete existing tokens
-        await Promise.all(
-            tokens.map((tokenItem) => tokenItem.type === 'verify-email' && tokenItem.deleteOne())
-        );
 
         // generate token
         const token = generateToken(user.toObject());
