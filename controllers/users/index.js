@@ -11,8 +11,4 @@
 module.exports = {
     getUsers: require('./get-users'),
     getUser: require('./get-user'),
-    updateUser: require('./update-user'),
-    updateUserBySelf: require('./update-user-by-self'),
-    deleteUser: require('./delete-user'),
-    deleteUserBySelf: require('./delete-user-by-self'),
 };
