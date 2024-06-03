@@ -15,13 +15,20 @@ const router = express.Router();
 
 // controllers
 const {
+    viewRegister,
     register,
+    viewLogin,
     login,
+    viewForgotPassword,
     forgotPassword,
+    viewResetPassword,
     resetPassword,
-    sendVerificationEmail,
+    viewResendVerificationEmail,
+    resendVerificationEmail,
+    viewVerifyEmail,
     verifyEmail,
 } = require('../../../../controllers/api/auth/users');
+const { isAuthorized, isNotAuthorized } = require('../../../../middlewares/api/auth');
 
 // middlewares
 const {
@@ -32,6 +39,17 @@ const {
     validateSendVerificationEmail,
     validateVerifyEmail,
 } = require('../../../../middlewares/validators/auth');
+
+/**
+ * @description view register page
+ * @param {string} path - /auth/users/register
+ * @param {function} middleware ['isNotAuthorized']
+ * @param {function} controller - ['viewRegister']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/register', isNotAuthorized, viewRegister);
 
 /**
  * @description register a new user
@@ -45,6 +63,17 @@ const {
 router.post('/register', validateRegister, register);
 
 /**
+ * @description view login page
+ * @param {string} path - /auth/users/login
+ * @param {function} middleware ['isNotAuthorized']
+ * @param {function} controller - ['viewLogin']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/login', isNotAuthorized, viewLogin);
+
+/**
  * @description login a user
  * @param {string} path - /auth/users/login
  * @param {function} validator - ['validateLogin']
@@ -54,6 +83,17 @@ router.post('/register', validateRegister, register);
  * @method POST
  */
 router.post('/login', validateLogin, login);
+
+/**
+ * @description view forgot password page
+ * @param {string} path - /auth/users/forgot-password
+ * @param {function} middleware ['isNotAuthorized']
+ * @param {function} controller - ['viewForgotPassword']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/forgot-password', isNotAuthorized, viewForgotPassword);
 
 /**
  * @description forgot password
@@ -67,6 +107,17 @@ router.post('/login', validateLogin, login);
 router.post('/forgot-password', validateForgotPassword, forgotPassword);
 
 /**
+ * @description view reset password page
+ * @param {string} path - /auth/users/reset-password
+ * @param {function} middleware ['isNotAuthorized']
+ * @param {function} controller - ['viewResetPassword']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/reset-password', isNotAuthorized, viewResetPassword);
+
+/**
  * @description reset password
  * @param {string} path - /auth/users/reset-password
  * @param {function} validator - ['validateResetPassword']
@@ -78,15 +129,37 @@ router.post('/forgot-password', validateForgotPassword, forgotPassword);
 router.post('/reset-password', validateResetPassword, resetPassword);
 
 /**
+ * @description view resend verification email page
+ * @param {string} path - /auth/users/resend-verification-email
+ * @param {function} middleware ['isNotAuthorized']
+ * @param {function} controller - ['viewResendVerificationEmail']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/resend-verification-email', isNotAuthorized, viewResendVerificationEmail);
+
+/**
  * @description send verification email
  * @param {string} path - /auth/users/send-verification-email
  * @param {function} validator - ['validateSendVerificationEmail']
- * @param {function} controller - ['sendVerificationEmail']
+ * @param {function} controller - ['resendVerificationEmail']
  * @returns {object} - router
  * @access public
  * @method POST
  */
-router.post('/send-verification-email', validateSendVerificationEmail, sendVerificationEmail);
+router.post('/send-verification-email', validateSendVerificationEmail, resendVerificationEmail);
+
+/**
+ * @description view verify email page
+ * @param {string} path - /auth/users/verify-email
+ * @param {function} middleware ['isAuthorized']
+ * @param {function} controller - ['viewVerifyEmail']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/verify-email', isAuthorized, viewVerifyEmail);
 
 /**
  * @description verify email
