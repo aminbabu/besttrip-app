@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
 
         if (!user) {
             return res.status(400).json({
-                message: 'Invalid email or password',
+                message: 'Please check your email and password',
             });
         }
 
@@ -36,21 +36,21 @@ module.exports = async (req, res, next) => {
         // check if password match
         if (!match) {
             return res.status(400).json({
-                message: 'Invalid email or password',
+                message: 'Please check your email and password',
             });
         }
 
         // check if user status is active
         if (user.status !== 'active') {
             return res.status(400).json({
-                message: 'User is not active',
+                message: 'Please contact support',
             });
         }
 
         // check if user is verified
         if (!user.isVerified) {
             return res.status(400).json({
-                message: 'User is not verified',
+                message: 'Please verify your email',
             });
         }
 
