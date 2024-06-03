@@ -20,10 +20,10 @@ const {
     createBlogPost,
     updateBlogPost,
     deleteBlogPost,
-} = require('../../../../controllers/api/settings/content/blog-posts');
+} = require('../../../../controllers/settings/content/blog-posts');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateBlogPostId,
     validateBlogPost,
@@ -33,7 +33,7 @@ const {
 const {
     uploadBlogPostBanner,
     uploadBlogPostThumbnail,
-} = require('../../../../middlewares/api/settings/content/blog-posts');
+} = require('../../../../middlewares/settings/content/blog-posts');
 
 /**
  * @description - get blog posts

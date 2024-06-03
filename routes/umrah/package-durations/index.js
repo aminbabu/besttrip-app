@@ -20,10 +20,10 @@ const {
     createUmrahPackageDuration,
     updateUmrahPackageDuration,
     deleteUmrahPackageDuration,
-} = require('../../../controllers/api/umrah/package-durations');
+} = require('../../../controllers/umrah/package-durations');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
     validateUmrahPackageDurationId,
     validateUmrahPackageDuration,

@@ -17,17 +17,15 @@ const router = express.Router();
 const {
     getGeneralSettings,
     updateOrCreateGeneralSettings,
-} = require('../../../../controllers/api/settings/site/general');
+} = require('../../../../controllers/settings/site/general');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateGeneralSettings,
     validateGeneralSettingsFiles,
 } = require('../../../../middlewares/validators/settings/site/general');
-const {
-    uploadGeneralSettingsFile,
-} = require('../../../../middlewares/api/settings/site/general');
+const { uploadGeneralSettingsFile } = require('../../../../middlewares/settings/site/general');
 
 /**
  * @description get general settings

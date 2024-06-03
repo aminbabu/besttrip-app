@@ -20,18 +20,16 @@ const {
     createHotelOffer,
     updateHotelOffer,
     deleteHotelOffer,
-} = require('../../../../controllers/api/settings/content/hotel-offers');
+} = require('../../../../controllers/settings/content/hotel-offers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateHotelOfferId,
     validateHotelOffer,
     validateHotelOfferFile,
 } = require('../../../../middlewares/validators/settings/content/hotel-offers');
-const {
-    uploadHotelOfferFile,
-} = require('../../../../middlewares/api/settings/content/hotel-offers');
+const { uploadHotelOfferFile } = require('../../../../middlewares/settings/content/hotel-offers');
 
 /**
  * @description - get hotel offers

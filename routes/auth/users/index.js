@@ -27,8 +27,8 @@ const {
     resendVerificationEmail,
     viewVerifyEmail,
     verifyEmail,
-} = require('../../../controllers/api/auth/users');
-const { isAuthorized, isNotAuthorized } = require('../../../middlewares/api/auth');
+} = require('../../../controllers/auth/users');
+const { isAuthorized, isNotAuthorized } = require('../../../middlewares/auth');
 
 // middlewares
 const {

@@ -18,10 +18,10 @@ const {
     getSections,
     getSection,
     updateOrCreateSection,
-} = require('../../../../controllers/api/settings/content/sections');
+} = require('../../../../controllers/settings/content/sections');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateContentSectionKey,
     validateContentSection,

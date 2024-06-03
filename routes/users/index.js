@@ -21,10 +21,10 @@ const {
     updateUserBySelf,
     deleteUser,
     deleteUserBySelf,
-} = require('../../controllers/api/users');
+} = require('../../controllers/users');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../middlewares/auth');
 const {
     validateUserId,
     validateUser,

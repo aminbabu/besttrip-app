@@ -20,10 +20,10 @@ const {
     createExclusiveOffer,
     updateExclusiveOffer,
     deleteExclusiveOffer,
-} = require('../../../../controllers/api/settings/content/exclusive-offers');
+} = require('../../../../controllers/settings/content/exclusive-offers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateExclusiveOfferId,
     validateExclusiveOffer,
@@ -31,7 +31,7 @@ const {
 } = require('../../../../middlewares/validators/settings/content/exclusive-offers');
 const {
     uploadExclusiveOfferFile,
-} = require('../../../../middlewares/api/settings/content/exclusive-offers');
+} = require('../../../../middlewares/settings/content/exclusive-offers');
 
 /**
  * @description - get exclusive offers

@@ -18,16 +18,16 @@ const {
     getThemes,
     getTheme,
     updateOrCreateTheme,
-} = require('../../../controllers/api/settings/themes');
+} = require('../../../controllers/settings/themes');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
     validateThemeSettingsKey,
     validateThemeSettings,
     validateThemeSettingsFile,
 } = require('../../../middlewares/validators/settings/themes');
-const { uploadThemeSettingsFile } = require('../../../middlewares/api/settings/themes');
+const { uploadThemeSettingsFile } = require('../../../middlewares/settings/themes');
 
 /**
  * @description get themes

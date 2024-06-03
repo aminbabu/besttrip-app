@@ -19,10 +19,10 @@ const {
     getPolicy,
     createPolicy,
     updatePolicy,
-} = require('../../../../controllers/api/settings/site/policy');
+} = require('../../../../controllers/settings/site/policy');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validatePolicySettingsKey,
     validatePolicySettings,

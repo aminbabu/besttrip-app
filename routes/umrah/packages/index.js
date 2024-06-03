@@ -20,10 +20,10 @@ const {
     createUmrahPackage,
     updateUmrahPackage,
     deleteUmrahPackage,
-} = require('../../../controllers/api/umrah/packages');
+} = require('../../../controllers/umrah/packages');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
     validateUmrahPackageId,
     validateUmrahPackageThumbnail,
@@ -55,7 +55,7 @@ const {
     uploadMadinahHotelGallery,
     uploadUmrahDayWiseItineraryThumbnails,
     uploadUmrahThumbnail,
-} = require('../../../middlewares/api/umrah/packages');
+} = require('../../../middlewares/umrah/packages');
 
 /**
  * @description check if user is authorized

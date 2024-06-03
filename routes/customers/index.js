@@ -22,10 +22,10 @@ const {
     updateCustomerBySelf,
     deleteCustomer,
     deleteCustomerBySelf,
-} = require('../../controllers/api/customers');
+} = require('../../controllers/customers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../middlewares/auth');
 const {
     validateCustomerId,
     validateCustomer,
