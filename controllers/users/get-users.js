@@ -1,17 +1,17 @@
 /**
- * @file /controllers/users/get-all-users.js
+ * @file /controllers/users/get-users.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 08 April, 2024
- * @update_date 10 April, 2024
+ * @date 03 June, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
 const { User } = require('../../models');
 
 // export get all users controller
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
     try {
         // get all users and total count using aggregation
         const [{ users, totalCount }] = await User.aggregate([
@@ -31,13 +31,9 @@ module.exports = async (req, res, next) => {
             },
         ]);
 
-        // return response
-        return res.status(200).json({
-            message: 'Fetched users successfully',
-            users,
-            totalCount,
-        });
+        // return rendered users
+        return res.render('users', { users, totalCount });
     } catch (error) {
-        return next(error);
+        return res.redirect('/errors/500');
     }
 };
