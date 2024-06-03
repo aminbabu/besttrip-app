@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 21 March, 2024
- * @update_date 07 April, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -14,8 +14,17 @@ const { env } = require('../config');
 
 // export verify email mail
 module.exports = async (user, token) => {
+    let redirectTo;
+
     // read template file
     const template = fs.readFileSync(`${__dirname}/../templates/email/verify-email.ejs`, 'utf-8');
+
+    // set redirect url
+    if (user.role === 'customer') {
+        redirectTo = `${env.APP_URL}:${env.PORT}/api/auth/customers/verify-email?token=${token}`;
+    } else {
+        redirectTo = `${env.APP_URL}:${env.PORT}/api/auth/users/verify-email?token=${token}`;
+    }
 
     // compile template
     const html = ejs.render(template, {
@@ -27,7 +36,7 @@ module.exports = async (user, token) => {
             website: `${env.APP_URL}:${env.PORT}`,
         },
         user,
-        redirectTo: `${env.APP_URL}:${env.PORT}/auth/${user.role === 'customer' ? 'customers' : 'users'}/verify-email?token=${token}`,
+        redirectTo,
     });
 
     // attachments
