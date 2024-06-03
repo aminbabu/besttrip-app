@@ -4,14 +4,14 @@
  * @version 0.0.0
  * @author best-trip
  * @date 12 April, 2024
- * @update_date 17 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
 const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const { Customer, User } = require('../../../models');
+const { Customer, User } = require('../../models');
 
 // export upload avatar middleware
 module.exports =
