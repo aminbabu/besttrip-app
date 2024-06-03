@@ -15,6 +15,7 @@ const router = express.Router();
 
 // controllers
 const {
+    viewUserProfile,
     getAllUsers,
     getUser,
     updateUser,
@@ -69,6 +70,17 @@ router.get('/', isAllowed(['admin']), getAllUsers);
  * @method GET
  */
 router.get('/:id', isAllowed(['admin']), validateUserId, getUser);
+
+/**
+ * @description view user profile by self
+ * @param {string} path - /users/profile
+ * @param {function} middleware - []
+ * @param {function} controller - ['viewUserProfile']
+ * @returns {object} - router
+ * @access private - []
+ * @method GET
+ */
+router.get('/profile', viewUserProfile);
 
 /**
  * @description update user by self
