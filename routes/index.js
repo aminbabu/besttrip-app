@@ -35,6 +35,7 @@ router.use('/payment-requests', require('./payment-requests'));
 router.use('/umrah/packages', require('./umrah/packages'));
 router.use('/umrah/package-durations', require('./umrah/package-durations'));
 router.use('/umrah/package-types', require('./umrah/package-types'));
+router.use('/errors', require('./errors'));
 
 // export router
 module.exports = router;
