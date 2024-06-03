@@ -13,5 +13,6 @@ module.exports = {
     login: require('./login'),
     forgotPassword: require('./forgot-password'),
     resetPassword: require('./reset-password'),
+    resendVerificationEmail: require('./resend-verification-email'),
     logout: require('./logout'),
 };
