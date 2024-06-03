@@ -20,7 +20,7 @@ const {
 } = require('../../../../controllers/settings/site/contact');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validateContactSettings,
 } = require('../../../../middlewares/validators/settings/site/contact');
@@ -38,7 +38,7 @@ router.get('/', getContactSettings);
 /**
  * @description update contact settings
  * @param {string} path - '/settings/site/contact'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
  * @param {function} validator - ['validateContactSettings']
  * @param {function} controller - ['updateContactSettings']
  * @returns {object} - router
@@ -47,7 +47,7 @@ router.get('/', getContactSettings);
  */
 router.post(
     '/',
-    isAuthorized,
+    isUserAuthorized,
     isAllowed(['admin']),
     validateContactSettings,
     updateOrCreateContactSettings

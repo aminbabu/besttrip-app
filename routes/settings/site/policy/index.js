@@ -22,7 +22,7 @@ const {
 } = require('../../../../controllers/settings/site/policy');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isUserAuthorized, isAllowed } = require('../../../../middlewares/auth');
 const {
     validatePolicySettingsKey,
     validatePolicySettings,
@@ -31,7 +31,7 @@ const {
 /**
  * @description get policies settings
  * @param {string} path - '/settings/site/policy'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
  * @param {function} controller - ['getPolicies']
  * @returns {object} - router
  * @access public
@@ -42,7 +42,7 @@ router.get('/', getPolicies);
 /**
  * @description get policy settings
  * @param {string} path - '/settings/site/policy/:key'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePolicySettingsKey']
  * @param {function} controller - ['getPolicy']
  * @returns {object} - router
@@ -54,19 +54,19 @@ router.get('/:key', validatePolicySettingsKey, getPolicy);
 /**
  * @description create policy settings
  * @param {string} path - '/settings/site/policy'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePolicySettings']
  * @param {function} controller - ['createPolicy']
  * @returns {object} - router
  * @access private - ['admin']
  * @method POST
  */
-router.post('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, createPolicy);
+router.post('/', isUserAuthorized, isAllowed(['admin']), validatePolicySettings, createPolicy);
 
 /**
  * @description update policy settings
  * @param {string} path - '/settings/site/policy/:key'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePolicySettingsKey', 'validatePolicySettings']
  * @param {function} controller - ['updatePolicy']
  * @returns {object} - router
@@ -75,7 +75,7 @@ router.post('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, cre
  */
 router.patch(
     '/:key',
-    isAuthorized,
+    isUserAuthorized,
     isAllowed(['admin']),
     validatePolicySettingsKey,
     validatePolicySettings,

@@ -23,7 +23,7 @@ const {
 } = require('../../../controllers/umrah/package-durations');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
+const { isUserAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
     validateUmrahPackageDurationId,
     validateUmrahPackageDuration,
@@ -32,11 +32,11 @@ const {
 /**
  * @description check if user is authorized
  * @param {string} path - /customers
- * @param {function} middleware - ['isAuthorized']
+ * @param {function} middleware - ['isUserAuthorized']
  * @returns {object} - router
  * @method USE
  */
-router.use(isAuthorized);
+router.use(isUserAuthorized);
 
 /**
  * @description get all umrah package durations

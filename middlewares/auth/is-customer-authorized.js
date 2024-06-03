@@ -1,18 +1,18 @@
 /**
- * @file /middlewares/api/auth/is-authorized.js
+ * @file /middlewares/api/auth/is-customer-authorized.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 27 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
 const { env } = require('../../config');
-const { User, Customer } = require('../../models');
+const { Customer } = require('../../models');
 const { verifyToken, generateToken } = require('../../utils');
 
-// authourize user
+// authourize customer
 module.exports = async (req, res, next) => {
     // get authorization from header
     const authorization = req.header('authorization') || req.cookies.token;
@@ -28,35 +28,25 @@ module.exports = async (req, res, next) => {
     const token = authorization.replace('Bearer ', '');
 
     try {
-        let user;
-
         // verify token
         const payload = verifyToken(token);
 
-        // check if user exists based on role by id, email, and status
-        if (payload.user.role === 'customer') {
-            user = await Customer.findOne({
-                _id: payload.user._id,
-                email: payload.user.email,
-                status: 'active',
-            });
-        } else {
-            user = await User.findOne({
-                _id: payload.user._id,
-                email: payload.user.email,
-                status: 'active',
-            });
-        }
+        // check if customer exists based on role by id, email, and status
+        const customer = await Customer.findOne({
+            _id: payload.user._id,
+            email: payload.user.email,
+            status: 'active',
+        });
 
-        // check if user is not exist
-        if (!user) {
+        // check if customer is not exist
+        if (!customer) {
             return res.status(401).json({
                 message: 'Unauthorized',
             });
         }
 
         // generate token
-        const newToken = generateToken(user);
+        const newToken = generateToken(customer);
 
         // set token in response
         res.set('authorization', `Bearer ${newToken}`);
@@ -72,8 +62,8 @@ module.exports = async (req, res, next) => {
         // set token in request
         req.token = newToken;
 
-        // set user in request
-        req.user = user.toObject();
+        // set customer in request
+        req.customer = customer.toObject();
 
         // proceed to next middleware
         return next();

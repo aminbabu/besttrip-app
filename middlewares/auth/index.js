@@ -9,7 +9,8 @@
 
 // export all middlewares
 module.exports = {
-    isAuthorized: require('./is-authorized'),
-    isNotAuthorized: require('./is-not-authorized'),
+    isCustomerAuthorized: require('./is-customer-authorized'),
+    isUserAuthorized: require('./is-user-authorized'),
+    isUserNotAuthorized: require('./is-user-not-authorized'),
     isAllowed: require('./is-allowed'),
 };

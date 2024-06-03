@@ -21,7 +21,7 @@ const {
 } = require('../../../controllers/settings/themes');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
+const { isUserAuthorized, isAllowed } = require('../../../middlewares/auth');
 const {
     validateThemeSettingsKey,
     validateThemeSettings,
@@ -37,7 +37,7 @@ const { uploadThemeSettingsFile } = require('../../../middlewares/settings/theme
  * @access public
  * @method GET
  */
-router.get('/', isAuthorized, isAllowed(['admin']), getThemes);
+router.get('/', isUserAuthorized, isAllowed(['admin']), getThemes);
 
 /**
  * @description get theme by key
@@ -53,7 +53,7 @@ router.get('/:theme', validateThemeSettingsKey, getTheme);
 /**
  * @description update or create theme
  * @param {string} path - '/settings/themes/:key'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} middleware - ['isUserAuthorized', 'isAllowed']
  * @param {function} validator - ['validateThemeSettingsKey', 'validateThemeSettings']
  * @param {function} validator - ['validateThemeSettingsFile']
  * @param {function} middleware - ['uploadThemeSettingsFile']
@@ -68,7 +68,7 @@ router.post(
         console.log('req.body', req.body);
         next();
     },
-    isAuthorized,
+    isUserAuthorized,
     isAllowed(['admin']),
     validateThemeSettingsKey,
     validateThemeSettingsFile,

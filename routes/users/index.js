@@ -24,7 +24,7 @@ const {
 } = require('../../controllers/users');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../middlewares/auth');
+const { isUserAuthorized, isAllowed } = require('../../middlewares/auth');
 const {
     validateUserId,
     validateUser,
@@ -40,12 +40,12 @@ const { USER_ROLES } = require('../../constants');
 /**
  * @description check if user is authorized
  * @param {string} path - /users
- * @param {function} middleware - ['isAuthorized']
+ * @param {function} middleware - ['isUserAuthorized']
  * @returns {object} - router
  * @access private
  * @method USE
  */
-router.use(isAuthorized);
+router.use(isUserAuthorized);
 
 /**
  * @description get all users

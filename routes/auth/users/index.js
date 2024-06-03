@@ -28,7 +28,7 @@ const {
     viewVerifyEmail,
     verifyEmail,
 } = require('../../../controllers/auth/users');
-const { isAuthorized, isNotAuthorized } = require('../../../middlewares/auth');
+const { isUserAuthorized, isUserNotAuthorized } = require('../../../middlewares/auth');
 
 // middlewares
 const {
@@ -43,13 +43,13 @@ const {
 /**
  * @description view register page
  * @param {string} path - /auth/users/register
- * @param {function} middleware ['isNotAuthorized']
+ * @param {function} middleware ['isUserNotAuthorized']
  * @param {function} controller - ['viewRegister']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/register', isNotAuthorized, viewRegister);
+router.get('/register', isUserNotAuthorized, viewRegister);
 
 /**
  * @description register a new user
@@ -65,13 +65,13 @@ router.post('/register', validateRegister, register);
 /**
  * @description view login page
  * @param {string} path - /auth/users/login
- * @param {function} middleware ['isNotAuthorized']
+ * @param {function} middleware ['isUserNotAuthorized']
  * @param {function} controller - ['viewLogin']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/login', isNotAuthorized, viewLogin);
+router.get('/login', isUserNotAuthorized, viewLogin);
 
 /**
  * @description login a user
@@ -87,13 +87,13 @@ router.post('/login', validateLogin, login);
 /**
  * @description view forgot password page
  * @param {string} path - /auth/users/forgot-password
- * @param {function} middleware ['isNotAuthorized']
+ * @param {function} middleware ['isUserNotAuthorized']
  * @param {function} controller - ['viewForgotPassword']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/forgot-password', isNotAuthorized, viewForgotPassword);
+router.get('/forgot-password', isUserNotAuthorized, viewForgotPassword);
 
 /**
  * @description forgot password
@@ -109,13 +109,13 @@ router.post('/forgot-password', validateForgotPassword, forgotPassword);
 /**
  * @description view reset password page
  * @param {string} path - /auth/users/reset-password
- * @param {function} middleware ['isNotAuthorized']
+ * @param {function} middleware ['isUserNotAuthorized']
  * @param {function} controller - ['viewResetPassword']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/reset-password', isNotAuthorized, viewResetPassword);
+router.get('/reset-password', isUserNotAuthorized, viewResetPassword);
 
 /**
  * @description reset password
@@ -131,13 +131,13 @@ router.post('/reset-password', validateResetPassword, resetPassword);
 /**
  * @description view resend verification email page
  * @param {string} path - /auth/users/resend-verification-email
- * @param {function} middleware ['isNotAuthorized']
+ * @param {function} middleware ['isUserNotAuthorized']
  * @param {function} controller - ['viewResendVerificationEmail']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/resend-verification-email', isNotAuthorized, viewResendVerificationEmail);
+router.get('/resend-verification-email', isUserNotAuthorized, viewResendVerificationEmail);
 
 /**
  * @description send verification email
@@ -153,13 +153,13 @@ router.post('/send-verification-email', validateSendVerificationEmail, resendVer
 /**
  * @description view verify email page
  * @param {string} path - /auth/users/verify-email
- * @param {function} middleware ['isAuthorized']
+ * @param {function} middleware ['isUserAuthorized']
  * @param {function} controller - ['viewVerifyEmail']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/verify-email', isAuthorized, viewVerifyEmail);
+router.get('/verify-email', isUserAuthorized, viewVerifyEmail);
 
 /**
  * @description verify email
