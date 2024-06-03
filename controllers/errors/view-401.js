@@ -10,10 +10,16 @@
 // export 401 error view controller
 module.exports = (req, res) => {
     try {
-        res.render('errors/401', {
-            title: '401 - Unauthorized',
-        });
+        // clear cookie and header
+        res.clearCookie('token');
+        res.removeHeader('Authorization');
+
+        // render redirect to login page
+        return res.redirect('/auth/login');
     } catch (error) {
         console.error(error);
+        return res.status(500).json({
+            message: 'Internal server error',
+        });
     }
 };
