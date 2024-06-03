@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
         }
 
         // return rendered user
-        return res.render('user', { user });
+        return res.render('users/profile', { user });
     } catch (error) {
         return res.redirect('/errors/500');
     }
