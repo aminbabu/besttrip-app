@@ -19,11 +19,9 @@ const {
     login,
     forgotPassword,
     resetPassword,
-    sendVerificationEmail,
-    verifyEmail,
     logout,
 } = require('../../../controllers/auth/users');
-const { isAuthorized, isNotAuthorized } = require('../../../middlewares/auth');
+const { isNotAuthorized } = require('../../../middlewares/auth');
 
 /**
  * @description register a new user
@@ -68,26 +66,6 @@ router.get('/forgot-password', isNotAuthorized, forgotPassword);
  * @method GET
  */
 router.get('/reset-password', isNotAuthorized, resetPassword);
-
-/**
- * @description send verification email
- * @param {string} path - /dashboard/send-verification-email
- * @param {function} controller - ['sendVerificationEmail']
- * @returns {object} - router
- * @access public
- * @method GET
- */
-router.get('/send-verification-email', isAuthorized, sendVerificationEmail);
-
-/**
- * @description verify email
- * @param {string} path - /dashboard/verify-email
- * @param {function} controller - ['verifyEmail']
- * @returns {object} - router
- * @access public
- * @method GET
- */
-router.get('/verify-email', verifyEmail);
 
 /**
  * @description logout user
