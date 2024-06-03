@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 May, 2024
- * @update_date 27 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -24,9 +24,8 @@ const {
 } = require('../../controllers/users');
 
 // middlewares
-const { isAuthorized, isNotAllowed } = require('../../middlewares/auth');
+const { isAuthorized, isNotAllowed, isAllowed } = require('../../middlewares/auth');
 const {
-    validateUserId,
     validateUser,
     validateUserSelf,
     validateUserAccount,
@@ -56,19 +55,18 @@ router.use(isAuthorized);
  * @access private - ['admin']
  * @method GET
  */
-router.get('/', isNotAllowed(['admin']), getUsers);
+router.get('/', isAllowed(['admin']), getUsers);
 
 /**
  * @description get user by mongo id
  * @param {string} path - /dashboard/users/:id
  * @param {function} middleware - ['isNotAllowed']
- * @param {function} validator - ['validateUserId']
  * @param {function} controller - ['getUser']
  * @returns {object} - router
  * @access private - ['customer']
  * @method GET
  */
-router.get('/:id', isNotAllowed(['customer']), validateUserId, getUser);
+router.get('/:id', isNotAllowed(['customer']), getUser);
 
 /**
  * @description update user by self
@@ -116,13 +114,12 @@ router.patch(
  * @description delete user by mongo id
  * @param {string} path - /dashboard/users/:id
  * @param {function} middleware - ['isNotAllowed']
- * @param {function} validator - ['validateUserId']
  * @param {function} controller - ['deleteUser']
  * @returns {object} - router
  * @access private - ['customer']
  * @method DELETE
  */
-router.delete('/:id', isNotAllowed(['customer']), validateUserId, deleteUser);
+router.delete('/:id', isNotAllowed(['customer']), deleteUser);
 
 /**
  * @description delete user by self
