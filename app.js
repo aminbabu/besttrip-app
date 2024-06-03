@@ -22,7 +22,7 @@ const expressFileUpload = require('express-fileupload');
 const { expressCspHeader } = require('express-csp-header');
 
 // config
-const { createDBConnection, env, expressFileUploadConf, CSP_DIRECTIVES } = require('./config');
+const { createDBConnection, env, expressFileUploadConf, cspDirectives } = require('./config');
 
 // constants
 const { WHITE_LIST } = require('./constants');
@@ -50,7 +50,7 @@ app.use(helmet());
 app.use(cors());
 app.use(expressFileUpload(expressFileUploadConf));
 app.use(xssInstance.xssShield(WHITE_LIST));
-app.use(expressCspHeader(CSP_DIRECTIVES));
+app.use(expressCspHeader(cspDirectives));
 
 // routes
 app.use('/api', require('./routes/api'));

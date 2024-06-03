@@ -11,7 +11,7 @@
 const { INLINE, SELF, EVAL } = require('express-csp-header');
 
 // content security policy directives
-const CSP_DIRECTIVES = {
+const cspDirectives = {
     directives: {
         'default-src': [SELF],
         'script-src': [
@@ -30,4 +30,4 @@ const CSP_DIRECTIVES = {
 };
 
 // export content security policy directives
-module.exports = { CSP_DIRECTIVES };
+module.exports = { cspDirectives };
