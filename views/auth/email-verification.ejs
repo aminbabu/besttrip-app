@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--begin::Head-->
-<%- include('../partials/head.ejs', {title: 'Email Verification'}) %>
+<%- include('../partials/head.ejs', { title }) %>
 <!--end::Head-->
 <!--begin::Body-->
 
@@ -20,7 +20,7 @@
           <div class="card-body py-15 py-lg-20">
             <!--begin::Logo-->
             <div class="mb-14">
-              <a href="/" class="">
+              <a href="/dashboard" class="">
                 <img alt="Logo" src="/assets/media/logos/default-small.svg" class="h-40px" />
               </a>
             </div>
@@ -33,7 +33,7 @@
             <!--end::Text-->
             <!--begin::Link-->
             <div class="mb-11">
-              <a href="/" class="btn btn-sm btn-primary">Sign In</a>
+              <a href="/dashboard/login" class="btn btn-sm btn-primary">Sign In</a>
             </div>
             <!--end::Link-->
             <!--begin::Illustration-->
