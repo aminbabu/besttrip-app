@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 27 May, 2024
- * @update_date 27 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
 
     // check if authorization is not exist and redirect to login
     if (!authorization) {
-        return res.redirect('/admin/login');
+        return res.redirect('/dashboard/login');
     }
 
     // get token

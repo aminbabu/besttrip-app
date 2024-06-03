@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 27 May, 2024
+ * @update_date 03 June, 2024
  */
 
 // dependencies
@@ -23,7 +23,7 @@ module.exports = ({ user, token }) => {
     if (user.role === 'customer') {
         redirectTo = `${env.APP_URL}:${env.PORT}/auth/customers/reset-password?token=${token}`;
     } else {
-        redirectTo = `${env.APP_URL}:${env.PORT}/admin/reset-password?token=${token}`;
+        redirectTo = `${env.APP_URL}:${env.PORT}/dashboard/reset-password?token=${token}`;
     }
 
     // compile template
