@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/api/auth/is-authorized.js
+ * @file /middlewares/api/auth/is-user-authorized.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -9,11 +9,12 @@
 
 // dependencies
 const { env } = require('../../config');
-const { User } = require('../../models');
+const { User, Customer } = require('../../models');
 const { verifyToken, generateToken } = require('../../utils');
 
 // authourize user
 module.exports = async (req, res, next) => {
+    let user;
     // get authorization from header
     const authorization = req.header('authorization') || req.cookies.token;
 
@@ -31,12 +32,19 @@ module.exports = async (req, res, next) => {
         // verify token
         const payload = verifyToken(token);
 
-        // check if user exists based on role by id, email, and status
-        const user = await User.findOne({
+        // user properties
+        const userProperties = {
             _id: payload.user._id,
             email: payload.user.email,
             status: 'active',
-        });
+        };
+
+        // check if user exists based on role by id, email, and status
+        if (payload.user.role === 'customer') {
+            user = await Customer.findOne(userProperties);
+        } else {
+            user = await User.findOne(userProperties);
+        }
 
         // check if user is not exist
         if (!user) {
