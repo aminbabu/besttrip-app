@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
 
     // check if authorization is not exist
     if (!authorization) {
-        return res.render('errors/401');
+        return res.redirect('errors/401');
     }
 
     // get token
