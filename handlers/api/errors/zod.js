@@ -1,5 +1,5 @@
 /**
- * @file /handlers/errors/zod.js
+ * @file /handlers/api/errors/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
