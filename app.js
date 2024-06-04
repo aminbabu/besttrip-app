@@ -20,7 +20,7 @@ const { default: xssInstance } = require('xss-shield');
 const cors = require('cors');
 const expressFileUpload = require('express-fileupload');
 const { expressCspHeader } = require('express-csp-header');
-const ipinfo = require('ipinfo-express');
+const { default: ipinfo } = require('ipinfo-express');
 
 // config
 const {
