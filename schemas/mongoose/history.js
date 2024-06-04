@@ -36,14 +36,13 @@ module.exports = new Schema(
             required: [true, 'IP address is required'],
         },
         location: {
-            type: {
+            city: {
                 type: String,
-                enum: ['Point'],
-                required: [true, 'Location type is required'],
+                required: [true, 'City is required'],
             },
-            coordinates: {
-                type: [Number],
-                required: [true, 'Location coordinates are required'],
+            country: {
+                type: String,
+                required: [true, 'Country is required'],
             },
         },
     },
