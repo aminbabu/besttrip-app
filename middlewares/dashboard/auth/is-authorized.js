@@ -45,7 +45,7 @@ module.exports = async (req, res, next) => {
         }
 
         // login history
-        const loginHistory = await ipInfo(req);
+        const loginHistory = await ipInfo(req, user);
 
         // generate token
         const newToken = generateToken(user);

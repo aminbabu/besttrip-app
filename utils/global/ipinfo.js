@@ -12,14 +12,16 @@ const moment = require('moment');
 const { History } = require('../../models');
 
 // export ipinfo function
-module.exports = async (req) => {
+module.exports = async (req, user) => {
     let history;
 
     // ip information
     const { ip, city, region, country } = req.ipinfo;
 
     // get last history
-    history = await History.findOne({ user: req.user._id, ipAddress: ip }).sort({ createdAt: -1 });
+    history = await History.findOne({ user: user?._id, ipAddress: ip }).sort({
+        createdAt: -1,
+    });
 
     // check if last history is exist
     if (history) {
@@ -28,7 +30,7 @@ module.exports = async (req) => {
     } else {
         // create new history
         history = new History({
-            user: req.user._id,
+            user: user._id,
             lastLogin: moment().toDate(),
             userAgent: req.headers['user-agent'],
             ipAddress: ip,
