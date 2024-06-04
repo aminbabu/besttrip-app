@@ -15,7 +15,7 @@ module.exports = (req, res) => {
         res.removeHeader('Authorization');
 
         // redirect to sign-in page
-        return res.redirect('/dashboard/login');
+        return res.redirect('/dashboard/auth/login');
     } catch (error) {
         return res.redirect('/errors/500');
     }

@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
 
     // check if authorization is not exist
     if (!authorization) {
-        return res.redirect('/dashboard/login');
+        return res.redirect('/dashboard/auth/login');
     }
 
     // get token

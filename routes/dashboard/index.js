@@ -15,7 +15,7 @@ const router = express.Router();
 
 // routes
 router.use('/', require('./home'));
-router.use('/', require('./auth'));
+router.use('/auth', require('./auth'));
 router.use('/users', require('./users'));
 
 // export dashboard router

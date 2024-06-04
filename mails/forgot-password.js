@@ -23,7 +23,7 @@ module.exports = ({ user, token }) => {
     if (user.role === 'customer') {
         redirectTo = `${env.APP_URL}:${env.PORT}/auth/customers/reset-password?token=${token}`;
     } else {
-        redirectTo = `${env.APP_URL}:${env.PORT}/dashboard/reset-password?token=${token}`;
+        redirectTo = `${env.APP_URL}:${env.PORT}/dashboard/auth/reset-password?token=${token}`;
     }
 
     // compile template

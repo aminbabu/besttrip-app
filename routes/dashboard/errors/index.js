@@ -18,7 +18,7 @@ const { view401, view404, view500 } = require('../../../controllers/dashboard/er
 
 /**
  * @description view 401 error
- * @param {string} path - //dashboard/login
+ * @param {string} path - //dashboard/auth/login
  * @param {function} controller - ['view401']
  * @returns {object} - router
  * @access public

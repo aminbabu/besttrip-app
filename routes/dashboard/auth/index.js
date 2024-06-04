@@ -37,7 +37,7 @@ router.use(isNotAuthorized);
 
 /**
  * @description - login view route
- * @param {string} path - '/dashboard/login'
+ * @param {string} path - '/dashboard/auth/login'
  * @param {function} controller - ['viewSignIn']
  * @returns {object} - router
  * @access public - ['all']
@@ -47,7 +47,7 @@ router.get('/login', viewSignIn);
 
 /**
  * @description - sign-in view route
- * @param {string} path - '/dashboard/sign-in'
+ * @param {string} path - '/dashboard/auth/sign-in'
  * @param {function} controller - ['viewSignIn']
  * @returns {object} - router
  * @access public - ['all']
@@ -57,7 +57,7 @@ router.get('/sign-in', viewSignIn);
 
 /**
  * @description - register view route
- * @param {string} path - '/dashboard/register'
+ * @param {string} path - '/dashboard/auth/register'
  * @param {function} controller - ['viewSignUp']
  * @returns {object} - router
  * @access public - ['all']
@@ -67,7 +67,7 @@ router.get('/register', viewSignUp);
 
 /**
  * @description - sign-up view route
- * @param {string} path - '/dashboard/sign-up'
+ * @param {string} path - '/dashboard/auth/sign-up'
  * @param {function} controller - ['viewSignUp']
  * @returns {object} - router
  * @access public - ['all']
@@ -77,7 +77,7 @@ router.get('/sign-up', viewSignUp);
 
 /**
  * @description - forgot-password view route
- * @param {string} path - '/dashboard/forgot-password'
+ * @param {string} path - '/dashboard/auth/forgot-password'
  * @param {function} controller - ['viewForgotPassword']
  * @returns {object} - router
  * @access public - ['all']
@@ -87,7 +87,7 @@ router.get('/forgot-password', viewForgotPassword);
 
 /**
  * @description - reset-password view route
- * @param {string} path - '/dashboard/reset-password'
+ * @param {string} path - '/dashboard/auth/reset-password'
  * @param {function} controller - ['viewResetPassword']
  * @returns {object} - router
  * @access public - ['all']
@@ -107,7 +107,7 @@ router.get('/resend-verification-email', viewResendVerificationEmail);
 
 /**
  * @description - verify-email view route
- * @param {string} path - '/dashboard/verify-email'
+ * @param {string} path - '/dashboard/auth/verify-email'
  * @param {function} controller - ['viewEmailVerification']
  * @returns {object} - router
  * @access public - ['all']

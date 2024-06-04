@@ -23,7 +23,7 @@ module.exports = async (user, token) => {
     if (user.role === 'customer') {
         redirectTo = `${env.APP_URL}:${env.PORT}/api/auth/customers/verify-email?token=${token}`;
     } else {
-        redirectTo = `${env.APP_URL}:${env.PORT}/dashboard/verify-email?token=${token}`;
+        redirectTo = `${env.APP_URL}:${env.PORT}/dashboard/auth/verify-email?token=${token}`;
     }
 
     // compile template
