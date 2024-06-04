@@ -15,7 +15,6 @@ const router = express.Router();
 
 // controllers
 const {
-    signOut,
     viewSignIn,
     viewSignUp,
     viewForgotPassword,
@@ -115,26 +114,6 @@ router.get('/resend-verification-email', viewResendVerificationEmail);
  * @method GET
  */
 router.get('/verify-email', viewEmailVerification);
-
-/**
- * @description - logout route
- * @param {string} path - '/dashboard/logout'
- * @param {function} controller - ['logout']
- * @returns {object} - router
- * @access private - ['all']
- * @method GET
- */
-router.get('/logout', signOut);
-
-/**
- * @description - sign-out route
- * @param {string} path - '/dashboard/sign-out'
- * @param {function} controller - ['signOut']
- * @returns {object} - router
- * @access private - ['all']
- * @method GET
- */
-router.get('/sign-out', signOut);
 
 // export router
 module.exports = router;

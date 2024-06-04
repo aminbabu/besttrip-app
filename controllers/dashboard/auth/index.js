@@ -9,7 +9,6 @@
 
 // export auth view controllers
 module.exports = {
-    signOut: require('./sign-out'),
     viewSignIn: require('./view-sign-in'),
     viewSignUp: require('./view-sign-up'),
     viewForgotPassword: require('./view-forgot-password'),
