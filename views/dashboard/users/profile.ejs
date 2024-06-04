@@ -2186,7 +2186,18 @@
   <%- include('../partials/scroll-top.ejs'); %>
   <!--end::Scrolltop-->
   <!--begin::Javascript-->
-  <%- include('../partials/footer-scripts.ejs'); %>
+  <%- include('../partials/footer-scripts.ejs', {
+    vendorJavascripts: ['/assets/js/custom/datatables/datatables.bundle.js'],
+    customJavascripts: [
+      '/assets/js/custom/apps/user-management/users/view/table.js',
+      '/assets/js/custom/apps/user-management/users/view/view.js',
+      '/assets/js/custom/apps/user-management/users/view/update-details.js',
+      '/assets/js/custom/apps/user-management/users/view/update-email.js',
+      '/assets/js/custom/apps/user-management/users/view/update-password.js',
+      '/assets/js/custom/apps/user-management/users/view/update-role.js',
+      '/assets/js/custom/apps/user-management/users/view/add-one-time-password.js'
+    ]
+  }); %>
   <!--end::Javascript-->
 </body>
 <!--end::Body-->
