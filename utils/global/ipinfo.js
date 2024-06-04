@@ -31,7 +31,7 @@ module.exports = async (req, user) => {
         createdAt: -1,
     });
 
-    // check if last history is exist
+    // check if login history is exist
     if (history) {
         // update last login
         history.set({ lastLogin: moment().toDate() });
