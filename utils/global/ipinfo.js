@@ -29,7 +29,7 @@ module.exports = async (req, user) => {
     // check if last history is exist
     if (history) {
         // update last login
-        history.lastLogin = moment().toDate();
+        history.set({ lastLogin: moment().toDate() });
     } else {
         // create new history
         history = new History({
@@ -45,10 +45,8 @@ module.exports = async (req, user) => {
         });
     }
 
-    // update user last login
-    if (existinUser) {
-        existinUser.set({ history: history._id });
-    }
+    // update user login history
+    existinUser.set({ history: history._id });
 
     // save history
     await history.save();

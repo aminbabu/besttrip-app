@@ -10,7 +10,7 @@
 // dependencies
 const { env } = require('../../../../config');
 const { User } = require('../../../../models');
-const { comparePassword, generateToken } = require('../../../../utils');
+const { comparePassword, generateToken, ipInfo } = require('../../../../utils');
 
 // export login user controller
 module.exports = async (req, res, next) => {
@@ -39,6 +39,9 @@ module.exports = async (req, res, next) => {
                 message: 'Please check your email and password',
             });
         }
+
+        // update user last login
+        await ipInfo(req, userObject);
 
         // check if user status is active
         if (user.status !== 'active') {
