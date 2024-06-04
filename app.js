@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 03 June, 2024
+ * @update_date 04 June, 2024
  */
 
 // dependencies
@@ -53,7 +53,8 @@ app.use(xssInstance.xssShield(WHITE_LIST));
 app.use(expressCspHeader(cspDirectives));
 
 // routes
-app.use('/', require('./routes'));
+app.use('/api', require('./routes/api'));
+app.use('/dashboard', require('./routes/dashboard'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
