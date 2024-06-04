@@ -17,7 +17,6 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const { email, password } = req.body;
-        const { loginHistory } = req;
 
         // check if user exists
         const user = await User.findOne({ email }).select('+password');
@@ -40,12 +39,6 @@ module.exports = async (req, res, next) => {
                 message: 'Please check your email and password',
             });
         }
-
-        // update login history
-        user.set({ history: loginHistory?._id });
-
-        // save user
-        await user.save();
 
         // check if user status is active
         if (user.status !== 'active') {
