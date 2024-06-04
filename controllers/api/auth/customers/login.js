@@ -39,9 +39,6 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // update user last login
-        await ipInfo(req, customerObject);
-
         // check if customer status is active
         if (customer.status !== 'active') {
             return res.status(400).json({
@@ -53,6 +50,16 @@ module.exports = async (req, res, next) => {
         if (!customer.isVerified) {
             return res.status(400).json({
                 message: 'Please verify your email',
+            });
+        }
+
+        // update and get customer history
+        const history = await ipInfo(req, customerObject);
+
+        // check if history status is blocked
+        if (history.status === 'blocked') {
+            return res.status(400).json({
+                message: 'This account is blocked. Please contact support',
             });
         }
 
