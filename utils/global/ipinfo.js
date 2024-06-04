@@ -9,17 +9,22 @@
 
 // dependencies
 const moment = require('moment');
-const { History, User } = require('../../models');
+const { History, User, Customer } = require('../../models');
 
 // export ipinfo function
 module.exports = async (req, user) => {
     let history;
+    let existinUser;
 
     // ip information
     const { ip, city, region, country } = req.ipinfo;
 
     // get user
-    const existinUser = User.findById(user?._id);
+    if (user.role === 'customer') {
+        existinUser = Customer.findById(user?._id);
+    } else {
+        existinUser = User.findById(user?._id);
+    }
 
     // get last history
     history = await History.findOne({ user: user?._id, ipAddress: ip }).sort({
