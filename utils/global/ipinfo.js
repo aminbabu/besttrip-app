@@ -12,7 +12,7 @@ const moment = require('moment');
 const { History } = require('../../models');
 
 // export ipinfo function
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
     try {
         // ip information
         const { ip, city, region, country } = req.ipinfo || {};
@@ -36,7 +36,6 @@ module.exports = async (req, res, next) => {
         // return history
         return history;
     } catch (error) {
-        console.log(error);
-        return next(error);
+        return res.render('/errors/500');
     }
 };
