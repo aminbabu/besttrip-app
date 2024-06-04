@@ -73,6 +73,11 @@ module.exports = new Schema(
         postalCode: {
             type: String,
         },
+        history: {
+            type: Schema.Types.ObjectId,
+            ref: 'History',
+            required: [true, 'History is required'],
+        },
     },
     {
         timestamps: true,
