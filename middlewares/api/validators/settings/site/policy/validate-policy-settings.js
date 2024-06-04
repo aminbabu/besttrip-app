@@ -9,7 +9,7 @@
 
 // dependencies
 const { policySettingsSchema } = require('../../../../../../schemas/zod/settings/site');
-const { zodErrorHandler } = require('../../../../../../handlers/errors');
+const { zodErrorHandler } = require('../../../../../../handlers/api/errors');
 
 // export site policy settings validator middleware
 module.exports = (req, res, next) => {

@@ -9,7 +9,7 @@
 
 // dependencies
 const { userSchema } = require('../../../../schemas/zod/users');
-const { zodErrorHandler } = require('../../../../handlers/errors');
+const { zodErrorHandler } = require('../../../../handlers/api/errors');
 
 // export validate user self middleware
 module.exports = (req, res, next) => {

@@ -9,7 +9,7 @@
 
 // dependencies
 const { metaSettingsSchema } = require('../../../../../../schemas/zod/settings/site');
-const { zodErrorHandler } = require('../../../../../../handlers/errors');
+const { zodErrorHandler } = require('../../../../../../handlers/api/errors');
 
 // export meta settings validator middleware
 module.exports = (req, res, next) => {

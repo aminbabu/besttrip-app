@@ -9,7 +9,7 @@
 
 // dependencies
 const { generalSettingsSchema } = require('../../../../../../schemas/zod/settings/site');
-const { zodErrorHandler } = require('../../../../../../handlers/errors');
+const { zodErrorHandler } = require('../../../../../../handlers/api/errors');
 
 // export general settings validator middleware
 module.exports = (req, res, next) => {

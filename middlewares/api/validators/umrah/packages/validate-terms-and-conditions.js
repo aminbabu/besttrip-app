@@ -9,7 +9,7 @@
 
 // dependencies
 const { termsAndConditionsSchema } = require('../../../../../schemas/zod/umrah/packages');
-const { zodErrorHandler } = require('../../../../../handlers/errors');
+const { zodErrorHandler } = require('../../../../../handlers/api/errors');
 const { filterReqFromZodSchema } = require('../../../../../utils/umrah/package');
 
 // export umrah terms and conditions validation middleware
