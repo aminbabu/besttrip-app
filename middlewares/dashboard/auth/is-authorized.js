@@ -44,9 +44,6 @@ module.exports = async (req, res, next) => {
             return res.redirect('/dashboard/auth/login');
         }
 
-        // store login history
-        const loginHistory = await ipInfo(req);
-
         // generate token
         const newToken = generateToken(user);
 
@@ -67,8 +64,10 @@ module.exports = async (req, res, next) => {
         // set user in request
         req.user = user.toObject();
 
-        // set login history in request
-        req.loginHistory = loginHistory;
+        if (!req?.loginHistory) {
+            // set login history in request
+            req.loginHistory = await ipInfo(req);
+        }
 
         // proceed to next middleware
         return next();
