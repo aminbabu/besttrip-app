@@ -4,13 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 03 June, 2024
+ * @update_date 04 June, 2024
  */
 
 // dependencies
 const { env } = require('../../../config');
 const { User, Customer } = require('../../../models');
-const { verifyToken, generateToken } = require('../../../utils');
+const { verifyToken, generateToken, ipInfo } = require('../../../utils');
 
 // authourize user
 module.exports = async (req, res, next) => {
@@ -53,6 +53,9 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // login history
+        const loginHistory = await ipInfo(req, user);
+
         // generate token
         const newToken = generateToken(user);
 
@@ -72,6 +75,9 @@ module.exports = async (req, res, next) => {
 
         // set user in request
         req.user = user.toObject();
+
+        // set login history in request
+        req.loginHistory = loginHistory;
 
         // proceed to next middleware
         return next();
