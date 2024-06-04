@@ -14,11 +14,16 @@ const { User } = require('../../../models');
 // export profile view controller
 module.exports = async (req, res) => {
     try {
-        // get user and format dates
-        const existingUser = await User.findById(req.user._id).populate('history');
+        // get user with history
+        const existingUser = await User.findById(req.user._id).populate({
+            path: 'history',
+            select: 'lastLogin userAgent ipAddress location',
+        });
 
         // convert user to object
         const user = existingUser.toObject();
+
+        console.log('user', user);
 
         // format dates
         user.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
