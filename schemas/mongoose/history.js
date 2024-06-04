@@ -9,6 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
+const { HISTORY_STATUS } = require('../../constants');
 
 // export history schema
 module.exports = new Schema(
@@ -22,6 +23,12 @@ module.exports = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Customer',
             required: [() => this.customer, 'Customer is required'],
+        },
+        status: {
+            type: String,
+            enum: HISTORY_STATUS,
+            default: 'active',
+            required: [true, 'Status is required'],
         },
         lastLogin: {
             type: Date,
