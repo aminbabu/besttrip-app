@@ -22,11 +22,11 @@ const {
 } = require('../../../../../controllers/settings/site/policy');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
     validatePolicySettingsKey,
     validatePolicySettings,
-} = require('../../../../../middlewares/validators/settings/site/policy');
+} = require('../../../../../middlewares/api/validators/settings/site/policy');
 
 /**
  * @description get policies settings

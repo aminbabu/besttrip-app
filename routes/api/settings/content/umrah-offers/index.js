@@ -23,15 +23,15 @@ const {
 } = require('../../../../../controllers/settings/content/umrah-offers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
     validateUmrahOfferId,
     validateUmrahOffer,
     validateUmrahOfferFile,
-} = require('../../../../../middlewares/validators/settings/content/umrah-offers');
+} = require('../../../../../middlewares/api/validators/settings/content/umrah-offers');
 const {
     uploadUmrahOfferFile,
-} = require('../../../../../middlewares/settings/content/umrah-offers');
+} = require('../../../../../middlewares/api/settings/content/umrah-offers');
 
 /**
  * @description - get umrah offers

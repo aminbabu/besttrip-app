@@ -21,13 +21,13 @@ const {
 } = require('../../../../controllers/settings/themes');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
 const {
     validateThemeSettingsKey,
     validateThemeSettings,
     validateThemeSettingsFile,
-} = require('../../../../middlewares/validators/settings/themes');
-const { uploadThemeSettingsFile } = require('../../../../middlewares/settings/themes');
+} = require('../../../../middlewares/api/validators/settings/themes');
+const { uploadThemeSettingsFile } = require('../../../../middlewares/api/settings/themes');
 
 /**
  * @description get themes

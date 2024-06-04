@@ -21,11 +21,11 @@ const {
 } = require('../../../../../controllers/settings/content/sections');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
     validateContentSectionKey,
     validateContentSection,
-} = require('../../../../../middlewares/validators/settings/content/sections');
+} = require('../../../../../middlewares/api/validators/settings/content/sections');
 
 /**
  * @description - Get content section by key

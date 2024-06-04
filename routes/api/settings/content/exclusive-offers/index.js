@@ -23,15 +23,15 @@ const {
 } = require('../../../../../controllers/settings/content/exclusive-offers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
     validateExclusiveOfferId,
     validateExclusiveOffer,
     validateExclusiveOfferFile,
-} = require('../../../../../middlewares/validators/settings/content/exclusive-offers');
+} = require('../../../../../middlewares/api/validators/settings/content/exclusive-offers');
 const {
     uploadExclusiveOfferFile,
-} = require('../../../../../middlewares/settings/content/exclusive-offers');
+} = require('../../../../../middlewares/api/settings/content/exclusive-offers');
 
 /**
  * @description - get exclusive offers

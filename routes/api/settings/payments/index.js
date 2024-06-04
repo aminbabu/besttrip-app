@@ -23,11 +23,11 @@ const {
 } = require('../../../../controllers/settings/payments');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
 const {
     validatePaymentId,
     validatePayment,
-} = require('../../../../middlewares/validators/settings/payments');
+} = require('../../../../middlewares/api/validators/settings/payments');
 
 /**
  * @description - get payments settings

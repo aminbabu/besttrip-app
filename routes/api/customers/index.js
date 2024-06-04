@@ -25,16 +25,16 @@ const {
 } = require('../../../controllers/customers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
     validateCustomerId,
     validateCustomer,
     validateCustomerSelf,
     validateCustomerWallet,
     validateCustomerAccount,
-} = require('../../../middlewares/validators/customers');
-const { validateAvatar } = require('../../../middlewares/validators/files');
-const { uploadAvatar } = require('../../../middlewares/files');
+} = require('../../../middlewares/api/validators/customers');
+const { validateAvatar } = require('../../../middlewares/api/validators/files');
+const { uploadAvatar } = require('../../../middlewares/api/files');
 
 /**
  * @description check if user is authorized

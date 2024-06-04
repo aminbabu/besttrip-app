@@ -23,11 +23,11 @@ const {
 } = require('../../../../controllers/umrah/package-types');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../middlewares/auth');
+const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
 const {
     validateUmrahPackageTypeId,
     validateUmrahPackageType,
-} = require('../../../../middlewares/validators/umrah/package-types');
+} = require('../../../../middlewares/api/validators/umrah/package-types');
 
 /**
  * @description check if user is authorized

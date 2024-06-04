@@ -28,7 +28,7 @@ const {
     viewVerifyEmail,
     verifyEmail,
 } = require('../../../../controllers/auth/users');
-const { isAuthorized, isUserNotAuthorized } = require('../../../../middlewares/auth');
+const { isAuthorized, isUserNotAuthorized } = require('../../../../middlewares/api/auth');
 
 // middlewares
 const {
@@ -38,7 +38,7 @@ const {
     validateResetPassword,
     validateSendVerificationEmail,
     validateVerifyEmail,
-} = require('../../../../middlewares/validators/auth');
+} = require('../../../../middlewares/api/validators/auth');
 
 /**
  * @description view register page
