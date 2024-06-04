@@ -9,18 +9,23 @@
 
 // dependencies
 const moment = require('moment');
+const { User } = require('../../../models');
 
 // export profile view controller
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     try {
-        const { user } = req;
+        // get user and format dates
+        const existingUser = await User.findById(req.user._id).populate('history');
+
+        // convert user to object
+        const user = existingUser.toObject();
 
         // format dates
         user.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
         user.updatedAt = moment(user.updatedAt).format('DD MMM YYYY, h:mm a');
 
-        if (user?.lastLogin) {
-            user.lastLogin = moment(user.lastLogin).format('DD MMM YYYY, h:mm a');
+        if (user?.history?.lastLogin) {
+            user.history.lastLogin = moment(user.lastLogin).format('DD MMM YYYY, h:mm a');
         }
 
         // render profile view
