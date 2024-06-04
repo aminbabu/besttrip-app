@@ -11,7 +11,7 @@
 module.exports = (req, res) => {
     try {
         // return dashboard page
-        return res.render('dashboard/index', {
+        return res.render('dashboard/home', {
             title: 'Dashboard',
             user: req.user,
         });
