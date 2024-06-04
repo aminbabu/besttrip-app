@@ -1,15 +1,15 @@
 /**
- * @file /middlewares/api/validators/validateVerifyEmail.js
+ * @file /middlewares/dashboard/validators/auth/validate-verify-email.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
- * @date 18 March, 2024
- * @update_date 27 May, 2024
+ * @date 04 June, 2024
+ * @update_date 04 June, 2024
  */
 
 // dependencies
 const { verifyEmailSchema } = require('../../../../schemas/zod/auth');
-const { zodErrorHandler } = require('../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../handlers/dashboard/errors');
 
 // dependencies
 
