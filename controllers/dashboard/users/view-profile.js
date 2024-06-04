@@ -23,14 +23,12 @@ module.exports = async (req, res) => {
         // convert user to object
         const user = existingUser.toObject();
 
-        console.log('user', user);
-
         // format dates
         user.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
         user.updatedAt = moment(user.updatedAt).format('DD MMM YYYY, h:mm a');
 
         if (user?.history?.lastLogin) {
-            user.history.lastLogin = moment(user.lastLogin).format('DD MMM YYYY, h:mm a');
+            user.history.lastLogin = moment(user.history.lastLogin).format('DD MMM YYYY, h:mm a');
         }
 
         // render profile view
