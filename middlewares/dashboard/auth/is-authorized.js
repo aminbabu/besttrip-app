@@ -66,7 +66,7 @@ module.exports = async (req, res, next) => {
 
         if (!req?.loginHistory) {
             // set login history in request
-            req.loginHistory = await ipInfo(req);
+            req.loginHistory = await ipInfo(req, res, next);
         }
 
         // proceed to next middleware
