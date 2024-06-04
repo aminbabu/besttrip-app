@@ -38,6 +38,9 @@ dependencies:
   http-errors:
     specifier: ~1.6.3
     version: 1.6.3
+  ipinfo-express:
+    specifier: ^2.0.2
+    version: 2.0.2
   jsonwebtoken:
     specifier: ^9.0.2
     version: 9.0.2
@@ -1484,6 +1487,13 @@ packages:
     engines: {node: '>= 0.10'}
     dev: false
 
+  /ipinfo-express@2.0.2:
+    resolution: {integrity: sha512-XHHBEOFe2tpsI829V0vamSlgi0e+KeUaZ5BGdrNZcdDzZTNibNflXM/jy87x93P+MI/Lh+5WxjikqMc/HN/Y/w==}
+    engines: {node: '>=10'}
+    dependencies:
+      node-ipinfo: 3.5.1
+    dev: false
+
   /is-array-buffer@3.0.4:
     resolution: {integrity: sha512-wcjaerHw0ydZwfhiKbXJWLDY8A7yV7KhjQOpb83hGgGfId/aQa4TOvwyzn2PuswW2gPCYEL/nEAiSVpdOj1lXw==}
     engines: {node: '>= 0.4'}
@@ -1752,6 +1762,11 @@ packages:
       yallist: 4.0.0
     dev: false
 
+  /lru-cache@7.18.3:
+    resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
+    engines: {node: '>=12'}
+    dev: false
+
   /make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
@@ -1960,6 +1975,14 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
+    dev: false
+
+  /node-ipinfo@3.5.1:
+    resolution: {integrity: sha512-sh9yzyItNmc6SetUfJaTn0vaHhbxmVd9oFJceo2PwMXrDdHgR5hEwOkHK+fXKypQRTc1KXq9pzMmrEzCFNFlow==}
+    engines: {node: '>=10'}
+    dependencies:
+      lru-cache: 7.18.3
+      subnet-check: 1.10.1
     dev: false
 
   /nodemailer@6.9.12:
@@ -2534,6 +2557,11 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
     dev: true
+
+  /subnet-check@1.10.1:
+    resolution: {integrity: sha512-e8lXZ9ICcG42fFsMDZO5TTZ3uS2436b5hnx3uS4Z3XkAFuDLa5R3Pvt9lYhewKm/vCd48t14v0jFaSmVYOT2Kg==}
+    engines: {node: '>=4.0.0'}
+    dev: false
 
   /supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
