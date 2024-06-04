@@ -31,6 +31,26 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 router.get('/', isAuthorized, viewDashboard);
 
 /**
+ * @description - sign-in route
+ * @param {string} path - '/dashboard/sign-in'
+ * @param {function} controller - ['viewDashboard']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method GET
+ */
+router.get('/sign-in', (req, res) => res.redirect('/dashboard/auth/login'));
+
+/**
+ * @description - login route
+ * @param {string} path - '/dashboard/login'
+ * @param {function} controller - ['viewDashboard']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method GET
+ */
+router.get('/login', (req, res) => res.redirect('/dashboard/auth/login'));
+
+/**
  * @description - logout route
  * @param {string} path - '/dashboard/logout'
  * @param {function} controller - ['logout']
