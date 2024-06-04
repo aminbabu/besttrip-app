@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 03 June, 2024
+ * @update_date 04 June, 2024
  */
 
 // dependencies
@@ -17,6 +17,7 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const { email, password } = req.body;
+        const { loginHistory } = req;
 
         // check if user exists
         const user = await User.findOne({ email }).select('+password');
@@ -40,6 +41,12 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // update login history
+        user.set({ history: loginHistory?._id });
+
+        // save user
+        await user.save();
+
         // check if user status is active
         if (user.status !== 'active') {
             return res.status(400).json({
@@ -54,8 +61,9 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // remove password from user object
+        // remove password, history from user object
         delete userObject.password;
+        delete userObject.history;
 
         // generate token
         const token = generateToken(userObject);
