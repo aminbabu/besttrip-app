@@ -14,7 +14,7 @@ const { History } = require('../../models');
 // export ipinfo function
 module.exports = async (req) => {
     // ip information
-    const { ip, city, region, country } = req.ipinfo || {};
+    const { ip, city, region, country } = req.ipinfo;
 
     // create new history
     const history = new History({
