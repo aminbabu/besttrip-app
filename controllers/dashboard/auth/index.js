@@ -13,6 +13,6 @@ module.exports = {
     viewSignUp: require('./view-sign-up'),
     viewForgotPassword: require('./view-forgot-password'),
     viewResetPassword: require('./view-reset-password'),
-    viewResendVerification: require('./view-resend-verification'),
+    viewResendVerificationEmail: require('./view-resend-verification-email'),
     viewEmailVerification: require('./email-verification'),
 };

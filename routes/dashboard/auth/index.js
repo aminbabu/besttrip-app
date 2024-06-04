@@ -19,7 +19,7 @@ const {
     viewSignUp,
     viewForgotPassword,
     viewResetPassword,
-    viewResendVerification,
+    viewResendVerificationEmail,
     viewEmailVerification,
 } = require('../../../controllers/dashboard/auth');
 
@@ -98,12 +98,12 @@ router.get('/reset-password', viewResetPassword);
 /**
  * @description - resend-verification view route
  * @param {string} path - '/dashboard/resend-verification'
- * @param {function} controller - ['viewResendVerification']
+ * @param {function} controller - ['viewResendVerificationEmail']
  * @returns {object} - router
  * @access public - ['all']
  * @method GET
  */
-router.get('/resend-verification', viewResendVerification);
+router.get('/resend-verification-email', viewResendVerificationEmail);
 
 /**
  * @description - verify-email view route
