@@ -25,7 +25,7 @@ const KTAuthNewPassword = (function () {
                         },
                     },
                 },
-                'confirm-password': {
+                password_confirmation: {
                     validators: {
                         notEmpty: {
                             message: 'The password confirmation is required',
@@ -140,10 +140,10 @@ const KTAuthNewPassword = (function () {
 
                     // Check axios library docs: https://axios-http.com/docs/intro
                     axios
-                        .post(
-                            submitButton.closest('form').getAttribute('action'),
-                            new FormData(form)
-                        )
+                        .post(submitButton.closest('form').getAttribute('action'), {
+                            password: form.password.value,
+                            confirmPassword: form.password_confirmation.value,
+                        })
                         .then((response) => {
                             if (response) {
                                 // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
