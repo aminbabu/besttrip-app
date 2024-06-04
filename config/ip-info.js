@@ -14,6 +14,7 @@ const ipInfo = {
     token: IP_INFO_KEY,
     cache: null,
     timeout: 5000,
+    ipSelector: null,
 };
 
 // export ip info
