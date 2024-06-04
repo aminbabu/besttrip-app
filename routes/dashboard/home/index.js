@@ -14,7 +14,7 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewDashboard } = require('../../../controllers/dashboard/home');
+const { viewDashboard, signOut } = require('../../../controllers/dashboard/home');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
@@ -29,6 +29,26 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
  * @method GET
  */
 router.get('/', isAuthorized, viewDashboard);
+
+/**
+ * @description - logout route
+ * @param {string} path - '/dashboard/logout'
+ * @param {function} controller - ['logout']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method GET
+ */
+router.get('/logout', signOut);
+
+/**
+ * @description - sign-out route
+ * @param {string} path - '/dashboard/sign-out'
+ * @param {function} controller - ['signOut']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method GET
+ */
+router.get('/sign-out', signOut);
 
 // export dashboard router
 module.exports = router;

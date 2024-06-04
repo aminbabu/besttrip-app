@@ -10,4 +10,5 @@
 // export dashboard view controllers
 module.exports = {
     viewDashboard: require('./view-dashboard'),
+    signOut: require('./sign-out'),
 };
