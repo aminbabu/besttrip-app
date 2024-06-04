@@ -9,7 +9,7 @@
 
 // dependencies
 const moment = require('moment');
-const { History } = require('../../models');
+const { History, User } = require('../../models');
 
 // export ipinfo function
 module.exports = async (req, user) => {
@@ -17,6 +17,9 @@ module.exports = async (req, user) => {
 
     // ip information
     const { ip, city, region, country } = req.ipinfo;
+
+    // get user
+    const existinUser = User.findById(user?._id);
 
     // get last history
     history = await History.findOne({ user: user?._id, ipAddress: ip }).sort({
@@ -42,8 +45,16 @@ module.exports = async (req, user) => {
         });
     }
 
+    // update user last login
+    if (existinUser) {
+        existinUser.set({ history: history._id });
+    }
+
     // save history
     await history.save();
+
+    // save user
+    await existinUser.save();
 
     // return history
     return history;
