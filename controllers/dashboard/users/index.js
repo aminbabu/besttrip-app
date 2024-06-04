@@ -1,5 +1,5 @@
 /**
- * @file /controllers/dashboard/profile/index.js
+ * @file /controllers/dashboard/users/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -7,14 +7,7 @@
  * @update_date 04 June, 2024
  */
 
-// export profile view controller
-module.exports.viewProfile = (req, res) => {
-    try {
-        return res.render('dashboard/users/profile', {
-            title: req.user.name,
-            user: req.user,
-        });
-    } catch (error) {
-        return res.redirect('/errors/500');
-    }
+// export all user controllers
+module.exports = {
+    viewProfile: require('./view-profile'),
 };
