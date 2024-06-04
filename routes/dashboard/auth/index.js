@@ -36,6 +36,16 @@ const { isNotAuthorized } = require('../../../middlewares/dashboard/auth');
 router.use(isNotAuthorized);
 
 /**
+ * @description - login view route
+ * @param {string} path - '/dashboard/login'
+ * @param {function} controller - ['viewSignIn']
+ * @returns {object} - router
+ * @access public - ['all']
+ * @method GET
+ */
+router.get('/login', viewSignIn);
+
+/**
  * @description - sign-in view route
  * @param {string} path - '/dashboard/sign-in'
  * @param {function} controller - ['viewSignIn']
@@ -44,6 +54,16 @@ router.use(isNotAuthorized);
  * @method GET
  */
 router.get('/sign-in', viewSignIn);
+
+/**
+ * @description - register view route
+ * @param {string} path - '/dashboard/register'
+ * @param {function} controller - ['viewSignUp']
+ * @returns {object} - router
+ * @access public - ['all']
+ * @method GET
+ */
+router.get('/register', viewSignUp);
 
 /**
  * @description - sign-up view route
