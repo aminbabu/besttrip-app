@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 03 June, 2024
+ * @update_date 04 June, 2024
  */
 
 // dependencies
@@ -15,7 +15,6 @@ const router = express.Router();
 
 // controllers
 const {
-    viewUserProfile,
     getAllUsers,
     getUser,
     updateUser,
@@ -25,7 +24,7 @@ const {
 } = require('../../../controllers/api/users');
 
 // middlewares
-const { isAuthorized, isAllowed, isUserAuthorized } = require('../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
     validateUserId,
     validateUser,
@@ -48,17 +47,6 @@ const { USER_ROLES } = require('../../../constants');
  * @method GET
  */
 router.get('/', isAuthorized, isAllowed(['admin']), getAllUsers);
-
-/**
- * @description view user profile by self
- * @param {string} path - /users/profile
- * @param {function} middleware - ['isUserAuthorized']
- * @param {function} controller - ['viewUserProfile']
- * @returns {object} - router
- * @access private - []
- * @method GET
- */
-router.get('/profile', isUserAuthorized, viewUserProfile);
 
 /**
  * @description get user by mongo id

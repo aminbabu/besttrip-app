@@ -4,12 +4,11 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 03 June, 2024
+ * @update_date 04 June, 2024
  */
 
 // export all controllers
 module.exports = {
-    viewUserProfile: require('./view-user-profile'),
     getAllUsers: require('./get-all-users'),
     getUser: require('./get-user'),
     updateUser: require('./update-user'),
