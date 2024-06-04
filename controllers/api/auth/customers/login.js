@@ -4,12 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 03 June, 2024
+ * @update_date 04 June, 2024
  */
 
 // dependencies
 const { Customer } = require('../../../../models');
-const { comparePassword, generateToken } = require('../../../../utils');
+const { comparePassword, generateToken, ipInfo } = require('../../../../utils');
 
 // export login customer controller
 module.exports = async (req, res, next) => {
@@ -39,6 +39,9 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // update user last login
+        await ipInfo(req, customerObject);
+
         // check if customer status is active
         if (customer.status !== 'active') {
             return res.status(400).json({
@@ -53,8 +56,9 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // remove password from customer object
+        // remove password, history from customer object
         delete customerObject.password;
+        delete customerObject.history;
 
         // generate token
         const token = generateToken(customerObject);
