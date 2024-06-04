@@ -44,6 +44,9 @@ module.exports = async (req, res, next) => {
             return res.redirect('/dashboard/auth/login');
         }
 
+        // login history
+        const loginHistory = await ipInfo(req);
+
         // generate token
         const newToken = generateToken(user);
 
@@ -64,14 +67,15 @@ module.exports = async (req, res, next) => {
         // set user in request
         req.user = user.toObject();
 
-        if (!req?.loginHistory) {
-            // set login history in request
-            req.loginHistory = await ipInfo(req, res);
-        }
+        console.log('IP INFO:', req['x-forwarded-for'] || req.connection.remoteAddress);
+
+        // set login history in request
+        req.loginHistory = loginHistory;
 
         // proceed to next middleware
         return next();
     } catch (error) {
+        console.log(error);
         return res.redirect('/errors/500');
     }
 };
