@@ -137,8 +137,9 @@
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Address</div>
                             <div class="text-gray-600">
-                              101 Collin Street, <br />Melbourne 3000 VIC
-                              <br />Australia
+                              <%= user.address %>, <br>
+                              <%= user.city %> - <%= user.postalCode %>, <br>
+                              <%= user.state %>, <%= user.country %>
                             </div>
                             <!--begin::Details item-->
                             <% } %>
@@ -148,7 +149,7 @@
                               <%= user.createdAt %>
                             </div>
                             <!--begin::Details item-->
-                            <% if (user.lastLogin) { %>
+                            <% if (user.hisotry.lastLogin) { %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Last Login</div>
                             <div class="text-gray-600">
