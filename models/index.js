@@ -28,4 +28,5 @@ module.exports = {
     UmrahPackage: require('./umrah/package'),
     UmrahPackageDuration: require('./umrah/package-duration'),
     UmrahPackageType: require('./umrah/package-type'),
+    History: require('./history'),
 };
