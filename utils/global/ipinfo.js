@@ -36,6 +36,6 @@ module.exports = async (req, res) => {
         // return history
         return history;
     } catch (error) {
-        return res.render('/errors/500');
+        return res.redirect('/errors/500');
     }
 };
