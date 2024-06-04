@@ -4,14 +4,14 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 June, 2024
- * @update_date 03 June, 2024
+ * @update_date 04 June, 2024
  */
 
 // dependencies
 const { INLINE, SELF, EVAL } = require('express-csp-header');
 
-// content security policy directives
-const cspDirectives = {
+// export content security policy directives
+module.exports = {
     directives: {
         'default-src': [SELF],
         'script-src': [
@@ -28,6 +28,3 @@ const cspDirectives = {
         'frame-src': [SELF, 'https://www.googletagmanager.com'],
     },
 };
-
-// export content security policy directives
-module.exports = { cspDirectives };
