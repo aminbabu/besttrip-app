@@ -66,12 +66,12 @@ module.exports = async (req, res, next) => {
 
         if (!req?.loginHistory) {
             // set login history in request
-            req.loginHistory = await ipInfo(req, res, next);
+            req.loginHistory = await ipInfo(req, res);
         }
 
         // proceed to next middleware
         return next();
     } catch (error) {
-        return next(error);
+        return res.render('/errors/500');
     }
 };
