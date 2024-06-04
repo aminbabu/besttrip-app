@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/validateVerifyEmail.js
+ * @file /middlewares/api/validators/validateVerifyEmail.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

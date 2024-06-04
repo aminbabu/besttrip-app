@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/customers/validate-customer-wallet.js
+ * @file /middlewares/api/validators/customers/validate-customer-wallet.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/settings/site/contact/validate-contact-settings.js
+ * @file /middlewares/api/validators/settings/site/contact/validate-contact-settings.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

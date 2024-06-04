@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/users/update-user.js
+ * @file /middlewares/api/validators/users/update-user.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

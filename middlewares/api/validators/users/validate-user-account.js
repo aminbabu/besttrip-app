@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/global/validate-existed-user-account.js
+ * @file /middlewares/api/validators/global/validate-existed-user-account.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

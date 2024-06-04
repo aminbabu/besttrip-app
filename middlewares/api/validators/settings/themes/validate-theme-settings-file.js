@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/settings/themes/validate-theme-settings-file.js
+ * @file /middlewares/api/validators/settings/themes/validate-theme-settings-file.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

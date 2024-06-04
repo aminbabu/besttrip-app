@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/customers/update-customer.js
+ * @file /middlewares/api/validators/customers/update-customer.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

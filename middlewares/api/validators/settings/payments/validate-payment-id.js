@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/settings/payments/validate-payments-settings-id.js
+ * @file /middlewares/api/validators/settings/payments/validate-payments-settings-id.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

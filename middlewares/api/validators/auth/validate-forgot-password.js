@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/validateForgotPassword.js
+ * @file /middlewares/api/validators/validateForgotPassword.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

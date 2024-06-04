@@ -1,6 +1,6 @@
 /**
  * @file
- * /middlewares/validators/settings/content/exclusive-offers/validation-exclusive-offer-file.js
+ * /middlewares/api/validators/settings/content/exclusive-offers/validation-exclusive-offer-file.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

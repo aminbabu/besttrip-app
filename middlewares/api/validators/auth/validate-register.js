@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/validateRegister.js
+ * @file /middlewares/api/validators/validateRegister.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/settings/site/meta/validate-meta-settings-id.js
+ * @file /middlewares/api/validators/settings/site/meta/validate-meta-settings-id.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

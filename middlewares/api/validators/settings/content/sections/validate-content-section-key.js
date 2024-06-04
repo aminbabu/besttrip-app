@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/settings/content/sections/validate-content-section-key.js
+ * @file /middlewares/api/validators/settings/content/sections/validate-content-section-key.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

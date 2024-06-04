@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/validateResetPassword.js
+ * @file /middlewares/api/validators/validateResetPassword.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

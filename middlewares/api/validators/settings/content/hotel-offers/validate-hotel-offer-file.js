@@ -1,6 +1,6 @@
 /**
  * @file
- * /middlewares/validators/settings/content/hotel-offers/validation-hotel-offer-file.js
+ * /middlewares/api/validators/settings/content/hotel-offers/validation-hotel-offer-file.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

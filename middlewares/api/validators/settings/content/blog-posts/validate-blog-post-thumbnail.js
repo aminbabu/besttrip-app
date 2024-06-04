@@ -1,6 +1,6 @@
 /**
  * @file
- * /middlewares/validators/settings/content/blog-posts/validation-blog-post-thumbnail.js
+ * /middlewares/api/validators/settings/content/blog-posts/validation-blog-post-thumbnail.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

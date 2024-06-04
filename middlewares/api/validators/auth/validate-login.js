@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/validateLogin.js
+ * @file /middlewares/api/validators/validateLogin.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

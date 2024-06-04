@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validators/settings/content/blog-posts/validate-blog-post.js
+ * @file /middlewares/api/validators/settings/content/blog-posts/validate-blog-post.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
