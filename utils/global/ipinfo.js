@@ -15,7 +15,7 @@ const { History } = require('../../models');
 module.exports = async (req, res, next) => {
     try {
         // ip information
-        const { ip, city, region, country } = req.ipinfo;
+        const { ip, city, region, country } = req.ipinfo || {};
 
         // create new history
         const history = new History({
@@ -36,6 +36,7 @@ module.exports = async (req, res, next) => {
         // return history
         return history;
     } catch (error) {
+        console.log(error);
         return next(error);
     }
 };
