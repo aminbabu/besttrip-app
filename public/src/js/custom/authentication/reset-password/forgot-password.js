@@ -127,9 +127,9 @@ const KTAuthResetPassword = (function () {
                                 }).then((result) => {
                                     const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
-                                    if (result.isConfirmed && redirectUrl) {
-                                        location.href = redirectUrl;
-                                    }
+                                    // if (result.isConfirmed && redirectUrl) {
+                                    //     location.href = redirectUrl;
+                                    // }
                                 });
                             } else {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
