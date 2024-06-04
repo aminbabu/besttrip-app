@@ -73,7 +73,6 @@ module.exports = async (req, res, next) => {
         // proceed to next middleware
         return next();
     } catch (error) {
-        console.log(error);
         return res.redirect('/errors/500');
     }
 };
