@@ -29,18 +29,24 @@ module.exports = async (req, res) => {
         // check if token exists
         if (!emailVerificationToken) {
             return res.render('dashboard/auth/email-verification', {
-                title: 'Invalid or Expired Token',
-                message:
-                    'Provided token is invalid or expired. Please resend verification email to get a new token.',
+                title: 'Email Verification',
+                data: {
+                    status: 'Invalid Token or Expired Token',
+                    message:
+                        'Provided token is invalid or expired. Please resend verification email to get a new token.',
+                },
             });
         }
 
         // check if token is expired
         if (moment(emailVerificationToken.expires).isBefore(moment())) {
             return res.render('dashboard/auth/email-verification', {
-                title: 'Token Expired',
-                message:
-                    'Provided token is expired. Please resend verification email to get a new token.',
+                title: 'Email Verification',
+                data: {
+                    status: 'Expired Token',
+                    message:
+                        'Provided token is expired. Please resend verification email to get a new token.',
+                },
             });
         }
 
@@ -50,16 +56,22 @@ module.exports = async (req, res) => {
         // check if user exists
         if (!user) {
             return res.render('dashboard/auth/email-verification', {
-                title: 'User Not Found',
-                message: 'User not found. Please resend verification email to get a new token.',
+                title: 'Email Verification',
+                data: {
+                    status: 'User Not Found',
+                    message: 'User not found. Please resend verification email to get a new token.',
+                },
             });
         }
 
         // check if user is already verified
         if (user.isVerified) {
             return res.render('dashboard/auth/email-verification', {
-                title: 'User Already Verified',
-                message: 'User is already verified. Please login to your account.',
+                title: 'Email Verification',
+                data: {
+                    status: 'Already Verified',
+                    message: 'User is already verified. Please login to your account.',
+                },
             });
         }
 
@@ -75,9 +87,12 @@ module.exports = async (req, res) => {
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
 
         return res.render('dashboard/auth/email-verification', {
-            title: 'Email Verified',
-            message:
-                'Email verified successfully. You can now login to your account and start using our services.',
+            title: 'Email Verification',
+            data: {
+                status: 'Email Verified',
+                message:
+                    'Email verified successfully. You can now login to your account and start using our services.',
+            },
         });
     } catch (err) {
         return res.redirect('/errors/500');
