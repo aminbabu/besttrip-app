@@ -38,15 +38,12 @@ module.exports = new Schema(
         location: {
             city: {
                 type: String,
-                required: [true, 'City is required'],
             },
             region: {
                 type: String,
-                required: [true, 'Region is required'],
             },
             country: {
                 type: String,
-                required: [true, 'Country is required'],
             },
         },
     },
