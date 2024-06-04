@@ -21,9 +21,9 @@ module.exports = async (req, user) => {
 
     // get user
     if (user.role === 'customer') {
-        existinUser = Customer.findById(user?._id);
+        existinUser = await Customer.findById(user?._id);
     } else {
-        existinUser = User.findById(user?._id);
+        existinUser = await User.findById(user?._id);
     }
 
     // get last history
