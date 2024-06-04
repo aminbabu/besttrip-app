@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 26 May, 2024
+ * @update_date 04 June, 2024
  */
 
 // dependencies
@@ -34,4 +34,5 @@ module.exports = {
     COOKIE_SECRET: process.env.COOKIE_SECRET,
     FRONTEND_KEY: process.env.FRONTEND_API_KEY,
     BACKEND_KEY: process.env.BACKEND_API_KEY,
+    IP_INFO_KEY: process.env.IPINFO_API_KEY,
 };

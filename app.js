@@ -20,9 +20,16 @@ const { default: xssInstance } = require('xss-shield');
 const cors = require('cors');
 const expressFileUpload = require('express-fileupload');
 const { expressCspHeader } = require('express-csp-header');
+const ipinfo = require('ipinfo-express');
 
 // config
-const { createDBConnection, env, expressFileUploadConf, cspDirectives } = require('./config');
+const {
+    createDBConnection,
+    env,
+    expressFileUploadConf,
+    cspDirectives,
+    ipInfo,
+} = require('./config');
 
 // constants
 const { WHITE_LIST } = require('./constants');
@@ -51,6 +58,7 @@ app.use(cors());
 app.use(expressFileUpload(expressFileUploadConf));
 app.use(xssInstance.xssShield(WHITE_LIST));
 app.use(expressCspHeader(cspDirectives));
+app.use(ipinfo(ipInfo));
 
 // routes
 app.use('/api', require('./routes/api'));
