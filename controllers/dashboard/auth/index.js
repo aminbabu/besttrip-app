@@ -1,0 +1,18 @@
+/**
+ * @file controllers/dashboard/auth/index.js
+ * @project best-trip
+ * @version 0.0.0
+ * @author best-trip
+ * @date 04 June, 2024
+ * @update_date 04 June, 2024
+ */
+
+// export auth view controllers
+module.exports = {
+    viewSignIn: require('./view-sign-in'),
+    viewSignUp: require('./view-sign-up'),
+    viewForgotPassword: require('./view-forgot-password'),
+    viewResetPassword: require('./view-reset-password'),
+    viewResendVerification: require('./view-resend-verification'),
+    viewEmailVerification: require('./email-verification'),
+};
