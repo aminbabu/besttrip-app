@@ -10,7 +10,7 @@
 // dependencies
 const { env } = require('../../../config');
 const { User, Customer } = require('../../../models');
-const { verifyToken, generateToken, ipInfo } = require('../../../utils');
+const { verifyToken, generateToken } = require('../../../utils');
 
 // authourize user
 module.exports = async (req, res, next) => {
@@ -53,9 +53,6 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // login history
-        const loginHistory = await ipInfo(req, user);
-
         // generate token
         const newToken = generateToken(user);
 
@@ -75,9 +72,6 @@ module.exports = async (req, res, next) => {
 
         // set user in request
         req.user = user.toObject();
-
-        // set login history in request
-        req.loginHistory = loginHistory;
 
         // proceed to next middleware
         return next();
