@@ -17,7 +17,7 @@ const router = express.Router();
 const {
     getGeneralSettings,
     updateOrCreateGeneralSettings,
-} = require('../../../../../controllers/settings/site/general');
+} = require('../../../../../controllers/api/settings/site/general');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');

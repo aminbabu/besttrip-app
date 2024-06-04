@@ -14,7 +14,7 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewDashboard } = require('../../controllers/dashboard');
+const { viewDashboard } = require('../../controllers/dashboard/home');
 
 // middlewares
 const { isAuthorized } = require('../../middlewares/dashboard/auth');

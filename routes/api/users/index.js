@@ -22,7 +22,7 @@ const {
     updateUserBySelf,
     deleteUser,
     deleteUserBySelf,
-} = require('../../../controllers/users');
+} = require('../../../controllers/api/users');
 
 // middlewares
 const { isAuthorized, isAllowed, isUserAuthorized } = require('../../../middlewares/api/auth');

@@ -17,7 +17,7 @@ const router = express.Router();
 const {
     getContactSettings,
     updateOrCreateContactSettings,
-} = require('../../../../../controllers/settings/site/contact');
+} = require('../../../../../controllers/api/settings/site/contact');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');

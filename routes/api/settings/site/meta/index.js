@@ -20,7 +20,7 @@ const {
     createMetaSetting,
     updateMetaSetting,
     deleteMetaSetting,
-} = require('../../../../../controllers/settings/site/meta');
+} = require('../../../../../controllers/api/settings/site/meta');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');

@@ -20,7 +20,7 @@ const {
     createUmrahOffer,
     updateUmrahOffer,
     deleteUmrahOffer,
-} = require('../../../../../controllers/settings/content/umrah-offers');
+} = require('../../../../../controllers/api/settings/content/umrah-offers');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');

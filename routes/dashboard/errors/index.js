@@ -14,7 +14,7 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { view401, view404, view500 } = require('../../../controllers/errors');
+const { view401, view404, view500 } = require('../../../controllers/dashboard/errors');
 
 /**
  * @description view 401 error
