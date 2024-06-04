@@ -13,21 +13,32 @@ const { History } = require('../../models');
 
 // export ipinfo function
 module.exports = async (req) => {
+    let history;
+
     // ip information
     const { ip, city, region, country } = req.ipinfo;
 
-    // create new history
-    const history = new History({
-        user: req.user._id,
-        lastLogin: moment().toDate(),
-        userAgent: req.headers['user-agent'],
-        ipAddress: ip,
-        location: {
-            city,
-            region,
-            country,
-        },
-    });
+    // get last history
+    history = await History.findOne({ user: req.user._id, ipAddress: ip }).sort({ createdAt: -1 });
+
+    // check if last history is exist
+    if (history) {
+        // update last login
+        history.lastLogin = moment().toDate();
+    } else {
+        // create new history
+        history = new History({
+            user: req.user._id,
+            lastLogin: moment().toDate(),
+            userAgent: req.headers['user-agent'],
+            ipAddress: ip,
+            location: {
+                city,
+                region,
+                country,
+            },
+        });
+    }
 
     // save history
     await history.save();
