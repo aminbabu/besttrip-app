@@ -67,8 +67,6 @@ module.exports = async (req, res, next) => {
         // set user in request
         req.user = user.toObject();
 
-        console.log('IP INFO:', req['x-forwarded-for'] || req.connection.remoteAddress);
-
         // set login history in request
         req.loginHistory = loginHistory;
 
