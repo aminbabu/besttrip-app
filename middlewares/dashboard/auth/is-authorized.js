@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
 
     // check if authorization is not exist
     if (!authorization) {
-        return res.render('errors/401');
+        return res.redirect('/dashboard/login');
     }
 
     // get token
@@ -41,7 +41,7 @@ module.exports = async (req, res, next) => {
 
         // check if user is not exist
         if (!user) {
-            return res.render('errors/401');
+            return res.redirect('/dashboard/login');
         }
 
         // generate token
