@@ -7,11 +7,18 @@
  * @update_date 03 June, 2024
  */
 
+// dependencies
+const moment = require('moment');
+
 // export user profile view controller
 module.exports = async (req, res) => {
     try {
         // get user
         const { user } = req;
+
+        // format datetime
+        user.createdAt = moment(user.createdAt).format('DD MMM YYYY, hh:mm a');
+        user.updatedAt = moment(user.updatedAt).format('DD MMM YYYY, hh:mm a');
 
         // return user profile
         return res.render('users/profile', {

@@ -79,7 +79,7 @@
                             <% if (user.avatar) { %>
                             <img src="/<%= user.avatar %>" alt="<%= user.name %>" />
                             <% } else { %>
-                            <span class="symbol-label fs-2 fw-bold text-uppercase"><%= user.name.charAt(0) %></span>
+                            <span class="symbol-label fs-2 fw-bold text-uppercase"><%= user.name[0] %></span>
                             <% } %>
                           </div>
                           <!--end::Avatar-->
@@ -115,22 +115,25 @@
                           <div class="pb-5 fs-6">
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Stuff ID</div>
-                            <div class="text-gray-600">ID-BT45453423</div>
+                            <div class="text-gray-600">ID-<%= user.userID %></div>
                             <!--begin::Details item-->
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Email Address</div>
-                            <div class="text-gray-600">info@besttrip.com</div>
+                            <div class="text-gray-600"><%= user.email %></div>
                             <!--begin::Details item-->
+                            <%  if (user.phone) { %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Phone Number</div>
-                            <div class="text-gray-600">+8801934567890</div>
+                            <div class="text-gray-600"><%= user.phone %></div>
                             <!--begin::Details item-->
+                            <% } %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Status</div>
-                            <div class="badge badge-light-success">
-                              Active
+                            <div class="badge badge-light-success text-uppercase">
+                              <%= user.status %>
                             </div>
                             <!--begin::Details item-->
+                            <% if (user.address) { %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Address</div>
                             <div class="text-gray-600">
@@ -138,14 +141,11 @@
                               <br />Australia
                             </div>
                             <!--begin::Details item-->
-                            <!--begin::Details item-->
-                            <div class="fw-bold mt-5">Language</div>
-                            <div class="text-gray-600">English</div>
-                            <!--begin::Details item-->
+                            <% } %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Joined Date</div>
                             <div class="text-gray-600">
-                              25 Jul 2023, 10:30 am
+                              <%= user.createdAt %>
                             </div>
                             <!--begin::Details item-->
                             <!--begin::Details item-->
