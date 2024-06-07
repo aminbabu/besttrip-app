@@ -5,7 +5,7 @@ node_modules**/node_modules/
 **/.vscode
 **/npm-debug.log
 **/coverage
-**/.env
+# **/.env
 **/.editorconfig
 **/.aws
 **/dist
