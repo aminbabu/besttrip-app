@@ -5,7 +5,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 04 June, 2024
+ * @update_date 07 June, 2024
  */
 
 // dependencies
@@ -23,13 +23,7 @@ const { expressCspHeader } = require('express-csp-header');
 const { default: ipinfo } = require('ipinfo-express');
 
 // config
-const {
-    createDBConnection,
-    env,
-    expressFileUploadConf,
-    cspDirectives,
-    ipInfo,
-} = require('./config');
+const { mongoDB, env, expressFileUploadConf, cspDirectives, ipInfo } = require('./config');
 
 // constants
 const { WHITE_LIST } = require('./constants');
@@ -41,7 +35,7 @@ dotenv.config();
 const app = express();
 
 // database connection
-createDBConnection();
+mongoDB.connect();
 
 // trust proxy
 app.set('trust proxy', true);
