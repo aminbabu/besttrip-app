@@ -1,5 +1,5 @@
 # Use the official image as a parent image
-FROM node:20.14.0-alpine3.20
+FROM node:22-alpine3.19
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -9,7 +9,7 @@ COPY package.json ./
 COPY pnpm-lock.yaml ./
 
 # Install app dependencies
-RUN npm install -g pnpm@8.15.4
+RUN npm install -g pnpm@9.1.4
 RUN pnpm install
 
 # Copy app source code
