@@ -7,8 +7,8 @@
     "dev": "nodemon ./bin/www"
   },
   "engines": {
-    "node": "20.11.1",
-    "npm": "10.2.4",
+    "node": "20.14.0",
+    "npm": "10.7.0",
     "pnpm": "8.15.4"
   },
   "dependencies": {
