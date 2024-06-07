@@ -1,5 +1,5 @@
 # Use the official image as a parent image
-FROM node:22-alpine3.19
+FROM node:20.14.0-alpine3.20
 
 # Create app directory
 WORKDIR /usr/src/app
