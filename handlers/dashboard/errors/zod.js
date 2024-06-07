@@ -16,6 +16,5 @@ module.exports = (res, zodErr) => {
         message: err.message,
     }));
 
-    // return error response
-    return res.status(400).json({ errors });
+    req.
 };
