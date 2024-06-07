@@ -15,8 +15,8 @@ RUN pnpm install
 # Copy app source code
 COPY . .
 
-# Expose port 3000
-EXPOSE 3000
+# Expose port 8123
+EXPOSE 8123
 
 # Run the app
 CMD [ "pnpm", "dev" ]
