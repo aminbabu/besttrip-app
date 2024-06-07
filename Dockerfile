@@ -9,7 +9,7 @@ COPY package.json ./
 COPY pnpm-lock.yaml ./
 
 # Install app dependencies
-RUN npm install -g pnpm
+RUN npm install -g pnpm@8.15.4
 RUN pnpm install
 
 # Copy app source code
