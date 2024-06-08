@@ -14,6 +14,8 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY pnpm-lock.yaml ./
 
+COPY ./.env ./
+
 # Install app dependencies
 RUN pnpm install
 
