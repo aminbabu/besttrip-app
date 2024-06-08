@@ -1,13 +1,13 @@
 services:
-  mongo_db:
+  mongodb:
     image: mongo:latest
-    container_name: mongo_db
+    container_name: mongodb-container
     restart: always
     ports:
       - "27017:27017"
     volumes:
-      - ./mongo_db:/data/db
-  node_app:
+      - ./mongodb:/data/db
+  node-app:
     build: .
     container_name: besttrip-node-app-container
     ports:
