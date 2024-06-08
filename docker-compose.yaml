@@ -6,10 +6,10 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./data:/data/db
+      - ./mongo_db:/data/db
   node_app:
     build: .
-    container_name: besttrip-node-app
+    container_name: besttrip-node-app-container
     ports:
       - "8123:8123"
     volumes:
