@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 04 June, 2024
+ * @update_date 08 June, 2024
  */
 
 // dependencies
@@ -98,7 +98,6 @@ module.exports = new Schema(
         history: {
             type: Schema.Types.ObjectId,
             ref: 'History',
-            required: [true, 'History is required'],
         },
     },
     {
