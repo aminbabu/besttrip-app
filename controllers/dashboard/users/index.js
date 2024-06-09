@@ -10,5 +10,4 @@
 // export all user controllers
 module.exports = {
     viewProfile: require('./view-profile'),
-    disableProfile: require('./disable-profile'),
 };
