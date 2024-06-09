@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 08 April, 2024
+ * @update_date 09 June, 2024
  */
 
 // export all mails
@@ -14,4 +14,5 @@ module.exports = {
     verifyEmail: require('./verify-email'),
     confirmEmailVerification: require('./confirm-email-verification'),
     sendPasswordResetConfirmation: require('./send-password-reset-confirmation'),
+    accountActivation: require('./account-activation'),
 };
