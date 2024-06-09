@@ -22,13 +22,13 @@ module.exports = z
             .refine((id) => isMongoId(id), {
                 message: 'Please provide a valid id',
             }),
-        password: z
+        currentPassword: z
             .string({
                 required_error: 'Password is required',
                 invalid_type_error: 'Password must be a string',
             })
             .min(8, 'Password must be at least 8 characters long.'),
-        currentPassword: z
+        password: z
             .string({
                 required_error: 'Password is required',
                 invalid_type_error: 'Password must be a string',
@@ -40,7 +40,7 @@ module.exports = z
                 invalid_type_error: 'Confirm password must be a string',
             })
             .min(8, 'Confirm password must be at least 8 characters long.')
-            .refine(({ currentPassword, confirmPassword }) => currentPassword === confirmPassword, {
+            .refine(({ password, confirmPassword }) => password === confirmPassword, {
                 message: 'Passwords do not match',
                 path: ['confirmPassword'],
             }),
