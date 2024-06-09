@@ -96,9 +96,9 @@ router.patch(
  * @param {function} controller - ['disableUserBySelf']
  * @returns {object} - router
  * @access private - ['all']
- * @method DELETE
+ * @method GET
  */
-router.delete('/self/disable', isAllowed(USER_ROLES), disableUserBySelf);
+router.get('/self/disable', isAllowed(USER_ROLES), disableUserBySelf);
 
 /**
  * @description update user by mongo id
