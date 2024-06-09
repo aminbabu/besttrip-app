@@ -149,6 +149,9 @@ const KTUsersUpdatePassword = (function () {
                                 confirmPassword: form.password_confirmation.value,
                             })
                             .then((response) => {
+                                // Reset form
+                                form.reset();
+
                                 Swal.fire({
                                     text:
                                         response.data.message ||
