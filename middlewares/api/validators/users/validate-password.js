@@ -9,7 +9,7 @@
 
 // dependencies
 const { updatePasswordSchema } = require('../../../../schemas/zod/users');
-const { zodErrorHandler } = require('../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // export update user password validator
 module.exports = (req, res, next) => {
