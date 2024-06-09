@@ -106,7 +106,7 @@ router.get('/verify-email', validateVerifyEmail, verifyEmail);
  * @param {function} controller - ['accountActivation']
  * @returns {object} - router
  * @access public
- * @method GET
+ * @method POST
  */
 router.post('/account-activation', validateLogin, accountActivation);
 
