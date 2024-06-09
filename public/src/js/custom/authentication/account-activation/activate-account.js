@@ -137,6 +137,7 @@ const KTActivateAccount = (function () {
                                     customClass: {
                                         confirmButton: 'btn btn-primary',
                                     },
+                                    allowOutsideClick: false,
                                 }).then((result) => {
                                     // Get redirect URL from the form
                                     const redirectUrl = form.getAttribute('data-kt-redirect-url');
