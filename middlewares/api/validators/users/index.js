@@ -11,6 +11,7 @@
 module.exports = {
     validateUserId: require('./validate-user-id'),
     validateUser: require('./validate-user'),
-    validateUserSelf: require('./validate-user-self'),
     validatePassword: require('./validate-password'),
+    validateUserSelf: require('./validate-user-self'),
+    validatePasswordSelf: require('./validate-password-self'),
 };
