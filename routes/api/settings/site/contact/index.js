@@ -27,7 +27,7 @@ const {
 
 /**
  * @description get contact settings
- * @param {string} path - '/settings/site/contact'
+ * @param {string} path - '/api/settings/site/contact'
  * @param {function} controller - ['getContactSettings']
  * @returns {object} - router
  * @access public
@@ -37,7 +37,7 @@ router.get('/', getContactSettings);
 
 /**
  * @description update contact settings
- * @param {string} path - '/settings/site/contact'
+ * @param {string} path - '/api/settings/site/contact'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateContactSettings']
  * @param {function} controller - ['updateContactSettings']

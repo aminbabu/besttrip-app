@@ -30,7 +30,7 @@ const {
 
 /**
  * @description get policies settings
- * @param {string} path - '/settings/site/policy'
+ * @param {string} path - '/api/settings/site/policy'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} controller - ['getPolicies']
  * @returns {object} - router
@@ -41,7 +41,7 @@ router.get('/', getPolicies);
 
 /**
  * @description get policy settings
- * @param {string} path - '/settings/site/policy/:key'
+ * @param {string} path - '/api/settings/site/policy/:key'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePolicySettingsKey']
  * @param {function} controller - ['getPolicy']
@@ -53,7 +53,7 @@ router.get('/:key', validatePolicySettingsKey, getPolicy);
 
 /**
  * @description create policy settings
- * @param {string} path - '/settings/site/policy'
+ * @param {string} path - '/api/settings/site/policy'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePolicySettings']
  * @param {function} controller - ['createPolicy']
@@ -65,7 +65,7 @@ router.post('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, cre
 
 /**
  * @description update policy settings
- * @param {string} path - '/settings/site/policy/:key'
+ * @param {string} path - '/api/settings/site/policy/:key'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePolicySettingsKey', 'validatePolicySettings']
  * @param {function} controller - ['updatePolicy']

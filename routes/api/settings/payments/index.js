@@ -31,7 +31,7 @@ const {
 
 /**
  * @description - get payments settings
- * @param {string} path - '/settings/payments'
+ * @param {string} path - '/api/settings/payments'
  * @param {function} controller - ['getPayment']
  * @returns {object} - router
  * @access public
@@ -41,7 +41,7 @@ router.get('/', getPayments);
 
 /**
  * @description - get payments settings by id
- * @param {string} path - '/settings/payments/:id'
+ * @param {string} path - '/api/settings/payments/:id'
  * @param {function} validator - ['validatePaymentId']
  * @param {function} controller - ['getPayment']
  * @returns {object} - router
@@ -52,7 +52,7 @@ router.get('/:id', validatePaymentId, getPayment);
 
 /**
  * @description - create payments settings
- * @param {string} path - '/settings/payments'
+ * @param {string} path - '/api/settings/payments'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePayment']
  * @param {function} controller - ['createPayment']
@@ -64,7 +64,7 @@ router.post('/', isAuthorized, isAllowed('admin'), validatePayment, createPaymen
 
 /**
  * @description - update payments settings
- * @param {string} path - '/settings/payments/:id'
+ * @param {string} path - '/api/settings/payments/:id'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePaymentId', 'validatePayment']
  * @param {function} controller - ['updatePayment']
@@ -83,7 +83,7 @@ router.patch(
 
 /**
  * @description - delete payments settings
- * @param {string} path - '/settings/payments/:id'
+ * @param {string} path - '/api/settings/payments/:id'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePaymentId']
  * @param {function} controller - ['deletePayment']

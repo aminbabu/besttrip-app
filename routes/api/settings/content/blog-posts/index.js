@@ -37,7 +37,7 @@ const {
 
 /**
  * @description - get blog posts
- * @param {string} path - '/settings/content/blog-posts'
+ * @param {string} path - '/api/settings/content/blog-posts'
  * @param {function} controller - ['getBlogPost']
  * @returns {object} - router
  * @access public
@@ -47,7 +47,7 @@ router.get('/', getBlogPosts);
 
 /**
  * @description - get blog post by id
- * @param {string} path - '/settings/content/blog-posts/:id'
+ * @param {string} path - '/api/settings/content/blog-posts/:id'
  * @param {function} validator - ['getBlogPost']
  * @param {function} controller - ['getBlogPost']
  * @returns {object} - router
@@ -58,7 +58,7 @@ router.get('/:id', validateBlogPostId, getBlogPost);
 
 /**
  * @description - create blog post
- * @param {string} path - '/settings/content/blog-posts'
+ * @param {string} path - '/api/settings/content/blog-posts'
  * @param {function} validator - ['validateBlogPostFile', 'validateBlogPost']
  * @param {function} middleware - ['uploadBlogPostFile']
  * @param {function} controller - ['createBlogPost']
@@ -80,7 +80,7 @@ router.post(
 
 /**
  * @description - update blog post
- * @param {string} path - '/settings/content/blog-posts/:id'
+ * @param {string} path - '/api/settings/content/blog-posts/:id'
  * @param {function} validator - ['validateBlogPostId', 'validateBlogPost']
  * @param {function} middleware - ['uploadBlogPostFile']
  * @param {function} controller - ['updateBlogPost']
@@ -103,7 +103,7 @@ router.put(
 
 /**
  * @description - delete blog post
- * @param {string} path - '/settings/content/blog-posts/:id'
+ * @param {string} path - '/api/settings/content/blog-posts/:id'
  * @param {function} validator - ['validateBlogPostId']
  * @param {function} controller - ['deleteBlogPost']
  * @returns {object} - router

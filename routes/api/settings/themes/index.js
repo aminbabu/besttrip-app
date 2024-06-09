@@ -31,7 +31,7 @@ const { uploadThemeSettingsFile } = require('../../../../middlewares/api/setting
 
 /**
  * @description get themes
- * @param {string} path - '/settings/themes'
+ * @param {string} path - '/api/settings/themes'
  * @param {function} controller - ['getThemes']
  * @returns {object} - router
  * @access public
@@ -41,7 +41,7 @@ router.get('/', isAuthorized, isAllowed(['admin']), getThemes);
 
 /**
  * @description get theme by key
- * @param {string} path - '/settings/themes/:key'
+ * @param {string} path - '/api/settings/themes/:key'
  * @param {function} validator - ['validateThemeSettingsKey']
  * @param {function} controller - ['getTheme']
  * @returns {object} - router
@@ -52,7 +52,7 @@ router.get('/:theme', validateThemeSettingsKey, getTheme);
 
 /**
  * @description update or create theme
- * @param {string} path - '/settings/themes/:key'
+ * @param {string} path - '/api/settings/themes/:key'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateThemeSettingsKey', 'validateThemeSettings']
  * @param {function} validator - ['validateThemeSettingsFile']

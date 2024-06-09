@@ -31,7 +31,7 @@ const {
 
 /**
  * @description get meta settings
- * @param {string} path - '/settings/site/meta'
+ * @param {string} path - '/api/settings/site/meta'
  * @param {function} controller - ['getMetaSettings']
  * @returns {object} - router
  * @access public
@@ -41,7 +41,7 @@ router.get('/', getMetaSettings);
 
 /**
  * @description get meta settings by id
- * @param {string} path - '/settings/site/meta/:id'
+ * @param {string} path - '/api/settings/site/meta/:id'
  * @param {function} validator - ['validateMetaSettingsId']
  * @param {function} controller - ['getMetaSetting']
  * @returns {object} - router
@@ -52,7 +52,7 @@ router.get('/:id', validateMetaSettingsId, getMetaSetting);
 
 /**
  * @description create meta settings
- * @param {string} path - '/settings/site/meta'
+ * @param {string} path - '/api/settings/site/meta'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateMetaSettings']
  * @param {function} controller - ['createMetaSetting']
@@ -64,7 +64,7 @@ router.post('/', isAuthorized, isAllowed('admin'), validateMetaSettings, createM
 
 /**
  * @description update meta settings
- * @param {string} path - '/settings/site/meta/:id'
+ * @param {string} path - '/api/settings/site/meta/:id'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateMetaSettingsId', 'validateMetaSettings']
  * @param {function} controller - ['updateMetaSetting']
@@ -83,7 +83,7 @@ router.patch(
 
 /**
  * @description delete meta settings
- * @param {string} path - '/settings/site/meta/:id'
+ * @param {string} path - '/api/settings/site/meta/:id'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateMetaSettingsId']
  * @param {function} controller - ['deleteMetaSetting']

@@ -31,7 +31,7 @@ const {
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/payment-requests'
+ * @param {string} path - '/api/payment-requests'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -40,7 +40,7 @@ router.use(isAuthorized);
 
 /**
  * @description - get payment requests
- * @param {string} path - '/payment-requests'
+ * @param {string} path - '/api/payment-requests'
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getPaymentRequests']
  * @returns {object} - router
@@ -51,7 +51,7 @@ router.get('/', isAllowed(['admin']), getPaymentRequests);
 
 /**
  * @description - get payment request by id
- * @param {string} path - '/payment-requests/:id'
+ * @param {string} path - '/api/payment-requests/:id'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validatePaymentRequestId']
  * @param {function} controller - ['getPaymentRequest']
@@ -63,7 +63,7 @@ router.get('/:id', isAllowed(['admin']), validatePaymentRequestId, getPaymentReq
 
 /**
  * @description - create payment request
- * @param {string} path - '/payment-requests'
+ * @param {string} path - '/api/payment-requests'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validatePaymentRequest']
  * @param {function} controller - ['createPaymentRequest']
@@ -75,7 +75,7 @@ router.post('/', isAllowed(['customer']), validatePaymentRequest, createPaymentR
 
 /**
  * @description - update payment request
- * @param {string} path - '/payment-requests/:id'
+ * @param {string} path - '/api/payment-requests/:id'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validatePaymentRequestId', 'validatePaymentRequest']
  * @param {function} controller - ['updatePaymentRequest']
@@ -93,7 +93,7 @@ router.patch(
 
 /**
  * @description - delete payment request
- * @param {string} path - '/payment-requests/:id'
+ * @param {string} path - '/api/payment-requests/:id'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validatePaymentRequestId']
  * @param {function} controller - ['deletePaymentRequest']

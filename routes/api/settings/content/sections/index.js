@@ -29,7 +29,7 @@ const {
 
 /**
  * @description - Get content section by key
- * @param {string} path - '/settings/content/sections/:key'
+ * @param {string} path - '/api/settings/content/sections/:key'
  * @param {function} validator - ['validateContentSectionKey']
  * @param {function} controller - ['getSection']
  * @returns {object} - router
@@ -40,7 +40,7 @@ router.get('/:key', validateContentSectionKey, getSection);
 
 /**
  * @description - Get all content sections
- * @param {string} path - '/settings/content/sections'
+ * @param {string} path - '/api/settings/content/sections'
  * @param {function} controller - ['getSections']
  * @returns {object} - router
  * @access public
@@ -50,7 +50,7 @@ router.get('/', getSections);
 
 /**
  * @description - Update/Create content section
- * @param {string} path - '/settings/content/sections/:key'
+ * @param {string} path - '/api/settings/content/sections/:key'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validators - ['validateContentSection']
  * @param {function} controller - ['updateOrCreateSection']
