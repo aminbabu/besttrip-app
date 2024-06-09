@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 03 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -28,6 +28,7 @@ module.exports = ({ user, token }) => {
 
     // compile template
     const html = ejs.render(template, {
+        title: 'Reset Password',
         company: {
             name: env.APP_NAME,
             address: '123, Best Trip Street, Best Trip City',

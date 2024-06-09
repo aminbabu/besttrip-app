@@ -31,6 +31,7 @@ module.exports = async (user) => {
 
     // compile template
     const html = ejs.render(template, {
+        title: 'Password Reset Confirmation',
         company: {
             name: env.APP_NAME,
             address: '123, Best Trip Street, Best Trip City',

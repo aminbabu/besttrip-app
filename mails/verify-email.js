@@ -28,6 +28,7 @@ module.exports = async (user, token) => {
 
     // compile template
     const html = ejs.render(template, {
+        title: 'Verify Email',
         company: {
             name: env.APP_NAME,
             address: '123, Best Trip Street, Best Trip City',

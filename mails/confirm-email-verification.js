@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 21 March, 2024
- * @update_date 27 May, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -31,6 +31,7 @@ module.exports = async (user) => {
 
     // compile template
     const html = ejs.render(template, {
+        title: 'Email Verification Confirmation',
         company: {
             name: env.APP_NAME,
             address: '123, Best Trip Street, Best Trip City',

@@ -31,6 +31,7 @@ module.exports = ({ user, token }) => {
 
     // compile template
     const html = ejs.render(template, {
+        title: 'Welcome to Best Trip',
         company: {
             name: env.APP_NAME,
             address: '123, Best Trip Street, Best Trip City',
