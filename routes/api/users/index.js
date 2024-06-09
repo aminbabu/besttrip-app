@@ -125,18 +125,6 @@ router.patch(
 );
 
 /**
- * @description update password by id
- * @param {string} path - /api/users/:id/password
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} validator - ['validatePassword']
- * @param {function} controller - ['updatePassword']
- * @returns {object} - router
- * @access private - ['admin']
- * @method PATCH
- */
-router.patch('/:id/password', isAllowed(['admin']), validatePassword, updatePassword);
-
-/**
  * @description update password by self
  * @param {string} path - /api/users/self/password
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
@@ -147,6 +135,18 @@ router.patch('/:id/password', isAllowed(['admin']), validatePassword, updatePass
  * @method PATCH
  */
 router.patch('/self/password', isAllowed(USER_ROLES), validatePasswordSelf, updatePasswordBySelf);
+
+/**
+ * @description update password by id
+ * @param {string} path - /api/users/:id/password
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validatePassword']
+ * @param {function} controller - ['updatePassword']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method PATCH
+ */
+router.patch('/:id/password', isAllowed(['admin']), validatePassword, updatePassword);
 
 /**
  * @description delete user by self
