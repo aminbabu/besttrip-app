@@ -898,7 +898,8 @@
                     <!--begin::Modal content-->
                     <div class="modal-content">
                       <!--begin::Form-->
-                      <form class="form" action="#" id="kt_modal_update_user_form" action="/api/users/self" method="post">
+                      <form class="form" id="kt_modal_update_user_form" action="/api/users/self" method="post">
+                        <input type="hidden" name="_method" value="PATCH">
                         <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_update_user_header">
                           <!--begin::Modal title-->
@@ -1035,6 +1036,14 @@
                                 <!--begin::Input-->
                                 <input class="form-control form-control-solid" name="dob" placeholder="Pick a date" id="kt_datepicker_user_dob" />
                                 <!--end::Input-->
+                                <script>
+                                  document.addEventListener('DOMContentLoaded', function() {
+                                    flatpickr("#kt_datepicker_user_dob", {
+                                      defaultDate: "<%= user?.dob %>",
+                                      dateFormat: "Y-m-d"
+                                    });
+                                  });
+                                </script>
                               </div>
                               <!--end::Input group-->
                               <!--begin::Input group-->
@@ -1280,8 +1289,7 @@
                       <!--begin::Modal body-->
                       <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <!--begin::Form-->
-                        <form id="kt_modal_add_task_form" class="form" action="/api/users/self" method="post">
-                          <input type="hidden" name="_method" value="PATCH" />
+                        <form id="kt_modal_add_task_form" class="form" action="#">
                           <!--begin::Input group-->
                           <div class="fv-row mb-7">
                             <!--begin::Label-->
