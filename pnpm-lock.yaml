@@ -20,9 +20,6 @@ importers:
       countries-list:
         specifier: ^3.1.0
         version: 3.1.0
-      country-flag-icons:
-        specifier: ^1.5.12
-        version: 1.5.12
       debug:
         specifier: ~2.6.9
         version: 2.6.9
@@ -363,9 +360,6 @@ packages:
 
   countries-list@3.1.0:
     resolution: {integrity: sha512-HpTBLZba1VPTZSjUnUwR7SykxV7Z/7/+ZM5x5wi5tO99Qvom6bE2SC+AQ18016ujg3jSlYBbMITrHNnPAHSM9Q==}
-
-  country-flag-icons@1.5.12:
-    resolution: {integrity: sha512-ksBaQqQEFSvSFg1NV8tlAk4IjgDRNMu5ImjnCac0C409CiN6ObTI0vCFaNfaPusxLrr5O9pueT1R3G4XMMwErg==}
 
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -1910,8 +1904,6 @@ snapshots:
       vary: 1.1.2
 
   countries-list@3.1.0: {}
-
-  country-flag-icons@1.5.12: {}
 
   cross-spawn@7.0.3:
     dependencies:
