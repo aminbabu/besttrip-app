@@ -125,7 +125,7 @@ const KTUsersUpdateDetails = (function () {
 
                     // Check axios library docs: https://axios-http.com/docs/intro
                     axios
-                        .post(submitButton.closest('form').getAttribute('action'), {
+                        .patch(submitButton.closest('form').getAttribute('action'), {
                             name: form.name.value,
                             email: form.email.value,
                             phone: form.phone.value,
