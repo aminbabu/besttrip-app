@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 07 April, 2024
- * @update_date 11 April, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -28,18 +28,17 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // delete customer
-        await customer.deleteOne();
-
         // delete customer avatar
         if (customer.avatar) {
-            fs.unlinkSync(
-                path.join(__dirname, `../../../public/uploads/avatars/customers/${customer.avatar}`)
-            );
+            fs.unlinkSync(path.join(__dirname, `../../../public/${customer.avatar}`));
         }
 
-        // remove token from headers
+        // remove token from cookies and header
+        res.clearCookie('token');
         res.removeHeader('Authorization');
+
+        // delete customer
+        await customer.deleteOne();
 
         // return response
         return res.status(200).json({

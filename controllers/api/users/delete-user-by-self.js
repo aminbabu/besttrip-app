@@ -28,19 +28,17 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // delete user
-        await user.deleteOne();
-
         // delete user avatar
         if (user.avatar) {
-            fs.unlinkSync(
-                path.join(__dirname, `../../../public/uploads/avatars/users/${user.avatar}`)
-            );
+            fs.unlinkSync(path.join(__dirname, `../../../public/${user.avatar}`));
         }
 
         // remove token from cookies and header
         res.clearCookie('token');
         res.removeHeader('Authorization');
+
+        // delete user
+        await user.deleteOne();
 
         // return response
         return res.status(200).json({
