@@ -9,10 +9,19 @@
 
 // dependencies
 const { z } = require('zod');
+const { isMongoId } = require('validator');
 
 // export update password schema
 module.exports = z
     .object({
+        id: z
+            .string({
+                required_error: 'Id is required',
+                invalid_type_error: 'Please provide a valid id',
+            })
+            .refine((id) => isMongoId(id), {
+                message: 'Please provide a valid id',
+            }),
         password: z
             .string({
                 required_error: 'Password is required',
