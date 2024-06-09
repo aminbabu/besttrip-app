@@ -24,7 +24,10 @@ module.exports =
             // get avatar
             const { avatar } = req.files || {};
 
-            console.log(avatar);
+            // continue if no avatar uploaded
+            if (!avatar) {
+                return next();
+            }
 
             // get user
             const user = id ? (await Customer.findById(id)) || (await User.findById(id)) : req.user;
@@ -33,11 +36,6 @@ module.exports =
             if (user.avatar) {
                 // delete previous avatar
                 fs.unlinkSync(path.join(__dirname, '../../../public/', user.avatar));
-            }
-
-            // continue if no avatar uploaded
-            if (!avatar) {
-                return next();
             }
 
             // prepare file path
