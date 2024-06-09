@@ -15,10 +15,10 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const { password, oldPassword } = req.body;
-        const { _id } = req.user;
+        const { id } = req.params;
 
         // get user
-        const user = await User.findById(_id).select('+password');
+        const user = await User.findById(id).select('+password');
 
         // check if user exists
         if (!user) {
