@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 03 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -39,9 +39,6 @@ module.exports = async (req, res, next) => {
             },
         });
 
-        // save customer
-        await newCustomer.save();
-
         // delete existing expired tokens
         await Token.deleteMany({
             customer: newCustomer._id,
@@ -63,8 +60,8 @@ module.exports = async (req, res, next) => {
         const info = welcome({ user: newCustomer.toObject(), token });
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
 
-        // set token in response
-        res.set('authorization', `Bearer ${token}`);
+        // save customer
+        await newCustomer.save();
 
         // return response
         return res.status(201).json({

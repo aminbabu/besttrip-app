@@ -36,9 +36,6 @@ module.exports = async (req, res, next) => {
             password,
         });
 
-        // save user
-        await newUser.save();
-
         // delete existing expired tokens
         await Token.deleteMany({
             user: newUser._id,
@@ -59,6 +56,9 @@ module.exports = async (req, res, next) => {
         // send mail
         const info = welcome({ user: newUser.toObject(), token });
         await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
+
+        // save user
+        await newUser.save();
 
         // return response
         return res.status(201).json({
