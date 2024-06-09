@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 04 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -21,6 +21,7 @@ const {
     viewResetPassword,
     viewResendVerificationEmail,
     viewEmailVerification,
+    viewAccountActivation,
 } = require('../../../controllers/dashboard/auth');
 
 // middlewares
@@ -114,6 +115,16 @@ router.get('/resend-verification-email', viewResendVerificationEmail);
  * @method GET
  */
 router.get('/verify-email', viewEmailVerification);
+
+/**
+ * @description - account-activation view route
+ * @param {string} path - '/dashboard/auth/account-activation'
+ * @param {function} controller - ['viewAccountActivation']
+ * @returns {object} - router
+ * @access public - ['all']
+ * @method GET
+ */
+router.get('/account-activation', viewAccountActivation);
 
 // export router
 module.exports = router;
