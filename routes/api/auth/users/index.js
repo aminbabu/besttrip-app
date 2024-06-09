@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 04 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -21,6 +21,7 @@ const {
     resetPassword,
     resendVerificationEmail,
     verifyEmail,
+    accountActivation,
 } = require('../../../../controllers/api/auth/users');
 
 // middlewares
@@ -98,6 +99,16 @@ router.post('/send-verification-email', validateSendVerificationEmail, resendVer
  * @method GET
  */
 router.get('/verify-email', validateVerifyEmail, verifyEmail);
+
+/**
+ * @description account activation
+ * @param {string} path - /auth/users/account-activation
+ * @param {function} controller - ['accountActivation']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/account-activation', accountActivation);
 
 // export
 module.exports = router;
