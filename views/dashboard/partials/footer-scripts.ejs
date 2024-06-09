@@ -1,6 +1,11 @@
 <script>
   var hostUrl = "/assets/";
 </script>
+<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+<script src="/assets/plugins/global/plugins.bundle.js"></script>
+<script src="/assets/js/scripts.bundle.js"></script>
+<script src="/assets/js/widgets.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
 <% if(typeof vendorJavascripts !== 'undefined' && vendorJavascripts?.length) { %>
 <!--begin::Vendors Javascript(used for this page only)-->
 <% vendorJavascripts.forEach(function(vendorJavascript) { %>
@@ -8,11 +13,6 @@
 <% }); %>
 <!--end::Vendors Javascript-->
 <% } %>
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="/assets/plugins/global/plugins.bundle.js"></script>
-<script src="/assets/js/scripts.bundle.js"></script>
-<script src="/assets/js/widgets.bundle.js"></script>
-<!--end::Global Javascript Bundle-->
 <% if(typeof customJavascripts !== 'undefined' && customJavascripts?.length) { %>
 <!--begin::Custom Javascript(used for this page only)-->
 <% customJavascripts.forEach(function(customJavascript) { %>
