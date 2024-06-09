@@ -8,58 +8,53 @@
  */
 
 // dependencies
-const { accountActivation } = require('../../../../mails');
-const { sendEmail, generateToken } = require('../../../../utils');
-const { Token, User } = require('../../../../models');
+const { User } = require('../../../../models');
+const { comparePassword } = require('../../../../utils');
 
-// export send verification email controller
+// export account activation controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { email } = req.body;
-
-        // get user
-        const user = await User.findOne({ email });
+        const { email, password } = req.body;
 
         // check if user exists
+        const user = await User.findOne({ email }).select('+password');
+
         if (!user) {
-            return res.status(404).json({
-                message: 'User not found',
+            return res.status(400).json({
+                message: 'Please check your email and password',
             });
         }
 
-        // check if user is already active
+        // convert user to object
+        const userObject = user.toObject();
+
+        // compare password
+        const match = await comparePassword(password, userObject.password);
+
+        // check if password match
+        if (!match) {
+            return res.status(400).json({
+                message: 'Please check your email and password',
+            });
+        }
+
+        // check if user status is already active
         if (user.status === 'active') {
             return res.status(400).json({
-                message: 'User is already active',
+                message: 'Your account is already active',
             });
         }
 
-        // delete existing expired tokens
-        await Token.deleteMany({
-            user: user._id,
-            type: 'account-activation',
-            expiresAt: { $lt: new Date() },
-        });
+        // update user status
+        user.set({ status: 'active' });
 
-        // generate token
-        const token = generateToken(user.toObject());
-
-        // store token in db
-        const tokenDoc = new Token({
-            user: user._id,
-            token,
-            type: 'account-activation',
-        });
-        await tokenDoc.save();
-
-        // send verification email
-        const info = await accountActivation(user.toObject(), token);
-        await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
+        // save user
+        await user.save();
 
         // return response
         return res.status(200).json({
-            message: `Account activation email has been sent to ${user.email}`,
+            message: 'Your account is activated',
         });
     } catch (error) {
         return next(error);
