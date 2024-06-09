@@ -141,7 +141,7 @@ router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUser);
  * @access private - ['user']
  * @method DELETE
  */
-router.delete('/', isAllowed(['user']), deleteUserBySelf);
+router.delete('/self', isAllowed(['user']), deleteUserBySelf);
 
 // export
 module.exports = router;
