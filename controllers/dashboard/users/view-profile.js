@@ -4,11 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 04 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
 const moment = require('moment');
+const { countries } = require('countries-list');
 const { User } = require('../../../models');
 
 // export profile view controller
@@ -35,6 +36,7 @@ module.exports = async (req, res) => {
         return res.render('dashboard/users/profile', {
             title: req.user.name,
             user,
+            countries: Object.values(countries),
         });
     } catch (error) {
         return res.redirect('/errors/500');
