@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 04 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // export all controllers
@@ -15,4 +15,5 @@ module.exports = {
     resetPassword: require('./reset-password'),
     resendVerificationEmail: require('./resend-verification-email'),
     verifyEmail: require('./verify-email'),
+    accountActivation: require('./account-activation'),
 };
