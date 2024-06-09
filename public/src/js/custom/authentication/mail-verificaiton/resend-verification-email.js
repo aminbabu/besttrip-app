@@ -150,7 +150,6 @@ const KTAuthResendVerificationEmail = (function () {
                                 : error.response.data.errors;
 
                             Swal.fire({
-                                title: '<h4 class="text-start">Error(s):</h4>',
                                 html: `${
                                     errors instanceof Array
                                         ? `<ul class="text-start">${Object.values(
