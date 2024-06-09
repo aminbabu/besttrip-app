@@ -1164,7 +1164,7 @@
                             </div>
                             <!--end::User form-->
                             <!--begin::Address toggle-->
-                            <div class="fw-bolder fs-3 rotate collapsible collapsed mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">
+                            <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="true" aria-controls="kt_modal_update_user_address">
                               Address Details
                               <span class="ms-2 rotate-180">
                                 <i class="ki-duotone ki-down fs-3"></i>
@@ -1172,7 +1172,7 @@
                             </div>
                             <!--end::Address toggle-->
                             <!--begin::Address form-->
-                            <div id="kt_modal_update_user_address" class="collapse">
+                            <div id="kt_modal_update_user_address" class="collapse show">
                               <!--begin::Input group-->
                               <div class="d-flex flex-column mb-7 fv-row">
                                 <!--begin::Label-->
@@ -1237,7 +1237,7 @@
                                     Select a Country...
                                   </option>
                                   <% countries.forEach(country => { %>
-                                  <option value="<%= country.continent %>" <%= country.continent == user?.country ? 'selected' : '' %>>
+                                  <option value="<%= country.name %>" <%= country.name == user?.country ? 'selected' : '' %>>
                                     <%= country.name %>
                                   </option>
                                   <% }); %>
