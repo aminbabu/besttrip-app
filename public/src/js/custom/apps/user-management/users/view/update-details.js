@@ -122,23 +122,44 @@ const KTUsersUpdateDetails = (function () {
 
                     // Disable button to avoid multiple click
                     submitButton.disabled = true;
+                    // User form data
+                    const userFormData = new FormData();
+
+                    // Form fields
+                    const formFields = [
+                        'name',
+                        'email',
+                        'phone',
+                        'dob',
+                        'address',
+                        'city',
+                        'state',
+                        'country',
+                        'postalCode',
+                    ];
+
+                    // Append form data dynamically
+                    formFields.forEach(
+                        (field) =>
+                            form[field].value.trim() &&
+                            userFormData.append(field, form[field].value.trim())
+                    );
+
+                    // Append avatar
+                    if (form.avatar.files.length > 0) {
+                        userFormData.append('avatar', form.avatar.files[0]);
+                    }
+
+                    console.log(userFormData.get('avatar'));
 
                     // Check axios library docs: https://axios-http.com/docs/intro
                     axios
-                        .patch(submitButton.closest('form').getAttribute('action'), {
-                            name: form.name.value,
-                            email: form.email.value,
-                            phone: form.phone.value,
-                            dob: form.dob.value,
-                            address: form.address.value,
-                            city: form.city.value,
-                            state: form.state.value,
-                            country: form.country.value,
-                            postalCode: form.postcode.value,
-                        })
+                        .patch(submitButton.closest('form').getAttribute('action'), userFormData)
                         .then((response) => {
                             Swal.fire({
-                                text: 'User details have been successfully updated!',
+                                text:
+                                    response.data.message ||
+                                    'Form has been successfully submitted!',
                                 icon: 'success',
                                 buttonsStyling: false,
                                 confirmButtonText: 'Ok, got it!',
@@ -147,8 +168,12 @@ const KTUsersUpdateDetails = (function () {
                                 },
                                 allowOutsideClick: false,
                             }).then((result) => {
-                                if (result.isConfirmed) {
+                                // Get the redirect URL from the form
+                                const redirectUrl = form.getAttribute('data-kt-redirect-url');
+
+                                if (result.isConfirmed && redirectUrl) {
                                     modal.hide();
+                                    location.href = redirectUrl;
                                 }
                             });
                         })
@@ -180,18 +205,17 @@ const KTUsersUpdateDetails = (function () {
                             // Enable button
                             submitButton.disabled = false;
                         });
-                } else {
-                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                    Swal.fire({
-                        text: 'Sorry, looks like there are some errors detected, please try again.',
-                        icon: 'error',
-                        buttonsStyling: false,
-                        confirmButtonText: 'Ok, got it!',
-                        customClass: {
-                            confirmButton: 'btn btn-primary',
-                        },
-                    });
                 }
+                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                Swal.fire({
+                    text: 'Sorry, looks like there are some errors detected, please try again.',
+                    icon: 'error',
+                    buttonsStyling: false,
+                    confirmButtonText: 'Ok, got it!',
+                    customClass: {
+                        confirmButton: 'btn btn-primary',
+                    },
+                });
             });
         });
     };
