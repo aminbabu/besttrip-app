@@ -14,7 +14,7 @@ const { comparePassword } = require('../../../utils');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { password, oldPassword } = req.body;
+        const { password, currentPassword } = req.body;
         const { id } = req.params;
 
         // get user
@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
         const userObject = user.toObject();
 
         // compare password
-        const match = await comparePassword(oldPassword, userObject.password);
+        const match = await comparePassword(currentPassword, userObject.password);
 
         // check if password match
         if (!match) {
