@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 04 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -14,7 +14,7 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewProfile } = require('../../../controllers/dashboard/users');
+const { viewProfile, disableProfile } = require('../../../controllers/dashboard/users');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
@@ -37,6 +37,16 @@ router.use(isAuthorized);
  * @method GET
  */
 router.get('/profile', viewProfile);
+
+/**
+ * @description - display user's profile
+ * @param {string} path - '/dashboard/users/profile/disable'
+ * @param {function} controller - ['disableProfile']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method GET
+ */
+router.get('/profile/disable', disableProfile);
 
 // export profile router
 module.exports = router;
