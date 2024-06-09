@@ -34,7 +34,7 @@ module.exports = async (req, res, next) => {
         user.set({
             ...user.toObject(),
             ...validatedUser,
-            avatar: avatar?.path,
+            avatar: avatar?.path || user.avatar,
         });
 
         // save user
