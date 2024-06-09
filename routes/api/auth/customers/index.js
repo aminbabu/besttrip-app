@@ -35,7 +35,7 @@ const {
 
 /**
  * @description register a new user
- * @param {string} path - /auth/customers/register
+ * @param {string} path - /api/auth/customers/register
  * @param {function} validator - ['validateRegister']
  * @param {function} controller - ['register']
  * @returns {object} - router
@@ -46,7 +46,7 @@ router.post('/register', validateRegister, register);
 
 /**
  * @description login a user
- * @param {string} path - /auth/customers/login
+ * @param {string} path - /api/auth/customers/login
  * @param {function} validator - ['validateLogin']
  * @param {function} controller - ['login']
  * @returns {object} - router
@@ -57,7 +57,7 @@ router.post('/login', validateLogin, login);
 
 /**
  * @description forgot password
- * @param {string} path - /auth/customers/forgot-password
+ * @param {string} path - /api/auth/customers/forgot-password
  * @param {function} validator - ['validateForgotPassword']
  * @param {function} controller - ['forgotPassword']
  * @returns {object} - router
@@ -68,7 +68,7 @@ router.post('/forgot-password', validateForgotPassword, forgotPassword);
 
 /**
  * @description reset password
- * @param {string} path - /auth/customers/reset-password
+ * @param {string} path - /api/auth/customers/reset-password
  * @param {function} validator - ['validateResetPassword']
  * @param {function} controller - ['resetPassword']
  * @returns {object} - router
@@ -79,7 +79,7 @@ router.post('/reset-password', validateResetPassword, resetPassword);
 
 /**
  * @description send verification email
- * @param {string} path - /auth/customers/send-verification-email
+ * @param {string} path - /api/auth/customers/send-verification-email
  * @param {function} validator - ['validateSendVerificationEmail']
  * @param {function} controller - ['sendVerificationEmail']
  * @returns {object} - router
@@ -90,7 +90,7 @@ router.post('/send-verification-email', validateSendVerificationEmail, sendVerif
 
 /**
  * @description verify email
- * @param {string} path - /auth/customers/verify-email
+ * @param {string} path - /api/auth/customers/verify-email
  * @param {function} validator - ['validateVerifyEmail']
  * @param {function} controller - ['verifyEmail']
  * @returns {object} - router
