@@ -898,8 +898,7 @@
                     <!--begin::Modal content-->
                     <div class="modal-content">
                       <!--begin::Form-->
-                      <form class="form" id="kt_modal_update_user_form" action="/api/users/self" method="post">
-                        <input type="hidden" name="_method" value="PATCH">
+                      <form class="form" id="kt_modal_update_user_form" data-kt-redirect-url="/dashboard/users/profile" action="/api/users/self" method="post">
                         <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_update_user_header">
                           <!--begin::Modal title-->
@@ -956,9 +955,15 @@
                                   <!--begin::Image input-->
                                   <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
                                     <!--begin::Preview existing avatar-->
+                                    <% if (user.avatar) { %>
+                                    <div class="image-input-wrapper w-125px h-125px" style="
+                                          background-image: url('/<%= user.avatar %>');
+                                        "></div>
+                                    <% } else { %>
                                     <div class="image-input-wrapper w-125px h-125px" style="
                                           background-image: url('/assets/media/avatars/blank.png');
                                         "></div>
+                                    <% } %>
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Edit-->
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -1159,7 +1164,7 @@
                             </div>
                             <!--end::User form-->
                             <!--begin::Address toggle-->
-                            <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">
+                            <div class="fw-bolder fs-3 rotate collapsible collapsed mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">
                               Address Details
                               <span class="ms-2 rotate-180">
                                 <i class="ki-duotone ki-down fs-3"></i>
@@ -1167,7 +1172,7 @@
                             </div>
                             <!--end::Address toggle-->
                             <!--begin::Address form-->
-                            <div id="kt_modal_update_user_address" class="collapse show">
+                            <div id="kt_modal_update_user_address" class="collapse">
                               <!--begin::Input group-->
                               <div class="d-flex flex-column mb-7 fv-row">
                                 <!--begin::Label-->
@@ -1196,7 +1201,7 @@
                                   <label class="fs-6 fw-semibold mb-2">State</label>
                                   <!--end::Label-->
                                   <!--begin::Input-->
-                                  <input class="form-control form-control-solid" placeholder="" name="state" value="<%= user?.name %>" />
+                                  <input class="form-control form-control-solid" placeholder="" name="state" value="<%= user?.state %>" />
                                   <!--end::Input-->
                                 </div>
                                 <!--end::Col-->
