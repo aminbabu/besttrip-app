@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 12 April, 2024
- * @update_date 03 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -24,10 +24,7 @@ module.exports =
             // get avatar
             const { avatar } = req.files || {};
 
-            // continue if no avatar uploaded
-            if (!avatar) {
-                return next();
-            }
+            console.log(avatar);
 
             // get user
             const user = id ? (await Customer.findById(id)) || (await User.findById(id)) : req.user;
@@ -35,12 +32,17 @@ module.exports =
             // check if user has avatar
             if (user.avatar) {
                 // delete previous avatar
-                fs.unlinkSync(path.join(__dirname, '../../public/', user.avatar));
+                fs.unlinkSync(path.join(__dirname, '../../../public/', user.avatar));
+            }
+
+            // continue if no avatar uploaded
+            if (!avatar) {
+                return next();
             }
 
             // prepare file path
             const filePath = path.join('uploads/', `${dir}/${uuidv4()}_${user._id}_${avatar.name}`);
-            const uploadPath = path.join(__dirname, '../../public/', filePath);
+            const uploadPath = path.join(__dirname, '../../../public/', filePath);
 
             // move file to upload path
             await avatar.mv(uploadPath);
