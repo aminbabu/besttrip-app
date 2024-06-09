@@ -33,7 +33,6 @@ module.exports = async (req, res, next) => {
         const userProperties = {
             _id: payload.user._id,
             email: payload.user.email,
-            status: 'active',
         };
 
         // check if user exists based on role by id, email, and status
@@ -42,6 +41,11 @@ module.exports = async (req, res, next) => {
         // check if user is not exist
         if (!user) {
             return res.redirect('/dashboard/auth/login');
+        }
+
+        // check if user is not active
+        if (user.status !== 'active') {
+            return res.redirect('/dashboard/auth/account-activation');
         }
 
         // generate token
