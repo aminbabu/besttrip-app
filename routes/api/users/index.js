@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 04 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -19,6 +19,7 @@ const {
     getUser,
     updateUser,
     updateUserBySelf,
+    disableUserBySelf,
     deleteUser,
     deleteUserBySelf,
 } = require('../../../controllers/api/users');
@@ -87,6 +88,17 @@ router.patch(
     uploadAvatar('avatars/users'),
     updateUserBySelf
 );
+
+/**
+ * @description disable user by self
+ * @param {string} path - /api/users/self/disable
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} controller - ['disableUserBySelf']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method DELETE
+ */
+router.delete('/self/disable', isAllowed(USER_ROLES), disableUserBySelf);
 
 /**
  * @description update user by mongo id
