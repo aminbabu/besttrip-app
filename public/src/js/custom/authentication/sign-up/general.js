@@ -295,7 +295,9 @@ const KTSignupGeneral = (function () {
                                     errors instanceof Array
                                         ? `<h2><ul class="text-start">${Object.values(
                                               error.response.data.errors
-                                          ).map((err) => `<li>${err?.message}</li>`)}</ul>`
+                                          )
+                                              .map((err) => `<li>${err?.message}</li>`)
+                                              .join('')}</ul>`
                                         : errors
                                 }`,
                                 icon: 'error',

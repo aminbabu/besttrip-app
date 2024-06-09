@@ -190,7 +190,9 @@ const KTAuthNewPassword = (function () {
                                     errors instanceof Array
                                         ? `<ul class="text-start">${Object.values(
                                               error.response.data.errors
-                                          ).map((err) => `<li>${err?.message}</li>`)}</ul>`
+                                          )
+                                              .map((err) => `<li>${err?.message}</li>`)
+                                              .join('')}</ul>`
                                         : errors
                                 }`,
                                 icon: 'error',
