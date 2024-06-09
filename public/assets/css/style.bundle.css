@@ -48649,6 +48649,14 @@ a:hover {
   color: #f78212;
 }
 
+.form-control-phone {
+  display: flex;
+  gap: 1rem;
+}
+.form-control-phone .select2-container {
+  width: 11rem !important;
+}
+
 [data-bs-theme=light] {
   --bs-app-bg-color: #f9f9f9;
   --bs-app-blank-bg-color: #f9f9f9;
