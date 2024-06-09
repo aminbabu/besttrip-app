@@ -18,8 +18,10 @@ const {
     getAllUsers,
     getUser,
     updateUser,
+    updatePassword,
     updateUserBySelf,
     disableUserBySelf,
+    updatePasswordBySelf,
     deleteUser,
     deleteUserBySelf,
 } = require('../../../controllers/api/users');
@@ -29,7 +31,9 @@ const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
     validateUserId,
     validateUser,
+    validatePassword,
     validateUserSelf,
+    validatePasswordSelf,
 } = require('../../../middlewares/api/validators/users');
 const { validateAvatar } = require('../../../middlewares/api/validators/files');
 const { uploadAvatar } = require('../../../middlewares/api/files');
@@ -119,6 +123,30 @@ router.patch(
     uploadAvatar('avatars/users'),
     updateUser
 );
+
+/**
+ * @description update password by id
+ * @param {string} path - /api/users/:id/password
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validatePassword']
+ * @param {function} controller - ['updatePassword']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method PATCH
+ */
+router.patch('/:id/password', isAllowed(['admin']), validatePassword, updatePassword);
+
+/**
+ * @description update password by self
+ * @param {string} path - /api/users/self/password
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validatePassword']
+ * @param {function} controller - ['updatePasswordBySelf']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method PATCH
+ */
+router.patch('/self/password', isAllowed(USER_ROLES), validatePasswordSelf, updatePasswordBySelf);
 
 /**
  * @description delete user by self
