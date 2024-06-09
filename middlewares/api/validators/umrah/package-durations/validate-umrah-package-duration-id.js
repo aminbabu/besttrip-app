@@ -11,7 +11,7 @@
 const {
     umrahPackageDurationSchema,
 } = require('../../../../../schemas/zod/umrah/package-durations');
-const { zodErrorHandler } = require('../../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../../handlers/errors');
 
 // export umrah package duration id validator
 module.exports = (req, res, next) => {

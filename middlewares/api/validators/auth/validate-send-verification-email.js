@@ -8,7 +8,7 @@
  */
 
 const { sendVerificationEmailSchema } = require('../../../../schemas/zod/auth');
-const { zodErrorHandler } = require('../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // export validate send verification email middleware
 module.exports = (req, res, next) => {

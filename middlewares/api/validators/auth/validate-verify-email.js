@@ -9,7 +9,7 @@
 
 // dependencies
 const { verifyEmailSchema } = require('../../../../schemas/zod/auth');
-const { zodErrorHandler } = require('../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // dependencies
 

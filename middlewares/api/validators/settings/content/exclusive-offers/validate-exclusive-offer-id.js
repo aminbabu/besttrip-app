@@ -9,7 +9,7 @@
 
 // dependencies
 const { exclusiveOfferSchema } = require('../../../../../../schemas/zod/settings/content');
-const { zodErrorHandler } = require('../../../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../../../handlers/errors');
 
 // export exclusive offer id validator middleware
 module.exports = (req, res, next) => {

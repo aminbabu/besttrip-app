@@ -9,7 +9,7 @@
 
 // dependencies
 const { umrahPackageTypeSchema } = require('../../../../../schemas/zod/umrah/package-types');
-const { zodErrorHandler } = require('../../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../../handlers/errors');
 
 // export umrah package type validator
 module.exports = (req, res, next) => {

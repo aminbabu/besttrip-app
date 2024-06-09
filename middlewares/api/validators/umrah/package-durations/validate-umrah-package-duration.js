@@ -8,8 +8,10 @@
  */
 
 // dependencies
-const { umrahPackageDurationSchema } = require('../../../../../schemas/zod/umrah/package-durations');
-const { zodErrorHandler } = require('../../../../../handlers/api/errors');
+const {
+    umrahPackageDurationSchema,
+} = require('../../../../../schemas/zod/umrah/package-durations');
+const { zodErrorHandler } = require('../../../../../handlers/errors');
 
 // export umrah package duration validator
 module.exports = (req, res, next) => {

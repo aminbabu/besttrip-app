@@ -9,7 +9,7 @@
 
 // dependencies
 const { flightOfferSchema } = require('../../../../../../schemas/zod/settings/content');
-const { zodErrorHandler } = require('../../../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../../../handlers/errors');
 
 // export flight offer validator middleware
 module.exports = (req, res, next) => {

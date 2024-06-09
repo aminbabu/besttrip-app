@@ -9,7 +9,7 @@
 
 // dependencies
 const { forgotPasswordSchema } = require('../../../../schemas/zod/auth');
-const { zodErrorHandler } = require('../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // export validate forgot password middleware
 module.exports = (req, res, next) => {

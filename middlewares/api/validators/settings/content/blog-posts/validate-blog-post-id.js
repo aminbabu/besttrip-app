@@ -9,7 +9,7 @@
 
 // dependencies
 const { blogPostSchema } = require('../../../../../../schemas/zod/settings/content');
-const { zodErrorHandler } = require('../../../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../../../handlers/errors');
 
 // export blog post id validator middleware
 module.exports = (req, res, next) => {

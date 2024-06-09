@@ -9,7 +9,7 @@
 
 // dependencies
 const { contactSettingsSchema } = require('../../../../../../schemas/zod/settings/site');
-const { zodErrorHandler } = require('../../../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../../../handlers/errors');
 
 // export contact settings validator middleware
 module.exports = (req, res, next) => {

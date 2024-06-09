@@ -9,7 +9,7 @@
 
 // dependencies
 const { paymentSettingsSchema } = require('../../../../../schemas/zod/settings/payments');
-const { zodErrorHandler } = require('../../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../../handlers/errors');
 
 // export payments settings validator middleware
 module.exports = (req, res, next) => {

@@ -9,7 +9,7 @@
 
 // dependencies
 const { customerSchema } = require('../../../../schemas/zod/customers');
-const { zodErrorHandler } = require('../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // export validate customer by id middleware
 module.exports = (req, res, next) => {

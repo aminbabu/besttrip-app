@@ -9,7 +9,7 @@
 
 // dependencies
 const { registerSchema } = require('../../../../schemas/zod/auth');
-const { zodErrorHandler } = require('../../../../handlers/api/errors');
+const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // export validate register middleware
 module.exports = (req, res, next) => {
