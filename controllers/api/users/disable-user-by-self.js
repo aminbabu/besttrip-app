@@ -30,6 +30,10 @@ module.exports = async (req, res) => {
         // save user
         await user.save();
 
+        // remove token from cookie and header
+        res.clearCookie('token');
+        res.removeHeader('authorization');
+
         // return response
         return res.json({ message: 'Disabled user successfully' });
     } catch (error) {
