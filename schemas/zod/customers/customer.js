@@ -4,17 +4,18 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 10 May, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
 const { z } = require('zod');
-const { isMobilePhone, isPostalCode, isMongoId } = require('validator');
+const { isMobilePhone, isMongoId } = require('validator');
 const moment = require('moment');
 const {
     CUSTOMER_STATUS,
     CUSTOMER_WALLET_TRANSACTION_TYPES,
     CUSTOMER_ROLES,
+    POST_CODE_REGEX,
 } = require('../../../constants');
 
 // export customer schema
@@ -118,7 +119,7 @@ module.exports = z
             .optional(),
         postalCode: z
             .string()
-            .refine((postalCode) => isPostalCode(postalCode), {
+            .refine((postalCode) => POST_CODE_REGEX.test(postalCode), {
                 message: 'Please enter a valid postal code',
             })
             .optional(),
