@@ -198,10 +198,12 @@ const KTUsersUpdateDetails = (function () {
 
     // Date of birth picker
     const dobPicker = () => {
-        $('#kt_datepicker_user_dob').flatpickr({
-            enableTime: false,
-            dateFormat: 'Z',
-        });
+        console.log(
+            $('#kt_datepicker_user_dob').flatpickr({
+                enableTime: false,
+                dateFormat: 'Y-m-d',
+            })
+        );
     };
 
     return {
