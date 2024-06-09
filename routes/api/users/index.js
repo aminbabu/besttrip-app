@@ -38,7 +38,7 @@ const { USER_ROLES } = require('../../../constants');
 
 /**
  * @description check if user is authorized
- * @param {string} path - /users
+ * @param {string} path - /api/users
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -47,7 +47,7 @@ router.use(isAuthorized);
 
 /**
  * @description get all users
- * @param {string} path - /users
+ * @param {string} path - /api/users
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} controller - ['getAllUsers']
  * @returns {object} - router
@@ -58,7 +58,7 @@ router.get('/', isAllowed(['admin']), getAllUsers);
 
 /**
  * @description get user by mongo id
- * @param {string} path - /users/:id
+ * @param {string} path - /api/users/:id
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateUserId']
  * @param {function} controller - ['getUser']
@@ -70,7 +70,7 @@ router.get('/:id', isAllowed(['admin']), validateUserId, getUser);
 
 /**
  * @description update user by self
- * @param {string} path - /users/self
+ * @param {string} path - /api/users/self
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateAvatar', 'validateUserAccount']
  * @param {function} validator - ['validateUserSelf']
@@ -90,7 +90,7 @@ router.patch(
 
 /**
  * @description update user by mongo id
- * @param {string} path - /users/:id
+ * @param {string} path - /api/users/:id
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateAvatar', 'validateUserAccount']
  * @param {function} validator - ['validateUser']
@@ -110,7 +110,7 @@ router.patch(
 
 /**
  * @description delete user by mongo id
- * @param {string} path - /users/:id
+ * @param {string} path - /api/users/:id
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateUserId']
  * @param {function} controller - ['deleteUser']
@@ -122,7 +122,7 @@ router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUser);
 
 /**
  * @description delete user by self
- * @param {string} path - /users/self
+ * @param {string} path - /api/users/self
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} controller - ['deleteUserBySelf']
  * @returns {object} - router

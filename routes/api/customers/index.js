@@ -38,7 +38,7 @@ const { uploadAvatar } = require('../../../middlewares/api/files');
 
 /**
  * @description check if user is authorized
- * @param {string} path - /customers
+ * @param {string} path - /api/customers
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -47,7 +47,7 @@ router.use(isAuthorized);
 
 /**
  * @description get all customers
- * @param {string} path - /customers
+ * @param {string} path - /api/customers
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getAllCustomers']
  * @returns {object} - router
@@ -58,7 +58,7 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
 
 /**
  * @description get customer by mongo id
- * @param {string} path - /customers/:id
+ * @param {string} path - /api/customers/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateCustomerId']
  * @param {function} controller - ['getCustomer']
@@ -70,7 +70,7 @@ router.get('/:id', isAllowed(['admin']), validateCustomerId, getCustomer);
 
 /**
  * @description update all customers wallet
- * @param {string} path - /customers/wallet
+ * @param {string} path - /api/customers/wallet
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateCustomerWallet']
  * @param {function} controller - ['updateAllCustomers']
@@ -82,7 +82,7 @@ router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllC
 
 /**
  * @description update customer by self
- * @param {string} path - /customers/self
+ * @param {string} path - /api/customers/self
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateAvatar', 'validateCustomerAccount']
  * @param {function} validator - ['validateCustomerSelf']
@@ -103,7 +103,7 @@ router.patch(
 
 /**
  * @description update customer by mongo id
- * @param {string} path - /customers/:id
+ * @param {string} path - /api/customers/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateAvatar', 'validateCustomerAccount']
  * @param {function} validator - ['validateCustomerId', 'validateCustomer']
@@ -126,7 +126,7 @@ router.patch(
 
 /**
  * @description delete customer by mongo id
- * @param {string} path - /customers/:id
+ * @param {string} path - /api/customers/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateCustomerId']
  * @param {function} controller - ['deleteCustomer']
@@ -138,7 +138,7 @@ router.delete('/:id', isAllowed(['admin']), validateCustomerId, deleteCustomer);
 
 /**
  * @description delete customer by self
- * @param {string} path - /customers/self
+ * @param {string} path - /api/customers/self
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['deleteCustomerBySelf']
  * @returns {object} - router
