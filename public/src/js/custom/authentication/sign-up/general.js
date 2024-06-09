@@ -291,9 +291,10 @@ const KTSignupGeneral = (function () {
                                 : error.response.data.errors;
 
                             Swal.fire({
+                                title: '<h4 class="text-start">Error(s):</h4>',
                                 html: `${
                                     errors instanceof Array
-                                        ? `<ul class="text-start">${Object.values(
+                                        ? `<h2><ul class="text-start">${Object.values(
                                               error.response.data.errors
                                           ).map((err) => `<li>${err?.message}</li>`)}</ul>`
                                         : errors
