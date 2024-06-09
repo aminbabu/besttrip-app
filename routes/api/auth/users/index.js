@@ -108,7 +108,7 @@ router.get('/verify-email', validateVerifyEmail, verifyEmail);
  * @access public
  * @method GET
  */
-router.get('/account-activation', validateLogin, accountActivation);
+router.post('/account-activation', validateLogin, accountActivation);
 
 // export
 module.exports = router;
