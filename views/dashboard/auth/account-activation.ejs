@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<%- include('../partials/head.ejs', { title }); %>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body" class="app-blank">
+  <!--begin::Theme mode setup on page load-->
+  <%- include('../partials/theme-mode.ejs'); %>
+  <!--end::Theme mode setup on page load-->
+  <!--begin::Root-->
+  <div class="d-flex flex-column flex-root" id="kt_app_root">
+    <!--begin::Authentication - Password reset -->
+    <!--begin::Body-->
+    <div class="d-flex flex-column flex-lg-row-fluid p-10">
+      <!--begin::Form-->
+      <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+        <!--begin::Wrapper-->
+        <div class="card min-w-325px w-sm-500px mx-sm-auto p-sm-6">
+          <div class="card-body">
+            <!--begin::Form-->
+            <form class="form w-100" novalidate="novalidate" id="kt_password_reset_form" data-kt-redirect-url="/dashboard/auth/login" action="/api/auth/users/account-activation" method="post">
+              <!--begin::Heading-->
+              <div class="text-center mb-10">
+                <!--begin::Title-->
+                <h1 class="text-gray-900 fw-bolder mb-3">Activate Account</h1>
+                <!--end::Title-->
+                <!--begin::Link-->
+                <div class="text-gray-500 fw-semibold fs-6">Enter your email and password to activate your account</div>
+                <!--end::Link-->
+              </div>
+              <!--begin::Heading-->
+              <!--begin::Input group=-->
+              <div class="fv-row mb-8">
+                <!--begin::Label-->
+                <label for="email" class="fw-bold text-start text-gray-900 fs-6 mb-2 required">
+                  Email address
+                </label>
+                <!--end::Label-->
+                <!--begin::Email-->
+                <input type="text" placeholder="Email address" name="email" autocomplete="off" class="form-control bg-transparent" />
+                <!--end::Email-->
+              </div>
+              <!--end::Input group-->
+              <!--begin::Input group-->
+              <div class="fv-row mb-8">
+                <!--begin::Label-->
+                <label for="password" class="fw-bold text-start text-gray-900 fs-6 mb-2 required">
+                  Password
+                </label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-transparent" />
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+              <!--begin::Actions-->
+              <div class="d-grid gap-4 pb-lg-0">
+                <button type="button" id="kt_password_reset_submit" class="btn btn-primary">
+                  <!--begin::Indicator label-->
+                  <span class="indicator-label">Activate</span>
+                  <!--end::Indicator label-->
+                  <!--begin::Indicator progress-->
+                  <span class="indicator-progress">Please wait...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                  <!--end::Indicator progress-->
+                </button>
+                <a href="/dashboard/auth/login" class="btn btn-light">Cancel</a>
+              </div>
+              <!--end::Actions-->
+            </form>
+            <!--end::Form-->
+          </div>
+        </div>
+        <!--end::Wrapper-->
+      </div>
+      <!--end::Form-->
+    </div>
+    <!--end::Body-->
+    <!--end::Authentication - Password reset-->
+  </div>
+  <!--end::Root-->
+  <!--begin::Javascript-->
+  <%- include('../partials/footer-scripts.ejs', { customJavascripts: ['/assets/js/custom/authentication/reset-password/account-activation.js'] }); %>
+  <!--end::Javascript-->
+</body>
+<!--end::Body-->
+
+</html>
