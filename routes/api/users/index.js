@@ -121,6 +121,17 @@ router.patch(
 );
 
 /**
+ * @description delete user by self
+ * @param {string} path - /api/users/self
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} controller - ['deleteUserBySelf']
+ * @returns {object} - router
+ * @access private - ['user']
+ * @method DELETE
+ */
+router.delete('/self', isAllowed(USER_ROLES), deleteUserBySelf);
+
+/**
  * @description delete user by mongo id
  * @param {string} path - /api/users/:id
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
@@ -131,17 +142,6 @@ router.patch(
  * @method DELETE
  */
 router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUser);
-
-/**
- * @description delete user by self
- * @param {string} path - /api/users/self
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} controller - ['deleteUserBySelf']
- * @returns {object} - router
- * @access private - ['user']
- * @method DELETE
- */
-router.delete('/self', isAllowed(USER_ROLES), deleteUserBySelf);
 
 // export
 module.exports = router;
