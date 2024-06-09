@@ -40,7 +40,7 @@ const KTUsersUpdateUtils = (function () {
                                 customClass: {
                                     confirmButton: 'btn btn-primary',
                                 },
-                                closeOnClickOutside: false,
+                                allowOutsideClick: false,
                                 showCancelButton: false,
                             }).then((outcome) => {
                                 if (outcome.isConfirmed) {
