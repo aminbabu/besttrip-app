@@ -19,13 +19,19 @@ module.exports = z
                 invalid_type_error: 'Password must be a string',
             })
             .min(8, 'Password must be at least 8 characters long.'),
+        currentPassword: z
+            .string({
+                required_error: 'Password is required',
+                invalid_type_error: 'Password must be a string',
+            })
+            .min(8, 'Password must be at least 8 characters long.'),
         confirmPassword: z
             .string({
                 required_error: 'Confirm password is required',
                 invalid_type_error: 'Confirm password must be a string',
             })
             .min(8, 'Confirm password must be at least 8 characters long.')
-            .refine(({ password, confirmPassword }) => password === confirmPassword, {
+            .refine(({ currentPassword, confirmPassword }) => currentPassword === confirmPassword, {
                 message: 'Passwords do not match',
                 path: ['confirmPassword'],
             }),
