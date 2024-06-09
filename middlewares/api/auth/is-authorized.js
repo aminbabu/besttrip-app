@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 04 June, 2024
+ * @update_date 09 June, 2024
  */
 
 // dependencies
@@ -36,7 +36,6 @@ module.exports = async (req, res, next) => {
         const userProperties = {
             _id: payload.user._id,
             email: payload.user.email,
-            status: 'active',
         };
 
         // check if user exists based on role by id, email, and status
@@ -50,6 +49,13 @@ module.exports = async (req, res, next) => {
         if (!user) {
             return res.status(401).json({
                 message: 'Unauthorized',
+            });
+        }
+
+        // check if user is not active
+        if (user.status !== 'active') {
+            return res.status(401).json({
+                message: 'Please contact administrator to activate your account',
             });
         }
 
