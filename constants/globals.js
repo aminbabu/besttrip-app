@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 06 April, 2024
- * @update_date 06 April, 2024
+ * @update_date 09 June, 2024
  */
 
 // pagination constants
@@ -18,6 +18,9 @@ const MIN_FILE_SIZE = ONE_MEGA_BYTE;
 const MAX_FILE_SIZE = 10 * ONE_MEGA_BYTE;
 const DEFAULT_FILE_SIZE = 5 * ONE_MEGA_BYTE;
 
+// regex constants
+const POST_CODE_REGEX = /^[A-Za-z0-9\s-]{3,10}$/;
+
 // export constants
 module.exports = {
     HALF_MEGA_BYTE,
@@ -27,4 +30,5 @@ module.exports = {
     MIN_FILE_SIZE,
     MAX_FILE_SIZE,
     DEFAULT_FILE_SIZE,
+    POST_CODE_REGEX,
 };
