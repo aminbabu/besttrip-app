@@ -55,7 +55,7 @@ module.exports = async (req, user) => {
     }
 
     // update user login history
-    existinUser.set({ history: history._id });
+    existinUser.histories.push(history._id);
 
     // save history
     await history.save();
