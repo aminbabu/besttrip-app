@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 04 June, 2024
+ * @update_date 10 June, 2024
  */
 
 // dependencies
@@ -27,7 +27,11 @@ module.exports = async (req, user) => {
     }
 
     // get last history
-    history = await History.findOne({ user: user?._id, ipAddress: ip }).sort({
+    history = await History.findOne({
+        user: user?._id,
+        ipAddress: ip,
+        userAgent: req.headers['user-agent'],
+    }).sort({
         createdAt: -1,
     });
 
