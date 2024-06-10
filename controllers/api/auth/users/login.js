@@ -71,6 +71,12 @@ module.exports = async (req, res, next) => {
         // generate token
         const token = generateToken(userObject);
 
+        // update user history
+        user.history.push(history._id);
+
+        // save user
+        await user.save();
+
         // set token in response
         res.set('authorization', `Bearer ${token}`);
 

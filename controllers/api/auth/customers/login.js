@@ -8,6 +8,7 @@
  */
 
 // dependencies
+const { env } = require('../../../../config');
 const { Customer } = require('../../../../models');
 const { comparePassword, generateToken, ipInfo } = require('../../../../utils');
 
@@ -72,6 +73,14 @@ module.exports = async (req, res, next) => {
 
         // set token in response
         res.set('authorization', `Bearer ${token}`);
+
+        // set cookie in response
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: env.JWT_EXPIRY,
+        });
 
         // return response
         return res.status(200).json({
