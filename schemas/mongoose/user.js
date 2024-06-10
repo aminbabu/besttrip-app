@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 08 June, 2024
+ * @update_date 10 June, 2024
  */
 
 // dependencies
@@ -73,10 +73,12 @@ module.exports = new Schema(
         postalCode: {
             type: String,
         },
-        history: {
-            type: Schema.Types.ObjectId,
-            ref: 'History',
-        },
+        history: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'History',
+            },
+        ],
     },
     {
         timestamps: true,
