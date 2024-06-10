@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
         const { email, password } = req.body;
 
         // check if user exists
-        const user = await User.findOne({ email }).select('+password');
+        const user = await User.findOne({ email }).select('+password').populate('history');
 
         if (!user) {
             return res.status(400).json({
