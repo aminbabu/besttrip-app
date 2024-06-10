@@ -66,10 +66,16 @@ module.exports = async (req, res, next) => {
 
         // remove password, history from customer object
         delete customerObject.password;
-        delete customerObject.history;
+        delete customerObject.histories;
 
         // generate token
         const token = generateToken(customerObject);
+
+        // update customer history
+        customer.histories.push(history._id);
+
+        // save customer
+        await customer.save();
 
         // set token in response
         res.set('authorization', `Bearer ${token}`);

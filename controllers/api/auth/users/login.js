@@ -66,13 +66,13 @@ module.exports = async (req, res, next) => {
 
         // remove password, history from user object
         delete userObject.password;
-        delete userObject.history;
+        delete userObject.histories;
 
         // generate token
         const token = generateToken(userObject);
 
         // update user history
-        user.history.push(history._id);
+        user.histories.push(history._id);
 
         // save user
         await user.save();
