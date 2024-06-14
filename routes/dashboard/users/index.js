@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 09 June, 2024
+ * @update_date 14 June, 2024
  */
 
 // dependencies
@@ -14,7 +14,7 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewProfile } = require('../../../controllers/dashboard/users');
+const { viewUsers, viewProfile } = require('../../../controllers/dashboard/users');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
@@ -27,6 +27,16 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
  * @method USE
  */
 router.use(isAuthorized);
+
+/**
+ * @description - users view route
+ * @param {string} path - '/dashboard/users'
+ * @param {function} controller - ['viewUsers']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method GET
+ */
+router.get('/', viewUsers);
 
 /**
  * @description - profile view route
