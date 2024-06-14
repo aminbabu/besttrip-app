@@ -11,7 +11,7 @@
 const { User } = require('../../../models');
 
 // export users view controller
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
     try {
         // get users
         const users = await User.find();
@@ -23,6 +23,6 @@ module.exports = async (req, res, next) => {
             users,
         });
     } catch (error) {
-        return next(error);
+        return res.redirect('/error/500');
     }
 };
