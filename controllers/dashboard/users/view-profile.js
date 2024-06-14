@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 10 June, 2024
+ * @update_date 14 June, 2024
  */
 
 // dependencies
@@ -46,7 +46,6 @@ module.exports = async (req, res) => {
             countries: Object.values(countries),
         });
     } catch (error) {
-        console.log('Error in viewProfile', error);
         return res.redirect('/errors/500');
     }
 };
