@@ -11,7 +11,7 @@
 const { roleSchema } = require('../../../../schemas/zod/roles');
 const { zodErrorHandler } = require('../../../../handlers/errors');
 
-// export payment request id validator middleware
+// export role id validator
 module.exports = (req, res, next) => {
     // validate request body
     const { error, success } = roleSchema.pick({ id: true }).safeParse(req.params);
