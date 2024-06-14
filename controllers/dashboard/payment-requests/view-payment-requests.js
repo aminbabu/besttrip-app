@@ -13,8 +13,11 @@ const { PaymentRequest } = require('../../../models');
 // export view payment requests controller
 module.exports = async (req, res, next) => {
     try {
+        // get status from request params
+        const { status } = req.params;
+
         // get payment requests
-        const paymentRequests = await PaymentRequest.find().populate('customer');
+        const paymentRequests = await PaymentRequest.find({ status }).populate('customer');
 
         // return render view
         return res.render('dashboard/payment-requests/', {
