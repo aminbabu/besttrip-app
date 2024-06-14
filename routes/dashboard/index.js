@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 June, 2024
- * @update_date 04 June, 2024
+ * @update_date 14 June, 2024
  */
 
 // dependencies
@@ -18,6 +18,7 @@ router.use('/', require('./home'));
 router.use('/auth', require('./auth'));
 router.use('/users', require('./users'));
 router.use('/payment-requests', require('./payment-requests'));
+router.use('/errors', require('./errors'));
 
 // export dashboard router
 module.exports = router;
