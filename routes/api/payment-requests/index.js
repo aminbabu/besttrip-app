@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 18 May, 2024
+ * @update_date 14 June, 2024
  */
 
 // dependencies
@@ -17,6 +17,7 @@ const router = express.Router();
 const {
     getPaymentRequests,
     getPaymentRequest,
+    getPaymentRequestsByStatus,
     createPaymentRequest,
     updatePaymentRequest,
     deletePaymentRequest,
@@ -27,6 +28,7 @@ const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
     validatePaymentRequestId,
     validatePaymentRequest,
+    validatePaymentRequestsByStatus,
 } = require('../../../middlewares/api/validators/payment-requests');
 
 /**
@@ -60,6 +62,22 @@ router.get('/', isAllowed(['admin']), getPaymentRequests);
  * @method GET
  */
 router.get('/:id', isAllowed(['admin']), validatePaymentRequestId, getPaymentRequest);
+
+/**
+ * @description - get payment requests by status
+ * @param {string} path - '/api/payment-requests/status/:status'
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} controller - ['getPaymentRequestsByStatus']
+ * @returns {object} - router
+ * @access private ['admin']
+ * @method GET
+ */
+router.get(
+    '/status/:status',
+    isAllowed(['admin']),
+    validatePaymentRequestsByStatus,
+    getPaymentRequestsByStatus
+);
 
 /**
  * @description - create payment request
