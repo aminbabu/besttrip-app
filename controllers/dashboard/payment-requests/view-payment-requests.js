@@ -11,7 +11,7 @@
 const { PaymentRequest } = require('../../../models');
 
 // export view payment requests controller
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
     try {
         // get status from request params
         const { status } = req.params;
@@ -26,6 +26,6 @@ module.exports = async (req, res, next) => {
             paymentRequests,
         });
     } catch (error) {
-        return next(error);
+        return res.redirect('/error/500');
     }
 };
