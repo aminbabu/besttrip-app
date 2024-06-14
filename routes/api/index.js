@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 May, 2024
- * @update_date 04 June, 2024
+ * @update_date 14 June, 2024
  */
 
 // dependencies
@@ -34,7 +34,6 @@ router.use('/payment-requests', require('./payment-requests'));
 router.use('/umrah/packages', require('./umrah/packages'));
 router.use('/umrah/package-durations', require('./umrah/package-durations'));
 router.use('/umrah/package-types', require('./umrah/package-types'));
-router.use('/errors', require('../dashboard/errors'));
 
 // export router
 module.exports = router;
