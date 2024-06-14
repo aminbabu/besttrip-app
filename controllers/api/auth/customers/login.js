@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 10 June, 2024
+ * @update_date 14 June, 2024
  */
 
 // dependencies
@@ -19,7 +19,9 @@ module.exports = async (req, res, next) => {
         const { email, password } = req.body;
 
         // check if customer exists
-        const customer = await Customer.findOne({ email }).select('+password').populate('history');
+        const customer = await Customer.findOne({ email })
+            .select('+password')
+            .populate('histories');
 
         if (!customer) {
             return res.status(400).json({
