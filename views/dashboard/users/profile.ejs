@@ -149,11 +149,11 @@
                               <%= user.createdAt %>
                             </div>
                             <!--begin::Details item-->
-                            <% if (user.history.lastLogin) { %>
+                            <% if (user?.histories.lastLogin) { %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Last Login</div>
                             <div class="text-gray-600">
-                              <%= user.history.lastLogin %>
+                              <%= user?.histories.lastLogin %>
                             </div>
                             <!--begin::Details item-->
                             <% } %>
@@ -353,7 +353,7 @@
                         <!--end::Card-->
                       </div>
                       <!--end:::Tab pane-->
-                      <% if (loginHistories?.length) { %>
+                      <% if (user?.histories?.length) { %>
                       <!--begin:::Tab pane-->
                       <div class="tab-pane fade" id="kt_user_view_overview_events_and_logs_tab" role="tabpanel">
                         <!--begin::Card-->
@@ -408,7 +408,7 @@
                                   <th class="min-w-125px">Last Login</th>
                                   <th class="min-w-125px">IP address</th>
                                   <th class="min-w-125px">Status</th>
-                                  <th class="min-w-125px">
+                                  <th class="min-w-400px" style="white-space: normal;">
                                     Browser/Device
                                   </th>
                                   <th class="min-w-125px">Location</th>
@@ -418,7 +418,7 @@
                                 </tr>
                               </thead>
                               <tbody class="text-gray-600 fw-semibold">
-                                <% loginHistories.forEach((history) => { %>
+                                <% user?.histories.forEach((history) => { %>
                                 <tr>
                                   <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -437,7 +437,7 @@
                                       <%= history.status %>
                                     </span>
                                   </td>
-                                  <td><%= history.userAgent %></td>
+                                  <td style="white-space: normal;"><%= history.userAgent %></td>
                                   <td><%= history.location %></td>
                                   <td class="text-end">
                                     <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
