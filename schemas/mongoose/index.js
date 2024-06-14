@@ -4,11 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 28 April, 2024
+ * @update_date 14 June, 2024
  */
 
 // export all schemas
 module.exports = {
+    roleSchema: require('./role'),
     userSchema: require('./user'),
     customerSchema: require('./customer'),
     tokenSchema: require('./token'),
