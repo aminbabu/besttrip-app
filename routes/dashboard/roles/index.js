@@ -21,7 +21,7 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/users'
+ * @param {string} path - '/dashboard/roles'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -30,7 +30,7 @@ router.use(isAuthorized);
 
 /**
  * @description - user roles view route
- * @param {string} path - '/dashboard/users/roles'
+ * @param {string} path - '/dashboard/roles'
  * @param {function} controller - ['viewRoles']
  * @returns {object} - router
  * @access private - ['all']
