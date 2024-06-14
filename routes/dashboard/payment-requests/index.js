@@ -30,13 +30,13 @@ router.use(isAuthorized);
 
 /**
  * @description - profile view route
- * @param {string} path - '/dashboard/payment-requests/'
+ * @param {string} path - '/dashboard/payment-requests/:status'
  * @param {function} controller - ['viewProfile']
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/', viewPaymentRequests);
+router.get('/:status', viewPaymentRequests);
 
 // export profile router
 module.exports = router;
