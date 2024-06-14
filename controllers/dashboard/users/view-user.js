@@ -13,8 +13,11 @@ const { User } = require('../../../models');
 // export edit user view controller
 module.exports = async (req, res) => {
     try {
+        // get user id from request params
+        const { id } = req.params;
+
         // get user
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(id);
 
         // check if user exists
         if (!user) {
