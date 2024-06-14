@@ -14,7 +14,7 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewUsers, editUser, viewProfile } = require('../../../controllers/dashboard/users');
+const { viewUsers, viewUser, viewProfile } = require('../../../controllers/dashboard/users');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
@@ -51,12 +51,12 @@ router.get('/profile', viewProfile);
 /**
  * @description - edit user view route
  * @param {string} path - '/dashboard/users/edit'
- * @param {function} controller - ['editUser']
+ * @param {function} controller - ['viewUser']
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/edit', editUser);
+router.get('/:id', viewUser);
 
 // export profile router
 module.exports = router;
