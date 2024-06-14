@@ -10,5 +10,6 @@
 // export all user controllers
 module.exports = {
     viewUsers: require('./view-users'),
+    editUser: require('./edit-user'),
     viewProfile: require('./view-profile'),
 };
