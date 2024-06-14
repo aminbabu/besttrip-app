@@ -1,160 +1,158 @@
-"use strict";
-
 // Class definition
-var KTUsersViewMain = (function () {
-  // Init login session button
-  var initLoginSession = () => {
-    const button = document.getElementById("kt_modal_users_login_session");
+const KTUsersViewMain = (function () {
+    // Init login session button
+    const initLoginSession = () => {
+        const button = document.getElementById('kt_modal_users_login_session');
 
-    button.addEventListener("click", (e) => {
-      e.preventDefault();
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
 
-      Swal.fire({
-        text: "Are you sure you would like sign out all sessions?",
-        icon: "warning",
-        showCancelButton: true,
-        buttonsStyling: false,
-        confirmButtonText: "Yes, sign out!",
-        cancelButtonText: "No, return",
-        customClass: {
-          confirmButton: "btn btn-primary",
-          cancelButton: "btn btn-active-light",
-        },
-      }).then(function (result) {
-        if (result.value) {
-          Swal.fire({
-            text: "You have signed out all sessions!.",
-            icon: "success",
-            buttonsStyling: false,
-            confirmButtonText: "Ok, got it!",
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-        } else if (result.dismiss === "cancel") {
-          Swal.fire({
-            text: "Your sessions are still preserved!.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Ok, got it!",
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-        }
-      });
-    });
-  };
-
-  // Init sign out single user
-  var initSignOutUser = () => {
-    const signOutButtons = document.querySelectorAll(
-      '[data-kt-users-sign-out="single_user"]'
-    );
-
-    signOutButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        const deviceName = button
-          .closest("tr")
-          .querySelectorAll("td")[1].innerText;
-
-        Swal.fire({
-          text: "Are you sure you would like sign out " + deviceName + "?",
-          icon: "warning",
-          showCancelButton: true,
-          buttonsStyling: false,
-          confirmButtonText: "Yes, sign out!",
-          cancelButtonText: "No, return",
-          customClass: {
-            confirmButton: "btn btn-primary",
-            cancelButton: "btn btn-active-light",
-          },
-        }).then(function (result) {
-          if (result.value) {
             Swal.fire({
-              text: "You have signed out " + deviceName + "!.",
-              icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: "Ok, got it!",
-              customClass: {
-                confirmButton: "btn btn-primary",
-              },
-            }).then(function () {
-              button.closest("tr").remove();
+                text: 'Are you sure you would like sign out all sessions?',
+                icon: 'warning',
+                showCancelButton: true,
+                buttonsStyling: false,
+                confirmButtonText: 'Yes, sign out!',
+                cancelButtonText: 'No, return',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-active-light',
+                },
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        text: 'You have signed out all sessions!.',
+                        icon: 'success',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                    });
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: 'Your sessions are still preserved!.',
+                        icon: 'error',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                    });
+                }
             });
-          } else if (result.dismiss === "cancel") {
-            Swal.fire({
-              text: deviceName + "'s session is still preserved!.",
-              icon: "error",
-              buttonsStyling: false,
-              confirmButtonText: "Ok, got it!",
-              customClass: {
-                confirmButton: "btn btn-primary",
-              },
-            });
-          }
         });
-      });
-    });
-  };
+    };
 
-  // Delete two step authentication handler
-  const initDeleteTwoStep = () => {
-    const deleteButton = document.getElementById("kt_users_delete_two_step");
+    // Init sign out single user
+    const initSignOutUser = () => {
+        const signOutButtons = document.querySelectorAll('[data-kt-users-sign-out="single_user"]');
 
-    deleteButton.addEventListener("click", (e) => {
-      e.preventDefault();
+        signOutButtons.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
 
-      Swal.fire({
-        text: "Are you sure you would like remove this two-step authentication?",
-        icon: "warning",
-        showCancelButton: true,
-        buttonsStyling: false,
-        confirmButtonText: "Yes, remove it!",
-        cancelButtonText: "No, return",
-        customClass: {
-          confirmButton: "btn btn-primary",
-          cancelButton: "btn btn-active-light",
-        },
-      }).then(function (result) {
-        if (result.value) {
-          Swal.fire({
-            text: "You have removed this two-step authentication!.",
-            icon: "success",
-            buttonsStyling: false,
-            confirmButtonText: "Ok, got it!",
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-        } else if (result.dismiss === "cancel") {
-          Swal.fire({
-            text: "Your two-step authentication is still valid!.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Ok, got it!",
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
+                const deviceName = button.closest('tr').querySelectorAll('td')[1].innerText;
+
+                Swal.fire({
+                    text: `Are you sure you would like sign out ${deviceName}?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: 'Yes, sign out!',
+                    cancelButtonText: 'No, return',
+                    customClass: {
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-active-light',
+                    },
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire({
+                            text: `You have signed out ${deviceName}!.`,
+                            icon: 'success',
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ok, got it!',
+                            customClass: {
+                                confirmButton: 'btn btn-primary',
+                            },
+                        }).then(() => {
+                            button.closest('tr').remove();
+                        });
+                    } else if (result.dismiss === 'cancel') {
+                        Swal.fire({
+                            text: `${deviceName}'s session is still preserved!.`,
+                            icon: 'error',
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ok, got it!',
+                            customClass: {
+                                confirmButton: 'btn btn-primary',
+                            },
+                        });
+                    }
+                });
+            });
+        });
+    };
+
+    // Delete two step authentication handler
+    const initDeleteTwoStep = () => {
+        const deleteButton = document.getElementById('kt_users_delete_two_step');
+
+        if (!deleteButton) {
+            return;
         }
-      });
-    });
-  };
 
-  return {
-    // Public functions
-    init: function () {
-      initLoginSession();
-      initSignOutUser();
-      initDeleteTwoStep();
-    },
-  };
-})();
+        deleteButton.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            Swal.fire({
+                text: 'Are you sure you would like remove this two-step authentication?',
+                icon: 'warning',
+                showCancelButton: true,
+                buttonsStyling: false,
+                confirmButtonText: 'Yes, remove it!',
+                cancelButtonText: 'No, return',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-active-light',
+                },
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        text: 'You have removed this two-step authentication!.',
+                        icon: 'success',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                    });
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: 'Your two-step authentication is still valid!.',
+                        icon: 'error',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                    });
+                }
+            });
+        });
+    };
+
+    return {
+        // Public functions
+        init() {
+            initLoginSession();
+            initSignOutUser();
+            initDeleteTwoStep();
+        },
+    };
+}());
 
 // On document ready
-KTUtil.onDOMContentLoaded(function () {
-  KTUsersViewMain.init();
+KTUtil.onDOMContentLoaded(() => {
+    KTUsersViewMain.init();
 });
