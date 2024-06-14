@@ -10,7 +10,7 @@
 // dependencies
 const { User } = require('../../../models');
 
-// export edit user view controller
+// export user view controller
 module.exports = async (req, res) => {
     try {
         // get user id from request params
