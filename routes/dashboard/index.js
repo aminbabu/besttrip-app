@@ -16,8 +16,9 @@ const router = express.Router();
 // routes
 router.use('/', require('./home'));
 router.use('/auth', require('./auth'));
-router.use('/users', require('./users'));
 router.use('/roles', require('./roles'));
+router.use('/users', require('./users'));
+router.use('/customers', require('./customers'));
 router.use('/payment-requests', require('./payment-requests'));
 router.use('/errors', require('./errors'));
 
