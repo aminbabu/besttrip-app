@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
         const paymentRequests = await PaymentRequest.find({ status }).populate('customer');
 
         // return render view
-        return res.render('dashboard/payment-requests/', {
+        return res.render(`dashboard/payment-requests/${status}`, {
             title: 'Payment Requests',
             user: req.user,
             paymentRequests,
