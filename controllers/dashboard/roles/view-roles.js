@@ -11,7 +11,7 @@
 const { Role } = require('../../../models');
 
 // export roles view controller
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
     try {
         // get roles
         const roles = await Role.find();
@@ -23,6 +23,6 @@ module.exports = async (req, res, next) => {
             roles,
         });
     } catch (error) {
-        return next(error);
+        return res.redirect('/error/500');
     }
 };
