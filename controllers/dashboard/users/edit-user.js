@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         }
 
         // return rendered view
-        return res.render('dashboard/users/edit-user', {
+        return res.render('dashboard/users/user', {
             title: 'Edit User',
             user,
         });
