@@ -36,7 +36,7 @@ router.use(isAuthorized);
  * @access private - ['all']
  * @method GET
  */
-router.get('/roles', viewRoles);
+router.get('/', viewRoles);
 
 // export profile router
 module.exports = router;
