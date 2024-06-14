@@ -4,11 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 28 April, 2024
+ * @update_date 14 June, 2024
  */
 
 // export all models
 module.exports = {
+    Role: require('./role'),
     User: require('./user'),
     Token: require('./token'),
     Customer: require('./customer'),
