@@ -9,7 +9,6 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { CUSTOMER_ROLES, USER_ROLES } = require('../../constants');
 
 // export role schema
 module.exports = new Schema(
@@ -22,10 +21,9 @@ module.exports = new Schema(
         description: {
             type: String,
         },
-        role: {
-            type: String,
-            enum: [...USER_ROLES, ...CUSTOMER_ROLES],
-            default: USER_ROLES[0],
+        permissions: {
+            type: [String],
+            default: [],
         },
     },
     {
