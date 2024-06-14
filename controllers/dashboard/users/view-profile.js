@@ -10,39 +10,32 @@
 // dependencies
 const moment = require('moment');
 const { countries } = require('countries-list');
-const { User, History } = require('../../../models');
+const { User } = require('../../../models');
 
 // export profile view controller
 module.exports = async (req, res) => {
     try {
-        // get user with history
-        const existingUser = await User.findById(req.user._id).populate({
-            path: 'history',
-            select: 'lastLogin',
-        });
-        const histories = await History.find({ user: req.user._id }).sort({ createdAt: -1 });
+        // get user with histories
+        const existingUser = await User.findById(req.user._id).populate('histories');
 
-        // convert user and login history to object
+        // convert user and login histories to object
         const user = existingUser.toObject();
 
         // format user dates
         user.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
         user.updatedAt = moment(user.updatedAt).format('DD MMM YYYY, h:mm a');
-        user.history.lastLogin = moment(user.history.lastLogin).format('DD MMM YYYY, h:mm a');
-
-        // format login histories
-        const loginHistories = histories.map((history) => {
-            const lastLoginDaysAgo = moment(history.lastLogin).fromNow();
-            const lastLogin = moment(history.lastLogin).format('DD MMM YYYY, h:mm a');
-            const location = Object.values(history.location)
-                .filter((loc) => loc)
-                .join(', ');
+        user.histories = user.histories.map((history) => {
+            const lastLogin = moment(history?.lastLogin).format('DD MMM YYYY, h:mm a');
+            const lastLoginDaysAgo = moment(history?.lastLogin).fromNow();
+            const location = history?.location
+                ? Object.values(history.location).filter(Boolean).join(', ')
+                : 'N/A';
 
             return {
-                ...history.toObject(),
-                location: location || 'Unknown',
+                ...history,
                 lastLogin,
                 lastLoginDaysAgo,
+                location,
             };
         });
 
@@ -51,7 +44,6 @@ module.exports = async (req, res) => {
             title: req.user.name,
             user,
             countries: Object.values(countries),
-            loginHistories,
         });
     } catch (error) {
         console.log('Error in viewProfile', error);
