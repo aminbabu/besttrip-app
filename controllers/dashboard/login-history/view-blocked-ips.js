@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
         const blockedIps = await History.find({ status: 'blocked' }).sort({ createdAt: -1 });
 
         // render blocked ips view
-        return res.render('dashboard/blocked-ips', {
+        return res.render('dashboard/login-history/blocked-ips', {
             title: 'Blocked IPs',
             user: req.user,
             blockedIps,
