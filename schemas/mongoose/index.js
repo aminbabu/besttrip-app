@@ -32,4 +32,5 @@ module.exports = {
     historySchema: require('./history'),
     umrahBookingSchema: require('./umrah/booking'),
     invoiceSchema: require('./invoice'),
+    generalLedgerSchema: require('./general-ledger'),
 };
