@@ -21,7 +21,7 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/payment-requests'
+ * @param {string} path - '/dashboard/invoices'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
