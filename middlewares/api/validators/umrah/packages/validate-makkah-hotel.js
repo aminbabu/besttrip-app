@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validation/umrah/packages/validate-makkah-hotel.js
+ * @file /middlewares/api/validators/umrah/packages/validate-makkah-hotel.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

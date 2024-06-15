@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validation/umrah/extanets/validate-day-wise-itinerary-thumbnails.js
+ * @file /middlewares/api/validators/umrah/extanets/validate-day-wise-itinerary-thumbnails.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

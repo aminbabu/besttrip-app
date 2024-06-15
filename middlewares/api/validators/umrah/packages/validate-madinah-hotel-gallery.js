@@ -1,6 +1,6 @@
 /**
  * @file
- * /middlewares/validation/umrah/extanets/validate-madinah-hotel-gallery.js
+ * /middlewares/api/validators/umrah/extanets/validate-madinah-hotel-gallery.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

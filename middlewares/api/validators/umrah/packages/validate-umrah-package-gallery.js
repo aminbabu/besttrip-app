@@ -1,6 +1,6 @@
 /**
  * @file
- * /middlewares/validation/umrah/extanets/validate-umrah-package-gallery.js
+ * /middlewares/api/validators/umrah/extanets/validate-umrah-package-gallery.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

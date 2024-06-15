@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validation/umrah/packages/validate-umrah-package.js
+ * @file /middlewares/api/validators/umrah/packages/validate-umrah-package.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

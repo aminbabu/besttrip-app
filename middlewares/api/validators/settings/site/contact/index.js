@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/validation/settings/site/contact/index.js
+ * @file /middlewares/api/validators/settings/site/contact/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
