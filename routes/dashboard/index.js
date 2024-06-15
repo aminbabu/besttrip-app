@@ -20,7 +20,10 @@ router.use('/roles', require('./roles'));
 router.use('/users', require('./users'));
 router.use('/customers', require('./customers'));
 router.use('/payment-requests', require('./payment-requests'));
-router.use('/umrah', require('./umrah'));
+router.use('/umrah/types', require('./umrah/types'));
+router.use('/umrah/durations', require('./umrah/durations'));
+router.use('/umrah/packages', require('./umrah/packages'));
+router.use('/umrah/bookings', require('./umrah/bookings'));
 router.use('/invoices', require('./invoices'));
 router.use('/errors', require('./errors'));
 
