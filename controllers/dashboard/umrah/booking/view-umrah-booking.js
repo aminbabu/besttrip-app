@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         const umrahBookings = await UmrahBooking.find({ status }).populate('customer');
 
         // return render view
-        return res.render(`dashboard/umrah/${status}`, {
+        return res.render(`dashboard/umrah/booking/${status}`, {
             title: 'Umrah Bookings',
             user: req.user,
             umrahBookings,
