@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
         // return render view
         return res.render('dashboard/customers', {
             title: 'Customers',
-            customer: req.customer,
+            user: req.user,
             customers,
         });
     } catch (error) {
