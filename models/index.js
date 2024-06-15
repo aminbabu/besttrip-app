@@ -32,4 +32,5 @@ module.exports = {
     History: require('./history'),
     UmrahBooking: require('./umrah/booking'),
     Invoice: require('./invoice'),
+    GeneralLedger: require('./general-ledger'),
 };
