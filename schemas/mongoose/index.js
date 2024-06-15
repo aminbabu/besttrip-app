@@ -31,4 +31,5 @@ module.exports = {
     umrahPackageTypeSchema: require('./umrah/package-type'),
     historySchema: require('./history'),
     umrahBookingSchema: require('./umrah/booking'),
+    invoiceSchema: require('./invoice'),
 };
