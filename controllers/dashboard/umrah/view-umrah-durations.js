@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
         const umrahPackageDurations = await UmrahPackageDuration.find();
 
         // return render view
-        return res.render('dashboard/umrah/duration', {
+        return res.render('dashboard/umrah/durations', {
             title: 'Umrah Package Durations',
             user: req.user,
             umrahPackageDurations,
