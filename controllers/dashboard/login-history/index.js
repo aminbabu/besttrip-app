@@ -10,4 +10,5 @@
 // export login history controller
 module.exports = {
     viewLoginHistory: require('./view-login-history'),
+    viewBlockedIps: require('./view-blocked-ips'),
 };
