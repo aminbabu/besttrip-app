@@ -1,5 +1,5 @@
 /**
- * @file controllers/dashboard/umrah/booking/index.js
+ * @file controllers/dashboard/umrah/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -7,7 +7,7 @@
  * @update_date 15 June, 2024
  */
 
-// export all umrah booking controllers
+// export all umrah controllers
 module.exports = {
     viewUmrahBooking: require('./view-umrah-booking'),
 };

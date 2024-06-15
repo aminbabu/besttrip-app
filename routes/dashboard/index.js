@@ -20,7 +20,7 @@ router.use('/roles', require('./roles'));
 router.use('/users', require('./users'));
 router.use('/customers', require('./customers'));
 router.use('/payment-requests', require('./payment-requests'));
-router.use('/umrah/booking', require('./umrah-booking'));
+router.use('/umrah', require('./umrah'));
 router.use('/invoices', require('./invoices'));
 router.use('/errors', require('./errors'));
 

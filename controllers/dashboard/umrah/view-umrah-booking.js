@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { UmrahBooking } = require('../../../../models');
+const { UmrahBooking } = require('../../../models');
 
 // export umrah booking view controller
 module.exports = async (req, res) => {
