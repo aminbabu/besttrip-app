@@ -25,6 +25,7 @@ router.use('/umrah/durations', require('./umrah/durations'));
 router.use('/umrah/packages', require('./umrah/packages'));
 router.use('/umrah/bookings', require('./umrah/bookings'));
 router.use('/invoices', require('./invoices'));
+router.use('/general-ledger', require('./general-ledger'));
 router.use('/errors', require('./errors'));
 
 // export dashboard router
