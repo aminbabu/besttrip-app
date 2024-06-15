@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 June, 2024
- * @update_date 14 June, 2024
+ * @update_date 15 June, 2024
  */
 
 // dependencies
@@ -27,6 +27,7 @@ module.exports = async (req, res) => {
         // return rendered view
         return res.render('dashboard/customers/customer', {
             title: 'Edit Customer',
+            user: req.user,
             customer,
         });
     } catch (error) {
