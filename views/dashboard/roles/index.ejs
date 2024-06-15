@@ -1250,7 +1250,15 @@
   <%- include('../partials/scroll-top.ejs'); %>
   <!--end::Scrolltop-->
   <!--begin::Javascript-->
-  <%- include('../partials/footer-scripts.ejs'); %>
+  <%- include('../partials/footer-scripts.ejs', {
+    vendorJavascripts: [
+      '/assets/plugins/custom/datatables/datatables.bundle.js'
+    ],
+    customJavascripts: [
+      '/assets/js/custom/apps/user-management/roles/list/add.js',
+      '/assets/js/custom/apps/user-management/roles/list/update-role.js'
+    ]
+  }); %>
   <!--end::Javascript-->
 </body>
 <!--end::Body-->
