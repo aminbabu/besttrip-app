@@ -8,7 +8,7 @@
  */
 
 // umrah bookings status
-const UMRAH_BOOKING_STATUS = ['in-process', 'under-review', 'success', 'blocked', 'cancelled'];
+const UMRAH_BOOKING_STATUS = ['in-process', 'under-review', 'success', 'booked', 'cancelled'];
 
 // export umrah bookings status
 module.exports = {
