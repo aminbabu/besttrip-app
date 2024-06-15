@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<%- include('../partials/head', { title }) %>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_app_body" data-kt-app-layout="light-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+  <!--begin::Theme mode setup on page load-->
+  <%- include('../partials/theme-mode.ejs') %>
+  <!--end::Theme mode setup on page load-->
+  <!--begin::App-->
+  <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+    <!--begin::Page-->
+    <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+      <!--begin::Header-->
+      <%- include('../partials/header', { user }) %>
+      <!--end::Header-->
+      <!--begin::Wrapper-->
+      <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+        <!--begin::Sidebar-->
+        <%- include('../partials/sidebar') %>
+        <!--end::Sidebar-->
+        <!--begin::Main-->
+        <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+          <!--begin::Content wrapper-->
+          <div class="d-flex flex-column flex-column-fluid">
+            <!--begin::Toolbar-->
+            <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+              <!--begin::Toolbar container-->
+              <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+                <!--begin::Page title-->
+                <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                  <!--begin::Title-->
+                  <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+                    Site Settings
+                  </h1>
+                  <!--end::Title-->
+                  <!--begin::Breadcrumb-->
+                  <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                      <a href="../index.html" class="text-muted text-hover-primary">Home</a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                      <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">Settings</li>
+                    <!--end::Item-->
+                  </ul>
+                  <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page title-->
+              </div>
+              <!--end::Toolbar container-->
+            </div>
+            <!--end::Toolbar-->
+            <!--begin::Content-->
+            <div id="kt_app_content" class="app-content flex-column-fluid">
+              <!--begin::Content container-->
+              <div id="kt_app_content_container" class="app-container container-xxl">
+                <!--begin::Card-->
+                <div class="card card-flush">
+                  <!--begin::Card body-->
+                  <div class="card-body">
+                    <!--begin:::Tabs-->
+                    <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-15">
+                      <!--begin:::Tab item-->
+                      <li class="nav-item">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5 active" data-bs-toggle="tab" href="#kt_settings_content_hotels">
+                          <i class="ki-duotone ki-abstract-47 fs-2 me-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                          Hotels
+                        </a>
+                      </li>
+                      <!--end:::Tab item-->
+                      <!--begin:::Tab item-->
+                      <li class="nav-item">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_settings_content_destinations">
+                          <i class="ki-duotone ki-airplane fs-2 me-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                          Destinations
+                        </a>
+                      </li>
+                      <!--end:::Tab item-->
+                      <!--begin:::Tab item-->
+                      <li class="nav-item">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_settings_content_umrah_&_ziyarah">
+                          <i class="ki-duotone ki-compass fs-2 me-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                          Umrah & Ziyarah
+                        </a>
+                      </li>
+                      <!--end:::Tab item-->
+                      <!--begin:::Tab item-->
+                      <li class="nav-item">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_settings_content_beautiful_places">
+                          <i class="ki-duotone ki-sun fs-2 me-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                            <span class="path5"></span>
+                            <span class="path6"></span>
+                            <span class="path7"></span>
+                            <span class="path8"></span>
+                            <span class="path9"></span>
+                          </i>
+                          Beautiful Places
+                        </a>
+                      </li>
+                      <!--end:::Tab item-->
+                    </ul>
+                    <!--end:::Tabs-->
+                    <!--begin:::Tab content-->
+                    <div class="tab-content" id="sectionTabContent">
+                      <!--begin:::Tab pane-->
+                      <div class="tab-pane fade show active" id="kt_settings_content_hotels" role="tabpanel">
+                        <!--begin::Form-->
+                        <form id="kt_settings_content_hotels_form" class="form" action="#">
+                          <!--begin::Heading-->
+                          <div class="row mb-7">
+                            <div class="col-md-9 offset-md-3">
+                              <h2>Discover Hotels</h2>
+                            </div>
+                          </div>
+                          <!--end::Heading-->
+                          <!--begin::Input group-->
+                          <div class="row fv-row mb-7">
+                            <div class="col-md-3 text-md-end">
+                              <!--begin::Label-->
+                              <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Title</span>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Set the title of discover hotels section.">
+                                  <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                  </i>
+                                </span>
+                              </label>
+                              <!--end::Label-->
+                            </div>
+                            <div class="col-md-9">
+                              <!--begin::Input-->
+                              <input type="text" class="form-control form-control-solid" name="title" placeholder="" value="" />
+                              <!--end::Input-->
+                            </div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Input group-->
+                          <div class="row fv-row mb-7">
+                            <div class="col-md-3 text-md-end">
+                              <!--begin::Label-->
+                              <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Description</span>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Set the description of discover hotels section.">
+                                  <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                  </i>
+                                </span>
+                              </label>
+                              <!--end::Label-->
+                            </div>
+                            <div class="col-md-9">
+                              <!--begin::Textarea-->
+                              <textarea class="form-control form-control-solid" name="description" data-kt-autosize="true" rows="5" placeholder="" value=""></textarea>
+                              <!--end::Textarea-->
+                            </div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Action buttons-->
+                          <div class="row py-5">
+                            <div class="col-md-9 offset-md-3">
+                              <div class="d-flex">
+                                <!--begin::Button-->
+                                <button type="reset" data-kt-settings-type="cancel" class="btn btn-light me-3">
+                                  Cancel
+                                </button>
+                                <!--end::Button-->
+                                <!--begin::Button-->
+                                <button type="submit" data-kt-settings-type="submit" class="btn btn-primary">
+                                  <span class="indicator-label">Save</span>
+                                  <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                                <!--end::Button-->
+                              </div>
+                            </div>
+                          </div>
+                          <!--end::Action buttons-->
+                        </form>
+                        <!--end::Form-->
+                      </div>
+                      <!--end:::Tab pane-->
+                      <!--begin:::Tab pane-->
+                      <div class="tab-pane fade" id="kt_settings_content_destinations" role="tabpanel">
+                        <!--begin::Form-->
+                        <form id="kt_settings_content_destinations_form" class="form" action="#">
+                          <!--begin::Heading-->
+                          <div class="row mb-7">
+                            <div class="col-md-9 offset-md-3">
+                              <h2>Popular Destinations</h2>
+                            </div>
+                          </div>
+                          <!--end::Heading-->
+                          <!--begin::Input group-->
+                          <div class="row fv-row mb-7">
+                            <div class="col-md-3 text-md-end">
+                              <!--begin::Label-->
+                              <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Title</span>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Set the title of discover hotels section.">
+                                  <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                  </i>
+                                </span>
+                              </label>
+                              <!--end::Label-->
+                            </div>
+                            <div class="col-md-9">
+                              <!--begin::Input-->
+                              <input type="text" class="form-control form-control-solid" name="title" placeholder="" value="" />
+                              <!--end::Input-->
+                            </div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Input group-->
+                          <div class="row fv-row mb-7">
+                            <div class="col-md-3 text-md-end">
+                              <!--begin::Label-->
+                              <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Description</span>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Set the description of discover hotels section.">
+                                  <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                  </i>
+                                </span>
+                              </label>
+                              <!--end::Label-->
+                            </div>
+                            <div class="col-md-9">
+                              <!--begin::Textarea-->
+                              <textarea class="form-control form-control-solid" name="description" data-kt-autosize="true" rows="5" placeholder="" value=""></textarea>
+                              <!--end::Textarea-->
+                            </div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Action buttons-->
+                          <div class="row py-5">
+                            <div class="col-md-9 offset-md-3">
+                              <div class="d-flex">
+                                <!--begin::Button-->
+                                <button type="reset" data-kt-settings-type="cancel" class="btn btn-light me-3">
+                                  Cancel
+                                </button>
+                                <!--end::Button-->
+                                <!--begin::Button-->
+                                <button type="submit" data-kt-settings-type="submit" class="btn btn-primary">
+                                  <span class="indicator-label">Save</span>
+                                  <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                                <!--end::Button-->
+                              </div>
+                            </div>
+                          </div>
+                          <!--end::Action buttons-->
+                        </form>
+                        <!--end::Form-->
+                      </div>
+                      <!--end:::Tab pane-->
+                      <!--begin:::Tab pane-->
+                      <div class="tab-pane fade" id="kt_settings_content_umrah_&_ziyarah" role="tabpanel">
+                        <!--begin::Form-->
+                        <form id="kt_settings_content_umrah_&_ziyarah_form" class="form" action="#">
+                          <!--begin::Heading-->
+                          <div class="row mb-7">
+                            <div class="col-md-9 offset-md-3">
+                              <h2>Umrah and Ziyarah</h2>
+                            </div>
+                          </div>
+                          <!--end::Heading-->
+                          <!--begin::Input group-->
+                          <div class="row fv-row mb-7">
+                            <div class="col-md-3 text-md-end">
+                              <!--begin::Label-->
+                              <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Title</span>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Set the title of discover hotels section.">
+                                  <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                  </i>
+                                </span>
+                              </label>
+                              <!--end::Label-->
+                            </div>
+                            <div class="col-md-9">
+                              <!--begin::Input-->
+                              <input type="text" class="form-control form-control-solid" name="title" placeholder="" value="" />
+                              <!--end::Input-->
+                            </div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Input group-->
+                          <div class="row fv-row mb-7">
+                            <div class="col-md-3 text-md-end">
+                              <!--begin::Label-->
+                              <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Description</span>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Set the description of discover hotels section.">
+                                  <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                  </i>
+                                </span>
+                              </label>
+                              <!--end::Label-->
+                            </div>
+                            <div class="col-md-9">
+                              <!--begin::Textarea-->
+                              <textarea class="form-control form-control-solid" name="description" data-kt-autosize="true" rows="5" placeholder="" value=""></textarea>
+                              <!--end::Textarea-->
+                            </div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Action buttons-->
+                          <div class="row py-5">
+                            <div class="col-md-9 offset-md-3">
+                              <div class="d-flex">
+                                <!--begin::Button-->
+                                <button type="reset" data-kt-settings-type="cancel" class="btn btn-light me-3">
+                                  Cancel
+                                </button>
+                                <!--end::Button-->
+                                <!--begin::Button-->
+                                <button type="submit" data-kt-settings-type="submit" class="btn btn-primary">
+                                  <span class="indicator-label">Save</span>
+                                  <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                                <!--end::Button-->
+                              </div>
+                            </div>
+                          </div>
+                          <!--end::Action buttons-->
+                        </form>
+                        <!--end::Form-->
+                      </div>
+                      <!--end:::Tab pane-->
+                      <!--begin:::Tab pane-->
+                      <div class="tab-pane fade" id="kt_settings_content_beautiful_places" role="tabpanel">
+                        <!--begin::Form-->
+                        <form id="kt_settings_content_beautiful_places_form" class="form" action="#">
+                          <!--begin::Heading-->
+                          <div class="row mb-7">
+                            <div class="col-md-9 offset-md-3">
+                              <h2>Beautiful Places in Bangladesh</h2>
+                            </div>
+                          </div>
+                          <!--end::Heading-->
+                          <!--begin::Input group-->
+                          <div class="row fv-row mb-7">
+                            <div class="col-md-3 text-md-end">
+                              <!--begin::Label-->
+                              <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Title</span>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Set the title of discover hotels section.">
+                                  <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                  </i>
+                                </span>
+                              </label>
+                              <!--end::Label-->
+                            </div>
+                            <div class="col-md-9">
+                              <!--begin::Input-->
+                              <input type="text" class="form-control form-control-solid" name="title" placeholder="" value="" />
+                              <!--end::Input-->
+                            </div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Input group-->
+                          <div class="row fv-row mb-7">
+                            <div class="col-md-3 text-md-end">
+                              <!--begin::Label-->
+                              <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Description</span>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Set the description of discover hotels section.">
+                                  <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                  </i>
+                                </span>
+                              </label>
+                              <!--end::Label-->
+                            </div>
+                            <div class="col-md-9">
+                              <!--begin::Textarea-->
+                              <textarea class="form-control form-control-solid" name="description" data-kt-autosize="true" rows="5" placeholder="" value=""></textarea>
+                              <!--end::Textarea-->
+                            </div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Action buttons-->
+                          <div class="row py-5">
+                            <div class="col-md-9 offset-md-3">
+                              <div class="d-flex">
+                                <!--begin::Button-->
+                                <button type="reset" data-kt-settings-type="cancel" class="btn btn-light me-3">
+                                  Cancel
+                                </button>
+                                <!--end::Button-->
+                                <!--begin::Button-->
+                                <button type="submit" data-kt-settings-type="submit" class="btn btn-primary">
+                                  <span class="indicator-label">Save</span>
+                                  <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                                <!--end::Button-->
+                              </div>
+                            </div>
+                          </div>
+                          <!--end::Action buttons-->
+                        </form>
+                        <!--end::Form-->
+                      </div>
+                      <!--end:::Tab pane-->
+                    </div>
+                    <!--end:::Tab content-->
+                  </div>
+                  <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+              </div>
+              <!--end::Content container-->
+            </div>
+            <!--end::Content-->
+          </div>
+          <!--end::Content wrapper-->
+          <!--begin::Footer-->
+          <%- include('../partials/footer.ejs'); %>
+          <!--end::Footer-->
+        </div>
+        <!--end:::Main-->
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+  </div>
+  <!--end::App-->
+  <!--begin::Drawers-->
+  <!--begin::Activities drawer-->
+  <%- include('../partials/activities-drawer.ejs'); %>
+  <!--end::Activities drawer-->
+  <!--end::Drawers-->
+  <!--begin::Scrolltop-->
+  <%- include('../partials/scroll-top.ejs'); %>
+  <!--end::Scrolltop-->
+  <!--begin::Javascript-->
+  <%- include('../partials/footer-scripts.ejs', {
+    customJavascripts: [
+        '/assets/js/custom/apps/settings/content/sections/update.js'
+    ]
+  }); %>
+  <!--end::Javascript-->
+</body>
+<!--end::Body-->
+
+</html>
