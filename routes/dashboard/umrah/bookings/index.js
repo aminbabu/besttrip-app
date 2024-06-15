@@ -36,7 +36,7 @@ router.use(isAuthorized);
  * @access private - ['all']
  * @method GET
  */
-router.get('/booking/:status', viewUmrahBookings);
+router.get('/:status', viewUmrahBookings);
 
 // export router
 module.exports = router;
