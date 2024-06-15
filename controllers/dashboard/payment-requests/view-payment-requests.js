@@ -10,7 +10,7 @@
 // dependencies
 const { PaymentRequest } = require('../../../models');
 
-// export view payment requests controller
+// export payment requests view controller
 module.exports = async (req, res) => {
     try {
         // get status from request params
