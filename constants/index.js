@@ -29,4 +29,5 @@ module.exports = {
     ...require('./umrah-package-types'),
     ...require('./visa'),
     ...require('./history'),
+    ...require('./umrah-bookings'),
 };
