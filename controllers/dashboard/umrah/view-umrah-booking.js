@@ -1,5 +1,5 @@
 /**
- * @file controllers/dashboard/umrah/booking/view-umrah-booking.js
+ * @file controllers/dashboard/umrah/view-umrah-booking.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
