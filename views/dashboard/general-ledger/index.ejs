@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<%- include('../partials/head', { title }) %>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_app_body" data-kt-app-layout="light-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+  <!--begin::Theme mode setup on page load-->
+  <%- include('../partials/theme-mode.ejs') %>
+  <!--end::Theme mode setup on page load-->
+  <!--begin::App-->
+  <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+    <!--begin::Page-->
+    <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+      <!--begin::Header-->
+      <%- include('../partials/header', { user }) %>
+      <!--end::Header-->
+      <!--begin::Wrapper-->
+      <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+        <!--begin::Sidebar-->
+        <%- include('../partials/sidebar') %>
+        <!--end::Sidebar-->
+        <!--begin::Main-->
+        <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+          <!--begin::Content wrapper-->
+          <div class="d-flex flex-column flex-column-fluid">
+            <!--begin::Toolbar-->
+            <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+              <!--begin::Toolbar container-->
+              <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+                <!--begin::Page title-->
+                <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                  <!--begin::Title-->
+                  <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+                    General Ledger
+                  </h1>
+                  <!--end::Title-->
+                  <!--begin::Breadcrumb-->
+                  <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                      <a href="../index.html" class="text-muted text-hover-primary">Home</a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                      <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">Ledger</li>
+                    <!--end::Item-->
+                  </ul>
+                  <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page title-->
+              </div>
+              <!--end::Toolbar container-->
+            </div>
+            <!--end::Toolbar-->
+            <!--begin::Content-->
+            <div id="kt_app_content" class="app-content flex-column-fluid">
+              <!--begin::Content container-->
+              <div id="kt_app_content_container" class="app-container container-xxl">
+                <!--start::Invoice Stats-->
+                <!--begin::Row-->
+                <div class="row g-5 mb-5 mb-lg-10">
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-8 py-10">
+                        <!--begin::Item-->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                            <h3 class="h5 text-gray-700 fw-bolder">275</h3>
+                            <span class="fw-bold opacity-75">Total Booking</span>
+                          </div>
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle ms-5 text-primary d-inline-flex flex-center" style="background-color: #ffefef">
+                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M19.25 6.25V4.375C19.25 3.87772 19.0525 3.40081 18.7008 3.04917C18.3492 2.69754 17.8723 2.5 17.375 2.5H14.875V1.875C14.875 1.70924 14.8092 1.55027 14.6919 1.43306C14.5747 1.31585 14.4158 1.25 14.25 1.25C14.0842 1.25 13.9253 1.31585 13.8081 1.43306C13.6908 1.55027 13.625 1.70924 13.625 1.875V2.5H7.375V1.875C7.375 1.70924 7.30915 1.55027 7.19194 1.43306C7.07473 1.31585 6.91576 1.25 6.75 1.25C6.58424 1.25 6.42527 1.31585 6.30806 1.43306C6.19085 1.55027 6.125 1.70924 6.125 1.875V2.5H3.625C3.12772 2.5 2.65081 2.69754 2.29917 3.04917C1.94754 3.40081 1.75 3.87772 1.75 4.375V6.25H19.25Z" fill="#F50308" />
+                              <path d="M1.75 7.5V16.875C1.75 17.3723 1.94754 17.8492 2.29917 18.2008C2.65081 18.5525 3.12772 18.75 3.625 18.75H17.375C17.8723 18.75 18.3492 18.5525 18.7008 18.2008C19.0525 17.8492 19.25 17.3723 19.25 16.875V7.5H1.75ZM14.0312 11.0994L9.65625 14.8494C9.53666 14.9516 9.38292 15.005 9.2257 14.9989C9.06849 14.9927 8.91937 14.9275 8.80813 14.8162L6.93313 12.9412C6.81928 12.8234 6.75628 12.6655 6.7577 12.5016C6.75913 12.3378 6.82486 12.181 6.94074 12.0651C7.05662 11.9492 7.21338 11.8835 7.37725 11.8821C7.54112 11.8807 7.699 11.9437 7.81687 12.0575L9.28313 13.5238L13.2206 10.1488C13.2826 10.0929 13.3551 10.05 13.4339 10.0226C13.5127 9.99524 13.5962 9.98391 13.6795 9.98931C13.7627 9.9947 13.8441 10.0167 13.9187 10.054C13.9933 10.0913 14.0597 10.1432 14.1139 10.2066C14.1682 10.27 14.2092 10.3436 14.2345 10.4231C14.2599 10.5026 14.269 10.5863 14.2615 10.6694C14.254 10.7525 14.2299 10.8332 14.1907 10.9069C14.1515 10.9805 14.0979 11.0455 14.0331 11.0981L14.0312 11.0994Z" fill="#F50308" />
+                            </svg>
+                          </div>
+                          <!-- end::Icon -->
+                        </div>
+                        <!--end::Item-->
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-8 py-10">
+                        <!--begin::Item-->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                            <h3 class="h5 text-gray-700 fw-bolder">275K</h3>
+                            <span class="fw-bold opacity-75">Total Sales</span>
+                          </div>
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle ms-5 text-primary d-inline-flex flex-center" style="background-color: #ffefef">
+                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2592_47656)">
+                                <path d="M19.1717 10.2591C19.0913 10.0945 19.0913 9.90564 19.1717 9.74103L19.9177 8.21506C20.333 7.36542 20.0039 6.35273 19.1685 5.90949L17.6681 5.1134C17.5063 5.02754 17.3953 4.87473 17.3636 4.6943L17.0702 3.02131C16.9068 2.08983 16.0451 1.46389 15.1089 1.59635L13.4272 1.83424C13.2457 1.85987 13.0662 1.80151 12.9345 1.67413L11.7138 0.493195C11.034 -0.164379 9.9692 -0.164418 9.28952 0.493195L8.06875 1.67424C7.93703 1.80166 7.75754 1.85991 7.57606 1.83436L5.89431 1.59647C4.95779 1.46393 4.09647 2.08994 3.93307 3.02142L3.63963 4.69434C3.60795 4.87481 3.49698 5.02758 3.33514 5.11348L1.83476 5.90957C0.999375 6.35277 0.670314 7.36554 1.08562 8.21518L1.83152 9.74111C1.91199 9.90576 1.91199 10.0946 1.83152 10.2592L1.08559 11.7851C0.670275 12.6348 0.999336 13.6475 1.83472 14.0907L3.3351 14.8868C3.49698 14.9726 3.60795 15.1255 3.63963 15.3059L3.93307 16.9789C4.08182 17.8268 4.80892 18.4215 5.64458 18.4214C5.72689 18.4214 5.8104 18.4157 5.89435 18.4038L7.57609 18.1659C7.75746 18.1402 7.93707 18.1986 8.06879 18.326L9.28952 19.507C9.62944 19.8358 10.0655 20.0002 10.5016 20.0001C10.9377 20.0001 11.374 19.8357 11.7137 19.507L12.9345 18.326C13.0662 18.1986 13.2457 18.1404 13.4272 18.1659L15.1089 18.4038C16.0456 18.5363 16.9068 17.9103 17.0702 16.9788L17.3637 15.3059C17.3953 15.1255 17.5063 14.9727 17.6681 14.8868L19.1685 14.0907C20.0039 13.6475 20.333 12.6347 19.9177 11.7851L19.1717 10.2591ZM8.19457 4.80926C9.36065 4.80926 10.3094 5.75797 10.3094 6.92406C10.3094 8.09014 9.36065 9.03885 8.19457 9.03885C7.02848 9.03885 6.07977 8.09014 6.07977 6.92406C6.07977 5.75797 7.02848 4.80926 8.19457 4.80926ZM7.10301 14.2143C6.99039 14.3269 6.84278 14.3832 6.6952 14.3832C6.54762 14.3832 6.39997 14.3269 6.28739 14.2143C6.06216 13.9891 6.06216 13.6239 6.28739 13.3986L13.9002 5.78582C14.1254 5.56059 14.4906 5.56059 14.7159 5.78582C14.9411 6.01105 14.9411 6.37625 14.7159 6.60148L7.10301 14.2143ZM12.8086 15.1909C11.6425 15.1909 10.6938 14.2422 10.6938 13.0761C10.6938 11.91 11.6425 10.9613 12.8086 10.9613C13.9747 10.9613 14.9234 11.91 14.9234 13.0761C14.9234 14.2422 13.9747 15.1909 12.8086 15.1909Z" fill="#F50308" />
+                                <path d="M12.805 12.1133C12.275 12.1133 11.8438 12.5445 11.8438 13.0745C11.8438 13.6046 12.275 14.0358 12.805 14.0358C13.3351 14.0358 13.7663 13.6046 13.7663 13.0745C13.7663 12.5445 13.3351 12.1133 12.805 12.1133Z" fill="#F50308" />
+                                <path d="M8.19562 5.96094C7.66558 5.96094 7.23438 6.39215 7.23438 6.92218C7.23438 7.45222 7.66558 7.88347 8.19562 7.88347C8.72566 7.88347 9.1569 7.45226 9.1569 6.92218C9.15686 6.39219 8.72566 5.96094 8.19562 5.96094Z" fill="#F50308" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2592_47656">
+                                  <rect width="20" height="20" fill="white" transform="translate(0.5)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <!-- end::Icon -->
+                        </div>
+                        <!--end::Item-->
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-8 py-10">
+                        <!--begin::Item-->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                            <h3 class="h5 text-gray-700 fw-bolder">2000K</h3>
+                            <span class="fw-bold opacity-75">Total Supplier Price</span>
+                          </div>
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle ms-5 text-primary d-inline-flex flex-center" style="background-color: #ffefef">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M7.75 2.82424C8.05859 3.27737 8.33594 4.00784 8.33594 5.08596V8.58596H9.26953L10.8359 10.1836H8.33594V14.7149C8.33594 15.0703 8.46875 15.3906 8.73438 15.6797C9 15.9688 9.43359 16.1133 10.0352 16.1133C10.8125 16.1133 11.6328 15.6797 12.5 14.8125C13.3867 13.9258 13.8555 13.0156 13.8984 12.0821L13.5 12.1172C12.0781 12.1172 11.3672 11.3633 11.3672 9.85159C11.3672 9.33987 11.5352 8.88674 11.8672 8.4844C12.1992 8.08596 12.7539 7.88284 13.5312 7.88284C14.3516 7.88284 15.043 8.23831 15.5977 8.94924C16.1758 9.66018 16.4648 10.5274 16.4648 11.5469C16.4648 13.0586 15.8203 14.5 14.5312 15.8789C13.2656 17.2539 10.8438 17.9453 10 17.9453C8.64844 17.9453 8.12891 17.6797 7.6875 17.3789C7.24609 17.0742 6.66797 16.3555 6.66797 15.4492V10.1836H5.07031L3.53906 8.58596H6.67188V5.4219C6.67188 4.71487 5.96484 4.32815 5.50391 4.28909C5.22266 4.26565 4.91406 4.34377 4.80469 4.45706C4.60547 4.12502 4.41406 3.72268 4.23828 3.25784C4.23828 3.25784 4.39453 2.69534 4.90625 2.3594C5.25781 2.12893 5.58984 2.05862 6.10547 2.05862C7.08594 2.05471 7.53906 2.51565 7.75 2.82424Z" fill="#F50308" />
+                            </svg>
+                          </div>
+                          <!-- end::Icon -->
+                        </div>
+                        <!--end::Item-->
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6 col-xl-3">
+                    <!--begin::Mixed Widget 1-->
+                    <div class="card card-flush h-100">
+                      <!--begin::Body-->
+                      <div class="card-body px-8 py-10">
+                        <!--begin::Item-->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                            <h3 class="h5 text-gray-700 fw-bolder">100K</h3>
+                            <span class="fw-bold opacity-75">Total Profit</span>
+                          </div>
+                          <!-- begin::Icon -->
+                          <div class="flex-shrink-0 w-40px h-40px rounded-circle ms-5 text-primary d-inline-flex flex-center" style="background-color: #ffefef">
+                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_2592_47683)">
+                                <path d="M15.1875 7.07031C12.2796 7.07031 9.91406 9.43578 9.91406 12.3437C9.91406 15.2516 12.2795 17.617 15.1874 17.617C18.0953 17.617 20.4998 15.2516 20.4998 12.3437C20.4998 9.43578 18.0954 7.07031 15.1875 7.07031ZM15.7888 15.1675C15.7837 15.1693 15.7784 15.1685 15.7733 15.1702V15.8593C15.7733 16.1831 15.5113 16.4452 15.1874 16.4452C14.8635 16.4452 14.6014 16.1831 14.6014 15.8593V15.1662C14.2155 15.0359 13.8458 14.7884 13.5297 14.4116C13.3214 14.1638 13.3534 13.7942 13.6018 13.5865C13.8496 13.3782 14.2204 13.4102 14.4269 13.6586C14.737 14.0277 15.0878 14.1741 15.3877 14.0666C15.6182 13.9825 15.7733 13.761 15.7733 13.5155C15.7733 13.1923 15.5107 12.9296 15.1874 12.9296C14.2181 12.9296 13.4296 12.1411 13.4296 11.1718C13.4296 10.464 13.8507 9.82828 14.5025 9.55254C14.5348 9.53887 14.5689 9.53965 14.6015 9.52801V8.82812C14.6015 8.50426 14.8636 8.24219 15.1874 8.24219C15.5113 8.24219 15.7734 8.50426 15.7734 8.82812V9.52906C16.0768 9.63156 16.3726 9.79449 16.6368 10.0504C16.8691 10.2752 16.8748 10.646 16.6494 10.8789C16.4245 11.1112 16.0531 11.1164 15.8208 10.8915C15.5359 10.6151 15.2206 10.5201 14.9596 10.6317C14.7422 10.7238 14.6014 10.9355 14.6014 11.1719C14.6014 11.4952 14.8641 11.7578 15.1874 11.7578C16.1567 11.7578 16.9452 12.5463 16.9452 13.5156C16.9452 14.252 16.4806 14.9157 15.7888 15.1675Z" fill="#F50308" />
+                                <path d="M1.08594 12.9297C0.76207 12.9297 0.5 13.1918 0.5 13.5156V19.414C0.5 19.7379 0.76207 19.9999 1.08594 19.9999H2.84371V12.9297H1.08594Z" fill="#F50308" />
+                                <path d="M14.3966 3.65721L10.295 0.141621C10.0764 -0.047207 9.75144 -0.047207 9.53284 0.141621L5.43136 3.65721C5.24483 3.81627 5.17788 4.0749 5.26312 4.30494C5.3478 4.53498 5.56694 4.68775 5.81245 4.68775H7.57023C7.57023 9.75334 7.57023 14.9342 7.57023 20.0001C9.07968 20.0001 10.1232 20.0001 11.6717 20.0001C11.9956 20.0001 12.2577 19.738 12.2577 19.4141V18.0776C10.174 17.0085 8.7421 14.8425 8.7421 12.3439C8.7421 9.84537 10.1741 7.67932 12.2577 6.61021V4.68779H14.0155C14.2609 4.68779 14.4801 4.53502 14.5648 4.30498C14.6501 4.0749 14.5831 3.81627 14.3966 3.65721Z" fill="#F50308" />
+                                <path d="M4.64063 8.24219C4.31676 8.24219 4.05469 8.50426 4.05469 8.82812V12.9296V19.9998C4.91055 19.9998 5.56742 19.9998 6.3984 19.9998V8.24219H4.64063Z" fill="#F50308" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_2592_47683">
+                                  <rect width="20" height="20" fill="white" transform="translate(0.5)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                          <!-- end::Icon -->
+                        </div>
+                        <!--end::Item-->
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <!--end::Mixed Widget 1-->
+                  </div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
+                <!--end::Invoice Stats-->
+                <!--begin::Card-->
+                <div class="card">
+                  <!--begin::Card header-->
+                  <div class="card-header border-0 pt-6">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                      <!--begin::Search-->
+                      <div class="d-flex align-items-center position-relative my-1">
+                        <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                        <input type="text" data-kt-general-ledger-table-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Search ledger" />
+                      </div>
+                      <!--end::Search-->
+                    </div>
+                    <!--begin::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                      <!--begin::Toolbar-->
+                      <div class="d-flex justify-content-end" data-kt-general-ledger-table-toolbar="base">
+                        <!--begin::Filter-->
+                        <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                          <i class="ki-duotone ki-filter fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span> </i>Filter
+                        </button>
+                        <!--begin::Menu 1-->
+                        <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true" id="kt-toolbar-filter">
+                          <!--begin::Header-->
+                          <div class="px-7 py-5">
+                            <div class="fs-4 text-gray-900 fw-bold">
+                              Filter Options
+                            </div>
+                          </div>
+                          <!--end::Header-->
+                          <!--begin::Separator-->
+                          <div class="separator border-gray-200"></div>
+                          <!--end::Separator-->
+                          <!--begin::Content-->
+                          <div class="px-7 py-5">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10">
+                              <!--begin::Label-->
+                              <label class="fs-5 fw-semibold form-label mb-5">
+                                Select Date Range:
+                              </label>
+                              <!--end::Label-->
+                              <!--begin::Input-->
+                              <input class="form-control form-control-solid" name="date" data-kt-invoice-table-filter="date" placeholder="Pick a date" />
+                              <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10">
+                              <!--begin::Label-->
+                              <label class="form-label fs-5 fw-semibold mb-3">Payment Type:</label>
+                              <!--end::Label-->
+                              <!--begin::Input-->
+                              <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-general-ledger-table-filter="payment_type" data-dropdown-parent="#kt-toolbar-filter">
+                                <option></option>
+                                <option value="bKash">bKash</option>
+                                <option value="Nagad">Nagad</option>
+                                <option value="Rocket">Rocket</option>
+                              </select>
+                              <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10">
+                              <!--begin::Label-->
+                              <label class="form-label fs-5 fw-semibold mb-3">Supplier:</label>
+                              <!--end::Label-->
+                              <!--begin::Input-->
+                              <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-general-ledger-table-filter="supplier" data-dropdown-parent="#kt-toolbar-filter">
+                                <option></option>
+                                <option value="1BU-01">1BU-01</option>
+                                <option value="1BU-02">1BU-02</option>
+                                <option value="1BU-03">1BU-03</option>
+                              </select>
+                              <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Actions-->
+                            <div class="d-flex justify-content-end">
+                              <button type="reset" class="btn btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true" data-kt-general-ledger-table-filter="reset">
+                                Reset
+                              </button>
+                              <button type="submit" class="btn btn-primary" data-kt-menu-dismiss="true" data-kt-general-ledger-table-filter="filter">
+                                Apply
+                              </button>
+                            </div>
+                            <!--end::Actions-->
+                          </div>
+                          <!--end::Content-->
+                        </div>
+                        <!--end::Menu 1-->
+                        <!--end::Filter-->
+                        <!--begin::Export-->
+                        <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_general_ledger_export_modal">
+                          <i class="ki-duotone ki-exit-up fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span> </i>Export
+                        </button>
+                        <!--end::Export-->
+                      </div>
+                      <!--end::Toolbar-->
+                      <!--begin::Group actions-->
+                      <div class="d-flex justify-content-end align-items-center d-none" data-kt-general-ledger-table-toolbar="selected">
+                        <div class="fw-bold me-5">
+                          <span class="me-2" data-kt-general-ledger-table-select="selected_count"></span>Selected
+                        </div>
+                        <button type="button" class="btn btn-danger" data-kt-general-ledger-table-select="download_selected">
+                          Download Selected
+                        </button>
+                      </div>
+                      <!--end::Group actions-->
+                    </div>
+                    <!--end::Card toolbar-->
+                  </div>
+                  <!--end::Card header-->
+                  <!--begin::Card body-->
+                  <div class="card-body pt-0">
+                    <!--begin::Table-->
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_general_ledger_table">
+                      <thead>
+                        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                          <th class="w-10px pe-2">
+                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                              <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_general_ledger_table .form-check-input" value="1" />
+                            </div>
+                          </th>
+                          <th class="min-w-125px">Booking ID</th>
+                          <th class="min-w-175px">Issue Date</th>
+                          <th class="min-w-150px">Invoice ID</th>
+                          <th class="min-w-150px">Customer</th>
+                          <th class="min-w-150px">Booking Type</th>
+                          <th class="min-w-100px">Supplier</th>
+                          <th class="min-w-100px">Currency</th>
+                          <th class="min-w-125px">Supplier Price</th>
+                          <th class="min-w-125px">Sales Price</th>
+                          <th class="min-w-125px">Profit</th>
+                          <th class="min-w-125px">Payment</th>
+                          <th class="min-w-125px">Transaction ID</th>
+                        </tr>
+                      </thead>
+                      <tbody class="fw-semibold text-gray-600">
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000001</td>
+                          <td>14 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000001</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="link-primary-dark"> 1BU-01 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>bKash</td>
+                          <td>hgsdhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000002</td>
+                          <td>15 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000002</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-02 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>Nagad</td>
+                          <td>j55dhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000003</td>
+                          <td>16 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000003</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-03 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>Nagad</td>
+                          <td>kj5dhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000001</td>
+                          <td>14 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000001</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-01 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>bKash</td>
+                          <td>hgsdhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000002</td>
+                          <td>15 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000002</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-02 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>Nagad</td>
+                          <td>j55dhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000003</td>
+                          <td>16 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000003</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-03 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>Nagad</td>
+                          <td>kj5dhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000001</td>
+                          <td>14 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000001</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-01 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>bKash</td>
+                          <td>hgsdhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000002</td>
+                          <td>15 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000002</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-02 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>Nagad</td>
+                          <td>j55dhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000003</td>
+                          <td>16 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000003</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-03 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>Nagad</td>
+                          <td>kj5dhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000001</td>
+                          <td>14 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000001</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-01 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>bKash</td>
+                          <td>hgsdhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000002</td>
+                          <td>15 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000002</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-02 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>Nagad</td>
+                          <td>j55dhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000003</td>
+                          <td>16 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000003</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-03 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>Nagad</td>
+                          <td>kj5dhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000001</td>
+                          <td>14 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000001</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-01 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>10,00,000</td>
+                          <td>bKash</td>
+                          <td>hgsdhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000002</td>
+                          <td>15 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000002</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-02 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>20,00,000</td>
+                          <td>Nagad</td>
+                          <td>j55dhdyfd76W65</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                              <input class="form-check-input" type="checkbox" value="1" />
+                            </div>
+                          </td>
+                          <td>BTC24000003</td>
+                          <td>16 Dec 2020, 8:43 pm</td>
+                          <td>BTC24000003</td>
+                          <td>
+                            <a href="#" class="link-primary-dark">
+                              Md. Irfanul Islam
+                            </a>
+                          </td>
+                          <td>Umrah Package</td>
+                          <td>
+                            <a href="#" class="text-gray-600"> 1BU-03 </a>
+                          </td>
+                          <td>BDT</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>30,00,000</td>
+                          <td>Nagad</td>
+                          <td>kj5dhdyfd76W65</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!--end::Table-->
+                  </div>
+                  <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+                <!--begin::Modals-->
+                <!--begin::Modal - Adjust Balance-->
+                <div class="modal fade" id="kt_general_ledger_export_modal" tabindex="-1" aria-hidden="true">
+                  <!--begin::Modal dialog-->
+                  <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                      <!--begin::Modal header-->
+                      <div class="modal-header">
+                        <!--begin::Modal title-->
+                        <h2 class="fw-bold">Export Invoice</h2>
+                        <!--end::Modal title-->
+                        <!--begin::Close-->
+                        <div id="kt_general_ledger_export_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                          <i class="bi bi-x fs-2x"></i>
+                        </div>
+                        <!--end::Close-->
+                      </div>
+                      <!--end::Modal header-->
+                      <!--begin::Modal body-->
+                      <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                        <!--begin::Form-->
+                        <form id="kt_general_ledger_export_form" class="form" action="#">
+                          <!--begin::Input group-->
+                          <div class="fv-row mb-10">
+                            <!--begin::Label-->
+                            <label class="fs-5 fw-semibold form-label mb-5">
+                              Select Export Format:
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select data-control="select2" data-placeholder="Select a format" data-hide-search="true" name="format" class="form-select form-select-solid">
+                              <option value="excell">Excel</option>
+                              <option value="pdf">PDF</option>
+                              <option value="cvs">CVS</option>
+                              <option value="zip">ZIP</option>
+                            </select>
+                            <!--end::Input-->
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Input group-->
+                          <div class="fv-row mb-10">
+                            <!--begin::Label-->
+                            <label class="fs-5 fw-semibold form-label mb-5">
+                              Select Date Range:
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input class="form-control form-control-solid" placeholder="Pick a date" name="date" />
+                            <!--end::Input-->
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Actions-->
+                          <div class="text-center">
+                            <button type="reset" id="kt_general_ledger_export_cancel" class="btn btn-light me-3">
+                              Discard
+                            </button>
+                            <button type="submit" id="kt_general_ledger_export_submit" class="btn btn-primary">
+                              <span class="indicator-label">Submit</span>
+                              <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                          </div>
+                          <!--end::Actions-->
+                        </form>
+                        <!--end::Form-->
+                      </div>
+                      <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                  </div>
+                  <!--end::Modal dialog-->
+                </div>
+                <!--end::Modal - New Card-->
+                <!--end::Modals-->
+              </div>
+              <!--end::Content container-->
+            </div>
+            <!--end::Content-->
+          </div>
+          <!--end::Content wrapper-->
+          <!--begin::Footer-->
+          <%- include('../partials/footer.ejs'); %>
+          <!--end::Footer-->
+        </div>
+        <!--end:::Main-->
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+  </div>
+  <!--end::App-->
+  <!--begin::Drawers-->
+  <!--begin::Activities drawer-->
+  <%- include('../partials/activities-drawer.ejs'); %>
+  <!--end::Activities drawer-->
+  <!--end::Drawers-->
+  <!--begin::Scrolltop-->
+  <%- include('../partials/scroll-top.ejs'); %>
+  <!--end::Scrolltop-->
+  <!--begin::Javascript-->
+  <%- include('../partials/footer-scripts.ejs', {
+    vendorJavascripts: [
+        '/assets/plugins/custom/datatables/datatables.bundle.js'
+    ],
+    customJavascripts: [
+        '/assets/js/custom/apps/ledger-management/list/export.js',
+        '/assets/js/custom/apps/ledger-management/list/list.js'
+    ]
+  }); %>
+  <!--end::Javascript-->
+</body>
+<!--end::Body-->
+
+</html>
