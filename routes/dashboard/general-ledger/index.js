@@ -29,7 +29,7 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 router.use(isAuthorized);
 
 /**
- * @description - umrah bookings view route
+ * @description - general ledger view route
  * @param {string} path - '/dashboard/general-ledgers'
  * @param {function} controller - ['viewGeneralLedger']
  * @returns {object} - router
