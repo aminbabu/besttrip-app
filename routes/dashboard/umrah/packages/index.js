@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/umrah/packages/index.js
+ * @file routes/dashboard/umrah//index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -40,7 +40,7 @@ router.use(isAuthorized);
  * @access private - ['all']
  * @method GET
  */
-router.get('/packages', viewUmrahPackages);
+router.get('/', viewUmrahPackages);
 
 /**
  * @description - umrah package add view route
@@ -50,17 +50,17 @@ router.get('/packages', viewUmrahPackages);
  * @access private - ['all']
  * @method GET
  */
-router.get('/packages/add', viewAddUmrahPackage);
+router.get('/add', viewAddUmrahPackage);
 
 /**
  * @description - umrah package edit view route
- * @param {string} path - '/dashboard/umrah/package/edit/:id'
+ * @param {string} path - '/dashboard/umrah/package/:id'
  * @param {function} controller - ['viewEditUmrahPackage']
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/packages/:id', viewEditUmrahPackage);
+router.get('/:id', viewEditUmrahPackage);
 
 // export router
 module.exports = router;
