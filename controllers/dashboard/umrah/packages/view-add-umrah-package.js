@@ -1,5 +1,5 @@
 /**
- * @file controllers/dashboard/umrah/view-add-umrah-package.js
+ * @file controllers/dashboard/umrah/packages/view-add-umrah-package.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

@@ -1,5 +1,5 @@
 /**
- * @file controllers/dashboard/umrah/index.js
+ * @file controllers/dashboard/umrah/packages/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -9,9 +9,6 @@
 
 // export all umrah controllers
 module.exports = {
-    viewUmrahBooking: require('./view-umrah-booking'),
-    viewUmrahTypes: require('./view-umrah-types'),
-    viewUmrahDurations: require('./view-umrah-durations'),
     viewUmrahPackages: require('./view-umrah-packages'),
     viewAddUmrahPackage: require('./view-add-umrah-package'),
     viewEditUmrahPackage: require('./view-edit-umrah-package'),

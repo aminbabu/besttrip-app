@@ -1,5 +1,5 @@
 /**
- * @file controllers/dashboard/umrah/view-edit-umrah-package.js
+ * @file controllers/dashboard/umrah/packages/view-edit-umrah-package.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { UmrahPackage } = require('../../../models');
+const { UmrahPackage } = require('../../../../models');
 
 // export umrah package edit view controller
 module.exports = async (req, res) => {

@@ -1,5 +1,5 @@
 /**
- * @file controllers/dashboard/umrah/view-umrah-booking.js
+ * @file controllers/dashboard/umrah/bookings/view-umrah-booking.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -8,9 +8,9 @@
  */
 
 // dependencies
-const { UmrahBooking } = require('../../../models');
+const { UmrahBooking } = require('../../../../models');
 
-// export umrah booking view controller
+// export umrah bookings view controller
 module.exports = async (req, res) => {
     try {
         // get status from request params

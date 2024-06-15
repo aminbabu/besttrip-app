@@ -1,5 +1,5 @@
 /**
- * @file controllers/dashboard/umrah/view-umrah-durations.js
+ * @file controllers/dashboard/umrah/durations/view-umrah-durations.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -8,9 +8,9 @@
  */
 
 // dependencies
-const { UmrahPackageDuration } = require('../../../models');
+const { UmrahPackageDuration } = require('../../../../models');
 
-// export umrah package duration view controller
+// export umrah package durations view controller
 module.exports = async (req, res) => {
     try {
         // get umrah package durations

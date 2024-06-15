@@ -1,5 +1,5 @@
 /**
- * @file controllers/dashboard/umrah/view-umrah-types.js
+ * @file controllers/dashboard/umrah/types/view-umrah-types.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { UmrahPackageType } = require('../../../models');
+const { UmrahPackageType } = require('../../../../models');
 
 // export umrah types view controller
 module.exports = async (req, res) => {
