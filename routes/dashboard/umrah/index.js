@@ -83,7 +83,7 @@ router.get('/packages', viewUmrahPackages);
  * @access private - ['all']
  * @method GET
  */
-router.get('/package/add', viewAddUmrahPackage);
+router.get('/packages/add', viewAddUmrahPackage);
 
 /**
  * @description - umrah package edit view route
@@ -93,7 +93,7 @@ router.get('/package/add', viewAddUmrahPackage);
  * @access private - ['all']
  * @method GET
  */
-router.get('/package/edit/:id', viewEditUmrahPackage);
+router.get('/packages/:id', viewEditUmrahPackage);
 
 // export router
 module.exports = router;
