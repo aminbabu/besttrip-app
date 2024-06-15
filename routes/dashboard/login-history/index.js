@@ -14,7 +14,10 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewLoginHistory } = require('../../../controllers/dashboard/login-history');
+const {
+    viewLoginHistory,
+    viewBlockedIps,
+} = require('../../../controllers/dashboard/login-history');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
@@ -29,7 +32,7 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 router.use(isAuthorized);
 
 /**
- * @description - umrah bookings view route
+ * @description - login history view route
  * @param {string} path - '/dashboard/login-history'
  * @param {function} controller - ['viewLoginHistory']
  * @returns {object} - router
@@ -37,6 +40,16 @@ router.use(isAuthorized);
  * @method GET
  */
 router.get('/', viewLoginHistory);
+
+/**
+ * @description - blocked ip view route
+ * @param {string} path - '/dashboard/login-history/blocked-ips'
+ * @param {function} controller - ['viewBlockedIps']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method GET
+ */
+router.get('/blocked-ips', viewBlockedIps);
 
 // export router
 module.exports = router;
