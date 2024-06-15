@@ -36,7 +36,7 @@ router.use(isAuthorized);
  * @access private - ['all']
  * @method GET
  */
-router.get('/types', viewUmrahTypes);
+router.get('/', viewUmrahTypes);
 
 // export router
 module.exports = router;
