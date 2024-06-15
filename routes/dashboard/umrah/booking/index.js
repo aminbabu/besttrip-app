@@ -14,10 +14,10 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewUmrahBooking } = require('../../../controllers/dashboard/umrah/booking');
+const { viewUmrahBooking } = require('../../../../controllers/dashboard/umrah/booking');
 
 // middlewares
-const { isAuthorized } = require('../../../middlewares/dashboard/auth');
+const { isAuthorized } = require('../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
