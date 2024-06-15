@@ -9,5 +9,5 @@
 
 // export general ledger controllers
 module.exports = {
-    viewPaymentRequests: require('./view-general-ledger'),
+    viewGeneralLedger: require('./view-general-ledger'),
 };
