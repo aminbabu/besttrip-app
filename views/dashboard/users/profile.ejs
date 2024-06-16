@@ -996,8 +996,7 @@
                         <form class="form" id="kt_modal_add_one_time_password_form">
                           <!--begin::Label-->
                           <div class="fw-bold mb-9">
-                            Enter the new phone number to receive an SMS to
-                            when you log in.
+                            Enter your password to enable Two Factor Authentication (2FA).
                           </div>
                           <!--end::Label-->
                           <!--begin::Separator-->
@@ -1011,7 +1010,7 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="email" class="form-control form-control-solid" name="otp_email" value="irfan@gmail.com" readonly="readonly" />
+                            <input type="email" class="form-control form-control-solid" name="email" value="<%= user.email %>" readonly="readonly" />
                             <!--end::Input-->
                           </div>
                           <!--end::Input group-->
@@ -1023,7 +1022,7 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="password" class="form-control form-control-solid" name="otp_confirm_password" value="" />
+                            <input type="password" class="form-control form-control-solid" name="password" value="" />
                             <!--end::Input-->
                           </div>
                           <!--end::Input group-->
