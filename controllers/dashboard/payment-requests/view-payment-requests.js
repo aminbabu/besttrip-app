@@ -8,7 +8,9 @@
  */
 
 // dependencies
+const moment = require('moment');
 const { PaymentRequest } = require('../../../models');
+const { currencyFormatter } = require('../../../utils');
 
 // export payment requests view controller
 module.exports = async (req, res) => {
@@ -17,7 +19,19 @@ module.exports = async (req, res) => {
         const { status } = req.params;
 
         // get payment requests
-        const paymentRequests = await PaymentRequest.find({ status }).populate('customer');
+        let paymentRequests = await PaymentRequest.find({ status }).populate('customer');
+
+        // format payment requests
+        paymentRequests = paymentRequests.map((paymentRequest) => {
+            const modifiedPaymentRequest = paymentRequest.toObject();
+
+            modifiedPaymentRequest.amount = currencyFormatter(paymentRequest.amount);
+            modifiedPaymentRequest.createdAt = moment(paymentRequest.createdAt).format(
+                'DD MMM, YYYY hh:mm A'
+            );
+
+            return modifiedPaymentRequest;
+        });
 
         // return render view
         return res.render(`dashboard/payment-requests/${status}`, {
