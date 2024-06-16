@@ -23,13 +23,6 @@ module.exports =
         const { id } = req.params || {};
         const { attachment } = req.files || {};
 
-        // check if attachment exists
-        if (!attachment) {
-            return res.status(400).json({
-                message: 'Attachment is required',
-            });
-        }
-
         // check if id exists
         if (id) {
             // find payment request by id
