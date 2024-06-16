@@ -20,6 +20,9 @@ importers:
       countries-list:
         specifier: ^3.1.0
         version: 3.1.0
+      currency.js:
+        specifier: ^2.0.4
+        version: 2.0.4
       debug:
         specifier: ~2.6.9
         version: 2.6.9
@@ -371,6 +374,10 @@ packages:
 
   cssfilter@0.0.10:
     resolution: {integrity: sha512-FAaLDaplstoRsDR8XGYH51znUN0UY7nMc6Z9/fvE8EXGwvJE9hu7W2vHwx1+bd6gCYnln9nLbzxFTrcO9YQDZw==}
+
+  currency.js@2.0.4:
+    resolution: {integrity: sha512-6/OplJYgJ0RUlli74d93HJ/OsKVBi8lB1+Z6eJYS1YZzBuIp4qKKHpJ7ad+GvTlWmLR/hLJOWTykN5Nm8NJ7+w==}
+    engines: {node: '>=4'}
 
   data-view-buffer@1.0.1:
     resolution: {integrity: sha512-0lht7OugA5x3iJLOWFhWK/5ehONdprk0ISXqVFn/NFrDu+cuc8iADFrGQz5BnRK7LLU3JmkbXSxaqX+/mXYtUA==}
@@ -1914,6 +1921,8 @@ snapshots:
   csp-header@5.2.1: {}
 
   cssfilter@0.0.10: {}
+
+  currency.js@2.0.4: {}
 
   data-view-buffer@1.0.1:
     dependencies:
