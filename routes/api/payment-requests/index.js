@@ -31,7 +31,7 @@ const {
     validatePaymentRequestsByStatus,
     validatePaymentRequestAttachment,
 } = require('../../../middlewares/api/validators/payment-requests');
-const uploadPaymentAttachment = require('../../../middlewares/api/payment-requests/upload-payment-attachment');
+const { uploadPaymentAttachment } = require('../../../middlewares/api/payment-requests');
 
 /**
  * @description check if user is authorized
