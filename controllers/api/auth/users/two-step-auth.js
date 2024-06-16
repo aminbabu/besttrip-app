@@ -40,7 +40,7 @@ module.exports = async (req, res, next) => {
         }
 
         // update user two step auth
-        user.set({ twoStepAuth: true });
+        user.set({ twoStepAuth: !user.twoStepAuth });
 
         // save user
         await user.save();
@@ -48,6 +48,7 @@ module.exports = async (req, res, next) => {
         // return response
         return res.status(200).json({
             message: 'Two step authentication is enabled',
+            user,
         });
     } catch (error) {
         return next(error);
