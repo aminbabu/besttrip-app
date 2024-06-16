@@ -114,7 +114,7 @@ router.patch(
     '/:id',
     isAllowed(['admin']),
     validatePaymentRequestId,
-    validatePaymentRequest,
+    validatePaymentRequestsByStatus,
     updatePaymentRequest
 );
 
