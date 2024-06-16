@@ -39,11 +39,11 @@ const KTPaymentRequestRejected = (function () {
                             // Fill the fields
                             const { paymentRequest } = response.data;
 
-                            if (!paymentRequest?.notes) {
-                                paymentRequest.notes = 'No reason provided';
+                            if (!paymentRequest?.note) {
+                                paymentRequest.note = 'No reason provided';
                             }
 
-                            messageEl.innerHTML = paymentRequest.notes;
+                            messageEl.innerHTML = paymentRequest.note;
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
