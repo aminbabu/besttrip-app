@@ -42,7 +42,7 @@ module.exports = new Schema(
             enum: PAYMENT_REQUEST_STATUS,
             default: PAYMENT_REQUEST_STATUS[0],
         },
-        notes: {
+        note: {
             type: String,
         },
         customer: {
