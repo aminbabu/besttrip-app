@@ -22,7 +22,7 @@ const KTPaymentRequestRejected = (function () {
     // Get payment request data on modal show
     const showPaymentRequestData = () => {
         const triggers = document.querySelectorAll(
-            '[data-kt-trigger="kt_payment_requests_rejected_reason"]'
+            '[data-kt-payment-requests-rejected-reason-action="trigger"]'
         );
 
         triggers.forEach((trigger) => {
