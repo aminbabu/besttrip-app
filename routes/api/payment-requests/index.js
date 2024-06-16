@@ -28,6 +28,7 @@ const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
     validatePaymentRequestId,
     validatePaymentRequest,
+    validatePaymentRequestStatus,
     validatePaymentRequestsByStatus,
     validatePaymentRequestAttachment,
 } = require('../../../middlewares/api/validators/payment-requests');
@@ -114,7 +115,7 @@ router.patch(
     '/:id',
     isAllowed(['admin']),
     validatePaymentRequestId,
-    validatePaymentRequestsByStatus,
+    validatePaymentRequestStatus,
     updatePaymentRequest
 );
 
