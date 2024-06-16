@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 10 May, 2024
+ * @update_date 16 June, 2024
  */
 
 // dependencies
@@ -16,10 +16,12 @@ module.exports = async (req, res, next) => {
         // get validated data
         const { _id } = req.user;
         const validatedData = req.body;
+        const { attachment } = req.files;
 
         // create payment request
         const paymentsRequest = new PaymentRequest({
             ...validatedData,
+            attachment: attachment?.path,
             customer: _id,
         });
 
