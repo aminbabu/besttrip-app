@@ -123,7 +123,18 @@ module.exports = z
                 message: 'Please enter a valid postal code',
             })
             .optional(),
-        flyerNumber: z.number().optional(),
+        flyerNumber: z
+            .string({
+                required_error: 'Flyer number is required',
+                invalid_type_error: 'Please enter a valid flyer number',
+            })
+            .min(3, {
+                message: 'Flyer number must be at least 3 characters long',
+            })
+            .max(50, {
+                message: 'Flyer number must not be more than 50 characters',
+            })
+            .optional(),
         wallet: z
             .object(
                 {
