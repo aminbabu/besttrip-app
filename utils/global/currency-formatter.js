@@ -7,10 +7,19 @@
  * @update_date 16 June, 2024
  */
 
+// dependencies
+const currency = require('currency.js');
+
 // export currency formatter function
-module.exports = (amount, locale = 'bn-BD', currency = 'BDT') =>
-    new Intl.NumberFormat(locale, {
-        style: 'currency',
-        currency,
-        maximumFractionDigits: 2,
-    }).format(amount);
+module.exports = (price) =>
+    currency(price, {
+        precision: 2, // Set the number of decimal places
+        formatWith: {
+            symbol: ' BDT', // Add a space before "BDT" for better readability
+            thousand: ',',
+            decimal: '.',
+            prefix: '',
+            suffix: '',
+            format: '{symbol}{prefix}{number}{fractional}', // Customize the format string
+        },
+    }).format(); // Outputs: 1,234.56 BDT
