@@ -203,6 +203,17 @@ const KTUsersUpdatePassword = (function () {
                                 // Enable button
                                 submitButton.disabled = false;
                             });
+                    } else {
+                        // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                        Swal.fire({
+                            text: 'Sorry, looks like there are some errors detected, please try again.',
+                            icon: 'error',
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ok, got it!',
+                            customClass: {
+                                confirmButton: 'btn btn-primary',
+                            },
+                        });
                     }
                 });
             }
