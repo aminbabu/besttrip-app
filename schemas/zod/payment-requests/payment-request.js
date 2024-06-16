@@ -61,5 +61,13 @@ module.exports = z
                 message: `Status should be one of ${PAYMENT_REQUEST_STATUS.join(', ')}`,
             })
             .optional(),
+        notes: z
+            .string({
+                required_error: 'Notes is required',
+                invalid_type_error: 'Notes should be a string',
+            })
+            .min(10, 'Notes should be at least 10 characters long')
+            .max(500, 'Notes should not be more than 500 characters long')
+            .optional(),
     })
     .strict();
