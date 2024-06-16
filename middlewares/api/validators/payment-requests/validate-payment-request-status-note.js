@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/api/validators/payment-requests/validate-payment-request-status.js
+ * @file /middlewares/api/validators/payment-requests/validate-payment-request-status-note.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
