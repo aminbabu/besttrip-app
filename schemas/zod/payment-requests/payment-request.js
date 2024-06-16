@@ -68,7 +68,7 @@ module.exports = z
                 required_error: 'Note is required',
                 invalid_type_error: 'Note should be a string',
             })
-            .min(3, 'Note should be at least 10 characters long')
+            .min(3, 'Note should be at least 3 characters long')
             .max(500, 'Note should not be more than 500 characters long')
             .optional(),
     })
