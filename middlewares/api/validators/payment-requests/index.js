@@ -11,7 +11,7 @@
 module.exports = {
     validatePaymentRequestId: require('./validate-payment-request-id'),
     validatePaymentRequest: require('./validate-payment-request'),
-    validatePaymentRequestStatus: require('./validate-payment-request-status'),
+    validatePaymentRequestStatusNote: require('./validate-payment-request-status-note'),
     validatePaymentRequestsByStatus: require('./validate-payment-requests-by-status'),
     validatePaymentRequestAttachment: require('./validate-payment-request-attachment'),
 };
