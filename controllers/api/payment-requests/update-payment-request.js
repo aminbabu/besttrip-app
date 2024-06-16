@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const { id } = req.params;
-        const { status } = req.body;
+        const { status, note } = req.body;
 
         // get payment request
         const paymentRequest = await PaymentRequest.findById(id).populate('customer');
@@ -45,7 +45,10 @@ module.exports = async (req, res, next) => {
         }
 
         // update payment request
-        paymentRequest.status = status;
+        paymentRequest.set({
+            status,
+            note: note || paymentRequest?.note,
+        });
 
         // save payment request
         await paymentRequest.save();
