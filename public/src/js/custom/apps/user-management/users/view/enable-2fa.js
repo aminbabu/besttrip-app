@@ -117,7 +117,7 @@ const KTUsersEnableTwo2FA = (function () {
                                 Swal.fire({
                                     text:
                                         response.data.message ||
-                                        'You have successfully enabled two-step authentication!',
+                                        `Your 2FA has been ${response.data.user.twoStepAuth ? 'enabled' : 'disabled'} successfully.`,
                                     icon: 'success',
                                     buttonsStyling: false,
                                     confirmButtonText: 'Ok, got it!',
