@@ -117,9 +117,9 @@ router.post('/account-activation', validateLogin, accountActivation);
  * @param {function} controller - ['twoStepAuth']
  * @returns {object} - router
  * @access public
- * @method POST
+ * @method PATCH
  */
-router.post('/two-step', validateLogin, twoStepAuth);
+router.patch('/two-step', validateLogin, twoStepAuth);
 
 // export
 module.exports = router;
