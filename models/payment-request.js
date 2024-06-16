@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 16 June, 2024
  */
 
 // dependencies
@@ -28,13 +28,13 @@ paymentRequestSchema.pre('save', async function (next) {
         );
 
         // get count from the last reference ID if any or set to 0
-        let count = lastPaymentRequest ? parseInt(lastPaymentRequest.referenceID.slice(11), 10) : 0;
+        let count = lastPaymentRequest ? parseInt(lastPaymentRequest.refId.slice(11), 10) : 0;
 
         // check pad count with 0 if less than 4 digits and increment by 1
         count = count > 9999 ? count + 1 : (count + 1).toString().padStart(4, '0');
 
         // reference ID based on date (YYYYMMDD) and count (0001, 0002, ...) with prefix 'DEP'
-        this.referenceID = `DEP${moment().format('YYYYMMDD')}${count}`;
+        this.refId = `DEP${moment().format('YYYYMMDD')}${count}`;
 
         return next();
     } catch (error) {

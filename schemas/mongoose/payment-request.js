@@ -14,7 +14,7 @@ const { PAYMENT_REQUEST_STATUS } = require('../../constants');
 // export payment request schema
 module.exports = new Schema(
     {
-        referenceID: {
+        refId: {
             type: String,
             unique: [true, 'Reference ID must be unique'],
         },
