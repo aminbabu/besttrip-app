@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 10 May, 2024
+ * @update_date 16 June, 2024
  */
 
 // dependencies
@@ -63,13 +63,13 @@ module.exports = z
                 message: `Status should be one of ${PAYMENT_REQUEST_STATUS.join(', ')}`,
             })
             .optional(),
-        notes: z
+        note: z
             .string({
-                required_error: 'Notes is required',
-                invalid_type_error: 'Notes should be a string',
+                required_error: 'Note is required',
+                invalid_type_error: 'Note should be a string',
             })
-            .min(10, 'Notes should be at least 10 characters long')
-            .max(500, 'Notes should not be more than 500 characters long')
+            .min(10, 'Note should be at least 10 characters long')
+            .max(500, 'Note should not be more than 500 characters long')
             .optional(),
     })
     .strict();
