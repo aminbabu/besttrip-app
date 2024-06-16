@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { PaymentRequest } = require('../../../models');
+const { PaymentRequest, Customer } = require('../../../models');
 
 // export update payment request controller
 module.exports = async (req, res, next) => {
@@ -27,23 +27,31 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // get the customer
+        const customer = await Customer.findById(paymentRequest.customer._id);
+
         // check if payment request is approved
         if (paymentRequest.status !== 'approved' && status === 'approved') {
             // update customer balance
             paymentRequest.customer.wallet.balance += paymentRequest.amount;
+            customer.wallet.balance += paymentRequest.amount;
         }
 
         // check if payment request is rejected
         if (paymentRequest.status === 'approved' && status === 'rejected') {
             // update customer balance
             paymentRequest.customer.wallet.balance -= paymentRequest.amount;
+            customer.wallet.balance -= paymentRequest.amount;
         }
 
         // update payment request
-        paymentRequest.set({ status });
+        paymentRequest.status = status;
 
         // save payment request
         await paymentRequest.save();
+
+        // save customer
+        await customer.save();
 
         // return response
         return res.status(200).json({
