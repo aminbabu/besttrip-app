@@ -43,7 +43,7 @@ module.exports =
         attachment.mv(uploadFilePath);
 
         // set file path to request body
-        req.files.attachment = uploadPath;
+        req.files.attachment.path = uploadPath;
 
         // proceed to next middleware
         return next();
