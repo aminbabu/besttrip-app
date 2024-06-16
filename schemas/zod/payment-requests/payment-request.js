@@ -25,11 +25,13 @@ module.exports = z
                 message: 'Please provide a valid id',
             }),
         amount: z
-            .number({
+            .string({
                 required_error: 'Amount is required',
-                invalid_type_error: 'Amount should be a number',
+                invalid_type_error: 'Amount should be a string',
             })
-            .min(0, 'Amount should be a positive number'),
+            .refine((amount) => Number(amount) > 0, {
+                message: 'Amount should be a positive number',
+            }),
         account: z
             .string({
                 required_error: 'Account is required',
