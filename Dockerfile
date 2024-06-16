@@ -1,6 +1,9 @@
 # Use the official image as a parent image
 FROM node:20.14.0-alpine3.20
 
+# Set the timezone
+RUN apk add --no-cache tzdata
+
 # Install nodemon
 RUN npm install -g nodemon
 
