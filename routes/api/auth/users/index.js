@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 09 June, 2024
+ * @update_date 16 June, 2024
  */
 
 // dependencies
@@ -22,6 +22,7 @@ const {
     resendVerificationEmail,
     verifyEmail,
     accountActivation,
+    twoStepAuth,
 } = require('../../../../controllers/api/auth/users');
 
 // middlewares
@@ -109,6 +110,16 @@ router.get('/verify-email', validateVerifyEmail, verifyEmail);
  * @method POST
  */
 router.post('/account-activation', validateLogin, accountActivation);
+
+/**
+ * @description two step authentication
+ * @param {string} path - /api/auth/users/two-step
+ * @param {function} controller - ['twoStepAuth']
+ * @returns {object} - router
+ * @access public
+ * @method POST
+ */
+router.post('/two-step', validateLogin, twoStepAuth);
 
 // export
 module.exports = router;
