@@ -126,8 +126,12 @@ const KTUsersEnableTwo2FA = (function () {
                                     },
                                     allowOutsideClick: false,
                                 }).then((result) => {
-                                    if (result.isConfirmed) {
+                                    // Get the redirect URL from the form
+                                    const redirectUrl = form.getAttribute('data-kt-redirect-url');
+
+                                    if (result.isConfirmed && redirectUrl) {
                                         modal.hide();
+                                        location.href = redirectUrl;
                                     }
                                 });
                             })
