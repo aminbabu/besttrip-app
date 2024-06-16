@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
 
             modifiedPaymentRequest.amount = currencyFormatter(paymentRequest.amount);
             modifiedPaymentRequest.createdAt = moment(paymentRequest.createdAt).format(
-                'MMMM Do YYYY, h:mm:ss a'
+                'DD MMM YYYY, h:mm:ss a'
             );
 
             return modifiedPaymentRequest;
