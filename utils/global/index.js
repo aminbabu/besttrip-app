@@ -13,4 +13,5 @@ module.exports = {
     comparePassword: require('./compare-password'),
     verifyToken: require('./verify-token'),
     ipInfo: require('./ipinfo'),
+    currencyFormatter: require('./currency-formatter'),
 };
