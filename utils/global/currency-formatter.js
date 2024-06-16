@@ -8,9 +8,9 @@
  */
 
 // export currency formatter function
-module.exports = (amount, locale = 'bn-BD') =>
+module.exports = (amount, locale = 'bn-BD', currency = 'BDT') =>
     new Intl.NumberFormat(locale, {
         style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 2,
+        currency,
+        maximumFractionDigits: 2,
     }).format(amount);
