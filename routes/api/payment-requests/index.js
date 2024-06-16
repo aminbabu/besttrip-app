@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 14 June, 2024
+ * @update_date 16 June, 2024
  */
 
 // dependencies
@@ -29,7 +29,9 @@ const {
     validatePaymentRequestId,
     validatePaymentRequest,
     validatePaymentRequestsByStatus,
+    validatePaymentRequestAttachment,
 } = require('../../../middlewares/api/validators/payment-requests');
+const uploadPaymentAttachment = require('../../../middlewares/api/payment-requests/upload-payment-attachment');
 
 /**
  * @description check if user is authorized
@@ -89,7 +91,14 @@ router.get(
  * @access private ['customer']
  * @method POST
  */
-router.post('/', isAllowed(['customer']), validatePaymentRequest, createPaymentRequest);
+router.post(
+    '/',
+    isAllowed(['customer']),
+    validatePaymentRequestAttachment,
+    validatePaymentRequest,
+    uploadPaymentAttachment('payment-requests'),
+    createPaymentRequest
+);
 
 /**
  * @description - update payment request
