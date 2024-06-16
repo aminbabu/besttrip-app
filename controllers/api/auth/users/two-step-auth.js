@@ -47,7 +47,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
-            message: 'Two step authentication is enabled',
+            message: `Your 2FA has been ${user.twoStepAuth ? 'enabled' : 'disabled'} successfully.`,
             user,
         });
     } catch (error) {
