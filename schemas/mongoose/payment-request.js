@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 10 May, 2024
+ * @update_date 16 June, 2024
  */
 
 // dependencies
@@ -41,6 +41,9 @@ module.exports = new Schema(
             type: String,
             enum: PAYMENT_REQUEST_STATUS,
             default: PAYMENT_REQUEST_STATUS[0],
+        },
+        notes: {
+            type: String,
         },
         customer: {
             type: Schema.Types.ObjectId,
