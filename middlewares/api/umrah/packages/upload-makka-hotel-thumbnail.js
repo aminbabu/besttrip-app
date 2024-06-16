@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/umrah/packages/upload-package-makka-hotel-thumbnail.js
+ * @file /middlewares/api/umrah/packages/upload-package-makka-hotel-thumbnail.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

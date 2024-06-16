@@ -1,5 +1,5 @@
 /**
- * @file /middlewares/umrah/packages/upload-package-gallery.js
+ * @file /middlewares/api/umrah/packages/upload-package-gallery.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
