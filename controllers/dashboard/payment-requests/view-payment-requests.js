@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 June, 2024
- * @update_date 15 June, 2024
+ * @update_date 19 June, 2024
  */
 
 // dependencies
@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
 
             modifiedPaymentRequest.amount = currencyFormatter(paymentRequest.amount);
             modifiedPaymentRequest.createdAt = moment(paymentRequest.createdAt).format(
-                'DD MMM YYYY, h:mm:ss a'
+                'DD MMM YYYY, h:mm a'
             );
 
             return modifiedPaymentRequest;
