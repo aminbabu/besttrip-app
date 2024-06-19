@@ -313,17 +313,17 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="mb-5">
+                                <div class="mb-5 fv-row">
                                   <!--begin::Label-->
                                   <label class="required fw-semibold fs-6 mb-5">Role</label>
                                   <!--end::Label-->
                                   <!--begin::Roles-->
                                   <!--begin::Input row-->
-                                  <div class="d-flex fv-row">
+                                  <div class="d-flex">
                                     <!--begin::Radio-->
                                     <div class="form-check form-check-custom form-check-solid">
                                       <!--begin::Input-->
-                                      <input class="form-check-input me-3" name="role" type="radio" value="admin" id="kt_modal_update_role_option_0" checked="checked" />
+                                      <input class="form-check-input me-3" name="role" type="radio" value="admin" id="kt_modal_update_role_option_0" />
                                       <!--end::Input-->
                                       <!--begin::Label-->
                                       <label class="form-check-label" for="kt_modal_update_role_option_0">
@@ -331,8 +331,7 @@
                                           Admin
                                         </div>
                                         <div class="text-gray-600">
-                                          Best for business owners and
-                                          company administrators
+                                          Best for business owners and company administrators
                                         </div>
                                       </label>
                                       <!--end::Label-->
@@ -342,14 +341,38 @@
                                   <!--end::Input row-->
                                   <div class="separator separator-dashed my-5"></div>
                                   <!--begin::Input row-->
-                                  <div class="d-flex fv-row">
+                                  <div class="d-flex">
                                     <!--begin::Radio-->
                                     <div class="form-check form-check-custom form-check-solid">
                                       <!--begin::Input-->
-                                      <input class="form-check-input me-3" name="role" type="radio" value="dev" id="kt_modal_update_role_option_1" />
+                                      <input class="form-check-input me-3" name="role" type="radio" value="manager" id="kt_modal_update_role_option_1" />
                                       <!--end::Input-->
                                       <!--begin::Label-->
                                       <label class="form-check-label" for="kt_modal_update_role_option_1">
+                                        <div class="fw-bold text-gray-800">
+                                          Manager
+                                        </div>
+                                        <div class="text-gray-600">
+                                          Best for managers and team leads who manage team activities
+                                        </div>
+                                      </label>
+                                      <!--end::Label-->
+                                    </div>
+                                    <!--end::Radio-->
+                                  </div>
+                                  <!--end::Input row-->
+                                  <!--end::Input row-->
+                                  <div class="separator separator-dashed my-5"></div>
+                                  <!--begin::Input row-->
+                                  <!--begin::Input row-->
+                                  <div class="d-flex">
+                                    <!--begin::Radio-->
+                                    <div class="form-check form-check-custom form-check-solid">
+                                      <!--begin::Input-->
+                                      <input class="form-check-input me-3" name="role" type="radio" value="dev" id="kt_modal_update_role_option_2" />
+                                      <!--end::Input-->
+                                      <!--begin::Label-->
+                                      <label class="form-check-label" for="kt_modal_update_role_option_2">
                                         <div class="fw-bold text-gray-800">
                                           Developer
                                         </div>
@@ -365,32 +388,7 @@
                                   <!--end::Input row-->
                                   <div class="separator separator-dashed my-5"></div>
                                   <!--begin::Input row-->
-                                  <div class="d-flex fv-row">
-                                    <!--begin::Radio-->
-                                    <div class="form-check form-check-custom form-check-solid">
-                                      <!--begin::Input-->
-                                      <input class="form-check-input me-3" name="role" type="radio" value="analyst" id="kt_modal_update_role_option_2" />
-                                      <!--end::Input-->
-                                      <!--begin::Label-->
-                                      <label class="form-check-label" for="kt_modal_update_role_option_2">
-                                        <div class="fw-bold text-gray-800">
-                                          Analyst
-                                        </div>
-                                        <div class="text-gray-600">
-                                          Best for people who need full
-                                          access to analytics data, but
-                                          don't need to update business
-                                          settings
-                                        </div>
-                                      </label>
-                                      <!--end::Label-->
-                                    </div>
-                                    <!--end::Radio-->
-                                  </div>
-                                  <!--end::Input row-->
-                                  <div class="separator separator-dashed my-5"></div>
-                                  <!--begin::Input row-->
-                                  <div class="d-flex fv-row">
+                                  <div class="d-flex">
                                     <!--begin::Radio-->
                                     <div class="form-check form-check-custom form-check-solid">
                                       <!--begin::Input-->
@@ -402,9 +400,7 @@
                                           Support
                                         </div>
                                         <div class="text-gray-600">
-                                          Best for employees who regularly
-                                          refund payments and respond to
-                                          disputes
+                                          Best for support agents and people who need access to payment data
                                         </div>
                                       </label>
                                       <!--end::Label-->
@@ -414,21 +410,19 @@
                                   <!--end::Input row-->
                                   <div class="separator separator-dashed my-5"></div>
                                   <!--begin::Input row-->
-                                  <div class="d-flex fv-row">
+                                  <div class="d-flex">
                                     <!--begin::Radio-->
                                     <div class="form-check form-check-custom form-check-solid">
                                       <!--begin::Input-->
-                                      <input class="form-check-input me-3" name="role" type="radio" value="trail" id="kt_modal_update_role_option_4" />
+                                      <input class="form-check-input me-3" name="role" type="radio" value="stuff" id="kt_modal_update_role_option_4" checked="checked" />
                                       <!--end::Input-->
                                       <!--begin::Label-->
                                       <label class="form-check-label" for="kt_modal_update_role_option_4">
                                         <div class="fw-bold text-gray-800">
-                                          Trial
+                                          Stuff
                                         </div>
                                         <div class="text-gray-600">
-                                          Best for people who need to
-                                          preview content data, but don't
-                                          need to make any updates
+                                          Best for employees who regularly refund payments and respond to disputes
                                         </div>
                                       </label>
                                       <!--end::Label-->
