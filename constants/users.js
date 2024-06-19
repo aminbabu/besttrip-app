@@ -13,8 +13,12 @@ const USER_ROLES = ['user', 'admin'];
 // user status
 const USER_STATUS = ['active', 'disabled'];
 
+// user password
+const USER_DEFAULT_PASSWORD = '12345678';
+
 // export constants
 module.exports = {
     USER_ROLES,
     USER_STATUS,
+    USER_DEFAULT_PASSWORD,
 };
