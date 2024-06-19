@@ -4,11 +4,11 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 14 May, 2024
+ * @update_date 19 June, 2024
  */
 
 // user roles
-const USER_ROLES = ['user', 'admin'];
+const USER_ROLES = ['trail', 'dev', 'analyst', 'support', 'admin'];
 
 // user status
 const USER_STATUS = ['active', 'disabled'];
