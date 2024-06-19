@@ -79,13 +79,14 @@ const KTUsersAddUser = (function () {
                                     Swal.fire({
                                         text:
                                             response.data.message ||
-                                            'User has been successfully added! Please check your email to activate the account.',
+                                            'User has been successfully added. Please check your email to activate the account.',
                                         icon: 'success',
                                         buttonsStyling: false,
                                         confirmButtonText: 'Ok, got it!',
                                         customClass: {
                                             confirmButton: 'btn btn-primary',
                                         },
+                                        allowOutsideClick: false,
                                     }).then(() => {
                                         // Reset form
                                         form.reset();
