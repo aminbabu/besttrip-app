@@ -64,7 +64,7 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(201).json({
-            message: 'User created successfully',
+            message: 'User created successfully. Please verify your email address.',
         });
     } catch (error) {
         return next(error);
