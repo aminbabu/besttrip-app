@@ -75,15 +75,29 @@ const KTUsersAddUser = (function () {
                             )
                             .then((response) => {
                                 if (response) {
-                                    // Reset form
-                                    form.reset();
+                                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                    Swal.fire({
+                                        text:
+                                            response.data.message ||
+                                            'User has been successfully added! Please check your email to activate the account.',
+                                        icon: 'success',
+                                        buttonsStyling: false,
+                                        confirmButtonText: 'Ok, got it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary',
+                                        },
+                                    }).then(() => {
+                                        // Reset form
+                                        form.reset();
 
-                                    // Get redirect URL from the form
-                                    const redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                        // Get redirect URL from the form
+                                        const redirectUrl =
+                                            form.getAttribute('data-kt-redirect-url');
 
-                                    if (redirectUrl) {
-                                        location.href = redirectUrl;
-                                    }
+                                        if (redirectUrl) {
+                                            location.href = redirectUrl;
+                                        }
+                                    });
                                 } else {
                                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                     Swal.fire({
