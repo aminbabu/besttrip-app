@@ -75,6 +75,19 @@ router.get('/', isAllowed(['admin']), getAllUsers);
 router.get('/:id', isAllowed(['admin']), validateUserId, getUser);
 
 /**
+ * @description add user
+ * @param {string} path - /api/users/
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validateAvatar', 'validateUserAccount']
+ * @param {function} validator - ['validateUser']
+ * @param {function} controller - ['createUser']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method POST
+ */
+router.post('/', isAllowed(['admin']), validateUser, createUser);
+
+/**
  * @description update user by self
  * @param {string} path - /api/users/self
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
@@ -104,19 +117,6 @@ router.patch(
  * @method GET
  */
 router.get('/self/disable', isAllowed(USER_ROLES), disableUserBySelf);
-
-/**
- * @description add user
- * @param {string} path - /api/users/
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} validator - ['validateAvatar', 'validateUserAccount']
- * @param {function} validator - ['validateUser']
- * @param {function} controller - ['createUser']
- * @returns {object} - router
- * @access private - ['admin']
- * @method POST
- */
-router.post('/', isAllowed(['admin']), validateUser, createUser);
 
 /**
  * @description update user by mongo id
