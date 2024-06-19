@@ -8,13 +8,23 @@
  */
 
 // dependencies
+const moment = require('moment');
 const { User } = require('../../../models');
 
 // export users view controller
 module.exports = async (req, res) => {
     try {
         // get users
-        const users = await User.find();
+        let users = await User.find();
+
+        // formate data
+        users = users.map((user) => {
+            const userObj = user.toObject();
+
+            userObj.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
+
+            return userObj;
+        });
 
         // return render view
         return res.render('dashboard/users', {
