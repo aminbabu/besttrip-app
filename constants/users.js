@@ -8,7 +8,7 @@
  */
 
 // user roles
-const USER_ROLES = ['trail', 'dev', 'analyst', 'support', 'admin'];
+const USER_ROLES = ['stuff', 'dev', 'support', 'manager', 'admin'];
 
 // user status
 const USER_STATUS = ['active', 'disabled'];
