@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 09 June, 2024
+ * @update_date 19 June, 2024
  */
 
 // dependencies
@@ -17,6 +17,7 @@ const router = express.Router();
 const {
     getAllUsers,
     getUser,
+    createUser,
     updateUser,
     updatePassword,
     updateUserBySelf,
@@ -103,6 +104,19 @@ router.patch(
  * @method GET
  */
 router.get('/self/disable', isAllowed(USER_ROLES), disableUserBySelf);
+
+/**
+ * @description add user
+ * @param {string} path - /api/users/
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validateAvatar', 'validateUserAccount']
+ * @param {function} validator - ['validateUser']
+ * @param {function} controller - ['createUser']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method POST
+ */
+router.post('/', isAllowed(['admin']), validateUser, createUser);
 
 /**
  * @description update user by mongo id
