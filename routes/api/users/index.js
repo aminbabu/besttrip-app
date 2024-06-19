@@ -168,7 +168,7 @@ router.patch('/:id/password', isAllowed(['admin']), validatePassword, updatePass
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} controller - ['deleteUserBySelf']
  * @returns {object} - router
- * @access private - ['user']
+ * @access private - all
  * @method DELETE
  */
 router.delete('/self', isAllowed(USER_ROLES), deleteUserBySelf);
