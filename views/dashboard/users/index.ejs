@@ -279,70 +279,16 @@
                           <!--begin::Modal body-->
                           <div class="modal-body px-5 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_add_user_form" class="form" action="#">
+                            <form id="kt_modal_add_user_form" class="form" data-kt-redirect-url="/dashboard/users" action="/api/users/" method="post">
                               <!--begin::Scroll-->
                               <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-7">
-                                  <!--begin::Label-->
-                                  <label class="d-block fw-semibold fs-6 mb-5">Avatar</label>
-                                  <!--end::Label-->
-                                  <!--begin::Image placeholder-->
-                                  <style>
-                                    .image-input-placeholder {
-                                      background-image: url("../../assets/media/svg/files/blank-image.svg");
-                                    }
-
-                                    [data-bs-theme="dark"] .image-input-placeholder {
-                                      background-image: url("../../assets/media/svg/files/blank-image-dark.svg");
-                                    }
-                                  </style>
-                                  <!--end::Image placeholder-->
-                                  <!--begin::Image input-->
-                                  <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
-                                    <!--begin::Preview existing avatar-->
-                                    <div class="image-input-wrapper w-125px h-125px" style="
-                                background-image: url(../../assets/media/avatars/300-6.jpg);
-                              "></div>
-                                    <!--end::Preview existing avatar-->
-                                    <!--begin::Label-->
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                                      <i class="ki-duotone ki-pencil fs-7">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                      </i>
-                                      <!--begin::Inputs-->
-                                      <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                                      <input type="hidden" name="avatar_remove" />
-                                      <!--end::Inputs-->
-                                    </label>
-                                    <!--end::Label-->
-                                    <!--begin::Cancel-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                      <i class="bi bi-x fs-2x"></i>
-                                    </span>
-                                    <!--end::Cancel-->
-                                    <!--begin::Remove-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                      <i class="bi bi-x fs-2"></i>
-                                    </span>
-                                    <!--end::Remove-->
-                                  </div>
-                                  <!--end::Image input-->
-                                  <!--begin::Hint-->
-                                  <div class="form-text">
-                                    Allowed file types: png, jpg, jpeg.
-                                  </div>
-                                  <!--end::Hint-->
-                                </div>
-                                <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                   <!--begin::Label-->
                                   <label class="required fw-semibold fs-6 mb-2">Full Name</label>
                                   <!--end::Label-->
                                   <!--begin::Input-->
-                                  <input type="text" name="user_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name" value="Emma Smith" />
+                                  <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name" />
                                   <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -352,7 +298,7 @@
                                   <label class="required fw-semibold fs-6 mb-2">Email</label>
                                   <!--end::Label-->
                                   <!--begin::Input-->
-                                  <input type="email" name="user_email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="smith@kpmg.com" />
+                                  <input type="email" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" />
                                   <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -362,23 +308,7 @@
                                   <label class="required fw-semibold fs-6 mb-2">Phone Number</label>
                                   <!--end::Label-->
                                   <!--begin::Input-->
-                                  <input type="text" name="user_phone" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="017XX-XXXXXX" value="01871249015" />
-                                  <!--end::Input-->
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-7">
-                                  <!--begin::Label-->
-                                  <label class="required fw-semibold fs-6 mb-2">Staus</label>
-                                  <!--end::Label-->
-                                  <!--begin::Input-->
-                                  <select name="user_status" class="form-select form-select-solid mb-3 mb-lg-0" data-control="select2" data-hide-search="true" data-placeholder="Select a status">
-                                    <option></option>
-                                    <option value="1" selected>
-                                      Active
-                                    </option>
-                                    <option value="2">Disabled</option>
-                                  </select>
+                                  <input type="text" name="phone" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="017XX-XXXXXX" />
                                   <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -393,12 +323,12 @@
                                     <!--begin::Radio-->
                                     <div class="form-check form-check-custom form-check-solid">
                                       <!--begin::Input-->
-                                      <input class="form-check-input me-3" name="user_role" type="radio" value="0" id="kt_modal_update_role_option_0" checked="checked" />
+                                      <input class="form-check-input me-3" name="role" type="radio" value="admin" id="kt_modal_update_role_option_0" checked="checked" />
                                       <!--end::Input-->
                                       <!--begin::Label-->
                                       <label class="form-check-label" for="kt_modal_update_role_option_0">
                                         <div class="fw-bold text-gray-800">
-                                          Administrator
+                                          Admin
                                         </div>
                                         <div class="text-gray-600">
                                           Best for business owners and
@@ -416,7 +346,7 @@
                                     <!--begin::Radio-->
                                     <div class="form-check form-check-custom form-check-solid">
                                       <!--begin::Input-->
-                                      <input class="form-check-input me-3" name="user_role" type="radio" value="1" id="kt_modal_update_role_option_1" />
+                                      <input class="form-check-input me-3" name="role" type="radio" value="dev" id="kt_modal_update_role_option_1" />
                                       <!--end::Input-->
                                       <!--begin::Label-->
                                       <label class="form-check-label" for="kt_modal_update_role_option_1">
@@ -439,7 +369,7 @@
                                     <!--begin::Radio-->
                                     <div class="form-check form-check-custom form-check-solid">
                                       <!--begin::Input-->
-                                      <input class="form-check-input me-3" name="user_role" type="radio" value="2" id="kt_modal_update_role_option_2" />
+                                      <input class="form-check-input me-3" name="role" type="radio" value="analyst" id="kt_modal_update_role_option_2" />
                                       <!--end::Input-->
                                       <!--begin::Label-->
                                       <label class="form-check-label" for="kt_modal_update_role_option_2">
@@ -464,7 +394,7 @@
                                     <!--begin::Radio-->
                                     <div class="form-check form-check-custom form-check-solid">
                                       <!--begin::Input-->
-                                      <input class="form-check-input me-3" name="user_role" type="radio" value="3" id="kt_modal_update_role_option_3" />
+                                      <input class="form-check-input me-3" name="role" type="radio" value="support" id="kt_modal_update_role_option_3" />
                                       <!--end::Input-->
                                       <!--begin::Label-->
                                       <label class="form-check-label" for="kt_modal_update_role_option_3">
@@ -488,7 +418,7 @@
                                     <!--begin::Radio-->
                                     <div class="form-check form-check-custom form-check-solid">
                                       <!--begin::Input-->
-                                      <input class="form-check-input me-3" name="user_role" type="radio" value="4" id="kt_modal_update_role_option_4" />
+                                      <input class="form-check-input me-3" name="role" type="radio" value="trail" id="kt_modal_update_role_option_4" />
                                       <!--end::Input-->
                                       <!--begin::Label-->
                                       <label class="form-check-label" for="kt_modal_update_role_option_4">
