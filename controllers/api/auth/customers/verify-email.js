@@ -49,7 +49,10 @@ module.exports = async (req, res, next) => {
         }
 
         // update customer
-        customer.isVerified = true;
+        customer.set({
+            isVerified: true,
+            status: 'active',
+        });
         await customer.save();
 
         // delete token
