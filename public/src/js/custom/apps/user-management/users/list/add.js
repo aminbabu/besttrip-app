@@ -58,8 +58,6 @@ const KTUsersAddUser = (function () {
             // Validate form before submit
             if (validator) {
                 validator.validate().then((status) => {
-                    console.log('validated!');
-
                     if (status == 'Valid') {
                         // Show loading indication
                         submitButton.setAttribute('data-kt-indicator', 'on');
@@ -113,7 +111,6 @@ const KTUsersAddUser = (function () {
                                 }
                             })
                             .catch((error) => {
-                                console.log(error);
                                 const errors = error.response.data.message
                                     ? error.response.data.message
                                     : error.response.data.errors;
