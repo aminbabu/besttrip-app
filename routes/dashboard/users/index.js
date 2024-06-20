@@ -40,13 +40,13 @@ router.get('/', viewUsers);
 
 /**
  * @description - user view route
- * @param {string} path - '/dashboard/users/id'
+ * @param {string} path - '/dashboard/users/:id'
  * @param {function} controller - ['viewUser']
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/id', viewUser);
+router.get('/:id', viewUser);
 
 // export profile router
 module.exports = router;
