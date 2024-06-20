@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 16 June, 2024
+ * @update_date 20 June, 2024
  */
 
 // dependencies
@@ -57,7 +57,7 @@ module.exports = new Schema(
         status: {
             type: String,
             enum: CUSTOMER_STATUS,
-            default: CUSTOMER_STATUS[0],
+            default: CUSTOMER_STATUS[1],
         },
         twoStepAuth: {
             type: Boolean,
