@@ -15,7 +15,7 @@ const { User } = require('../../../models');
 module.exports = async (req, res) => {
     try {
         // get users
-        let users = await User.find();
+        let users = await User.find().sort({ createdAt: -1 });
 
         // formate data
         users = users.map((user) => {
