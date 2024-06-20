@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 14 June, 2024
+ * @update_date 20 June, 2024
  */
 
 // dependencies
@@ -14,7 +14,7 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewUsers, viewUser, viewProfile } = require('../../../controllers/dashboard/users');
+const { viewUsers, viewUser } = require('../../../controllers/dashboard/users');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
@@ -39,24 +39,14 @@ router.use(isAuthorized);
 router.get('/', viewUsers);
 
 /**
- * @description - profile view route
- * @param {string} path - '/dashboard/users/profile'
- * @param {function} controller - ['viewProfile']
- * @returns {object} - router
- * @access private - ['all']
- * @method GET
- */
-router.get('/profile', viewProfile);
-
-/**
- * @description - edit user view route
- * @param {string} path - '/dashboard/users/edit'
+ * @description - user view route
+ * @param {string} path - '/dashboard/users/id'
  * @param {function} controller - ['viewUser']
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/:id', viewUser);
+router.get('/id', viewUser);
 
 // export profile router
 module.exports = router;
