@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 15 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // export all schemas
@@ -29,7 +29,7 @@ module.exports = {
     umrahPackageSchema: require('./umrah/package'),
     umrahPackageDurationSchema: require('./umrah/package-duration'),
     umrahPackageTypeSchema: require('./umrah/package-type'),
-    historySchema: require('./history'),
+    loginHistorySchema: require('./loginHistory'),
     umrahBookingSchema: require('./umrah/booking'),
     invoiceSchema: require('./invoice'),
     generalLedgerSchema: require('./general-ledger'),
