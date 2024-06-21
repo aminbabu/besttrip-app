@@ -21,17 +21,14 @@ module.exports = async (req, res, next) => {
         // get user
         const user = await User.findById(userId);
 
-        // get user login history
-        const loginHistory = await LoginHistory.find({ user: userId });
-
         // update user
         user.set({ loginHistory: [] });
 
-        // delete user login history
-        await loginHistory.deleteMany();
-
         // save user
         await user.save();
+
+        // delete user login history
+        await LoginHistory.deleteMany({ user: userId });
 
         // clear token from cookies and headers
         res.clearCookie('token');

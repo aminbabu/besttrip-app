@@ -16,20 +16,17 @@ module.exports = async (req, res, next) => {
         // get user id
         const { id } = req.params;
 
-        // get user login history
-        const loginHistory = await LoginHistory.find({ user: id });
-
         // delete user login history
         const user = await User.findById(id);
 
         // update user
         user.set({ loginHistory: [] });
 
-        // delete user login history
-        await loginHistory.deleteMany();
-
         // save user
         await user.save();
+
+        // delete user login history
+        await LoginHistory.deleteMany({ user: id });
 
         // return response
         return res.status(200).json({
