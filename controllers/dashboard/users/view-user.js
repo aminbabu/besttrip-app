@@ -27,6 +27,8 @@ module.exports = async (req, res) => {
         // format user dates
         user.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
         user.updatedAt = moment(user.updatedAt).format('DD MMM YYYY, h:mm a');
+
+        // format login history
         user.loginHistory = user.loginHistory
             .map((history) => {
                 const lastLogin = moment(history?.lastLogin).format('DD MMM YYYY, h:mm a');
@@ -43,6 +45,26 @@ module.exports = async (req, res) => {
                 };
             })
             .sort((a, b) => b.lastLogin - a.lastLogin);
+
+            switch (user.role) {
+                case 'admin':
+                    user.roleName = 'Administator';
+                    break;
+                case 'manager':
+                    user.roleName = 'Manager';
+                    break;
+                case 'dev':
+                    user.roleName = 'Developer';
+                    break;
+                case 'support':
+                    user.roleName = 'Support';
+                    break;
+                case 'stuff':
+                    user.roleName = 'Stuff';
+                    break;
+                default:
+                    break;
+            }
 
         // render profile view
         return res.render('dashboard/users/user', {
