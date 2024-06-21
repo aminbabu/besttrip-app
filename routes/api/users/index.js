@@ -20,6 +20,7 @@ const {
     createUser,
     updateUser,
     updatePassword,
+    updateRole,
     updateUserBySelf,
     disableUserBySelf,
     updatePasswordBySelf,
@@ -37,6 +38,7 @@ const {
     validatePassword,
     validateUserSelf,
     validatePasswordSelf,
+    validateRole,
 } = require('../../../middlewares/api/validators/users');
 const { validateAvatar } = require('../../../middlewares/api/validators/files');
 const { uploadAvatar } = require('../../../middlewares/api/files');
@@ -164,6 +166,19 @@ router.patch('/self/password', isAllowed(USER_ROLES), validatePasswordSelf, upda
  * @method PATCH
  */
 router.patch('/:id/password', isAllowed(['admin']), validatePassword, updatePassword);
+
+
+/**
+ * @description update role
+ * @param {string} path - /api/users/:id/role
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validateRole']
+ * @param {function} controller - ['updateRole']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method PATCH
+ */
+router.patch('/:id/role', isAllowed(['admin']), validateRole, updateRole);
 
 /**
  * @description delete user by self
