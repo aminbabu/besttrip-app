@@ -33,9 +33,13 @@ module.exports = async (req, res, next) => {
         // save user
         await user.save();
 
+        // clear token from cookies and headers
+        res.clearCookie('token');
+        res.removeHeader('Authorization');
+
         // return response
         return res.status(200).json({
-            message: 'Deleted user login history successfully',
+            message: 'Deleted your login history successfully. You are logged out now.',
         });
     } catch (error) {
         return next(error);

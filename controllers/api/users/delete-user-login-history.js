@@ -34,6 +34,7 @@ module.exports = async (req, res, next) => {
         // return response
         return res.status(200).json({
             message: 'Deleted user login history successfully',
+            user,
         });
     } catch (error) {
         return next(error);
