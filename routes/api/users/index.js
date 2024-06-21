@@ -165,7 +165,7 @@ router.patch('/self/password', isAllowed(USER_ROLES), validatePasswordSelf, upda
  * @access private - ['admin']
  * @method PATCH
  */
-router.patch('/:id/password', isAllowed(['admin']), validatePassword, updatePassword);
+router.patch('/:id/password', isAllowed(['admin']), validateUserId, validatePassword, updatePassword);
 
 
 /**
