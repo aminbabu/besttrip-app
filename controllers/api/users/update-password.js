@@ -4,17 +4,16 @@
  * @version 0.0.0
  * @author best-trip
  * @date 09 June, 2024
- * @update_date 09 June, 2024
+ * @update_date 21 June, 2024
  */
 
 const { User } = require('../../../models');
-const { comparePassword } = require('../../../utils');
 
 // export update password controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { password, currentPassword } = req.body;
+        const { password } = req.body;
         const { id } = req.params;
 
         // get user
@@ -24,19 +23,6 @@ module.exports = async (req, res, next) => {
         if (!user) {
             return res.status(404).json({
                 message: 'User not found',
-            });
-        }
-
-        // convert user to object
-        const userObject = user.toObject();
-
-        // compare password
-        const match = await comparePassword(currentPassword, userObject.password);
-
-        // check if password match
-        if (!match) {
-            return res.status(400).json({
-                message: 'Current password is incorrect',
             });
         }
 
