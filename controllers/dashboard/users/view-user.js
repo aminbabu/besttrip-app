@@ -4,13 +4,14 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 21 June, 2024
+ * @update_date 22 June, 2024
  */
 
 // dependencies
 const moment = require('moment');
 const { countries } = require('countries-list');
 const { User } = require('../../../models');
+const { prepareRoleDefination } = require('../../../utils');
 
 // export profile view controller
 module.exports = async (req, res) => {
@@ -46,31 +47,11 @@ module.exports = async (req, res) => {
             })
             .sort((a, b) => b.lastLogin - a.lastLogin);
 
-            switch (user.role) {
-                case 'admin':
-                    user.roleName = 'Administator';
-                    break;
-                case 'manager':
-                    user.roleName = 'Manager';
-                    break;
-                case 'dev':
-                    user.roleName = 'Developer';
-                    break;
-                case 'support':
-                    user.roleName = 'Support';
-                    break;
-                case 'stuff':
-                    user.roleName = 'Stuff';
-                    break;
-                default:
-                    break;
-            }
-
         // render profile view
         return res.render('dashboard/users/user', {
             title: user.name,
             loggedInUser: req.user,
-            user,
+            user: prepareRoleDefination(user),
             countries: Object.values(countries),
         });
     } catch (error) {
