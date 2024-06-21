@@ -23,9 +23,8 @@ module.exports = async (req, res) => {
             const userObj = {...user.toObject()};
 
             userObj.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
-            userObj.roleName = prepareRoleDefination(userObj);
 
-            return userObj;
+            return prepareRoleDefination(userObj);
         });
 
         // return render view
