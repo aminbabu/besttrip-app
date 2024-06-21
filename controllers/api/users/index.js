@@ -14,6 +14,7 @@ module.exports = {
     createUser: require('./create-user'),
     updateUser: require('./update-user'),
     updatePassword: require('./update-password'),
+    updateRole: require('./update-role'),
     updateUserBySelf: require('./update-user-by-self'),
     updatePasswordBySelf: require('./update-password-by-self'),
     disableUserBySelf: require('./disable-user-by-self'),
