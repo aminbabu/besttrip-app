@@ -4,12 +4,12 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 10 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // dependencies
 const moment = require('moment');
-const { History, User, Customer } = require('../../models');
+const { LoginHistory, User, Customer } = require('../../models');
 
 // export ipinfo function
 module.exports = async (req, user) => {
@@ -27,7 +27,7 @@ module.exports = async (req, user) => {
     }
 
     // get last history
-    history = await History.findOne({
+    history = await LoginHistory.findOne({
         user: user?._id,
         ipAddress: ip,
         userAgent: req.headers['user-agent'],
@@ -41,7 +41,7 @@ module.exports = async (req, user) => {
         history.set({ lastLogin: moment().toDate() });
     } else {
         // create new history
-        history = new History({
+        history = new LoginHistory({
             user: user._id,
             lastLogin: moment().toDate(),
             userAgent: req.headers['user-agent'],
