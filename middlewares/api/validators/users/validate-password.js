@@ -14,7 +14,7 @@ const { zodErrorHandler } = require('../../../../handlers/errors');
 // export update user password validator
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = updatePasswordSchema.safeParse(req.body);
+    const { error, success } = updatePasswordSchema.omit({ currentPassword: true }).safeParse(req.body);
 
     // check for errors
     if (!success) {
