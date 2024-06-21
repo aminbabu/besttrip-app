@@ -189,7 +189,7 @@ router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUser);
 
 /**
  * @description delete user's login history by mongo id
- * @param {string} path - /api/users/:id/login-history
+ * @param {string} path - /api/users/:id/login-history/all
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateUserId']
  * @param {function} controller - ['deleteUserLoginHistory']
@@ -197,18 +197,23 @@ router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUser);
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id/login-history', isAllowed(['admin']), validateUserId, deleteUserLoginHistory);
+router.delete(
+    '/:id/login-history/all',
+    isAllowed(['admin']),
+    validateUserId,
+    deleteUserLoginHistory
+);
 
 /**
  * @description delete user's login history by self
- * @param {string} path - /api/users/self/login-history
+ * @param {string} path - /api/users/self/login-history/all
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} controller - ['deleteUserLoginHistoryBySelf']
  * @returns {object} - router
  * @access private - ['all']
  * @method DELETE
  */
-router.delete('/self/login-history', isAllowed(USER_ROLES), deleteUserLoginHistoryBySelf);
+router.delete('/self/login-history/all', isAllowed(USER_ROLES), deleteUserLoginHistoryBySelf);
 
 // export
 module.exports = router;
