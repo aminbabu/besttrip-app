@@ -42,7 +42,7 @@ const KTUsersLoginSessionList = (function () {
         //     dateRow[3].setAttribute('data-order', realDate);
 
         //     // Set real date for joined column
-        //     const joinedDate = moment(dateRow[5].innerHTML, 'DD MMM YYYY, LT').format(); // select date from 5th column in table
+        // const joinedDate = moment(dateRow[5].innerHTML, 'DD MMM YYYY, LT').format(); // select date from 5th column in table
         //     dateRow[5].setAttribute('data-order', joinedDate);
         // });
 
@@ -174,8 +174,8 @@ const KTUsersLoginSessionList = (function () {
                     confirmButtonText: 'Yes, delete!',
                     cancelButtonText: 'No, cancel',
                     customClass: {
-                        confirmButton: 'btn fw-bold btn-danger',
-                        cancelButton: 'btn fw-bold btn-active-light-primary',
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-light',
                     },
                 }).then((result) => {
                     if (result.value) {
@@ -185,7 +185,7 @@ const KTUsersLoginSessionList = (function () {
                             buttonsStyling: false,
                             confirmButtonText: 'Ok, got it!',
                             customClass: {
-                                confirmButton: 'btn fw-bold btn-primary',
+                                confirmButton: 'btn btn-primary',
                             },
                         })
                             .then(() => {
@@ -203,7 +203,7 @@ const KTUsersLoginSessionList = (function () {
                             buttonsStyling: false,
                             confirmButtonText: 'Ok, got it!',
                             customClass: {
-                                confirmButton: 'btn fw-bold btn-primary',
+                                confirmButton: 'btn btn-primary',
                             },
                         });
                     }
@@ -213,7 +213,7 @@ const KTUsersLoginSessionList = (function () {
     };
 
     // Init toggle toolbar
-    var initToggleToolbar = () => {
+    const initToggleToolbar = () => {
         // Toggle selected action toolbar
         // Select all checkboxes
         const checkboxes = table.querySelectorAll('[type="checkbox"]');
@@ -255,8 +255,8 @@ const KTUsersLoginSessionList = (function () {
                 confirmButtonText: 'Yes, delete!',
                 cancelButtonText: 'No, cancel',
                 customClass: {
-                    confirmButton: 'btn fw-bold btn-danger',
-                    cancelButton: 'btn fw-bold btn-active-light-primary',
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-light',
                 },
             }).then((result) => {
                 if (result.value) {
@@ -266,7 +266,7 @@ const KTUsersLoginSessionList = (function () {
                         buttonsStyling: false,
                         confirmButtonText: 'Ok, got it!',
                         customClass: {
-                            confirmButton: 'btn fw-bold btn-primary',
+                            confirmButton: 'btn btn-primary',
                         },
                     })
                         .then(() => {
@@ -295,7 +295,7 @@ const KTUsersLoginSessionList = (function () {
                         buttonsStyling: false,
                         confirmButtonText: 'Ok, got it!',
                         customClass: {
-                            confirmButton: 'btn fw-bold btn-primary',
+                            confirmButton: 'btn btn-primary',
                         },
                     });
                 }
