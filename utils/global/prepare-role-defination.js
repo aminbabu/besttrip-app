@@ -14,22 +14,28 @@ module.exports = (user) =>
 
     switch (modifiedUser.role) {
         case 'admin':
-            return modifiedUser.roleName = 'Administator';
+             modifiedUser.roleName = 'Administator';
+             break;
             
         case 'manager':
-            return modifiedUser.roleName = 'Manager';
+             modifiedUser.roleName = 'Manager';
+             break;
             
         case 'dev':
-            return modifiedUser.roleName = 'Developer';
+             modifiedUser.roleName = 'Developer';
+             break;
             
         case 'support':
-            return modifiedUser.roleName = 'Support';
+             modifiedUser.roleName = 'Support';
+             break;
             
         case 'stuff':
-            return modifiedUser.roleName = 'Stuff';
+             modifiedUser.roleName = 'Stuff';
+             break;
     
         default:
-            return modifiedUser.roleName = 'Stuff';
+             modifiedUser.roleName = 'Stuff';
+             break;
     }
 
     return modifiedUser;
