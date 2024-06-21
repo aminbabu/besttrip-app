@@ -14,16 +14,16 @@ const { LoginHistory, User, Customer } = require('../../models');
 // export ipinfo function
 module.exports = async (req, user) => {
     let history;
-    let existinUser;
+    let existingUser;
 
     // ip information
     const { ip, city, region, country } = req.ipinfo;
 
     // get user
     if (user.role === 'customer') {
-        existinUser = await Customer.findById(user?._id);
+        existingUser = await Customer.findById(user?._id);
     } else {
-        existinUser = await User.findById(user?._id);
+        existingUser = await User.findById(user?._id);
     }
 
     // get last history
@@ -52,16 +52,16 @@ module.exports = async (req, user) => {
                 country,
             },
         });
-    }
 
-    // update user login history
-    existinUser.histories.push(history._id);
+        // push history to user/customer
+        existingUser.loginHistory.push(history._id);
+    }
 
     // save history
     await history.save();
 
     // save user
-    await existinUser.save();
+    await existingUser.save();
 
     // return history
     return history;
