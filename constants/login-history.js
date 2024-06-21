@@ -8,7 +8,7 @@
  */
 
 // login history history status
-const LOGIN_HISTORY_STATUS = ['active', 'blocked'];
+const LOGIN_HISTORY_STATUS = ['active', 'blocked', 'disabled'];
 
 // export history constants
 module.exports = {
