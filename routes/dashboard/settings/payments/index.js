@@ -31,7 +31,7 @@ router.use(isAuthorized);
 /**
  * @description - payments view route
  * @param {string} path - '/dashboard/settings/payments'
- * @param {function} controller - ['viewLoginHistory']
+ * @param {function} controller - ['viewPayments']
  * @returns {object} - router
  * @access private - ['all']
  * @method GET

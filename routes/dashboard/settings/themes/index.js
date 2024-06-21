@@ -31,7 +31,7 @@ router.use(isAuthorized);
 /**
  * @description - themes view route
  * @param {string} path - '/dashboard/settings/themes'
- * @param {function} controller - ['viewLoginHistory']
+ * @param {function} controller - ['viewThemes']
  * @returns {object} - router
  * @access private - ['all']
  * @method GET

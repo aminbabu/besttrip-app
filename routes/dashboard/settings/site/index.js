@@ -31,7 +31,7 @@ router.use(isAuthorized);
 /**
  * @description - site view route
  * @param {string} path - '/dashboard/settings/site'
- * @param {function} controller - ['viewLoginHistory']
+ * @param {function} controller - ['viewSite']
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
