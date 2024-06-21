@@ -135,6 +135,7 @@ router.patch(
     '/:id',
     isAllowed(['admin']),
     validateAvatar,
+    validateUserId,
     validateUser,
     uploadAvatar('avatars/users'),
     updateUser
