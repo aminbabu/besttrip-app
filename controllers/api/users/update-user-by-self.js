@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 09 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // dependencies
@@ -32,7 +32,6 @@ module.exports = async (req, res, next) => {
 
         // update user
         user.set({
-            ...user.toObject(),
             ...validatedUser,
             avatar: avatar?.path || user.avatar,
         });
