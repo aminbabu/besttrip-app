@@ -97,7 +97,7 @@ var KTUsersUpdateRole = (function () {
 
       // Check axios library docs: https://axios-http.com/docs/intro
       axios
-        .post(
+        .patch(
           submitButton.closest("form").getAttribute("action"),
           new FormData(form)
         )
