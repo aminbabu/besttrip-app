@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 09 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // dependencies
@@ -19,12 +19,12 @@ module.exports = async (req, res, next) => {
         const { name, email, phone, password } = req.body;
 
         // check if user already exists
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ role: 'admin' });
 
         // check if user already exists
         if (user) {
             return res.status(400).json({
-                message: 'User already exists',
+                message: 'User with role admin already exists. Please contact support.',
             });
         }
 
