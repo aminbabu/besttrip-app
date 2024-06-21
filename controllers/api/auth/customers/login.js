@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
         // check if customer exists
         const customer = await Customer.findOne({ email })
             .select('+password')
-            .populate('histories');
+            .populate('loginHistory');
 
         if (!customer) {
             return res.status(400).json({
@@ -68,7 +68,7 @@ module.exports = async (req, res, next) => {
 
         // remove password, history from customer object
         delete customerObject.password;
-        delete customerObject.histories;
+        delete customerObject.loginHistory;
 
         // generate token
         const token = generateToken(customerObject);
