@@ -47,6 +47,7 @@ module.exports = async (req, res) => {
             })
             .sort((a, b) => b.lastLogin - a.lastLogin);
 
+
         // render profile view
         return res.render('dashboard/users/user', {
             title: user.name,
