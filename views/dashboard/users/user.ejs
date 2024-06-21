@@ -197,14 +197,14 @@
                           <!--end::Menu item-->
                           <!--begin::Menu item-->
                           <div class="menu-item px-5">
-                            <a href="/api/users/<% if (id == user._id) { %>self<% } else { %><%= user._id %> <% } %>/disable" class="menu-link px-5" id="kt_users_disable_account">
+                            <a href="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/disable" class="menu-link px-5" id="kt_users_disable_account">
                               Disable Account
                             </a>
                           </div>
                           <!--end::Menu item-->
                           <!--begin::Menu item-->
                           <div class="menu-item px-5">
-                            <a href="/api/users/<% if (id == user._id) { %>self<% } else { %><%= user._id %> <% } %>" class="menu-link text-danger px-5" id="kt_users_delete_account">
+                            <a href="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>" class="menu-link text-danger px-5" id="kt_users_delete_account">
                               Delete Account
                             </a>
                           </div>
@@ -315,7 +315,7 @@
                               <!--begin::Toolbar-->
                               <div class="d-flex justify-content-end gap-3" data-kt-users-login-session-toolbar="base">
                                 <!--begin::Filter-->
-                                <button type="button" class="btn btn-sm btn-flex btn-light-primary" id="kt_modal_users_login_session">
+                                <button type="button" class="btn btn-sm btn-flex btn-light-primary" data-kt-sign-out-all-sessions-url="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/login-history/all" id="kt_modal_users_login_session">
                                   <i class="ki-duotone ki-entrance-right fs-3">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -433,7 +433,7 @@
                     <!--begin::Modal content-->
                     <div class="modal-content">
                       <!--begin::Form-->
-                      <form class="form" id="kt_modal_update_user_form" data-kt-redirect-url="/dashboard/users/<%= user._id %>" action="/api/users/<% if (id == user._id) { %>self<% } else { %><%= user._id %> <% } %>" method="post">
+                      <form class="form" id="kt_modal_update_user_form" data-kt-redirect-url="/dashboard/users/<%= user._id %>" action="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>" method="post">
                         <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_update_user_header">
                           <!--begin::Modal title-->
@@ -829,7 +829,7 @@
                       <!--begin::Modal body-->
                       <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <!--begin::Form-->
-                        <form id="kt_modal_update_password_form" class="form" data-kt-redirect-url="/dashboard/users/<%= user._id %>" action="/api/users/<% if (id == user._id) { %>self<% } else { %><%= user._id %> <% } %>/password" method="post">
+                        <form id="kt_modal_update_password_form" class="form" data-kt-redirect-url="/dashboard/users/<%= user._id %>" action="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/password" method="post">
                           <!--begin::Input group=-->
                           <div class="fv-row mb-10">
                             <label class="required form-label fs-6 mb-2">Current Password</label>
