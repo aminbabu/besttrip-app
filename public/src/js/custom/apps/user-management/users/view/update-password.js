@@ -141,13 +141,22 @@ const KTUsersUpdatePassword = (function () {
                         // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
+                        // Get the form action URL
+                        const url = submitButton.closest('form').getAttribute('action');
+
+                        // Prepare form data to sumbit
+                        const payload = {
+                            password: form.password.value,
+                            confirmPassword: form.password_confirmation.value,
+                        }
+
+                        if (url.includes('self')) {
+                            payload.currentPassword = form.current_password.value;
+                        }
+
                         // Check axios library docs: https://axios-http.com/docs/intro
                         axios
-                            .patch(submitButton.closest('form').getAttribute('action'), {
-                                currentPassword: form.current_password.value,
-                                password: form.password.value,
-                                confirmPassword: form.password_confirmation.value,
-                            })
+                            .patch(url, payload)
                             .then((response) => {
                                 // Reset form
                                 form.reset();
