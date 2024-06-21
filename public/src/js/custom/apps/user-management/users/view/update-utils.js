@@ -19,7 +19,6 @@ const KTUsersUpdateUtils = (function () {
                 icon: 'warning',
                 buttonsStyling: false,
                 showCancelButton: true,
-                reverseButtons: true,
                 cancelButtonText: 'No, cancel',
                 confirmButtonText: 'Yes, disable!',
                 customClass: {
@@ -91,7 +90,6 @@ const KTUsersUpdateUtils = (function () {
                 icon: 'warning',
                 buttonsStyling: false,
                 showCancelButton: true,
-                reverseButtons: true,
                 cancelButtonText: 'No, cancel',
                 confirmButtonText: 'Yes, delete!',
                 customClass: {

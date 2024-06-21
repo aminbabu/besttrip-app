@@ -213,7 +213,6 @@ const KTPaymentRequests = (function () {
                     buttonsStyling: false,
                     confirmButtonText: 'Yes, approve it!',
                     cancelButtonText: 'No, return',
-                    reverseButtons: true,
                     customClass: {
                         confirmButton: 'btn btn-primary',
                         cancelButton: 'btn btn-light',
