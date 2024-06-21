@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { HISTORY_STATUS } = require('../../constants');
+const { LOGIN_HISTORY_STATUS } = require('../../constants');
 
 // export history schema
 module.exports = new Schema(
@@ -26,7 +26,7 @@ module.exports = new Schema(
         },
         status: {
             type: String,
-            enum: HISTORY_STATUS,
+            enum: LOGIN_HISTORY_STATUS,
             default: 'active',
             required: [true, 'Status is required'],
         },
