@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 15 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // export all models
@@ -29,7 +29,7 @@ module.exports = {
     UmrahPackage: require('./umrah/package'),
     UmrahPackageDuration: require('./umrah/package-duration'),
     UmrahPackageType: require('./umrah/package-type'),
-    History: require('./history'),
+    LoginHistory: require('./login-history'),
     UmrahBooking: require('./umrah/booking'),
     Invoice: require('./invoice'),
     GeneralLedger: require('./general-ledger'),

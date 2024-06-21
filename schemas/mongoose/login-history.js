@@ -1,5 +1,5 @@
 /**
- * @file /schemas/mongoose/loginHistory.js
+ * @file /schemas/mongoose/login-history.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

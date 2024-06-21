@@ -29,7 +29,7 @@ module.exports = {
     umrahPackageSchema: require('./umrah/package'),
     umrahPackageDurationSchema: require('./umrah/package-duration'),
     umrahPackageTypeSchema: require('./umrah/package-type'),
-    loginHistorySchema: require('./loginHistory'),
+    loginHistorySchema: require('./login-history'),
     umrahBookingSchema: require('./umrah/booking'),
     invoiceSchema: require('./invoice'),
     generalLedgerSchema: require('./general-ledger'),
