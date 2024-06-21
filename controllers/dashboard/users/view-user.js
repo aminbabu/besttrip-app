@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 20 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // dependencies
@@ -18,33 +18,37 @@ module.exports = async (req, res) => {
         // validated data
         const { id } = req.params;
 
-        // get user with histories
-        const existingUser = await User.findById(id).populate('histories');
+        // get user with login history
+        const existingUser = await User.findById(id).populate('loginHistory');
 
-        // convert user and login histories to object
+        // convert user and login login history to object
         const user = existingUser.toObject();
 
         // format user dates
         user.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
         user.updatedAt = moment(user.updatedAt).format('DD MMM YYYY, h:mm a');
-        user.histories = user.histories.map((history) => {
-            const lastLogin = moment(history?.lastLogin).format('DD MMM YYYY, h:mm a');
-            const lastLoginDaysAgo = moment(history?.lastLogin).fromNow();
-            const location = history?.location
-                ? Object.values(history.location).filter(Boolean).join(', ')
-                : 'N/A';
+        user.loginHistory = user.loginHistory
+            .map((history) => {
+                const lastLogin = moment(history?.lastLogin).format('DD MMM YYYY, h:mm a');
+                const lastLoginDaysAgo = moment(history?.lastLogin).fromNow();
+                const location = history?.location
+                    ? Object.values(history.location).filter(Boolean).join(', ')
+                    : 'N/A';
 
-            return {
-                ...history,
-                lastLogin,
-                lastLoginDaysAgo,
-                location,
-            };
-        });
+                return {
+                    ...history,
+                    lastLogin,
+                    lastLoginDaysAgo,
+                    location,
+                };
+            })
+            .sort((a, b) => b.lastLogin - a.lastLogin);
 
         // render profile view
         return res.render('dashboard/users/user', {
-            title: req.user.name,
+            title: user.name,
+            id,
+            loggedInUser: req.user,
             user,
             countries: Object.values(countries),
         });
