@@ -47,7 +47,6 @@ module.exports = async (req, res) => {
         // render profile view
         return res.render('dashboard/users/user', {
             title: user.name,
-            id,
             loggedInUser: req.user,
             user,
             countries: Object.values(countries),
