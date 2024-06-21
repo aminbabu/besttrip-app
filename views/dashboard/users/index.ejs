@@ -508,7 +508,7 @@
                           <!--begin::User details-->
                         </td>
                         <td><%= user.phone %></td>
-                        <td class="text-capitalize"><%= user.role %></td>
+                        <td class="text-capitalize"><%= user.roleName %></td>
                         <td>
                           <div class="badge badge-light-<% if (user.status === 'disabled') { %>primary<% } else { %>success<% } %> min-w-80px px-4 py-3 justify-content-center text-capitalize">
                             <%= user.status %>
