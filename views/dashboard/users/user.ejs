@@ -839,12 +839,14 @@
                       <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <!--begin::Form-->
                         <form id="kt_modal_update_password_form" class="form" data-kt-redirect-url="/dashboard/users/<%= user._id %>" action="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/password" method="post">
+                          <% if (loggedInUser.email === user.email) { %>
                           <!--begin::Input group=-->
                           <div class="fv-row mb-10">
                             <label class="required form-label fs-6 mb-2">Current Password</label>
                             <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="current_password" autocomplete="off" />
                           </div>
                           <!--end::Input group=-->
+                          <% } %>
                           <!--begin::Input group=-->
                           <div class="fv-row mb-8" data-kt-password-meter="true">
                             <!--begin::Wrapper-->
