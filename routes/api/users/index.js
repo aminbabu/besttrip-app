@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 19 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // dependencies
@@ -25,6 +25,8 @@ const {
     updatePasswordBySelf,
     deleteUser,
     deleteUserBySelf,
+    deleteUserLoginHistory,
+    deleteUserLoginHistoryBySelf,
 } = require('../../../controllers/api/users');
 
 // middlewares
@@ -184,6 +186,29 @@ router.delete('/self', isAllowed(USER_ROLES), deleteUserBySelf);
  * @method DELETE
  */
 router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUser);
+
+/**
+ * @description delete user's login history by mongo id
+ * @param {string} path - /api/users/:id/login-history
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validateUserId']
+ * @param {function} controller - ['deleteUserLoginHistory']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method DELETE
+ */
+router.delete('/:id/login-history', isAllowed(['admin']), validateUserId, deleteUserLoginHistory);
+
+/**
+ * @description delete user's login history by self
+ * @param {string} path - /api/users/self/login-history
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} controller - ['deleteUserLoginHistoryBySelf']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method DELETE
+ */
+router.delete('/self/login-history', isAllowed(USER_ROLES), deleteUserLoginHistoryBySelf);
 
 // export
 module.exports = router;
