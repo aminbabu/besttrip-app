@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 14 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // dependencies
@@ -72,9 +72,6 @@ module.exports = async (req, res, next) => {
 
         // generate token
         const token = generateToken(customerObject);
-
-        // update customer history
-        customer.histories.push(history._id);
 
         // save customer
         await customer.save();
