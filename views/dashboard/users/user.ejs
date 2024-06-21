@@ -250,6 +250,7 @@
                                       </button>
                                     </td>
                                   </tr>
+                                  <% if (loggedInUser.email !== user.email) { %>
                                   <tr>
                                     <td>Role</td>
                                     <td class="text-capitalize"><%= user.roleName %></td>
@@ -262,7 +263,7 @@
                                       </button>
                                     </td>
                                   </tr>
-
+                                  <% } %>
                                 </tbody>
                               </table>
                               <!--end::Table-->
