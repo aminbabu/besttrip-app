@@ -77,7 +77,7 @@ module.exports = new Schema(
         postalCode: {
             type: String,
         },
-        histories: [
+        loginHistory: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'LoginHistory',

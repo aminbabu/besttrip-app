@@ -99,7 +99,7 @@ module.exports = new Schema(
                 type: String,
             },
         },
-        histories: [
+        loginHistory: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'LoginHistory',
