@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 07 April, 2024
- * @update_date 04 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // export constants
@@ -28,6 +28,6 @@ module.exports = {
     ...require('./umrah-package-durations'),
     ...require('./umrah-package-types'),
     ...require('./visa'),
-    ...require('./history'),
+    ...require('./login-history'),
     ...require('./umrah-bookings'),
 };
