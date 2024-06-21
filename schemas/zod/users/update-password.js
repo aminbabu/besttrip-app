@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 09 June, 2024
- * @update_date 09 June, 2024
+ * @update_date 21 June, 2024
  */
 
 // dependencies
@@ -14,14 +14,6 @@ const { isMongoId } = require('validator');
 // export update password schema
 module.exports = z
     .object({
-        id: z
-            .string({
-                required_error: 'Id is required',
-                invalid_type_error: 'Please provide a valid id',
-            })
-            .refine((id) => isMongoId(id), {
-                message: 'Please provide a valid id',
-            }),
         currentPassword: z
             .string({
                 required_error: 'Password is required',
