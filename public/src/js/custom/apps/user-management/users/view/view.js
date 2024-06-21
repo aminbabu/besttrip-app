@@ -3,6 +3,7 @@ const KTUsersViewMain = (function () {
     // Init login session button
     const initLoginSession = () => {
         const button = document.getElementById('kt_modal_users_login_session');
+        const url = button.getAttribute('data-kt-sign-out-all-sessions-url');
 
         button.addEventListener('click', (e) => {
             e.preventDefault();
@@ -20,18 +21,71 @@ const KTUsersViewMain = (function () {
                 },
             }).then((result) => {
                 if (result.value) {
-                    Swal.fire({
-                        text: 'You have signed out all sessions!.',
-                        icon: 'success',
-                        buttonsStyling: false,
-                        confirmButtonText: 'Ok, got it!',
-                        customClass: {
-                            confirmButton: 'btn btn-primary',
-                        },
-                    });
+                    // Check axios library docs: https://axios-http.com/docs/intro
+                    axios
+                        .delete(url)
+                        .then((response) => {
+                            if (response) {
+                                // Get user data
+                                const { user } = response.data || {};
+
+                                // Show success popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                Swal.fire({
+                                    text:
+                                        response.data.message ||
+                                        'All sessions have been signed out!',
+                                    icon: 'success',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                    allowOutsideClick: false,
+                                }).then(() => {
+                                    // Redirect to the login page
+                                    location.href = user
+                                        ? `/dashboard/users/${user._id}`
+                                        : '/dashboard/login';
+                                });
+                            } else {
+                                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                Swal.fire({
+                                    text: 'Something went wrong, please try again.',
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            const errors = error.response.data.message
+                                ? error.response.data.message
+                                : error.response.data.errors;
+
+                            Swal.fire({
+                                html: `${
+                                    errors instanceof Array
+                                        ? `<ul class="text-start">${Object.values(
+                                              error.response.data.errors
+                                          )
+                                              .map((err) => `<li>${err?.message}</li>`)
+                                              .join('')}</ul>`
+                                        : errors
+                                }`,
+                                icon: 'error',
+                                buttonsStyling: false,
+                                confirmButtonText: 'Ok, got it!',
+                                customClass: {
+                                    confirmButton: 'btn btn-primary',
+                                },
+                            });
+                        });
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
-                        text: 'Your sessions are still preserved!.',
+                        text: 'Sessions are still preserved!',
                         icon: 'error',
                         buttonsStyling: false,
                         confirmButtonText: 'Ok, got it!',
@@ -68,7 +122,7 @@ const KTUsersViewMain = (function () {
                 }).then((result) => {
                     if (result.value) {
                         Swal.fire({
-                            text: `You have signed out ${deviceName}!.`,
+                            text: `You have signed out ${deviceName}!`,
                             icon: 'success',
                             buttonsStyling: false,
                             confirmButtonText: 'Ok, got it!',
@@ -80,7 +134,7 @@ const KTUsersViewMain = (function () {
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: `${deviceName}'s session is still preserved!.`,
+                            text: `${deviceName}'s session is still preserved!`,
                             icon: 'error',
                             buttonsStyling: false,
                             confirmButtonText: 'Ok, got it!',
@@ -119,7 +173,7 @@ const KTUsersViewMain = (function () {
             }).then((result) => {
                 if (result.value) {
                     Swal.fire({
-                        text: 'You have removed this two-step authentication!.',
+                        text: 'You have removed this two-step authentication!',
                         icon: 'success',
                         buttonsStyling: false,
                         confirmButtonText: 'Ok, got it!',
@@ -129,7 +183,7 @@ const KTUsersViewMain = (function () {
                     });
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
-                        text: 'Your two-step authentication is still valid!.',
+                        text: 'Your two-step authentication is still valid!',
                         icon: 'error',
                         buttonsStyling: false,
                         confirmButtonText: 'Ok, got it!',
