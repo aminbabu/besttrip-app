@@ -4,15 +4,6 @@
   // config related to code formatting
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "[javascript]": {
-    "editor.formatOnSave": false,
-    "editor.defaultFormatter": null
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll": "explicit"
-  },
-  "eslint.alwaysShowStatus": true,
   "emmet.includeLanguages": {
     "ejs": "html"
   },
