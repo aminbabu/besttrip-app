@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 May, 2024
- * @update_date 22 June, 2024
+ * @update_date 23 June, 2024
  */
 
 // dependencies
@@ -18,6 +18,7 @@ router.use("/auth/users", require("./auth/users"));
 router.use("/auth/customers", require("./auth/customers"));
 router.use("/users", require("./users"));
 router.use("/customers", require("./customers"));
+router.use("/general-ledger", require("./general-ledger"));
 router.use("/settings/site/general", require("./settings/site/general"));
 router.use("/settings/site/contact", require("./settings/site/contact"));
 router.use("/settings/site/policy", require("./settings/site/policy"));
