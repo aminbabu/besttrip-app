@@ -23,6 +23,10 @@ const {
 
 // middlewares
 const { isAuthorized, isAllowed } = require("../../../middlewares/api/auth");
+const {
+  validateLoginHistoryId,
+  validateLoginHistory,
+} = require("../../../middlewares/api/validators/login-history");
 
 /**
  * @description check if user is authorized
@@ -69,7 +73,13 @@ router.get(
  * @access private - ['admin']
  * @method PATCH
  */
-router.patch("/:id", isAllowed(["admin"]), updateHistory);
+router.patch(
+  "/:id",
+  isAllowed(["admin"]),
+  validateLoginHistoryId,
+  validateLoginHistory,
+  updateHistory
+);
 
 /**
  * @description delete history by mongo id
@@ -80,7 +90,12 @@ router.patch("/:id", isAllowed(["admin"]), updateHistory);
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete("/:id", isAllowed(["admin"]), deleteHistory);
+router.delete(
+  "/:id",
+  isAllowed(["admin"]),
+  validateLoginHistoryId,
+  deleteHistory
+);
 
 // export router
 module.exports = router;
