@@ -195,6 +195,16 @@
                             </div>
                           </div>
                           <!--end::Menu item-->
+                          <% if (loggedInUser.email !== user.email && user.status === 'disabled') { %>
+                          <!--begin::Menu item-->
+                          <div class="menu-item px-5">
+                            <a href="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/enable" class="menu-link px-5" id="kt_users_disable_account">
+                              Enable Account
+                            </a>
+                          </div>
+                          <!--end::Menu item-->
+                          <% } %>
+                          <% if (user.status === 'active') { %>
                           <!--begin::Menu item-->
                           <div class="menu-item px-5">
                             <a href="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/disable" class="menu-link px-5" id="kt_users_disable_account">
@@ -202,6 +212,7 @@
                             </a>
                           </div>
                           <!--end::Menu item-->
+                          <% } %>
                           <!--begin::Menu item-->
                           <div class="menu-item px-5">
                             <a href="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>" class="menu-link text-danger px-5" id="kt_users_delete_account">
