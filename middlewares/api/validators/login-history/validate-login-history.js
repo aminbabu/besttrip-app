@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
   // validate request body
   const { error, success } = loginHistorySchema
     .omit({ id: true })
-    .safeParse(req.params);
+    .safeParse(req.body);
 
   // check for errors
   if (!success) {
