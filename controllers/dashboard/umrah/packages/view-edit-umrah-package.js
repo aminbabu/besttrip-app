@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 15 June, 2024
- * @update_date 15 June, 2024
+ * @update_date 22 June, 2024
  */
 
 // dependencies
@@ -18,6 +18,11 @@ module.exports = async (req, res) => {
 
         // get umrah package
         const umrahPackage = await UmrahPackage.findById(id);
+
+        // check if umrah package not found
+        if (!umrahPackage) {
+            return res.redirect('/errors/404');
+        }
 
         // return render view
         return res.render('dashboard/umrah/packages/edit', {
