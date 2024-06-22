@@ -19,6 +19,7 @@ module.exports = {
   updatePasswordBySelf: require("./update-password-by-self"),
   disableUserBySelf: require("./disable-user-by-self"),
   disableUser: require("./disable-user"),
+  enableUser: require("./enable-user"),
   deleteUser: require("./delete-user"),
   deleteUserBySelf: require("./delete-user-by-self"),
   deleteUserLoginHistory: require("./delete-user-login-history"),
