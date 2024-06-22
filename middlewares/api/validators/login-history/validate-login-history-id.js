@@ -14,7 +14,7 @@ const { zodErrorHandler } = require("../../../../handlers/errors");
 // export login history id validator
 module.exports = (req, res, next) => {
   // validate request body
-  const { error, success } = loginHistoryScheme
+  const { error, success } = loginHistorySchema
     .pick({ id: true })
     .safeParse(req.params);
 
