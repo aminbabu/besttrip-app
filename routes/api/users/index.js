@@ -24,6 +24,7 @@ const {
   updateUserBySelf,
   disableUserBySelf,
   disableUser,
+  enableUser,
   updatePasswordBySelf,
   deleteUser,
   deleteUserBySelf,
@@ -100,6 +101,17 @@ router.get("/self/disable", isAllowed(USER_ROLES), disableUserBySelf);
  * @method GET
  */
 router.get("/:id/disable", isAllowed("admin"), disableUser);
+
+/**
+ * @description enable user by mongo id
+ * @param {string} path - /api/users/:id/enable
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} controller - ['enableUser']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method GET
+ */
+router.get("/:id/enable", isAllowed("admin"), enableUser);
 
 /**
  * @description add user
