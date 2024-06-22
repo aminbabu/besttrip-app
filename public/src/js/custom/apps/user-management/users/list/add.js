@@ -72,6 +72,9 @@ const KTUsersAddUser = (function () {
                                 new FormData(form)
                             )
                             .then((response) => {
+                                // hide modal
+                                modal.hide();
+                                
                                 if (response) {
                                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                     Swal.fire({
