@@ -150,13 +150,15 @@ var KTUsersList = (function () {
       d.addEventListener("click", function (e) {
         e.preventDefault();
 
+        const url = d.getAttribute("href");
+
         // Select parent row
         const parent = e.target.closest("tr");
 
         // Get user name
         const userName = parent
           .querySelectorAll("td")[1]
-          .querySelectorAll("a")[1].innerText;
+          .querySelectorAll("a")[0].innerText;
 
         // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
         Swal.fire({
@@ -167,27 +169,71 @@ var KTUsersList = (function () {
           confirmButtonText: "Yes, delete!",
           cancelButtonText: "No, cancel",
           customClass: {
-            confirmButton: "btn fw-bold btn-danger",
-            cancelButton: "btn fw-bold btn-active-light-primary",
+            confirmButton: "btn btn-primary",
+            cancelButton: "btn btn-active-light-primary",
           },
         }).then(function (result) {
           if (result.value) {
-            Swal.fire({
-              text: "You have deleted " + userName + "!.",
-              icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: "Ok, got it!",
-              customClass: {
-                confirmButton: "btn fw-bold btn-primary",
-              },
-            })
-              .then(function () {
-                // Remove current row
-                datatable.row($(parent)).remove().draw();
+            // Check axios library docs: https://axios-http.com/docs/intro
+            axios
+              .delete(url)
+              .then((response) => {
+                if (response) {
+                  Swal.fire({
+                    text: "You have deleted " + userName + "!.",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                      confirmButton: "btn btn-primary",
+                    },
+                    allowOutsideClick: false,
+                  })
+                    .then(function () {
+                      // Remove current row
+                      datatable.row($(parent)).remove().draw();
+                    })
+                    .then(function () {
+                      // Detect checked checkboxes
+                      toggleToolbars();
+                    });
+                } else {
+                  // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                  Swal.fire({
+                    text:
+                      response.data.message ||
+                      "Sorry, we ran into an error! Please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                      confirmButton: "btn btn-primary",
+                    },
+                  });
+                }
               })
-              .then(function () {
-                // Detect checked checkboxes
-                toggleToolbars();
+              .catch((error) => {
+                const errors = error.response.data.message
+                  ? error.response.data.message
+                  : error.response.data.errors;
+
+                Swal.fire({
+                  html: `${
+                    errors instanceof Array
+                      ? `<ul class="text-start">${Object.values(
+                          error.response.data.errors
+                        )
+                          .map((err) => `<li>${err?.message}</li>`)
+                          .join("")}</ul>`
+                      : errors
+                  }`,
+                  icon: "error",
+                  buttonsStyling: false,
+                  confirmButtonText: "Ok, got it!",
+                  customClass: {
+                    confirmButton: "btn btn-primary",
+                  },
+                });
               });
           } else if (result.dismiss === "cancel") {
             Swal.fire({
@@ -196,7 +242,7 @@ var KTUsersList = (function () {
               buttonsStyling: false,
               confirmButtonText: "Ok, got it!",
               customClass: {
-                confirmButton: "btn fw-bold btn-primary",
+                confirmButton: "btn btn-primary",
               },
             });
           }
@@ -244,8 +290,8 @@ var KTUsersList = (function () {
         confirmButtonText: "Yes, delete!",
         cancelButtonText: "No, cancel",
         customClass: {
-          confirmButton: "btn fw-bold btn-danger",
-          cancelButton: "btn fw-bold btn-active-light-primary",
+          confirmButton: "btn btn-primary",
+          cancelButton: "btn btn-active-light-primary",
         },
       }).then(function (result) {
         if (result.value) {
@@ -255,7 +301,7 @@ var KTUsersList = (function () {
             buttonsStyling: false,
             confirmButtonText: "Ok, got it!",
             customClass: {
-              confirmButton: "btn fw-bold btn-primary",
+              confirmButton: "btn btn-primary",
             },
           })
             .then(function () {
@@ -285,7 +331,7 @@ var KTUsersList = (function () {
             buttonsStyling: false,
             confirmButtonText: "Ok, got it!",
             customClass: {
-              confirmButton: "btn fw-bold btn-primary",
+              confirmButton: "btn btn-primary",
             },
           });
         }
