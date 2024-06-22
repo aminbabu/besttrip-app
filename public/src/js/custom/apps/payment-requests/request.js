@@ -53,6 +53,9 @@ const KTPaymentRequests = (function () {
                                 status: 'rejected',
                             })
                             .then((response) => {
+                                // hide modal
+                                modal.hide();
+
                                 if (response) {
                                     // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                     Swal.fire({
@@ -223,6 +226,9 @@ const KTPaymentRequests = (function () {
                         axios
                             .patch(url, { status: 'approved' })
                             .then((response) => {
+                                // hide modal
+                                modal.hide();
+                                
                                 if (response) {
                                     // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                     Swal.fire({
