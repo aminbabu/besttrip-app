@@ -23,6 +23,7 @@ const {
   updateRole,
   updateUserBySelf,
   disableUserBySelf,
+  disableUser,
   updatePasswordBySelf,
   deleteUser,
   deleteUserBySelf,
