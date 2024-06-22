@@ -22,6 +22,11 @@ module.exports = async (req, res) => {
         // get user with login history
         const existingUser = await User.findById(id).populate('loginHistory');
 
+        // check if user not found
+        if (!existingUser) {
+            return res.redirect('/errors/404');
+        }
+
         // convert user and login login history to object
         const user = existingUser.toObject();
 
