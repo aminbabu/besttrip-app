@@ -12,7 +12,7 @@ const { LoginHistory } = require('../../../models');
 const { verifyToken } = require('../../../utils');
 
 // export 401 error view controller
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     try {
         // get token from cookie or header
         const token = req.cookies.token || req.headers.authorization;
