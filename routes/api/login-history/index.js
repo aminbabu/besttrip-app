@@ -17,6 +17,7 @@ const router = express.Router();
 const {
   getHistory,
   getHistoryById,
+  updateHistory,
   deleteHistory,
 } = require("../../../controllers/api/login-history");
 
@@ -58,6 +59,17 @@ router.get(
   validateLoginHistoryId,
   getHistoryById
 );
+
+/**
+ * @description update history by mongo id
+ * @param {string} path - /api/history/:id
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} controller - ['updateHistory']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method PATCH
+ */
+router.patch("/:id", isAllowed(["admin"]), updateHistory);
 
 /**
  * @description delete history by mongo id
