@@ -30,7 +30,7 @@ const {
 
 /**
  * @description check if user is authorized
- * @param {string} path - /api/history
+ * @param {string} path - /api/login-history
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -39,7 +39,7 @@ router.use(isAuthorized);
 
 /**
  * @description get all history
- * @param {string} path - /api/history
+ * @param {string} path - /api/login-history
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getHistory']
  * @returns {object} - router
@@ -50,7 +50,7 @@ router.get("/", isAllowed(["admin"]), getHistory);
 
 /**
  * @description get history by mongo id
- * @param {string} path - /api/history/:id
+ * @param {string} path - /api/login-history/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getHistoryById']
  * @returns {object} - router
@@ -66,7 +66,7 @@ router.get(
 
 /**
  * @description update history by mongo id
- * @param {string} path - /api/history/:id
+ * @param {string} path - /api/login-history/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['updateHistory']
  * @returns {object} - router
@@ -83,7 +83,7 @@ router.patch(
 
 /**
  * @description delete history by mongo id
- * @param {string} path - /api/history/:id
+ * @param {string} path - /api/login-history/:id
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['deleteHistory']
  * @returns {object} - router
