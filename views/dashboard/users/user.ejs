@@ -198,7 +198,7 @@
                           <% if (loggedInUser.email !== user.email && user.status === 'disabled') { %>
                           <!--begin::Menu item-->
                           <div class="menu-item px-5">
-                            <a href="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/enable" class="menu-link px-5" id="kt_users_disable_account">
+                            <a href="/api/users/<% if (loggedInUser.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/enable" class="menu-link px-5" id="kt_users_enable_account">
                               Enable Account
                             </a>
                           </div>
