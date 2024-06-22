@@ -14,6 +14,8 @@ const KTUsersUpdateUtils = (function () {
     userDisableBtn.addEventListener("click", (e) => {
       e.preventDefault();
 
+      const url = userDisableBtn.getAttribute("href");
+
       // Show confirm popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
       Swal.fire({
         text: "Are you sure you want to disable this user account?",
@@ -29,7 +31,7 @@ const KTUsersUpdateUtils = (function () {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .get(userDisableBtn.getAttribute("href"))
+            .get(url)
             .then((response) => {
               // Show success message. For more info check the plugin's official documentation: https://sweetalert2.github.io/
               Swal.fire({
@@ -46,7 +48,9 @@ const KTUsersUpdateUtils = (function () {
                 showCancelButton: false,
               }).then((outcome) => {
                 if (outcome.isConfirmed) {
-                  location.href = "/dashboard/login";
+                  location.href = url.includes("self")
+                    ? "/dashboard/login"
+                    : `/dashboard/users/${response.data.user._id}`;
                 }
               });
             })
@@ -117,6 +121,10 @@ const KTUsersUpdateUtils = (function () {
                 },
                 allowOutsideClick: false,
                 showCancelButton: false,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.reload();
+                }
               });
             })
             .catch((error) => {
