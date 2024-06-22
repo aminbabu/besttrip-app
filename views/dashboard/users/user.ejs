@@ -129,7 +129,7 @@
                             <% } %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Account Status</div>
-                            <div class="badge badge-light-success text-uppercase">
+                            <div class="badge badge-light-<% if (user.status === 'disabled') { %>primary<% } else { %>success<% } %> text-uppercase">
                               <%= user.status %>
                             </div>
                             <!--begin::Details item-->
