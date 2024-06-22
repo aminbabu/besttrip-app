@@ -1,1 +1,28 @@
-// create eslintrc using prettier based eslint-config-prettier, eslint-config-airbnb-base, eslint-plugin-prettier
+// https://eslint.org/docs/user-guide/configuring
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["airbnb-base", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "no-console": 0,
+    "indent": 0,
+    "linebreak-style": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 100,
+        "tabWidth": 4,
+        "semi": true
+      }
+    ]
+  },
+  "plugins": ["prettier"]
+}
