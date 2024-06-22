@@ -11,5 +11,6 @@
 module.exports = {
   getHistory: require("./get-history"),
   getHistoryById: require("./get-history-by-id"),
+  updateHistory: require("./update-history"),
   deleteHistory: require("./delete-history"),
 };
