@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
     await user.save();
 
     // return response
-    return res.json({ message: "Disabled user successfully" });
+    return res.json({ message: "Disabled user successfully", user });
   } catch (error) {
     return next(error);
   }
