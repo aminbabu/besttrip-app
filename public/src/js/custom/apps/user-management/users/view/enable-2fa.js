@@ -114,6 +114,9 @@ const KTUsersEnableTwo2FA = (function () {
                                 // Reset form
                                 form.reset();
 
+                                // hide modal
+                                modal.hide();
+
                                 Swal.fire({
                                     text:
                                         response.data.message ||
@@ -130,7 +133,6 @@ const KTUsersEnableTwo2FA = (function () {
                                     const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
                                     if (result.isConfirmed && redirectUrl) {
-                                        modal.hide();
                                         location.href = redirectUrl;
                                     }
                                 });
