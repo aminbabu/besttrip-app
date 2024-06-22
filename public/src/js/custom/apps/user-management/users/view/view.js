@@ -3,7 +3,12 @@ const KTUsersViewMain = (function () {
     // Init login session button
     const initLoginSession = () => {
         const button = document.getElementById('kt_modal_users_login_session');
-        const url = button.getAttribute('data-kt-sign-out-all-sessions-url');
+
+        if (!button) {
+            return;
+        }
+
+        const url = button.getAttribute('data_kt_sign_out_all_sessions_url');
 
         button.addEventListener('click', (e) => {
             e.preventDefault();
