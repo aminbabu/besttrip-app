@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 June, 2024
- * @update_date 19 June, 2024
+ * @update_date 22 June, 2024
  */
 
 // dependencies
@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
 
         // format payment requests
         paymentRequests = paymentRequests.map((paymentRequest) => {
-            const modifiedPaymentRequest = paymentRequest.toObject();
+            const modifiedPaymentRequest = {...paymentRequest.toObject()};
 
             modifiedPaymentRequest.amount = currencyFormatter(paymentRequest.amount);
             modifiedPaymentRequest.createdAt = moment(paymentRequest.createdAt).format(
