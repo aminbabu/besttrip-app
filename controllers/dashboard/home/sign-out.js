@@ -32,10 +32,13 @@ module.exports = async (req, res) => {
             createdAt: -1,
         });
 
-        // delete history
-        if (history) {
-            history.deleteOne();
+        // check if history not found
+        if (!history) {
+            return res.redirect('/errors/404');
         }
+
+        // delete history
+        history.deleteOne();
 
         // clear cookie and header
         res.clearCookie('token');
