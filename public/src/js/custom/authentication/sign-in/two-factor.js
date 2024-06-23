@@ -37,8 +37,6 @@ var KTSigninTwoFactor = (function () {
       // Validate form before submit
       if (validator) {
         validator.validate().then(function (status) {
-          console.log("validated!");
-
           if (status == "Valid") {
             submitButton.setAttribute("data-kt-indicator", "on");
 

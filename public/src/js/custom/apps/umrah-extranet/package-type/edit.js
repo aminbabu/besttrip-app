@@ -52,8 +52,6 @@ var KTPackageEdit = (function () {
       // Validate form before submit
       if (validator) {
         validator.validate().then(function (status) {
-          console.log("validated!");
-
           if (status == "Valid") {
             // Show loading indication
             submitButton.setAttribute("data-kt-indicator", "on");

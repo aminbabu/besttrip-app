@@ -43,8 +43,6 @@ var KTCreatePackage = (function () {
 
       if (validator) {
         validator.validate().then(function (status) {
-          console.log("validated!");
-
           if (status == "Valid") {
             stepper.goNext();
 
@@ -85,8 +83,6 @@ var KTCreatePackage = (function () {
       var validator = validations[3]; // get validator for last form
 
       validator.validate().then(function (status) {
-        console.log("validated!");
-
         if (status == "Valid") {
           // Prevent default button action
           e.preventDefault();
