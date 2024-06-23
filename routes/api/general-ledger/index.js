@@ -23,7 +23,7 @@ const {
 } = require("../../../controllers/api/general-ledger");
 
 // middlewares
-const { isAuthorized } = require("../../../middlewares/api/auth");
+const { isAuthorized, isAllowed } = require("../../../middlewares/api/auth");
 const {
   validateGeneralLedgerId,
   validateGeneralLedger,
