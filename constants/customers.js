@@ -4,21 +4,25 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 20 April, 2024
+ * @update_date 23 June, 2024
  */
 
 // customer roles
-const CUSTOMER_ROLES = ['customer'];
+const CUSTOMER_ROLES = ["customer"];
 
 // customer wallet transaction types
-const CUSTOMER_WALLET_TRANSACTION_TYPES = ['top-up', 'deduct'];
+const CUSTOMER_WALLET_TRANSACTION_TYPES = ["top-up", "deduct"];
 
 // customer status
-const CUSTOMER_STATUS = ['active', 'disabled'];
+const CUSTOMER_STATUS = ["active", "disabled"];
+
+// customer password
+const CUSTOMER_DEFAULT_PASSWORD = "12345678";
 
 // export constants
 module.exports = {
-    CUSTOMER_WALLET_TRANSACTION_TYPES,
-    CUSTOMER_STATUS,
-    CUSTOMER_ROLES,
+  CUSTOMER_WALLET_TRANSACTION_TYPES,
+  CUSTOMER_STATUS,
+  CUSTOMER_ROLES,
+  CUSTOMER_DEFAULT_PASSWORD,
 };
