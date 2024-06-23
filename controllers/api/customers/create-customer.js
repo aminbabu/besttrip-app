@@ -8,6 +8,7 @@
  */
 
 // dependencies
+const { CUSTOMER_DEFAULT_PASSWORD } = require("../../../constants");
 const { Customer } = require("../../../models");
 
 // export create customer controller
@@ -17,7 +18,10 @@ module.exports = async (req, res, next) => {
     const validatedData = req.body;
 
     // create customer
-    const customer = new Customer(validatedData);
+    const customer = new Customer({
+      ...validatedData,
+      password: CUSTOMER_DEFAULT_PASSWORD,
+    });
 
     // save customer
     await customer.save();
