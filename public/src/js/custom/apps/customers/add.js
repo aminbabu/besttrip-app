@@ -114,10 +114,6 @@ var KTModalCustomersAdd = (function () {
             // Disable submit button whilst loading
             submitButton.disabled = true;
 
-            console.log(submitButton.closest("form").getAttribute("action"));
-
-            return;
-
             // Check axios library docs: https://axios-http.com/docs/intro
             axios
               .post(
