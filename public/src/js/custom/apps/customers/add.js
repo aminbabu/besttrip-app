@@ -122,11 +122,6 @@ var KTModalCustomersAdd = (function () {
               Array.from(formData.entries()).filter((e) => e[1].trim())
             );
 
-            // filter empty fields
-            customerData.forEach(
-              (value, key) => !value && delete customerData[key]
-            );
-
             // Check axios library docs: https://axios-http.com/docs/intro
             axios
               .post(
