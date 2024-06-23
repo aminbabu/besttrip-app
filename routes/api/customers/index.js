@@ -4,37 +4,38 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 03 June, 2024
+ * @update_date 23 June, 2024
  */
 
 // dependencies
-const express = require('express');
+const express = require("express");
 
 // express router
 const router = express.Router();
 
 // controllers
 const {
-    getAllCustomers,
-    getCustomer,
-    updateAllCustomersWallet,
-    updateCustomer,
-    updateCustomerBySelf,
-    deleteCustomer,
-    deleteCustomerBySelf,
-} = require('../../../controllers/api/customers');
+  getAllCustomers,
+  getCustomer,
+  createCustomer,
+  updateAllCustomersWallet,
+  updateCustomer,
+  updateCustomerBySelf,
+  deleteCustomer,
+  deleteCustomerBySelf,
+} = require("../../../controllers/api/customers");
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
+const { isAuthorized, isAllowed } = require("../../../middlewares/api/auth");
 const {
-    validateCustomerId,
-    validateCustomer,
-    validateCustomerSelf,
-    validateCustomerWallet,
-    validateCustomerAccount,
-} = require('../../../middlewares/api/validators/customers');
-const { validateAvatar } = require('../../../middlewares/api/validators/files');
-const { uploadAvatar } = require('../../../middlewares/api/files');
+  validateCustomerId,
+  validateCustomer,
+  validateCustomerSelf,
+  validateCustomerWallet,
+  validateCustomerAccount,
+} = require("../../../middlewares/api/validators/customers");
+const { validateAvatar } = require("../../../middlewares/api/validators/files");
+const { uploadAvatar } = require("../../../middlewares/api/files");
 
 /**
  * @description check if user is authorized
@@ -54,7 +55,7 @@ router.use(isAuthorized);
  * @access private - ['admin']
  * @method GET
  */
-router.get('/', isAllowed(['admin']), getAllCustomers);
+router.get("/", isAllowed(["admin"]), getAllCustomers);
 
 /**
  * @description get customer by mongo id
@@ -66,7 +67,19 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
  * @access private - ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), validateCustomerId, getCustomer);
+router.get("/:id", isAllowed(["admin"]), validateCustomerId, getCustomer);
+
+/**
+ * @description create a new customer
+ * @param {string} path - /api/customers
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validateCustomer']
+ * @param {function} controller - ['createCustomer']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method POST
+ */
+router.post("/", isAllowed(["admin"]), validateCustomer, createCustomer);
 
 /**
  * @description update all customers wallet
@@ -78,7 +91,12 @@ router.get('/:id', isAllowed(['admin']), validateCustomerId, getCustomer);
  * @access private - ['admin']
  * @method PATCH
  */
-router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllCustomersWallet);
+router.patch(
+  "/wallet",
+  isAllowed(["admin"]),
+  validateCustomerWallet,
+  updateAllCustomersWallet
+);
 
 /**
  * @description update customer by self
@@ -92,13 +110,13 @@ router.patch('/wallet', isAllowed(['admin']), validateCustomerWallet, updateAllC
  * @method PATCH
  */
 router.patch(
-    '/self',
-    isAllowed(['customer']),
-    validateAvatar,
-    validateCustomerAccount,
-    validateCustomerSelf,
-    uploadAvatar('avatars/customers'),
-    updateCustomerBySelf
+  "/self",
+  isAllowed(["customer"]),
+  validateAvatar,
+  validateCustomerAccount,
+  validateCustomerSelf,
+  uploadAvatar("avatars/customers"),
+  updateCustomerBySelf
 );
 
 /**
@@ -114,14 +132,14 @@ router.patch(
  * @method PATCH
  */
 router.patch(
-    '/:id',
-    isAllowed(['admin']),
-    validateAvatar,
-    validateCustomerAccount,
-    validateCustomerId,
-    validateCustomer,
-    uploadAvatar('avatars/customers'),
-    updateCustomer
+  "/:id",
+  isAllowed(["admin"]),
+  validateAvatar,
+  validateCustomerAccount,
+  validateCustomerId,
+  validateCustomer,
+  uploadAvatar("avatars/customers"),
+  updateCustomer
 );
 
 /**
@@ -134,7 +152,7 @@ router.patch(
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['admin']), validateCustomerId, deleteCustomer);
+router.delete("/:id", isAllowed(["admin"]), validateCustomerId, deleteCustomer);
 
 /**
  * @description delete customer by self
@@ -145,7 +163,7 @@ router.delete('/:id', isAllowed(['admin']), validateCustomerId, deleteCustomer);
  * @access private - ['customer']
  * @method DELETE
  */
-router.delete('/', isAllowed(['customer']), deleteCustomerBySelf);
+router.delete("/", isAllowed(["customer"]), deleteCustomerBySelf);
 
 // export
 module.exports = router;
