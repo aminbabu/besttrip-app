@@ -412,7 +412,7 @@
                                   Select a Country...
                                 </option>
                                 <% countries.forEach(country => { %>
-                                <option value="<%= country.name %>" <%= country.name == user?.country ? 'selected' : '' %>>
+                                <option value="<%= country.name %>">
                                   <%= country.name %>
                                 </option>
                                 <% }); %>
