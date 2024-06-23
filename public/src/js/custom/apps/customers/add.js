@@ -38,17 +38,10 @@ var KTModalCustomersAdd = (function () {
             },
           },
         },
-        "first-name": {
+        dob: {
           validators: {
             notEmpty: {
-              message: "First name is required",
-            },
-          },
-        },
-        "last-name": {
-          validators: {
-            notEmpty: {
-              message: "Last name is required",
+              message: "Customer date of birth is required",
             },
           },
         },
@@ -59,10 +52,10 @@ var KTModalCustomersAdd = (function () {
         //     },
         //   },
         // },
-        // address1: {
+        // address: {
         //   validators: {
         //     notEmpty: {
-        //       message: "Address 1 is required",
+        //       message: "Address is required",
         //     },
         //   },
         // },
@@ -119,30 +112,85 @@ var KTModalCustomersAdd = (function () {
             // Disable submit button whilst loading
             submitButton.disabled = true;
 
-            setTimeout(function () {
-              submitButton.removeAttribute("data-kt-indicator");
+            // Check axios library docs: https://axios-http.com/docs/intro
+            axios
+              .post(
+                submitButton.closest("form").getAttribute("action"),
+                new FormData(form)
+              )
+              .then((response) => {
+                // hide modal
+                modal.hide();
 
-              Swal.fire({
-                text: "Form has been successfully submitted!",
-                icon: "success",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, got it!",
-                customClass: {
-                  confirmButton: "btn btn-primary",
-                },
-              }).then(function (result) {
-                if (result.isConfirmed) {
-                  // Hide modal
-                  modal.hide();
+                if (response) {
+                  // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                  Swal.fire({
+                    text:
+                      response.data.message ||
+                      "Customer has been successfully added!",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                      confirmButton: "btn btn-primary",
+                    },
+                    allowOutsideClick: false,
+                  }).then(() => {
+                    // Reset form
+                    form.reset();
 
-                  // Enable submit button after loading
-                  submitButton.disabled = false;
+                    // Get redirect URL from the form
+                    const redirectUrl = form.getAttribute(
+                      "data-kt-redirect-url"
+                    );
 
-                  // Redirect to customers list page
-                  window.location = form.getAttribute("data-kt-redirect");
+                    if (redirectUrl) {
+                      location.href = redirectUrl;
+                    }
+                  });
+                } else {
+                  // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                  Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                      confirmButton: "btn btn-primary",
+                    },
+                  });
                 }
+              })
+              .catch((error) => {
+                const errors = error.response.data.message
+                  ? error.response.data.message
+                  : error.response.data.errors;
+
+                Swal.fire({
+                  html: `${
+                    errors instanceof Array
+                      ? `<ul class="text-start">${Object.values(
+                          error.response.data.errors
+                        )
+                          .map((err) => `<li>${err?.message}</li>`)
+                          .join("")}</ul>`
+                      : errors
+                  }`,
+                  icon: "error",
+                  buttonsStyling: false,
+                  confirmButtonText: "Ok, got it!",
+                  customClass: {
+                    confirmButton: "btn btn-primary",
+                  },
+                });
+              })
+              .then(() => {
+                // Hide loading indication
+                submitButton.removeAttribute("data-kt-indicator");
+
+                // Enable button
+                submitButton.disabled = false;
               });
-            }, 2000);
           } else {
             Swal.fire({
               text: "Sorry, looks like there are some errors detected, please try again.",
