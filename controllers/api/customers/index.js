@@ -9,11 +9,12 @@
 
 // export all controllers
 module.exports = {
-    getAllCustomers: require('./get-all-customers'),
-    getCustomer: require('./get-customer'),
-    updateAllCustomersWallet: require('./update-all-customers-wallet'),
-    updateCustomer: require('./update-customer'),
-    updateCustomerBySelf: require('./update-customer-by-self'),
-    deleteCustomer: require('./delete-customer'),
-    deleteCustomerBySelf: require('./delete-customer-by-self'),
+  getAllCustomers: require("./get-all-customers"),
+  getCustomer: require("./get-customer"),
+  createCustomer: require("./create-customer"),
+  updateAllCustomersWallet: require("./update-all-customers-wallet"),
+  updateCustomer: require("./update-customer"),
+  updateCustomerBySelf: require("./update-customer-by-self"),
+  deleteCustomer: require("./delete-customer"),
+  deleteCustomerBySelf: require("./delete-customer-by-self"),
 };
