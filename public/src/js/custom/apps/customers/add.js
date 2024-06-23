@@ -114,11 +114,24 @@ var KTModalCustomersAdd = (function () {
             // Disable submit button whilst loading
             submitButton.disabled = true;
 
+            // prepare form data
+            const formData = new FormData(form);
+
+            // remove empty fields from form data
+            const customerData = Object.fromEntries(
+              Array.from(formData.entries()).filter((e) => e[1].trim())
+            );
+
+            // filter empty fields
+            customerData.forEach(
+              (value, key) => !value && delete customerData[key]
+            );
+
             // Check axios library docs: https://axios-http.com/docs/intro
             axios
               .post(
                 submitButton.closest("form").getAttribute("action"),
-                new FormData(form)
+                customerData
               )
               .then((response) => {
                 // hide modal
