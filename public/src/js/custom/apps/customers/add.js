@@ -29,6 +29,10 @@ var KTModalCustomersAdd = (function () {
             notEmpty: {
               message: "Customer email is required",
             },
+            regexp: {
+              regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "The value is not a valid email address",
+            },
           },
         },
         phone: {
@@ -109,6 +113,10 @@ var KTModalCustomersAdd = (function () {
 
             // Disable submit button whilst loading
             submitButton.disabled = true;
+
+            console.log(submitButton.closest("form").getAttribute("action"));
+
+            return;
 
             // Check axios library docs: https://axios-http.com/docs/intro
             axios

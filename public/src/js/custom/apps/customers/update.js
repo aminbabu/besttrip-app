@@ -30,6 +30,10 @@ var KTModalUpdateCustomer = (function () {
             notEmpty: {
               message: "Customer email is required",
             },
+            regexp: {
+              regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "The value is not a valid email address",
+            },
           },
         },
         phone: {
