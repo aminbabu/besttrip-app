@@ -15,7 +15,7 @@ const { Customer } = require("../../../models");
 module.exports = async (req, res) => {
   try {
     // get customers
-    const customers = await Customer.find();
+    const customers = await Customer.find().sort({ createdAt: -1 });
 
     // return render view
     return res.render("dashboard/customers", {
