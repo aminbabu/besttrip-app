@@ -177,6 +177,7 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
+                  <% if (customers.length) { %>
                   <!--begin::Table-->
                   <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
                     <thead>
@@ -195,7 +196,6 @@
                       </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-                      <% if (customers.length) { %>
                       <% customers.forEach((customer) => { %>
                       <tr>
                         <td>
@@ -256,14 +256,13 @@
                         </td>
                       </tr>
                       <% }) %>
-                      <% } else { %>
-                      <tr>
-                        <td colspan=" 7" class="text-center py-10">No customers found</td>
-                      </tr>
-                      <% } %>
+
                     </tbody>
                   </table>
                   <!--end::Table-->
+                  <% } else { %>
+                  <p class="text-center fs-4 text-gray-600 mt-6">No customers found</p>
+                  <% } %>
                 </div>
                 <!--end::Card body-->
               </div>
