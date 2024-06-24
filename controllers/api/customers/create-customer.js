@@ -11,7 +11,7 @@
 const { CUSTOMER_DEFAULT_PASSWORD } = require("../../../constants");
 const { welcome } = require("../../../mails");
 const { Customer, Token } = require("../../../models");
-const { sendEmail } = require("../../../utils");
+const { sendEmail, generateToken } = require("../../../utils");
 
 // export create customer controller
 module.exports = async (req, res, next) => {
@@ -69,7 +69,7 @@ module.exports = async (req, res, next) => {
     );
 
     // save customer
-    await customer.save();
+    await newCustomer.save();
 
     // return response
     return res.status(201).json({
