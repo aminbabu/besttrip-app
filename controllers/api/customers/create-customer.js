@@ -19,10 +19,9 @@ module.exports = async (req, res, next) => {
     // get validated data
     const validatedData = req.body;
 
-    // get customer by email
+    // get customer by email or phone
     const customer = await Customer.findOne({
-      email: validatedData.email,
-      phone: validatedData.phone,
+      $or: [{ email: validatedData.email }, { phone: validatedData.phone }],
     });
 
     console.log("customer", validatedData, customer);

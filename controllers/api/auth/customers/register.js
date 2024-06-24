@@ -18,8 +18,10 @@ module.exports = async (req, res, next) => {
     // get validated data
     const { name, email, phone, password } = req.body;
 
-    // check if customer already exists
-    const customer = await Customer.findOne({ email, phone });
+    // get customer by email or phone
+    const customer = await Customer.findOne({
+      $or: [{ email }, { phone }],
+    });
 
     // check if customer already exists
     if (customer) {
