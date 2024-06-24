@@ -33,9 +33,6 @@ module.exports = async (req, res, next) => {
     const newCustomer = new Customer({
       ...validatedData,
       password: CUSTOMER_DEFAULT_PASSWORD,
-      wallet: {
-        balance: 0,
-      },
     });
 
     // delete existing expired tokens
