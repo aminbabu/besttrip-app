@@ -24,20 +24,18 @@ module.exports = new Schema(
       ref: "Customer",
       required: [() => this.customer, "Customer is required"],
     },
-    wallet: {
-      balance: {
-        type: Number,
-        required: [true, "Wallet balance is required"],
-        default: 0,
-      },
-      type: {
-        type: String,
-        enum: WALLET_TRANSACTION_TYPES,
-        default: WALLET_TRANSACTION_TYPES[0],
-      },
-      description: {
-        type: String,
-      },
+    balance: {
+      type: Number,
+      required: [true, "Wallet balance is required"],
+      default: 0,
+    },
+    type: {
+      type: String,
+      enum: WALLET_TRANSACTION_TYPES,
+      default: WALLET_TRANSACTION_TYPES[0],
+    },
+    description: {
+      type: String,
     },
   },
   {
