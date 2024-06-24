@@ -27,10 +27,7 @@ const { isAuthorized, isAllowed } = require("../../../middlewares/api/auth");
 const {
   validateWalletId,
   validateWallet,
-  validateWallet,
 } = require("../../../middlewares/api/validators/wallets");
-const { validateAvatar } = require("../../../middlewares/api/validators/files");
-const { uploadAvatar } = require("../../../middlewares/api/files");
 
 /**
  * @description check if user is authorized
