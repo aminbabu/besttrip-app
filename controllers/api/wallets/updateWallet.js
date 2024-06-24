@@ -33,7 +33,11 @@ module.exports = async (req, res, next) => {
     if (type === "top-up") {
       wallet.set({ balance: wallet.balance + balance, type, description });
     } else {
-      wallet.set({ balance: wallet.balance - balance, type, description });
+      wallet.set({
+        balance: wallet.balance - balance <= 0 ? 0 : wallet.balance - balance,
+        type,
+        description,
+      });
     }
 
     // save wallet
