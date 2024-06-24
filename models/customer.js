@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 23 June, 2024
+ * @update_date 24 June, 2024
  */
 
 // dependencies
@@ -12,7 +12,7 @@ const { model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const moment = require("moment");
 const { customerSchema } = require("../schemas/mongoose");
-const { Wallet } = require("./wallet");
+const Wallet = require("./wallet");
 
 // hash password before saving
 customerSchema.pre("save", async function (next) {
