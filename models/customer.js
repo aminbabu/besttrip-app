@@ -62,26 +62,5 @@ customerSchema.pre("save", async function (next) {
   }
 });
 
-// manage customer wallet before saving
-customerSchema.pre("save", async function (next) {
-  try {
-    // check if customer is new
-    if (!this.isNew) {
-      return next();
-    }
-
-    // check if wallet is not provided
-    if (!this.wallet) {
-      this.wallet = {
-        balance: 0,
-      };
-    }
-
-    return next();
-  } catch (error) {
-    return next(error);
-  }
-});
-
 // export model
 module.exports = model("Customer", customerSchema);
