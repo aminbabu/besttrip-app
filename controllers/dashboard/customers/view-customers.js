@@ -10,12 +10,26 @@
 // dependencies
 const { countries } = require("countries-list");
 const { Customer } = require("../../../models");
+const moment = require("moment");
 
 // export customers view controller
 module.exports = async (req, res) => {
   try {
     // get customers
-    const customers = await Customer.find().sort({ createdAt: -1 });
+    let customers = await Customer.find()
+      .populate("wallet")
+      .sort({ createdAt: -1 });
+
+    // formate data
+    customers = customers.map((customer) => {
+      const customerObj = { ...customer.toObject() };
+
+      customerObj.createdAt = moment(customer.createdAt).format(
+        "DD MMM YYYY, h:mm a"
+      );
+
+      return customerObj;
+    });
 
     // return render view
     return res.render("dashboard/customers", {
