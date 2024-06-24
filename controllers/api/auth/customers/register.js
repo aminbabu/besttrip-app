@@ -63,6 +63,9 @@ module.exports = async (req, res, next) => {
     // prepare email
     const info = welcome({ user: newCustomer.toObject(), token });
 
+    // update customer wallet
+    newCustomer.wallet = wallet._id;
+
     // save customer
     await newCustomer.save();
 
