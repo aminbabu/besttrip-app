@@ -12,6 +12,7 @@ const { model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const moment = require("moment");
 const { customerSchema } = require("../schemas/mongoose");
+const { Wallet } = require("./wallet");
 
 // hash password before saving
 customerSchema.pre("save", async function (next) {
@@ -55,6 +56,31 @@ customerSchema.pre("save", async function (next) {
 
     // customer ID based on date (YYYYMMDD) and count (0001, 0002, ...) with prefix 'BTC'
     this.customerID = `BTC${moment().format("YYYYMMDD")}${count}`;
+
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+});
+
+// manage customer wallet before saving
+customerSchema.pre("save", async function (next) {
+  try {
+    // check if customer is new
+    if (!this.isNew) {
+      return next();
+    }
+
+    // create wallet for customer
+    const wallet = new Wallet({
+      customer: this._id,
+    });
+
+    // save wallet
+    await wallet.save();
+
+    // set wallet id
+    this.wallet = wallet._id;
 
     return next();
   } catch (error) {
