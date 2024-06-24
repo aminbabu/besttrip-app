@@ -15,8 +15,8 @@ const { zodErrorHandler } = require("../../../../handlers/errors");
 module.exports = (req, res, next) => {
   // validate request params
   const { error, success } = walletSchema
-    .pick({ id: true })
-    .safeParse(req.params);
+    .pick({ user: ture, customer: true })
+    .safeParse(req.query);
 
   // check for errors
   if (!success) {
