@@ -25,6 +25,8 @@ module.exports = async (req, res, next) => {
       phone: validatedData.phone,
     });
 
+    console.log("customer", validatedData, customer);
+
     // check if customer already exists
     if (customer) {
       return res.status(400).json({
@@ -55,11 +57,16 @@ module.exports = async (req, res, next) => {
       type: "verify-email",
     });
 
+    // prepare email
+    const info = welcome({ user: newCustomer.toObject(), token });
+
+    // save customer
+    await newCustomer.save();
+
     // save token
     await tokenDoc.save();
 
-    // send mail
-    const info = welcome({ user: newCustomer.toObject(), token });
+    // send email
     await sendEmail(
       info.to,
       info.subject,
@@ -67,9 +74,6 @@ module.exports = async (req, res, next) => {
       info.html,
       info.attachments
     );
-
-    // save customer
-    await newCustomer.save();
 
     // return response
     return res.status(201).json({
