@@ -16,7 +16,6 @@ module.exports = (req, res, next) => {
   // validate request body
   const { error, success } = walletSchema
     .omit({ id: true, user: true, customer: true })
-    .required()
     .safeParse(req.body);
 
   // check for errors
