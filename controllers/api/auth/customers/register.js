@@ -9,7 +9,7 @@
 
 // dependencies
 const { welcome } = require("../../../../mails");
-const { Customer, Token } = require("../../../../models");
+const { Customer, Token, Wallet } = require("../../../../models");
 const { generateToken, sendEmail } = require("../../../../utils");
 
 // export register a new customer controller
@@ -38,6 +38,11 @@ module.exports = async (req, res, next) => {
       password,
     });
 
+    // create wallet
+    const wallet = new Wallet({
+      customer: newCustomer._id,
+    });
+
     // delete existing expired tokens
     await Token.deleteMany({
       customer: newCustomer._id,
@@ -60,6 +65,9 @@ module.exports = async (req, res, next) => {
 
     // save customer
     await newCustomer.save();
+
+    // save wallet
+    await wallet.save();
 
     // save token
     await tokenDoc.save();
