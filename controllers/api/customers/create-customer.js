@@ -20,7 +20,10 @@ module.exports = async (req, res, next) => {
     const validatedData = req.body;
 
     // get customer by email
-    const customer = await Customer.findOne({ email: validatedData.email });
+    const customer = await Customer.findOne({
+      email: validatedData.email,
+      phone: validatedData.phone,
+    });
 
     // check if customer already exists
     if (customer) {
