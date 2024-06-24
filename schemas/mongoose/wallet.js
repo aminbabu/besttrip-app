@@ -18,11 +18,13 @@ module.exports = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: [() => this.user, "User is required"],
+      unique: [true, "User already has a wallet"],
     },
     customer: {
       type: Schema.Types.ObjectId,
       ref: "Customer",
       required: [() => this.customer, "Customer is required"],
+      unique: [true, "Customer already has a wallet"],
     },
     balance: {
       type: Number,
