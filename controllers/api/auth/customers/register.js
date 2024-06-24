@@ -45,16 +45,24 @@ module.exports = async (req, res, next) => {
 
     // generate token
     const token = generateToken(newCustomer.toObject());
+
     // store token in db
     const tokenDoc = new Token({
       customer: newCustomer._id,
       token,
       type: "verify-email",
     });
+
+    // prepare email
+    const info = welcome({ user: newCustomer.toObject(), token });
+
+    // save customer
+    await newCustomer.save();
+
+    // save token
     await tokenDoc.save();
 
     // send mail
-    const info = welcome({ user: newCustomer.toObject(), token });
     await sendEmail(
       info.to,
       info.subject,
@@ -62,9 +70,6 @@ module.exports = async (req, res, next) => {
       info.html,
       info.attachments
     );
-
-    // save customer
-    await newCustomer.save();
 
     // return response
     return res.status(201).json({
