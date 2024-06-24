@@ -18,7 +18,6 @@ const {
   getWallets,
   getWallet,
   createWallet,
-  updateWallets,
   updateWallet,
   deleteWallet,
 } = require("../../../controllers/api/wallets");
@@ -76,18 +75,6 @@ router.get("/:id", isAllowed(["admin"]), validateWalletId, getWallet);
  * @method POST
  */
 router.post("/", isAllowed(["admin"]), validateWallet, createWallet);
-
-/**
- * @description update all wallets wallet
- * @param {string} path - /api/wallets
- * @param {function} middleware - ['isAllowed']
- * @param {function} validator - ['validateWallet']
- * @param {function} controller - ['updateWallets']
- * @returns {object} - router
- * @access private - ['admin']
- * @method PATCH
- */
-router.patch("/", isAllowed(["admin"]), validateWallet, updateWallets);
 
 /**
  * @description update wallet by mongo id
