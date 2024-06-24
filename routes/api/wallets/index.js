@@ -40,18 +40,18 @@ router.use(isAuthorized);
 
 /**
  * @description get all wallets
- * @param {string} path - /api/wallets
+ * @param {string} path - /api/wallets/all
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getWallets']
  * @returns {object} - router
  * @access private - ['admin']
  * @method GET
  */
-router.get("/", isAllowed(["admin"]), getWallets);
+router.get("/all", isAllowed(["admin"]), getWallets);
 
 /**
  * @description get wallet by mongo id
- * @param {string} path - /api/wallets/:id
+ * @param {string} path - /api/wallets?user=_id_or_customer=_id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateWalletId']
  * @param {function} controller - ['getWallet']
@@ -59,7 +59,7 @@ router.get("/", isAllowed(["admin"]), getWallets);
  * @access private - ['admin']
  * @method GET
  */
-router.get("/:id", isAllowed(["admin"]), validateWalletId, getWallet);
+router.get("/", isAllowed(["admin"]), validateWalletId, getWallet);
 
 /**
  * @description create a new wallet
@@ -75,7 +75,7 @@ router.post("/", isAllowed(["admin"]), validateWallet, createWallet);
 
 /**
  * @description update wallet by mongo id
- * @param {string} path - /api/wallets/:id
+ * @param {string} path - /api/wallets?user=_id_or_customer=_id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateWalletId', 'validateWallet']
  * @param {function} controller - ['updateWallet']
@@ -84,7 +84,7 @@ router.post("/", isAllowed(["admin"]), validateWallet, createWallet);
  * @method PATCH
  */
 router.patch(
-  "/:id",
+  "/",
   isAllowed(["admin"]),
   validateWalletId,
   validateWallet,
@@ -93,7 +93,7 @@ router.patch(
 
 /**
  * @description delete wallet by mongo id
- * @param {string} path - /api/wallets/:id
+ * @param {string} path - /api/wallets?user=_id_or_customer=_id
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateWalletId']
  * @param {function} controller - ['deleteWallet']
@@ -101,7 +101,7 @@ router.patch(
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete("/:id", isAllowed(["admin"]), validateWalletId, deleteWallet);
+router.delete("/", isAllowed(["admin"]), validateWalletId, deleteWallet);
 
 // export
 module.exports = router;

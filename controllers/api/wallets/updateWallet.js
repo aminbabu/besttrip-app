@@ -14,12 +14,12 @@ const { Wallet } = require("../../../models");
 module.exports = async (req, res, next) => {
   try {
     // update validated Data
-    const { id } = req.params;
+    const { user, customer } = req.query;
     const { balance, type, description } = req.body;
 
     // get wallet by customer/user id
     const wallet = await Wallet.findOne({
-      $or: [{ customer: id }, { user: id }],
+      $or: [{ user }, { customer }],
     });
 
     // check if wallet exists
