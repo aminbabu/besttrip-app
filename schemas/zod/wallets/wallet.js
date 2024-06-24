@@ -47,7 +47,7 @@ module.exports = z
         required_error: "Balance is required",
         invalid_type_error: "Please provide a valid balance",
       })
-      .refine((balance) => Number(balance) >= 0, {
+      .refine((balance) => Number(balance) < 0, {
         message: "Please provide a valid balance",
       }),
     type: z
