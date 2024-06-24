@@ -4,65 +4,38 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 24 June, 2024
  */
 
 // dependencies
-const { Customer } = require('../../../models');
+const { Wallet } = require("../../../models");
 
 // export update all customers wallet controller
 module.exports = async (req, res, next) => {
-    try {
-        // get validated data
-        const { wallet } = req.body;
+  try {
+    // get validated data
+    const { balance, type } = req.body;
 
-        // get all customers
-        const customers = await Customer.find();
+    // get customer's wallet
+    const wallets = await Wallet.find({}).select("customer balance");
 
-        // check if customers exist
-        if (!customers.length) {
-            return res.status(404).json({
-                message: 'No customers found',
-            });
-        }
+    // update all customers wallet
+    wallets.forEach(async (wallet) => {
+      wallet.balance =
+        type === "top-up"
+          ? wallet.balance + balance
+          : wallet.balance - balance < 0
+            ? 0
+            : wallet.balance - balance;
 
-        // update all customers wallet
-        customers.forEach(async (c) => {
-            // get customer
-            const customer = { ...c.toObject() };
+      // save wallet
+      await wallet.save();
+    });
 
-            // calculate wallet balance based on transaction type
-            if (wallet) {
-                switch (wallet.type) {
-                    case 'top-up':
-                        customer.wallet.balance += wallet.balance;
-                        break;
-                    case 'deduct':
-                        customer.wallet.balance -= wallet.balance;
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // update customer
-            c.set({
-                ...customer,
-                wallet: {
-                    ...wallet,
-                    balance: customer.wallet.balance,
-                },
-            });
-
-            // save customer
-            await c.save();
-        });
-
-        return res.status(200).json({
-            message: 'Customers wallet updated successfully',
-            customers,
-        });
-    } catch (error) {
-        return next(error);
-    }
+    return res.status(200).json({
+      message: "Updated all customers wallet successfully",
+    });
+  } catch (error) {
+    return next(error);
+  }
 };
