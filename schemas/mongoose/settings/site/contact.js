@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 14 April, 2024
+ * @update_date 02 Jul, 2024
  */
 
 // dependencies
@@ -19,17 +19,20 @@ module.exports = new Schema(
         phone: {
             type: String,
         },
-        social: {
-            type: [
-                {
-                    name: {
-                        type: String,
-                    },
-                    url: {
-                        type: String,
-                    },
-                },
-            ],
+        facebook: {
+            type: String,
+        },
+        twitter: {
+            type: String,
+        },
+        instagram: {
+            type: String,
+        },
+        youtube: {
+            type: String,
+        },
+        linkedin: {
+            type: String,
         },
         address: {
             type: String,
