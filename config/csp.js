@@ -22,7 +22,7 @@ module.exports = {
             'https://www.google-analytics.com',
         ],
         'style-src': [SELF, INLINE, 'https://fonts.googleapis.com'],
-        'img-src': [SELF, 'data: https://www.google-analytics.com'],
+        'img-src': [SELF, 'data:', 'blob:', 'https://www.google-analytics.com'],
         'font-src': [SELF, 'https://fonts.gstatic.com'],
         'connect-src': [SELF, 'https://www.google-analytics.com'],
         'frame-src': [SELF, 'https://www.googletagmanager.com'],
