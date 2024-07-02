@@ -216,7 +216,7 @@
         <div class="app-navbar-item ms-2 ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
           <!--begin::Menu wrapper-->
           <div class="cursor-pointer symbol symbol-35px symbol-md-40px symbol-circle" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-            <%  if (user.avatar) { %>
+            <%  if (user?.avatar) { %>
             <img src="/<%= user.avatar %>" alt="<%= user.name %>" />
             <% } else { %>
             <span class="symbol-label bg-primary text-inverse-primary fw-bolder">
@@ -231,7 +231,7 @@
               <div class="menu-content d-flex align-items-center px-3">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-50px symbol-circle me-5">
-                  <% if (user.avatar) { %>
+                  <% if (user?.avatar) { %>
                   <img id="kt_header_user_avatar" alt="Logo" src="/<%= user.avatar %>" />
                   <% } else { %>
                   <span class="symbol-label bg-primary text-inverse-primary fw-bolder">

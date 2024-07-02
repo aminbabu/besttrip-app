@@ -177,7 +177,7 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                  <% if (customers.length) { %>
+                  <% if (customers?.length) { %>
                   <!--begin::Table-->
                   <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
                     <thead>
@@ -204,7 +204,7 @@
                           </div>
                         </td>
                         <td class="d-flex align-items-center">
-                          <% if (customer.avatar) { %>
+                          <% if (customer?.avatar) { %>
                           <!--begin:: Avatar -->
                           <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                             <a href="/dashboard/customers/<%= customer._id %>">
