@@ -1,13 +1,13 @@
 {
-  // workbench settings
-  "workbench.colorTheme": "Learn with Sumit - Shades of Grey",
-  // config related to code formatting
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "emmet.includeLanguages": {
-    "ejs": "html"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "j69.ejs-beautify"
-  }
+    // workbench settings
+    "workbench.colorTheme": "Learn with Sumit - Shades of Grey",
+    // config related to code formatting
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "emmet.includeLanguages": {
+        "ejs": "html"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "j69.ejs-beautify"
+    }
 }
