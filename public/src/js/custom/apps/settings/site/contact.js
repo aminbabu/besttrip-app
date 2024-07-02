@@ -4,8 +4,6 @@
 var KTSettingsContact = (function () {
     // Shared variables
     const form = document.querySelector('#kt_settings_contact_form');
-    var fileInputs;
-    var ktFileUploaderContent;
 
     if (!form) {
         return;
