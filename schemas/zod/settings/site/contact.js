@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 02 Jul, 2024
  */
 
 // dependencies
@@ -30,43 +30,51 @@ module.exports = z
             .refine((phone) => isMobilePhone(phone), {
                 message: 'Phone must be a valid phone number',
             }),
-        social: z
-            .array(
-                z.object(
-                    {
-                        name: z
-                            .string({
-                                required_error: 'Name is required',
-                                invalid_type_error: 'Name must be a string',
-                            })
-                            .min(3, {
-                                message: 'Name must be at least 3 characters',
-                            })
-                            .max(255, {
-                                message: 'Name must not be more than 255 characters',
-                            }),
-                        url: z
-                            .string({
-                                required_error: 'URL is required',
-                                invalid_type_error: 'URL must be a string',
-                            })
-                            .url({
-                                message: 'URL must be a valid URL',
-                            }),
-                    },
-                    {
-                        required_error: 'At least one social media is required',
-                        invalid_type_error: 'At least one social media is required',
-                    }
-                ),
-                {
-                    required_error: 'At least one social media is required',
-                    invalid_type_error: 'Social media should be an array',
-                }
-            )
-            .nonempty({
-                message: 'At least one social media is required',
-            }),
+        facebook: z
+            .string({
+                required_error: 'Facebook is required',
+                invalid_type_error: 'Facebook must be a string',
+            })
+            .url({
+                message: 'Facebook must be a valid URL',
+            })
+            .optional(),
+        twitter: z
+            .string({
+                required_error: 'Twitter is required',
+                invalid_type_error: 'Twitter must be a string',
+            })
+            .url({
+                message: 'Twitter must be a valid URL',
+            })
+            .optional(),
+        instagram: z
+            .string({
+                required_error: 'Instagram is required',
+                invalid_type_error: 'Instagram must be a string',
+            })
+            .url({
+                message: 'Instagram must be a valid URL',
+            })
+            .optional(),
+        youtube: z
+            .string({
+                required_error: 'Youtube is required',
+                invalid_type_error: 'Youtube must be a string',
+            })
+            .url({
+                message: 'Youtube must be a valid URL',
+            })
+            .optional(),
+        linkedin: z
+            .string({
+                required_error: 'Linkedin is required',
+                invalid_type_error: 'Linkedin must be a string',
+            })
+            .url({
+                message: 'Linkedin must be a valid URL',
+            })
+            .optional(),
         address: z
             .string({
                 required_error: 'Address is required',
