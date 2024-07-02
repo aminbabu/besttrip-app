@@ -118,7 +118,7 @@
                       <!--begin:::Tab pane-->
                       <div class="tab-pane fade show active" id="kt_settings_general" role="tabpanel">
                         <!--begin::Form-->
-                        <form id="kt_settings_general_form" class="form" action="#">
+                        <form id="kt_settings_general_form" class="form" action="/api/settings/site/general">
                           <!--begin::Heading-->
                           <div class="row mb-7">
                             <div class="col-md-9 offset-md-3">
@@ -151,6 +151,9 @@
                                     <div class="kt-file-uploader">
                                       <!--begin::Message-->
                                       <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_logo">
+                                        <% if (general?.logo) { %>
+                                        <img src="/<%= general.logo %>" class="mw-100 mh-100px mb-5 mb-xl-0" alt="<%= general?.title %> Logo" />
+                                        <% } else { %>
                                         <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
                                         <!--begin::Info-->
                                         <div class="ms-xl-4 mt-4 mt-xl-0">
@@ -158,14 +161,15 @@
                                             Upload logo
                                           </h3>
                                           <span class="fs-7 fw-semibold text-gray-500">
-                                            PNG, JPG, GIF up to 5MB
+                                            PNG, JPG, JPEG, SVG up to 5MB
                                           </span>
                                         </div>
                                         <!--end::Info-->
+                                        <% } %>
                                       </label>
                                       <!--end::Message-->
                                       <!--begin::Input-->
-                                      <input type="file" name="logo" id="kt_file_uploader_logo" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="5" hidden class="d-none" />
+                                      <input type="file" name="logo" id="kt_file_uploader_logo" accept=".png,.jpg,.jpeg,.svg" data-kt-file-uploader-max-size="5" hidden class="d-none" />
                                     </div>
                                     <!--end::Preview Container-->
                                   </div>
@@ -207,14 +211,14 @@
                                             Upload favicon
                                           </h3>
                                           <span class="fs-7 fw-semibold text-gray-500">
-                                            PNG, JPG, GIF, SVG up to 1MB
+                                            ICO, PNG, GIF, SVG up to 1MB
                                           </span>
                                         </div>
                                         <!--end::Info-->
                                       </label>
                                       <!--end::Message-->
                                       <!--begin::Input-->
-                                      <input type="file" name="favicon" id="kt_file_uploader_favicon" accept=".png, .jpg, .jpeg, .svg" data-kt-file-uploader-max-size="1" hidden class="d-none" />
+                                      <input type="file" name="favicon" id="kt_file_uploader_favicon" accept=".ico,.png,.gif,.svg" data-kt-file-uploader-max-size="1" hidden class="d-none" />
                                     </div>
                                     <!--end::Preview Container-->
                                   </div>
@@ -229,7 +233,7 @@
                             <div class="col-md-3 text-md-end">
                               <!--begin::Label-->
                               <label class="fs-6 fw-semibold form-label mt-3">
-                                <span>Website Name</span>
+                                <span class="required">Website Name</span>
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Set the name of your website.">
                                   <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                     <span class="path1"></span>
@@ -242,7 +246,7 @@
                             </div>
                             <div class="col-md-9">
                               <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" name="website_name" placeholder="" value="" />
+                              <input type="text" class="form-control form-control-solid" name="title" placeholder="" value="<%= general?.title %>" />
                               <!--end::Input-->
                             </div>
                           </div>
@@ -267,12 +271,12 @@
                               <div class="row">
                                 <div class="col-lg-6">
                                   <!--begin::Input-->
-                                  <input type="text" class="form-control form-control-solid" name="domain_name_1" placeholder="" value="" />
+                                  <input type="text" class="form-control form-control-solid" name="domains[]" placeholder="" value="<%= general?.domains?.[0] %>" />
                                   <!--end::Input-->
                                 </div>
                                 <div class="col-lg-6">
                                   <!--begin::Input-->
-                                  <input type="text" class="form-control form-control-solid" name="domain_name_2" placeholder="" value="" />
+                                  <input type="text" class="form-control form-control-solid" name="domains[]" placeholder="" value="<%= general?.domains?.[1] %>" />
                                   <!--end::Input-->
                                 </div>
                               </div>
@@ -297,7 +301,7 @@
                             </div>
                             <div class="col-md-9">
                               <!--begin::Textarea-->
-                              <textarea class="form-control form-control-solid" name="website_description" data-kt-autosize="true" rows="5" placeholder="" value=""></textarea>
+                              <textarea class="form-control form-control-solid" name="description" data-kt-autosize="true" rows="5" placeholder=""><%= general?.description %></textarea>
                               <!--end::Textarea-->
                             </div>
                           </div>
@@ -308,11 +312,11 @@
                               <div class="d-flex">
                                 <!--begin::Button-->
                                 <button type="reset" data-kt-settings-type="cancel" class="btn btn-light me-3">
-                                  Cancel
+                                  Reset
                                 </button>
                                 <!--end::Button-->
                                 <!--begin::Button-->
-                                <button type="submit" data-kt-settings-type="submit" class="btn btn-primary">
+                                <button type="submit" kt-settings-general-form-action="submit" class="btn btn-primary">
                                   <span class="indicator-label">Save</span>
                                   <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -329,7 +333,7 @@
                       <!--begin:::Tab pane-->
                       <div class="tab-pane fade" id="kt_settings_contact" role="tabpanel">
                         <!--begin::Form-->
-                        <form id="kt_settings_general_contact_form" class="form" action="#">
+                        <form id="kt_settings_contact_form" class="form" action="/api/settings/site/contact">
                           <!--begin::Heading-->
                           <div class="row mb-7">
                             <div class="col-md-9 offset-md-3">
@@ -342,7 +346,7 @@
                             <div class="col-md-3 text-md-end">
                               <!--begin::Label-->
                               <label class="fs-6 fw-semibold form-label mt-3">
-                                <span>Email Address</span>
+                                <span class="required">Email Address</span>
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Set the website email address">
                                   <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                     <span class="path1"></span>
@@ -355,7 +359,7 @@
                             </div>
                             <div class="col-md-9">
                               <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" name="contact_email" placeholder="" value="" />
+                              <input type="text" class="form-control form-control-solid" name="email" placeholder="" value="<%= contact?.email %>" />
                               <!--end::Input-->
                             </div>
                           </div>
@@ -365,7 +369,7 @@
                             <div class="col-md-3 text-md-end">
                               <!--begin::Label-->
                               <label class="fs-6 fw-semibold form-label mt-3">
-                                <span>Phone Number</span>
+                                <span class="required">Phone Number</span>
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Set the website phone number">
                                   <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                     <span class="path1"></span>
@@ -378,7 +382,7 @@
                             </div>
                             <div class="col-md-9">
                               <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" name="contact_phone" placeholder="" value="" />
+                              <input type="text" class="form-control form-control-solid" name="phone" placeholder="" value="<%= contact?.phone %>" />
                               <!--end::Input-->
                             </div>
                           </div>
@@ -401,7 +405,7 @@
                             </div>
                             <div class="col-md-9">
                               <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" name="contact_facebook" placeholder="" value="" />
+                              <input type="text" class="form-control form-control-solid" name="facebook" placeholder="" value="<%= contact?.facebook %>" />
                               <!--end::Input-->
                             </div>
                           </div>
@@ -424,7 +428,7 @@
                             </div>
                             <div class="col-md-9">
                               <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" name="contact_twitter" placeholder="" value="" />
+                              <input type="text" class="form-control form-control-solid" name="twitter" placeholder="" value="<%= contact?.twitter %>" />
                               <!--end::Input-->
                             </div>
                           </div>
@@ -447,7 +451,7 @@
                             </div>
                             <div class="col-md-9">
                               <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" name="contact_instagram" placeholder="" value="" />
+                              <input type="text" class="form-control form-control-solid" name="instagram" placeholder="" value="<%= contact?.instagram %>" />
                               <!--end::Input-->
                             </div>
                           </div>
@@ -470,7 +474,7 @@
                             </div>
                             <div class="col-md-9">
                               <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" name="contact_youtube" placeholder="" value="" />
+                              <input type="text" class="form-control form-control-solid" name="youtube" placeholder="" value="<%= contact?.youtube %>" />
                               <!--end::Input-->
                             </div>
                           </div>
@@ -480,7 +484,7 @@
                             <div class="col-md-3 text-md-end">
                               <!--begin::Label-->
                               <label class="fs-6 fw-semibold form-label mt-3">
-                                <span>Office Address</span>
+                                <span class="required">Office Address</span>
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Set the website office address">
                                   <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                     <span class="path1"></span>
@@ -493,7 +497,7 @@
                             </div>
                             <div class="col-md-9">
                               <!--begin::Textarea-->
-                              <textarea class="form-control form-control-solid" name="contact_address" data-kt-autosize="true" rows="5" placeholder="" value=""></textarea>
+                              <textarea class="form-control form-control-solid" name="address" data-kt-autosize="true" rows="5" placeholder=""><%= contact?.address %></textarea>
                               <!--end::Textarea-->
                             </div>
                           </div>
@@ -504,11 +508,11 @@
                               <div class="d-flex">
                                 <!--begin::Button-->
                                 <button type="reset" data-kt-settings-type="cancel" class="btn btn-light me-3">
-                                  Cancel
+                                  Reset
                                 </button>
                                 <!--end::Button-->
                                 <!--begin::Button-->
-                                <button type="submit" data-kt-settings-type="submit" class="btn btn-primary">
+                                <button type="submit" kt-settings-contact-form-action="submit" class="btn btn-primary">
                                   <span class="indicator-label">Save</span>
                                   <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -748,7 +752,8 @@
         '/assets/plugins/custom/ckeditor/ckeditor-classic.bundle.js',
     ],
     customJavascripts: [
-        '/assets/js/custom/apps/settings/settings.js',
+        '/assets/js/custom/apps/settings/site/general.js',
+        '/assets/js/custom/apps/settings/site/contact.js',
     ]
   }); %>
   <!--end::Javascript-->
