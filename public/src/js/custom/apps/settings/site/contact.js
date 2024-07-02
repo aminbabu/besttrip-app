@@ -178,70 +178,10 @@ var KTSettingsContact = (function () {
         });
     };
 
-    // Init File Uploader
-    const initFileUploader = () => {
-        fileInputs = Array.from(
-            document.querySelectorAll('input[type="file"]')
-        );
-
-        fileInputs.forEach((input) => {
-            let error;
-            const previewContainer = input.closest('.kt-file-uploader');
-            const label = previewContainer.querySelector(
-                '.kt-file-uploader-label'
-            );
-            ktFileUploaderContent = label.innerHTML;
-            const maxFileSize = parseInt(
-                input.getAttribute('data-kt-file-uploader-max-size')
-            );
-
-            // preview image using URL.createObjectURL
-            input.addEventListener('change', function () {
-                const file = input.files[0];
-
-                if (!file) {
-                    return;
-                }
-
-                // create preview element and append to the container
-                const preview = document.createElement('img');
-
-                if (error) {
-                    error.remove();
-                }
-
-                if (file?.size > 1024 * 1024 * maxFileSize) {
-                    // create error message
-                    error = document.createElement('div');
-                    error.classList.add('text-danger', 'mt-2');
-                    error.innerText = `File size should not exceed ${maxFileSize}MB`;
-
-                    // restore label content
-                    label.innerHTML = ktFileUploaderContent;
-
-                    // empty input value
-                    input.value = '';
-
-                    // append error message
-                    previewContainer.appendChild(error);
-                    return;
-                }
-
-                // remove content and append preview
-                label.innerHTML = '';
-                preview.classList.add('kt-file-uploader-preview', 'mx-auto');
-                preview.src = URL.createObjectURL(file);
-                preview.alt = file.name;
-                label.appendChild(preview);
-            });
-        });
-    };
-
     return {
         // Public functions
         init: function () {
             initSettingsPaymentAdd();
-            initFileUploader();
         },
     };
 })();
