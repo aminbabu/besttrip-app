@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 17 April, 2024
+ * @update_date 02 Jul, 2024
  */
 
 // dependencies
@@ -24,7 +24,7 @@ module.exports = z
             .max(50, {
                 message: 'Title must not be more than 50 characters',
             }),
-        domain: z
+        domains: z
             .array(
                 z
                     .string({
@@ -48,6 +48,7 @@ module.exports = z
             })
             .max(255, {
                 message: 'Description must not be more than 255 characters',
-            }),
+            })
+            .optional(),
     })
     .strict();
