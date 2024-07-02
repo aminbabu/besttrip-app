@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 17 May, 2024
+ * @update_date 02 Jul, 2024
  */
 
 // dependencies
@@ -31,12 +31,25 @@ const uploadLogo =
         // check if general settings has logo
         if (generalSettings?.logo) {
             // delete previous logo
-            fs.unlinkSync(path.join(__dirname, '../../../../public/', generalSettings.logo));
+            fs.unlinkSync(
+                path.join(
+                    __dirname,
+                    '../../../../../public/',
+                    generalSettings.logo
+                )
+            );
         }
 
         // prepare file path
-        const logoPath = path.join('uploads/', `${dir}/${uuidv4()}_${logo.name}`);
-        const uploadLogoPath = path.join(__dirname, '../../../../public/', logoPath);
+        const logoPath = path.join(
+            'uploads/',
+            `${dir}/${uuidv4()}_${logo.name}`
+        );
+        const uploadLogoPath = path.join(
+            __dirname,
+            '../../../../../public/',
+            logoPath
+        );
 
         // move file to upload path
         await logo.mv(uploadLogoPath);
@@ -66,12 +79,25 @@ const uploadFavicon =
         // check if general settings has favicon
         if (generalSettings?.favicon) {
             // delete previous favicon
-            fs.unlinkSync(path.join(__dirname, '../../../../public/', generalSettings.favicon));
+            fs.unlinkSync(
+                path.join(
+                    __dirname,
+                    '../../../../public/',
+                    generalSettings.favicon
+                )
+            );
         }
 
         // prepare file path
-        const faviconPath = path.join('uploads/', `${dir}/${uuidv4()}_${favicon.name}`);
-        const uploadFaviconPath = path.join(__dirname, '../../../../public/', faviconPath);
+        const faviconPath = path.join(
+            'uploads/',
+            `${dir}/${uuidv4()}_${favicon.name}`
+        );
+        const uploadFaviconPath = path.join(
+            __dirname,
+            '../../../../public/',
+            faviconPath
+        );
 
         // move file to upload path
         await favicon.mv(uploadFaviconPath);
