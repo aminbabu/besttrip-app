@@ -15,22 +15,18 @@ module.exports = new Schema(
     {
         'about-us': {
             type: String,
-            required: true,
             trim: true,
         },
         'terms-of-conditions': {
             type: String,
-            required: true,
             trim: true,
         },
         'refund-policy': {
             type: String,
-            required: true,
             trim: true,
         },
         'privacy-policy': {
             type: String,
-            required: true,
             trim: true,
         },
     },
