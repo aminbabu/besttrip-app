@@ -75,7 +75,7 @@ router.post(
     '/media',
     isAuthorized,
     isAllowed(['admin']),
-    uploadPolicySettingsFile,
+    uploadPolicySettingsFile('/ckeditos'),
     uploadPolicySettings
 );
 
