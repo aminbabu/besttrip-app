@@ -359,12 +359,91 @@ var KTContentExclusiveOfferEdit = (function () {
         });
     };
 
+    // Toggle status
+    const toggleStatus = async () => {
+        const toggleButtons = document.querySelectorAll(
+            '.form-check-input-custom'
+        );
+
+        if (!toggleButtons.length) {
+            return;
+        }
+
+        toggleButtons.forEach((button) => {
+            button.addEventListener('change', async () => {
+                const url = button.getAttribute('data-kt-exclusive-offer-url');
+
+                // Check axios library docs: https://axios-http.com/docs/intro
+                axios
+                    .patch(url, {
+                        status: button.checked ? 'active' : 'disabled',
+                    })
+                    .then((response) => {
+                        if (response) {
+                            Swal.fire({
+                                text:
+                                    response?.data?.message ||
+                                    'Status has been updated successfully!',
+                                icon: 'success',
+                                buttonsStyling: false,
+                                confirmButtonText: 'Ok, got it!',
+                                customClass: {
+                                    confirmButton: 'btn btn-primary',
+                                },
+                                allowOutsideClick: false,
+                            });
+                        } else {
+                            // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                            Swal.fire({
+                                text:
+                                    response?.data?.message ||
+                                    'Sorry, we ran into an error! Please try again.',
+                                icon: 'error',
+                                buttonsStyling: false,
+                                confirmButtonText: 'Ok, got it!',
+                                customClass: {
+                                    confirmButton: 'btn btn-primary',
+                                },
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        const errors = error.response?.data?.message
+                            ? error.response?.data?.message
+                            : error.response.data.errors;
+
+                        Swal.fire({
+                            html: `${
+                                errors instanceof Array
+                                    ? `<ul class="text-start">${Object.values(
+                                          error.response.data.errors
+                                      )
+                                          .map(
+                                              (err) =>
+                                                  `<li>${err?.message}</li>`
+                                          )
+                                          .join('')}</ul>`
+                                    : errors
+                            }`,
+                            icon: 'error',
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ok, got it!',
+                            customClass: {
+                                confirmButton: 'btn btn-primary',
+                            },
+                        });
+                    });
+            });
+        });
+    };
+
     return {
         // Public functions
         init: function () {
             initEditContentExclusiveOffer();
             initFileUploader();
             populateData();
+            toggleStatus();
         },
     };
 })();
