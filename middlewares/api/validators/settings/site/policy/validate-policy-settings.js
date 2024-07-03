@@ -8,7 +8,9 @@
  */
 
 // dependencies
-const { policySettingsSchema } = require('../../../../../../schemas/zod/settings/site');
+const {
+    policySettingsSchema,
+} = require('../../../../../../schemas/zod/settings/site');
 const { zodErrorHandler } = require('../../../../../../handlers/errors');
 
 // export site policy settings validator middleware
