@@ -246,11 +246,59 @@ var KTContentExclusiveOfferEdit = (function () {
         });
     };
 
+    // Populate form data
+    const populateData = async () => {
+        const editButtons = document.querySelectorAll(
+            '[data-kt-content-exclusive-offers-table-filter="edit_row"]'
+        );
+
+        if (!editButtons.length) {
+            return;
+        }
+
+        editButtons.forEach((button) => {
+            button.addEventListener('click', async () => {
+                const href = button.getAttribute('href');
+
+                try {
+                    const response = await axios.get(href);
+
+                    if (response) {
+                        const data = response.data.exclusiveOffer;
+
+                        const preview = document.createElement('img');
+
+                        form.setAttribute('action', href);
+                        preview.src = data.thumbnail;
+                        preview.alt = data.link;
+                        form.querySelector('[name="link"]').value = data.link;
+                        form.querySelector('[name="status"]').value =
+                            data.status;
+                    }
+                } catch (error) {
+                    // hide modal
+                    modal.hide();
+
+                    Swal.fire({
+                        text: 'Sorry, looks like there are some errors detected, please try again.',
+                        icon: 'error',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                    });
+                }
+            });
+        });
+    };
+
     return {
         // Public functions
         init: function () {
             initEditContentExclusiveOffer();
             initFileUploader();
+            populateData();
         },
     };
 })();
