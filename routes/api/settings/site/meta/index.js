@@ -23,7 +23,10 @@ const {
 } = require('../../../../../controllers/api/settings/site/meta');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
+const {
+    isAuthorized,
+    isAllowed,
+} = require('../../../../../middlewares/api/auth');
 const {
     validateMetaSettingsId,
     validateMetaSettings,
@@ -60,7 +63,13 @@ router.get('/:id', validateMetaSettingsId, getMetaSetting);
  * @access private - ['admin']
  * @method POST
  */
-router.post('/', isAuthorized, isAllowed('admin'), validateMetaSettings, createMetaSetting);
+router.post(
+    '/',
+    isAuthorized,
+    isAllowed('admin'),
+    validateMetaSettings,
+    createMetaSetting
+);
 
 /**
  * @description update meta settings
@@ -91,7 +100,13 @@ router.patch(
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAuthorized, isAllowed('admin'), validateMetaSettingsId, deleteMetaSetting);
+router.delete(
+    '/:id',
+    isAuthorized,
+    isAllowed('admin'),
+    validateMetaSettingsId,
+    deleteMetaSetting
+);
 
 // export router
 module.exports = router;
