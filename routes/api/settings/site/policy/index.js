@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 18 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -16,15 +16,15 @@ const router = express.Router();
 // controllers
 const {
     getPolicies,
-    getPolicy,
-    createPolicy,
-    updatePolicy,
+    updateOrCreagtePolicy,
 } = require('../../../../../controllers/api/settings/site/policy');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
-    validatePolicySettingsKey,
+    isAuthorized,
+    isAllowed,
+} = require('../../../../../middlewares/api/auth');
+const {
     validatePolicySettings,
 } = require('../../../../../middlewares/api/validators/settings/site/policy');
 
@@ -40,46 +40,21 @@ const {
 router.get('/', getPolicies);
 
 /**
- * @description get policy settings
- * @param {string} path - '/api/settings/site/policy/:key'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} validator - ['validatePolicySettingsKey']
- * @param {function} controller - ['getPolicy']
- * @returns {object} - router
- * @access public
- * @method GET
- */
-router.get('/:key', validatePolicySettingsKey, getPolicy);
-
-/**
  * @description create policy settings
  * @param {string} path - '/api/settings/site/policy'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validatePolicySettings']
- * @param {function} controller - ['createPolicy']
+ * @param {function} controller - ['updateOrCreagtePolicy']
  * @returns {object} - router
  * @access private - ['admin']
  * @method POST
  */
-router.post('/', isAuthorized, isAllowed(['admin']), validatePolicySettings, createPolicy);
-
-/**
- * @description update policy settings
- * @param {string} path - '/api/settings/site/policy/:key'
- * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} validator - ['validatePolicySettingsKey', 'validatePolicySettings']
- * @param {function} controller - ['updatePolicy']
- * @returns {object} - router
- * @access private - ['admin']
- * @method PATCH
- */
-router.patch(
-    '/:key',
+router.post(
+    '/',
     isAuthorized,
     isAllowed(['admin']),
-    validatePolicySettingsKey,
     validatePolicySettings,
-    updatePolicy
+    updateOrCreagtePolicy
 );
 
 // export router
