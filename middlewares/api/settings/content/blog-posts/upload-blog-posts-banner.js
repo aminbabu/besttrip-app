@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 17 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -32,12 +32,21 @@ module.exports =
         // check if blog post banner exists
         if (blogPost?.banner) {
             // delete previous banner
-            fs.unlinkSync(path.join(__dirname, '../../../../public/', blogPost.banner));
+            fs.unlinkSync(
+                path.join(__dirname, '../../../../public', blogPost.banner)
+            );
         }
 
         // prepare file path
-        const bannerPath = path.join('uploads/', `${dir}/${uuidv4()}_${banner.name}`);
-        const uploadLogoPath = path.join(__dirname, '../../../../public/', bannerPath);
+        const bannerPath = path.join(
+            '/uploads/',
+            `${dir}/${uuidv4()}_${banner.name}`
+        );
+        const uploadLogoPath = path.join(
+            __dirname,
+            '../../../../public',
+            bannerPath
+        );
 
         // move file to upload path
         await banner.mv(uploadLogoPath);

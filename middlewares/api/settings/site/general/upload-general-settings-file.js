@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 13 April, 2024
- * @update_date 02 Jul, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -34,7 +34,7 @@ const uploadLogo =
             fs.unlinkSync(
                 path.join(
                     __dirname,
-                    '../../../../../public/',
+                    '../../../../../public',
                     generalSettings.logo
                 )
             );
@@ -42,12 +42,12 @@ const uploadLogo =
 
         // prepare file path
         const logoPath = path.join(
-            'uploads/',
+            '/uploads/',
             `${dir}/${uuidv4()}_${logo.name}`
         );
         const uploadLogoPath = path.join(
             __dirname,
-            '../../../../../public/',
+            '../../../../../public',
             logoPath
         );
 
@@ -82,7 +82,7 @@ const uploadFavicon =
             fs.unlinkSync(
                 path.join(
                     __dirname,
-                    '../../../../public/',
+                    '../../../../public',
                     generalSettings.favicon
                 )
             );
@@ -90,12 +90,12 @@ const uploadFavicon =
 
         // prepare file path
         const faviconPath = path.join(
-            'uploads/',
+            '/uploads/',
             `${dir}/${uuidv4()}_${favicon.name}`
         );
         const uploadFaviconPath = path.join(
             __dirname,
-            '../../../../public/',
+            '../../../../public',
             faviconPath
         );
 

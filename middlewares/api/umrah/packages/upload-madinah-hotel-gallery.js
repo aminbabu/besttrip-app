@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 17 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -39,27 +39,36 @@ module.exports =
             // delete previous extra thumbnails
             madinahhHotelExtraThumbnails.forEach(
                 (thumbnail) =>
-                    thumbnail && fs.unlinkSync(path.join(__dirname, '../../../public/', thumbnail))
+                    thumbnail &&
+                    fs.unlinkSync(
+                        path.join(__dirname, '../../../public', thumbnail)
+                    )
             );
         }
 
         // prepare file path
-        const updateExtraThumbnails = madinahhHotelExtraThumbnails.map((thumbnail) => {
-            const updatedThumbnail = { ...thumbnail };
-            const thumbnailPath = path.join(
-                'uploads/',
-                `${dir}/${uuidv4()}_${updatedThumbnail.name}`
-            );
-            const uploadLogoPath = path.join(__dirname, '../../../public/', thumbnailPath);
+        const updateExtraThumbnails = madinahhHotelExtraThumbnails.map(
+            (thumbnail) => {
+                const updatedThumbnail = { ...thumbnail };
+                const thumbnailPath = path.join(
+                    '/uploads/',
+                    `${dir}/${uuidv4()}_${updatedThumbnail.name}`
+                );
+                const uploadLogoPath = path.join(
+                    __dirname,
+                    '../../../public',
+                    thumbnailPath
+                );
 
-            // move file to upload path
-            updatedThumbnail.mv(uploadLogoPath);
+                // move file to upload path
+                updatedThumbnail.mv(uploadLogoPath);
 
-            // set file path to thumbnail object
-            updatedThumbnail.path = thumbnailPath;
+                // set file path to thumbnail object
+                updatedThumbnail.path = thumbnailPath;
 
-            return updatedThumbnail;
-        });
+                return updatedThumbnail;
+            }
+        );
 
         // set file path to request body
         req.files.madinahhHotelExtraThumbnails = updateExtraThumbnails;

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 11 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -32,12 +32,20 @@ module.exports = async (req, res, next) => {
 
         // delete blog post thumbnail
         if (blogPost?.thumbnail) {
-            fs.unlinkSync(path.join(__dirname, '../../../../../public/', blogPost.thumbnail));
+            fs.unlinkSync(
+                path.join(
+                    __dirname,
+                    '../../../../../public',
+                    blogPost.thumbnail
+                )
+            );
         }
 
         // delete blog post banner
         if (blogPost?.banner) {
-            fs.unlinkSync(path.join(__dirname, '../../../../../public/', blogPost.banner));
+            fs.unlinkSync(
+                path.join(__dirname, '../../../../../public', blogPost.banner)
+            );
         }
 
         // send response

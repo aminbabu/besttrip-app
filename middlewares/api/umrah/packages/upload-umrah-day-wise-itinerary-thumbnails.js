@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 May, 2024
- * @update_date 17 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -40,7 +40,13 @@ module.exports =
             umrahPackage.itineraryDays.forEach(
                 (itinerary) =>
                     itinerary?.thumbnail &&
-                    fs.unlinkSync(path.join(__dirname, '../../../public/', itinerary.thumbnail))
+                    fs.unlinkSync(
+                        path.join(
+                            __dirname,
+                            '../../../public',
+                            itinerary.thumbnail
+                        )
+                    )
             );
         }
 
@@ -48,10 +54,14 @@ module.exports =
         const updateItineraryDays = itineraryDays.map((itinerary) => {
             const updatedItinerary = { ...itinerary };
             const thumbnailPath = path.join(
-                'uploads/',
+                '/uploads/',
                 `${dir}/${uuidv4()}_${updatedItinerary.thumbnail.name}`
             );
-            const uploadLogoPath = path.join(__dirname, '../../../public/', thumbnailPath);
+            const uploadLogoPath = path.join(
+                __dirname,
+                '../../../public',
+                thumbnailPath
+            );
 
             // move file to upload path
             updatedItinerary.thumbnail.mv(uploadLogoPath);

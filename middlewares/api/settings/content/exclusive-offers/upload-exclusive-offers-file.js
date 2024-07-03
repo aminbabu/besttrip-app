@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 17 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -32,12 +32,25 @@ module.exports =
         // check if exclusive offer thumbnail exists
         if (exclusiveOffer?.thumbnail) {
             // delete previous thumbnail
-            fs.unlinkSync(path.join(__dirname, '../../../../public/', exclusiveOffer.thumbnail));
+            fs.unlinkSync(
+                path.join(
+                    __dirname,
+                    '../../../../public',
+                    exclusiveOffer.thumbnail
+                )
+            );
         }
 
         // prepare file path
-        const thumbnailPath = path.join('uploads/', `${dir}/${uuidv4()}_${thumbnail.name}`);
-        const uploadLogoPath = path.join(__dirname, '../../../../public/', thumbnailPath);
+        const thumbnailPath = path.join(
+            '/uploads/',
+            `${dir}/${uuidv4()}_${thumbnail.name}`
+        );
+        const uploadLogoPath = path.join(
+            __dirname,
+            '../../../../public',
+            thumbnailPath
+        );
 
         // move file to upload path
         await thumbnail.mv(uploadLogoPath);

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 16 June, 2024
- * @update_date 16 June, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -32,12 +32,25 @@ module.exports =
         // check if payment attachment exists
         if (paymentRequest?.attachment) {
             // delete existing payment attachment
-            fs.unlinkSync(path.join(__dirname, '../../../public/', paymentRequest.attachment));
+            fs.unlinkSync(
+                path.join(
+                    __dirname,
+                    '../../../public',
+                    paymentRequest.attachment
+                )
+            );
         }
 
         // prepare file path
-        const uploadPath = path.join('uploads/', `${dir}/${uuidv4()}_${attachment.name}`);
-        const uploadFilePath = path.join(__dirname, '../../../public/', uploadPath);
+        const uploadPath = path.join(
+            '/uploads/',
+            `${dir}/${uuidv4()}_${attachment.name}`
+        );
+        const uploadFilePath = path.join(
+            __dirname,
+            '../../../public',
+            uploadPath
+        );
 
         // move file to upload path
         attachment.mv(uploadFilePath);

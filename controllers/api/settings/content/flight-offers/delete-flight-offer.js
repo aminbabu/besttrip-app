@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 11 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -32,7 +32,13 @@ module.exports = async (req, res, next) => {
 
         // delete flight offer thumbnail
         if (flightOffer?.thumbnail) {
-            fs.unlinkSync(path.join(__dirname, '../../../../../public/', flightOffer.thumbnail));
+            fs.unlinkSync(
+                path.join(
+                    __dirname,
+                    '../../../../../public',
+                    flightOffer.thumbnail
+                )
+            );
         }
 
         // send response

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 17 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -32,15 +32,25 @@ module.exports =
         // check if umrah package umrah thumbnail exists
         if (umrahPackage?.umrahThumbnail) {
             // delete previous umrah thumbnail
-            fs.unlinkSync(path.join(__dirname, '../../../public/', umrahPackage.umrahThumbnail));
+            fs.unlinkSync(
+                path.join(
+                    __dirname,
+                    '../../../public',
+                    umrahPackage.umrahThumbnail
+                )
+            );
         }
 
         // prepare file path
         const umrahThumbnailPath = path.join(
-            'uploads/',
+            '/uploads/',
             `${dir}/${uuidv4()}_${umrahThumbnail.name}`
         );
-        const uploadLogoPath = path.join(__dirname, '../../../public/', umrahThumbnailPath);
+        const uploadLogoPath = path.join(
+            __dirname,
+            '../../../public',
+            umrahThumbnailPath
+        );
 
         // move file to upload path
         await umrahThumbnail.mv(uploadLogoPath);

@@ -30,17 +30,28 @@ module.exports =
             }
 
             // get user
-            const user = id ? (await Customer.findById(id)) || (await User.findById(id)) : req.user;
+            const user = id
+                ? (await Customer.findById(id)) || (await User.findById(id))
+                : req.user;
 
             // check if user has avatar
             if (user.avatar) {
                 // delete previous avatar
-                fs.unlinkSync(path.join(__dirname, '../../../public/', user.avatar));
+                fs.unlinkSync(
+                    path.join(__dirname, '../../../public', user.avatar)
+                );
             }
 
             // prepare file path
-            const filePath = path.join('uploads/', `${dir}/${uuidv4()}_${user._id}_${avatar.name}`);
-            const uploadPath = path.join(__dirname, '../../../public/', filePath);
+            const filePath = path.join(
+                '/uploads/',
+                `${dir}/${uuidv4()}_${user._id}_${avatar.name}`
+            );
+            const uploadPath = path.join(
+                __dirname,
+                '../../../public',
+                filePath
+            );
 
             // move file to upload path
             await avatar.mv(uploadPath);

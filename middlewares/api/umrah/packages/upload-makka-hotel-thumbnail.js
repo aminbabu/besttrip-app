@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 17 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -33,16 +33,24 @@ module.exports =
         if (umrahPackage?.makkahHotelThumbnail) {
             // delete previous makka hotel thumbnail
             fs.unlinkSync(
-                path.join(__dirname, '../../../public/', umrahPackage.makkahHotelThumbnail)
+                path.join(
+                    __dirname,
+                    '../../../public',
+                    umrahPackage.makkahHotelThumbnail
+                )
             );
         }
 
         // prepare file path
         const makkahHotelThumbnailPath = path.join(
-            'uploads/',
+            '/uploads/',
             `${dir}/${uuidv4()}_${makkahHotelThumbnail.name}`
         );
-        const uploadLogoPath = path.join(__dirname, '../../../public/', makkahHotelThumbnailPath);
+        const uploadLogoPath = path.join(
+            __dirname,
+            '../../../public',
+            makkahHotelThumbnailPath
+        );
 
         // move file to upload path
         await makkahHotelThumbnail.mv(uploadLogoPath);

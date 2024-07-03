@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 May, 2024
- * @update_date 17 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -39,7 +39,10 @@ module.exports =
             // delete previous extra thumbnails
             umrahPackage.extraThumbnails.forEach(
                 (thumbnail) =>
-                    thumbnail && fs.unlinkSync(path.join(__dirname, '../../../public/', thumbnail))
+                    thumbnail &&
+                    fs.unlinkSync(
+                        path.join(__dirname, '../../../public', thumbnail)
+                    )
             );
         }
 
@@ -47,10 +50,14 @@ module.exports =
         const updateExtraThumbnails = extraThumbnails.map((thumbnail) => {
             const updatedThumbnail = { ...thumbnail };
             const thumbnailPath = path.join(
-                'uploads/',
+                '/uploads/',
                 `${dir}/${uuidv4()}_${updatedThumbnail.name}`
             );
-            const uploadLogoPath = path.join(__dirname, '../../../public/', thumbnailPath);
+            const uploadLogoPath = path.join(
+                __dirname,
+                '../../../public',
+                thumbnailPath
+            );
 
             // move file to upload path
             updatedThumbnail.mv(uploadLogoPath);

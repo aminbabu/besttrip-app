@@ -11,7 +11,6 @@
 const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const { GeneralSettings } = require('../../../../../models');
 
 // export upload policy settings file middleware
 module.exports =
@@ -22,12 +21,12 @@ module.exports =
 
         // prepare file path
         const filePath = path.join(
-            'uploads/',
+            '/uploads/',
             `${dir}/${uuidv4()}_${upload.name}`
         );
         const uploadPath = path.join(
             __dirname,
-            '../../../../../public/',
+            '../../../../../public',
             filePath
         );
 
