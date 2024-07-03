@@ -48,10 +48,15 @@ const KTPaymentRequests = (function () {
 
                         // Check axios library docs: https://axios-http.com/docs/intro
                         axios
-                            .patch(submitButton.closest('form').getAttribute('action'), {
-                                note: form.note.value,
-                                status: 'rejected',
-                            })
+                            .patch(
+                                submitButton
+                                    .closest('form')
+                                    .getAttribute('action'),
+                                {
+                                    note: form.note.value,
+                                    status: 'rejected',
+                                }
+                            )
                             .then((response) => {
                                 // hide modal
                                 modal.hide();
@@ -60,7 +65,7 @@ const KTPaymentRequests = (function () {
                                     // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                     Swal.fire({
                                         text:
-                                            response.data.message ||
+                                            response?.data?.message ||
                                             'Payment request has been changed to rejected!',
                                         icon: 'error',
                                         buttonsStyling: false,
@@ -74,8 +79,9 @@ const KTPaymentRequests = (function () {
                                         form.reset();
 
                                         // Get redirect URL from the form
-                                        const redirectUrl =
-                                            form.getAttribute('data-kt-redirect-url');
+                                        const redirectUrl = form.getAttribute(
+                                            'data-kt-redirect-url'
+                                        );
 
                                         if (result.isConfirmed && redirectUrl) {
                                             location.href = redirectUrl;
@@ -95,8 +101,8 @@ const KTPaymentRequests = (function () {
                                 }
                             })
                             .catch((error) => {
-                                const errors = error.response.data.message
-                                    ? error.response.data.message
+                                const errors = error.response?.data?.message
+                                    ? error.response?.data?.message
                                     : error.response.data.errors;
 
                                 Swal.fire({
@@ -105,7 +111,10 @@ const KTPaymentRequests = (function () {
                                             ? `<ul class="text-start">${Object.values(
                                                   error.response.data.errors
                                               )
-                                                  .map((err) => `<li>${err?.message}</li>`)
+                                                  .map(
+                                                      (err) =>
+                                                          `<li>${err?.message}</li>`
+                                                  )
                                                   .join('')}</ul>`
                                             : errors
                                     }`,
@@ -119,7 +128,9 @@ const KTPaymentRequests = (function () {
                             })
                             .then(() => {
                                 // Hide loading indication
-                                submitButton.removeAttribute('data-kt-indicator');
+                                submitButton.removeAttribute(
+                                    'data-kt-indicator'
+                                );
 
                                 // Enable button
                                 submitButton.disabled = false;
@@ -228,7 +239,7 @@ const KTPaymentRequests = (function () {
                             .then((response) => {
                                 // hide modal
                                 modal.hide();
-                                
+
                                 if (response) {
                                     // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                     Swal.fire({
@@ -242,7 +253,8 @@ const KTPaymentRequests = (function () {
                                         allowOutsideClick: false,
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            location.href = '/dashboard/payment-requests/requested';
+                                            location.href =
+                                                '/dashboard/payment-requests/requested';
                                         }
                                     });
                                 } else {
@@ -259,8 +271,8 @@ const KTPaymentRequests = (function () {
                                 }
                             })
                             .catch((error) => {
-                                const errors = error.response.data.message
-                                    ? error.response.data.message
+                                const errors = error.response?.data?.message
+                                    ? error.response?.data?.message
                                     : error.response.data.errors;
 
                                 Swal.fire({
@@ -269,7 +281,10 @@ const KTPaymentRequests = (function () {
                                             ? `<ul class="text-start">${Object.values(
                                                   error.response.data.errors
                                               )
-                                                  .map((err) => `<li>${err?.message}</li>`)
+                                                  .map(
+                                                      (err) =>
+                                                          `<li>${err?.message}</li>`
+                                                  )
                                                   .join('')}</ul>`
                                             : errors
                                     }`,
@@ -312,7 +327,9 @@ const KTPaymentRequests = (function () {
         // Public functions
         init() {
             // Elements
-            element = document.querySelector('#kt_modal_reject_payment_request');
+            element = document.querySelector(
+                '#kt_modal_reject_payment_request'
+            );
 
             if (!element) {
                 return;
@@ -320,7 +337,9 @@ const KTPaymentRequests = (function () {
 
             modal = new bootstrap.Modal(element);
 
-            form = document.querySelector('#kt_modal_reject_payment_request_form');
+            form = document.querySelector(
+                '#kt_modal_reject_payment_request_form'
+            );
             submitButton = form.querySelector(
                 '[data-kt-reject-payment-request-modal-action="submit"]'
             );
@@ -342,7 +361,7 @@ const KTPaymentRequests = (function () {
             handleRequestRejection();
         },
     };
-}());
+})();
 
 // On document ready
 KTUtil.onDOMContentLoaded(() => {

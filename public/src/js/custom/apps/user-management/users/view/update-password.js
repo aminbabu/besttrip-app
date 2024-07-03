@@ -39,9 +39,11 @@ const KTUsersUpdatePassword = (function () {
                         },
                         identical: {
                             compare() {
-                                return form.querySelector('[name="password"]').value;
+                                return form.querySelector('[name="password"]')
+                                    .value;
                             },
-                            message: 'The password and its confirm are not the same',
+                            message:
+                                'The password and its confirm are not the same',
                         },
                     },
                 },
@@ -58,7 +60,9 @@ const KTUsersUpdatePassword = (function () {
         });
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
+        const closeButton = element.querySelector(
+            '[data-kt-users-modal-action="close"]'
+        );
         closeButton.addEventListener('click', (e) => {
             e.preventDefault();
 
@@ -92,7 +96,9 @@ const KTUsersUpdatePassword = (function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-users-modal-action="cancel"]');
+        const cancelButton = element.querySelector(
+            '[data-kt-users-modal-action="cancel"]'
+        );
         cancelButton.addEventListener('click', (e) => {
             e.preventDefault();
 
@@ -126,7 +132,9 @@ const KTUsersUpdatePassword = (function () {
         });
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-users-modal-action="submit"]');
+        const submitButton = element.querySelector(
+            '[data-kt-users-modal-action="submit"]'
+        );
         submitButton.addEventListener('click', (e) => {
             // Prevent default button action
             e.preventDefault();
@@ -142,16 +150,19 @@ const KTUsersUpdatePassword = (function () {
                         submitButton.disabled = true;
 
                         // Get the form action URL
-                        const url = submitButton.closest('form').getAttribute('action');
+                        const url = submitButton
+                            .closest('form')
+                            .getAttribute('action');
 
                         // Prepare form data to sumbit
                         const payload = {
                             password: form.password.value,
                             confirmPassword: form.password_confirmation.value,
-                        }
+                        };
 
                         if (url.includes('self')) {
-                            payload.currentPassword = form.current_password.value;
+                            payload.currentPassword =
+                                form.current_password.value;
                         }
 
                         // Check axios library docs: https://axios-http.com/docs/intro
@@ -163,7 +174,7 @@ const KTUsersUpdatePassword = (function () {
 
                                 Swal.fire({
                                     text:
-                                        response.data.message ||
+                                        response?.data?.message ||
                                         'Your password has been updated successfully!',
                                     icon: 'success',
                                     buttonsStyling: false,
@@ -174,7 +185,9 @@ const KTUsersUpdatePassword = (function () {
                                     allowOutsideClick: false,
                                 }).then((result) => {
                                     // Get the redirect URL from the form
-                                    const redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                    const redirectUrl = form.getAttribute(
+                                        'data-kt-redirect-url'
+                                    );
 
                                     if (result.isConfirmed && redirectUrl) {
                                         modal.hide();
@@ -183,8 +196,8 @@ const KTUsersUpdatePassword = (function () {
                                 });
                             })
                             .catch((error) => {
-                                const errors = error.response.data.message
-                                    ? error.response.data.message
+                                const errors = error.response?.data?.message
+                                    ? error.response?.data?.message
                                     : error.response.data.errors;
 
                                 Swal.fire({
@@ -193,7 +206,10 @@ const KTUsersUpdatePassword = (function () {
                                             ? `<ul class="text-start">${Object.values(
                                                   error.response.data.errors
                                               )
-                                                  .map((err) => `<li>${err?.message}</li>`)
+                                                  .map(
+                                                      (err) =>
+                                                          `<li>${err?.message}</li>`
+                                                  )
                                                   .join('')}</ul>`
                                             : errors
                                     }`,
@@ -207,7 +223,9 @@ const KTUsersUpdatePassword = (function () {
                             })
                             .then(() => {
                                 // Hide loading indication
-                                submitButton.removeAttribute('data-kt-indicator');
+                                submitButton.removeAttribute(
+                                    'data-kt-indicator'
+                                );
 
                                 // Enable button
                                 submitButton.disabled = false;
@@ -235,7 +253,7 @@ const KTUsersUpdatePassword = (function () {
             initUpdatePassword();
         },
     };
-}());
+})();
 
 // On document ready
 KTUtil.onDOMContentLoaded(() => {

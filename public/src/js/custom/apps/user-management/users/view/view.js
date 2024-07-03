@@ -37,7 +37,7 @@ const KTUsersViewMain = (function () {
                                 // Show success popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
                                     text:
-                                        response.data.message ||
+                                        response?.data?.message ||
                                         'All sessions have been signed out!',
                                     icon: 'success',
                                     buttonsStyling: false,
@@ -66,8 +66,8 @@ const KTUsersViewMain = (function () {
                             }
                         })
                         .catch((error) => {
-                            const errors = error.response.data.message
-                                ? error.response.data.message
+                            const errors = error.response?.data?.message
+                                ? error.response?.data?.message
                                 : error.response.data.errors;
 
                             Swal.fire({
@@ -76,7 +76,10 @@ const KTUsersViewMain = (function () {
                                         ? `<ul class="text-start">${Object.values(
                                               error.response.data.errors
                                           )
-                                              .map((err) => `<li>${err?.message}</li>`)
+                                              .map(
+                                                  (err) =>
+                                                      `<li>${err?.message}</li>`
+                                              )
                                               .join('')}</ul>`
                                         : errors
                                 }`,
@@ -105,7 +108,9 @@ const KTUsersViewMain = (function () {
 
     // Delete two step authentication handler
     const initDeleteTwoStep = () => {
-        const deleteButton = document.getElementById('kt_users_delete_two_step');
+        const deleteButton = document.getElementById(
+            'kt_users_delete_two_step'
+        );
 
         if (!deleteButton) {
             return;
@@ -158,7 +163,7 @@ const KTUsersViewMain = (function () {
             initDeleteTwoStep();
         },
     };
-}());
+})();
 
 // On document ready
 KTUtil.onDOMContentLoaded(() => {

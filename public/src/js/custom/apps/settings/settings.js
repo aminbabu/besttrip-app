@@ -111,7 +111,7 @@ var KTAppSettings = (function () {
                                         // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                         Swal.fire({
                                             text:
-                                                response.data.message ||
+                                                response?.data?.message ||
                                                 'Site settings updated successfully!',
                                             icon: 'success',
                                             buttonsStyling: false,
@@ -126,7 +126,7 @@ var KTAppSettings = (function () {
                                         // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                         Swal.fire({
                                             text:
-                                                response.data.message ||
+                                                response?.data?.message ||
                                                 'Sorry, something went wrong. Please try again.',
                                             icon: 'error',
                                             buttonsStyling: false,
@@ -139,8 +139,8 @@ var KTAppSettings = (function () {
                                     }
                                 })
                                 .catch((error) => {
-                                    const errors = error.response.data.message
-                                        ? error.response.data.message
+                                    const errors = error.response?.data?.message
+                                        ? error.response?.data?.message
                                         : error.response.data.errors;
 
                                     Swal.fire({

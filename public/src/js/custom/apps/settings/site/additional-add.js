@@ -69,7 +69,7 @@ const KTUsersAddAdditional = (function () {
                                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                     Swal.fire({
                                         text:
-                                            response.data.message ||
+                                            response?.data?.message ||
                                             'Additional meta tag has been successfully added.',
                                         icon: 'success',
                                         buttonsStyling: false,
@@ -105,8 +105,8 @@ const KTUsersAddAdditional = (function () {
                                 }
                             })
                             .catch((error) => {
-                                const errors = error.response.data.message
-                                    ? error.response.data.message
+                                const errors = error.response?.data?.message
+                                    ? error.response?.data?.message
                                     : error.response.data.errors;
 
                                 Swal.fire({

@@ -29,7 +29,9 @@ const KTPaymentRequestRejected = (function () {
             trigger.addEventListener('click', (e) => {
                 e.preventDefault();
                 const url = trigger.getAttribute('href');
-                const messageEl = element.querySelector('#kt_payment_requests_rejected_reason');
+                const messageEl = element.querySelector(
+                    '#kt_payment_requests_rejected_reason'
+                );
 
                 // Check axios library docs: https://axios-http.com/docs/intro
                 axios
@@ -58,8 +60,8 @@ const KTPaymentRequestRejected = (function () {
                         }
                     })
                     .catch((error) => {
-                        const errors = error.response.data.message
-                            ? error.response.data.message
+                        const errors = error.response?.data?.message
+                            ? error.response?.data?.message
                             : error.response.data.errors;
 
                         Swal.fire({
@@ -68,7 +70,10 @@ const KTPaymentRequestRejected = (function () {
                                     ? `<ul class="text-start">${Object.values(
                                           error.response.data.errors
                                       )
-                                          .map((err) => `<li>${err?.message}</li>`)
+                                          .map(
+                                              (err) =>
+                                                  `<li>${err?.message}</li>`
+                                          )
                                           .join('')}</ul>`
                                     : errors
                             }`,
@@ -87,7 +92,9 @@ const KTPaymentRequestRejected = (function () {
     return {
         // Public functions
         init() {
-            element = document.getElementById('kt-reject-reason-payment-request-modal');
+            element = document.getElementById(
+                'kt-reject-reason-payment-request-modal'
+            );
 
             if (!element) {
                 return;
@@ -99,7 +106,7 @@ const KTPaymentRequestRejected = (function () {
             showPaymentRequestData();
         },
     };
-}());
+})();
 
 // On document ready
 KTUtil.onDOMContentLoaded(() => {

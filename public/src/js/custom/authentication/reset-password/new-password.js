@@ -32,9 +32,11 @@ const KTAuthNewPassword = (function () {
                         },
                         identical: {
                             compare() {
-                                return form.querySelector('[name="password"]').value;
+                                return form.querySelector('[name="password"]')
+                                    .value;
                             },
-                            message: 'The password and its confirm are not the same',
+                            message:
+                                'The password and its confirm are not the same',
                         },
                     },
                 },
@@ -53,11 +55,14 @@ const KTAuthNewPassword = (function () {
             },
         });
 
-        form.querySelector('input[name="password"]').addEventListener('input', function () {
-            if (this.value.length > 0) {
-                validator.updateFieldStatus('password', 'NotValidated');
+        form.querySelector('input[name="password"]').addEventListener(
+            'input',
+            function () {
+                if (this.value.length > 0) {
+                    validator.updateFieldStatus('password', 'NotValidated');
+                }
             }
-        });
+        );
     };
 
     const handleSubmitDemo = function (e) {
@@ -93,12 +98,17 @@ const KTAuthNewPassword = (function () {
                             },
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                form.querySelector('[name="password"]').value = '';
-                                form.querySelector('[name="confirm-password"]').value = '';
+                                form.querySelector('[name="password"]').value =
+                                    '';
+                                form.querySelector(
+                                    '[name="confirm-password"]'
+                                ).value = '';
                                 passwordMeter.reset(); // reset password meter
                                 // form.submit();
 
-                                const redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                const redirectUrl = form.getAttribute(
+                                    'data-kt-redirect-url'
+                                );
                                 if (redirectUrl) {
                                     location.href = redirectUrl;
                                 }
@@ -140,10 +150,14 @@ const KTAuthNewPassword = (function () {
 
                     // Check axios library docs: https://axios-http.com/docs/intro
                     axios
-                        .post(submitButton.closest('form').getAttribute('action'), {
-                            password: form.password.value,
-                            confirmPassword: form.password_confirmation.value,
-                        })
+                        .post(
+                            submitButton.closest('form').getAttribute('action'),
+                            {
+                                password: form.password.value,
+                                confirmPassword:
+                                    form.password_confirmation.value,
+                            }
+                        )
                         .then((response) => {
                             if (response) {
                                 // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -161,7 +175,9 @@ const KTAuthNewPassword = (function () {
                                     form.reset();
 
                                     // Get redirect URL from the form
-                                    const redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                    const redirectUrl = form.getAttribute(
+                                        'data-kt-redirect-url'
+                                    );
 
                                     if (result.isConfirmed && redirectUrl) {
                                         location.href = redirectUrl;
@@ -181,8 +197,8 @@ const KTAuthNewPassword = (function () {
                             }
                         })
                         .catch((error) => {
-                            const errors = error.response.data.message
-                                ? error.response.data.message
+                            const errors = error.response?.data?.message
+                                ? error.response?.data?.message
                                 : error.response.data.errors;
 
                             Swal.fire({
@@ -191,7 +207,10 @@ const KTAuthNewPassword = (function () {
                                         ? `<ul class="text-start">${Object.values(
                                               error.response.data.errors
                                           )
-                                              .map((err) => `<li>${err?.message}</li>`)
+                                              .map(
+                                                  (err) =>
+                                                      `<li>${err?.message}</li>`
+                                              )
                                               .join('')}</ul>`
                                         : errors
                                 }`,
@@ -258,7 +277,7 @@ const KTAuthNewPassword = (function () {
             // }
         },
     };
-}());
+})();
 
 // On document ready
 KTUtil.onDOMContentLoaded(() => {
