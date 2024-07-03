@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 15 June, 2024
- * @update_date 15 June, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
         const policies = await PolicySettings.findOne();
 
         // get meta settings
-        const meta = await MetaSettings.findOne();
+        const meta = await MetaSettings.find();
 
         // render site view
         return res.render('dashboard/settings/site', {
