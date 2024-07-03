@@ -55,52 +55,97 @@ var KTContentExclusiveOffers = (function () {
             d.addEventListener('click', function (e) {
                 e.preventDefault();
 
-                // Select parent row
-                const parent = e.target.closest('tr');
-
-                // Get package name
-                const packageName = parent.querySelectorAll('td')[1].innerText;
-
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text:
-                        'Are you sure you want to delete ' + packageName + '?',
+                    text: 'Are you sure you want to delete this offer?',
                     icon: 'warning',
                     showCancelButton: true,
                     buttonsStyling: false,
                     confirmButtonText: 'Yes, delete!',
                     cancelButtonText: 'No, cancel',
                     customClass: {
-                        confirmButton: 'btn fw-bold btn-danger',
-                        cancelButton: 'btn fw-bold btn-active-light-primary',
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-active-light-primary',
                     },
                 }).then(function (result) {
                     if (result.value) {
-                        Swal.fire({
-                            text: 'You have deleted ' + packageName + '!.',
-                            icon: 'success',
-                            buttonsStyling: false,
-                            confirmButtonText: 'Ok, got it!',
-                            customClass: {
-                                confirmButton: 'btn fw-bold btn-primary',
-                            },
-                        })
-                            .then(function () {
-                                // Remove current row
-                                datatable.row($(parent)).remove().draw();
+                        // Check axios library docs: https://axios-http.com/docs/intro
+                        axios
+                            .delete(url)
+                            .then((response) => {
+                                if (response) {
+                                    Swal.fire({
+                                        text:
+                                            response?.data?.message ||
+                                            'The offer has been deleted successfully!',
+                                        icon: 'success',
+                                        buttonsStyling: false,
+                                        confirmButtonText: 'Ok, got it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary',
+                                        },
+                                        allowOutsideClick: false,
+                                    })
+                                        .then(function () {
+                                            // Remove current row
+                                            datatable
+                                                .row($(parent))
+                                                .remove()
+                                                .draw();
+                                        })
+                                        .then(function () {
+                                            // Detect checked checkboxes
+                                            toggleToolbars();
+                                        });
+                                } else {
+                                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                    Swal.fire({
+                                        text:
+                                            response?.data?.message ||
+                                            'Sorry, we ran into an error! Please try again.',
+                                        icon: 'error',
+                                        buttonsStyling: false,
+                                        confirmButtonText: 'Ok, got it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary',
+                                        },
+                                    });
+                                }
                             })
-                            .then(function () {
-                                // Detect checked checkboxes
-                                toggleToolbars();
+                            .catch((error) => {
+                                const errors = error.response?.data?.message
+                                    ? error.response?.data?.message
+                                    : error.response.data.errors;
+
+                                Swal.fire({
+                                    html: `${
+                                        errors instanceof Array
+                                            ? `<ul class="text-start">${Object.values(
+                                                  error.response.data.errors
+                                              )
+                                                  .map(
+                                                      (err) =>
+                                                          `<li>${err?.message}</li>`
+                                                  )
+                                                  .join('')}</ul>`
+                                            : errors
+                                    }`,
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
                             });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: packageName + ' was not deleted.',
+                            text: 'The offer was not deleted.',
                             icon: 'error',
                             buttonsStyling: false,
                             confirmButtonText: 'Ok, got it!',
                             customClass: {
-                                confirmButton: 'btn fw-bold btn-primary',
+                                confirmButton: 'btn btn-primary',
                             },
                         });
                     }
