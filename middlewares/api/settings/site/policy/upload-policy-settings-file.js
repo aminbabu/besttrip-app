@@ -18,29 +18,24 @@ module.exports =
     (dir = '/ckeditos') =>
     async (req, res, next) => {
         // get files
-        const { files } = req || {};
+        const { upload } = req.files;
 
         // prepare file path
-        files.forEach(async (file) => {
-            const filePath = path.join(
-                'uploads/',
-                `${dir}/${uuidv4()}_${file.name}`
-            );
-            const uploadPath = path.join(
-                __dirname,
-                '../../../../../public/',
-                filePath
-            );
+        const filePath = path.join(
+            'uploads/',
+            `${dir}/${uuidv4()}_${upload.name}`
+        );
+        const uploadPath = path.join(
+            __dirname,
+            '../../../../../public/',
+            filePath
+        );
 
-            // move file to upload path
-            await file.mv(uploadPath);
+        // move file to upload path
+        await upload.mv(uploadPath);
 
-            // set file path to file object
-            file.path = filePath;
-        });
-
-        // set files to request body
-        req.files = files;
+        // set file to request body
+        req.files.upload.path = filePath;
 
         // proceed to next middleware
         return next();

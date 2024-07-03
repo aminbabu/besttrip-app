@@ -11,12 +11,12 @@
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { files } = req;
+        const { upload } = req.files;
 
         // return response
         return res.status(200).send({
             message: 'Policy settings uploaded successfully',
-            url: files[0].path,
+            url: upload.path,
         });
     } catch (error) {
         return next(error);
