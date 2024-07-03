@@ -18,7 +18,7 @@ module.exports = (req, res, next) => {
     // validate request body
     const { error, success } = exclusiveOfferSchema
         .pick({ status: true })
-        .safeParse(req.params);
+        .safeParse(req.body);
 
     // check for errors
     if (!success) {
