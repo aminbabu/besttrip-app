@@ -120,7 +120,7 @@ var KTAppSettings = (function () {
                                             allowOutsideClick: false,
                                         }).then(() => {
                                             // Reset form
-                                            form.reset();
+                                            // form.reset();
 
                                             // Get redirect URL from the form
                                             const redirectUrl =
