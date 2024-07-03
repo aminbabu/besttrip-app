@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 18 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -21,7 +21,10 @@ const {
 } = require('../../../../../controllers/api/settings/content/sections');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
+const {
+    isAuthorized,
+    isAllowed,
+} = require('../../../../../middlewares/api/auth');
 const {
     validateContentSectionKey,
     validateContentSection,
@@ -56,9 +59,9 @@ router.get('/', getSections);
  * @param {function} controller - ['updateOrCreateSection']
  * @returns {object} - router
  * @access private ['admin']
- * @method PUT
+ * @method POST
  */
-router.put(
+router.post(
     '/:key',
     isAuthorized,
     isAllowed(['admin']),
