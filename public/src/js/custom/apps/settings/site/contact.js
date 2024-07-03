@@ -106,7 +106,7 @@ var KTSettingsContact = (function () {
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             // Reload page to see changes
-                                            window.location.reload();
+                                            // window.location.reload();
                                         }
                                     });
                                 } else {
