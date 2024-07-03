@@ -11,4 +11,5 @@
 module.exports = {
     getPolicies: require('./get-policies'),
     updateOrCreagtePolicy: require('./update-or-create-policy'),
+    uploadPolicySettings: require('./upload-policy-settings'),
 };

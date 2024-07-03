@@ -17,6 +17,7 @@ const router = express.Router();
 const {
     getPolicies,
     updateOrCreagtePolicy,
+    uploadPolicySettings,
 } = require('../../../../../controllers/api/settings/site/policy');
 
 // middlewares
@@ -64,8 +65,8 @@ router.post(
  * @description upload policy settings media
  * @param {string} path - '/api/settings/site/policy/media'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
- * @param {function} validator - ['validatePolicySettingsMedia']
- * @param {function} controller - ['uploadPolicySettingsFile']
+ * @param {function} middleware - ['uploadPolicySettingsFile']
+ * @param {function} controller - ['uploadPolicySettings']
  * @returns {object} - router
  * @access private - ['admin']
  * @method POST
@@ -74,7 +75,8 @@ router.post(
     '/media',
     isAuthorized,
     isAllowed(['admin']),
-    uploadPolicySettingsFile
+    uploadPolicySettingsFile,
+    uploadPolicySettings
 );
 
 // export router
