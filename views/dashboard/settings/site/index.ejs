@@ -529,7 +529,7 @@
                       <!--begin:::Tab pane-->
                       <div class="tab-pane fade" id="kt_settings_general_policy" role="tabpanel">
                         <!--begin::Form-->
-                        <form id="kt_settings_general_policy_form" class="form" action="#">
+                        <form id="kt_settings_policy_form" class="form" action="/api/settings/site/policy">
                           <!--begin::Heading-->
                           <div class="row mb-7">
                             <div class="col-md-9 offset-md-3">
@@ -555,7 +555,7 @@
                             </div>
                             <div class="col-md-9">
                               <!-- begin::About CKEditor -->
-                              <textarea name="kt_docs_ckeditor_about_us" id="kt_docs_ckeditor_about_us"></textarea>
+                              <textarea name="about-us" id="kt_docs_ckeditor_about_us"><%= policies?.['about-us'] %></textarea>
                               <!-- end::About CKEditor -->
                             </div>
                           </div>
@@ -578,8 +578,7 @@
                             </div>
                             <div class="col-md-9">
                               <!-- begin::About CKEditor -->
-                              <textarea name="kt_docs_ckeditor_toc" id="kt_docs_ckeditor_toc">
-                                </textarea>
+                              <textarea name="terms-and-conditions" id="kt_docs_ckeditor_toc"><%= policies?.['terms-and-conditions'] %></textarea>
                               <!-- end::About CKEditor -->
                             </div>
                           </div>
@@ -602,8 +601,7 @@
                             </div>
                             <div class="col-md-9">
                               <!-- begin::About CKEditor -->
-                              <textarea name="kt_docs_ckeditor_refund_policy" id="kt_docs_ckeditor_refund_policy">
-                                </textarea>
+                              <textarea name="refund-policy" id="kt_docs_ckeditor_refund_policy"><%= policies?.['refund-policy'] %></textarea>
                               <!-- end::About CKEditor -->
                             </div>
                           </div>
@@ -626,8 +624,7 @@
                             </div>
                             <div class="col-md-9">
                               <!-- begin::About CKEditor -->
-                              <textarea name="kt_docs_ckeditor_privacy_policy" id="kt_docs_ckeditor_privacy_policy">
-                                </textarea>
+                              <textarea name="privacy-policy" id="kt_docs_ckeditor_privacy_policy"><%= policies?.['privacy-policy'] %></textarea>
                               <!-- end::About CKEditor -->
                             </div>
                           </div>
@@ -642,7 +639,7 @@
                                 </button>
                                 <!--end::Button-->
                                 <!--begin::Button-->
-                                <button type="submit" data-kt-settings-type="submit" class="btn btn-primary">
+                                <button type="submit" kt-settings-policy-form-action="submit" class="btn btn-primary">
                                   <span class="indicator-label">Save</span>
                                   <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
