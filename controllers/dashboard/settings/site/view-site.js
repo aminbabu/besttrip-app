@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
         const contact = await ContactSettings.findOne();
 
         // get policies settings
-        const policies = await PolicySettings.find();
+        const policies = await PolicySettings.findOne();
 
         // get meta settings
         const meta = await MetaSettings.findOne();
