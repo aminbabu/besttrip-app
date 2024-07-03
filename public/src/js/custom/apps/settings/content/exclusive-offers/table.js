@@ -55,6 +55,8 @@ var KTContentExclusiveOffers = (function () {
             d.addEventListener('click', function (e) {
                 e.preventDefault();
 
+                const url = d.getAttribute('href');
+
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
                     text: 'Are you sure you want to delete this offer?',
