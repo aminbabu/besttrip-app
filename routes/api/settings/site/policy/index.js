@@ -27,6 +27,9 @@ const {
 const {
     validatePolicySettings,
 } = require('../../../../../middlewares/api/validators/settings/site/policy');
+const {
+    uploadPolicySettingsFile,
+} = require('../../../../../middlewares/api/settings/site/policy');
 
 /**
  * @description get policies settings
@@ -55,6 +58,23 @@ router.post(
     isAllowed(['admin']),
     validatePolicySettings,
     updateOrCreagtePolicy
+);
+
+/**
+ * @description upload policy settings media
+ * @param {string} path - '/api/settings/site/policy/media'
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validatePolicySettingsMedia']
+ * @param {function} controller - ['uploadPolicySettingsFile']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method POST
+ */
+router.post(
+    '/media',
+    isAuthorized,
+    isAllowed(['admin']),
+    uploadPolicySettingsFile
 );
 
 // export router
