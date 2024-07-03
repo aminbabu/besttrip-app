@@ -16,7 +16,7 @@ module.exports = new Schema(
         'about-us': {
             type: String,
         },
-        'terms-of-conditions': {
+        'terms-and-conditions': {
             type: String,
         },
         'refund-policy': {

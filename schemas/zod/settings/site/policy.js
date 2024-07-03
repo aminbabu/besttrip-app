@@ -23,11 +23,11 @@ module.exports = z
                 message: 'About us content should have at least 3 characters',
             })
             .optional(),
-        'terms-of-conditions': z
+        'terms-and-conditions': z
             .string({
-                required_error: 'Terms of conditions content is required',
+                required_error: 'Terms and conditions content is required',
                 invalid_type_error:
-                    'Please provide valid terms of conditions content',
+                    'Please provide valid terms and conditions content',
             })
             .trim()
             .min(3, {
