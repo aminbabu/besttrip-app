@@ -231,71 +231,6 @@ var KTContentExclusiveOffers = (function () {
         }
     };
 
-    // Init File Uploader
-    const initFileUploader = () => {
-        const handleFileInputChange = (input) => {
-            const previewContainer = input.closest('.kt-file-uploader');
-            const label = previewContainer.querySelector(
-                '.kt-file-uploader-label'
-            );
-            const maxFileSize = parseInt(
-                input.getAttribute('data-kt-file-uploader-max-size')
-            );
-            const invalidMessage =
-                previewContainer.querySelector('.invalid-feedback');
-            const file = input.files[0];
-
-            if (!file) {
-                return;
-            }
-
-            // remove error message
-            invalidMessage.classList.add('d-none');
-
-            // create preview element and append to the container
-            const preview = document.createElement('img');
-
-            if (file?.size > 1024 * 1024 * maxFileSize) {
-                const message = `File size should not exceed ${maxFileSize}MB`;
-
-                if (ktFileUploaderContent) {
-                    // restore label content
-                    label.innerHTML = ktFileUploaderContent;
-                }
-
-                // empty input value
-                input.value = '';
-
-                // append error message
-                invalidMessage.innerHTML = message;
-                invalidMessage.classList.remove('d-none');
-                return;
-            }
-
-            // add was-invalid class to the container
-            if (!previewContainer.classList.contains('was-invalided')) {
-                ktFileUploaderContent = label.innerHTML;
-                previewContainer.classList.add('was-invalided');
-            }
-
-            // remove content and append preview
-            label.innerHTML = '';
-            preview.classList.add('kt-file-uploader-preview');
-            preview.src = URL.createObjectURL(file);
-            preview.alt = file.name;
-            label.appendChild(preview);
-        };
-
-        form.addEventListener('change', function (event) {
-            const target = event.target;
-
-            // Check if the changed element is an input with type file
-            if (target.tagName === 'INPUT' && target.type === 'file') {
-                handleFileInputChange(target);
-            }
-        });
-    };
-
     return {
         // Public functions
         init: function () {
@@ -311,7 +246,6 @@ var KTContentExclusiveOffers = (function () {
             initToggleToolbar();
             handleSearch();
             handleRowDeletion();
-            initFileUploader();
         },
     };
 })();
