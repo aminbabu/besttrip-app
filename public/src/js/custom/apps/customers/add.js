@@ -178,7 +178,7 @@ var KTModalCustomersAdd = (function () {
                             .catch((error) => {
                                 const errors = error.response?.data?.message
                                     ? error.response?.data?.message
-                                    : error.response.data.errors;
+                                    : error?.response?.data?.errors;
 
                                 Swal.fire({
                                     html: `${
