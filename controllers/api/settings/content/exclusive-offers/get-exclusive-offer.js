@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 06 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -14,8 +14,6 @@ const { ExclusiveOffer } = require('../../../../../models');
 module.exports = async (req, res, next) => {
     try {
         const { id } = req.params;
-
-        console.log('id: ', id);
 
         // get exclusive offers
         const exclusiveOffer = await ExclusiveOffer.findById(id);
