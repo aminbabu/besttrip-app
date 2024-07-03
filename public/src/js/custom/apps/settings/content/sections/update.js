@@ -131,7 +131,7 @@ var KTAppSettings = (function () {
                                             if (redirectUrl) {
                                                 location.href = redirectUrl;
                                             } else {
-                                                location.reload();
+                                                // location.reload();
                                             }
                                         });
                                     } else {
