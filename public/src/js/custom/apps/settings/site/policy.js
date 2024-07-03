@@ -63,7 +63,7 @@ var KTSettingsPolicy = (function () {
                             .then((response) => {
                                 if (response) {
                                     // Reset form
-                                    form.reset();
+                                    // form.reset();
 
                                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                     Swal.fire({
