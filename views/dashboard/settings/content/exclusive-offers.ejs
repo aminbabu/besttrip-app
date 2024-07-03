@@ -141,7 +141,7 @@
                           <td>
                             <div class="form-check form-switch form-check-solid">
                               <label class="form-check-label">
-                                <input class="form-check-input form-check-input-custom" type="checkbox" <% offer.status === 'active' ? 'checked' : '' %> value="<%= offer.status %>" />
+                                <input class="form-check-input form-check-input-custom" type="checkbox" <% if (offer?.status === 'active') { %> checked <% } %> value="<%= offer.status %>" />
                                 <span class="enabled">Active</span>
                                 <span class="disabled">Disabled</span>
                               </label>
