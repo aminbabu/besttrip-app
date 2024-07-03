@@ -19,6 +19,7 @@ const {
     getExclusiveOffer,
     createExclusiveOffer,
     updateExclusiveOffer,
+    updateExclusiveOfferStatus,
     deleteExclusiveOffer,
 } = require('../../../../../controllers/api/settings/content/exclusive-offers');
 
@@ -30,6 +31,7 @@ const {
 const {
     validateExclusiveOfferId,
     validateExclusiveOffer,
+    validateExclusiveOfferStatus,
     validateExclusiveOfferFile,
 } = require('../../../../../middlewares/api/validators/settings/content/exclusive-offers');
 const {
@@ -96,6 +98,24 @@ router.patch(
     validateExclusiveOffer,
     uploadExclusiveOfferFile('/offers/exclusive'),
     updateExclusiveOffer
+);
+
+/**
+ * @description - update exclusive offer status
+ * @param {string} path - '/api/settings/content/exclusive-offers/:id/status'
+ * @param {function} validator - ['validateExclusiveOfferId', 'validateExclusiveOfferStatus']
+ * @param {function} controller - ['updateExclusiveOfferStatus']
+ * @returns {object} - router
+ * @access private ['admin']
+ * @method PATCH
+ */
+router.patch(
+    '/:id',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateExclusiveOfferId,
+    validateExclusiveOfferStatus,
+    updateExclusiveOfferStatus
 );
 
 /**
