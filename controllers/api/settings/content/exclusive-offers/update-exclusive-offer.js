@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 19 April, 2024
- * @update_date 06 May, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
         exclusiveOffer.set({
             link,
             status,
-            thumbnail: thumbnail.path,
+            thumbnail: thumbnail?.path || exclusiveOffer.thumbnail,
         });
 
         // save exclusive offer
