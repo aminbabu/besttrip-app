@@ -17,13 +17,6 @@ var KTContentExclusiveOfferEdit = (function () {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         var validator = FormValidation.formValidation(form, {
             fields: {
-                thumbnail: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Thumbnail is required',
-                        },
-                    },
-                },
                 link: {
                     validators: {
                         notEmpty: {
@@ -67,31 +60,95 @@ var KTContentExclusiveOfferEdit = (function () {
                         // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
-                        // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                        setTimeout(function () {
-                            // Remove loading indication
-                            submitButton.removeAttribute('data-kt-indicator');
-
-                            // Enable button
-                            submitButton.disabled = false;
-
-                            // Show popup confirmation
-                            Swal.fire({
-                                text: 'Form has been successfully submitted!',
-                                icon: 'success',
-                                buttonsStyling: false,
-                                confirmButtonText: 'Ok, got it!',
-                                customClass: {
-                                    confirmButton: 'btn btn-primary',
-                                },
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
+                        // Check axios library docs: https://axios-http.com/docs/intro
+                        axios
+                            .patch(
+                                submitButton
+                                    .closest('form')
+                                    .getAttribute('action'),
+                                new FormData(form)
+                            )
+                            .then((response) => {
+                                if (response) {
+                                    // Hide modal
                                     modal.hide();
-                                }
-                            });
 
-                            //form.submit(); // Submit form
-                        }, 2000);
+                                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                    Swal.fire({
+                                        text:
+                                            response?.data?.message ||
+                                            'Form has been successfully submitted!',
+                                        icon: 'success',
+                                        buttonsStyling: false,
+                                        confirmButtonText: 'Ok, got it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary',
+                                        },
+                                        allowOutsideClick: false,
+                                    }).then(() => {
+                                        // Reset form
+                                        form.reset();
+
+                                        // Get redirect URL from the form
+                                        const redirectUrl = form.getAttribute(
+                                            'data-kt-redirect-url'
+                                        );
+
+                                        if (redirectUrl) {
+                                            location.href = redirectUrl;
+                                        } else {
+                                            location.reload();
+                                        }
+                                    });
+                                } else {
+                                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                    Swal.fire({
+                                        text: 'Sorry, looks like there are some errors detected, please try again.',
+                                        icon: 'error',
+                                        buttonsStyling: false,
+                                        confirmButtonText: 'Ok, got it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary',
+                                        },
+                                    });
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                const errors = error.response?.data?.message
+                                    ? error.response?.data?.message
+                                    : error.response.data.errors;
+
+                                Swal.fire({
+                                    html: `${
+                                        errors instanceof Array
+                                            ? `<ul class="text-start">${Object.values(
+                                                  error.response.data.errors
+                                              )
+                                                  .map(
+                                                      (err) =>
+                                                          `<li>${err?.message}</li>`
+                                                  )
+                                                  .join('')}</ul>`
+                                            : errors
+                                    }`,
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
+                            })
+                            .then(() => {
+                                // Hide loading indication
+                                submitButton.removeAttribute(
+                                    'data-kt-indicator'
+                                );
+
+                                // Enable button
+                                submitButton.disabled = false;
+                            });
                     } else {
                         // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
@@ -265,15 +322,25 @@ var KTContentExclusiveOfferEdit = (function () {
 
                     if (response) {
                         const data = response.data.exclusiveOffer;
+                        const previewContainer =
+                            form.querySelector('.kt-file-uploader');
 
+                        // create preview element and append to the container
                         const preview = document.createElement('img');
-
-                        form.setAttribute('action', href);
+                        preview.classList.add('kt-file-uploader-preview');
                         preview.src = data.thumbnail;
                         preview.alt = data.link;
+                        previewContainer.querySelector('label').innerHTML = '';
+                        previewContainer
+                            .querySelector('label')
+                            .appendChild(preview);
+
+                        form.setAttribute('action', href);
                         form.querySelector('[name="link"]').value = data.link;
-                        form.querySelector('[name="status"]').value =
-                            data.status;
+                        $(form)
+                            .find('select[name="status"]')
+                            .val(data.status)
+                            .trigger('change');
                     }
                 } catch (error) {
                     // hide modal
