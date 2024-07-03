@@ -16,11 +16,34 @@ module.exports = async (req, res) => {
         // get sections
         const sections = await SectionSettings.find();
 
+        const hotelSection = sections.find(
+            (section) => section.key === 'hotels'
+        );
+        const destinationSection = sections.find(
+            (section) => section.key === 'destinations'
+        );
+        const umrahZiyarahSection = sections.find(
+            (section) => section.key === 'umrah-ziyarah'
+        );
+        const beautifulPlacesSection = sections.find(
+            (section) => section.key === 'beautiful-places'
+        );
+
+        console.log(
+            hotelSection,
+            destinationSection,
+            umrahZiyarahSection,
+            beautifulPlacesSection
+        );
+
         // render sections view
         return res.render('dashboard/settings/content/sections', {
             title: 'Sections',
             user: req.user,
-            sections,
+            hotelSection,
+            destinationSection,
+            umrahZiyarahSection,
+            beautifulPlacesSection,
         });
     } catch (error) {
         return res.redirect('/error/500');
