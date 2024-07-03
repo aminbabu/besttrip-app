@@ -23,6 +23,11 @@ module.exports =
         const { id } = req.params || {};
         const { thumbnail } = req.files || {};
 
+        // check if thumbnail is not uploaded
+        if (!thumbnail) {
+            return next();
+        }
+
         // check if id exists
         if (id) {
             // get exclusive offer
