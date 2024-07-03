@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 14 April, 2024
- * @update_date 16 April, 2024
+ * @update_date 03 Jul, 2024
  */
 
 // dependencies
@@ -13,13 +13,25 @@ const { Schema } = require('mongoose');
 // export customer schema
 module.exports = new Schema(
     {
-        key: {
+        'about-us': {
             type: String,
-            unique: [true, `Key - ${this.key} already exists`],
+            required: true,
+            trim: true,
         },
-        content: {
+        'terms-of-conditions': {
             type: String,
-            required: [true, `Content - ${this.content} is required`],
+            required: true,
+            trim: true,
+        },
+        'refund-policy': {
+            type: String,
+            required: true,
+            trim: true,
+        },
+        'privacy-policy': {
+            type: String,
+            required: true,
+            trim: true,
         },
     },
     { timestamps: true }
