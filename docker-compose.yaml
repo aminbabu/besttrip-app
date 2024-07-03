@@ -1,21 +1,21 @@
 services:
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb-container
-    restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./mongodb:/data/db
-  node-app:
-    build: .
-    container_name: besttrip-node-app-container
-    ports:
-      - "8123:8123"
-    volumes:
-      - ./:/usr/src/app
-      - /usr/src/app/node_modules
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-    depends_on:
-      - mongodb
+    mongodb:
+        image: mongo:latest
+        container_name: mongodb-container
+        restart: always
+        ports:
+            - '27017:27017'
+        volumes:
+            - ./mongodb:/data/db
+    node-app:
+        build: .
+        container_name: besttrip-node-app-container
+        ports:
+            - '8123:8123'
+        volumes:
+            - ./:/usr/src/app
+            - /usr/src/app/node_modules
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+        depends_on:
+            - mongodb
