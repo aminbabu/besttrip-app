@@ -110,7 +110,7 @@ router.patch(
  * @method PATCH
  */
 router.patch(
-    '/:id',
+    '/:id/status',
     isAuthorized,
     isAllowed(['admin']),
     validateExclusiveOfferId,
