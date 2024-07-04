@@ -81,7 +81,7 @@ module.exports = async (req, res, next) => {
         req.user = user.toObject();
 
         // set locals
-        req.locals.user = user.toObject();
+        res.locals.user = user.toObject();
 
         // proceed to next middleware
         return next();
