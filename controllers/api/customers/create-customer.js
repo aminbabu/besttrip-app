@@ -69,7 +69,8 @@ module.exports = async (req, res, next) => {
             info.subject,
             info.text,
             info.html,
-            info.attachments
+            info.attachments,
+            (err, info) => (err ? console.log(err) : console.log(info))
         );
 
         // save token

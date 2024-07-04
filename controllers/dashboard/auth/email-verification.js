@@ -59,7 +59,8 @@ module.exports = async (req, res) => {
                 title: 'Email Verification',
                 data: {
                     status: 'User Not Found',
-                    message: 'User not found. Please resend verification email to get a new token.',
+                    message:
+                        'User not found. Please resend verification email to get a new token.',
                 },
             });
         }
@@ -70,7 +71,8 @@ module.exports = async (req, res) => {
                 title: 'Email Verification',
                 data: {
                     status: 'Already Verified',
-                    message: 'User is already verified. Please login to your account.',
+                    message:
+                        'User is already verified. Please login to your account.',
                 },
             });
         }
@@ -87,7 +89,14 @@ module.exports = async (req, res) => {
 
         // send email
         const info = await confirmEmailVerification(user.toObject());
-        await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
+        await sendEmail(
+            info.to,
+            info.subject,
+            info.text,
+            info.html,
+            info.attachments,
+            (err, info) => (err ? console.log(err) : console.log(info))
+        );
 
         return res.render('dashboard/auth/email-verification', {
             title: 'Email Verification',
