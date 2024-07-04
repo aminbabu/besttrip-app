@@ -59,12 +59,6 @@ module.exports = async (req, res, next) => {
         // prepare email
         const info = welcome({ user: newUser.toObject(), token });
 
-        // save user
-        await newUser.save();
-
-        // save token
-        await tokenDoc.save();
-
         // send mail
         await sendEmail(
             info.to,
@@ -73,6 +67,12 @@ module.exports = async (req, res, next) => {
             info.html,
             info.attachments
         );
+
+        // save token
+        await tokenDoc.save();
+
+        // save user
+        await newUser.save();
 
         // return response
         return res.status(201).json({
