@@ -15,6 +15,10 @@ const { env } = require('../config');
 // export welcome mail
 module.exports = ({ user, token }) => {
     let redirectTo;
+    const appUrl =
+        env.NODE_ENV === 'development'
+            ? `${env.APP_URL}:${env.PORT}`
+            : env.APP_URL;
 
     // read template file
     const template = fs.readFileSync(
@@ -24,9 +28,9 @@ module.exports = ({ user, token }) => {
 
     // set redirect url
     if (user.role === 'customer') {
-        redirectTo = `${env.APP_URL}:${env.PORT}/api/auth/customers/verify-email?token=${token}`;
+        redirectTo = `${appUrl}/api/auth/customers/verify-email?token=${token}`;
     } else {
-        redirectTo = `${env.APP_URL}:${env.PORT}/dashboard/auth/verify-email?token=${token}`;
+        redirectTo = `${appUrl}/dashboard/auth/verify-email?token=${token}`;
     }
 
     // compile template
@@ -37,7 +41,7 @@ module.exports = ({ user, token }) => {
             address: '123, Best Trip Street, Best Trip City',
             phone: '+1234567890',
             email: env.EMAIL_FROM,
-            website: `${env.APP_URL}:${env.PORT}`,
+            website: `${appUrl}`,
         },
         user,
         redirectTo,

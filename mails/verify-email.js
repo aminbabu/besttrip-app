@@ -15,15 +15,22 @@ const { env } = require('../config');
 // export verify email mail
 module.exports = async (user, token) => {
     let redirectTo;
+    const appUrl =
+        env.NODE_ENV === 'development'
+            ? `${env.APP_URL}:${env.PORT}`
+            : env.APP_URL;
 
     // read template file
-    const template = fs.readFileSync(`${__dirname}/../templates/email/verify-email.ejs`, 'utf-8');
+    const template = fs.readFileSync(
+        `${__dirname}/../templates/email/verify-email.ejs`,
+        'utf-8'
+    );
 
     // set redirect url
     if (user.role === 'customer') {
-        redirectTo = `${env.APP_URL}:${env.PORT}/api/auth/customers/verify-email?token=${token}`;
+        redirectTo = `${appUrl}/api/auth/customers/verify-email?token=${token}`;
     } else {
-        redirectTo = `${env.APP_URL}:${env.PORT}/dashboard/auth/verify-email?token=${token}`;
+        redirectTo = `${appUrl}/dashboard/auth/verify-email?token=${token}`;
     }
 
     // compile template
@@ -34,7 +41,7 @@ module.exports = async (user, token) => {
             address: '123, Best Trip Street, Best Trip City',
             phone: '+1234567890',
             email: env.EMAIL_FROM,
-            website: `${env.APP_URL}:${env.PORT}`,
+            website: `${appUrl}`,
         },
         user,
         redirectTo,
