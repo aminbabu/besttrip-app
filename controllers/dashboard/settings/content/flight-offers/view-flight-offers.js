@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
         // render flight offers view
         return res.render('dashboard/settings/content/flight-offers', {
             title: 'Flight Offers',
-            user: req.user,
             flightOffers,
         });
     } catch (error) {

@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
         // render payments view
         return res.render('dashboard/settings/payments', {
             title: 'Payment Methods',
-            user: req.user,
             payments,
         });
     } catch (error) {

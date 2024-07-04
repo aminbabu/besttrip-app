@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
         // render themes view
         return res.render('dashboard/settings/themes', {
             title: 'Themes',
-            user: req.user,
             themes,
         });
     } catch (error) {

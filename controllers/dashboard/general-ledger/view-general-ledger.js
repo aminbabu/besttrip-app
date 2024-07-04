@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
         // return render view
         return res.render('dashboard/general-ledger', {
             title: 'General Ledger',
-            user: req.user,
             generalLedger,
         });
     } catch (error) {

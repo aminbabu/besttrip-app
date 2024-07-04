@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
         // return render view
         return res.render('dashboard/invoices', {
             title: 'Invoices',
-            user: req.user,
             invoices,
         });
     } catch (error) {

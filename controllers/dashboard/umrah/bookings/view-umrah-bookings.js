@@ -17,12 +17,13 @@ module.exports = async (req, res) => {
         const { status } = req.params;
 
         // get umrah bookings
-        const umrahBookings = await UmrahBooking.find({ status }).populate('customer');
+        const umrahBookings = await UmrahBooking.find({ status }).populate(
+            'customer'
+        );
 
         // return render view
         return res.render(`dashboard/umrah/booking/${status}`, {
             title: 'Umrah Bookings',
-            user: req.user,
             umrahBookings,
         });
     } catch (error) {

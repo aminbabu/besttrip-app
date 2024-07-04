@@ -27,7 +27,6 @@ module.exports = async (req, res) => {
         // return render view
         return res.render('dashboard/umrah/packages/edit', {
             title: 'Edit Umrah Package',
-            user: req.user,
             umrahPackage,
         });
     } catch (error) {

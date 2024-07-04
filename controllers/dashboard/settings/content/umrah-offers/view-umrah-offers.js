@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
         // render umrah offers view
         return res.render('dashboard/settings/content/umrah-offers', {
             title: 'Umrah Offers',
-            user: req.user,
             umrahOffers,
         });
     } catch (error) {

@@ -13,7 +13,6 @@ module.exports = async (req, res) => {
         // return render view
         return res.render('dashboard/umrah/packages/add', {
             title: 'Add Umrah Package',
-            user: req.user,
         });
     } catch (error) {
         return res.redirect('/error/500');

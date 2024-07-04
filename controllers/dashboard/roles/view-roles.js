@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
         // return render view
         return res.render('dashboard/roles', {
             title: 'Roles',
-            user: req.user,
             roles,
         });
     } catch (error) {

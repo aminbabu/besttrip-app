@@ -14,12 +14,13 @@ const { LoginHistory } = require('../../../models');
 module.exports = async (req, res) => {
     try {
         // get blocked ips
-        const blockedIps = await LoginHistory.find({ status: 'blocked' }).sort({ createdAt: -1 });
+        const blockedIps = await LoginHistory.find({ status: 'blocked' }).sort({
+            createdAt: -1,
+        });
 
         // render blocked ips view
         return res.render('dashboard/login-history/blocked-ips', {
             title: 'Blocked IPs',
-            user: req.user,
             blockedIps,
         });
     } catch (error) {

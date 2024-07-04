@@ -39,7 +39,6 @@ module.exports = async (req, res) => {
         // render sections view
         return res.render('dashboard/settings/content/sections', {
             title: 'Sections',
-            user: req.user,
             hotelSection,
             destinationSection,
             umrahZiyarahSection,

@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
         // render blog posts view
         return res.render('dashboard/settings/content/blog-posts', {
             title: 'Blog Posts',
-            user: req.user,
             blogPosts,
         });
     } catch (error) {

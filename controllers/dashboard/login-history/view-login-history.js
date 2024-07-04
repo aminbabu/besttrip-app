@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
         // render login history view
         return res.render('dashboard/login-history', {
             title: 'Login History',
-            user: req.user,
             loginHistory,
         });
     } catch (error) {

@@ -13,7 +13,6 @@ module.exports = (req, res) => {
         // return dashboard page
         return res.render('dashboard/home', {
             title: 'Dashboard',
-            user: req.user,
         });
     } catch (error) {
         return res.redirect('/errors/500');

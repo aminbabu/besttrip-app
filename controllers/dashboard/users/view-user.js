@@ -37,7 +37,9 @@ module.exports = async (req, res) => {
         // format login history
         user.loginHistory = user.loginHistory
             .map((history) => {
-                const lastLogin = moment(history?.lastLogin).format('DD MMM YYYY, h:mm a');
+                const lastLogin = moment(history?.lastLogin).format(
+                    'DD MMM YYYY, h:mm a'
+                );
                 const lastLoginDaysAgo = moment(history?.lastLogin).fromNow();
                 const location = history?.location
                     ? Object.values(history.location).filter(Boolean).join(', ')
@@ -51,7 +53,6 @@ module.exports = async (req, res) => {
                 };
             })
             .sort((a, b) => b.lastLogin - a.lastLogin);
-
 
         // render profile view
         return res.render('dashboard/users/user', {

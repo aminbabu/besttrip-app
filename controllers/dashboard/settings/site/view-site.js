@@ -45,7 +45,6 @@ module.exports = async (req, res) => {
         // render site view
         return res.render('dashboard/settings/site', {
             title: 'Site Settings',
-            user: req.user,
             general,
             contact,
             policies,

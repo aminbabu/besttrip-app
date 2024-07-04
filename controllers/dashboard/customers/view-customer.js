@@ -27,7 +27,6 @@ module.exports = async (req, res) => {
         // return rendered view
         return res.render('dashboard/customers/customer', {
             title: 'Edit Customer',
-            user: req.user,
             customer,
         });
     } catch (error) {

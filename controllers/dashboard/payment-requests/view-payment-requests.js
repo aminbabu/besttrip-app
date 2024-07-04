@@ -19,18 +19,22 @@ module.exports = async (req, res) => {
         const { status } = req.params;
 
         // get payment requests by sorting descending
-        let paymentRequests = await PaymentRequest.find({ status }).populate('customer').sort({
-            createdAt: 'desc',
-        });
+        let paymentRequests = await PaymentRequest.find({ status })
+            .populate('customer')
+            .sort({
+                createdAt: 'desc',
+            });
 
         // format payment requests
         paymentRequests = paymentRequests.map((paymentRequest) => {
-            const modifiedPaymentRequest = {...paymentRequest.toObject()};
+            const modifiedPaymentRequest = { ...paymentRequest.toObject() };
 
-            modifiedPaymentRequest.amount = currencyFormatter(paymentRequest.amount);
-            modifiedPaymentRequest.createdAt = moment(paymentRequest.createdAt).format(
-                'DD MMM YYYY, h:mm a'
+            modifiedPaymentRequest.amount = currencyFormatter(
+                paymentRequest.amount
             );
+            modifiedPaymentRequest.createdAt = moment(
+                paymentRequest.createdAt
+            ).format('DD MMM YYYY, h:mm a');
 
             return modifiedPaymentRequest;
         });
@@ -39,7 +43,6 @@ module.exports = async (req, res) => {
         return res.render('dashboard/payment-requests/', {
             title: 'Payment Requests',
             status,
-            user: req.user,
             paymentRequests,
         });
     } catch (error) {

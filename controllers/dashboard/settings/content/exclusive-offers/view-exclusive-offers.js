@@ -30,7 +30,6 @@ module.exports = async (req, res) => {
         // render exclusive offers view
         return res.render('dashboard/settings/content/exclusive-offers', {
             title: 'Exclusive Offers',
-            user: req.user,
             exclusiveOffers,
         });
     } catch (error) {

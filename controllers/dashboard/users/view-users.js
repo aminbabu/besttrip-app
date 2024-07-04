@@ -20,9 +20,11 @@ module.exports = async (req, res) => {
 
         // formate data
         users = users.map((user) => {
-            const userObj = {...user.toObject()};
+            const userObj = { ...user.toObject() };
 
-            userObj.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
+            userObj.createdAt = moment(user.createdAt).format(
+                'DD MMM YYYY, h:mm a'
+            );
 
             return prepareRoleDefination(userObj);
         });
@@ -30,7 +32,6 @@ module.exports = async (req, res) => {
         // return render view
         return res.render('dashboard/users', {
             title: 'Users',
-            user: req.user,
             users,
         });
     } catch (error) {
