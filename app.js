@@ -25,7 +25,7 @@ const { default: ipinfo } = require('ipinfo-express');
 const { WHITE_LIST } = require('./constants');
 
 // utils
-const { notFound, routeUrl } = require('./middlewares/utils');
+const { notFound, routeUrl, errorHandler } = require('./middlewares/utils');
 
 // config
 const {
@@ -74,20 +74,6 @@ app.use('/dashboard', require('./routes/dashboard'));
 app.use(notFound);
 
 // error handler
-app.use((err, req, res, next) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    console.log(err);
-
-    // send error response
-    return res.status(err.status || 500).json({
-        message: err.message,
-    });
-
-    // render the error page
-    // return res.status(err.status || 500).render('error');
-});
+app.use(errorHandler);
 
 module.exports = app;
