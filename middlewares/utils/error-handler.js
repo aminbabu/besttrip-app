@@ -13,11 +13,12 @@ module.exports = (err, req, res, next) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    console.log(err);
+    console.log('From Error Handler:: ', err);
 
     // send error response
     return res.status(err.status || 500).json({
-        message: err.message,
+        message:
+            err?.message || 'Internal server error. Please try again later.',
     });
 
     // render the error page
