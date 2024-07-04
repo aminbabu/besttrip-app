@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 21 June, 2024
+ * @update_date 04 Jul, 2024
  */
 
 // dependencies
@@ -19,7 +19,9 @@ module.exports = async (req, res, next) => {
         const { email, password } = req.body;
 
         // check if user exists
-        const user = await User.findOne({ email }).select('+password').populate('loginHistory');
+        const user = await User.findOne({ email })
+            .select('+password')
+            .populate('loginHistory');
 
         if (!user) {
             return res.status(400).json({
@@ -80,7 +82,7 @@ module.exports = async (req, res, next) => {
         // set cookie in response
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: env.NODE_ENV === 'production',
             sameSite: 'strict',
             maxAge: env.JWT_EXPIRY,
         });

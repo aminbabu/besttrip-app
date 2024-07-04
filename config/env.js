@@ -19,10 +19,7 @@ module.exports = {
     APP_NAME: process.env.APP_NAME,
     APP_URL: process.env.APP_URL,
     PORT: process.env.PORT,
-    MONGODB_URI:
-        process.env.NODE_ENV === 'development'
-            ? process.env.MONGODB_URI_DEV
-            : process.env.MONGODB_URI_PROD,
+    MONGODB_URI: process.env.MONGODB_URI,
     JWT_SECRET: process.env.JWT_SECRET,
     JWT_EXPIRY: process.env.JWT_EXPIRY,
     EMAIL_SERVICE: process.env.EMAIL_SERVICE,
