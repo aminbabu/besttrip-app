@@ -64,6 +64,9 @@ module.exports = async (req, res, next) => {
         // set user in request
         req.user = user.toObject();
 
+        // set locals
+        req.locals.user = user.toObject();
+
         // proceed to next middleware
         return next();
     } catch (error) {

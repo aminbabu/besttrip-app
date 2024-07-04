@@ -55,7 +55,8 @@ module.exports = async (req, res, next) => {
         // check if user is not active
         if (user.status !== 'active') {
             return res.status(401).json({
-                message: 'Please contact administrator to activate your account',
+                message:
+                    'Please contact administrator to activate your account',
             });
         }
 
@@ -78,6 +79,9 @@ module.exports = async (req, res, next) => {
 
         // set user in request
         req.user = user.toObject();
+
+        // set locals
+        req.locals.user = user.toObject();
 
         // proceed to next middleware
         return next();
