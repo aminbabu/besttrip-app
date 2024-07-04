@@ -23,8 +23,8 @@ const sendEmail = async function (
     // create transporter
     const transporter = nodemailer.createTransport({
         host: env.EMAIL_HOST,
-        port: env.EMAIL_PORT,
-        secure: env.EMAIL_PORT === 465,
+        port: parseInt(env.EMAIL_PORT),
+        secure: parseInt(env.EMAIL_PORT) === 465,
         auth: {
             user: env.EMAIL_USERNAME,
             pass: env.EMAIL_PASSWORD,
