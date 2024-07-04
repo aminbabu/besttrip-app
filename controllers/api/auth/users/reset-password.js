@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 27 May, 2024
+ * @update_date 04 Jul, 2024
  */
 
 const moment = require('moment');
@@ -50,14 +50,24 @@ module.exports = async (req, res, next) => {
 
         // update user password
         user.password = password;
-        await user.save();
+
+        // prepare email
+        const info = await sendPasswordResetConfirmation(user.toObject());
+
+        // send email
+        await sendEmail(
+            info.to,
+            info.subject,
+            info.text,
+            info.html,
+            info.attachments
+        );
 
         // delete token
         await resetPasswordToken.deleteOne();
 
-        // send email
-        const info = await sendPasswordResetConfirmation(user.toObject());
-        await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
+        // save user
+        await user.save();
 
         // return response
         return res.status(200).json({

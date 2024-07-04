@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 14 April, 2024
+ * @update_date 04 Jul, 2024
  */
 
 // dependencies
@@ -36,7 +36,9 @@ module.exports = async (req, res, next) => {
 
         // delete existing tokens
         await Promise.all(
-            tokens.map((token) => token?.type === 'reset-password' && token.deleteOne())
+            tokens.map(
+                (token) => token?.type === 'reset-password' && token.deleteOne()
+            )
         );
 
         // generate token
@@ -48,14 +50,24 @@ module.exports = async (req, res, next) => {
             token,
             type: 'reset-password',
         });
-        await tokenDoc.save();
 
-        // send mail
+        // prepare email
         const info = forgotPassword({
             user: user.toObject(),
             token,
         });
-        await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
+
+        // send email
+        await sendEmail(
+            info.to,
+            info.subject,
+            info.text,
+            info.html,
+            info.attachments
+        );
+
+        // save token
+        await tokenDoc.save();
 
         // return response
         return res.status(200).json({

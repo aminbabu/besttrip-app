@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 03 June, 2024
+ * @update_date 04 Jul, 2024
  */
 
 // dependencies
@@ -51,11 +51,21 @@ module.exports = async (req, res, next) => {
             token,
             type: 'verify-email',
         });
-        await tokenDoc.save();
 
-        // send verification email
+        // prepare email
         const info = await verifyEmail(user.toObject(), token);
-        await sendEmail(info.to, info.subject, info.text, info.html, info.attachments);
+
+        // send email
+        await sendEmail(
+            info.to,
+            info.subject,
+            info.text,
+            info.html,
+            info.attachments
+        );
+
+        // save token
+        await tokenDoc.save();
 
         // return response
         return res.status(200).json({
