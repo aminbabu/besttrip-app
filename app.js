@@ -22,6 +22,12 @@ const expressFileUpload = require('express-fileupload');
 const { expressCspHeader } = require('express-csp-header');
 const { default: ipinfo } = require('ipinfo-express');
 
+// constants
+const { WHITE_LIST } = require('./constants');
+
+// utils
+const { notFound, routeUrl } = require('./middlewares/utils');
+
 // config
 const {
     mongoDB,
@@ -30,9 +36,6 @@ const {
     cspDirectives,
     ipInfo,
 } = require('./config');
-
-// constants
-const { WHITE_LIST } = require('./constants');
 
 // dotenv config
 dotenv.config();
@@ -62,20 +65,14 @@ app.use(expressFileUpload(expressFileUploadConf));
 app.use(xssInstance.xssShield(WHITE_LIST));
 app.use(expressCspHeader(cspDirectives));
 app.use(ipinfo(ipInfo));
-
-app.use((req, res, next) => {
-    res.locals.url = req.originalUrl;
-    next();
-});
+app.use(routeUrl);
 
 // routes
 app.use('/api', require('./routes/api'));
 app.use('/dashboard', require('./routes/dashboard'));
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-    next(createError(404));
-});
+app.use(notFound);
 
 // error handler
 app.use((err, req, res, next) => {
