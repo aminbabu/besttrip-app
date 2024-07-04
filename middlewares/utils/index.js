@@ -10,5 +10,6 @@
 // export all utils middlewares
 module.exports = {
     routeUrl: require('./route-url'),
+    errorHandler: require('./error-handler'),
     notFound: require('./not-found.js'),
 };
