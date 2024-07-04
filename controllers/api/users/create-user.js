@@ -25,7 +25,8 @@ module.exports = async (req, res, next) => {
         // check if user already exists
         if (user) {
             return res.status(400).json({
-                message: 'User already exists',
+                message:
+                    'User already exists. Please choose a different email or phone number.',
             });
         }
 
