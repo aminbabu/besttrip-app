@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 04 Jul, 2024
+ * @update_date 05 Jul, 2024
  */
 
 // dependencies
@@ -35,6 +35,7 @@ module.exports = async (req, res, next) => {
             email,
             phone,
             password,
+            role: 'admin',
         });
 
         // delete existing expired tokens
