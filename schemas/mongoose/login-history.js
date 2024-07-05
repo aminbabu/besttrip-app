@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 21 June, 2024
+ * @update_date 05 Jul, 2024
  */
 
 // dependencies
@@ -17,12 +17,10 @@ module.exports = new Schema(
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User',
-            required: [() => this.user, 'User is required'],
         },
         customer: {
             type: Schema.Types.ObjectId,
             ref: 'Customer',
-            required: [() => this.customer, 'Customer is required'],
         },
         status: {
             type: String,
