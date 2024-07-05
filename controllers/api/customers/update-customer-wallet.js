@@ -14,7 +14,8 @@ const { Wallet } = require('../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { id: customerId, balance, type, description } = req.body;
+        const { balance, type, description } = req.body;
+        const { id: customerId } = req.params;
 
         // get customer's wallet
         const wallet = await Wallet.findOne({ customer: customerId });
