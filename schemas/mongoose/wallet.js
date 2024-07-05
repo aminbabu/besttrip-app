@@ -14,10 +14,22 @@ const { WALLET_TRANSACTION_TYPES } = require('../../constants');
 // export customer schema
 module.exports = new Schema(
     {
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: [
+                (self) => (self?.customer ? false : true),
+                'User is required',
+            ],
+            unique: [true, 'User already has a wallet'],
+        },
         customer: {
             type: Schema.Types.ObjectId,
             ref: 'Customer',
-            required: [true, 'Customer is required'],
+            required: [
+                (self) => (self?.user ? false : true),
+                'Customer is required',
+            ],
             unique: [true, 'Customer already has a wallet'],
         },
         balance: {
