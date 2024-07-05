@@ -14,7 +14,7 @@
     <!--begin::Page-->
     <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
       <!--begin::Header-->
-      <%- include('../partials/header', { user }) %>
+      <%- include('../partials/header', { customer }) %>
       <!--end::Header-->
       <!--begin::Wrapper-->
       <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
@@ -32,7 +32,7 @@
               <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <!--begin::Title-->
                 <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                  Customer Details
+                  <%= customer?.name %>
                 </h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
@@ -48,7 +48,7 @@
                   </li>
                   <!--end::Item-->
                   <!--begin::Item-->
-                  <li class="breadcrumb-item text-muted">Customers</li>
+                  <li class="breadcrumb-item text-muted">Profile</li>
                   <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -74,15 +74,19 @@
                       <div class="d-flex flex-center flex-column mb-5">
                         <!--begin::Avatar-->
                         <div class="symbol symbol-100px symbol-circle mb-7">
-                          <img src="../assets/media/avatars/300-1.jpg" alt="image" />
+                          <% if (customer?.avatar) { %>
+                          <img src="/<%= customer.avatar %>" alt="<%= customer.name %>" />
+                          <% } else { %>
+                          <span class="symbol-label fs-2 fw-bold text-uppercase"><%= customer?.name[0] %></span>
+                          <% } %>
                         </div>
                         <!--end::Avatar-->
                         <!--begin::Name-->
-                        <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">Md. Irfanul Haque</a>
+                        <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1"><%= customer?.name %></a>
                         <!--end::Name-->
                         <!--begin::Position-->
                         <div class="fs-5 fw-semibold text-muted mb-6">
-                          BTC20242001
+                          <%= customer?.roleName %>
                         </div>
                         <!--end::Position-->
                       </div>
@@ -105,45 +109,55 @@
                       <div id="kt_customer_view_details" class="collapse show">
                         <div class="py-5 fs-6">
                           <!--begin::Details item-->
-                          <div class="fw-bold">Staus</div>
-                          <!--begin::Badge-->
-                          <div class="badge badge-light-success d-inline">
-                            Active
-                          </div>
-                          <!--begin::Badge-->
+                          <div class="fw-bold mt-5">Customer ID</div>
+                          <div class="text-gray-600"><%= customer?.customerID %></div>
                           <!--end::Details item-->
                           <!--begin::Details item-->
                           <div class="fw-bold mt-5">Birthday</div>
-                          <div class="text-gray-600">20th May, 1995</div>
+                          <div class="text-gray-600"><%= customer?.dob %></div>
                           <!--end::Details item-->
                           <!--begin::Details item-->
                           <div class="fw-bold mt-5">Email Address</div>
-                          <div class="text-gray-600">info@besttrip.com</div>
-                          <!--end::Details item-->
+                          <div class="text-gray-600"><%= customer?.email %></div>
                           <!--begin::Details item-->
-                          <div class="fw-bold mt-5">Phone</div>
-                          <div class="text-gray-600">+8801712345678</div>
-                          <!--end::Details item-->
+                          <%  if (customer?.phone) { %>
+                          <!--begin::Details item-->
+                          <div class="fw-bold mt-5">Phone Number</div>
+                          <div class="text-gray-600"><%= customer?.phone %></div>
+                          <!--begin::Details item-->
+                          <% } %>
+                          <!--begin::Details item-->
+                          <div class="fw-bold mt-5">Account Status</div>
+                          <div class="badge badge-light-<% if (customer?.status === 'disabled') { %>primary<% } else { %>success<% } %> text-uppercase">
+                            <%= customer?.status %>
+                          </div>
+                          <!--begin::Details item-->
+                          <!--begin::Details item-->
+                          <% if (user?.address) { %>
                           <!--begin::Details item-->
                           <div class="fw-bold mt-5">Address</div>
                           <div class="text-gray-600">
-                            101 Collin Street, <br />Melbourne 3000 VIC
-                            <br />Australia
+                            <%= user?.address %>, <br>
+                            <%= user?.city %> - <%= user?.postalCode %>, <br>
+                            <%= user?.state %>, <%= user?.country %>
                           </div>
-                          <!--end::Details item-->
+                          <!--begin::Details item-->
+                          <% } %>
                           <!--begin::Details item-->
                           <div class="fw-bold mt-5">
                             Frequent Flyer Number
                           </div>
-                          <div class="text-gray-600">5874564000</div>
+                          <div class="text-gray-600"><%= customer?.flyerNumber %></div>
                           <!--end::Details item-->
+                          <% if (customer?.umrahBookings?.[0]) { %>
                           <!--begin::Details item-->
                           <div class="fw-bold mt-5">Last Booking Date</div>
-                          <div class="text-gray-600">20th May, 2021</div>
+                          <div class="text-gray-600"><%= customer?.umrahBookings?.[0] %></div>
                           <!--end::Details item-->
+                          <% } %>
                           <!--begin::Details item-->
                           <div class="fw-bold mt-5">Joined Date</div>
-                          <div class="text-gray-600">20th May, 2021</div>
+                          <div class="text-gray-600"><%= customer?.createdAt %></div>
                           <!--end::Details item-->
                         </div>
                       </div>
@@ -234,8 +248,8 @@
                             <div class="menu-item px-3">
                               <div class="menu-content px-3">
                                 <label class="form-check form-switch form-check-custom form-check-solid">
-                                  <input class="form-check-input w-30px h-20px" type="checkbox" value="" name="notifications" checked="checked" id="kt_user_menu_notifications" />
-                                  <span class="form-check-label text-muted fs-6" for="kt_user_menu_notifications">Notifications</span>
+                                  <input class="form-check-input w-30px h-20px" type="checkbox" value="" name="notifications" checked="checked" id="kt_customer_menu_notifications" />
+                                  <span class="form-check-label text-muted fs-6" for="kt_customer_menu_notifications">Notifications</span>
                                 </label>
                               </div>
                             </div>
@@ -923,7 +937,7 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
                           <!--begin::Tab Content-->
-                          <div id="kt_referred_users_tab_content" class="tab-content">
+                          <div id="kt_referred_customers_tab_content" class="tab-content">
                             <!--begin::Tab panel-->
                             <div id="kt_customer_details_invoices_1" class="py-0 tab-pane fade show active" role="tabpanel">
                               <!--begin::Table-->
@@ -5565,7 +5579,7 @@
                         <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_customer_header" data-kt-scroll-wrappers="#kt_modal_update_customer_scroll" data-kt-scroll-offset="300px">
                           <!--begin::User toggle-->
-                          <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_customer_user_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_customer_user_info">
+                          <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_customer_customer_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_customer_customer_info">
                             User Information
                             <span class="ms-2 rotate-180">
                               <i class="ki-duotone ki-down fs-3"></i>
@@ -5573,7 +5587,7 @@
                           </div>
                           <!--end::User toggle-->
                           <!--begin::User form-->
-                          <div id="kt_modal_update_customer_user_info" class="collapse show">
+                          <div id="kt_modal_update_customer_customer_info" class="collapse show">
                             <!--begin::Input group-->
                             <div class="mb-7">
                               <!--begin::Label-->
@@ -6156,9 +6170,9 @@
                             <!--end::Input-->
                             <!--begin::Card logos-->
                             <div class="position-absolute translate-middle-y top-50 end-0 me-5">
-                              <img src="assets/media/svg/card-logos/visa.svg" alt="" class="h-25px" />
-                              <img src="assets/media/svg/card-logos/mastercard.svg" alt="" class="h-25px" />
-                              <img src="assets/media/svg/card-logos/american-express.svg" alt="" class="h-25px" />
+                              <img src="/assets/media/svg/card-logos/visa.svg" alt="" class="h-25px" />
+                              <img src="/assets/media/svg/card-logos/mastercard.svg" alt="" class="h-25px" />
+                              <img src="/assets/media/svg/card-logos/american-express.svg" alt="" class="h-25px" />
                             </div>
                             <!--end::Card logos-->
                           </div>
