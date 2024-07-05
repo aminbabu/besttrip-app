@@ -14,18 +14,22 @@ const { Wallet } = require('../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { id: customerId, balance, type } = req.body;
+        const { id: customerId, balance, type, description } = req.body;
 
         // get customer's wallet
         const wallet = await Wallet.findById(customerId);
 
-        // update wallet balance
-        wallet.balance =
-            type === 'top-up'
-                ? wallet.balance + balance
-                : wallet.balance - balance < 0
-                  ? 0
-                  : wallet.balance - balance;
+        // set wallet data
+        wallet.set({
+            balance: (wallet.balance =
+                type === 'top-up'
+                    ? wallet.balance + balance
+                    : wallet.balance - balance < 0
+                      ? 0
+                      : wallet.balance - balance),
+            type: type,
+            description: description,
+        });
 
         // save wallet
         await wallet.save();
