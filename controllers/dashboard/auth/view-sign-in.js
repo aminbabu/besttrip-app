@@ -15,6 +15,6 @@ module.exports = (req, res) => {
             message: 'Please enter your email and password to sign in.',
         });
     } catch (err) {
-        return res.redirect('/errors/500');
+        return res.redirect('/dashboard/errors/500');
     }
 };

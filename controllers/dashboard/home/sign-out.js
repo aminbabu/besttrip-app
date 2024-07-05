@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
 
         // check if history not found
         if (!history) {
-            return res.redirect('/errors/404');
+            return res.redirect('/dashboard/errors/404');
         }
 
         // delete history
@@ -47,6 +47,6 @@ module.exports = async (req, res) => {
         // redirect to sign-in page
         return res.redirect('/dashboard/auth/login');
     } catch (error) {
-        return res.redirect('/errors/500');
+        return res.redirect('/dashboard/errors/500');
     }
 };

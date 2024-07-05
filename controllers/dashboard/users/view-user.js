@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
         // check if user not found
         if (!existingUser) {
-            return res.redirect('/errors/404');
+            return res.redirect('/dashboard/errors/404');
         }
 
         // convert user and login login history to object
@@ -62,6 +62,6 @@ module.exports = async (req, res) => {
             countries: Object.values(countries),
         });
     } catch (error) {
-        return res.redirect('/errors/500');
+        return res.redirect('/dashboard/errors/500');
     }
 };

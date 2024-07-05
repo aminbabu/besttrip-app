@@ -12,9 +12,10 @@ module.exports = (req, res) => {
     try {
         return res.render('dashboard/auth/resend-verification-email', {
             title: 'Resend Verification Email',
-            message: 'Please enter your email address to receive a new verification link.',
+            message:
+                'Please enter your email address to receive a new verification link.',
         });
     } catch (err) {
-        return res.redirect('/errors/500');
+        return res.redirect('/dashboard/errors/500');
     }
 };

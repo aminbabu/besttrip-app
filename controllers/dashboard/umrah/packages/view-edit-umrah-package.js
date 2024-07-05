@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
 
         // check if umrah package not found
         if (!umrahPackage) {
-            return res.redirect('/errors/404');
+            return res.redirect('/dashboard/errors/404');
         }
 
         // return render view

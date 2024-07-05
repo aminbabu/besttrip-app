@@ -1,5 +1,5 @@
 /**
- * @file controllers/errors/view-404.js
+ * @file controllers/dashboard/errors/view-404.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

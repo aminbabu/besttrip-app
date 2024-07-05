@@ -15,6 +15,6 @@ module.exports = (req, res) => {
             title: 'Dashboard',
         });
     } catch (error) {
-        return res.redirect('/errors/500');
+        return res.redirect('/dashboard/errors/500');
     }
 };

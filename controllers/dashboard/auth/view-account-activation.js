@@ -16,6 +16,6 @@ module.exports = (req, res) => {
                 'Please enter your email to send account activation link. If you have not received the email, please check your spam folder.',
         });
     } catch (err) {
-        return res.redirect('/errors/500');
+        return res.redirect('/dashboard/errors/500');
     }
 };
