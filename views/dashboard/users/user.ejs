@@ -79,7 +79,7 @@
                             <% if (user?.avatar) { %>
                             <img src="/<%= user.avatar %>" alt="<%= user.name %>" />
                             <% } else { %>
-                            <span class="symbol-label fs-2 fw-bold text-uppercase"><%= user.name[0] %></span>
+                            <span class="symbol-label fs-2 fw-bold text-uppercase"><%= user?.name[0] %></span>
                             <% } %>
                           </div>
                           <!--end::Avatar-->
