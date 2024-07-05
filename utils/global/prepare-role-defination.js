@@ -4,40 +4,42 @@
  * @version 0.0.0
  * @author best-trip
  * @date 21 June, 2024
- * @update_date 21 June, 2024
+ * @update_date 05 Jul, 2024
  */
 
 // export role defination function
-module.exports = (user) => 
-{
-    const modifiedUser = {...user};
+module.exports = (user) => {
+    const modifiedUser = { ...user };
 
     switch (modifiedUser.role) {
         case 'admin':
-             modifiedUser.roleName = 'Administator';
-             break;
-            
+            modifiedUser.roleName = 'Administator';
+            break;
+
         case 'manager':
-             modifiedUser.roleName = 'Manager';
-             break;
-            
+            modifiedUser.roleName = 'Manager';
+            break;
+
         case 'dev':
-             modifiedUser.roleName = 'Developer';
-             break;
-            
+            modifiedUser.roleName = 'Developer';
+            break;
+
         case 'support':
-             modifiedUser.roleName = 'Support';
-             break;
-            
+            modifiedUser.roleName = 'Support';
+            break;
+
         case 'stuff':
-             modifiedUser.roleName = 'Stuff';
-             break;
-    
+            modifiedUser.roleName = 'Stuff';
+            break;
+
+        case 'customer':
+            modifiedUser.roleName = 'Customer';
+            break;
+
         default:
-             modifiedUser.roleName = 'Stuff';
-             break;
+            modifiedUser.roleName = 'Stuff';
+            break;
     }
 
     return modifiedUser;
-}
-
+};
