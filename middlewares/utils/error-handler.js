@@ -15,11 +15,16 @@ module.exports = (err, req, res, next) => {
 
     console.log('From Error Handler:: ', err);
 
-    // send error response
-    return res.status(err.status || 500).json({
-        message:
-            err?.message || 'Internal server error. Please try again later.',
-    });
+    if (req.locals?.url.startsWith('/api')) {
+        // send error response
+        return res.status(err.status || 500).json({
+            message:
+                err?.message ||
+                'Internal server error. Please try again later.',
+        });
+    } else {
+        return res.redirect(`/dashboard/errors/${err.status || 500}`);
+    }
 
     // render the error page
     // return res.status(err.status || 500).render('error');
