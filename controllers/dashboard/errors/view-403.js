@@ -4,13 +4,13 @@
  * @version 0.0.0
  * @author best-trip
  * @date 03 June, 2024
- * @update_date 03 June, 2024
+ * @update_date 05 Jul, 2024
  */
 
 // export 403 error view controller
 module.exports = (req, res) => {
     try {
-        res.render('errors/403', {
+        res.render('dashboard/errors/403', {
             title: '403 - Forbidden',
         });
     } catch (error) {
