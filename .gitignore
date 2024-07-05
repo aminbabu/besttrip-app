@@ -163,5 +163,6 @@ dist
 ### MongoDB ###
 # Local MongoDB data directory
 /mongodb
+/backup
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode
