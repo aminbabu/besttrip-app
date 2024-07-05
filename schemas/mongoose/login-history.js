@@ -17,10 +17,18 @@ module.exports = new Schema(
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User',
+            required: [
+                (self) => (self?.customer ? false : true),
+                'User is required',
+            ],
         },
         customer: {
             type: Schema.Types.ObjectId,
             ref: 'Customer',
+            required: [
+                (self) => (self?.user ? false : true),
+                'Customer is required',
+            ],
         },
         status: {
             type: String,
