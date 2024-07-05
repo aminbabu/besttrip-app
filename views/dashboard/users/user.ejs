@@ -33,7 +33,7 @@
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                   <!--begin::Title-->
                   <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                    <%= user.name %>
+                    <%= user?.name %>
                   </h1>
                   <!--end::Title-->
                   <!--begin::Breadcrumb-->
@@ -77,19 +77,19 @@
                           <!--begin::Avatar-->
                           <div class="symbol symbol-100px symbol-circle mb-7">
                             <% if (user?.avatar) { %>
-                            <img src="/<%= user.avatar %>" alt="<%= user.name %>" />
+                            <img src="/<%= user?.avatar %>" alt="<%= user?.name %>" />
                             <% } else { %>
                             <span class="symbol-label fs-2 fw-bold text-uppercase"><%= user?.name[0] %></span>
                             <% } %>
                           </div>
                           <!--end::Avatar-->
                           <!--begin::Name-->
-                          <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3"><%= user.name %></a>
+                          <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3"><%= user?.name %></a>
                           <!--end::Name-->
                           <!--begin::Position-->
                           <div class="mb-5">
                             <!--begin::Position-->
-                            <div class="fs-5 fw-semibold text-muted text-capitalize mb-6"><%= user.roleName %></div>
+                            <div class="fs-5 fw-semibold text-muted text-capitalize mb-6"><%= user?.roleName %></div>
                             <!--end::Position-->
                           </div>
                           <!--end::Position-->
@@ -114,39 +114,39 @@
                         <div id="kt_user_view_details" class="collapse show">
                           <div class="pb-5 fs-6">
                             <!--begin::Details item-->
-                            <div class="fw-bold mt-5">Stuff ID</div>
-                            <div class="text-gray-600"><%= user.userID %></div>
+                            <div class="fw-bold">Stuff ID</div>
+                            <div class="text-gray-600"><%= user?.userID %></div>
                             <!--begin::Details item-->
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Email Address</div>
-                            <div class="text-gray-600"><%= user.email %></div>
+                            <div class="text-gray-600"><%= user?.email %></div>
                             <!--begin::Details item-->
-                            <%  if (user.phone) { %>
+                            <%  if (user?.phone) { %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Phone Number</div>
-                            <div class="text-gray-600"><%= user.phone %></div>
+                            <div class="text-gray-600"><%= user?.phone %></div>
                             <!--begin::Details item-->
                             <% } %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Account Status</div>
                             <div class="badge badge-light-<% if (user?.status === 'disabled') { %>primary<% } else { %>success<% } %> text-uppercase">
-                              <%= user.status %>
+                              <%= user?.status %>
                             </div>
                             <!--begin::Details item-->
                             <% if (user?.address) { %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Address</div>
                             <div class="text-gray-600">
-                              <%= user.address %>, <br>
-                              <%= user.city %> - <%= user.postalCode %>, <br>
-                              <%= user.state %>, <%= user.country %>
+                              <%= user?.address %>, <br>
+                              <%= user?.city %> - <%= user?.postalCode %>, <br>
+                              <%= user?.state %>, <%= user?.country %>
                             </div>
                             <!--begin::Details item-->
                             <% } %>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Joined Date</div>
                             <div class="text-gray-600">
-                              <%= user.createdAt %>
+                              <%= user?.createdAt %>
                             </div>
                             <!--begin::Details item-->
                             <% if (user?.loginHistory.lastLogin) { %>
@@ -195,10 +195,10 @@
                             </div>
                           </div>
                           <!--end::Menu item-->
-                          <% if (loggedInUser?.email !== user.email && user.status === 'disabled') { %>
+                          <% if (loggedInUser?.email !== user?.email && user?.status === 'disabled') { %>
                           <!--begin::Menu item-->
                           <div class="menu-item px-5">
-                            <a href="/api/users/<% if (loggedInUser?.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/enable" class="menu-link px-5" id="kt_users_enable_account">
+                            <a href="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>/enable" class="menu-link px-5" id="kt_users_enable_account">
                               Enable Account
                             </a>
                           </div>
@@ -207,7 +207,7 @@
                           <% if (user?.status === 'active') { %>
                           <!--begin::Menu item-->
                           <div class="menu-item px-5">
-                            <a href="/api/users/<% if (loggedInUser?.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/disable" class="menu-link px-5" id="kt_users_disable_account">
+                            <a href="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>/disable" class="menu-link px-5" id="kt_users_disable_account">
                               Disable Account
                             </a>
                           </div>
@@ -215,7 +215,7 @@
                           <% } %>
                           <!--begin::Menu item-->
                           <div class="menu-item px-5">
-                            <a href="/api/users/<% if (loggedInUser?.email === user.email) { %>self<% } else { %><%= user._id %><% } %>" class="menu-link text-danger px-5" id="kt_users_delete_account">
+                            <a href="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>" class="menu-link text-danger px-5" id="kt_users_delete_account">
                               Delete Account
                             </a>
                           </div>
@@ -261,10 +261,10 @@
                                       </button>
                                     </td>
                                   </tr>
-                                  <% if (loggedInUser?.email !== user.email) { %>
+                                  <% if (loggedInUser?.email !== user?.email) { %>
                                   <tr>
                                     <td>Role</td>
-                                    <td class="text-capitalize"><%= user.roleName %></td>
+                                    <td class="text-capitalize"><%= user?.roleName %></td>
                                     <td class="text-end">
                                       <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">
                                         <i class="ki-duotone ki-pencil fs-3">
@@ -340,7 +340,7 @@
                               <!--begin::Toolbar-->
                               <div class="d-flex justify-content-end gap-3" data-kt-users-login-session-toolbar="base">
                                 <!--begin::Filter-->
-                                <button type="button" class="btn btn-sm btn-flex btn-light-primary" data_kt_sign_out_all_sessions_url="/api/users/<% if (loggedInUser?.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/login-history/all" id="kt_modal_users_login_session">
+                                <button type="button" class="btn btn-sm btn-flex btn-light-primary" data_kt_sign_out_all_sessions_url="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>/login-history/all" id="kt_modal_users_login_session">
                                   <i class="ki-duotone ki-entrance-right fs-3">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -455,7 +455,7 @@
                     <!--begin::Modal content-->
                     <div class="modal-content">
                       <!--begin::Form-->
-                      <form class="form" id="kt_modal_update_user_form" data-kt-redirect-url="/dashboard/users/<%= user._id %>" action="/api/users/<% if (loggedInUser?.email === user.email) { %>self<% } else { %><%= user._id %><% } %>" method="post">
+                      <form class="form" id="kt_modal_update_user_form" data-kt-redirect-url="/dashboard/users/<%= user?._id %>" action="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>" method="post">
                         <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_update_user_header">
                           <!--begin::Modal title-->
@@ -514,7 +514,7 @@
                                     <!--begin::Preview existing avatar-->
                                     <% if (user?.avatar) { %>
                                     <div class="image-input-wrapper w-125px h-125px" style="
-                                          background-image: url('/<%= user.avatar %>');
+                                          background-image: url('/<%= user?.avatar %>');
                                         "></div>
                                     <% } else { %>
                                     <div class="image-input-wrapper w-125px h-125px" style="
@@ -558,7 +558,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="<%= user.name %>" />
+                                <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="<%= user?.name %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -577,7 +577,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="<%= user.email %>" />
+                                <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="<%= user?.email %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -851,8 +851,8 @@
                       <!--begin::Modal body-->
                       <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <!--begin::Form-->
-                        <form id="kt_modal_update_password_form" class="form" data-kt-redirect-url="/dashboard/users/<%= user._id %>" action="/api/users/<% if (loggedInUser?.email === user.email) { %>self<% } else { %><%= user._id %><% } %>/password" method="post">
-                          <% if (loggedInUser?.email === user.email) { %>
+                        <form id="kt_modal_update_password_form" class="form" data-kt-redirect-url="/dashboard/users/<%= user?._id %>" action="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>/password" method="post">
+                          <% if (loggedInUser?.email === user?.email) { %>
                           <!--begin::Input group=-->
                           <div class="fv-row mb-10">
                             <label class="required form-label fs-6 mb-2">Current Password</label>
@@ -960,7 +960,7 @@
                       <!--begin::Modal body-->
                       <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <!--begin::Form-->
-                        <form id="kt_modal_update_role_form" class="form" data-kt-redirect-url="/dashboard/users/<%= user._id %>" action="/api/users/<%= user._id %>/role" method="post">
+                        <form id="kt_modal_update_role_form" class="form" data-kt-redirect-url="/dashboard/users/<%= user?._id %>" action="/api/users/<%= user?._id %>/role" method="post">
                           <!--begin::Notice-->
                           <!--begin::Notice-->
                           <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
@@ -1215,7 +1215,7 @@
                       <!--begin::Modal body-->
                       <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <!--begin::Form-->
-                        <form class="form" id="kt_modal_enable_2fa_form" data-kt-redirect-url="/dashboard/users/<%= user._id %>" action="/api/auth/users/two-step" method="post">
+                        <form class="form" id="kt_modal_enable_2fa_form" data-kt-redirect-url="/dashboard/users/<%= user?._id %>" action="/api/auth/users/two-step" method="post">
                           <!--begin::Label-->
                           <div class="fw-bold mb-9">
                             Enter your password to <% if (user?.twoStepAuth) { %>disable<% } else { %>enable<% } %>
@@ -1233,7 +1233,7 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="email" class="form-control form-control-solid" name="email" value="<%= user.email %>" readonly="readonly" />
+                            <input type="email" class="form-control form-control-solid" name="email" value="<%= user?.email %>" readonly="readonly" />
                             <!--end::Input-->
                           </div>
                           <!--end::Input group-->
