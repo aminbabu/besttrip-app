@@ -12,6 +12,7 @@ const moment = require('moment');
 const { Customer } = require('../../../models');
 const { countries } = require('countries-list');
 const prepareRoleDefination = require('../../../utils/global/prepare-role-defination');
+const { currencyFormatter } = require('../../../utils/global');
 
 // export customer view controller
 module.exports = async (req, res) => {
@@ -48,6 +49,23 @@ module.exports = async (req, res) => {
             'DD MMM YYYY, h:mm a'
         );
         customer.dob = moment(customer.dob).format('DD MMM YYYY');
+        customer?.umrahBookings?.forEach((booking) => {
+            booking.createdAt = moment(booking.createdAt).format(
+                'DD MMM YYYY, h:mm a'
+            );
+        });
+        customer?.paymentRequests?.forEach((request) => {
+            request.createdAt = moment(request.createdAt).format(
+                'DD MMM YYYY, h:mm a'
+            );
+        });
+
+        // format wallet balance
+        if (customer?.wallet?.balance) {
+            customer.wallet.balance = currencyFormatter(
+                customer.wallet.balance
+            );
+        }
 
         // return rendered view
         return res.render('dashboard/customers/customer', {
