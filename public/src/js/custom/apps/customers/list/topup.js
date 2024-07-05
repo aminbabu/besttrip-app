@@ -49,17 +49,22 @@ var KTModalCustomersTopup = (function () {
                         // Disable submit button whilst loading
                         submitButton.disabled = true;
 
+                        const data = {
+                            type: 'top-up',
+                            balance: form.balance.value,
+                        };
+
+                        if (form.description.value) {
+                            data.description = form.description.value;
+                        }
+
                         // Check axios library docs: https://axios-http.com/docs/intro
                         axios
                             .patch(
                                 submitButton
                                     .closest('form')
                                     .getAttribute('action'),
-                                {
-                                    type: 'top-up',
-                                    balance: form.balance.value,
-                                    description: form.description.value,
-                                }
+                                data
                             )
                             .then((response) => {
                                 // hide modal
