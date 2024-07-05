@@ -61,11 +61,7 @@ module.exports = async (req, res) => {
         });
 
         // format wallet balance
-        if (customer?.wallet?.balance) {
-            customer.wallet.balance = currencyFormatter(
-                customer.wallet.balance
-            );
-        }
+        customer.wallet.balance = currencyFormatter(customer.wallet.balance);
 
         // return rendered view
         return res.render('dashboard/customers/customer', {
