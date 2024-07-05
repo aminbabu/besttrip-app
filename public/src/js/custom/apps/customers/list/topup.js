@@ -18,7 +18,7 @@ var KTModalCustomersTopup = (function () {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validator = FormValidation.formValidation(form, {
             fields: {
-                amount: {
+                balance: {
                     validators: {
                         notEmpty: {
                             message: 'Amount is required',
