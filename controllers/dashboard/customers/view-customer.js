@@ -11,6 +11,7 @@
 const moment = require('moment');
 const { Customer } = require('../../../models');
 const { countries } = require('countries-list');
+const prepareRoleDefination = require('../../../utils/global/prepare-role-defination');
 
 // export customer view controller
 module.exports = async (req, res) => {
@@ -50,7 +51,7 @@ module.exports = async (req, res) => {
         // return rendered view
         return res.render('dashboard/customers/customer', {
             title: customer.name,
-            customer,
+            customer: prepareRoleDefination(customer),
             countries: Object.values(countries),
         });
     } catch (error) {
