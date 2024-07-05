@@ -27,8 +27,6 @@ module.exports = async (req, res, next) => {
             ],
         });
 
-        console.log('customer', validatedData, customer);
-
         // check if customer already exists
         if (customer) {
             return res.status(400).json({
