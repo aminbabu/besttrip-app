@@ -51,6 +51,6 @@ module.exports = async (req, res) => {
             meta,
         });
     } catch (error) {
-        return res.redirect('/error/500');
+        return res.redirect('/dashboard/error/500');
     }
 };

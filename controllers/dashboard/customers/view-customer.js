@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
 
         // check if customer exists
         if (!customer) {
-            return res.redirect('/error/404');
+            return res.redirect('/dashboard/error/404');
         }
 
         // return rendered view
@@ -30,6 +30,6 @@ module.exports = async (req, res) => {
             customer,
         });
     } catch (error) {
-        return res.redirect('/error/500');
+        return res.redirect('/dashboard/error/500');
     }
 };
