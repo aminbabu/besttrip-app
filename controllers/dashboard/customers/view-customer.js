@@ -47,6 +47,7 @@ module.exports = async (req, res) => {
         customer.updatedAt = moment(customer.updatedAt).format(
             'DD MMM YYYY, h:mm a'
         );
+        customer.dob = moment(customer.dob).format('DD MMM YYYY');
 
         // return rendered view
         return res.render('dashboard/customers/customer', {
