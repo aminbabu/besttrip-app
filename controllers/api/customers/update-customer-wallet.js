@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
         wallet.set({
             balance: (wallet.balance =
                 type === 'top-up'
-                    ? wallet.balance + balance
+                    ? wallet.balance + Number(balance)
                     : wallet.balance - balance < 0
                       ? 0
                       : wallet.balance - balance),
