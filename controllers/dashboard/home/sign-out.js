@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 June, 2024
- * @update_date 21 June, 2024
+ * @update_date 05 Jul, 2024
  */
 
 // dependencies
@@ -24,21 +24,19 @@ module.exports = async (req, res) => {
         const { user } = verifyToken(token) || {};
 
         // get last history
-        const history = await LoginHistory.findOne({
+        const history = await LoginHistory.find({
             user: user?._id,
             ipAddress: ip,
-            userAgent: req.headers['user-agent'],
         }).sort({
             createdAt: -1,
         });
 
-        // check if history not found
-        if (!history) {
-            return res.redirect('/dashboard/errors/404');
-        }
-
         // delete history
-        history.deleteOne();
+        if (history.length) {
+            history?.forEach(async (item) => {
+                await item.deleteOne();
+            });
+        }
 
         // clear cookie and header
         res.clearCookie('token');
