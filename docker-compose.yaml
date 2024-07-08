@@ -6,7 +6,7 @@ services:
         ports:
             - '27017:27017'
         volumes:
-            - mongodb-data:/data/db
+            - ./mongodb-data:/data/db
     node-app:
         build: .
         container_name: besttrip-node-app-container
