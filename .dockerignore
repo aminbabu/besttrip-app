@@ -9,4 +9,4 @@ node_modules**/node_modules/
 **/.editorconfig
 **/.aws
 **/dist
-mongodb
+mongodb*
