@@ -1,0 +1,298 @@
+[
+ {
+  "code": "DAC",
+  "name": "Hazrat Shahjalal Intl Arpt",
+  "citycode": "DAC",
+  "city": "Dhaka",
+  "country": "Bangladesh",
+  "countrycode": "BD"
+ },
+ {
+  "code": "CGP",
+  "name": "Shah Amanat International Airport",
+  "citycode": "CGP",
+  "city": "Chittagong",
+  "country": "Bangladesh",
+  "countrycode": "BD"
+ },
+ {
+  "code": "SPD",
+  "name": "Saidpur Airport",
+  "citycode": "SPD",
+  "city": "Saidpur",
+  "country": "Bangladesh",
+  "countrycode": "BD"
+ },
+ {
+  "code": "CXB",
+  "name": "Coxs Bazar Airport",
+  "citycode": "CXB",
+  "city": "Coxs Bazar",
+  "country": "Bangladesh",
+  "countrycode": "BD"
+ },
+ {
+  "code": "ZYL",
+  "name": "Civil Airport",
+  "citycode": "ZYL",
+  "city": "Sylhet",
+  "country": "Bangladesh",
+  "countrycode": "BD"
+ },
+ {
+  "code": "RJH",
+  "name": "Rajshahi Airport",
+  "citycode": "RJH",
+  "city": "Rajshahi",
+  "country": "Bangladesh",
+  "countrycode": "BD"
+ },
+ {
+  "code": "JSR",
+  "name": "Jessore Airport",
+  "citycode": "JSR",
+  "city": "Jessore",
+  "country": "Bangladesh",
+  "countrycode": "BD"
+ },
+ {
+  "code": "BZL",
+  "name": "Barisal Airport",
+  "citycode": "BZL",
+  "city": "Barisal",
+  "country": "Bangladesh",
+  "countrycode": "BD"
+ },
+ {
+  "code": "JED",
+  "name": "King Abdulaziz International Airport",
+  "citycode": "JED",
+  "city": "Jeddah",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "DMM",
+  "name": "King Fahd International Airport",
+  "citycode": "DMM",
+  "city": "Dammam",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "RUH",
+  "name": "King Khaled International Airport",
+  "citycode": "RUH",
+  "city": "Riyadh",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "ABT",
+  "name": "Al-Aqiq Airport",
+  "citycode": "ABT",
+  "city": "Al Baha",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "AHB",
+  "name": "Abha Regional Airport",
+  "citycode": "AHB",
+  "city": "Abha",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "AJF",
+  "name": "Jouf Airport",
+  "citycode": "AJF",
+  "city": "Sakaka Al Jouf",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "AQI",
+  "name": "Qaisumah Airport",
+  "citycode": "AQI",
+  "city": "Qaisumah",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "BHH",
+  "name": "Bisha Domestic Airport",
+  "citycode": "BHH",
+  "city": "Bisha",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "DHA",
+  "name": "King Abdulaziz Air Base",
+  "citycode": "DHA",
+  "city": "Dhahran",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "DWD",
+  "name": "Dawadmi Airport",
+  "citycode": "DWD",
+  "city": "Dawadmi",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "EAM",
+  "name": "Nejran Airport",
+  "citycode": "EAM",
+  "city": "Nejran",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "EJH",
+  "name": "Wedjh Airport",
+  "citycode": "EJH",
+  "city": "Wedjh",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "ELQ",
+  "name": "Prince Nayef bin Abdulaziz Regional Airport",
+  "citycode": "ELQ",
+  "city": "Buraidah",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "GIZ",
+  "name": "Jazan Regional Airport",
+  "citycode": "GIZ",
+  "city": "Jazan",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "HAS",
+  "name": "Hail Airport",
+  "citycode": "HAS",
+  "city": "Hail",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "HBT",
+  "name": "Hambantota Seaplane Base",
+  "citycode": "HBT",
+  "city": "Hafr Albatin",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "HOF",
+  "name": "Al-Ahsa Airport",
+  "citycode": "HOF",
+  "city": "Alahsa",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "KMC",
+  "name": "Hafar Al-Batin Domestic Airport",
+  "citycode": "KMC",
+  "city": "King Khalid Mil.",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "MED",
+  "name": "Prince Mohammad Bin Abdulaziz International Airport",
+  "citycode": "MED",
+  "city": "Madinah",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "RAE",
+  "name": "Arar Airport",
+  "citycode": "RAE",
+  "city": "Arar",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "RAH",
+  "name": "Rafha Airport",
+  "citycode": "RAH",
+  "city": "Rafha",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "SHW",
+  "name": "Sharurah Airport",
+  "citycode": "SHW",
+  "city": "Sharurah",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "TIF",
+  "name": "Taif Airport",
+  "citycode": "TIF",
+  "city": "Taif",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "TUI",
+  "name": "Turaif Airport",
+  "citycode": "TUI",
+  "city": "Turaif",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "TUU",
+  "name": "Tabuk Regional Airport",
+  "citycode": "TUU",
+  "city": "Tabuk",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "URY",
+  "name": "Gurayat Airport",
+  "citycode": "URY",
+  "city": "Gurayat",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "WAE",
+  "name": "Wadi Ad Dawasir Airport",
+  "citycode": "WAE",
+  "city": "Wadi Ad Dawasir",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "YNB",
+  "name": "Yanbu Airport",
+  "citycode": "YNB",
+  "city": "Yanbu",
+  "country": "Saudi Arabia",
+  "countrycode": "SA"
+ },
+ {
+  "code": "DXB",
+  "name": "Dubai International Airport",
+  "citycode": "DXB",
+  "city": "Dubai",
+  "country": "United Arab Emirates",
+  "countrycode": "AE"
+ }
+]
