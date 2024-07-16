@@ -29,13 +29,18 @@ module.exports =
             flightOffer = await FlightOffer.findById(id);
         }
 
+        // check if thumbnail is not uploaded
+        if (flightOffer && !thumbnail) {
+            return next();
+        }
+
         // check if flight offer thumbnail exists
         if (flightOffer?.thumbnail) {
             // delete previous thumbnail
             fs.unlinkSync(
                 path.join(
                     __dirname,
-                    '../../../../public',
+                    './../../../../../public',
                     flightOffer.thumbnail
                 )
             );
@@ -48,7 +53,7 @@ module.exports =
         );
         const uploadLogoPath = path.join(
             __dirname,
-            '../../../../public',
+            './../../../../../public',
             thumbnailPath
         );
 

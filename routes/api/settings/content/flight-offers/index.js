@@ -20,14 +20,21 @@ const {
     createFlightOffer,
     updateFlightOffer,
     deleteFlightOffer,
+    updateFlightOfferStatus,
+    deleteManyHotelOffers,
 } = require('../../../../../controllers/api/settings/content/flight-offers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
+    isAuthorized,
+    isAllowed,
+} = require('../../../../../middlewares/api/auth');
+const {
+    validateHotelOfferIds,
     validateFlightOfferId,
     validateFlightOffer,
     validateFlightOfferFile,
+    validateFlightOfferStatus,
 } = require('../../../../../middlewares/api/validators/settings/content/flight-offers');
 const {
     uploadFlightOfferFile,
@@ -82,9 +89,9 @@ router.post(
  * @param {function} controller - ['updateFlightOffer']
  * @returns {object} - router
  * @access private ['admin']
- * @method PUT
+ * @method PATCH
  */
-router.put(
+router.patch(
     '/:id',
     isAuthorized,
     isAllowed(['admin']),
@@ -96,6 +103,41 @@ router.put(
 );
 
 /**
+ * @description - update flight offer status
+ * @param {string} path - '/api/settings/content/flight-offers/:id/status'
+ * @param {function} validator - ['validateFlightOfferId', 'validateFlightOfferStatus']
+ * @param {function} controller - ['updateFlightOfferStatus']
+ * @returns {object} - router
+ * @access private ['admin']
+ * @method PATCH
+ */
+router.patch(
+    '/:id/status',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateFlightOfferId,
+    validateFlightOfferStatus,
+    updateFlightOfferStatus
+);
+
+/**
+ * @description - delete many flight offers by IDs
+ * @param {string} path - '/api/settings/content/flight-offers/delete-many'
+ * @param {function} middleware - ['validateFlightOfferIds']
+ * @param {function} controller - ['deleteManyFlightOffers']
+ * @returns {object} - router
+ * @access private ['admin']
+ * @method DELETE
+ */
+router.delete(
+    '/delete-many',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateHotelOfferIds,
+    deleteManyHotelOffers
+);
+
+/**
  * @description - delete flight offer
  * @param {string} path - '/api/settings/content/flight-offers/:id'
  * @param {function} validator - ['validateFlightOfferId']
@@ -104,7 +146,13 @@ router.put(
  * @access private ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAuthorized, isAllowed(['admin']), validateFlightOfferId, deleteFlightOffer);
+router.delete(
+    '/:id',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateFlightOfferId,
+    deleteFlightOffer
+);
 
 // export router
 module.exports = router;

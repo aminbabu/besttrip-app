@@ -15,6 +15,25 @@ const { HOTEL_STATUS } = require('../../../../constants');
 // export hotel content settings schema
 module.exports = z
     .object({
+        ids: z
+            .array(
+                z.string({
+                    required_error: 'IDs are required',
+                    invalid_type_error: 'Please provide valid IDs',
+                })
+            )
+            .nonempty({
+                message: 'IDs array must not be empty',
+            })
+            .optional(),
+        id: z
+            .string({
+                required_error: 'Id is required',
+                invalid_type_error: 'Please provide a valid id',
+            })
+            .refine((id) => isMongoId(id), {
+                message: 'Please provide a valid id',
+            }),
         id: z
             .string({
                 required_error: 'Id is required',

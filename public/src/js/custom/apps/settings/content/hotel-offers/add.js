@@ -85,82 +85,104 @@ var KTContentHotelOfferAdd = (function () {
 
             // Validate form before submit
             if (validator) {
-                validator.validate().then(async function (status) {
+                validator.validate().then(function (status) {
                     if (status == 'Valid') {
                         // Show loading indication
                         submitButton.setAttribute('data-kt-indicator', 'on');
 
-                        // Disable button to avoid multiple clicks
+                        // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
-                        // Prepare form data
-                        const formData = new FormData(form);
-
-                        try {
-                            // Send POST request with form data
-                            const response = await axios.post(
-                                form.getAttribute('action'),
-                                formData
-                            );
-
-                            // Remove loading indication
-                            submitButton.removeAttribute('data-kt-indicator');
-
-                            // Enable button
-                            submitButton.disabled = false;
-
-                            // Show success popup
-                            Swal.fire({
-                                text:
-                                    response?.data?.message ||
-                                    'Form has been successfully submitted!',
-                                icon: 'success',
-                                buttonsStyling: false,
-                                confirmButtonText: 'Ok, got it!',
-                                customClass: {
-                                    confirmButton: 'btn btn-primary',
-                                },
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
+                        // Check axios library docs: https://axios-http.com/docs/intro
+                        axios
+                            .post(
+                                submitButton
+                                    .closest('form')
+                                    .getAttribute('action'),
+                                new FormData(form)
+                            )
+                            .then((response) => {
+                                if (response) {
+                                    // Hide modal
                                     modal.hide();
 
-                                    // Reset form
-                                    form.reset();
+                                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                    Swal.fire({
+                                        text:
+                                            response?.data?.message ||
+                                            'Form has been successfully submitted!',
+                                        icon: 'success',
+                                        buttonsStyling: false,
+                                        confirmButtonText: 'Ok, got it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary',
+                                        },
+                                        allowOutsideClick: false,
+                                    }).then(() => {
+                                        // Reset form
+                                        form.reset();
 
-                                    // Get redirect URL from the form
-                                    const redirectUrl = form.getAttribute(
-                                        'data-kt-redirect-url'
-                                    );
+                                        // Get redirect URL from the form
+                                        const redirectUrl = form.getAttribute(
+                                            'data-kt-redirect-url'
+                                        );
 
-                                    if (redirectUrl) {
-                                        location.href = redirectUrl;
-                                    } else {
-                                        location.reload();
-                                    }
+                                        if (redirectUrl) {
+                                            location.href = redirectUrl;
+                                        } else {
+                                            location.reload();
+                                        }
+                                    });
+                                } else {
+                                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                    Swal.fire({
+                                        text: 'Sorry, looks like there are some errors detected, please try again.',
+                                        icon: 'error',
+                                        buttonsStyling: false,
+                                        confirmButtonText: 'Ok, got it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary',
+                                        },
+                                    });
                                 }
-                            });
-                        } catch (error) {
-                            // Remove loading indication
-                            submitButton.removeAttribute('data-kt-indicator');
+                            })
+                            .catch((error) => {
+                                const errors = error.response?.data?.message
+                                    ? error.response?.data?.message
+                                    : error?.response?.data?.errors;
 
-                            // Enable button
-                            submitButton.disabled = false;
+                                Swal.fire({
+                                    html: `${
+                                        errors instanceof Array
+                                            ? `<ul class="text-start">${Object.values(
+                                                  error.response.data.errors
+                                              )
+                                                  .map(
+                                                      (err) =>
+                                                          `<li>${err?.message}</li>`
+                                                  )
+                                                  .join('')}</ul>`
+                                            : errors
+                                    }`,
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
+                            })
+                            .then(() => {
+                                // Hide loading indication
+                                submitButton.removeAttribute(
+                                    'data-kt-indicator'
+                                );
 
-                            // Show error popup
-                            Swal.fire({
-                                text:
-                                    error.response?.data?.message ||
-                                    'Sorry, we ran into an error! Please try again.',
-                                icon: 'error',
-                                buttonsStyling: false,
-                                confirmButtonText: 'Ok, got it!',
-                                customClass: {
-                                    confirmButton: 'btn btn-primary',
-                                },
+                                // Enable button
+                                submitButton.disabled = false;
                             });
-                        }
                     } else {
-                        // Show warning popup
+                        // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
                             text: 'Sorry, looks like there are some errors detected, please try again.',
                             icon: 'error',

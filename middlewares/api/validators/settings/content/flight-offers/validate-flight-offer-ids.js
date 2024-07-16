@@ -10,14 +10,14 @@
 // dependencies
 const { z } = require('zod');
 const {
-    hotelOfferSchema,
+    flightOfferSchema,
 } = require('../../../../../../schemas/zod/settings/content');
 const { zodErrorHandler } = require('../../../../../../handlers/errors');
 
 // Middleware function to validate hotel offer IDs
 module.exports = (req, res, next) => {
     // Validate request body IDs against the schema
-    const { error, data } = hotelOfferSchema
+    const { error, data } = flightOfferSchema
         .pick({ ids: true })
         .safeParse(req.body.ids);
 

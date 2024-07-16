@@ -9,6 +9,8 @@
 
 // export
 module.exports = {
+    validateHotelOfferIds: require('./validate-flight-offer-ids'),
+    validateFlightOfferStatus: require('./validate-flight-offer-status'),
     validateFlightOfferId: require('./validate-flight-offer-id'),
     validateFlightOffer: require('./validate-flight-offer'),
     validateFlightOfferFile: require('./validate-flight-offer-file'),

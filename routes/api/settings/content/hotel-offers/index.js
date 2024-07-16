@@ -89,7 +89,7 @@ router.post(
  * @param {function} controller - ['updateHotelOffer']
  * @returns {object} - router
  * @access private ['admin']
- * @method patch
+ * @method PATCH
  */
 router.patch(
     '/:id',

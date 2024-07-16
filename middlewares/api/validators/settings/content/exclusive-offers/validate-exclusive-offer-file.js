@@ -23,6 +23,13 @@ module.exports = async (req, res, next) => {
         return next();
     }
 
+    if (!thumbnail) {
+        // check if thumbnail is not uploaded
+        return res.status(400).json({
+            message: 'Please upload a thumbnail',
+        });
+    }
+
     // check if thumbnail is an array
     if (Array.isArray(thumbnail)) {
         return res.status(400).json({
