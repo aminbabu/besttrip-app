@@ -459,6 +459,16 @@ var KTContentUmrahOfferEdit = (function () {
                             .val(data.status)
                             .trigger('change');
 
+                        // Set the checkboxes for inclusions
+                        const inclusions = data.inclusions;
+                        form.querySelectorAll(
+                            'input[name="inclusions"]'
+                        ).forEach((checkbox) => {
+                            checkbox.checked = inclusions.includes(
+                                checkbox.value
+                            );
+                        });
+
                         form.setAttribute('action', href);
 
                         // Initialize file uploader after populating data

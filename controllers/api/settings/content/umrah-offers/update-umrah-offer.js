@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
         // update umrah offer
         umrahOffer.set({
             ...validatedData,
-            thumbnail: thumbnail.path,
+            thumbnail: thumbnail?.path || umrahOffer.thumbnail,
         });
 
         // save umrah offer
