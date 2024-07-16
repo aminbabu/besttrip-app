@@ -13,5 +13,7 @@ module.exports = {
     getHotelOffer: require('./get-hotel-offer'),
     createHotelOffer: require('./create-hotel-offer'),
     updateHotelOffer: require('./update-hotel-offer'),
+    updateHotelOfferStatus: require('./update-hotel-offer-status'),
     deleteHotelOffer: require('./delete-hotel-offer'),
+    deleteManyHotelOffers: require('./delete-many-hotel-offers'),
 };

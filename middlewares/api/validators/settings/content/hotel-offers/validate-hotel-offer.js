@@ -8,13 +8,17 @@
  */
 
 // dependencies
-const { hotelOfferSchema } = require('../../../../../../schemas/zod/settings/content');
+const {
+    hotelOfferSchema,
+} = require('../../../../../../schemas/zod/settings/content');
 const { zodErrorHandler } = require('../../../../../../handlers/errors');
 
 // export hotel offer validator middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = hotelOfferSchema.omit({ id: true }).safeParse(req.body);
+    const { error, success } = hotelOfferSchema
+        .omit({ id: true })
+        .safeParse(req.body);
 
     // check for errors
     if (!success) {

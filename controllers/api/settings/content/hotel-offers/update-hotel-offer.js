@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
         // update hotel offer
         hotelOffer.set({
             ...validated,
-            thumbnail: thumbnail.path,
+            thumbnail: thumbnail?.path || hotelOffer.thumbnail,
         });
 
         // save hotel offer

@@ -20,14 +20,21 @@ const {
     createHotelOffer,
     updateHotelOffer,
     deleteHotelOffer,
+    updateHotelOfferStatus,
+    deleteManyHotelOffers,
 } = require('../../../../../controllers/api/settings/content/hotel-offers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
+const {
+    isAuthorized,
+    isAllowed,
+} = require('../../../../../middlewares/api/auth');
 const {
     validateHotelOfferId,
     validateHotelOffer,
     validateHotelOfferFile,
+    validateHotelOfferStatus,
+    validateHotelOfferIds,
 } = require('../../../../../middlewares/api/validators/settings/content/hotel-offers');
 const {
     uploadHotelOfferFile,
@@ -82,9 +89,9 @@ router.post(
  * @param {function} controller - ['updateHotelOffer']
  * @returns {object} - router
  * @access private ['admin']
- * @method PUT
+ * @method patch
  */
-router.put(
+router.patch(
     '/:id',
     isAuthorized,
     isAllowed(['admin']),
@@ -96,6 +103,41 @@ router.put(
 );
 
 /**
+ * @description - update hotel offer status
+ * @param {string} path - '/api/settings/content/hotel-offers/:id/status'
+ * @param {function} validator - ['validateHotelOfferId', 'validateHotelOfferStatus']
+ * @param {function} controller - ['updateHotelOfferStatus']
+ * @returns {object} - router
+ * @access private ['admin']
+ * @method PATCH
+ */
+router.patch(
+    '/:id/status',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateHotelOfferId,
+    validateHotelOfferStatus,
+    updateHotelOfferStatus
+);
+
+/**
+ * @description - delete many hotel offers by IDs
+ * @param {string} path - '/api/settings/content/hotel-offers/delete-many'
+ * @param {function} middleware - ['validateHotelOfferIds']
+ * @param {function} controller - ['deleteManyHotelOffers']
+ * @returns {object} - router
+ * @access private ['admin']
+ * @method DELETE
+ */
+router.delete(
+    '/delete-many',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateHotelOfferIds,
+    deleteManyHotelOffers
+);
+
+/**
  * @description - delete hotel offer
  * @param {string} path - '/api/settings/content/hotel-offers/:id'
  * @param {function} validator - ['validateHotelOfferId']
@@ -104,7 +146,13 @@ router.put(
  * @access private ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAuthorized, isAllowed(['admin']), validateHotelOfferId, deleteHotelOffer);
+router.delete(
+    '/:id',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateHotelOfferId,
+    deleteHotelOffer
+);
 
 // export router
 module.exports = router;

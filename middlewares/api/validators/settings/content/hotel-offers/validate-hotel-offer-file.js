@@ -8,15 +8,23 @@
  * @update_date 07 May, 2024
  */
 
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../../constants');
+const {
+    DEFAULT_IMAGE_TYPES,
+    ONE_MEGA_BYTE,
+} = require('../../../../../../constants');
 
 // export hotel offer file validator middleware
 module.exports = async (req, res, next) => {
     // get thumbnail
     const { thumbnail } = req.files || {};
 
-    // check if thumbnail is not uploaded
+    // check if the req method is not post and thumbnail
+    if (req.method !== 'POST' && !thumbnail) {
+        return next();
+    }
+
     if (!thumbnail) {
+        // check if thumbnail is not uploaded
         return res.status(400).json({
             message: 'Please upload a thumbnail',
         });
@@ -32,14 +40,18 @@ module.exports = async (req, res, next) => {
     // check if thumbnail is not an image of type jpg, jpeg, png
     if (thumbnail && !DEFAULT_IMAGE_TYPES.includes(thumbnail.mimetype)) {
         return res.status(400).json({
-            message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+            message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(
+                ', '
+            )}`,
         });
     }
 
     // check if thumbnail size is greater than 1 MB
     if (thumbnail?.size > ONE_MEGA_BYTE) {
         return res.status(400).json({
-            message: `Please upload a thumbnail of size less than ${(ONE_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+            message: `Please upload a thumbnail of size less than ${(
+                ONE_MEGA_BYTE / ONE_MEGA_BYTE
+            ).toFixed(2)} MB`,
         });
     }
 

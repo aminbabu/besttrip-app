@@ -9,7 +9,10 @@
 
 // export
 module.exports = {
+    validateHotelOfferIds: require('./validate-hotel-offer-ids'),
     validateHotelOfferId: require('./validate-hotel-offer-id'),
     validateHotelOffer: require('./validate-hotel-offer'),
     validateHotelOfferFile: require('./validate-hotel-offer-file'),
+    validateHotelOfferStatus: require('./validate-hotel-offer-status'),
+    validateHotelOfferStatus: require('./validate-hotel-offer-status'),
 };
