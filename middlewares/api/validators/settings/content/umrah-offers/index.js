@@ -9,6 +9,8 @@
 
 // export
 module.exports = {
+    validateUmrahOfferStatus: require('./validate-umrah-offer-status'),
+    validateUmrahOfferIds: require('./validate-umrah-offer-ids'),
     validateUmrahOfferId: require('./validate-umrah-offer-id'),
     validateUmrahOffer: require('./validate-umrah-offer'),
     validateUmrahOfferFile: require('./validate-umrah-offer-file'),

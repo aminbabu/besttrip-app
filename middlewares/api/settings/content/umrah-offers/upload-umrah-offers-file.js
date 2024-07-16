@@ -23,17 +23,26 @@ module.exports =
         const { id } = req.params || {};
         const { thumbnail } = req.files || {};
 
-        // check if thumbnail exists
-        if (!thumbnail) {
-            // get umrah offer
+        // check if id is provided
+        if (id) {
+            // get flight offer
             umrahOffer = await UmrahOffer.findById(id);
         }
 
-        // check if umrah offer thumbnail exists
+        // check if thumbnail is not uploaded
+        if (umrahOffer && !thumbnail) {
+            return next();
+        }
+
+        // check if flight offer thumbnail exists
         if (umrahOffer?.thumbnail) {
             // delete previous thumbnail
             fs.unlinkSync(
-                path.join(__dirname, '../../../../public', umrahOffer.thumbnail)
+                path.join(
+                    __dirname,
+                    './../../../../../public',
+                    umrahOffer.thumbnail
+                )
             );
         }
 
@@ -44,7 +53,7 @@ module.exports =
         );
         const uploadLogoPath = path.join(
             __dirname,
-            '../../../../public',
+            './../../../../../public',
             thumbnailPath
         );
 

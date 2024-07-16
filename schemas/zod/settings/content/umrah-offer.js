@@ -62,7 +62,9 @@ module.exports = z
                     invalid_type_error: 'Please provide a valid inclusions',
                 })
                 .refine((inclusion) => UMRAH_INCLUSIONS.includes(inclusion), {
-                    message: `Please provide a valid inclusion. Available options are ${UMRAH_INCLUSIONS.join(', ')}`,
+                    message: `Please provide a valid inclusion. Available options are ${UMRAH_INCLUSIONS.join(
+                        ', '
+                    )}`,
                 })
         ),
         price: z
@@ -87,7 +89,9 @@ module.exports = z
                 invalid_type_error: 'Please provide a valid status',
             })
             .refine((status) => UMRAH_STATUS.includes(status), {
-                message: `Please provide a valid status. Available options are ${UMRAH_STATUS.join(', ')}`,
+                message: `Please provide a valid status. Available options are ${UMRAH_STATUS.join(
+                    ', '
+                )}`,
             }),
     })
     .strict();

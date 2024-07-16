@@ -20,13 +20,20 @@ const {
     createUmrahOffer,
     updateUmrahOffer,
     deleteUmrahOffer,
+    deleteManyUmrahOffers,
+    updateUmrahOfferStatus,
 } = require('../../../../../controllers/api/settings/content/umrah-offers');
 
 // middlewares
-const { isAuthorized, isAllowed } = require('../../../../../middlewares/api/auth');
 const {
+    isAuthorized,
+    isAllowed,
+} = require('../../../../../middlewares/api/auth');
+const {
+    validateUmrahOfferIds,
     validateUmrahOfferId,
     validateUmrahOffer,
+    validateUmrahOfferStatus,
     validateUmrahOfferFile,
 } = require('../../../../../middlewares/api/validators/settings/content/umrah-offers');
 const {
@@ -82,9 +89,9 @@ router.post(
  * @param {function} controller - ['updateUmrahOffer']
  * @returns {object} - router
  * @access private ['admin']
- * @method PUT
+ * @method PATCH
  */
-router.put(
+router.patch(
     '/:id',
     isAuthorized,
     isAllowed(['admin']),
@@ -96,6 +103,41 @@ router.put(
 );
 
 /**
+ * @description - update umrah offer status
+ * @param {string} path - '/api/settings/content/umrah-offers/:id/status'
+ * @param {function} validator - ['validateUmrahOfferId', 'validateUmrahOfferStatus']
+ * @param {function} controller - ['updateUmrahOfferStatus']
+ * @returns {object} - router
+ * @access private ['admin']
+ * @method PATCH
+ */
+router.patch(
+    '/:id/status',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateUmrahOfferId,
+    validateUmrahOfferStatus,
+    updateUmrahOfferStatus
+);
+
+/**
+ * @description - delete many umrah offers by IDs
+ * @param {string} path - '/api/settings/content/umrah-offers/delete-many'
+ * @param {function} middleware - ['validateUmrahOfferIds']
+ * @param {function} controller - ['deleteManyUmrahOffers']
+ * @returns {object} - router
+ * @access private ['admin']
+ * @method DELETE
+ */
+router.delete(
+    '/delete-many',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateUmrahOfferIds,
+    deleteManyUmrahOffers
+);
+
+/**
  * @description - delete umrah offer
  * @param {string} path - '/api/settings/content/umrah-offers/:id'
  * @param {function} validator - ['validateUmrahOfferId']
@@ -104,7 +146,13 @@ router.put(
  * @access private ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAuthorized, isAllowed(['admin']), validateUmrahOfferId, deleteUmrahOffer);
+router.delete(
+    '/:id',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateUmrahOfferId,
+    deleteUmrahOffer
+);
 
 // export router
 module.exports = router;
