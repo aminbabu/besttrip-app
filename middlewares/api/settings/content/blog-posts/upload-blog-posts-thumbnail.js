@@ -29,11 +29,20 @@ module.exports =
             blogPost = await BlogPost.findById(id);
         }
 
+        // check if thumbnail is not uploaded
+        if (blogPost && !thumbnail) {
+            return next();
+        }
+
         // check if blog post thumbnail exists
         if (blogPost?.thumbnail) {
             // delete previous thumbnail
             fs.unlinkSync(
-                path.join(__dirname, '../../../../public', blogPost.thumbnail)
+                path.join(
+                    __dirname,
+                    './../../../../../public',
+                    blogPost.thumbnail
+                )
             );
         }
 
@@ -44,7 +53,7 @@ module.exports =
         );
         const uploadLogoPath = path.join(
             __dirname,
-            '../../../../public',
+            './../../../../../public',
             thumbnailPath
         );
 

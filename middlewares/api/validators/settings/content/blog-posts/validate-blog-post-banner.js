@@ -9,12 +9,20 @@
  */
 
 // dependencies
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../../constants');
+const {
+    DEFAULT_IMAGE_TYPES,
+    ONE_MEGA_BYTE,
+} = require('../../../../../../constants');
 
 // export blog post file validator middleware
 module.exports = async (req, res, next) => {
     // get banner
     const { banner } = req.files || {};
+
+    // check if the req method is not post and thumbnail
+    if (req.method !== 'POST' && !banner) {
+        return next();
+    }
 
     // check if banner is not uploaded
     if (!banner) {
@@ -33,14 +41,18 @@ module.exports = async (req, res, next) => {
     // check if banner is not an image of type jpg, jpeg, png
     if (banner && !DEFAULT_IMAGE_TYPES.includes(banner.mimetype)) {
         return res.status(400).json({
-            message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+            message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(
+                ', '
+            )}`,
         });
     }
 
     // check if banner size is greater than 1 MB
     if (banner?.size > ONE_MEGA_BYTE) {
         return res.status(400).json({
-            message: `Please upload a banner of size less than ${(ONE_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+            message: `Please upload a banner of size less than ${(
+                ONE_MEGA_BYTE / ONE_MEGA_BYTE
+            ).toFixed(2)} MB`,
         });
     }
 

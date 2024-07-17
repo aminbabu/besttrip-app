@@ -13,5 +13,7 @@ module.exports = {
     getBlogPost: require('./get-blog-post'),
     createBlogPost: require('./create-blog-post'),
     updateBlogPost: require('./update-blog-post'),
+    updateBlogPostStatus: require('./update-blog-post-status'),
     deleteBlogPost: require('./delete-blog-post'),
+    deleteManyBlogPosts: require('./delete-many-blog-post'),
 };

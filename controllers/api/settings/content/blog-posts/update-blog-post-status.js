@@ -1,5 +1,5 @@
 /**
- * @file /controllers/api/settings/content/blog-posts/get-blog-posts.js
+ * @file /controllers/api/settings/content/blog-posts/update-blog-posts-status.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -10,13 +10,12 @@
 // dependencies
 const { BlogPost } = require('../../../../../models');
 
-// export update blog post controller
+// export update blog post status controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
         const { id } = req.params;
-        const validatedData = req.body;
-        const { thumbnail, banner } = req.files;
+        const { status } = req.body;
 
         // get blog post
         const blogPost = await BlogPost.findById(id);
@@ -29,18 +28,14 @@ module.exports = async (req, res, next) => {
         }
 
         // update blog post
-        blogPost.set({
-            ...validatedData,
-            thumbnail: thumbnail?.path || blogPost.thumbnail,
-            banner: banner?.path || blogPost.banner,
-        });
+        blogPost.set({ status });
 
         // save blog post
         await blogPost.save();
 
         // send response
         return res.send({
-            message: 'Updated blog post successfully',
+            message: 'Updated blog post status successfully',
             blogPost,
         });
     } catch (error) {

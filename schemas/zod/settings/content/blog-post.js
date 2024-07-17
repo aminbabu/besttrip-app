@@ -10,11 +10,25 @@
 // dependencies
 const { isMongoId } = require('validator');
 const { z } = require('zod');
-const { BLOG_STATUS, BLOG_DOMESTIC_AIRLINES } = require('../../../../constants');
+const {
+    BLOG_STATUS,
+    BLOG_DOMESTIC_AIRLINES,
+} = require('../../../../constants');
 
 // export blog post schema
 module.exports = z
     .object({
+        ids: z
+            .array(
+                z.string({
+                    required_error: 'IDs are required',
+                    invalid_type_error: 'Please provide valid IDs',
+                })
+            )
+            .nonempty({
+                message: 'IDs array must not be empty',
+            })
+            .optional(),
         id: z
             .string({
                 required_error: 'Id is required',
@@ -86,7 +100,9 @@ module.exports = z
                 invalid_type_error: 'Please provide a valid status',
             })
             .refine((status) => BLOG_STATUS.includes(status), {
-                message: `Please provide a valid status. Available options are ${BLOG_STATUS.join(', ')}`,
+                message: `Please provide a valid status. Available options are ${BLOG_STATUS.join(
+                    ', '
+                )}`,
             }),
         nearestAirport: z
             .string({
@@ -98,17 +114,25 @@ module.exports = z
                 message: 'Nearest Airport must be at least 3 characters',
             })
             .max(255, {
-                message: 'Nearest Airport must not be greater than 255 characters',
+                message:
+                    'Nearest Airport must not be greater than 255 characters',
             }),
         domesticAirlines: z.array(
             z
                 .string({
                     required_error: 'Domestic Airlines is required',
-                    invalid_type_error: 'Please provide a valid domestic Airlines',
+                    invalid_type_error:
+                        'Please provide a valid domestic Airlines',
                 })
-                .refine((domesticAirlines) => BLOG_DOMESTIC_AIRLINES.includes(domesticAirlines), {
-                    message: `Please provide a valid domestic Airlines. Available options are ${BLOG_DOMESTIC_AIRLINES.join(', ')}`,
-                })
+                .refine(
+                    (domesticAirlines) =>
+                        BLOG_DOMESTIC_AIRLINES.includes(domesticAirlines),
+                    {
+                        message: `Please provide a valid domestic Airlines. Available options are ${BLOG_DOMESTIC_AIRLINES.join(
+                            ', '
+                        )}`,
+                    }
+                )
         ),
     })
     .strict();
