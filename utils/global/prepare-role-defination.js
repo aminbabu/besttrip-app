@@ -28,8 +28,8 @@ module.exports = (user) => {
             modifiedUser.roleName = 'Support';
             break;
 
-        case 'stuff':
-            modifiedUser.roleName = 'Stuff';
+        case 'staff':
+            modifiedUser.roleName = 'Staff';
             break;
 
         case 'customer':
@@ -37,7 +37,7 @@ module.exports = (user) => {
             break;
 
         default:
-            modifiedUser.roleName = 'Stuff';
+            modifiedUser.roleName = 'Staff';
             break;
     }
 

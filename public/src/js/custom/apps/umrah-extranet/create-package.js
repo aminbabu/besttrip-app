@@ -1077,8 +1077,9 @@ var KTCreatePackage = (function () {
         const dropZoneBasicThumbnails = new Dropzone(
             '#kt_dropzonejs_basic_thumbnails',
             {
-                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
+                // url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
+                // paramName: 'files', // The name that will be used to transfer the file
+                autoProcessQueue: false,
                 maxFiles: 10,
                 maxFilesize: 10, // MB
                 addRemoveLinks: true,
@@ -1094,8 +1095,9 @@ var KTCreatePackage = (function () {
         const dropZoneMakkahThumbnails = new Dropzone(
             '#kt_dropzonejs_makkah_hotel_thumbnails',
             {
-                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
+                // url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
+                // paramName: 'files', // The name that will be used to transfer the file
+                autoProcessQueue: false,
                 maxFiles: 10,
                 maxFilesize: 10, // MB
                 addRemoveLinks: true,
@@ -1111,8 +1113,9 @@ var KTCreatePackage = (function () {
         const dropZoneMadinahThumbnails = new Dropzone(
             '#kt_dropzonejs_madinah_hotel_thumbnails',
             {
-                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
+                // url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
+                // paramName: 'files', // The name that will be used to transfer the file
+                autoProcessQueue: false,
                 maxFiles: 10,
                 maxFilesize: 10, // MB
                 addRemoveLinks: true,
