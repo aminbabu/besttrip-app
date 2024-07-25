@@ -34,14 +34,6 @@ module.exports = z
             .refine((id) => isMongoId(id), {
                 message: 'Please provide a valid id',
             }),
-        id: z
-            .string({
-                required_error: 'Id is required',
-                invalid_type_error: 'Please provide a valid id',
-            })
-            .refine((id) => isMongoId(id), {
-                message: 'Please provide a valid id',
-            }),
         title: z
             .string({
                 required_error: 'Title is required',

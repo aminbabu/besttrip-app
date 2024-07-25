@@ -17,7 +17,10 @@ module.exports = async (req, res, next) => {
         const { status } = req.params;
 
         // get payment requests
-        const paymentRequests = await PaymentRequest.find({ status }).populate('customer');
+        const paymentRequests = await PaymentRequest.find({ status }).populate(
+            'customer',
+            '-password  -twoStepAuth -isVerified -loginHistory -createdAt -updatedAt'
+        );
 
         // return response
         return res.status(200).json({

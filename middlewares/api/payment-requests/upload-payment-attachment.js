@@ -35,7 +35,7 @@ module.exports =
             fs.unlinkSync(
                 path.join(
                     __dirname,
-                    '../../../public',
+                    './../../../public',
                     paymentRequest.attachment
                 )
             );
@@ -48,7 +48,7 @@ module.exports =
         );
         const uploadFilePath = path.join(
             __dirname,
-            '../../../public',
+            './../../../public',
             uploadPath
         );
 

@@ -18,7 +18,10 @@ module.exports = async (req, res, next) => {
         const { status, note } = req.body;
 
         // get payment request
-        const paymentRequest = await PaymentRequest.findById(id).populate('customer');
+        const paymentRequest = await PaymentRequest.findById(id).populate(
+            'customer',
+            '-password  -twoStepAuth -isVerified -loginHistory -createdAt -updatedAt'
+        );
 
         // check if payment request exist
         if (!paymentRequest) {

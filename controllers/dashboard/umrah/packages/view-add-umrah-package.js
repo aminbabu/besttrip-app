@@ -7,12 +7,19 @@
  * @update_date 15 June, 2024
  */
 
+const { UmrahPackageDuration } = require('./../../../../models');
+
 // export umrah package add view controller
 module.exports = async (req, res) => {
     try {
+        const umrahPackageDurations = await UmrahPackageDuration.find({
+            status: 'active',
+        });
+
         // return render view
         return res.render('dashboard/umrah/packages/add', {
             title: 'Add Umrah Package',
+            umrahPackageDurations,
         });
     } catch (error) {
         return res.redirect('/dashboard/error/500');

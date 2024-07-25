@@ -10,5 +10,7 @@
 // export umrah package type validators
 module.exports = {
     validateUmrahPackageTypeId: require('./validate-umrah-package-type-id'),
+    validateUmrahPackageTypeIds: require('./validate-umrah-package-type-ids'),
     validateUmrahPackageType: require('./validate-umrah-package-type'),
+    validateUmrahPackageTypeStatus: require('./validate-umrah-package-type-status'),
 };

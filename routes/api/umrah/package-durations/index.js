@@ -20,12 +20,14 @@ const {
     createUmrahPackageDuration,
     updateUmrahPackageDuration,
     deleteUmrahPackageDuration,
+    updateUmrahPackageDurationStatus,
 } = require('../../../../controllers/api/umrah/package-durations');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
 const {
     validateUmrahPackageDurationId,
+    validateUmrahPackageDurationStatus,
     validateUmrahPackageDuration,
 } = require('../../../../middlewares/api/validators/umrah/package-durations');
 
@@ -59,7 +61,12 @@ router.get('/', isAllowed(['admin']), getUmrahPackageDurations);
  * @access private - ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), validateUmrahPackageDurationId, getUmrahPackageDuration);
+router.get(
+    '/:id',
+    isAllowed(['admin']),
+    validateUmrahPackageDurationId,
+    getUmrahPackageDuration
+);
 
 /**
  * @description create umrah package duration
@@ -70,7 +77,12 @@ router.get('/:id', isAllowed(['admin']), validateUmrahPackageDurationId, getUmra
  * @access private - ['admin']
  * @method POST
  */
-router.post('/', isAllowed(['admin']), validateUmrahPackageDuration, createUmrahPackageDuration);
+router.post(
+    '/',
+    isAllowed(['admin']),
+    validateUmrahPackageDuration,
+    createUmrahPackageDuration
+);
 
 /**
  * @description update umrah package duration
@@ -80,14 +92,33 @@ router.post('/', isAllowed(['admin']), validateUmrahPackageDuration, createUmrah
  * @param {function} controller - ['updateUmrahPackageDuration']
  * @returns {object} - router
  * @access private - ['admin']
- * @method PUT
+ * @method PATCH
  */
-router.put(
+router.patch(
     '/:id',
     isAllowed(['admin']),
     validateUmrahPackageDurationId,
     validateUmrahPackageDuration,
     updateUmrahPackageDuration
+);
+
+/**
+ * @description - update umrah package duration status
+ * @param {string} path - /umrah/package-durations/:id/status
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateUmrahPackageDurationId', 'validateUmrahPackageDurationStatus']
+ * @param {function} controller - ['updateUmrahPackageDurationStatus']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method PATCH
+ */
+router.patch(
+    '/:id/status',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateUmrahPackageDurationId,
+    validateUmrahPackageDurationStatus,
+    updateUmrahPackageDurationStatus
 );
 
 /**

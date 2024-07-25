@@ -157,7 +157,7 @@
                                 </label>
                               </div>
                             </td>
-                            <td><%= new Date(offer.createdAt).toLocaleString() %></td>
+                            <td><%= new Date(offer.updatedAt).toLocaleString() %></td>
                             <td class="text-end">
                               <a
                                 href="#"
@@ -299,19 +299,12 @@
                           <!--end::Label-->
                           <!--begin::Input-->
                           <select data-control="select2" data-placeholder="Select a duration" data-hide-search="true" name="duration" class="form-select form-select-solid">
-                            <option></option>
-                            <option value=15>
-                              15 Days | 14 Nights
+                          <option></option>
+                          <% umrahPackageDurations?.forEach((duration) => { %>
+                            <option value="<%= duration.days %>">                              
+                              <%= duration.days %> Days | <%= duration.nights %> Nights
                             </option>
-                            <option value=20>
-                              20 Days | 19 Nights
-                            </option>
-                            <option value=25>
-                              25 Days | 24 Nights
-                            </option>
-                            <option value=30>
-                              30 Days | 29 Nights
-                            </option>
+                          <% }); %> 
                           </select>
                           <!--end::Input-->
                         </div>
@@ -512,18 +505,11 @@
                           <!--begin::Input-->
                           <select data-control="select2" data-placeholder="Select a duration" data-hide-search="true" name="duration" class="form-select form-select-solid">
                             <option></option>
-                            <option value=15>
-                              15 Days | 14 Nights
+                          <% umrahPackageDurations?.forEach((duration) => { %>
+                            <option value="<%= duration.days %>">                              
+                              <%= duration.days %> Days | <%= duration.nights %> Nights
                             </option>
-                            <option value=20>
-                              20 Days | 19 Nights
-                            </option>
-                            <option value=25>
-                              25 Days | 24 Nights
-                            </option>
-                            <option value=30>
-                              30 Days | 29 Nights
-                            </option>
+                          <% }); %> 
                           </select>
                           <!--end::Input-->
                         </div>

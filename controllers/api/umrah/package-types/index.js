@@ -14,4 +14,6 @@ module.exports = {
     createUmrahPackageType: require('./create-umrah-package-type'),
     updateUmrahPackageType: require('./update-umrah-package-type'),
     deleteUmrahPackageType: require('./delete-umrah-package-type'),
+    deleteManyUmrahPackageType: require('./delete-many-umrah-package-type'),
+    updateUmrahPackageTypeStatus: require('./update-umrah-package-type-status'),
 };

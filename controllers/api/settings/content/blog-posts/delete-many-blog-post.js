@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
             _id: { $in: ids },
         });
 
-        // check if any blog posts found
+        // check if any blog posts not found
         if (blogsPosts.length === 0) {
             return res.status(404).send({
                 message: 'No blog posts found with the provided IDs',

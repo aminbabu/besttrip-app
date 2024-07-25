@@ -8,18 +8,22 @@
  */
 
 // dependencies
-const { UmrahOffer } = require('../../../../../models');
+const { UmrahOffer, UmrahPackageDuration } = require('../../../../../models');
 
 // export umrah offers view controller
 module.exports = async (req, res) => {
     try {
         // get umrah offers
         const umrahOffers = await UmrahOffer.find();
+        const umrahPackageDurations = await UmrahPackageDuration.find({
+            status: 'active',
+        });
 
         // render umrah offers view
         return res.render('dashboard/settings/content/umrah-offers', {
             title: 'Umrah Offers',
             umrahOffers,
+            umrahPackageDurations,
         });
     } catch (error) {
         return res.redirect('/dashboard/error/500');

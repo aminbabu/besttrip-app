@@ -10,5 +10,6 @@
 // export umrah package duration validators
 module.exports = {
     validateUmrahPackageDurationId: require('./validate-umrah-package-duration-id'),
+    validateUmrahPackageDurationStatus: require('./validate-umrah-package-duration-status'),
     validateUmrahPackageDuration: require('./validate-umrah-package-duration'),
 };

@@ -20,13 +20,17 @@ const {
     createUmrahPackageType,
     updateUmrahPackageType,
     deleteUmrahPackageType,
+    updateUmrahPackageTypeStatus,
+    deleteManyUmrahPackageType,
 } = require('../../../../controllers/api/umrah/package-types');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
 const {
     validateUmrahPackageTypeId,
+    validateUmrahPackageTypeIds,
     validateUmrahPackageType,
+    validateUmrahPackageTypeStatus,
 } = require('../../../../middlewares/api/validators/umrah/package-types');
 
 /**
@@ -59,7 +63,12 @@ router.get('/', isAllowed(['admin']), getUmrahPackageTypes);
  * @access private - ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), validateUmrahPackageTypeId, getUmrahPackageType);
+router.get(
+    '/:id',
+    isAllowed(['admin']),
+    validateUmrahPackageTypeId,
+    getUmrahPackageType
+);
 
 /**
  * @description create umrah package type
@@ -70,7 +79,12 @@ router.get('/:id', isAllowed(['admin']), validateUmrahPackageTypeId, getUmrahPac
  * @access private - ['admin']
  * @method POST
  */
-router.post('/', isAllowed(['admin']), validateUmrahPackageType, createUmrahPackageType);
+router.post(
+    '/',
+    isAllowed(['admin']),
+    validateUmrahPackageType,
+    createUmrahPackageType
+);
 
 /**
  * @description update umrah package type
@@ -80,14 +94,50 @@ router.post('/', isAllowed(['admin']), validateUmrahPackageType, createUmrahPack
  * @param {function} controller - ['updateUmrahPackageType']
  * @returns {object} - router
  * @access private - ['admin']
- * @method PUT
+ * @method PATCH
  */
-router.put(
+router.patch(
     '/:id',
     isAllowed(['admin']),
     validateUmrahPackageTypeId,
     validateUmrahPackageType,
     updateUmrahPackageType
+);
+
+/**
+ * @description - update umrah package type status
+ * @param {string} path - /umrah/package-types/:id/status
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateUmrahPackageTypeId', 'validateUmrahPackageTypeStatus']
+ * @param {function} controller - ['updateUmrahPackageTypeStatus']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method PATCH
+ */
+router.patch(
+    '/:id/status',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateUmrahPackageTypeId,
+    validateUmrahPackageTypeStatus,
+    updateUmrahPackageTypeStatus
+);
+
+/**
+ * @description - delete many umrah package type by IDs
+ * @param {string} path - '/umrah/package-types/delete-many'
+ * @param {function} middleware - ['validateUmrahPackageTypeIds']
+ * @param {function} controller - ['deleteManyUmrahPackageType']
+ * @returns {object} - router
+ * @access private ['admin']
+ * @method DELETE
+ */
+router.delete(
+    '/delete-many',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateUmrahPackageTypeIds,
+    deleteManyUmrahPackageType
 );
 
 /**
@@ -100,7 +150,12 @@ router.put(
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['admin']), validateUmrahPackageTypeId, deleteUmrahPackageType);
+router.delete(
+    '/:id',
+    isAllowed(['admin']),
+    validateUmrahPackageTypeId,
+    deleteUmrahPackageType
+);
 
 // export router
 module.exports = router;

@@ -14,7 +14,10 @@ const { PaymentRequest } = require('../../../models');
 module.exports = async (req, res, next) => {
     try {
         // get payment requests
-        const paymentRequests = await PaymentRequest.find().populate('customer');
+        const paymentRequests = await PaymentRequest.find().populate(
+            'customer',
+            '-password  -twoStepAuth -isVerified -loginHistory -createdAt -updatedAt'
+        );
 
         // return response
         return res.status(200).json({

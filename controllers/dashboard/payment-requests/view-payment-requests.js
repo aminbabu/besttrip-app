@@ -20,7 +20,10 @@ module.exports = async (req, res) => {
 
         // get payment requests by sorting descending
         let paymentRequests = await PaymentRequest.find({ status })
-            .populate('customer')
+            .populate(
+                'customer',
+                '-password  -twoStepAuth -isVerified -loginHistory -createdAt -updatedAt'
+            )
             .sort({
                 createdAt: 'desc',
             });

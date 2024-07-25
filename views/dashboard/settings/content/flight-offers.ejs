@@ -127,7 +127,7 @@
                           <th class="text-end min-w-100px">Actions</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="text-gray-600 fw-semibold">
                         <% flightOffers?.forEach((flight) => { %>
                           <tr>
                             <td>
@@ -153,7 +153,7 @@
                                 </label>
                               </div>
                             </td>
-                            <td><%= new Date(flight.createdAt).toLocaleString() %></td>
+                            <td><%= new Date(flight.updatedAt).toLocaleString() %></td>
                             <td class="text-end">
                               <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                 Actions

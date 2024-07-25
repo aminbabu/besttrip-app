@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
             _id: { $in: ids },
         });
 
-        // check if any hotel offers found
+        // check if any hotel offers not found
         if (flightOffersToDelete.length === 0) {
             return res.status(404).send({
                 message: 'No hotel offers found with the provided IDs',

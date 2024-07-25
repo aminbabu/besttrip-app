@@ -409,7 +409,7 @@
                                     </label>
                                     <!--end::Message-->
                                     <!--begin::Input-->
-                                    <input type="file" name="basic_package_thumbnail" id="kt_file_uploader_basic_thumbnail" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
+                                    <input type="file" name="thumbnail" id="kt_file_uploader_basic_thumbnail" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
                                     <!--begin::Error Message -->
                                     <div class="invalid-feedback d-block"></div>
                                     <!--end::Error Message-->
@@ -427,7 +427,7 @@
                                 <label class="form-label required">Title</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="basic_package_title" value="" placeholder="" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="title" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -439,7 +439,7 @@
                                 <label class="form-label required">Subtitle</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="basic_package_subtitle" value="" placeholder="" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="subtitle" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -453,7 +453,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="basic_package_start_location" aria-label="Select a location" data-control="select2" data-placeholder="Select a location.." class="form-select form-select-solid form-select-lg">
+                                <select name="departureLocation" aria-label="Select a location" data-control="select2" data-placeholder="Select a location.." class="form-select form-select-solid form-select-lg">
                                   <option></option>
                                   <option value="Dhaka, Bangladesh">
                                     Dhaka, Bangladesh
@@ -488,7 +488,7 @@
                                 <label class="form-label required">Package Schedule</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="basic_package_schedule" aria-label="Select a month" data-control="select2" data-placeholder="Select a month.." class="form-select form-select-solid form-select-lg">
+                                <select name="schedule" aria-label="Select a month" data-control="select2" data-placeholder="Select a month.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select a month..</option>
                                   <option value="January">January</option>
                                   <option value="February">February</option>
@@ -514,7 +514,7 @@
                                 <label class="form-label required">Journey Date</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="basic_package_start_date" data-flatpickr="package_date_picker" />
+                                <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="journeyDate" data-flatpickr="package_date_picker" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -526,7 +526,7 @@
                                 <label class="form-label required">Package Expire Date</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="basic_package_expire_date" data-flatpickr="package_date_picker" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="expiryDate" data-flatpickr="package_date_picker" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -539,24 +539,12 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="basic_package_duration_days_&_nights" aria-label="Select total days" data-control="select2" data-hide-search="true" data-placeholder="Select total days.." class="form-select form-select-solid form-select-lg">
-                                  <option value="20">
-                                    Select total days & nights..
-                                  </option>
-                                  <option value="15">
-                                    15 Days | 14 Nights
-                                  </option>
-                                  <option value="21">
-                                    21 Days | 20 Nights
-                                  </option>
-                                  <option value="30">
-                                    30 Days | 29 Nights
-                                  </option>
-                                  <option value="45">
-                                    45 Days | 44 Nights
-                                  </option>
-                                  <option value="90">
-                                    90 Days | 89 Nights
-                                  </option>
+                                <option></option>
+                                <% umrahPackageDurations?.forEach((duration) => { %>
+                                <option value="<%= duration.days%>">                              
+                                  <%= duration.days %> Days | <%= duration.nights %> Nights
+                                </option>
+                                <% }); %> 
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -569,7 +557,7 @@
                                 <label class="form-label required">Package Type</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="basic_package_type" aria-label="Select package type" data-control="select2" data-hide-search="true" data-placeholder="Select package type.." class="form-select form-select-solid form-select-lg">
+                                <select name="type" aria-label="Select package type" data-control="select2" data-hide-search="true" data-placeholder="Select package type.." class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select package type..
                                   </option>
@@ -588,13 +576,13 @@
                                 <label class="form-label required">Package Status</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="basic_package_status" aria-label="Select package status" data-control="select2" data-hide-search="true" data-placeholder="Select package status.." class="form-select form-select-solid form-select-lg">
+                                <select name="status" aria-label="Select package status" data-control="select2" data-hide-search="true" data-placeholder="Select package status.." class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select package status..
                                   </option>
-                                  <option value="Active">Active</option>
-                                  <option value="Disabled">Disabled</option>
-                                  <option value="Draft">Draft</option>
+                                  <option value="active">Active</option>
+                                  <option value="disabled">Disabled</option>
+                                  <option value="draft">Draft</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -607,7 +595,7 @@
                                 <label class="form-label required">Adult Package Price</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="basic_adult_package_price" value="" placeholder="" />
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="adultPrice" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -619,7 +607,7 @@
                                 <label class="form-label required">Chilren Package Price</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="basic_child_package_price" value="" placeholder="" />
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="childPrice" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -631,7 +619,7 @@
                                 <label class="form-label required">Infant Package Price</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="basic_infant_package_price" value="" placeholder="" />
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="infantPrice" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -643,7 +631,7 @@
                                 <label class="form-label required">Seat Avaiable</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="basic_seat_available" value="" placeholder="" />
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="seats" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -658,30 +646,30 @@
                                 <div class="d-flex flex-wrap align-items-center gap-4 mt-3">
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                    <input class="form-check-input" name="basic_inclusions[]" type="checkbox" value="Flight" />
+                                    <input class="form-check-input" name="inclusions" type="checkbox" value="flight" />
                                     <span class="fw-semibold ps-2 fs-6">Flight</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="basic_inclusions[]" type="checkbox" value="Hotel" />
+                                    <input class="form-check-input" name="inclusions" type="checkbox" value="hotel" />
                                     <span class="fw-semibold ps-2 fs-6">Hotel</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="basic_inclusions[]" type="checkbox" value="Visa" />
+                                    <input class="form-check-input" name="inclusions" type="checkbox" value="visa" />
                                     <span class="fw-semibold ps-2 fs-6">Visa</span>
                                   </label>
                                   <!--end::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="basic_inclusions[]" type="checkbox" value="Transport" />
+                                    <input class="form-check-input" name="inclusions" type="checkbox" value="transport" />
                                     <span class="fw-semibold ps-2 fs-6">Transport</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--end::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="basic_inclusions[]" type="checkbox" value="Food" />
+                                    <input class="form-check-input" name="inclusions" type="checkbox" value="food" />
                                     <span class="fw-semibold ps-2 fs-6">Food</span>
                                   </label>
                                   <!--end::Option-->
@@ -749,7 +737,7 @@
                                 <label class="form-label required">Airline Code</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inbound_airline_code" aria-label="Select airline code" data-control="select2-country" data-placeholder="Select airline code" class="form-select form-select-solid form-select-lg">
+                                <select name="outboundAirlineCode" aria-label="Select airline code" data-control="select2-country" data-placeholder="Select airline code" class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select airline code
                                   </option>
@@ -766,7 +754,7 @@
                                 <label class="form-label required">Flight No</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="outbound_flight_no" value="" placeholder="" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="outboundFlightNumber" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -778,7 +766,7 @@
                                 <label class="form-label required">Booking Class</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="outbound_booking_class" aria-label="Select class" data-control="select2" data-placeholder="Select class" class="form-select form-select-solid form-select-lg">
+                                <select name="outboundBookingClass" aria-label="Select class" data-control="select2" data-placeholder="Select class" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select class</option>
                                   <option value="Economy">Economy</option>
                                   <option value="Premium Economy">
@@ -802,7 +790,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="outbound_departure_airport" aria-label="Select departure airport" data-control="select2" data-placeholder="Select departure airport" class="form-select form-select-solid form-select-lg">
+                                <select name="outboundDepartureAirport" aria-label="Select departure airport" data-control="select2" data-placeholder="Select departure airport" class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select departure airport
                                   </option>
@@ -834,7 +822,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="outbound_arrival_airport" aria-label="Select arrival airport" data-control="select2" data-placeholder="Select arrival airport" class="form-select form-select-solid form-select-lg">
+                                <select name="outboundArrivalAirport" aria-label="Select arrival airport" data-control="select2" data-placeholder="Select arrival airport" class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select arrival airport
                                   </option>
@@ -859,7 +847,7 @@
                                 <label class="form-label required">Aircraft Model</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="outbound_aircraft_model" aria-label="Select aircraft model" data-control="select2" data-placeholder="Select aircraft model" class="form-select form-select-solid form-select-lg">
+                                <select name="outboundAirCraftModel" aria-label="Select aircraft model" data-control="select2" data-placeholder="Select aircraft model" class="form-select form-select-solid form-select-lg">
                                   <option></option>
                                   <option value="Airbus A220">
                                     Airbus A220
@@ -888,7 +876,7 @@
                                 <label class="form-label required">Departure Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outbound_departure_datetime" data-flatpickr="package_datetime_picker" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundDepartureDatetime" data-flatpickr="package_datetime_picker" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -900,7 +888,7 @@
                                 <label class="form-label required">Arrival Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outbound_arrival_datetime" data-flatpickr="package_datetime_picker" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundArrivalDatetime" data-flatpickr="package_datetime_picker" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -912,7 +900,7 @@
                                 <label class="form-label required">Flight Stops</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="outbound_flight_stops" aria-label="Select flight stops" data-control="select2" data-placeholder="Select flight stops.." class="form-select form-select-solid form-select-lg" data-kt-umrah-extranet-flight-stops-select="true">
+                                <select name="outboundFlightStops" aria-label="Select flight stops" data-control="select2" data-placeholder="Select flight stops.." class="form-select form-select-solid form-select-lg" data-kt-umrah-extranet-flight-stops-select="true">
                                   <option value="">
                                     Select flight stops..
                                   </option>
@@ -933,7 +921,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="outbound_layover_1st_duration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="1st" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="outboundLayoverFirstDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="1st" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -947,7 +935,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="outbound_layover_1st_airport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="1st">
+                                <select name="outboundLayoverFirstAirport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="1st">
                                   <option value="">
                                     Select layover airport
                                   </option>
@@ -979,7 +967,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="outbound_layover_2nd_duration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="outboundLayoverSecondDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -993,7 +981,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="outbound_layover_2nd_airport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="2nd">
+                                <select name="outboundLayoverSecondAirport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="2nd">
                                   <option value="">
                                     Select layover airport
                                   </option>
@@ -1022,7 +1010,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Adult Baggage Checkin</label>
                                 <!--begin::Input-->
-                                <select name="outbound_adult_baggage_checkin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="outboundAdultBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="1 Pices">1 Pices</option>
@@ -1113,7 +1101,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Adult Baggage Cabin</label>
                                 <!--begin::Input-->
-                                <select name="outbound_adult_baggage_cabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="outboundAdultBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="KG">KG</option>
@@ -1135,7 +1123,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Children Baggage Checkin</label>
                                 <!--begin::Input-->
-                                <select name="outbound_child_baggage_checkin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="outboundChildBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="1 Pices">1 Pices</option>
@@ -1226,7 +1214,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Children Baggage Cabin</label>
                                 <!--begin::Input-->
-                                <select name="outbound_child_baggage_cabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="outboundChildBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="KG">KG</option>
@@ -1248,7 +1236,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Infant Baggage Checkin</label>
                                 <!--begin::Input-->
-                                <select name="outbound_infant_baggage_checkin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="outboundInfantBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="1 Pices">1 Pices</option>
@@ -1339,7 +1327,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Infant Baggage Cabin</label>
                                 <!--begin::Input-->
-                                <select name="outbound_infant_baggage_cabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="outboundInfantBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="KG">KG</option>
@@ -1406,7 +1394,7 @@
                                     </label>
                                     <!--end::Message-->
                                     <!--begin::Input-->
-                                    <input type="file" name="makkah_hotel_thumbnail" id="kt_file_uploader_makkah_hotel_thumbnail" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
+                                    <input type="file" name="makkahHotelThumbnail" id="kt_file_uploader_makkah_hotel_thumbnail" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
                                     <!--end::Input-->
                                     <!--begin::Error Message -->
                                     <div class="invalid-feedback d-block"></div>
@@ -1473,7 +1461,7 @@
                                 <label class="form-label required">Hotel Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="makkah_hotel_name" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="makkahHotelName" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1487,7 +1475,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="makkah_hotel_address" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="makkahHotelAddress" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1501,7 +1489,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="makkah_hotel_rating" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true">
+                                <select name="makkahHotelRating" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true">
                                   <option></option>
                                   <option value="1">1</option>
                                   <option value="2">2</option>
@@ -1522,7 +1510,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" name="makkah_hotel_distance_from_haram" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="number" name="makkahHotelDistance" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1536,7 +1524,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="makkah_hotel_distance_from_haram_unit" aria-label="Select distance unit" data-control="select2" data-placeholder="Select distance unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="makkahHotelDistanceUnit" aria-label="Select distance unit" data-control="select2" data-placeholder="Select distance unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select distance unit..
                                   </option>
@@ -1557,7 +1545,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" name="makkah_hotel_walking_distance_from_haram" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="number" name="makkahHotelWalkDuration" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1571,7 +1559,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="makkah_hotel_google_map_link" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="makkahHotelLocation" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1583,7 +1571,7 @@
                                 <label class="form-label"> Notes </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea name="makkah_hotel_notes" class="form-control form-control-lg form-control-solid" rows="3" placeholder="Write a note"></textarea>
+                                <textarea name="makkahHotelNote" class="form-control form-control-lg form-control-solid" rows="3" placeholder="Write a note"></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1667,7 +1655,7 @@
                                     </label>
                                     <!--end::Message-->
                                     <!--begin::Input-->
-                                    <input type="file" name="madinah_hotel_thumbnail" id="kt_file_uploader_madinah_hotel_thumbnail" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
+                                    <input type="file" name="madinahHotelThumbnail" id="kt_file_uploader_madinah_hotel_thumbnail" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
                                     <!--end::Input-->
                                     <!--begin::Error Message -->
                                     <div class="invalid-feedback d-block"></div>
@@ -1688,7 +1676,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="madinah_hotel_stay_duration" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
+                                <select name="madinahHotelNoOfNights" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select stay duration..
                                   </option>
@@ -1734,7 +1722,7 @@
                                 <label class="form-label required">Hotel Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="madinah_hotel_name" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="madinahHotelName" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1748,7 +1736,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="madinah_hotel_address" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="madinahHotelAddress" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1762,7 +1750,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="madinah_hotel_rating" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true">
+                                <select name="madinahHotelRating" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true">
                                   <option></option>
                                   <option value="1">1</option>
                                   <option value="2">2</option>
@@ -1783,7 +1771,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" name="madinah_hotel_distance_from_masjid_e_nabwi" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="number" name="madinahHotelDistance" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1797,7 +1785,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="madinah_hotel_distance_from_masjid_e_nabwi_unit" aria-label="Select distance unit" data-control="select2" data-placeholder="Select distance unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="madinahHotelDistanceUnit" aria-label="Select distance unit" data-control="select2" data-placeholder="Select distance unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select distance unit..
                                   </option>
@@ -1819,7 +1807,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" name="madinah_hotel_walking_distance_from_masjid_e_nabwi" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="number" name="madinahHotelWalkDuration" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1833,7 +1821,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="madinah_hotel_google_map_link" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="madinahHotelLocation" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1845,7 +1833,7 @@
                                 <label class="form-label"> Notes </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea name="madinah_hotel_notes" class="form-control form-control-lg form-control-solid" rows="3" placeholder="Write a note"></textarea>
+                                <textarea name="madinahHotelNote" class="form-control form-control-lg form-control-solid" rows="3" placeholder="Write a note"></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1909,7 +1897,7 @@
                                 <label class="form-label required">Airline Code</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inbound_airline_code" aria-label="Select airline code" data-control="select2-country" data-placeholder="Select airline code" class="form-select form-select-solid form-select-lg">
+                                <select name="inboundAirlineCode" aria-label="Select airline code" data-control="select2-country" data-placeholder="Select airline code" class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select airline code
                                   </option>
@@ -1926,7 +1914,7 @@
                                 <label class="form-label required">Flight No</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="inbound_flight_no" value="" placeholder="" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundFlightNumber" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1938,7 +1926,7 @@
                                 <label class="form-label required">Booking Class</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inbound_booking_class" aria-label="Select class" data-control="select2" data-placeholder="Select class" class="form-select form-select-solid form-select-lg">
+                                <select name="inboundBookingClass" aria-label="Select class" data-control="select2" data-placeholder="Select class" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select class</option>
                                   <option value="Economy">Economy</option>
                                   <option value="Premium Economy">
@@ -1962,7 +1950,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inbound_departure_airport" aria-label="Select departure airport" data-control="select2" data-placeholder="Select departure airport" class="form-select form-select-solid form-select-lg">
+                                <select name="inboundDepartureAirport" aria-label="Select departure airport" data-control="select2" data-placeholder="Select departure airport" class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select departure airport
                                   </option>
@@ -1994,7 +1982,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inbound_arrival_airport" aria-label="Select arrival airport" data-control="select2" data-placeholder="Select arrival airport" class="form-select form-select-solid form-select-lg">
+                                <select name="inboundArrivalAirport" aria-label="Select arrival airport" data-control="select2" data-placeholder="Select arrival airport" class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select arrival airport
                                   </option>
@@ -2019,7 +2007,7 @@
                                 <label class="form-label required">Aircraft Model</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inbound_aircraft_model" aria-label="Select aircraft model" data-control="select2" data-placeholder="Select aircraft model" class="form-select form-select-solid form-select-lg">
+                                <select name="inboundAirCraftModel" aria-label="Select aircraft model" data-control="select2" data-placeholder="Select aircraft model" class="form-select form-select-solid form-select-lg">
                                   <option></option>
                                   <option value="Airbus A220">
                                     Airbus A220
@@ -2048,7 +2036,7 @@
                                 <label class="form-label required">Departure Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inbound_departure_datetime" data-flatpickr="package_datetime_picker" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundDepartureDatetime" data-flatpickr="package_datetime_picker" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2060,7 +2048,7 @@
                                 <label class="form-label required">Arrival Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inbound_arrival_datetime" data-flatpickr="package_datetime_picker" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundArrivalDatetime" data-flatpickr="package_datetime_picker" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2072,7 +2060,7 @@
                                 <label class="form-label required">Flight Stops</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inbound_flight_stops" aria-label="Select flight stops" data-control="select2" data-placeholder="Select flight stops.." class="form-select form-select-solid form-select-lg" data-kt-umrah-extranet-flight-stops-select="true">
+                                <select name="inboundFlightStops" aria-label="Select flight stops" data-control="select2" data-placeholder="Select flight stops.." class="form-select form-select-solid form-select-lg" data-kt-umrah-extranet-flight-stops-select="true">
                                   <option value="">
                                     Select flight stops..
                                   </option>
@@ -2093,7 +2081,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="inbound_layover_1st_duration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="1st" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverFirstDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="1st" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2107,7 +2095,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inbound_layover_1st_airport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="1st">
+                                <select name="inboundLayoverFirstAirport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="1st">
                                   <option value="">
                                     Select layover airport
                                   </option>
@@ -2139,7 +2127,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="inbound_layover_2nd_duration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverSecondDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2153,7 +2141,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inbound_layover_2nd_airport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="2nd">
+                                <select name="inboundLayoverSecondAirport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="2nd">
                                   <option value="">
                                     Select layover airport
                                   </option>
@@ -2182,7 +2170,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Adult Baggage Checkin</label>
                                 <!--begin::Input-->
-                                <select name="inbound_adult_baggage_checkin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="inboundAdultBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="1 Pices">1 Pices</option>
@@ -2273,7 +2261,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Adult Baggage Cabin</label>
                                 <!--begin::Input-->
-                                <select name="inbound_adult_baggage_cabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="inboundAdultBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="KG">KG</option>
@@ -2295,7 +2283,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Children Baggage Checkin</label>
                                 <!--begin::Input-->
-                                <select name="inbound_child_baggage_checkin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="inboundChildBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="1 Pices">1 Pices</option>
@@ -2386,7 +2374,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Children Baggage Cabin</label>
                                 <!--begin::Input-->
-                                <select name="inbound_child_baggage_cabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="inboundChildBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="KG">KG</option>
@@ -2408,7 +2396,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Infant Baggage Checkin</label>
                                 <!--begin::Input-->
-                                <select name="inbound_infant_baggage_checkin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="inboundInfantBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="1 Pices">1 Pices</option>
@@ -2499,7 +2487,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Infant Baggage Cabin</label>
                                 <!--begin::Input-->
-                                <select name="inbound_infant_baggage_cabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
+                                <select name="inboundInfantBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
                                   <option value="SB">SB</option>
                                   <option value="KG">KG</option>
@@ -2546,7 +2534,7 @@
                                 <label class="form-label required">Visa Type</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="visa_type" aria-label="Select visa type" data-control="select2" data-placeholder="Select visa type" class="form-select form-select-solid form-select-lg">
+                                <select name="visaType" aria-label="Select visa type" data-control="select2" data-placeholder="Select visa type" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select visa type</option>
                                   <option value="Umrah Visa">
                                     Umrah Visa
@@ -2569,7 +2557,7 @@
                                 <label class="form-label required">Number of Entries</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="visa_entries" aria-label="Select visa entries" data-control="select2" data-placeholder="Select visa entries" class="form-select form-select-solid form-select-lg">
+                                <select name="visaNoOfEntries" aria-label="Select visa entries" data-control="select2" data-placeholder="Select visa entries" class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select visa entries
                                   </option>
@@ -2594,7 +2582,7 @@
                                 <label class="form-label required">Visa Duration (Days)</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-solid" name="visa_duration" value="" placeholder="Enter visa duration" />
+                                <input type="number" class="form-control form-control-solid" name="visaDuration" value="" placeholder="Enter visa duration" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2606,7 +2594,7 @@
                                 <label class="form-label required">Visa Validity (Days)</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-solid" name="visa_validity" value="" placeholder="Enter visa validity" />
+                                <input type="number" class="form-control form-control-solid" name="visaValidity" value="" placeholder="Enter visa validity" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2629,7 +2617,7 @@
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="visa_required[]" placeholder="Enter option" value="" />
+                                      <input type="text" class="form-control form-control-solid" name="visaOptions" placeholder="Enter option" value="" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -2652,7 +2640,7 @@
                                 <label class="form-label">Note</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="visa_notes" rows="3" placeholder="Write a note"></textarea>
+                                <textarea class="form-control form-control-solid" name="visaNote" rows="3" placeholder="Write a note"></textarea>
                                 <!--end::Input-->
                               </div>
                             </div>
@@ -2687,7 +2675,7 @@
                                 <label class="form-label required">Transport Type</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="transport_type" aria-label="Select transport type" data-control="select2" data-placeholder="Select transport type" class="form-select form-select-solid form-select-lg">
+                                <select name="transportType" aria-label="Select transport type" data-control="select2" data-placeholder="Select transport type" class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select transport type
                                   </option>
@@ -2720,7 +2708,7 @@
                                 <label class="form-label required">Airport To Hotel</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="transport_airport_to_hotel" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
+                                <select name="transportAirportToHotel" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
                                   <option value="Yes">Yes</option>
                                   <option value="No">No</option>
@@ -2736,7 +2724,7 @@
                                 <label class="form-label required">Visitor Place</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="transport_visitor_place" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
+                                <select name="transportVisitorPlaces" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
                                   <option value="Yes">Yes</option>
                                   <option value="No">No</option>
@@ -2752,7 +2740,7 @@
                                 <label class="form-label required">Hotel To Airport</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="transport_hotel_to_airport" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
+                                <select name="transportHotelToAirport" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
                                   <option value="Yes">Yes</option>
                                   <option value="No">No</option>
@@ -2779,7 +2767,7 @@
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="transport_bus_service[]" placeholder="Enter option" value="" />
+                                      <input type="text" class="form-control form-control-solid" name="transportServices" placeholder="Enter option" value="" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -2805,54 +2793,54 @@
                                 <div class="d-grid gap-4 mt-3">
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                    <input class="form-check-input" name="transport_bus_service_type[]" type="checkbox" value="Sedan car (4 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Sedan car (4 Seater)" />
                                     <span class="fw-semibold ps-2 fs-6">Sedan car (4 Seater)</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transport_bus_service_type[]" type="checkbox" value="Suv (6 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Suv (6 Seater)" />
                                     <span class="fw-semibold ps-2 fs-6">Suv (6 Seater)</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transport_bus_service_type[]" type="checkbox" value="Mvp (8 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Mvp (8 Seater)" />
                                     <span class="fw-semibold ps-2 fs-6">Mvp (8 Seater)</span>
                                   </label>
                                   <!--end::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transport_bus_service_type[]" type="checkbox" value="Microbus (10 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Microbus (10 Seater)" />
                                     <span class="fw-semibold ps-2 fs-6">Microbus (10 Seater)</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--end::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transport_bus_service_type[]" type="checkbox" value="Bus (42 seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Bus (42 seater)" />
                                     <span class="fw-semibold ps-2 fs-6">Bus (42 seater)</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transport_bus_service_type[]" type="checkbox" value="Luxury Sedan (4 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Luxury Sedan (4 Seater)" />
                                     <span class="fw-semibold ps-2 fs-6">Luxury Sedan (4 Seater)</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transport_bus_service_type[]" type="checkbox" value="Luxury Suv (6 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Luxury Suv (6 Seater)" />
                                     <span class="fw-semibold ps-2 fs-6">Luxury Suv (6 Seater)</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transport_bus_service_type[]" type="checkbox" value="Luxury Mvp (8 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Luxury Mvp (8 Seater)" />
                                     <span class="fw-semibold ps-2 fs-6">Luxury Mvp (8 Seater)</span>
                                   </label>
                                   <!--end::Option-->
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transport_bus_service_type[]" type="checkbox" value="Bullet Train" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Bullet Train" />
                                     <span class="fw-semibold ps-2 fs-6">Bullet Train</span>
                                   </label>
                                   <!--end::Option-->
@@ -2868,7 +2856,7 @@
                                 <label class="form-label">Note</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="transport_notes" rows="3" placeholder="Write a note"></textarea>
+                                <textarea class="form-control form-control-solid" name="transportNote" rows="3" placeholder="Write a note"></textarea>
                                 <!--end::Input-->
                               </div>
                             </div>
@@ -2903,7 +2891,7 @@
                                 <label class="form-label required">Ziyara Days</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-solid" name="ziyara_days" value="" placeholder="" />
+                                <input type="number" class="form-control form-control-solid" name="ziyarahDays" value="" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2915,7 +2903,7 @@
                                 <label class="form-label required">Makkah Ziyara</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="ziyara_makkah" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
+                                <select name="ziyarahMakkah" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
                                   <option value="Included">Included</option>
                                   <option value="Not Included">
@@ -2933,7 +2921,7 @@
                                 <label class="form-label required">Madinah Ziyara</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="ziyara_madinah" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
+                                <select name="ziyarahMadinah" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
                                   <option value="Included">Included</option>
                                   <option value="Not Included">
@@ -2953,7 +2941,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="ziyara_taif" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
+                                <select name="ziyarahTaif" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
                                   <option value="Included">Included</option>
                                   <option value="Not Included">
@@ -2984,7 +2972,7 @@
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyara_makkah_details[]" placeholder="Enter option" value="" />
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMakkaDetails" placeholder="Enter option" value="" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -3019,7 +3007,7 @@
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyara_madinah_details[]" placeholder="Enter option" value="" />
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMadinaDetails" placeholder="Enter option" value="" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -3054,7 +3042,7 @@
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyara_taif_details[]" placeholder="Enter option" value="" />
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahTaifDetails" placeholder="Enter option" value="" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -3076,7 +3064,7 @@
                                 <label class="form-label">Note</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="transport_notes" rows="3" placeholder="Write a note"></textarea>
+                                <textarea class="form-control form-control-solid" name="ziyarahNote" rows="3" placeholder="Write a note"></textarea>
                                 <!--end::Input-->
                               </div>
                             </div>
@@ -3152,7 +3140,7 @@
                                     </label>
                                     <!--end::Message-->
                                     <!--begin::Input-->
-                                    <input type="file" name="about_umrah_thumbnail" id="kt_docs_uploader_thumbnail" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
+                                    <input type="file" name="umrahThumbnail" id="kt_docs_uploader_thumbnail" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
                                     <!--end::Input-->
                                     <!--begin::Error Message -->
                                     <div class="invalid-feedback d-block"></div>
@@ -3171,7 +3159,7 @@
                                 <label class="form-label required">Title</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" name="about_umrah_title" placeholder="" value="" />
+                                <input type="text" class="form-control form-control-solid" name="umrahTitle" placeholder="" value="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -3231,7 +3219,7 @@
                                 <label class="form-label required">Description</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="terms_conditions_description" id="kt_docs_ckeditor_terms_&_conditions_description" rows="3" placeholder="Write a description"></textarea>
+                                <textarea class="form-control form-control-solid" name="termsConditions" id="kt_docs_ckeditor_terms_&_conditions_description" rows="3" placeholder="Write a description"></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->

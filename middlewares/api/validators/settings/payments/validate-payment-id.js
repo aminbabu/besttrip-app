@@ -8,13 +8,17 @@
  */
 
 // dependencies
-const { paymentSettingsSchema } = require('../../../../../schemas/zod/settings/payments');
+const {
+    paymentSettingsSchema,
+} = require('../../../../../schemas/zod/settings/payments');
 const { zodErrorHandler } = require('../../../../../handlers/errors');
 
 // export payments settings id validator middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = paymentSettingsSchema.pick({ id: true }).safeParse(req.params);
+    const { error, success } = paymentSettingsSchema
+        .pick({ id: true })
+        .safeParse(req.params);
 
     // check for errors
     if (!success) {

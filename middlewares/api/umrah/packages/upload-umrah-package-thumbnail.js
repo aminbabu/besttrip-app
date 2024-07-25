@@ -33,7 +33,11 @@ module.exports =
         if (umrahPackage?.thumbnail) {
             // delete previous thumbnail
             fs.unlinkSync(
-                path.join(__dirname, '../../../public', umrahPackage.thumbnail)
+                path.join(
+                    __dirname,
+                    './../../../../public',
+                    umrahPackage.thumbnail
+                )
             );
         }
 
@@ -44,7 +48,7 @@ module.exports =
         );
         const uploadLogoPath = path.join(
             __dirname,
-            '../../../public',
+            './../../../../public',
             thumbnailPath
         );
 
