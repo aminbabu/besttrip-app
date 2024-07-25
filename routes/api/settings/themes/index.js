@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 18 May, 2024
+ * @update_date 25 Jul, 2024
  */
 
 // dependencies
@@ -27,7 +27,9 @@ const {
     validateThemeSettings,
     validateThemeSettingsFile,
 } = require('../../../../middlewares/api/validators/settings/themes');
-const { uploadThemeSettingsFile } = require('../../../../middlewares/api/settings/themes');
+const {
+    uploadThemeSettingsFile,
+} = require('../../../../middlewares/api/settings/themes');
 
 /**
  * @description get themes
@@ -64,10 +66,6 @@ router.get('/:theme', validateThemeSettingsKey, getTheme);
  */
 router.post(
     '/:theme',
-    (req, res, next) => {
-        console.log('req.body', req.body);
-        next();
-    },
     isAuthorized,
     isAllowed(['admin']),
     validateThemeSettingsKey,
