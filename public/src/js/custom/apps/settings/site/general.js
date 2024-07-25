@@ -58,10 +58,12 @@ var KTSettingsGeneral = (function () {
                         formData
                             .getAll('domains[]')
                             .forEach((domain, index) => {
-                                formData.set(
-                                    `domains[${index}]`,
-                                    domain.trim()
-                                );
+                                if (domain.trim()) {
+                                    formData.set(
+                                        `domains[${index}]`,
+                                        domain.trim()
+                                    );
+                                }
                             });
 
                         // Check axios library docs: https://axios-http.com/docs/intro
