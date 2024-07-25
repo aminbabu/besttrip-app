@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 08 May, 2024
+ * @update_date 25 Jul, 2024
  */
 
 // dependencies
@@ -18,7 +18,7 @@ module.exports = new Schema(
             type: String,
             enum: THEME_NAMES,
             required: [true, 'Theme name is required'],
-            unique: true,
+            unique: [true, 'Theme name must be unique'],
         },
         illustration: {
             type: String,
