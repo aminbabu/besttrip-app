@@ -1,7 +1,7 @@
 'use strict';
 
 // Class definition
-var KTContentExclusiveOfferAdd = (function () {
+var KTContentHotelOfferAdd = (function () {
     // Shared variables
     const element = document.getElementById(
         'kt_content_exclusive_offers_add_modal'
@@ -318,5 +318,5 @@ var KTContentExclusiveOfferAdd = (function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTContentExclusiveOfferAdd.init();
+    KTContentHotelOfferAdd.init();
 });

@@ -14,4 +14,6 @@ module.exports = {
     createUmrahOffer: require('./create-umrah-offer'),
     updateUmrahOffer: require('./update-umrah-offer'),
     deleteUmrahOffer: require('./delete-umrah-offer'),
+    deleteManyUmrahOffers: require('./delete-many-umrah-offers'),
+    updateUmrahOfferStatus: require('./update-hotel-umrah-status'),
 };

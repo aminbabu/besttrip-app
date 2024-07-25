@@ -9,7 +9,9 @@
 
 // export
 module.exports = {
+    validateBlogPostStatus: require('./validate-blog-post-status'),
     validateBlogPostId: require('./validate-blog-post-id'),
+    validateBlogPostIds: require('./validate-blog-post-ids'),
     validateBlogPost: require('./validate-blog-post'),
     validateBlogPostThumbnail: require('./validate-blog-post-thumbnail'),
     validateBlogPostBanner: require('./validate-blog-post-banner'),

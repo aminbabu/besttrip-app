@@ -41,7 +41,7 @@ module.exports =
                 (thumbnail) =>
                     thumbnail &&
                     fs.unlinkSync(
-                        path.join(__dirname, '../../../public', thumbnail)
+                        path.join(__dirname, './../../../../public', thumbnail)
                     )
             );
         }
@@ -55,7 +55,7 @@ module.exports =
             );
             const uploadLogoPath = path.join(
                 __dirname,
-                '../../../public',
+                './../../../../public',
                 thumbnailPath
             );
 

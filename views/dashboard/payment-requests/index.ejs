@@ -229,7 +229,7 @@
                           </td>
                           <td><%= paymentRequest.refId %></td>
                           <td>
-                            <div class="badge badge-<% if(paymentRequest.status === 'approved') { %>success <% } else if (paymentRequest.status === 'rejected') { %>primary <% } else { %>info <% } %> px-4 py-3 justify-content-center text-capitalize">
+                            <div class="badge badge-<% if(paymentRequest.status === 'approved') { %>success <% } else if (paymentRequest.status === 'rejected') { %>primary <% } else { %>info <% } %> px-4 py-3 justify-content-center text-capitalize" style="cursor: pointer;">
                               <%= paymentRequest.status %>
                             </div>
                           </td>

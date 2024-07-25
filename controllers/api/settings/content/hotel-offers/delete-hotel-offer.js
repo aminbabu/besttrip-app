@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
             fs.unlinkSync(
                 path.join(
                     __dirname,
-                    '../../../../../public',
+                    './../../../../../public',
                     hotelOffer.thumbnail
                 )
             );

@@ -35,7 +35,7 @@ module.exports =
             fs.unlinkSync(
                 path.join(
                     __dirname,
-                    '../../../public',
+                    './../../../../public',
                     umrahPackage.madinahHotelThumbnail
                 )
             );
@@ -48,7 +48,7 @@ module.exports =
         );
         const uploadLogoPath = path.join(
             __dirname,
-            '../../../public',
+            './../../../../public',
             madinahHotelThumbnailPath
         );
 

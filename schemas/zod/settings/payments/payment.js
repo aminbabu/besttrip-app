@@ -15,6 +15,17 @@ const { PAYMENTS_STATUS } = require('../../../../constants');
 // export payment settings schema
 module.exports = z
     .object({
+        ids: z
+            .array(
+                z.string({
+                    required_error: 'IDs are required',
+                    invalid_type_error: 'Please provide valid IDs',
+                })
+            )
+            .nonempty({
+                message: 'IDs array must not be empty',
+            })
+            .optional(),
         id: z
             .string({
                 required_error: 'Id is required',

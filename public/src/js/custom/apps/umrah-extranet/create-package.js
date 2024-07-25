@@ -84,47 +84,99 @@ var KTCreatePackage = (function () {
 
             validator.validate().then(function (status) {
                 if (status == 'Valid') {
-                    // Prevent default button action
-                    e.preventDefault();
+                    // Show loading indication
+                    formSubmitButton.setAttribute('data-kt-indicator', 'on');
 
                     // Disable button to avoid multiple click
                     formSubmitButton.disabled = true;
 
-                    // Show loading indication
-                    formSubmitButton.setAttribute('data-kt-indicator', 'on');
+                    /* ===================================== */
 
-                    // Simulate form submission
-                    setTimeout(function () {
-                        // Hide loading indication
-                        formSubmitButton.removeAttribute('data-kt-indicator');
+                    axios
+                        .post(
+                            formSubmitButton
+                                .closest('form')
+                                .getAttribute('action'),
+                            new FormData(form)
+                        )
+                        .then((response) => {
+                            if (response) {
+                                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                Swal.fire({
+                                    text:
+                                        response?.data?.message ||
+                                        'Form has been successfully submitted!',
+                                    icon: 'success',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                    allowOutsideClick: false,
+                                }).then(() => {
+                                    // Reset form
+                                    form.reset();
 
-                        // Enable button
-                        formSubmitButton.disabled = false;
+                                    location.reload();
+                                });
+                            } else {
+                                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                Swal.fire({
+                                    text: 'Sorry, looks like there are some errors detected, please try again.',
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            const errors = error.response?.data?.message
+                                ? error.response?.data?.message
+                                : error?.response?.data?.errors;
 
-                        // Show popup confirmation
-                        Swal.fire({
-                            text: 'Form has been successfully submitted!',
-                            icon: 'success',
-                            buttonsStyling: false,
-                            confirmButtonText: 'Ok, got it!',
-                            customClass: {
-                                confirmButton: 'btn btn-primary',
-                            },
-                        }).then(function (result) {
-                            // stepperObj.goNext();
+                            Swal.fire({
+                                html: `${
+                                    errors instanceof Array
+                                        ? `<ul class="text-start">${Object.values(
+                                              error.response.data.errors
+                                          )
+                                              .map(
+                                                  (err) =>
+                                                      `<li>${err?.message}</li>`
+                                              )
+                                              .join('')}</ul>`
+                                        : errors
+                                }`,
+                                icon: 'error',
+                                buttonsStyling: false,
+                                confirmButtonText: 'Ok, got it!',
+                                customClass: {
+                                    confirmButton: 'btn btn-primary',
+                                },
+                            });
+                        })
+                        .then(() => {
+                            // Hide loading indication
+                            formSubmitButton.removeAttribute(
+                                'data-kt-indicator'
+                            );
+
+                            // Enable button
+                            formSubmitButton.disabled = false;
                         });
-                    }, 2000);
                 } else {
+                    // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
                         text: 'Sorry, looks like there are some errors detected, please try again.',
                         icon: 'error',
                         buttonsStyling: false,
                         confirmButtonText: 'Ok, got it!',
                         customClass: {
-                            confirmButton: 'btn btn-light',
+                            confirmButton: 'btn btn-primary',
                         },
-                    }).then(function () {
-                        KTUtil.scrollTop();
                     });
                 }
             });
@@ -164,52 +216,52 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    basic_package_thumbnail: {
+                    thumbnail: {
                         validators: {
                             notEmpty: {
                                 message: 'Thumbnail is required',
                             },
                         },
                     },
-                    basic_package_title: {
+                    title: {
                         validators: {
                             notEmpty: {
                                 message: 'Package title is required',
                             },
                         },
                     },
-                    basic_package_subtitle: {
+                    subtitle: {
                         validators: {
                             notEmpty: {
                                 message: 'Package subtitle is required',
                             },
                         },
                     },
-                    basic_package_start_location: {
+                    departureLocation: {
                         validators: {
                             notEmpty: {
                                 message: 'Departure location is required',
                             },
                         },
                     },
-                    basic_package_start_date: {
+                    schedule: {
                         validators: {
                             notEmpty: {
-                                message: 'Package start date is required',
+                                message: 'Schedule start date is required',
                             },
                         },
                     },
-                    basic_package_expire_date: {
+                    journeyDate: {
                         validators: {
                             notEmpty: {
-                                message: 'Package start date is required',
+                                message: 'Journey date is required',
                             },
                         },
                     },
-                    basic_package_schedule: {
+                    expiryDate: {
                         validators: {
                             notEmpty: {
-                                message: 'Package schedule is required',
+                                message: 'Expiry Date is required',
                             },
                         },
                     },
@@ -220,21 +272,21 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    basic_package_type: {
+                    type: {
                         validators: {
                             notEmpty: {
                                 message: 'Package type is required',
                             },
                         },
                     },
-                    basic_package_status: {
+                    status: {
                         validators: {
                             notEmpty: {
                                 message: 'Package status is required',
                             },
                         },
                     },
-                    basic_adult_package_price: {
+                    adultPrice: {
                         validators: {
                             notEmpty: {
                                 message: 'Adult package price is required',
@@ -250,7 +302,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    basic_child_package_price: {
+                    childPrice: {
                         validators: {
                             notEmpty: {
                                 message: 'Child package price is required',
@@ -266,7 +318,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    basic_infant_package_price: {
+                    infantPrice: {
                         validators: {
                             notEmpty: {
                                 message: 'Infant package price is required',
@@ -282,7 +334,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    basic_seat_available: {
+                    seats: {
                         validators: {
                             notEmpty: {
                                 message: 'Seat available is required',
@@ -298,7 +350,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    'basic_inclusions[]': {
+                    inclusions: {
                         validators: {
                             notEmpty: {
                                 message: 'Inclusions is required',
@@ -321,105 +373,105 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    outbound_airline_code: {
+                    outboundAirlineCode: {
                         validators: {
                             notEmpty: {
                                 message: 'Airline code is required',
                             },
                         },
                     },
-                    outbound_flight_no: {
+                    outboundFlightNumber: {
                         validators: {
                             notEmpty: {
                                 message: 'Flight number is required',
                             },
                         },
                     },
-                    outbound_booking_class: {
+                    outboundBookingClass: {
                         validators: {
                             notEmpty: {
                                 message: 'Flight class is required',
                             },
                         },
                     },
-                    outbound_aircraft_model: {
+                    outboundAirCraftModel: {
                         validators: {
                             notEmpty: {
                                 message: 'Airline model is required',
                             },
                         },
                     },
-                    outbound_departure_airport: {
+                    outboundDepartureAirport: {
                         validators: {
                             notEmpty: {
                                 message: 'Departure from is required',
                             },
                         },
                     },
-                    outbound_arrival_airport: {
+                    outboundArrivalAirport: {
                         validators: {
                             notEmpty: {
                                 message: 'Arrival to is required',
                             },
                         },
                     },
-                    outbound_departure_datetime: {
+                    outboundDepartureDatetime: {
                         validators: {
                             notEmpty: {
                                 message: 'Departure datetime is required',
                             },
                         },
                     },
-                    outbound_arrival_datetime: {
+                    outboundArrivalDatetime: {
                         validators: {
                             notEmpty: {
                                 message: 'Arrival datetime is required',
                             },
                         },
                     },
-                    outbound_flight_stops: {
+                    outboundFlightStops: {
                         validators: {
                             notEmpty: {
                                 message: 'Flight stops is required',
                             },
                         },
                     },
-                    outbound_adult_baggage_checkin: {
+                    outboundAdultBaggageCheckin: {
                         validators: {
                             notEmpty: {
                                 message: 'Adult baggage check-in is required',
                             },
                         },
                     },
-                    outbound_adult_baggage_cabin: {
+                    outboundAdultBaggageCabin: {
                         validators: {
                             notEmpty: {
                                 message: 'Adult baggage cabin is required',
                             },
                         },
                     },
-                    outbound_child_baggage_checkin: {
+                    outboundChildBaggageCheckin: {
                         validators: {
                             notEmpty: {
                                 message: 'Child baggage check-in is required',
                             },
                         },
                     },
-                    outbound_child_baggage_cabin: {
+                    outboundChildBaggageCabin: {
                         validators: {
                             notEmpty: {
                                 message: 'Child baggage cabin is required',
                             },
                         },
                     },
-                    outbound_infant_baggage_checkin: {
+                    outboundInfantBaggageCheckin: {
                         validators: {
                             notEmpty: {
                                 message: 'Infant baggage check-in is required',
                             },
                         },
                     },
-                    outbound_infant_baggage_cabin: {
+                    outboundInfantBaggageCabin: {
                         validators: {
                             notEmpty: {
                                 message: 'Infant baggage cabin is required',
@@ -443,7 +495,7 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    makkah_hotel_thumbnail: {
+                    makkahHotelThumbnail: {
                         validators: {
                             notEmpty: {
                                 message: 'Thumbnail is required',
@@ -457,42 +509,42 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    makkah_hotel_name: {
+                    makkahHotelName: {
                         validators: {
                             notEmpty: {
                                 message: 'Hotel name is required',
                             },
                         },
                     },
-                    makkah_hotel_address: {
+                    makkahHotelAddress: {
                         validators: {
                             notEmpty: {
                                 message: 'Address is required',
                             },
                         },
                     },
-                    makkah_hotel_rating: {
+                    makkahHotelRating: {
                         validators: {
                             notEmpty: {
                                 message: 'Rating is required',
                             },
                         },
                     },
-                    makkah_hotel_distance_from_haram: {
+                    makkahHotelDistance: {
                         validators: {
                             notEmpty: {
                                 message: 'Distance from Haram is required',
                             },
                         },
                     },
-                    makkah_hotel_distance_from_haram_unit: {
+                    makkahHotelDistanceUnit: {
                         validators: {
                             notEmpty: {
                                 message: 'Distance unit is required',
                             },
                         },
                     },
-                    makkah_hotel_walking_distance_from_haram: {
+                    makkahHotelWalkDuration: {
                         validators: {
                             notEmpty: {
                                 message:
@@ -500,7 +552,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    makkah_hotel_google_map_link: {
+                    makkahHotelLocation: {
                         validators: {
                             notEmpty: {
                                 message: 'Google map link is required',
@@ -524,42 +576,42 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    madinah_hotel_thumbnail: {
+                    madinahHotelThumbnail: {
                         validators: {
                             notEmpty: {
                                 message: 'Thumbnail is required',
                             },
                         },
                     },
-                    madinah_hotel_stay_duration: {
+                    madinahHotelNoOfNights: {
                         validators: {
                             notEmpty: {
                                 message: 'Stay duration is required',
                             },
                         },
                     },
-                    madinah_hotel_name: {
+                    madinahHotelName: {
                         validators: {
                             notEmpty: {
                                 message: 'Hotel name is required',
                             },
                         },
                     },
-                    madinah_hotel_address: {
+                    madinahHotelAddress: {
                         validators: {
                             notEmpty: {
                                 message: 'Address is required',
                             },
                         },
                     },
-                    madinah_hotel_rating: {
+                    madinahHotelRating: {
                         validators: {
                             notEmpty: {
                                 message: 'Rating is required',
                             },
                         },
                     },
-                    madinah_hotel_distance_from_masjid_e_nabwi: {
+                    madinahHotelDistance: {
                         validators: {
                             notEmpty: {
                                 message:
@@ -567,14 +619,14 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    madinah_hotel_distance_from_masjid_e_nabwi_unit: {
+                    madinahHotelDistanceUnit: {
                         validators: {
                             notEmpty: {
                                 message: 'Distance unit is required',
                             },
                         },
                     },
-                    madinah_hotel_walking_distance_from_masjid_e_nabwi: {
+                    madinahHotelWalkDuration: {
                         validators: {
                             notEmpty: {
                                 message:
@@ -582,7 +634,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    madinah_hotel_google_map_link: {
+                    madinahHotelLocation: {
                         validators: {
                             notEmpty: {
                                 message: 'Google map link is required',
@@ -606,105 +658,105 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    inbound_airline_code: {
+                    inboundAirlineCode: {
                         validators: {
                             notEmpty: {
                                 message: 'Airline code is required',
                             },
                         },
                     },
-                    inbound_flight_no: {
+                    inboundFlightNumber: {
                         validators: {
                             notEmpty: {
                                 message: 'Flight number is required',
                             },
                         },
                     },
-                    inbound_flight_class: {
+                    inboundBookingClass: {
                         validators: {
                             notEmpty: {
                                 message: 'Flight class is required',
                             },
                         },
                     },
-                    inbound_airline_model: {
+                    inboundAirCraftModel: {
                         validators: {
                             notEmpty: {
                                 message: 'Airline model is required',
                             },
                         },
                     },
-                    inbound_departure_airport: {
+                    inboundDepartureAirport: {
                         validators: {
                             notEmpty: {
                                 message: 'Departure from is required',
                             },
                         },
                     },
-                    inbound_arrival_airport: {
+                    inboundArrivalAirport: {
                         validators: {
                             notEmpty: {
                                 message: 'Arrival to is required',
                             },
                         },
                     },
-                    inbound_departure_datetime: {
+                    inboundDepartureDatetime: {
                         validators: {
                             notEmpty: {
                                 message: 'Departure datetime is required',
                             },
                         },
                     },
-                    inbound_arrival_datetime: {
+                    inboundArrivalDatetime: {
                         validators: {
                             notEmpty: {
                                 message: 'Arrival datetime is required',
                             },
                         },
                     },
-                    inbound_flight_stops: {
+                    inboundFlightStops: {
                         validators: {
                             notEmpty: {
                                 message: 'Flight stops is required',
                             },
                         },
                     },
-                    inbound_adult_baggage_checkin: {
+                    inboundAdultBaggageCheckin: {
                         validators: {
                             notEmpty: {
                                 message: 'Adult baggage check-in is required',
                             },
                         },
                     },
-                    inbound_adult_baggage_cabin: {
+                    inboundAdultBaggageCabin: {
                         validators: {
                             notEmpty: {
                                 message: 'Adult baggage cabin is required',
                             },
                         },
                     },
-                    inbound_child_baggage_checkin: {
+                    inboundChildBaggageCheckin: {
                         validators: {
                             notEmpty: {
                                 message: 'Child baggage check-in is required',
                             },
                         },
                     },
-                    inbound_child_baggage_cabin: {
+                    inboundChildBaggageCabin: {
                         validators: {
                             notEmpty: {
                                 message: 'Child baggage cabin is required',
                             },
                         },
                     },
-                    inbound_infant_baggage_checkin: {
+                    inboundInfantBaggageCheckin: {
                         validators: {
                             notEmpty: {
                                 message: 'Infant baggage check-in is required',
                             },
                         },
                     },
-                    inbound_infant_baggage_cabin: {
+                    inboundInfantBaggageCabin: {
                         validators: {
                             notEmpty: {
                                 message: 'Infant baggage cabin is required',
@@ -728,21 +780,21 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    visa_type: {
+                    visaType: {
                         validators: {
                             notEmpty: {
                                 message: 'Visa type is required',
                             },
                         },
                     },
-                    visa_entries: {
+                    visaNoOfEntries: {
                         validators: {
                             notEmpty: {
                                 message: 'Visa entries is required',
                             },
                         },
                     },
-                    visa_duration: {
+                    visaDuration: {
                         validators: {
                             notEmpty: {
                                 message: 'Visa duration is required',
@@ -759,7 +811,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    visa_validity: {
+                    visaValidity: {
                         validators: {
                             notEmpty: {
                                 message: 'Visa validity is required',
@@ -776,7 +828,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    'visa_required[]': {
+                    visaOptions: {
                         validators: {
                             notEmpty: {
                                 message: 'Value is required',
@@ -800,42 +852,42 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    transport_type: {
+                    transportType: {
                         validators: {
                             notEmpty: {
                                 message: 'Transport type is required',
                             },
                         },
                     },
-                    transport_airport_to_hotel: {
+                    transportAirportToHotel: {
                         validators: {
                             notEmpty: {
                                 message: 'Airport to hotel is required',
                             },
                         },
                     },
-                    transport_visitor_place: {
+                    transportVisitorPlaces: {
                         validators: {
                             notEmpty: {
                                 message: 'Visitor place is required',
                             },
                         },
                     },
-                    transport_hotel_to_airport: {
+                    transportHotelToAirport: {
                         validators: {
                             notEmpty: {
                                 message: 'Hotel to airport is required',
                             },
                         },
                     },
-                    'transport_bus_service[]': {
+                    transportServices: {
                         validators: {
                             notEmpty: {
                                 message: 'Value is required',
                             },
                         },
                     },
-                    'transport_bus_service_type[]': {
+                    transportServiceTypes: {
                         validators: {
                             notEmpty: {
                                 message: 'Bus service type is required',
@@ -859,49 +911,49 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    ziyara_days: {
+                    ziyarahDays: {
                         validators: {
                             notEmpty: {
                                 message: 'The value is required',
                             },
                         },
                     },
-                    ziyara_makkah: {
+                    ziyarahMakkah: {
                         validators: {
                             notEmpty: {
                                 message: 'The value is required',
                             },
                         },
                     },
-                    ziyara_madinah: {
+                    ziyarahMadinah: {
                         validators: {
                             notEmpty: {
                                 message: 'The value is required',
                             },
                         },
                     },
-                    ziyara_taif: {
+                    ziyarahTaif: {
                         validators: {
                             notEmpty: {
                                 message: 'The value is required',
                             },
                         },
                     },
-                    'ziyara_makkah_details[]': {
+                    ziyarahMakkaDetails: {
                         validators: {
                             notEmpty: {
                                 message: 'Makkah ziyara details is required',
                             },
                         },
                     },
-                    'ziyara_madinah_details[]': {
+                    ziyarahMadinaDetails: {
                         validators: {
                             notEmpty: {
                                 message: 'Madinah ziyara details is required',
                             },
                         },
                     },
-                    'ziyara_taif_details[]': {
+                    ziyarahTaifDetails: {
                         validators: {
                             notEmpty: {
                                 message: 'Taif ziyara details is required',
@@ -941,14 +993,14 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    about_umrah_thumbnail: {
+                    umrahThumbnail: {
                         validators: {
                             notEmpty: {
                                 message: 'Thumbnail is required',
                             },
                         },
                     },
-                    about_umrah_title: {
+                    umrahTitle: {
                         validators: {
                             notEmpty: {
                                 message: 'Title is required',
@@ -986,7 +1038,7 @@ var KTCreatePackage = (function () {
         validations.push(
             FormValidation.formValidation(form, {
                 fields: {
-                    terms_conditions_description: {
+                    termsConditions: {
                         validators: {
                             notEmpty: {
                                 message: 'Description is required',

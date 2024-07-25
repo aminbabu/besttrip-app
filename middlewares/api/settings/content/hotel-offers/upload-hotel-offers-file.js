@@ -29,11 +29,20 @@ module.exports =
             hotelOffer = await HotelOffer.findById(id);
         }
 
+        // check if thumbnail is not uploaded
+        if (hotelOffer && !thumbnail) {
+            return next();
+        }
+
         // check if hotel offer thumbnail exists
         if (hotelOffer?.thumbnail) {
             // delete previous thumbnail
             fs.unlinkSync(
-                path.join(__dirname, '../../../../public', hotelOffer.thumbnail)
+                path.join(
+                    __dirname,
+                    './../../../../../public',
+                    hotelOffer.thumbnail
+                )
             );
         }
 
@@ -44,7 +53,7 @@ module.exports =
         );
         const uploadLogoPath = path.join(
             __dirname,
-            '../../../../public',
+            './../../../../../public',
             thumbnailPath
         );
 

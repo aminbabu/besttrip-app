@@ -31,8 +31,8 @@ module.exports = async (req, res, next) => {
         // update blog post
         blogPost.set({
             ...validatedData,
-            thumbnail: thumbnail.path,
-            banner: banner.path,
+            thumbnail: thumbnail?.path || blogPost.thumbnail,
+            banner: banner?.path || blogPost.banner,
         });
 
         // save blog post

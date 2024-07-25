@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
         // update flight offer
         flightOffer.set({
             ...validatedData,
-            thumbnail: thumbnail.path,
+            thumbnail: thumbnail?.path || flightOffer.thumbnail,
         });
 
         // save flight offer

@@ -32,7 +32,9 @@ const {
     validatePaymentRequestsByStatus,
     validatePaymentRequestAttachment,
 } = require('../../../middlewares/api/validators/payment-requests');
-const { uploadPaymentAttachment } = require('../../../middlewares/api/payment-requests');
+const {
+    uploadPaymentAttachment,
+} = require('../../../middlewares/api/payment-requests');
 
 /**
  * @description check if user is authorized
@@ -64,7 +66,12 @@ router.get('/', isAllowed(['admin']), getPaymentRequests);
  * @access private ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), validatePaymentRequestId, getPaymentRequest);
+router.get(
+    '/:id',
+    isAllowed(['admin']),
+    validatePaymentRequestId,
+    getPaymentRequest
+);
 
 /**
  * @description - get payment requests by status
@@ -129,7 +136,12 @@ router.patch(
  * @access private ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['admin']), validatePaymentRequestId, deletePaymentRequest);
+router.delete(
+    '/:id',
+    isAllowed(['admin']),
+    validatePaymentRequestId,
+    deletePaymentRequest
+);
 
 // export router
 module.exports = router;

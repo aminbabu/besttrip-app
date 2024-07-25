@@ -12,6 +12,7 @@ module.exports = {
     getUmrahPackageDurations: require('./get-umrah-package-durations'),
     getUmrahPackageDuration: require('./get-umrah-package-duration'),
     createUmrahPackageDuration: require('./create-umrah-package-duration'),
+    updateUmrahPackageDurationStatus: require('./update-umrah-package-duration-status'),
     updateUmrahPackageDuration: require('./update-umrah-package-duration'),
     deleteUmrahPackageDuration: require('./delete-umrah-package-duration'),
 };

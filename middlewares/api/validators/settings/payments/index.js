@@ -9,6 +9,8 @@
 
 // export payments settings validator middlewares
 module.exports = {
+    validatePaymentStatus: require('./validate-payment-status'),
+    validatePaymentIds: require('./validate-payment-ids'),
     validatePaymentId: require('./validate-payment-id'),
     validatePayment: require('./validate-payment'),
 };

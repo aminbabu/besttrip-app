@@ -9,9 +9,11 @@
 
 // export flight offers controllers
 module.exports = {
+    updateFlightOfferStatus: require('./update-flight-status.js'),
     getFlightOffers: require('./get-flight-offers'),
     getFlightOffer: require('./get-flight-offer'),
     createFlightOffer: require('./create-flight-offer'),
     updateFlightOffer: require('./update-flight-offer'),
     deleteFlightOffer: require('./delete-flight-offer'),
+    deleteManyHotelOffers: require('./delete-many-flight-offers.js'),
 };

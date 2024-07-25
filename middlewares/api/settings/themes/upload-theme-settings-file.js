@@ -36,7 +36,7 @@ module.exports =
             fs.unlinkSync(
                 path.join(
                     __dirname,
-                    '../../../public',
+                    './../../../../public',
                     themeSettings.illustration
                 )
             );
@@ -49,7 +49,7 @@ module.exports =
         );
         const uploadIllustrationPath = path.join(
             __dirname,
-            '../../../public',
+            './../../../../public',
             illustrationPath
         );
 
