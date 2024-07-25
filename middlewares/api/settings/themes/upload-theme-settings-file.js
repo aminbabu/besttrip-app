@@ -30,6 +30,8 @@ module.exports =
             themeSettings = await ThemeSettings.findOne({ theme });
         }
 
+        console.log('themeSettings', themeSettings);
+
         // check if illustration exists
         if (themeSettings?.illustration) {
             try {

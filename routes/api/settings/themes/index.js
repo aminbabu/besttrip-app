@@ -68,6 +68,11 @@ router.post(
     '/:theme',
     isAuthorized,
     isAllowed(['admin']),
+    (req, res, next) => {
+        console.log(req.body);
+
+        next();
+    },
     validateThemeSettingsKey,
     validateThemeSettingsFile,
     validateThemeSettings,
