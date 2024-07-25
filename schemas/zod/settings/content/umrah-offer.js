@@ -66,18 +66,33 @@ module.exports = z
             .refine((duration) => duration >= 0, {
                 message: 'Please provide a valid duration',
             }),
-        inclusions: z.array(
-            z
-                .string({
-                    required_error: 'Inclusions is required',
-                    invalid_type_error: 'Please provide a valid inclusions',
-                })
-                .refine((inclusion) => UMRAH_INCLUSIONS.includes(inclusion), {
-                    message: `Please provide a valid inclusion. Available options are ${UMRAH_INCLUSIONS.join(
+        inclusions: z
+            .union([
+                z
+                    .string({
+                        invalid_type_error: 'Please provide valid inclusions',
+                    })
+                    .transform((inclusion) => inclusion.split(',')),
+                z.array(
+                    z.string({
+                        invalid_type_error: 'Please provide valid inclusions',
+                    })
+                ),
+            ])
+            .transform((inclusions) =>
+                Array.isArray(inclusions) ? inclusions : [inclusions]
+            )
+            .refine(
+                (inclusions) =>
+                    inclusions.every((inclusion) =>
+                        UMRAH_INCLUSIONS.includes(inclusion)
+                    ),
+                {
+                    message: `Please provide valid inclusions. Available options are ${UMRAH_INCLUSIONS.join(
                         ', '
                     )}`,
-                })
-        ),
+                }
+            ),
         price: z
             .string({
                 required_error: 'Price is required',

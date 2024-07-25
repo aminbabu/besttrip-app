@@ -117,22 +117,40 @@ module.exports = z
                 message:
                     'Nearest Airport must not be greater than 255 characters',
             }),
-        domesticAirlines: z.array(
-            z
-                .string({
-                    required_error: 'Domestic Airlines is required',
-                    invalid_type_error:
-                        'Please provide a valid domestic Airlines',
-                })
-                .refine(
-                    (domesticAirlines) =>
-                        BLOG_DOMESTIC_AIRLINES.includes(domesticAirlines),
-                    {
-                        message: `Please provide a valid domestic Airlines. Available options are ${BLOG_DOMESTIC_AIRLINES.join(
-                            ', '
-                        )}`,
-                    }
-                )
-        ),
+        domesticAirlines: z
+            .union([
+                z
+                    .string({
+                        required_error: 'Domestic Airlines is required',
+                        invalid_type_error:
+                            'Please provide a valid domestic Airlines',
+                    })
+                    .transform((domesticAirlines) =>
+                        domesticAirlines.split(',')
+                    ),
+                z.array(
+                    z.string({
+                        required_error: 'Domestic Airlines is required',
+                        invalid_type_error:
+                            'Please provide a valid domestic Airlines',
+                    })
+                ),
+            ])
+            .transform((domesticAirlines) =>
+                Array.isArray(domesticAirlines)
+                    ? domesticAirlines
+                    : [domesticAirlines]
+            )
+            .refine(
+                (domesticAirlines) =>
+                    domesticAirlines.every((airline) =>
+                        BLOG_DOMESTIC_AIRLINES.includes(airline)
+                    ),
+                {
+                    message: `Please provide a valid domestic Airlines. Available options are ${BLOG_DOMESTIC_AIRLINES.join(
+                        ', '
+                    )}`,
+                }
+            ),
     })
     .strict();
