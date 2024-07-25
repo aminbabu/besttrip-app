@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 15 June, 2024
- * @update_date 03 Jul, 2024
+ * @update_date 25 Jul, 2024
  */
 
 // dependencies
@@ -27,13 +27,6 @@ module.exports = async (req, res) => {
         );
         const beautifulPlacesSection = sections.find(
             (section) => section.key === 'beautiful-places'
-        );
-
-        console.log(
-            hotelSection,
-            destinationSection,
-            umrahZiyarahSection,
-            beautifulPlacesSection
         );
 
         // render sections view
