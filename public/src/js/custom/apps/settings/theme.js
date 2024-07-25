@@ -7,7 +7,7 @@ var KTAppThemeSettings = (function () {
     var ktFileUploaderContent;
 
     // Private functions
-    const initForms = () => {
+    const initForms = async () => {
         const forms = [
             'kt_settings_theme_general_form',
             'kt_settings_theme_alternative_form',
@@ -17,6 +17,10 @@ var KTAppThemeSettings = (function () {
         forms.forEach((formId) => {
             // Select form
             const form = document.getElementById(formId);
+
+            const url = form.getAttribute('data-kt-url');
+
+            populateData(url, form);
 
             if (!form) {
                 return;
@@ -314,6 +318,44 @@ var KTAppThemeSettings = (function () {
         });
     };
 
+    const populateData = async (url, form) => {
+        try {
+            // Fetch data from URL
+            const response = await axios.get(url);
+
+            if (response && response.data) {
+                const data = response.data.theme;
+
+                const previewContainer =
+                    form.querySelector('.kt-file-uploader');
+                // Create preview element and append to the container
+                const preview = document.createElement('img');
+                preview.classList.add('kt-file-uploader-preview');
+                preview.src = data.illustration;
+                preview.alt = data.title;
+                previewContainer.querySelector('label').innerHTML = '';
+                previewContainer.querySelector('label').appendChild(preview);
+
+                form.querySelector('[name="title"]').value = data.title;
+                form.querySelector('[name="description"]').value =
+                    data.description;
+            } else {
+                // Handle case where response.data is empty or null
+                Swal.fire({
+                    text: 'No data received. Please try again later.',
+                    icon: 'warning',
+                    buttonsStyling: false,
+                    confirmButtonText: 'Ok, got it!',
+                    customClass: {
+                        confirmButton: 'btn btn-primary',
+                    },
+                });
+            }
+        } catch (error) {
+            return;
+        }
+    };
+
     // Public methods
     return {
         init: function () {
@@ -331,42 +373,3 @@ KTUtil.onDOMContentLoaded(function () {
 });
 
 //  /* ===================================== */
-
-//                             // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-//                             setTimeout(function () {
-//                                 // Remove loading indication
-//                                 submitButton.removeAttribute(
-//                                     'data-kt-indicator'
-//                                 );
-
-//                                 // Enable button
-//                                 submitButton.disabled = false;
-
-//                                 // Show popup confirmation
-//                                 Swal.fire({
-//                                     text: 'Form has been successfully submitted!',
-//                                     icon: 'success',
-//                                     buttonsStyling: false,
-//                                     confirmButtonText: 'Ok, got it!',
-//                                     customClass: {
-//                                         confirmButton: 'btn btn-primary',
-//                                     },
-//                                 });
-
-//                                 // Reset file inputs after submit
-//                                 fileInputs.forEach((input) => {
-//                                     const previewContainer =
-//                                         input.closest('.kt-file-uploader');
-//                                     const label =
-//                                         previewContainer.querySelector(
-//                                             '.kt-file-uploader-label'
-//                                         );
-
-//                                     input.value = '';
-//                                     label.innerHTML = ktFileUploaderContent;
-//                                 });
-
-//                                 form.reset(); // Reset form to default state
-
-//                                 // form.submit(); // Submit form
-//                             }, 2000);
