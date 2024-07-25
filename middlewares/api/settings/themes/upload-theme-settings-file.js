@@ -32,14 +32,18 @@ module.exports =
 
         // check if illustration exists
         if (themeSettings?.illustration) {
-            // delete previous illustration
-            fs.unlinkSync(
-                path.join(
-                    __dirname,
-                    './../../../../public',
-                    themeSettings.illustration
-                )
-            );
+            try {
+                // delete previous illustration
+                fs.unlinkSync(
+                    path.join(
+                        __dirname,
+                        './../../../../public',
+                        themeSettings.illustration
+                    )
+                );
+            } catch (err) {
+                console.error(`Failed to delete illustration: ${err.message}`);
+            }
         }
 
         // prepare file path
