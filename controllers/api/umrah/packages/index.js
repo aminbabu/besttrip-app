@@ -9,7 +9,8 @@
 
 // export all umrah packages controllers
 module.exports = {
-    getUmrahPackages: require('./get-umrah-packges'),
+    getUmrahPackages: require('./get-umrah-packages'),
+    getUmrahPackagesForCustomers: require('./get-umrah-packages-for-customers'),
     getUmrahPackage: require('./get-umrah-package'),
     createUmrahPackage: require('./create-umrah-package'),
     updateUmrahPackage: require('./update-umrah-package'),
