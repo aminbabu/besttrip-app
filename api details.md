@@ -170,7 +170,7 @@ const InfiniteScroll = () => {
     useEffect(() => {
         const loadMore = async () => {
             try {
-                const response = await axios.post('/api/umrah/packages/get-umrah-packages-for-customers', {
+                const response = await axios.post('/api', {
                     lastItemId, // Pass the lastItemId to the API
                     packageSchedule: '', // Replace with actual value
                     packageType: '', // Replace with actual value
