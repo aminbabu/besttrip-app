@@ -15,9 +15,16 @@ const {
 const {
     UMRAH_PACKAGE_SCHEDULES,
 } = require('../../../../constants/umrah-pacakges');
+const mongoose = require('mongoose');
 
 // Helper function to validate MongoDB ObjectId
-const isValidObjectId = (id) => /^[a-fA-F0-9]{24}$/.test(id);
+const isValidObjectId = (id) => {
+    try {
+        return new mongoose.Types.ObjectId(id).toString() === id;
+    } catch (error) {
+        return false;
+    }
+};
 
 // export get umrah packages schema
 module.exports = z
@@ -66,5 +73,39 @@ module.exports = z
                 message: 'Default data length must be at least 1',
             })
             .default(10), // Default value if not provided
+        adultTravelers: z
+            .string({
+                invalid_type_error: 'Adult travelers must be a number',
+            })
+            .transform((value) => parseFloat(value))
+            .refine((value) => !isNaN(value) && value >= 1, {
+                message:
+                    'Adult travelers must be a non-negative number or at least 1',
+            }),
+        childTravelers: z
+            .string({
+                invalid_type_error: 'Child travelers must be a number',
+            })
+            .transform((value) => parseFloat(value))
+            .refine((value) => !isNaN(value) && value >= 0, {
+                message: 'Child travelers must be a non-negative number',
+            }),
+        infantsTravelers: z
+            .string({
+                invalid_type_error: 'Infants travelers must be a number',
+            })
+            .transform((value) => parseFloat(value))
+            .refine((value) => !isNaN(value) && value >= 0, {
+                message: 'Infants travelers must be a non-negative number',
+            }),
+        lastItemId: z
+            .string({
+                invalid_type_error: 'Last item ID must be a valid ObjectId',
+            })
+            .refine((id) => !id || isValidObjectId(id), {
+                message:
+                    'Please provide a valid MongoDB ObjectId or leave it empty',
+            })
+            .optional(),
     })
     .strict();

@@ -48,7 +48,7 @@ Upon a successful request, the server responds with:
                 "infantPartialPrice": 0,
                 "partialSubtotal": 0,
                 "seats": 0,
-                "inclusions": "Inclusions",
+                "inclusions": ["Inclusions"],
                 "extraThumbnails": ["Extra Thumbnail URLs"],
                 "outboundAirlineCode": "Airline Code",
                 "outboundFlightNumber": "Flight Number",
@@ -163,7 +163,7 @@ import axios from 'axios';
 
 const InfiniteScroll = () => {
     const [items, setItems] = useState([]);
-    const [skip, setSkip] = useState(0);
+    const [lastItemId, setLastItemId] = useState(null); // Tracks the last item ID
     const [hasMore, setHasMore] = useState(true);
     const loaderRef = useRef(null);
 
@@ -171,16 +171,23 @@ const InfiniteScroll = () => {
         const loadMore = async () => {
             try {
                 const response = await axios.post('/api/umrah/packages/get-umrah-packages-for-customers', {
-                    skip,
-                    defaultDataLength: 10, // or your fixed limit
-                    // other params
+                    lastItemId, // Pass the lastItemId to the API
+                    packageSchedule: '', // Replace with actual value
+                    packageType: '', // Replace with actual value
+                    packageDuration: 1, // Replace with actual value
+                    dataLength: 10, // Number of items to fetch per request
+                    adultTravellers: 0, // Replace with actual value
+                    childTravellers: 0, // Replace with actual value
+                    infantsTravellers: 0, // Replace with actual value
                 });
-                const { data, hasMore } = response.data;
-                setItems((prevItems) => [...prevItems, ...data.umrahPackages]);
-                setHasMore(hasMore);
-                if (hasMore) {
-                    setSkip((prevSkip) => prevSkip + 10); // increment skip
+
+                const { umrahPackages, hasMore: moreItemsAvailable } = response.data;
+
+                if (umrahPackages.length > 0) {
+                    setItems((prevItems) => [...prevItems, ...umrahPackages]);
+                    setLastItemId(umrahPackages[umrahPackages.length - 1]._id); // Update lastItemId with the last item's ID
                 }
+                setHasMore(moreItemsAvailable);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -197,7 +204,7 @@ const InfiniteScroll = () => {
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [skip, hasMore]);
+    }, [lastItemId, hasMore]); // Re-run effect when lastItemId or hasMore changes
 
     return (
         <div>
@@ -208,6 +215,9 @@ const InfiniteScroll = () => {
         </div>
     );
 };
+
+export default InfiniteScroll;
+
 
 export default InfiniteScroll;
 

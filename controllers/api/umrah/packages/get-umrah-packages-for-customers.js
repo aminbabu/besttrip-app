@@ -9,6 +9,7 @@
 
 // dependencies
 const { UmrahPackage } = require('../../../../models');
+const mongoose = require('mongoose');
 
 // export get umrah packages controller
 module.exports = async (req, res, next) => {
@@ -18,23 +19,49 @@ module.exports = async (req, res, next) => {
             packageSchedule,
             packageType,
             packageDuration,
-            dataLength = 10, // Default to 10 if not provided
-            skip = 0, // Default skip value for pagination
+            dataLength,
+            adultTravelers,
+            childTravelers,
+            infantsTravelers,
+            lastItemId,
         } = req.body;
 
-        // Convert skip and dataLength to numbers and validate
-        const parsedSkip = parseInt(skip, 10);
+        // Convert dataLength to a number and validate
         const parsedDataLength = parseFloat(dataLength);
-
-        if (isNaN(parsedSkip) || parsedSkip < 0) {
-            throw new Error('Skip value must be a non-negative integer');
-        }
 
         if (isNaN(parsedDataLength) || parsedDataLength < 1) {
             throw new Error(
                 'Default data length must be a number and at least 1'
             );
         }
+
+        // Convert traveler values to numbers and validate
+        const parsedAdultTravelers = parseFloat(adultTravelers);
+        const parsedChildTravelers = parseFloat(childTravelers);
+        const parsedInfantsTravelers = parseFloat(infantsTravelers);
+
+        if (isNaN(parsedAdultTravelers) || parsedAdultTravelers < 0) {
+            throw new Error('Adult travelers must be a non-negative number');
+        }
+
+        if (isNaN(parsedChildTravelers) || parsedChildTravelers < 0) {
+            throw new Error('Child travelers must be a non-negative number');
+        }
+
+        if (isNaN(parsedInfantsTravelers) || parsedInfantsTravelers < 0) {
+            throw new Error('Infants travelers must be a non-negative number');
+        }
+
+        // Ensure the total number of travelers does not exceed the number of seats
+        const totalTravelers =
+            parsedAdultTravelers +
+            parsedChildTravelers +
+            parsedInfantsTravelers;
+
+        // Convert lastItemId to ObjectId if it's provided
+        const lastItemObjectId = lastItemId
+            ? new mongoose.Types.ObjectId(lastItemId)
+            : null;
 
         // Stage to filter documents based on provided criteria
         const matchingStage = {
@@ -50,6 +77,14 @@ module.exports = async (req, res, next) => {
                                     $subtract: ['$expiryDate', '$journeyDate'],
                                 },
                                 packageDuration * 24 * 60 * 60 * 1000, // convert days to milliseconds
+                            ],
+                        },
+                    },
+                    {
+                        $expr: {
+                            $gte: [
+                                { $subtract: ['$seats', totalTravelers] },
+                                0,
                             ],
                         },
                     },
@@ -191,7 +226,7 @@ module.exports = async (req, res, next) => {
             },
         };
 
-        // Stage to handle pagination
+        // Stage to handle pagination with cursor-based approach
         const paginationStage = {
             $facet: {
                 metadata: [
@@ -199,7 +234,11 @@ module.exports = async (req, res, next) => {
                 ],
                 umrahPackages: [
                     { $sort: { _id: 1 } }, // Ensure sorting to handle pagination
-                    { $skip: parsedSkip }, // Skip the number of documents already fetched
+                    {
+                        $match: lastItemObjectId
+                            ? { _id: { $gt: lastItemObjectId } }
+                            : {},
+                    }, // Fetch items after lastItemId
                     { $limit: parsedDataLength }, // Limit the number of documents returned
                 ],
             },
@@ -216,6 +255,12 @@ module.exports = async (req, res, next) => {
         // Determine if there are more items to fetch
         const hasMore = result.umrahPackages.length === parsedDataLength;
 
+        // Get the ID of the last item in the result to be used as cursor for next request
+        const nextCursor =
+            result.umrahPackages.length > 0
+                ? result.umrahPackages[result.umrahPackages.length - 1]._id
+                : null;
+
         // Send response
         return res.status(200).json({
             message: 'Fetched umrah packages successfully',
@@ -223,7 +268,7 @@ module.exports = async (req, res, next) => {
                 umrahPackages: result.umrahPackages,
                 metadata: result.metadata[0],
                 hasMore, // Indicate if there are more items to fetch
-                skip: parsedSkip + parsedDataLength, // Update skip for next request
+                nextCursor, // ID of the last item for next request
             },
         });
     } catch (error) {
