@@ -27,6 +27,7 @@ module.exports = {
     ...require('./umrah-package-durations'),
     ...require('./umrah-package-types'),
     ...require('./visa'),
+    ...require('./traveler'),
     ...require('./login-history'),
     ...require('./umrah-bookings'),
     ...require('./wallet'),
