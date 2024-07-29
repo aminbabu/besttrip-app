@@ -218,7 +218,4 @@ const InfiniteScroll = () => {
 
 export default InfiniteScroll;
 
-
-export default InfiniteScroll;
-
 ```
