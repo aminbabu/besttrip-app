@@ -8,6 +8,9 @@
  */
 
 // dependencies
+const {
+    UMRAH_BOOKING_STATUS,
+} = require('../../../../constants/umrah-bookings');
 const { UmrahBooking } = require('../../../../models');
 
 // export create umrah booking controller
@@ -17,7 +20,7 @@ module.exports = async (req, res, next) => {
         const existingBooking = await UmrahBooking.findOne({
             customer: req.user._id,
             umrahPackage: req.body.umrahPackage,
-            status: { $eq: 'not-booked-yet' },
+            status: { $eq: UMRAH_BOOKING_STATUS[0] },
         });
 
         if (existingBooking) {
@@ -30,7 +33,7 @@ module.exports = async (req, res, next) => {
         // create new umrah booking
         const newUmrahBooking = new UmrahBooking({
             customer: req.user._id,
-            status: 'not-booked-yet',
+            status: UMRAH_BOOKING_STATUS[0],
             ...req.body,
         });
 
