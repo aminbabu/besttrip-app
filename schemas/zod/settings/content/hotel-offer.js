@@ -24,8 +24,7 @@ module.exports = z
             )
             .nonempty({
                 message: 'IDs array must not be empty',
-            })
-            .optional(),
+            }),
         id: z
             .string({
                 required_error: 'Id is required',

@@ -8,13 +8,17 @@
  */
 
 // dependencies
-const { umrahPackageTypeSchema } = require('../../../../../schemas/zod/umrah/package-types');
+const {
+    umrahPackageTypeSchema,
+} = require('../../../../../schemas/zod/umrah/package-types');
 const { zodErrorHandler } = require('../../../../../handlers/errors');
 
 // export umrah package type validator
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = umrahPackageTypeSchema.omit({ id: true }).safeParse(req.body);
+    const { error, success } = umrahPackageTypeSchema
+        .omit({ id: true, ids: true })
+        .safeParse(req.body);
 
     // check for errors
     if (!success) {

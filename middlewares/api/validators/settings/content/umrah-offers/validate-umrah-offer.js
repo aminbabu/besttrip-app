@@ -8,13 +8,17 @@
  */
 
 // dependencies
-const { umrahOfferSchema } = require('../../../../../../schemas/zod/settings/content');
+const {
+    umrahOfferSchema,
+} = require('../../../../../../schemas/zod/settings/content');
 const { zodErrorHandler } = require('../../../../../../handlers/errors');
 
 // export umrah offer validator middleware
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = umrahOfferSchema.omit({ id: true }).safeParse(req.body);
+    const { error, success } = umrahOfferSchema
+        .omit({ id: true, ids: true })
+        .safeParse(req.body);
 
     // check for errors
     if (!success) {
