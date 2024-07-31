@@ -116,7 +116,7 @@ module.exports = new Schema(
             ref: 'UmrahPackage',
             required: [true, 'Umrah package ID is required'],
         },
-        UmrahBooking: {
+        umrahBooking: {
             type: Schema.Types.ObjectId,
             ref: 'UmrahBooking',
             required: [true, 'UmrahBooking ID is required'],

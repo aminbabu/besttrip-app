@@ -14,14 +14,16 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewUmrahBookings } = require('../../../../controllers/dashboard/umrah/bookings');
+const {
+    viewUmrahBookings,
+} = require('../../../../controllers/dashboard/umrah/bookings');
 
 // middlewares
 const { isAuthorized } = require('../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/payment-requests'
+ * @param {string} path - '/dashboard/umrah/booking'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE

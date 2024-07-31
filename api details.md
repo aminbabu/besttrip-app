@@ -176,9 +176,9 @@ const InfiniteScroll = () => {
                     packageType: '', // Replace with actual value
                     packageDuration: 1, // Replace with actual value
                     dataLength: 10, // Number of items to fetch per request
-                    adultTravellers: 0, // Replace with actual value
-                    childTravellers: 0, // Replace with actual value
-                    infantsTravellers: 0, // Replace with actual value
+                    adultTravelers: 0, // Replace with actual value
+                    childTravelers: 0, // Replace with actual value
+                    infantsTravelers: 0, // Replace with actual value
                 });
 
                 const { umrahPackages, hasMore: moreItemsAvailable } = response.data;
