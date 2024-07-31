@@ -23,7 +23,7 @@ const {
     viewCustomerBookings,
     // submitBookingForReview,
     deleteUmrahBookingByIdForAdmin,
-    // deleteUmrahBookingByIdForCustomer,
+    deleteUmrahBookingByIdForCustomer,
     // deleteManyUmrahBookingsForAdmin,
     // deleteManyUmrahBookingsForCustomer,
 } = require('../../../../controllers/api/umrah/bookings');
@@ -169,12 +169,12 @@ router.delete(
  * @access private - ['customer']
  * @method DELETE
  */
-// router.delete(
-//     '/customer/:id',
-//     isAllowed(['customer']),
-//     validateUmrahBookingId,
-//     deleteUmrahBookingByIdForCustomer
-// );
+router.delete(
+    '/customer/:id',
+    isAllowed(['customer']),
+    validateUmrahBookingId,
+    deleteUmrahBookingByIdForCustomer
+);
 
 /**
  * @description - delete multiple umrah bookings by IDs for admin

@@ -16,4 +16,5 @@ module.exports = {
     getUmrahBookingByIdForCustomer: require('./get-umrah-booking-by-id-for-customer'),
     updateUmrahBookingStatus: require('./update-umrah-booking-status-for-admin'),
     deleteUmrahBookingByIdForAdmin: require('./delete-umrah-booking-for-admin'),
+    deleteUmrahBookingByIdForCustomer: require('./delete-umrah-booking-for-customer'),
 };
