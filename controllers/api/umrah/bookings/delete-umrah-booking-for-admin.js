@@ -8,16 +8,10 @@
 
 // dependencies
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs/promises');
 const mongoose = require('mongoose');
 const { UmrahBooking, Traveler } = require('../../../../models');
 
-/**
- * @description Delete an Umrah booking and its corresponding travelers for admin.
- * @param {Object} req - The request object containing the booking ID in params.
- * @param {Object} res - The response object to send the result or error.
- * @param {Function} next - The next middleware function in the stack.
- */
 module.exports = async (req, res, next) => {
     try {
         // Extract booking ID from request params
@@ -53,8 +47,8 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // Delete each traveler's images from the file system
-        for (const traveler of travelers) {
+        // Collect image deletion promises
+        const deleteImagePromises = travelers.flatMap((traveler) => {
             const imagePaths = [
                 traveler.passport,
                 traveler.travelerPhoto,
@@ -62,27 +56,27 @@ module.exports = async (req, res, next) => {
                 traveler.travelerCovidCertificate,
             ];
 
-            for (const filePath of imagePaths) {
-                if (filePath) {
-                    const fullPath = path.resolve(
+            return imagePaths
+                .filter((filePath) => filePath) // Filter out undefined or null file paths
+                .map((filePath) => {
+                    const fullPath = path.join(
                         __dirname,
                         './../../../../public',
                         filePath
                     );
-                    try {
-                        if (fs.existsSync(fullPath)) {
-                            fs.unlinkSync(fullPath);
-                        }
-                    } catch (error) {
-                        // Log error and continue with the next file
+
+                    return fs.unlink(fullPath).catch((error) => {
+                        // Log error but continue with the next file
                         console.error(
                             `Error deleting file ${fullPath}:`,
                             error
                         );
-                    }
-                }
-            }
-        }
+                    });
+                });
+        });
+
+        // Wait for all image deletions to complete
+        await Promise.all(deleteImagePromises);
 
         // Delete travelers from the database
         await Traveler.deleteMany({ umrahBooking: id });
