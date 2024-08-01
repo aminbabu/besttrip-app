@@ -260,7 +260,7 @@ module.exports = async (req, res, next) => {
             // save umrah booking
             await umrahBooking.save();
 
-            // send mail
+            send mail
             await sendEmail(
                 (to = req.user.email),
                 (subject = 'Partial Payment Invoice'),
@@ -296,7 +296,7 @@ module.exports = async (req, res, next) => {
             // save umrah booking
             await umrahBooking.save();
 
-            // send mail
+            send mail
             await sendEmail(
                 (to = req.user.email),
                 (subject = 'Full Payment Invoice'),
@@ -308,6 +308,7 @@ module.exports = async (req, res, next) => {
         return res.send({
             message: `Your umrah package booked successfully and an email has sended to your email:${req.user.email}`,
             invoice,
+            bookedPackageDetails: result,
         });
     } catch (error) {
         return next(error);

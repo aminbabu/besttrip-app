@@ -19,7 +19,7 @@ const sendEmail = require('../../../../utils/mails/send-email');
 module.exports = async (req, res, next) => {
     try {
         const { id } = req.params; // Booking ID
-        const { partialPaymentAmount } = req.body; // Amount to be paid
+        const { partialPaymentAmount, paymentType } = req.body;
 
         // Fetch the invoice for the partial payment
         const invoice = await Invoice.findOne({
@@ -39,57 +39,98 @@ module.exports = async (req, res, next) => {
                 .send({ message: 'Payment is no longer valid due to expiry' });
         }
 
-        // Validate amounts are numbers
-        if (
-            isNaN(invoice.paidAmount) ||
-            isNaN(invoice.partialPaymentRestAmount)
-        ) {
-            return res.status(200).send({ message: 'Invalid invoice amounts' });
-        }
+        // Fetch wallet details
+        const walletDetails = await Wallet.findOne({
+            customer: req.user._id,
+        });
 
-        // Calculate remaining amount
-        const remainingAmount = invoice.partialPaymentRestAmount;
+        if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
+            // Validate amounts are numbers
+            if (
+                isNaN(invoice.paidAmount) ||
+                isNaN(invoice.partialPaymentRestAmount)
+            ) {
+                return res
+                    .status(200)
+                    .send({ message: 'Invalid invoice amounts' });
+            }
 
-        if (partialPaymentAmount > remainingAmount) {
+            // Calculate remaining amount
+            const remainingAmount = invoice.partialPaymentRestAmount;
+
+            // Check if the partial payment amount exceeds the remaining amount
+            if (partialPaymentAmount > remainingAmount) {
+                const message =
+                    remainingAmount > 0
+                        ? `You should pay only ${remainingAmount}. But you're trying to pay ${partialPaymentAmount}. Please adjust the amount.`
+                        : 'Payment amount exceeds the remaining balance or the full payment has already been made.';
+
+                return res.status(200).send({ message });
+            }
+
+            // Update invoice with new paid amount and rest amount
+            invoice.paidAmount =
+                (Number(invoice.paidAmount) || 0) +
+                Number(partialPaymentAmount);
+            invoice.partialPaymentRestAmount =
+                (Number(invoice.partialPaymentRestAmount) || 0) -
+                Number(partialPaymentAmount);
+
+            await invoice.save();
+
+            if (walletDetails.balance < partialPaymentAmount) {
+                return res
+                    .status(200)
+                    .send({ message: 'Insufficient balance' });
+            }
+
+            // Update wallet balance
+            walletDetails.balance -= partialPaymentAmount;
+            await walletDetails.save();
+
+            // Send email notification
+            const to = req.user.email;
+            const subject = 'Partial Payment Update';
+            const text = `Your payment of ${partialPaymentAmount} has been received. Remaining balance on your invoice is ${invoice.partialPaymentRestAmount}.`;
+
+            // await sendEmail(to, subject, text, (err) => console.log(err));
+
+            // Send response
             return res.status(200).send({
-                message:
-                    "Payment amount exceeds remaining balance or you've done the full payment",
+                message: `Partial payment processed successfully and an email has been sent to your email: ${req.user.email}`,
+                invoice,
+                walletDetails,
+            });
+        } else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
+            // Full payment handling
+            const fullPaymentAmount = invoice.partialPaymentRestAmount;
+
+            if (walletDetails.balance < fullPaymentAmount) {
+                return res
+                    .status(400)
+                    .send({ message: 'Insufficient balance' });
+            }
+
+            // Update invoice with full payment
+            invoice.paidAmount =
+                (Number(invoice.paidAmount) || 0) + fullPaymentAmount;
+            invoice.partialPaymentRestAmount = 0;
+
+            await invoice.save();
+
+            // Update wallet balance
+            walletDetails.balance -= fullPaymentAmount;
+            await walletDetails.save();
+
+            // await sendEmail(to, subject, text, (err) => console.log(err));
+
+            // Send response
+            return res.status(200).send({
+                message: `Full partial payment processed successfully and an email has been sent to your email: ${req.user.email}`,
+                invoice,
+                walletDetails,
             });
         }
-
-        // Update invoice with new paid amount and rest amount
-        invoice.paidAmount =
-            (Number(invoice.paidAmount) || 0) + Number(partialPaymentAmount);
-        invoice.partialPaymentRestAmount =
-            (Number(invoice.partialPaymentRestAmount) || 0) -
-            Number(partialPaymentAmount);
-
-        await invoice.save();
-
-        // Fetch wallet details
-        const walletDetails = await Wallet.findOne({ customer: req.user._id });
-
-        if (walletDetails.balance < partialPaymentAmount) {
-            return res.status(200).send({ message: 'Insufficient balance' });
-        }
-
-        // Update wallet balance
-        walletDetails.balance -= partialPaymentAmount;
-        await walletDetails.save();
-
-        // Send email notification
-        const to = req.user.email;
-        const subject = 'Partial Payment Update';
-        const text = `Your payment of ${partialPaymentAmount} has been received. Remaining balance on your invoice is ${invoice.partialPaymentRestAmount}.`;
-
-        await sendEmail(to, subject, text, (err) => console.log(err));
-
-        // Send response
-        return res.status(200).send({
-            message: `Partial payment processed successfully and an email has been sent to your email: ${req.user.email}`,
-            invoice,
-            walletDetails,
-        });
     } catch (error) {
         return next(error);
     }
