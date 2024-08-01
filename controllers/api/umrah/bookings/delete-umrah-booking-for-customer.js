@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
 
         // Check if the ID is a valid MongoDB ObjectId
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({
+            return res.status(200).json({
                 success: false,
                 message: 'Invalid booking ID.',
             });
@@ -46,7 +46,7 @@ module.exports = async (req, res, next) => {
 
         // Check if any travelers are found
         if (travelers.length === 0) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: 'No travelers found for this Umrah booking.',
             });

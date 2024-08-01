@@ -9,7 +9,7 @@
 
 // umrah bookings status
 const UMRAH_BOOKING_STATUS = [
-    'not-booked-yet',
+    'pending',
     'in-process',
     'under-review',
     'success',
@@ -17,7 +17,11 @@ const UMRAH_BOOKING_STATUS = [
     'cancelled',
 ];
 
+// umrah booking payment type
+const UMRAH_BOOKING_PAYMENT_TYPE = ['partial-payment', 'full-payment'];
+
 // export umrah bookings status
 module.exports = {
     UMRAH_BOOKING_STATUS,
+    UMRAH_BOOKING_PAYMENT_TYPE,
 };

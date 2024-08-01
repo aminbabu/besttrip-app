@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
 
         // Validate ID format
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ message: 'Invalid ID format' });
+            return res.status(200).json({ message: 'Invalid ID format' });
         }
 
         // Define aggregation stages
@@ -103,7 +103,7 @@ module.exports = async (req, res, next) => {
 
         if (umrahBookingsWithTravelers.length === 0) {
             return res
-                .status(404)
+                .status(200)
                 .json({ message: 'No data found for the given ID' });
         }
 

@@ -9,7 +9,10 @@
 // dependencies
 const { z } = require('zod');
 const { isMongoId } = require('validator');
-const { UMRAH_BOOKING_STATUS } = require('../../../../constants');
+const {
+    UMRAH_BOOKING_STATUS,
+    UMRAH_BOOKING_PAYMENT_TYPE,
+} = require('../../../../constants');
 
 // export umrah booking schema
 module.exports = z
@@ -48,5 +51,24 @@ module.exports = z
             .refine((status) => UMRAH_BOOKING_STATUS.includes(status), {
                 message: 'Please provide a valid status',
             }),
+        paymentType: z
+            .string({
+                required_error: 'Payment Type is required',
+                invalid_type_error: 'Payment Type must be a string',
+            })
+            .refine((type) => UMRAH_BOOKING_PAYMENT_TYPE.includes(type), {
+                message: 'Please provide a valid Payment Type',
+            }),
+        partialPaymentAmount: z.union([
+            z
+                .string({
+                    invalid_type_error:
+                        'Partial Payment Amount must be a number or string',
+                })
+                .transform((val) => parseFloat(val)),
+            z.number({
+                invalid_type_error: 'Partial Payment Amount must be a number',
+            }),
+        ]),
     })
     .strict();

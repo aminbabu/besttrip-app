@@ -9,12 +9,15 @@
 
 // dependencies
 const { z } = require('zod');
+const {
+    umrahBookingSchema,
+} = require('../../../../../schemas/zod/umrah/bookings');
 const { zodErrorHandler } = require('../../../../../handlers/errors');
 
 // export validate umrah booking IDs validator
 module.exports = (req, res, next) => {
     // validate request body
-    const { error, success } = bookingIdsSchema
+    const { error, success } = umrahBookingSchema
         .pick({ ids: true })
         .safeParse(req.body.ids);
 

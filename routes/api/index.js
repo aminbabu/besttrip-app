@@ -19,6 +19,7 @@ router.use('/auth/customers', require('./auth/customers'));
 router.use('/users', require('./users'));
 router.use('/customers', require('./customers'));
 router.use('/general-ledger', require('./general-ledger'));
+router.use('/invoice', require('./invoice'));
 router.use('/settings/site/general', require('./settings/site/general'));
 router.use('/settings/site/contact', require('./settings/site/contact'));
 router.use('/settings/site/policy', require('./settings/site/policy'));

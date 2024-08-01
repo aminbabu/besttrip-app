@@ -21,9 +21,10 @@ const {
     getUmrahBookingByIdForCustomer,
     updateUmrahBookingStatus,
     viewCustomerBookings,
-    // submitBookingForReview,
+    submitBookingForReview,
     deleteUmrahBookingByIdForAdmin,
     deleteUmrahBookingByIdForCustomer,
+    restOfThePartialPayment,
     // deleteManyUmrahBookingsForAdmin,
     // deleteManyUmrahBookingsForCustomer,
 } = require('../../../../controllers/api/umrah/bookings');
@@ -35,6 +36,7 @@ const {
     validateUmrahBookingId,
     validateUmrahBookingIds,
     validateUmrahBookingStatus,
+    validateUmrahBookingPayment,
 } = require('./../../../../middlewares/api/validators/umrah/bookings/index');
 
 /**
@@ -125,7 +127,30 @@ router.get(
  * @access private - ['customer']
  * @method POST
  */
-// router.post('/:id/submit-review',isAllowed(['customer']),validateUmrahBookingId,submitBookingForReview);
+router.post(
+    '/:id/submit-review',
+    isAllowed(['customer']),
+    validateUmrahBookingId,
+    validateUmrahBookingPayment,
+    submitBookingForReview
+);
+
+/**
+ * @description - make rest of the partial payment
+ * @param {string} path - '/api/umrah/booking/:id/rest-partial-payment'
+ * @param {function} middleware - ['isAllowed', 'validateUmrahBookingId']
+ * @param {function} controller - ['restOfThePartialPayment']
+ * @returns {object} - router
+ * @access private - ['customer']
+ * @method POST
+ */
+router.post(
+    '/:id/rest-partial-payment',
+    isAllowed(['customer']),
+    validateUmrahBookingId,
+    validateUmrahBookingPayment,
+    restOfThePartialPayment
+);
 
 /**
  * @description - update umrah booking status

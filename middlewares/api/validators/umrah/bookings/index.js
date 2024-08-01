@@ -10,6 +10,7 @@
 // export umrah bookings validators
 module.exports = {
     validateUmrahBooking: require('./validate-umrah-booking'),
+    validateUmrahBookingPayment: require('./validate-umrah-booking-payment'),
     validateUmrahBookingId: require('./validate-umrah-booking-id'),
     validateUmrahBookingIds: require('./validate-umrah-booking-ids'),
     validateUmrahBookingStatus: require('./validate-umrah-booking-status'),

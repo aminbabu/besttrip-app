@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
 
         // check if traveler exists
         if (!traveler) {
-            return res.status(404).send({
+            return res.status(200).send({
                 message: 'Traveler not found',
             });
         }
@@ -73,7 +73,7 @@ module.exports = async (req, res, next) => {
         }
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Deleted traveler successfully',
             traveler,
         });

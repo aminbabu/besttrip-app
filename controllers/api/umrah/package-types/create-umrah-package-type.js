@@ -17,11 +17,13 @@ module.exports = async (req, res, next) => {
         const { name, status } = req.body;
 
         // check if umrah package type already exists
-        const existingUmrahPackageType = await UmrahPackageType.findOne({ name });
+        const existingUmrahPackageType = await UmrahPackageType.findOne({
+            name,
+        });
 
         // check if umrah package type already exists
         if (existingUmrahPackageType) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Umrah package type already exists',
             });
         }
