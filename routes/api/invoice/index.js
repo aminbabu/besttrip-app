@@ -35,7 +35,7 @@ router.use(isAuthorized);
 
 /**
  * @description get invoice for admin
- * @param {string} path - /api/invoice/customer
+ * @param {string} path - /api/invoice/:id/admin
  * @param {function} middleware - ['isAllowed', 'validateInvoiceId']
  * @param {function} controller - ['getInvoiceForAdmin']
  * @returns {object} - router
@@ -51,7 +51,7 @@ router.get(
 
 /**
  * @description get invoice for customer
- * @param {string} path - /api/invoice/customer
+ * @param {string} path - /api/invoice/:id/customer
  * @param {function} middleware - ['isAllowed', 'validateInvoiceId']
  * @param {function} controller - ['getInvoiceForCustomer']
  * @returns {object} - router
