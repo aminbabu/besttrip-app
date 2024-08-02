@@ -17,16 +17,13 @@ module.exports = async (req, res, next) => {
         // Extract booking ID from request params
         const { id } = req.params;
 
-        // Check if the ID is a valid MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(200).json({
-                success: false,
-                message: 'Invalid booking ID.',
-            });
-        }
-
         // Fetch the Umrah booking by ID
-        const umrahBooking = await UmrahBooking.findOne({ _id: id });
+        const umrahBooking = await UmrahBooking.findById(id);
+
+        // Check if the Umrah booking exist or not
+        if (!umrahBooking) {
+            return res.status(200).json({ message: 'Umrah booking not found' });
+        }
 
         // Check if the booking status prohibits deletion
         if (
