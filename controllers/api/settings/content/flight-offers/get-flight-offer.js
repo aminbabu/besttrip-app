@@ -20,13 +20,13 @@ module.exports = async (req, res, next) => {
 
         // check if flight offer exists
         if (!flightOffer) {
-            return res.status(404).send({
+            return res.status(200).send({
                 message: 'Flight offer not found',
             });
         }
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Fetched flight offer successfully',
             flightOffer,
         });

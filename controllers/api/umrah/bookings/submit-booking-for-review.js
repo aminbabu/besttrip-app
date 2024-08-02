@@ -210,7 +210,7 @@ module.exports = async (req, res, next) => {
 
         // Check is there any adult traveler associated with this package or not
         if (!result?.priceByTravelers?.adult?.count) {
-            return res.send({
+            return res.status(200).send({
                 message:
                     'To book this package there should be one adult traveler',
             });

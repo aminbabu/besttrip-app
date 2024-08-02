@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
 
         // check if flight offer exists
         if (!flightOffer) {
-            return res.status(404).send({
+            return res.status(200).send({
                 message: 'Flight offer not found',
             });
         }
@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
         await flightOffer.save();
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Updated flight offer successfully',
             flightOffer,
         });

@@ -8,34 +8,34 @@
  */
 
 // dependencies
-const { Wallet } = require("../../../models");
+const { Wallet } = require('../../../models');
 
 // export delete wallet controller
 module.exports = async (req, res, next) => {
-  try {
-    // get validated Data
-    const { user, customer } = req.query;
+    try {
+        // get validated Data
+        const { user, customer } = req.query;
 
-    // get wallet by customer/user id
-    const wallet = await Wallet.findOne({
-      $or: [{ user }, { customer }],
-    });
+        // get wallet by customer/user id
+        const wallet = await Wallet.findOne({
+            $or: [{ user }, { customer }],
+        });
 
-    // check if wallet exists
-    if (!wallet) {
-      return res.status(404).json({
-        message: "Wallet not found",
-      });
+        // check if wallet exists
+        if (!wallet) {
+            return res.status(200).json({
+                message: 'Wallet not found',
+            });
+        }
+
+        // delete wallet
+        await wallet.deleteOne();
+
+        // return response
+        return res.status(200).json({
+            message: 'Deleted wallet successfully',
+        });
+    } catch (error) {
+        next(error);
     }
-
-    // delete wallet
-    await wallet.deleteOne();
-
-    // return response
-    return res.status(200).json({
-      message: "Deleted wallet successfully",
-    });
-  } catch (error) {
-    next(error);
-  }
 };

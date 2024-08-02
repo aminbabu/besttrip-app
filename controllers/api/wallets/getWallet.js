@@ -8,32 +8,32 @@
  */
 
 // dependencies
-const { Wallet } = require("../../../models");
+const { Wallet } = require('../../../models');
 
 // export get wallet controller
 module.exports = async (req, res, next) => {
-  try {
-    // get validated Data
-    const { user, customer } = req.query;
+    try {
+        // get validated Data
+        const { user, customer } = req.query;
 
-    // get wallet by customer/user id
-    const wallet = await Wallet.findOne({
-      $or: [{ user }, { customer }],
-    });
+        // get wallet by customer/user id
+        const wallet = await Wallet.findOne({
+            $or: [{ user }, { customer }],
+        });
 
-    // check if wallet exists
-    if (!wallet) {
-      return res.status(404).json({
-        message: "Wallet not found",
-      });
+        // check if wallet exists
+        if (!wallet) {
+            return res.status(200).json({
+                message: 'Wallet not found',
+            });
+        }
+
+        // return wallet
+        return res.status(200).json({
+            message: 'Fetch wallet successfully',
+            wallet,
+        });
+    } catch (error) {
+        next(error);
     }
-
-    // return wallet
-    return res.status(200).json({
-      message: "Fetch wallet successfully",
-      wallet,
-    });
-  } catch (error) {
-    next(error);
-  }
 };

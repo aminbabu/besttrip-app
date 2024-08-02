@@ -8,31 +8,31 @@
  */
 
 // dependencies
-const { User } = require("../../../models");
+const { User } = require('../../../models');
 
 // export enable user controller
 module.exports = async (req, res, next) => {
-  try {
-    // get user id
-    const { id } = req.params;
+    try {
+        // get user id
+        const { id } = req.params;
 
-    // find user
-    const user = await User.findById(id);
+        // find user
+        const user = await User.findById(id);
 
-    // check if user exists
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+        // check if user exists
+        if (!user) {
+            return res.status(200).json({ message: 'User not found' });
+        }
+
+        // set user status to active
+        user.set({ status: 'active' });
+
+        // save user
+        await user.save();
+
+        // return response
+        return res.json({ message: 'Enabled user successfully' });
+    } catch (error) {
+        return next(error);
     }
-
-    // set user status to active
-    user.set({ status: "active" });
-
-    // save user
-    await user.save();
-
-    // return response
-    return res.json({ message: "Enabled user successfully" });
-  } catch (error) {
-    return next(error);
-  }
 };

@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const flightOffers = await FlightOffer.find();
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Fetched flight offers successfully',
             flightOffers,
         });

@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
 
         // check if any blog posts not found
         if (blogsPosts.length === 0) {
-            return res.status(404).send({
+            return res.status(200).send({
                 message: 'No blog posts found with the provided IDs',
             });
         }
@@ -46,7 +46,7 @@ module.exports = async (req, res, next) => {
         });
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Deleted blog posts successfully',
             deletedFlightPosts: blogsPosts,
         });

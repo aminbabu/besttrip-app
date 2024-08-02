@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
         // check if hotel offer exists
         if (!hotelOffer) {
-            return res.status(404).send({
+            return res.status(200).send({
                 message: 'Hotel offer not found',
             });
         }
@@ -42,7 +42,7 @@ module.exports = async (req, res, next) => {
         }
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Deleted hotel offer successfully',
             hotelOffer,
         });
