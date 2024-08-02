@@ -52,7 +52,7 @@ router.use(
 router.use('/settings/themes', require('./settings/themes'));
 router.use('/payment-requests', require('./payment-requests'));
 router.use('/umrah/packages', require('./umrah/packages'));
-router.use('/umrah/travelers', require('./umrah/traveler'));
+router.use('/umrah/travelers', require('./umrah/travelers'));
 router.use('/umrah/booking', require('./umrah/bookings'));
 router.use('/umrah/package-durations', require('./umrah/package-durations'));
 router.use('/umrah/package-types', require('./umrah/package-types'));

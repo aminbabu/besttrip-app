@@ -208,12 +208,21 @@ module.exports = async (req, res, next) => {
             projectionStage,
         ]);
 
+        // Check is there any adult traveler associated with this package or not
+        if (!result?.priceByTravelers?.adult?.count) {
+            return res.send({
+                message:
+                    'To book this package there should be one adult traveler',
+            });
+        }
+
         // Calculate full payment subtotal
         const fullPaymentSubtotal =
             (result?.priceByTravelers?.adult?.subtotal || 0) +
             (result?.priceByTravelers?.child?.subtotal || 0) +
             (result?.priceByTravelers?.infant?.subtotal || 0);
 
+        // Calculate partial payment subtotal
         const partialSubtotal =
             (result?.priceByTravelers?.adult?.partialSubtotal || 0) +
             (result?.priceByTravelers?.child?.partialSubtotal || 0) +
@@ -260,7 +269,7 @@ module.exports = async (req, res, next) => {
             // save umrah booking
             await umrahBooking.save();
 
-            send mail
+            // send mail
             await sendEmail(
                 (to = req.user.email),
                 (subject = 'Partial Payment Invoice'),
@@ -296,7 +305,7 @@ module.exports = async (req, res, next) => {
             // save umrah booking
             await umrahBooking.save();
 
-            send mail
+            // send mail
             await sendEmail(
                 (to = req.user.email),
                 (subject = 'Full Payment Invoice'),
@@ -305,7 +314,7 @@ module.exports = async (req, res, next) => {
             );
         }
         // send response
-        return res.send({
+        return res.status(200).send({
             message: `Your umrah package booked successfully and an email has sended to your email:${req.user.email}`,
             invoice,
             bookedPackageDetails: result,

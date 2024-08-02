@@ -93,7 +93,8 @@ module.exports = async (req, res, next) => {
             const subject = 'Partial Payment Update';
             const text = `Your payment of ${partialPaymentAmount} has been received. Remaining balance on your invoice is ${invoice.partialPaymentRestAmount}.`;
 
-            // await sendEmail(to, subject, text, (err) => console.log(err));
+            // send mail
+            await sendEmail(to, subject, text, (err) => console.log(err));
 
             // Send response
             return res.status(200).send({
@@ -122,7 +123,8 @@ module.exports = async (req, res, next) => {
             walletDetails.balance -= fullPaymentAmount;
             await walletDetails.save();
 
-            // await sendEmail(to, subject, text, (err) => console.log(err));
+            // send mail
+            await sendEmail(to, subject, text, (err) => console.log(err));
 
             // Send response
             return res.status(200).send({
