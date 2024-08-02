@@ -9,7 +9,10 @@
  */
 
 // dependencies
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants');
+const {
+    DEFAULT_IMAGE_TYPES,
+    ONE_MEGA_BYTE,
+} = require('../../../../../constants');
 
 // export umrah package package thumbnail validator middleware
 module.exports = async (req, res, next) => {
@@ -18,29 +21,36 @@ module.exports = async (req, res, next) => {
 
     // check if umrah thumbnail is not provided
     if (!umrahThumbnail) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload a thumbnail of umrah package',
         });
     }
 
     // check if makka hotel thumbnail is an array
     if (Array.isArray(umrahThumbnail)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload only one thumbnail of umrah package',
         });
     }
 
     // check if umrah thumbnail is not an image of type jpg, jpeg, png
-    if (umrahThumbnail && !DEFAULT_IMAGE_TYPES.includes(umrahThumbnail.mimetype)) {
-        return res.status(400).json({
-            message: `Please upload a thumbnail of umrah package of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+    if (
+        umrahThumbnail &&
+        !DEFAULT_IMAGE_TYPES.includes(umrahThumbnail.mimetype)
+    ) {
+        return res.status(200).json({
+            message: `Please upload a thumbnail of umrah package of type ${DEFAULT_IMAGE_TYPES.join(
+                ', '
+            )}`,
         });
     }
 
     // check if umrah thumbnail size is greater than 1 MB
     if (umrahThumbnail?.size > ONE_MEGA_BYTE) {
-        return res.status(400).json({
-            message: `Please upload a thumbnail of umrah package of size less than ${(ONE_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+        return res.status(200).json({
+            message: `Please upload a thumbnail of umrah package of size less than ${(
+                ONE_MEGA_BYTE / ONE_MEGA_BYTE
+            ).toFixed(2)} MB`,
         });
     }
 

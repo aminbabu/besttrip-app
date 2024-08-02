@@ -34,7 +34,7 @@ module.exports = async (req, res, next) => {
         await generalLedger.save();
 
         // send response
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'Updated general ledger successfully',
             generalLedger,
         });

@@ -26,14 +26,14 @@ module.exports = async (req, res, next) => {
         });
 
         if (!resetPasswordToken) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Invalid or expired token',
             });
         }
 
         // check if token is expired
         if (moment(resetPasswordToken.expires).isBefore(moment())) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Invalid or expired token',
             });
         }

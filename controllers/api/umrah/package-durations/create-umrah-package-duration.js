@@ -39,7 +39,7 @@ module.exports = async (req, res, next) => {
         await umrahPackageDuration.save();
 
         // send response
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'Created umrah package duration successfully',
             umrahPackageDuration,
         });

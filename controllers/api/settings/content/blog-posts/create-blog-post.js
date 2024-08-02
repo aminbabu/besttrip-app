@@ -28,7 +28,7 @@ module.exports = async (req, res, next) => {
         await blogPost.save();
 
         // send response
-        return res.status(201).send({
+        return res.status(200).send({
             message: 'Created blog post successfully',
             blogPost,
         });

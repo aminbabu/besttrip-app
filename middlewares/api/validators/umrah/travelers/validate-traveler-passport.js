@@ -26,21 +26,21 @@ module.exports = async (req, res, next) => {
 
     // check if passport is not uploaded
     if (!passport) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload a passport',
         });
     }
 
     // check if passport is an array
     if (Array.isArray(passport)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload only one passport',
         });
     }
 
     // check if passport is not an image of type jpg, jpeg, png
     if (passport && !DEFAULT_IMAGE_TYPES.includes(passport.mimetype)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(
                 ', '
             )}`,
@@ -49,7 +49,7 @@ module.exports = async (req, res, next) => {
 
     // check if passport size is greater than 1 MB
     if (passport?.size > MAX_FILE_SIZE) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: `Please upload a passport of size less than ${(
                 MAX_FILE_SIZE / MAX_FILE_SIZE
             ).toFixed(2)} MB`,

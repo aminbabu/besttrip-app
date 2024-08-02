@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
 
         // check if user is already verified
         if (user.isVerified) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'User is already verified',
             });
         }

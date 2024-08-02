@@ -31,14 +31,17 @@ module.exports = async (req, res, next) => {
             ...validatedData,
             schedule: validatedData.schedule.toLowerCase(),
             thumbnail: thumbnail.path,
-            extraThumbnails: extraThumbnails?.map((extraThumbnail) => extraThumbnail.path),
+            extraThumbnails: extraThumbnails?.map(
+                (extraThumbnail) => extraThumbnail.path
+            ),
             makkahHotelThumbnail: makkahHotelThumbnail.path,
             makkahHotelExtraThumbnails: makkahHotelExtraThumbnails?.map(
                 (makkahHotelExtraThumbnail) => makkahHotelExtraThumbnail.path
             ),
             madinahHotelThumbnail: madinahHotelThumbnail.path,
             madinahhHotelExtraThumbnails: madinahhHotelExtraThumbnails?.map(
-                (madinahhHotelExtraThumbnail) => madinahhHotelExtraThumbnail.path
+                (madinahhHotelExtraThumbnail) =>
+                    madinahhHotelExtraThumbnail.path
             ),
             itineraryDays: itineraryDays?.map((itineraryDay) => ({
                 ...itineraryDay,
@@ -51,7 +54,7 @@ module.exports = async (req, res, next) => {
         await umrahPackage.save();
 
         // send response
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'Created umrah package package successfully',
             umrahPackage,
         });

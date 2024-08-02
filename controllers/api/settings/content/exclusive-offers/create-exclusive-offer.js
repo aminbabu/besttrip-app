@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
 
         // check if thumbnail is uploaded
         if (!thumbnail) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Please upload a thumbnail',
             });
         }
@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
         await exclusiveOffer.save();
 
         // send response
-        return res.status(201).send({
+        return res.status(200).send({
             message: 'Created exclusive offer successfully',
             exclusiveOffer,
         });

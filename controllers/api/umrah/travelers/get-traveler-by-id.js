@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
         });
 
         // send traveler
-        return res.status(201).send({
+        return res.status(200).send({
             message: 'Traveler data fetched successfully',
             traveler,
         });

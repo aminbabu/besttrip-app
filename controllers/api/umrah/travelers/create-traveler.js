@@ -87,7 +87,7 @@ module.exports = async (req, res, next) => {
             await traveler.save();
 
             // send traveler
-            return res.status(201).send({
+            return res.status(200).send({
                 message: 'Created traveler successfully',
                 traveler,
             });

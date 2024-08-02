@@ -21,43 +21,47 @@ module.exports = async (req, res, next) => {
 
     // check if logo is an array
     if (Array.isArray(logo)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Logo must be a single image',
         });
     }
 
     // check if favicon is an array
     if (Array.isArray(favicon)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Favicon must be a single image',
         });
     }
 
     // check if logo is not an image of type jpeg, jpg, png
     if (logo && !BRAND_LOGO_TYPES.includes(logo.mimetype)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: `Logo must be of type ${BRAND_LOGO_TYPES.join(', ')}`,
         });
     }
 
     // check if favicon is not an image of type png, ico, svg
     if (favicon && !FAVICON_TYPES.includes(favicon.mimetype)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: `Favicon must be of type ${FAVICON_TYPES.join(', ')}`,
         });
     }
 
     // check if favicon size is greater than 0.5 MB
     if (logo?.size > HALF_MEGA_BYTE) {
-        return res.status(400).json({
-            message: `Logo must be of size less than ${(HALF_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+        return res.status(200).json({
+            message: `Logo must be of size less than ${(
+                HALF_MEGA_BYTE / ONE_MEGA_BYTE
+            ).toFixed(2)} MB`,
         });
     }
 
     // check if favicon size is greater than 0.5 MB
     if (favicon?.size > HALF_MEGA_BYTE) {
-        return res.status(400).json({
-            message: `Favicon must be of size less than ${(HALF_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+        return res.status(200).json({
+            message: `Favicon must be of size less than ${(
+                HALF_MEGA_BYTE / ONE_MEGA_BYTE
+            ).toFixed(2)} MB`,
         });
     }
 

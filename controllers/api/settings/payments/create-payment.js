@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
 
         // check if payments settings exist
         if (existingPaymentsSetting) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Payments settings already exists',
             });
         }
@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
         await paymentsSetting.save();
 
         // return response
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'Created payments settings successfully',
             paymentsSetting,
         });

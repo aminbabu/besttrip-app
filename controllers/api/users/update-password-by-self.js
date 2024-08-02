@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
 
         // check if password match
         if (!match) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Current password is incorrect',
             });
         }

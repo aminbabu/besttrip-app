@@ -26,14 +26,14 @@ module.exports = async (req, res, next) => {
 
     // check if travelerPhoto is not uploaded
     if (!travelerPhoto) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload a travelerPhoto',
         });
     }
 
     // check if travelerPhoto is an array
     if (Array.isArray(travelerPhoto)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload only one travelerPhoto',
         });
     }
@@ -43,7 +43,7 @@ module.exports = async (req, res, next) => {
         travelerPhoto &&
         !DEFAULT_IMAGE_TYPES.includes(travelerPhoto.mimetype)
     ) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(
                 ', '
             )}`,
@@ -52,7 +52,7 @@ module.exports = async (req, res, next) => {
 
     // check if travelerPhoto size is greater than 1 MB
     if (travelerPhoto?.size > MAX_FILE_SIZE) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: `Please upload a travelerPhoto of size less than ${(
                 MAX_FILE_SIZE / MAX_FILE_SIZE
             ).toFixed(2)} MB`,

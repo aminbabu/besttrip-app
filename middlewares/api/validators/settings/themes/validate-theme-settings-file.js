@@ -20,29 +20,33 @@ module.exports = async (req, res, next) => {
 
     // check if illustration is not provided
     if (!illustration) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Illustration is required',
         });
     }
 
     // check if illustration is an array
     if (Array.isArray(illustration)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Illustration must be a single image',
         });
     }
 
     // check if illustration is not an image of type jpg, jpeg, png
     if (illustration && !DEFAULT_IMAGE_TYPES.includes(illustration.mimetype)) {
-        return res.status(400).json({
-            message: `Illustration must be of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+        return res.status(200).json({
+            message: `Illustration must be of type ${DEFAULT_IMAGE_TYPES.join(
+                ', '
+            )}`,
         });
     }
 
     // check if illustration is of size greater than 5MB
     if (illustration?.size > DEFAULT_FILE_SIZE) {
-        return res.status(400).json({
-            message: `Illustration must be of size less than ${(DEFAULT_FILE_SIZE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+        return res.status(200).json({
+            message: `Illustration must be of size less than ${(
+                DEFAULT_FILE_SIZE / ONE_MEGA_BYTE
+            ).toFixed(2)} MB`,
         });
     }
 

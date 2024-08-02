@@ -9,7 +9,10 @@
  */
 
 // dependencies
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants');
+const {
+    DEFAULT_IMAGE_TYPES,
+    ONE_MEGA_BYTE,
+} = require('../../../../../constants');
 
 // export umrah package madinah hotel gallery validator middleware
 module.exports = async (req, res, next) => {
@@ -26,7 +29,7 @@ module.exports = async (req, res, next) => {
 
     // check if makka hotel extra thumbnails is not an array
     if (!Array.isArray(madinahHotelExtraThumbnails)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload valid images of madinah hotel',
         });
     }
@@ -49,14 +52,14 @@ module.exports = async (req, res, next) => {
 
     // Check if all checks pass
     if (isInValidImageType) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: `Please upload valid images of madinah hotel of type 
              ${DEFAULT_IMAGE_TYPES.join(', ')}`,
         });
     }
 
     if (isInValidImageSize) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: `Please upload images of madinah hotel of size less than ${(
                 ONE_MEGA_BYTE / ONE_MEGA_BYTE
             ).toFixed(2)} MB`,

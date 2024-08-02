@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
         const user = await User.findOne({ email }).select('+password');
 
         if (!user) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Please check your email and password',
             });
         }
@@ -34,7 +34,7 @@ module.exports = async (req, res, next) => {
 
         // check if password match
         if (!match) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Please check your email and password',
             });
         }
@@ -47,7 +47,9 @@ module.exports = async (req, res, next) => {
 
         // return response
         return res.status(200).json({
-            message: `Your 2FA has been ${user.twoStepAuth ? 'enabled' : 'disabled'} successfully.`,
+            message: `Your 2FA has been ${
+                user.twoStepAuth ? 'enabled' : 'disabled'
+            } successfully.`,
             user,
         });
     } catch (error) {

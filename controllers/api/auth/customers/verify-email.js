@@ -51,7 +51,7 @@ module.exports = async (req, res, next) => {
 
         // check if customer is already verified
         if (customer.isVerified) {
-            return res.status(400).json({ message: 'Email already verified' });
+            return res.status(200).json({ message: 'Email already verified' });
         }
 
         // update customer

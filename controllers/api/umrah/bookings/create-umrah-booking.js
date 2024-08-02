@@ -41,7 +41,7 @@ module.exports = async (req, res, next) => {
         await newUmrahBooking.save();
 
         // return success response
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
             message: 'Umrah booking created successfully.',
             data: newUmrahBooking,
