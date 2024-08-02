@@ -10,7 +10,10 @@
 const path = require('path');
 const fs = require('fs/promises');
 const mongoose = require('mongoose');
-const { UmrahBooking, Traveler } = require('../../../../models');
+const { UmrahBooking, Traveler, Invoice } = require('../../../../models');
+const {
+    UMRAH_BOOKING_STATUS,
+} = require('../../../../constants/umrah-bookings');
 
 module.exports = async (req, res, next) => {
     try {
@@ -22,6 +25,23 @@ module.exports = async (req, res, next) => {
             return res.status(200).json({
                 success: false,
                 message: 'Invalid booking ID.',
+            });
+        }
+
+        // Fetch the Umrah booking by ID
+        const umrahBooking = await UmrahBooking.findOne({ _id: id });
+
+        // Check if the booking status prohibits deletion
+        if (
+            [
+                UMRAH_BOOKING_STATUS[1],
+                UMRAH_BOOKING_STATUS[2],
+                UMRAH_BOOKING_STATUS[3],
+                UMRAH_BOOKING_STATUS[4],
+            ].includes(umrahBooking.status)
+        ) {
+            return res.status(200).json({
+                message: `You can't delete this booking cause it is already ${umrahBooking.status}`,
             });
         }
 
@@ -95,9 +115,14 @@ module.exports = async (req, res, next) => {
             customer: req.user._id,
         });
 
+        // Delete the invoice from the database
+        await Invoice.findOneAndDelete({
+            bookingId: id,
+            customer: req.user._id,
+        });
+
         // Return success response
         return res.status(200).json({
-            success: true,
             message:
                 'Umrah booking and associated travelers deleted successfully.',
         });

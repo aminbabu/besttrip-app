@@ -10,7 +10,7 @@
 const path = require('path');
 const fs = require('fs/promises');
 const mongoose = require('mongoose');
-const { UmrahBooking, Traveler } = require('../../../../models');
+const { UmrahBooking, Traveler, Invoice } = require('../../../../models');
 
 module.exports = async (req, res, next) => {
     try {
@@ -22,6 +22,21 @@ module.exports = async (req, res, next) => {
             return res.status(200).json({
                 success: false,
                 message: 'Invalid booking ID.',
+            });
+        }
+
+        // Fetch the Umrah booking by ID
+        const umrahBooking = await UmrahBooking.findOne({ _id: id });
+
+        // Check if the booking status prohibits deletion
+        if (
+            [UMRAH_BOOKING_STATUS[0], UMRAH_BOOKING_STATUS[3]].includes(
+                umrahBooking.status
+            )
+        ) {
+            return res.status(200).json({
+                message:
+                    "You can't delete this booking cause it's not booked yet",
             });
         }
 
@@ -84,9 +99,13 @@ module.exports = async (req, res, next) => {
         // Delete the Umrah booking from the database
         await UmrahBooking.findByIdAndDelete(id);
 
+        // Delete the invoice from the database
+        await Invoice.findOneAndDelete({
+            bookingId: id,
+        });
+
         // Return success response
         return res.status(200).json({
-            success: true,
             message:
                 'Umrah booking and associated travelers deleted successfully.',
         });
