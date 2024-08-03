@@ -8,10 +8,10 @@
  */
 
 // dependencies
-const { UmrahBooking } = require('../../../../models');
+const { UmrahBooking, Invoice } = require('../../../../models');
 
 // export umrah bookings view controller
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
     try {
         // get status from request params
         const { status } = req.params;
@@ -67,6 +67,24 @@ module.exports = async (req, res, next) => {
             },
         };
 
+        // Define invoices lookup stage
+        const lookupInvoicesStage = {
+            $lookup: {
+                from: 'invoices',
+                localField: 'customer._id',
+                foreignField: 'customer',
+                as: 'invoiceDetails',
+            },
+        };
+
+        // Define invoices unwind stage
+        const unwindInvoicesStage = {
+            $unwind: {
+                path: '$invoiceDetails',
+                preserveNullAndEmptyArrays: true,
+            },
+        };
+
         // Define result projection stage
         const projectStage = {
             $project: {
@@ -86,9 +104,25 @@ module.exports = async (req, res, next) => {
                     customerID: 1,
                     wallet: 1,
                 },
-                umrahPackage: 1,
+                umrahPackage: {
+                    _id: 1,
+                    updatedAt: 1,
+                    journeyDate: 1,
+                },
+                bookingRefId: 1,
                 status: 1,
-                travelers: 1,
+                travelers: {
+                    passport: 1,
+                    travelerPhoto: 1,
+                    travelerNID: 1,
+                    travelerCovidCertificate: 1,
+                },
+                invoiceDetails: {
+                    invoiceId: 1,
+                    totalAmount: 1,
+                    paidAmount: 1,
+                    paymentType: 1,
+                },
             },
         };
 
@@ -100,15 +134,17 @@ module.exports = async (req, res, next) => {
             lookupUmrahPackageStage,
             unwindUmrahPackageStage,
             lookupTravelersStage,
+            lookupInvoicesStage,
+            unwindInvoicesStage,
             projectStage,
         ]);
 
-        // return bookings with travelers
-        return res.status(200).json({
+        // return render view
+        return res.status(200).send({
             message: 'Data retrieve successfully',
             umrahBookings: umrahBookingsWithTravelers,
         });
     } catch (error) {
-        return next(error);
+        return res.redirect('/dashboard/error/500');
     }
 };

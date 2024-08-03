@@ -10,4 +10,5 @@
 // export all umrah bookings controllers
 module.exports = {
     viewUmrahBookings: require('./view-umrah-bookings'),
+    bookingDetails: require('./booking-details'),
 };

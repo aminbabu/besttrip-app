@@ -18,7 +18,13 @@ const { zodErrorHandler } = require('../../../../../handlers/errors');
 module.exports = (req, res, next) => {
     // validate request body
     const { error, success } = umrahBookingSchema
-        .omit({ id: true, status: true, ids: true, paymentType: true })
+        .omit({
+            id: true,
+            status: true,
+            ids: true,
+            paymentType: true,
+            partialPaymentAmount: true,
+        })
         .safeParse(req.body);
 
     // check for errors

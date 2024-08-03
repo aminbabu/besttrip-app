@@ -14,6 +14,7 @@ const {
 } = require('../../../../constants/umrah-bookings');
 const { UmrahBooking, Wallet, Invoice } = require('../../../../models');
 const mongoose = require('mongoose');
+const moment = require('moment');
 const sendEmail = require('../../../../utils/mails/send-email');
 
 // export submit umrah bookings for review view controller
@@ -238,7 +239,10 @@ module.exports = async (req, res, next) => {
         if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
             // Generate invoice for partial payment
             invoice = new Invoice({
-                invoiceId: `INV-${new mongoose.Types.ObjectId()}`,
+                invoiceId: `INV-${moment().format('YYYYMMDD')}-${Math.random()
+                    .toString(36)
+                    .substr(2, 6)
+                    .toUpperCase()}`,
                 bookingId: id,
                 customer: req.user._id,
                 totalAmount: partialSubtotal,
@@ -264,7 +268,10 @@ module.exports = async (req, res, next) => {
             await walletDetails.save();
 
             // update umrah booking
-            umrahBooking.set({ status: UMRAH_BOOKING_STATUS[4] });
+            umrahBooking.set({
+                status: UMRAH_BOOKING_STATUS[4],
+                invoiceId: invoice._id,
+            });
 
             // save umrah booking
             await umrahBooking.save();
@@ -279,7 +286,10 @@ module.exports = async (req, res, next) => {
         } else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
             // Generate invoice for full payment
             invoice = new Invoice({
-                invoiceId: `INV-${new mongoose.Types.ObjectId()}`,
+                invoiceId: `INV-${moment().format('YYYYMMDD')}-${Math.random()
+                    .toString(36)
+                    .substr(2, 6)
+                    .toUpperCase()}`,
                 bookingId: id,
                 customer: req.user._id,
                 totalAmount: fullPaymentSubtotal,
@@ -300,7 +310,10 @@ module.exports = async (req, res, next) => {
             await walletDetails.save();
 
             // update umrah booking
-            umrahBooking.set({ status: UMRAH_BOOKING_STATUS[4] });
+            umrahBooking.set({
+                status: UMRAH_BOOKING_STATUS[4],
+                invoiceId: invoice._id,
+            });
 
             // save umrah booking
             await umrahBooking.save();

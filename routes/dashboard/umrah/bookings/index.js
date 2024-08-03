@@ -16,6 +16,7 @@ const router = express.Router();
 // controllers
 const {
     viewUmrahBookings,
+    bookingDetails,
 } = require('../../../../controllers/dashboard/umrah/bookings');
 
 // middlewares
@@ -23,7 +24,7 @@ const { isAuthorized } = require('../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/umrah/booking'
+ * @param {string} path - '/dashboard/umrah/bookings'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -31,8 +32,18 @@ const { isAuthorized } = require('../../../../middlewares/dashboard/auth');
 router.use(isAuthorized);
 
 /**
+ * @description - umrah booking view route
+ * @param {string} path - '/dashboard/umrah/bookings/booking-details/:id'
+ * @param {function} controller - ['bookingDetails']
+ * @returns {object} - router
+ * @access private - ['all']
+ * @method GET
+ */
+router.get('/booking-details/:id', bookingDetails);
+
+/**
  * @description - umrah bookings view route
- * @param {string} path - '/dashboard/umrah/booking/:status'
+ * @param {string} path - '/dashboard/umrah/bookings/:status'
  * @param {function} controller - ['viewUmrahBookings']
  * @returns {object} - router
  * @access private - ['all']

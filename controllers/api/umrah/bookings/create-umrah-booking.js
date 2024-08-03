@@ -12,6 +12,7 @@ const {
     UMRAH_BOOKING_STATUS,
 } = require('../../../../constants/umrah-bookings');
 const { UmrahBooking } = require('../../../../models');
+const moment = require('moment');
 
 // export create umrah booking controller
 module.exports = async (req, res, next) => {
@@ -20,27 +21,41 @@ module.exports = async (req, res, next) => {
         const existingBooking = await UmrahBooking.findOne({
             customer: req.user._id,
             umrahPackage: req.body.umrahPackage,
-            status: { $eq: UMRAH_BOOKING_STATUS[0] },
+            status: UMRAH_BOOKING_STATUS[0],
         });
 
         if (existingBooking) {
             return res.status(200).json({
-                success: false,
                 message: 'You have this Umrah package already in your list.',
             });
         }
 
-        // create new umrah booking
+        // Get the last booking reference ID count or default to 0
+        const lastBooking = await UmrahBooking.findOne(
+            {},
+            {},
+            { sort: { createdAt: -1 } }
+        );
+        const lastCount = lastBooking
+            ? parseInt(lastBooking.bookingRefId.slice(11), 10)
+            : 0;
+        const count = (lastCount + 1).toString().padStart(4, '0');
+
+        // Generate bookingRefId
+        const bookingRefId = `BTU${moment().format('YYYYMMDD')}${count}`;
+
+        // Create new umrah booking
         const newUmrahBooking = new UmrahBooking({
             customer: req.user._id,
             status: UMRAH_BOOKING_STATUS[0],
+            bookingRefId,
             ...req.body,
         });
 
-        // save booking to database
+        // Save booking to database
         await newUmrahBooking.save();
 
-        // return success response
+        // Return success response
         return res.status(200).json({
             message: 'Umrah booking created successfully.',
             data: newUmrahBooking,

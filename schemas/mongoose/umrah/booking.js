@@ -24,6 +24,14 @@ module.exports = new Schema(
             ref: 'UmrahPackage',
             required: [true, 'Umrah package is required'],
         },
+        bookingRefId: {
+            type: String,
+            required: [true, 'Booking Reference Id is required'],
+        },
+        invoiceId: {
+            type: Schema.Types.ObjectId,
+            default: null,
+        },
         status: {
             type: String,
             enum: UMRAH_BOOKING_STATUS,

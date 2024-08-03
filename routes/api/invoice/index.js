@@ -16,6 +16,7 @@ const router = express.Router();
 const {
     getInvoiceForAdmin,
     getInvoiceForCustomer,
+    getAllInvoicesForAdmin,
 } = require('../../../controllers/api/invoice');
 
 // middlewares
@@ -32,6 +33,17 @@ const {
  * @method USE
  */
 router.use(isAuthorized);
+
+/**
+ * @description get all invoices for admin
+ * @param {string} path - /api/invoice/admin
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} controller - ['getAllInvoicesForAdmin']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method GET
+ */
+router.get('/admin', isAllowed(['admin']), getAllInvoicesForAdmin);
 
 /**
  * @description get invoice for admin

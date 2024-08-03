@@ -67,6 +67,24 @@ module.exports = async (req, res) => {
             },
         };
 
+        // Define invoices lookup stage
+        const lookupInvoicesStage = {
+            $lookup: {
+                from: 'invoices',
+                localField: 'customer._id',
+                foreignField: 'customer',
+                as: 'invoiceDetails',
+            },
+        };
+
+        // Define invoices unwind stage
+        const unwindInvoicesStage = {
+            $unwind: {
+                path: '$invoiceDetails',
+                preserveNullAndEmptyArrays: true,
+            },
+        };
+
         // Define result projection stage
         const projectStage = {
             $project: {
@@ -86,9 +104,25 @@ module.exports = async (req, res) => {
                     customerID: 1,
                     wallet: 1,
                 },
-                umrahPackage: 1,
+                umrahPackage: {
+                    _id: 1,
+                    updatedAt: 1,
+                    journeyDate: 1,
+                },
+                bookingRefId: 1,
                 status: 1,
-                travelers: 1,
+                travelers: {
+                    passport: 1,
+                    travelerPhoto: 1,
+                    travelerNID: 1,
+                    travelerCovidCertificate: 1,
+                },
+                invoiceDetails: {
+                    invoiceId: 1,
+                    totalAmount: 1,
+                    paidAmount: 1,
+                    paymentType: 1,
+                },
             },
         };
 
@@ -100,11 +134,13 @@ module.exports = async (req, res) => {
             lookupUmrahPackageStage,
             unwindUmrahPackageStage,
             lookupTravelersStage,
+            lookupInvoicesStage,
+            unwindInvoicesStage,
             projectStage,
         ]);
 
         // return render view
-        return res.render(`dashboard/umrah/booking/${status}`, {
+        return res.render(`dashboard/umrah/bookings/${status}`, {
             title: 'Umrah Bookings',
             umrahBookings: umrahBookingsWithTravelers,
         });

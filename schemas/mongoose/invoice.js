@@ -21,7 +21,8 @@ module.exports = new Schema(
             required: [true, 'Invoice ID is required'],
         },
         bookingId: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'umrahbookings',
             required: [true, 'Booking ID is required'],
         },
         customer: {
