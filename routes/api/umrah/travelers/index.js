@@ -88,12 +88,12 @@ router.get(
  * @param {function} middleware - [isAllowed 'validateTraveler']
  * @param {function} controller - ['createTraveler']
  * @returns {object} - router
- * @access private - ['customer']
+ * @access private - ['customer','admin]
  * @method POST
  */
 router.post(
     '/',
-    isAllowed(['customer']),
+    isAllowed(['customer', 'admin']),
     validateTraveler,
     validateTraveler,
     validateTravelerPhoto,
@@ -113,12 +113,12 @@ router.post(
  * @param {function} middleware - [isAllowed 'validateTravelerId', validateTravelerId, 'validateTraveler']
  * @param {function} controller - ['updateTraveler']
  * @returns {object} - router
- * @access private - ['customer']
+ * @access private - ['customer','admin']
  * @method PATCH
  */
 router.patch(
     '/:umrahBookingId/:travelerId',
-    isAllowed(['customer']),
+    isAllowed(['customer', 'admin']),
     validateTravelerId,
     validateUmrahBookingId,
     validateTraveler,
@@ -140,12 +140,12 @@ router.patch(
  * @param {function} middleware - [isAllowed, 'validateUmrahBookingId', 'validateTravelerId']
  * @param {function} controller - ['deleteTravelerById']
  * @returns {object} - router
- * @access private - ['customer']
+ * @access private - ['customer','admin']
  * @method DELETE
  */
 router.delete(
     '/:umrahBookingId/:travelerId',
-    isAllowed(['customer']),
+    isAllowed(['customer', 'admin']),
     validateTravelerId,
     validateUmrahBookingId,
     deleteTravelerById
