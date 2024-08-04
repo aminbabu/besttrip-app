@@ -1199,31 +1199,35 @@ var KTCreatePackage = (function () {
 
     // Init flatpickr
     var initFlatpickr = function () {
-        const datepicker = form.querySelectorAll(
-            '[data-flatpickr=package_date_picker]'
-        );
-        const datetimepicker = form.querySelectorAll(
-            '[data-flatpickr=package_datetime_picker]'
-        );
-        const timepicker = form.querySelectorAll(
-            '[data-flatpickr=package_time_picker]'
-        );
+        let datepicker;
+        let datetimepicker;
+        let timepicker;
 
         // Handle datepicker -- For more info on flatpickr plugin, please visit: https://flatpickr.js.org/
-        $(datepicker).flatpickr({
+        datepicker = $(
+            form.querySelectorAll('[data-flatpickr=package_date_picker]')
+        ).flatpickr({
             altInput: true,
             altFormat: 'j F, Y',
             minDate: 'today',
             maxDate: new Date().fp_incr(365), // 365 days from now
             onChange: function (selectedDates, dateStr, instance) {
-                console.log(selectedDates);
-                console.log(dateStr);
-                console.log(instance);
+                datepicker.forEach((dp) => {
+                    if (
+                        instance.input.name === 'journeyDate' &&
+                        dp.input.name === 'expiryDate'
+                    ) {
+                        dp.set('maxDate', dateStr);
+                        dp._input.disabled = false;
+                    }
+                });
             },
         });
 
         // Handle datetimepicker -- For more info on flatpickr plugin, please visit: https://flatpickr.js.org/
-        $(datetimepicker).flatpickr({
+        datetimepicker = $(
+            form.querySelectorAll('[data-flatpickr=package_datetime_picker]')
+        ).flatpickr({
             enableTime: true,
             altInput: true,
             time_24hr: true,
@@ -1234,7 +1238,9 @@ var KTCreatePackage = (function () {
         });
 
         // Handle timepicker -- For more info on flatpickr plugin, please visit: https://flatpickr.js.org/
-        $(timepicker).flatpickr({
+        timepicker = $(
+            form.querySelectorAll('[data-flatpickr=package_time_picker]')
+        ).flatpickr({
             enableTime: true,
             noCalendar: true,
             dateFormat: 'H:i',
