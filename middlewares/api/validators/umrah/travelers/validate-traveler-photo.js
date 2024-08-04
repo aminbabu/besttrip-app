@@ -50,7 +50,7 @@ module.exports = async (req, res, next) => {
         });
     }
 
-    // check if travelerPhoto size is greater than 1 MB
+    // check if travelerPhoto size is greater than Max File Size
     if (travelerPhoto?.size > MAX_FILE_SIZE) {
         return res.status(200).json({
             message: `Please upload a travelerPhoto of size less than ${(

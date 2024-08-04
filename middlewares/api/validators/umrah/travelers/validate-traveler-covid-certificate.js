@@ -50,7 +50,7 @@ module.exports = async (req, res, next) => {
         });
     }
 
-    // check if covid certificate size is greater than 1 MB
+    // check if covid certificate size is greater than Max File Size
     if (travelerCovidCertificate?.size > MAX_FILE_SIZE) {
         return res.status(200).json({
             message: `Please upload a travelerCovidCertificate of size less than ${(
