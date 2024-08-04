@@ -49041,8 +49041,12 @@ a:hover {
     grid-column: span 2/span 2;
   }
 }
-.flatpickr-current-month input.cur-year[disabled] {
-  color: #4d4d4d;
+[data-kt-app-layout=light-sidebar] .flatpickr-current-month input.cur-year[disabled] {
+  color: #99a1b7;
+}
+
+[data-bs-theme=dark] .flatpickr-current-month input.cur-year[disabled] {
+  color: #252f4a;
 }
 
 [data-kt-app-layout=light-sidebar] .ck {
