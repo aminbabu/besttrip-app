@@ -49041,6 +49041,10 @@ a:hover {
     grid-column: span 2/span 2;
   }
 }
+.flatpickr-current-month input.cur-year[disabled] {
+  color: #4d4d4d;
+}
+
 [data-kt-app-layout=light-sidebar] .ck {
   --ck-color-base-background: #f9f9f9;
   --ck-color-toolbar-background: #f9f9f9;
