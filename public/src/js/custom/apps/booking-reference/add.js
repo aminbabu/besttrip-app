@@ -668,6 +668,8 @@ var KTContentAddTraveler = (function () {
             preview.src = URL.createObjectURL(file);
             preview.alt = file.name;
             label.appendChild(preview);
+
+            console.log(preview);
         };
 
         form.addEventListener('click', function (event) {
