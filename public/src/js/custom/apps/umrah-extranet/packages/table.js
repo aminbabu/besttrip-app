@@ -285,7 +285,7 @@ var KTUmrahExtranetPackageList = (function () {
     };
 
     // Init flatpickr
-    const initFlatPickr = function () {
+    const initFlatpickr = function () {
         // Handle datepicker range -- For more info on flatpickr plugin, please visit: https://flatpickr.js.org/
         $(
             '[data-kt-umrah-extranet-package-list-table-filter][name="date"]'
@@ -314,11 +314,7 @@ var KTUmrahExtranetPackageList = (function () {
             handleFilterDatatable();
             handleRowDeletion();
             toggleToolbars();
-            initflatpickr({
-                enableTime: false,
-                dateFormat: 'Y-m-d',
-                maxDate: 'today',
-            });
+            initFlatpickr();
             handleFilterResetForm();
         },
     };

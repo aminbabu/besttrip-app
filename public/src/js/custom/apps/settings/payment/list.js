@@ -329,11 +329,7 @@ var KTSettingsPayment = (function () {
             initToggleToolbar();
             handleSearch();
             handleRowDeletion();
-            initflatpickr({
-                enableTime: false,
-                dateFormat: 'Y-m-d',
-                maxDate: 'today',
-            });
+            initFlatpickr();
         },
     };
 })();

@@ -1128,7 +1128,7 @@ var KTCreatePackage = (function () {
     };
 
     // Init flatpickr
-    var initFlatPickr = function () {
+    var initFlatpickr = function () {
         const datepicker = form.querySelectorAll(
             '[data-flatpickr=package_date_picker]'
         );
@@ -1434,11 +1434,7 @@ var KTCreatePackage = (function () {
             handleForm();
             initFileUploader();
             addMoreThumbnails();
-            initflatpickr({
-                enableTime: false,
-                dateFormat: 'Y-m-d',
-                maxDate: 'today',
-            });
+            initFlatpickr();
             handleFlightStops();
             handleRepeater();
             initCKEditors();

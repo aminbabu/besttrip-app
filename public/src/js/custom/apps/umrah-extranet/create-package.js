@@ -12,6 +12,9 @@ var KTCreatePackage = (function () {
     var stepperObj;
     var validations = [];
     var ktFileUploaderContent;
+    var dropZoneBasicThumbnails;
+    var dropZoneMakkahThumbnails;
+    var dropZoneMadinahThumbnails;
 
     // Private Functions
     var initStepper = function () {
@@ -90,14 +93,31 @@ var KTCreatePackage = (function () {
                     // Disable button to avoid multiple click
                     formSubmitButton.disabled = true;
 
-                    /* ===================================== */
+                    // construct form data
+                    const formData = new FormData(form);
+
+                    // append files
+                    formData.append(
+                        'extraThumbnails',
+                        dropZoneBasicThumbnails.files
+                    );
+
+                    formData.append(
+                        'makkahHotelExtraThumbnails',
+                        dropZoneMakkahThumbnails.files
+                    );
+
+                    formData.append(
+                        'madinahHotelExtraThumbnails',
+                        dropZoneMadinahThumbnails.files
+                    );
 
                     axios
                         .post(
                             formSubmitButton
                                 .closest('form')
                                 .getAttribute('action'),
-                            new FormData(form)
+                            formData
                         )
                         .then((response) => {
                             if (response) {
@@ -133,6 +153,8 @@ var KTCreatePackage = (function () {
                             }
                         })
                         .catch((error) => {
+                            console.log(error);
+
                             const errors = error.response?.data?.message
                                 ? error.response?.data?.message
                                 : error?.response?.data?.errors;
@@ -1014,13 +1036,6 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    about_umrah_description: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Description is required',
-                            },
-                        },
-                    },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -1126,10 +1141,10 @@ var KTCreatePackage = (function () {
 
     // Add more thumbnails
     const addMoreThumbnails = () => {
-        const dropZoneBasicThumbnails = new Dropzone(
+        dropZoneBasicThumbnails = new Dropzone(
             '#kt_dropzonejs_basic_thumbnails',
             {
-                // url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
+                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
                 // paramName: 'files', // The name that will be used to transfer the file
                 autoProcessQueue: false,
                 maxFiles: 10,
@@ -1144,10 +1159,10 @@ var KTCreatePackage = (function () {
                 },
             }
         );
-        const dropZoneMakkahThumbnails = new Dropzone(
+        dropZoneMakkahThumbnails = new Dropzone(
             '#kt_dropzonejs_makkah_hotel_thumbnails',
             {
-                // url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
+                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
                 // paramName: 'files', // The name that will be used to transfer the file
                 autoProcessQueue: false,
                 maxFiles: 10,
@@ -1162,10 +1177,10 @@ var KTCreatePackage = (function () {
                 },
             }
         );
-        const dropZoneMadinahThumbnails = new Dropzone(
+        dropZoneMadinahThumbnails = new Dropzone(
             '#kt_dropzonejs_madinah_hotel_thumbnails',
             {
-                // url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
+                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
                 // paramName: 'files', // The name that will be used to transfer the file
                 autoProcessQueue: false,
                 maxFiles: 10,
@@ -1183,7 +1198,7 @@ var KTCreatePackage = (function () {
     };
 
     // Init flatpickr
-    var initFlatPickr = function () {
+    var initFlatpickr = function () {
         const datepicker = form.querySelectorAll(
             '[data-flatpickr=package_date_picker]'
         );
@@ -1200,6 +1215,11 @@ var KTCreatePackage = (function () {
             altFormat: 'j F, Y',
             minDate: 'today',
             maxDate: new Date().fp_incr(365), // 365 days from now
+            onChange: function (selectedDates, dateStr, instance) {
+                console.log(selectedDates);
+                console.log(dateStr);
+                console.log(instance);
+            },
         });
 
         // Handle datetimepicker -- For more info on flatpickr plugin, please visit: https://flatpickr.js.org/
@@ -1509,7 +1529,7 @@ var KTCreatePackage = (function () {
             handleForm();
             initFileUploader();
             addMoreThumbnails();
-            initFlatPickr();
+            initFlatpickr();
             handleFlightStops();
             handleRepeater();
             initCKEditors();

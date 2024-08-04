@@ -178,11 +178,7 @@ var KTAppEcommerceSalesListing = (function () {
             }
 
             initDatatable();
-            initflatpickr({
-                enableTime: false,
-                dateFormat: 'Y-m-d',
-                maxDate: 'today',
-            });
+            initFlatpickr();
             handleSearchDatatable();
             handleStatusFilter();
             handleDeleteRows();

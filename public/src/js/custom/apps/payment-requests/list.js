@@ -319,11 +319,7 @@ var KTPaymentRequestsList = (function () {
             handleSearch();
             handleRowDeletion();
             handleFilter();
-            initflatpickr({
-                enableTime: false,
-                dateFormat: 'Y-m-d',
-                maxDate: 'today',
-            });
+            initFlatpickr();
         },
     };
 })();
