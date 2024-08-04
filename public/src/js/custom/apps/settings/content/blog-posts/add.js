@@ -347,6 +347,8 @@ var KTContentBlogPostAdd = (function () {
         form.addEventListener('change', function (event) {
             const target = event.target;
 
+            console.log(target);
+
             // Check if the changed element is an input with type file
             if (target.tagName === 'INPUT' && target.type === 'file') {
                 handleFileInputChange(target);
