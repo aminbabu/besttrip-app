@@ -9,6 +9,7 @@ var KTModalUpdateBookingStatus = (function () {
     var validator;
     var form;
     var modal;
+    var url;
 
     // Init form inputs
     var initBookingStatusForm = function () {
@@ -18,7 +19,7 @@ var KTModalUpdateBookingStatus = (function () {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validator = FormValidation.formValidation(form, {
             fields: {
-                booking_status: {
+                status: {
                     validators: {
                         notEmpty: {
                             message: 'Booking status is required',
@@ -46,37 +47,98 @@ var KTModalUpdateBookingStatus = (function () {
                 validator.validate().then(function (status) {
                     console.log('validated!');
 
-                    if (status == 'Valid') {
+                    if (status === 'Valid') {
                         submitButton.setAttribute('data-kt-indicator', 'on');
 
                         // Disable submit button whilst loading
                         submitButton.disabled = true;
 
-                        setTimeout(function () {
-                            submitButton.removeAttribute('data-kt-indicator');
+                        // Prepare form data
+                        const formData = new FormData(form);
 
-                            Swal.fire({
-                                text: 'Form has been successfully submitted!',
-                                icon: 'success',
-                                buttonsStyling: false,
-                                confirmButtonText: 'Ok, got it!',
-                                customClass: {
-                                    confirmButton: 'btn btn-primary',
-                                },
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
+                        // Check axios library docs: https://axios-http.com/docs/intro
+                        axios
+                            .patch(url, formData)
+                            .then((response) => {
+                                if (response) {
                                     // Hide modal
                                     modal.hide();
 
-                                    // Enable submit button after loading
-                                    submitButton.disabled = false;
+                                    // Show success popup
+                                    Swal.fire({
+                                        text:
+                                            response?.data?.message ||
+                                            'Form has been successfully submitted!',
+                                        icon: 'success',
+                                        buttonsStyling: false,
+                                        confirmButtonText: 'Ok, got it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary',
+                                        },
+                                        allowOutsideClick: false,
+                                    }).then(() => {
+                                        // Reset form
+                                        form.reset();
 
-                                    // Redirect to customers list page
-                                    window.location =
-                                        form.getAttribute('data-kt-redirect');
+                                        // Get redirect URL from the form
+                                        const redirectUrl = form.getAttribute(
+                                            'data-kt-redirect-url'
+                                        );
+
+                                        if (redirectUrl) {
+                                            location.href = redirectUrl;
+                                        } else {
+                                            location.reload();
+                                        }
+                                    });
+                                } else {
+                                    // Show error popup
+                                    Swal.fire({
+                                        text: 'Sorry, looks like there are some errors detected, please try again.',
+                                        icon: 'error',
+                                        buttonsStyling: false,
+                                        confirmButtonText: 'Ok, got it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary',
+                                        },
+                                    });
                                 }
+                            })
+                            .catch((error) => {
+                                const errors = error.response?.data?.message
+                                    ? error.response?.data?.message
+                                    : error?.response?.data?.errors;
+
+                                Swal.fire({
+                                    html: `${
+                                        errors instanceof Array
+                                            ? `<ul class="text-start">${Object.values(
+                                                  error.response.data.errors
+                                              )
+                                                  .map(
+                                                      (err) =>
+                                                          `<li>${err?.message}</li>`
+                                                  )
+                                                  .join('')}</ul>`
+                                            : errors
+                                    }`,
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
+                            })
+                            .then(() => {
+                                // Hide loading indication
+                                submitButton.removeAttribute(
+                                    'data-kt-indicator'
+                                );
+
+                                // Enable button
+                                submitButton.disabled = false;
                             });
-                        }, 2000);
                     } else {
                         Swal.fire({
                             text: 'Sorry, looks like there are some errors detected, please try again.',
@@ -175,11 +237,12 @@ var KTModalUpdateBookingStatus = (function () {
             submitButton = form.querySelector(
                 '[data-kt-booking-status-modal-action="submit"]'
             );
+            url = submitButton.getAttribute('data-kt-booking-status-modal-url');
             cancelButton = form.querySelector(
                 '[data-kt-booking-status-modal-action="cancel"]'
             );
             closeButton = element.querySelector(
-                '[data-kt-booking_status-modal-action="close"]'
+                '[data-kt-booking-status-modal-action="close"]'
             );
 
             initBookingStatusForm();
