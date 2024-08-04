@@ -10,4 +10,5 @@
 // export general ledger validators
 module.exports = {
     validateInvoiceId: require('./validate-invoice-id'),
+    validatePartialPaymentTimeLimit: require('./validate-partial-payment-time-limit'),
 };

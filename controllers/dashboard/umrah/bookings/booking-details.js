@@ -216,6 +216,8 @@ module.exports = async (req, res) => {
                 priceByTravelers: 1,
                 travelers: 1,
                 invoiceDetails: {
+                    _id: 1,
+                    partialPaymentExpiryDate: 1,
                     invoiceId: 1,
                     totalAmount: 1,
                     paidAmount: 1,

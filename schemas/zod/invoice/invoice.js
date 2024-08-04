@@ -22,5 +22,13 @@ module.exports = z
             .refine((id) => isMongoId(id), {
                 message: 'Please provide a valid id',
             }),
+        partialPaymentExpiryDate: z
+            .string({
+                required_error: 'Partial payment time limit is required',
+                invalid_type_error: 'Please provide a valid date',
+            })
+            .refine((date) => !isNaN(Date.parse(date)), {
+                message: 'Please provide a valid date',
+            }),
     })
     .strict();

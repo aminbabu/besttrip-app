@@ -17,12 +17,14 @@ const {
     getInvoiceForAdmin,
     getInvoiceForCustomer,
     getAllInvoicesForAdmin,
+    updatePartialPaymentTimeLimit,
 } = require('../../../controllers/api/invoice');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
     validateInvoiceId,
+    validatePartialPaymentTimeLimit,
 } = require('../../../middlewares/api/validators/invoice');
 
 /**
@@ -75,6 +77,23 @@ router.get(
     isAllowed(['customer']),
     validateInvoiceId,
     getInvoiceForCustomer
+);
+
+/**
+ * @description - update partial payment time limit
+ * @param {string} path - '/api/invoice/:id/partial-payment-time-limit'
+ * @param {function} middleware - ['isAllowed', 'validateInvoiceId']
+ * @param {function} controller - ['updatePartialPaymentTimeLimit']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method PATCH
+ */
+router.patch(
+    '/:id/partial-payment-time-limit',
+    isAllowed(['admin']),
+    validateInvoiceId,
+    validatePartialPaymentTimeLimit,
+    updatePartialPaymentTimeLimit
 );
 
 // export router

@@ -1697,16 +1697,14 @@
                                 <!--begin::Input group-->
                                 <div class="extend-time-limit-input-group mb-5">
                                   <!--begin::Label-->
-                                  <label class="fs-6 fw-semibold mb-2"
-                                    >Previous Time Limit</label
-                                  >
+                                  <label class="fs-6 fw-semibold mb-2">Previous Time Limit</label>
                                   <!--end::Label-->
                                   <!--begin::Input-->
                                   <input
                                     class="form-control form-control-solid"
                                     placeholder=""
                                     name="prev_time_limit"
-                                    value="12-July-2024"
+                                    value="<%= new Date(umrahBooking.invoiceDetails?.partialPaymentExpiryDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }) %>"
                                     disabled
                                   />
                                   <!--end::Input-->
@@ -1715,16 +1713,14 @@
                                 <!--begin::Input group-->
                                 <div class="extend-time-limit-input-group">
                                   <!--begin::Label-->
-                                  <label class="fs-6 fw-semibold mb-2"
-                                    >New Time Limit</label
-                                  >
+                                  <label class="fs-6 fw-semibold mb-2">New Time Limit</label>
                                   <!--end::Label-->
                                   <!--begin::Input-->
                                   <input
                                     id="kt-new-time-limit"
                                     class="form-control form-control-solid"
                                     placeholder="Select a date"
-                                    name="new_time_limit"
+                                    name="partialPaymentExpiryDate"
                                     type="date"
                                   />
                                   <!--end::Input-->
@@ -1751,15 +1747,14 @@
                             <button
                               type="submit"
                               class="btn btn-primary"
+                              data-kt-extend_time_limit-modal-url="/api/invoice/<%= umrahBooking.invoiceDetails._id %>/partial-payment-time-limit"
                               data-kt-extend_time_limit-modal-action="submit"
                             >
                               <span class="indicator-label">Submit</span>
-                              <span class="indicator-progress"
-                                >Please wait...
-                                <span
-                                  class="spinner-border spinner-border-sm align-middle ms-2"
-                                ></span
-                              ></span>
+                              <span class="indicator-progress">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                              </span>
                             </button>
                             <!--end::Button-->
                           </div>
@@ -1770,6 +1765,7 @@
                     </div>
                   </div>
                   <!--end::Modal - Extend time limit-->
+
 
                   <!--end::Modals-->
                 </div>

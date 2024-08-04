@@ -157,6 +157,8 @@ var KTModalUpdateBookingStatus = (function () {
         cancelButton.addEventListener('click', function (e) {
             e.preventDefault();
 
+            console.log(e.target);
+
             Swal.fire({
                 text: 'Are you sure you would like to cancel?',
                 icon: 'warning',

@@ -118,6 +118,7 @@ module.exports = async (req, res) => {
                     travelerCovidCertificate: 1,
                 },
                 invoiceDetails: {
+                    _id: 1,
                     invoiceId: 1,
                     totalAmount: 1,
                     paidAmount: 1,
