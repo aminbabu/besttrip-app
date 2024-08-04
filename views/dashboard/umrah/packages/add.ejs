@@ -362,7 +362,7 @@
                   <!--begin::Content-->
                   <div class="card d-flex flex-row-fluid flex-center">
                     <!--begin::Form-->
-                    <form class="card-body py-20 w-100 mw-xl-700px px-9" novalidate="novalidate" id="kt_umrah_extranet_package_add_form">
+                    <form class="card-body py-20 w-100 mw-xl-700px px-9" novalidate="novalidate" id="kt_umrah_extranet_package_add_form" action="/api/umrah/packages" method="post" enctype="multipart/form-data">
                       <!--begin::Step 1-->
                       <div class="current" data-kt-stepper-element="content">
                         <!--begin::Wrapper-->
@@ -888,7 +888,7 @@
                                 <label class="form-label required">Arrival Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundArrivalDatetime" data-flatpickr="package_datetime_picker" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundArrivalDatetime" data-flatpickr="package_datetime_picker" disabled />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2048,7 +2048,7 @@
                                 <label class="form-label required">Arrival Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundArrivalDatetime" data-flatpickr="package_datetime_picker" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundArrivalDatetime" data-flatpickr="package_datetime_picker" disabled />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->

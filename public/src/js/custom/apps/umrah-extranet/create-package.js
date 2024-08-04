@@ -96,20 +96,25 @@ var KTCreatePackage = (function () {
                     // construct form data
                     const formData = new FormData(form);
 
-                    // append files
-                    formData.append(
-                        'extraThumbnails',
-                        dropZoneBasicThumbnails.files
-                    );
+                    // Function to append Dropzone files to FormData
+                    const appendDropzoneFiles = (dropzone, fieldName) => {
+                        dropzone.files.forEach((file) => {
+                            formData.append(fieldName, file, file.name);
+                        });
+                    };
 
-                    formData.append(
-                        'makkahHotelExtraThumbnails',
-                        dropZoneMakkahThumbnails.files
+                    // Append files from each Dropzone instance
+                    appendDropzoneFiles(
+                        dropZoneBasicThumbnails,
+                        'extraThumbnails'
                     );
-
-                    formData.append(
-                        'madinahHotelExtraThumbnails',
-                        dropZoneMadinahThumbnails.files
+                    appendDropzoneFiles(
+                        dropZoneMakkahThumbnails,
+                        'makkahHotelExtraThumbnails'
+                    );
+                    appendDropzoneFiles(
+                        dropZoneMadinahThumbnails,
+                        'madinahhHotelExtraThumbnails'
                     );
 
                     axios
@@ -135,9 +140,8 @@ var KTCreatePackage = (function () {
                                     allowOutsideClick: false,
                                 }).then(() => {
                                     // Reset form
-                                    form.reset();
-
-                                    location.reload();
+                                    // form.reset();
+                                    // location.reload();
                                 });
                             } else {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -153,8 +157,6 @@ var KTCreatePackage = (function () {
                             }
                         })
                         .catch((error) => {
-                            console.log(error);
-
                             const errors = error.response?.data?.message
                                 ? error.response?.data?.message
                                 : error?.response?.data?.errors;
@@ -1235,6 +1237,26 @@ var KTCreatePackage = (function () {
             altFormat: 'j F, Y H:i',
             minDate: 'today',
             maxDate: new Date().fp_incr(365), // 365 days from now
+            onChange: function (selectedDates, dateStr, instance) {
+                datetimepicker.forEach((dp) => {
+                    if (
+                        (instance.input.name === 'outboundDepartureDatetime' &&
+                            dp.input.name === 'outboundArrivalDatetime') ||
+                        (instance.input.name === 'inboundDepartureDatetime' &&
+                            dp.input.name === 'inboundArrivalDatetime')
+                    ) {
+                        dp.set('minDate', dateStr);
+                        dp._input.disabled = false;
+                    }
+
+                    if (
+                        instance.input.name === 'outboundDepartureDatetime' &&
+                        dp.input.name === 'inboundDepartureDatetime'
+                    ) {
+                        dp.set('minDate', dateStr);
+                    }
+                });
+            },
         });
 
         // Handle timepicker -- For more info on flatpickr plugin, please visit: https://flatpickr.js.org/

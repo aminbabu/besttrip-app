@@ -116,11 +116,12 @@ router.get(
 router.post(
     '/',
     isAllowed(['admin']),
-    (req, res, next) => {
-        return res.json(req.body);
-    },
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
+    (req, res, next) => {
+        console.log('req.files', req.files);
+        next();
+    },
     validateUmrahPackageGallery,
     validateUmrahOutbound,
     validateMakkahHotelTumbnail,
