@@ -116,6 +116,9 @@ router.get(
 router.post(
     '/',
     isAllowed(['admin']),
+    (req, res, next) => {
+        return res.json(req.body);
+    },
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
     validateUmrahPackageGallery,

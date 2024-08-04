@@ -14,7 +14,11 @@ var KTModalUpdateBookingStatus = (function () {
     // Init form inputs
     var initBookingStatusForm = function () {
         // Init Datepicker --- For more info, please check Flatpickr's official documentation: https://flatpickr.js.org/
-        $('#kt_customer_birth_datepicker').flatpickr();
+        $('#kt_customer_birth_datepicker').flatpickr({
+            enableTime: false,
+            dateFormat: 'Y-m-d',
+            maxDate: 'today',
+        });
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validator = FormValidation.formValidation(form, {
