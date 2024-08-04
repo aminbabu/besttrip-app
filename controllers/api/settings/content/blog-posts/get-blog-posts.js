@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const blogPosts = await BlogPost.find();
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Fetched blog posts successfully',
             blogPosts,
         });

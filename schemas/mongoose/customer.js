@@ -85,18 +85,6 @@ module.exports = new Schema(
             ref: 'Wallet',
             unique: [true, 'Wallet already exists'],
         },
-        umrahBookings: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'UmrahBooking',
-            },
-        ],
-        paymentRequests: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'PaymentRequest',
-            },
-        ],
         loginHistory: [
             {
                 type: Schema.Types.ObjectId,

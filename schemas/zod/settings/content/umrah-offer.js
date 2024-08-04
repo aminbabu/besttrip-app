@@ -15,7 +15,7 @@ const { UMRAH_STATUS, UMRAH_INCLUSIONS } = require('../../../../constants');
 // export umrah content settings schema
 module.exports = z
     .object({
-        ids: z
+        id: z
             .array(
                 z.string({
                     required_error: 'IDs are required',
@@ -24,8 +24,7 @@ module.exports = z
             )
             .nonempty({
                 message: 'IDs array must not be empty',
-            })
-            .optional(),
+            }),
         id: z
             .string({
                 required_error: 'Id is required',

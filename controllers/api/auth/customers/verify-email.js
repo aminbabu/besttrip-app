@@ -46,12 +46,12 @@ module.exports = async (req, res, next) => {
 
         // check if customer exists
         if (!customer) {
-            return res.status(404).json({ message: 'Customer not found' });
+            return res.status(200).json({ message: 'Customer not found' });
         }
 
         // check if customer is already verified
         if (customer.isVerified) {
-            return res.status(400).json({ message: 'Email already verified' });
+            return res.status(200).json({ message: 'Email already verified' });
         }
 
         // update customer

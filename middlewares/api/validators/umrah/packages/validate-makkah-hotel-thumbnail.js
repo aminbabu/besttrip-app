@@ -9,7 +9,10 @@
  */
 
 // dependencies
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants');
+const {
+    DEFAULT_IMAGE_TYPES,
+    ONE_MEGA_BYTE,
+} = require('../../../../../constants');
 
 // export umrah package makkah hotel tumbnail validator middleware
 module.exports = async (req, res, next) => {
@@ -18,29 +21,36 @@ module.exports = async (req, res, next) => {
 
     // check if makka hotel thumbnail is not provided
     if (!makkahHotelThumbnail) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload a thumbnail of makkah hotel',
         });
     }
 
     // check if makka hotel thumbnail is an array
     if (Array.isArray(makkahHotelThumbnail)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload only one thumbnail of makkah hotel',
         });
     }
 
     // check if makka hotel thumbnail is not an image of type jpg, jpeg, png
-    if (makkahHotelThumbnail && !DEFAULT_IMAGE_TYPES.includes(makkahHotelThumbnail.mimetype)) {
-        return res.status(400).json({
-            message: `Please upload a thumbnail of makkah hotel of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+    if (
+        makkahHotelThumbnail &&
+        !DEFAULT_IMAGE_TYPES.includes(makkahHotelThumbnail.mimetype)
+    ) {
+        return res.status(200).json({
+            message: `Please upload a thumbnail of makkah hotel of type ${DEFAULT_IMAGE_TYPES.join(
+                ', '
+            )}`,
         });
     }
 
     // check if makka hotel thumbnail size is greater than 1 MB
     if (makkahHotelThumbnail?.size > ONE_MEGA_BYTE) {
-        return res.status(400).json({
-            message: `Please upload a thumbnail of makkah hotel of size less than ${(ONE_MEGA_BYTE / ONE_MEGA_BYTE).toFixed(2)} MB`,
+        return res.status(200).json({
+            message: `Please upload a thumbnail of makkah hotel of size less than ${(
+                ONE_MEGA_BYTE / ONE_MEGA_BYTE
+            ).toFixed(2)} MB`,
         });
     }
 

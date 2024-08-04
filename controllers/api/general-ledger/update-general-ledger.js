@@ -8,37 +8,37 @@
  */
 
 // dependencies
-const { GeneralLedger } = require("../../../models");
+const { GeneralLedger } = require('../../../models');
 
 // export update general ledger controller
 module.exports = async (req, res, next) => {
-  try {
-    // get validated data
-    const { id } = req.params;
-    const validatedData = req.body;
+    try {
+        // get validated data
+        const { id } = req.params;
+        const validatedData = req.body;
 
-    // get general ledger
-    const generalLedger = await GeneralLedger.findById(id);
+        // get general ledger
+        const generalLedger = await GeneralLedger.findById(id);
 
-    // check if general ledger exists
-    if (!generalLedger) {
-      return res.status(404).json({
-        message: "General ledger not found",
-      });
+        // check if general ledger exists
+        if (!generalLedger) {
+            return res.status(200).json({
+                message: 'General ledger not found',
+            });
+        }
+
+        // set general ledger data
+        generalLedger.set(validatedData);
+
+        // save general ledger
+        await generalLedger.save();
+
+        // send response
+        return res.status(200).json({
+            message: 'Updated general ledger successfully',
+            generalLedger,
+        });
+    } catch (error) {
+        return next(error);
     }
-
-    // set general ledger data
-    generalLedger.set(validatedData);
-
-    // save general ledger
-    await generalLedger.save();
-
-    // send response
-    return res.status(201).json({
-      message: "Updated general ledger successfully",
-      generalLedger,
-    });
-  } catch (error) {
-    return next(error);
-  }
 };

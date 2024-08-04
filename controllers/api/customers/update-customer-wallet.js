@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
         // check if wallet exists
         if (!wallet) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "Customer's wallet not found",
             });
         }
@@ -33,8 +33,8 @@ module.exports = async (req, res, next) => {
                 type === 'top-up'
                     ? wallet.balance + Number(balance)
                     : wallet.balance - balance < 0
-                      ? 0
-                      : wallet.balance - balance),
+                    ? 0
+                    : wallet.balance - balance),
             type: type,
             description: description,
         });

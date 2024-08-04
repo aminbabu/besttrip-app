@@ -17,11 +17,13 @@ module.exports = async (req, res, next) => {
         const { days, nights, status } = req.body;
 
         // check if umrah package duration already exists
-        const existingUmrahPackageDuration = await UmrahPackageDuration.findOne({ days, nights });
+        const existingUmrahPackageDuration = await UmrahPackageDuration.findOne(
+            { days, nights }
+        );
 
         // check if umrah package duration already exists
         if (existingUmrahPackageDuration) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Umrah package duration already exists',
             });
         }
@@ -37,7 +39,7 @@ module.exports = async (req, res, next) => {
         await umrahPackageDuration.save();
 
         // send response
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'Created umrah package duration successfully',
             umrahPackageDuration,
         });

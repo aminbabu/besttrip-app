@@ -8,7 +8,10 @@
  */
 
 // dependencies
-const { DEFAULT_IMAGE_TYPES, ONE_MEGA_BYTE } = require('../../../../../constants');
+const {
+    DEFAULT_IMAGE_TYPES,
+    ONE_MEGA_BYTE,
+} = require('../../../../../constants');
 
 // export umrah day wise itinerary thumbnails validator
 module.exports = async (req, res, next) => {
@@ -25,7 +28,7 @@ module.exports = async (req, res, next) => {
 
     // Check if day wise itinerary thumbnails is not an array
     if (!Array.isArray(itineraryDays)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Please upload valid day wise itinerary images',
         });
     }
@@ -48,13 +51,15 @@ module.exports = async (req, res, next) => {
 
     // Check if all checks pass
     if (isInValidImageType) {
-        return res.status(400).json({
-            message: `Please upload valid day wise itinerary images of type ${DEFAULT_IMAGE_TYPES.join(', ')}`,
+        return res.status(200).json({
+            message: `Please upload valid day wise itinerary images of type ${DEFAULT_IMAGE_TYPES.join(
+                ', '
+            )}`,
         });
     }
 
     if (isInValidImageSize) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: `Please upload day wise itinerary images of size less than ${(
                 ONE_MEGA_BYTE / ONE_MEGA_BYTE
             ).toFixed(2)} MB`,

@@ -8,26 +8,26 @@
  */
 
 // dependencies
-const { GeneralLedger } = require("../../../models");
+const { GeneralLedger } = require('../../../models');
 
 // export create general ledger controller
 module.exports = async (req, res, next) => {
-  try {
-    // get validated data
-    const validatedData = req.body;
+    try {
+        // get validated data
+        const validatedData = req.body;
 
-    // create general ledger
-    const generalLedger = new GeneralLedger(validatedData);
+        // create general ledger
+        const generalLedger = new GeneralLedger(validatedData);
 
-    // save general ledger
-    await generalLedger.save();
+        // save general ledger
+        await generalLedger.save();
 
-    // send response
-    return res.status(201).json({
-      message: "Created general ledger successfully",
-      generalLedger,
-    });
-  } catch (error) {
-    return next(error);
-  }
+        // send response
+        return res.status(200).json({
+            message: 'Created general ledger successfully',
+            generalLedger,
+        });
+    } catch (error) {
+        return next(error);
+    }
 };

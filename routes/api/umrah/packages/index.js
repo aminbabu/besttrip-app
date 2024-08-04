@@ -20,12 +20,14 @@ const {
     createUmrahPackage,
     updateUmrahPackage,
     deleteUmrahPackage,
+    getUmrahPackagesForCustomers,
 } = require('../../../../controllers/api/umrah/packages');
 
 // middlewares
 const { isAuthorized, isAllowed } = require('../../../../middlewares/api/auth');
 const {
     validateUmrahPackageId,
+    validateUmrahPackagesForCustomers,
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
     validateUmrahPackageGallery,
@@ -87,7 +89,12 @@ router.get('/', isAllowed(['admin']), getUmrahPackages);
  * @access private - ['admin']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), validateUmrahPackageId, getUmrahPackage);
+router.get(
+    '/:id',
+    isAllowed(['admin']),
+    validateUmrahPackageId,
+    getUmrahPackage
+);
 
 /**
  * @description create umrah package package
@@ -137,6 +144,21 @@ router.post(
     uploadUmrahDayWiseItineraryThumbnails('/umrah/package'),
     uploadUmrahThumbnail('/umrah/package'),
     createUmrahPackage
+);
+
+/**
+ * @description get all umrah packages for customers
+ * @param {string} path - /umrah/packages/customer
+ * @param {function} validator - ['validateUmrahPackagesForCustomers']
+ * @param {function} controller - ['getUmrahPackagesForCustomers']
+ * @returns {object} - router
+ * @access public
+ * @method POST
+ */
+router.post(
+    '/customer',
+    validateUmrahPackagesForCustomers,
+    getUmrahPackagesForCustomers
 );
 
 /**
@@ -200,7 +222,12 @@ router.patch(
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete('/:id', isAllowed(['admin']), validateUmrahPackageId, deleteUmrahPackage);
+router.delete(
+    '/:id',
+    isAllowed(['admin']),
+    validateUmrahPackageId,
+    deleteUmrahPackage
+);
 
 // export router
 module.exports = router;

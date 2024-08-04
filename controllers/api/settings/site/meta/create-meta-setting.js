@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
 
         // check if meta settings exists
         if (existingMetaSetting) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'Meta settings already exists with the same name',
             });
         }
@@ -33,7 +33,7 @@ module.exports = async (req, res, next) => {
         await metaSetting.save();
 
         // return response
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'Created meta settings successfully',
             metaSetting,
         });

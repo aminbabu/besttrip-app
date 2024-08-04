@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const exclusiveOffers = await ExclusiveOffer.find();
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Fetched exclusive offers successfully',
             exclusiveOffers,
         });

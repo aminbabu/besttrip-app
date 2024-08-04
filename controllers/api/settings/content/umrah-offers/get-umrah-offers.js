@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const umrahOffers = await UmrahOffer.find();
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Fetched umrah offers successfully',
             umrahOffers,
         });

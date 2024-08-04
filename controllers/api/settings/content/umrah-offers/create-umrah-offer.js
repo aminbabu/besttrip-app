@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
         await umrahOffer.save();
 
         // send response
-        return res.status(201).send({
+        return res.status(200).send({
             message: 'Created umrah offer successfully',
             umrahOffer,
         });

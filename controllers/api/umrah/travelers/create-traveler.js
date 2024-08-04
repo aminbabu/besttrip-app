@@ -1,0 +1,102 @@
+/**
+ * @file /controllers/api/umrah/traveler/create-traveler.js
+ * @project best-trip
+ * @version 0.0.0
+ * @author best-trip
+ * @date 20 April, 2024
+ * @update_date 08 May, 2024
+ */
+
+const {
+    UMRAH_BOOKING_STATUS,
+} = require('../../../../constants/umrah-bookings');
+const {
+    Traveler,
+    UmrahBooking,
+    UmrahPackage,
+} = require('./../../../../models');
+
+// dependencies
+
+// export create traveler controller
+module.exports = async (req, res, next) => {
+    try {
+        // get validated data
+        const validatedData = req.body;
+        const {
+            passport,
+            travelerPhoto,
+            travelerNID,
+            travelerCovidCertificate,
+        } = req.files;
+
+        const listedUmrah = await UmrahBooking.findOne({
+            _id: req.body.umrahBooking,
+            customer: req.user._id,
+        });
+
+        // Validate if listedUmrah is found
+        if (!listedUmrah) {
+            return res.status(200).send({
+                message: 'Umrah Booked Package not found',
+            });
+        }
+
+        const availableUmrahDetails = await UmrahPackage.findOne({
+            _id: listedUmrah.umrahPackage,
+        });
+
+        // Validate if availableUmrahDetails is found
+        if (!availableUmrahDetails) {
+            return res.status(200).send({
+                message: 'Umrah Package Details not found',
+            });
+        }
+
+        const listedTravelers = await Traveler.find({
+            createdBy: req.user._id,
+            umrahPackage: listedUmrah.umrahPackage,
+        });
+
+        // Validate if availableUmrahDetails is found
+        if (!listedTravelers) {
+            return res.status(200).send({
+                message: 'Travelers not found',
+            });
+        }
+
+        // alert message if the seats limit exceed
+        if (availableUmrahDetails.seats <= listedTravelers.length)
+            return res.status(200).send({
+                message: `You can not add more than ${availableUmrahDetails.seats} travelers in this package`,
+            });
+
+        // customer can't add more travelers if the package is already 'in-process' || 'under-review' || 'success' || 'booked' || 'cancelled'
+        if (listedUmrah.status === UMRAH_BOOKING_STATUS[0]) {
+            // create traveler
+            const traveler = new Traveler({
+                ...validatedData,
+                passport: passport.path,
+                travelerPhoto: travelerPhoto.path,
+                travelerNID: travelerNID.path,
+                travelerCovidCertificate: travelerCovidCertificate.path,
+                createdBy: req.user._id,
+            });
+
+            // save traveler
+            await traveler.save();
+
+            // send traveler
+            return res.status(200).send({
+                message: 'Created traveler successfully',
+                traveler,
+            });
+        } else {
+            return res.status(200).send({
+                message: `You can't add more travelers to this package cause this package ${listedUmrah.status}`,
+            });
+        }
+    } catch (error) {
+        return next(error);
+    }
+};

@@ -13,7 +13,10 @@ const { Customer } = require('../../../../models');
 // export customer account validator middleware
 module.exports = async (req, res, next) => {
     // check if customer is updating self
-    if (req.user.email === req.body.email || req.user.phone === req.body.phone) {
+    if (
+        req.user.email === req.body.email ||
+        req.user.phone === req.body.phone
+    ) {
         return next();
     }
 
@@ -29,7 +32,9 @@ module.exports = async (req, res, next) => {
 
     // check if customer exists
     if (customer) {
-        return res.status(400).json({ message: 'Email or phone already exists' });
+        return res
+            .status(200)
+            .json({ message: 'Email or phone already exists' });
     }
 
     // continue to the next middleware

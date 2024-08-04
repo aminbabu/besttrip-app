@@ -23,14 +23,16 @@ module.exports = async (req, res, next) => {
 
         // check if user exists
         if (!user) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: 'User not found',
             });
         }
 
         // delete user avatar
         if (user.avatar) {
-            fs.unlinkSync(path.join(__dirname, `../../../public/${user.avatar}`));
+            fs.unlinkSync(
+                path.join(__dirname, `../../../public/${user.avatar}`)
+            );
         }
 
         // remove token from cookies and header

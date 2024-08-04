@@ -17,7 +17,7 @@ const { zodErrorHandler } = require('../../../../../../handlers/errors');
 module.exports = (req, res, next) => {
     // validate request body
     const { error, success } = hotelOfferSchema
-        .omit({ id: true })
+        .omit({ id: true, ids: true })
         .safeParse(req.body);
 
     // check for errors

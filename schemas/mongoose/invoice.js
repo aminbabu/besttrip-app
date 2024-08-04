@@ -9,6 +9,9 @@
 
 // dependencies
 const { Schema } = require('mongoose');
+const {
+    UMRAH_BOOKING_PAYMENT_TYPE,
+} = require('../../constants/umrah-bookings');
 
 // export umrah package type schema
 module.exports = new Schema(
@@ -18,7 +21,8 @@ module.exports = new Schema(
             required: [true, 'Invoice ID is required'],
         },
         bookingId: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'umrahbookings',
             required: [true, 'Booking ID is required'],
         },
         customer: {
@@ -30,9 +34,20 @@ module.exports = new Schema(
             type: Number,
             required: [true, 'Total amount is required'],
         },
+        paymentType: {
+            type: String,
+            enum: UMRAH_BOOKING_PAYMENT_TYPE,
+            required: [true, 'Payment Type is required'],
+        },
+        partialPaymentExpiryDate: {
+            type: Date,
+        },
         paidAmount: {
             type: Number,
             required: [true, 'Paid amount is required'],
+        },
+        partialPaymentRestAmount: {
+            type: Number,
         },
     },
     {

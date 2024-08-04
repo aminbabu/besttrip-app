@@ -48614,6 +48614,433 @@ a:hover {
   background-color: #1b1c22;
 }
 
+.reference-card ul,
+.fare-summary-card ul,
+.details-card-specs-list,
+.booking-history-row,
+.booking-history-head,
+.ticket-number-row,
+.detail-inclusions ul {
+  padding: 0;
+  margin: 0;
+}
+
+.reference-card ul li,
+.fare-summary-table-content li,
+.ticket-number-row li,
+.booking-history-row li,
+.booking-history-head li,
+.details-card-specs-list li,
+.detail-inclusions ul li {
+  list-style: none;
+}
+
+.bg-light-red {
+  background-color: #ffefef;
+}
+
+.text-red {
+  color: #f70207;
+}
+
+.col-span-1 {
+  grid-column: span 1/span 1;
+}
+
+.col-span-2 {
+  grid-column: span 2/span 2;
+}
+
+.col-span-3 {
+  grid-column: span 3/span 3;
+}
+
+.col-span-4 {
+  grid-column: span 4/span 4;
+}
+
+.col-span-5 {
+  grid-column: span 5/span 5;
+}
+
+.col-span-6 {
+  grid-column: span 6/span 6;
+}
+
+.col-span-7 {
+  grid-column: span 7/span 7;
+}
+
+.col-span-8 {
+  grid-column: span 8/span 8;
+}
+
+.col-span-9 {
+  grid-column: span 9/span 9;
+}
+
+.col-span-10 {
+  grid-column: span 10/span 10;
+}
+
+.col-span-11 {
+  grid-column: span 11/span 11;
+}
+
+.col-span-12 {
+  grid-column: span 12/span 12;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-cols-7 {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.grid-cols-9 {
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+
+.grid-cols-10 {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.grid-cols-11 {
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.text-t-600 {
+  color: #616161;
+}
+
+.gap-5 {
+  gap: 20px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.reference-card,
+.reference-card-header {
+  padding-inline: 16px;
+  padding-block: 16px;
+}
+
+.reference-card {
+  font-size: 1rem;
+  gap: 20px;
+}
+
+.reference-card-right,
+.reference-card-left {
+  grid-column: span 12/span 12;
+}
+
+.details-card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 24px;
+}
+
+.details-card-img {
+  aspect-ratio: 1/1;
+  width: 100%;
+  flex-shrink: 0;
+  border-radius: 0.1785rem;
+  object-fit: cover;
+}
+
+.details-card-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.675;
+  margin-bottom: 6px;
+  color: #4a4a4a;
+}
+
+.package-duration {
+  font-size: 14px;
+  color: #4a4a4a;
+  margin-bottom: 48px;
+}
+
+.details-card-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.details-card-specs-list li {
+  display: flex;
+  font-size: 14px;
+  line-height: normal;
+  margin-bottom: 14px;
+  gap: 8px;
+}
+
+.detail-inclusions {
+  margin-top: auto;
+}
+
+.detail-inclusions-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  padding-inline: 16px;
+  padding-block: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.detail-inclusions-list {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.detail-inclusions-list li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.fare-summary-card-title {
+  padding: 16px 16px 0 16px;
+}
+
+.fare-summary-card {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fare-summary-table {
+  width: 100%;
+  overflow: auto;
+}
+
+.fare-summary-table-content {
+  display: grid;
+  min-width: max-content;
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.fare-summary-table-head li,
+.fare-summary-table-row li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 10px;
+  padding-block: 6px;
+}
+
+.traveller-form {
+  padding: 16px;
+}
+
+.traveller-form-container {
+  display: grid;
+  gap: 32px;
+}
+
+.traveller-input-group {
+  grid-column: span 6/span 6;
+}
+
+.action-btn {
+  padding-inline: 14px;
+  padding-block: 20px;
+  border: none;
+  width: 100%;
+  display: flex;
+  align-items: start !important;
+  text-align: center;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  color: #616161;
+  margin-bottom: 30px;
+}
+
+.action-btn:hover {
+  background-color: #fefefe;
+}
+
+.ticket-number-container,
+.booking-history-container {
+  width: 100%;
+  overflow: auto;
+}
+
+.booking-history-container {
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06));
+}
+
+.ticket-number-table,
+.booking-history-table {
+  min-width: max-content;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ticket-number-row li {
+  text-align: left;
+  padding-inline: 16px;
+  padding-block: 10px;
+  border: 1px solid transparent;
+}
+
+.booking-history-head {
+  background-color: #ffefef;
+}
+
+.booking-history-row {
+  background-color: white;
+}
+
+.booking-history-row li,
+.booking-history-head li {
+  padding-inline: 10px;
+  padding-block: 6px;
+}
+
+.border-l {
+  border-left: 1px solid white;
+}
+
+.border-grey {
+  border: 1px solid rgba(61, 61, 61, 0.0509803922);
+}
+
+.text-left {
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .reference-card-right {
+    grid-column: span 6/span 6;
+  }
+  .reference-card-left {
+    grid-column: span 5/span 5;
+  }
+  .details-card-content {
+    flex-direction: row;
+    padding: 20px;
+  }
+  .details-card-img {
+    max-width: 240px;
+  }
+  .traveller-input-group {
+    grid-column: span 3/span 3;
+  }
+  .ticket-number-table,
+  .booking-history-table {
+    min-width: fit-content;
+  }
+}
+@media (min-width: 1024px) {
+  .reference-card-right,
+  .reference-card-left {
+    grid-column: span 12/span 12;
+  }
+  .details-card-content {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .details-card-img {
+    max-width: 100%;
+  }
+  .traveller-input-group {
+    grid-column: span 6/span 6;
+  }
+}
+@media (min-width: 1400px) {
+  .reference-card,
+  .reference-card-header {
+    padding-inline: 34px;
+    padding-block: 24px;
+  }
+  .reference-card {
+    font-size: 14px;
+    gap: 12px;
+  }
+  .reference-card-right {
+    grid-column: span 6/span 6;
+  }
+  .reference-card-left {
+    grid-column: span 5/span 5;
+  }
+  .details-card-content {
+    padding: 32px;
+    align-items: center;
+    gap: 30px;
+    flex-direction: row;
+  }
+  .details-card-img {
+    max-width: 240px;
+  }
+  .package-duration {
+    font-size: 16px;
+  }
+  .details-card-specs {
+    flex-direction: row;
+    gap: 20px;
+  }
+  .fare-summary-card {
+    padding: 32px;
+  }
+  .fare-summary-card-title {
+    padding: 32px 32px 0 32px;
+  }
+  .traveller-form {
+    padding: 32px;
+  }
+  .traveller-input-group {
+    grid-column: span 2/span 2;
+  }
+}
 [data-kt-app-layout=light-sidebar] .ck {
   --ck-color-base-background: #f9f9f9;
   --ck-color-toolbar-background: #f9f9f9;

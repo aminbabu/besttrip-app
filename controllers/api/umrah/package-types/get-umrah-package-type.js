@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
 
         // check if umrah package type not found
         if (!umrahPackageType) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: 'Umrah package type not found',
             });
         }

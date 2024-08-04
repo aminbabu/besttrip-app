@@ -23,14 +23,16 @@ module.exports = async (req, res, next) => {
 
         // check if customer exists
         if (!customer) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: 'Customer not found',
             });
         }
 
         // delete customer avatar
         if (customer.avatar) {
-            fs.unlinkSync(path.join(__dirname, `../../../public/${customer.avatar}`));
+            fs.unlinkSync(
+                path.join(__dirname, `../../../public/${customer.avatar}`)
+            );
         }
 
         // delete customer

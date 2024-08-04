@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const hotelOffers = await HotelOffer.find();
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Fetched hotel offers successfully',
             hotelOffers,
         });

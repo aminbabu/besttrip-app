@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
         // check if umrah offer exists
         if (!umrahOffer) {
-            return res.status(404).send({
+            return res.status(200).send({
                 message: 'Umrah offer not found',
             });
         }
@@ -42,7 +42,7 @@ module.exports = async (req, res, next) => {
         }
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Deleted umrah offer successfully',
             umrahOffer,
         });

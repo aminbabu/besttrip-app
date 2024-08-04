@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
         // check if payments settings exist
         if (!paymentsSetting) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: 'Payments settings not found',
             });
         }
@@ -34,7 +34,7 @@ module.exports = async (req, res, next) => {
         await paymentsSetting.save();
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Updated payment status successfully',
             paymentsSetting,
         });

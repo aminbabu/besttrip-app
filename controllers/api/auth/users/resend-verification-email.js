@@ -23,14 +23,14 @@ module.exports = async (req, res, next) => {
 
         // check if user exists
         if (!user) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: 'User not found',
             });
         }
 
         // check if user is already verified
         if (user.isVerified) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: 'User is already verified',
             });
         }

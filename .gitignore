@@ -46,6 +46,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Uploads directory
+public/uploads
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
@@ -142,6 +145,7 @@ dist
 .svelte-kit
 
 ### VisualStudioCode ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

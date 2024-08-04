@@ -11,6 +11,7 @@
 module.exports = {
     umrahPackageIdSchema: require('./umrah-package-id'),
     umrahPackageSchema: require('./umrah-package'),
+    umrahPackagesForCustomersSchema: require('./umrah-packages-for-customers'),
     umrahOutboundSchema: require('./umrah-outbound'),
     umrahMakkaHotelSchema: require('./umrah-makka-hotel'),
     umrahMadinahHotelSchema: require('./umrah-madinah-hotel'),

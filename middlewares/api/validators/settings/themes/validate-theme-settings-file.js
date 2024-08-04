@@ -20,14 +20,14 @@ module.exports = async (req, res, next) => {
 
     // check if illustration is not provided
     if (!illustration) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Illustration is required',
         });
     }
 
     // check if illustration is an array
     if (Array.isArray(illustration)) {
-        return res.status(400).json({
+        return res.status(200).json({
             message: 'Illustration must be a single image',
         });
     }

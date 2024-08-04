@@ -20,13 +20,13 @@ module.exports = async (req, res, next) => {
 
         // check if blog post exists
         if (!blogPost) {
-            return res.status(404).send({
+            return res.status(200).send({
                 message: 'Blog post not found',
             });
         }
 
         // send response
-        return res.send({
+        return res.status(200).send({
             message: 'Fetched blog post successfully',
             blogPost,
         });
