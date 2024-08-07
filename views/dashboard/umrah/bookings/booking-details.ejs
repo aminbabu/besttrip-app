@@ -1338,7 +1338,7 @@
                             <!--begin::Actions-->
                             <div class="text-center pt-15">
                               <button type="reset" class="btn btn-light me-3" data-kt-edit-traveler-modal-action="cancel">Cancel</button>
-                              <button type="submit" class="btn btn-primary" data-kt-edit-traveler-modal-action="submit">Add Traveler</button>
+                              <button type="submit" class="btn btn-primary" data-kt-edit-traveler-modal-action="submit">Submit</button>
                             </div>
                             <!--end::Actions-->
                           </form>
@@ -2089,7 +2089,7 @@
                   </div>
                   <!--end::Modal - booking history-->
 
-
+                  
                   <!--begin::Modal - Extend time limit-->
                   <div
                     class="modal fade"
@@ -2104,9 +2104,8 @@
                         <!--begin::Form-->
                         <form
                           class="form"
-                          action="/api/invoice/<%= umrahBooking.invoiceDetails._id %>/partial-payment-time-limit"
-                          id="kt_modal_extend_time_limit_form"
-                          method="post"
+                          action="#"
+                          id="kt_modal_extend_time_limit"
                         >
                           <!--begin::Modal header-->
                           <div
@@ -2139,7 +2138,7 @@
                               data-kt-scroll-wrappers="#kt_modal_update_user_scroll"
                               data-kt-scroll-offset="300px"
                             >
-                              <!--begin::Extend time limit form-->
+                             <!--begin::Extend time limit form-->
                               <div>
                                 <!--begin::Input group-->
                                 <div class="extend-time-limit-input-group mb-5">
@@ -2151,6 +2150,7 @@
                                     class="form-control form-control-solid"
                                     placeholder=""
                                     name="prev_time_limit"
+                                    id="prev_time_limit"
                                     value="<%= new Date(umrahBooking.invoiceDetails?.partialPaymentExpiryDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }) %>"
                                     disabled
                                   />
@@ -2176,6 +2176,7 @@
                                 <!--end::Input group-->
                               </div>
                               <!--end::Extend time limit form-->
+
                             </div>
                             <!--end::Scroll-->
                           </div>
@@ -2196,12 +2197,15 @@
                               type="submit"
                               class="btn btn-primary"
                               data-kt-extend-time-limit-modal-action="submit"
+                              data-kt-extend-time-limit-modal-url="/api/invoice/<%= umrahBooking.invoiceDetails._id %>/partial-payment-time-limit"
                             >
                               <span class="indicator-label">Submit</span>
-                              <span class="indicator-progress">
-                                Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                              </span>
+                              <span class="indicator-progress"
+                                >Please wait...
+                                <span
+                                  class="spinner-border spinner-border-sm align-middle ms-2"
+                                ></span
+                              ></span>
                             </button>
                             <!--end::Button-->
                           </div>
@@ -2277,7 +2281,7 @@
       '/assets/js/custom/apps/booking-reference/update-supplier.js',
       // '/assets/js/custom/apps/booking-reference/update-ticket-number.js',
       '/assets/js/custom/apps/booking-reference/booking-history.js',
-      // '/assets/js/custom/apps/booking-reference/extend-time-limit.js',
+      '/assets/js/custom/apps/booking-reference/extend-time-limit.js',
     ]
   }); %>
   <!--end::Javascript-->

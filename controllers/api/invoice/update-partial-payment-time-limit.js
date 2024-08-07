@@ -31,7 +31,8 @@ module.exports = async (req, res, next) => {
 
         // Check if the incoming date is greater than the previous expiry date
         if (newExpiryDate <= currentExpiryDate) {
-            return res.status(200).json({
+            return res.status(400).json({
+                status: false,
                 message:
                     "New expiry date can't be less than or equal to the previous expiry date",
             });
@@ -56,6 +57,7 @@ module.exports = async (req, res, next) => {
         return res.status(200).json({
             message: 'Partial payment expiry date updated',
             invoice,
+            status: true,
         });
     } catch (error) {
         // Pass error to the error handler

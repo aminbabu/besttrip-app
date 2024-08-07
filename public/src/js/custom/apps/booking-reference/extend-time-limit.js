@@ -3,6 +3,7 @@
 // Class definition
 var KTModalExtendTimeLimit = (function () {
     var element;
+    var mainElement;
     var submitButton;
     var cancelButton;
     var closeButton;
@@ -10,21 +11,19 @@ var KTModalExtendTimeLimit = (function () {
     var form;
     var modal;
     var url;
+    var previousTimeLimitText;
 
     // Init form inputs
     var initExtendTimeLimitForm = function () {
-        // Init Datepicker --- For more info, please check Flatpickr's official documentation: https://flatpickr.js.org/
-        flatpickr("input[data-flatpickr='partialPaymentExpiryDate']", {
-            dateFormat: 'Y-m-d',
-        });
-
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validator = FormValidation.formValidation(form, {
             fields: {
-                partialPaymentExpiryDate: {
-                    validators: {
-                        notEmpty: {
-                            message: 'New Time Limit is required',
+                status: {
+                    partialPaymentExpiryDate: {
+                        validators: {
+                            notEmpty: {
+                                message: 'New Time Limit is required',
+                            },
                         },
                     },
                 },
@@ -55,14 +54,12 @@ var KTModalExtendTimeLimit = (function () {
                         // Disable submit button whilst loading
                         submitButton.disabled = true;
 
+                        // Prepare form data
+                        const formData = new FormData(form);
+
                         // Check axios library docs: https://axios-http.com/docs/intro
                         axios
-                            .patch(
-                                submitButton
-                                    .closest('form')
-                                    .getAttribute('action'),
-                                new FormData(form)
-                            )
+                            .patch(url, formData)
                             .then((response) => {
                                 if (response) {
                                     // Hide modal
@@ -73,7 +70,10 @@ var KTModalExtendTimeLimit = (function () {
                                         text:
                                             response?.data?.message ||
                                             'Form has been successfully submitted!',
-                                        icon: 'success',
+                                        icon:
+                                            response?.data?.status === true
+                                                ? 'success'
+                                                : 'error',
                                         buttonsStyling: false,
                                         confirmButtonText: 'Ok, got it!',
                                         customClass: {
@@ -84,16 +84,13 @@ var KTModalExtendTimeLimit = (function () {
                                         // Reset form
                                         form.reset();
 
-                                        // Get redirect URL from the form
-                                        const redirectUrl = form.getAttribute(
-                                            'data-kt-redirect-url'
-                                        );
-
-                                        if (redirectUrl) {
-                                            location.href = redirectUrl;
-                                        } else {
-                                            location.reload();
-                                        }
+                                        previousTimeLimitText.value = new Date(
+                                            response?.data?.invoice?.partialPaymentExpiryDate
+                                        ).toLocaleDateString('en-GB', {
+                                            day: '2-digit',
+                                            month: 'long',
+                                            year: 'numeric',
+                                        });
                                     });
                                 } else {
                                     // Show error popup
@@ -229,20 +226,23 @@ var KTModalExtendTimeLimit = (function () {
             // Elements
             element = document.querySelector('#kt_modal_extend_time_limit');
 
+            mainElement = document.querySelector('#kt_app_main');
+
             if (!element) {
                 return;
             }
 
             modal = new bootstrap.Modal(element);
-
-            form = element.querySelector('#kt_modal_extend_time_limit_form');
-
+            form = element.querySelector('#kt_modal_extend_time_limit');
             submitButton = form.querySelector(
                 '[data-kt-extend-time-limit-modal-action="submit"]'
             );
 
-            url = form.getAttribute('action');
-
+            previousTimeLimitText = form.querySelector('#prev_time_limit');
+            console.log(previousTimeLimitText);
+            url = submitButton.getAttribute(
+                'data-kt-extend-time-limit-modal-url'
+            );
             cancelButton = form.querySelector(
                 '[data-kt-extend-time-limit-modal-action="cancel"]'
             );
