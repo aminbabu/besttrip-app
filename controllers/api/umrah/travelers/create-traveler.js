@@ -32,7 +32,10 @@ module.exports = async (req, res, next) => {
 
         const listedUmrah = await UmrahBooking.findOne({
             _id: req.body.umrahBooking,
-            customer: req.user._id,
+            customer:
+                req.user.role === 'admin'
+                    ? validatedData.customerId
+                    : req.user._id,
         });
 
         // Validate if listedUmrah is found
@@ -71,8 +74,11 @@ module.exports = async (req, res, next) => {
                 message: `You can not add more than ${availableUmrahDetails.seats} travelers in this package`,
             });
 
-        // customer can't add more travelers if the package is already 'in-process' || 'under-review' || 'success' || 'booked' || 'cancelled'
-        if (listedUmrah.status === UMRAH_BOOKING_STATUS[0]) {
+        // customer can't add more travelers if the package is already 'in-process' || 'under-review' || 'success' || 'booked' || 'cancelled' but admin can
+        if (
+            req.user.role === 'admin' ||
+            listedUmrah.status === UMRAH_BOOKING_STATUS[0]
+        ) {
             // create traveler
             const traveler = new Traveler({
                 ...validatedData,
@@ -80,7 +86,10 @@ module.exports = async (req, res, next) => {
                 travelerPhoto: travelerPhoto.path,
                 travelerNID: travelerNID.path,
                 travelerCovidCertificate: travelerCovidCertificate.path,
-                createdBy: req.user._id,
+                createdBy:
+                    req.user.role === 'admin'
+                        ? validatedData.customerId
+                        : req.user._id,
             });
 
             // save traveler
@@ -88,7 +97,7 @@ module.exports = async (req, res, next) => {
 
             // send traveler
             return res.status(200).send({
-                message: 'Created traveler successfully',
+                message: 'Traveler created successfully',
                 traveler,
             });
         } else {

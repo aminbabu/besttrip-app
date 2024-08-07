@@ -23,7 +23,7 @@
             <!--begin::Main-->
             <!--begin::Content wrapper-->
             <!--begin::Main-->
-          <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+          <div class="app-main flex-column flex-row-fluid" id="kt_app_main" data-kt-page-url="/api/umrah/booking/admin/<%= umrahBooking._id %>">
             <!--begin::Content wrapper-->
             <div class="d-flex flex-column flex-column-fluid">
               <!--begin::Toolbar-->
@@ -78,7 +78,7 @@
                               <li>: <%= umrahBooking.customer.phone %></li>
                               <li>
                                 :
-                                <span class="text-success"><%= umrahBooking.status.charAt(0).toUpperCase() + umrahBooking.status.slice(1) %></span>
+                                <span class="text-success" data-kt-umrah-booking-status="umrah-status"><%= umrahBooking.status.charAt(0).toUpperCase() + umrahBooking.status.slice(1) %></span>
                               </li>
                             </ul>
                           </div>
@@ -611,309 +611,374 @@
                   </div>
                   <!--end::Layout-->
                   <!--begin::Modals-->
-                  <!--begin::Modal - Add Traveler Modal -->
-                 <div class="modal fade" id="kt_modal_add_traveler" tabindex="-1" aria-hidden="true">
-                  <!--begin::Modal dialog-->
-                  <div class="modal-dialog modal-dialog-centered mw-650px">
-                    <!--begin::Modal content-->
-                    <div class="modal-content">
-                      <!--begin::Modal header-->
-                      <div class="modal-header" id="kt_modal_add_traveler_header">
-                        <!--begin::Modal title-->
-                        <h2 class="fw-bold">Add Traveler</h2>
-                        <!--end::Modal title-->
-                        <!--begin::Close-->
-                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-add-traveler-modal-action="close">
-                          <i class="bi bi-x fs-2x"></i>
+
+
+
+
+                  <!--begin::Modal - Add Traveler-->
+                  <div class="modal fade" id="kt_modal_add_traveler" tabindex="-1" aria-hidden="true">
+                    <!--begin::Modal dialog-->
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                      <!--begin::Modal content-->
+                      <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header" id="kt_modal_add_content_blog_posts_header">
+                          <!--begin::Modal title-->
+                          <h2 class="fw-bold">Add Traveler</h2>
+                          <!--end::Modal title-->
+                          <!--begin::Close-->
+                          <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-add-traveler-modal-action="close">
+                            <i class="bi bi-x fs-2x"></i>
+                          </div>
+                          <!--end::Close-->
                         </div>
-                        <!--end::Close-->
-                      </div>
-                      <!--end::Modal header-->
-                      <!--begin::Modal body-->
-                      <div class="modal-body px-5 my-7">
-                        <!--begin::Form-->
-                        <form id="kt_modal_add_traveler_form" class="form" action="#" method="post">
-                          <!--begin::Scroll-->
-                          <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_traveler_scroll" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_traveler_header" data-kt-scroll-wrappers="#kt_modal_add_traveler_scroll" data-kt-scroll-offset="300px">
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body px-5 my-7">
+                          <!--begin::Form-->
+                          <form id="kt_modal_add_traveler_form" class="form" action="/api/umrah/travelers" method="post">
+                            <!--begin::Scroll-->
+                            <div class="d-flex flex-column scroll-y px-5 px-lg-10"
+                                id="kt_modal_add_content_blog_posts_scroll"
+                                data-kt-scroll="true"
+                                data-kt-scroll-activate="true"
+                                data-kt-scroll-max-height="auto"
+                                data-kt-scroll-dependencies="#kt_modal_add_content_blog_posts_header"
+                                data-kt-scroll-wrappers="#kt_modal_add_content_blog_posts_scroll"
+                                data-kt-scroll-offset="300px">
 
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label required">Passport</label>
-                              <!--end::Label-->
                               <!--begin::Input group-->
-                              <div class="fv-row">
-                                <!--begin::Preview Container-->
-                                <div class="kt-file-uploader">
-                                  <!--begin::Message-->
-                                  <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_add_traveler_passport">
-                                    <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
-                                    <!--begin::Info-->
-                                    <div class="ms-xl-4 mt-4 mt-xl-0">
-                                      <h3 class="fs-5 fw-bold text-gray-900 mb-1">Upload Passport</h3>
-                                      <span class="fs-7 fw-semibold text-gray-500">PNG, JPG, JPEG, GIF up to 10MB</span>
-                                    </div>
-                                    <!--end::Info-->
-                                  </label>
-                                  <!--end::Message-->
-                                  <!--begin::Input-->
-                                  <input type="file" name="passport" id="kt_file_uploader_add_traveler_passport" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
-                                  <!--begin::Error Message-->
-                                  <div class="invalid-feedback d-block"></div>
-                                  <!--end::Error Message-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Passport</label>
+                                <!--end::Label-->
+                                <!--begin::Input group-->
+                                <div class="fv-row">
+                                  <!--begin::Preview Container-->
+                                  <div class="kt-file-uploader">
+                                    <!--begin::Message-->
+                                    <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_add_passport">
+                                      <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+                                      <!--begin::Info-->
+                                      <div class="ms-xl-4 mt-4 mt-xl-0">
+                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">Upload Passport</h3>
+                                        <span class="fs-7 fw-semibold text-gray-500">PNG, JPG, JPEG, GIF up to 10MB</span>
+                                      </div>
+                                      <!--end::Info-->
+                                    </label>
+                                    <!--end::Message-->
+                                    <!--begin::Input-->
+                                    <input type="file" name="passport" id="kt_file_uploader_add_passport" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
+                                    <!--begin::Error Message -->
+                                    <div class="invalid-feedback d-block"></div>
+                                    <!--end::Error Message-->
+                                  </div>
+                                  <!--end::Preview Container-->
                                 </div>
-                                <!--end::Preview Container-->
+                                <!--end::Input group-->
                               </div>
                               <!--end::Input group-->
-                            </div>
-                            <!--begin::Input group-->
 
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label required">Traveler Photo</label>
-                              <!--end::Label-->
                               <!--begin::Input group-->
-                              <div class="fv-row">
-                                <!--begin::Preview Container-->
-                                <div class="kt-file-uploader">
-                                  <!--begin::Message-->
-                                  <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_add_traveler_photo">
-                                    <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
-                                    <!--begin::Info-->
-                                    <div class="ms-xl-4 mt-4 mt-xl-0">
-                                      <h3 class="fs-5 fw-bold text-gray-900 mb-1">Upload Traveler Photo</h3>
-                                      <span class="fs-7 fw-semibold text-gray-500">PNG, JPG, JPEG, GIF up to 10MB</span>
-                                    </div>
-                                    <!--end::Info-->
-                                  </label>
-                                  <!--end::Message-->
-                                  <!--begin::Input-->
-                                  <input type="file" name="travelerPhoto" id="kt_file_uploader_add_traveler_photo" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
-                                  <!--begin::Error Message-->
-                                  <div class="invalid-feedback d-block"></div>
-                                  <!--end::Error Message-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Traveler Image</label>
+                                <!--end::Label-->
+                                <!--begin::Input group-->
+                                <div class="fv-row">
+                                  <!--begin::Preview Container-->
+                                  <div class="kt-file-uploader">
+                                    <!--begin::Message-->
+                                    <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_add_traveler_image">
+                                      <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+                                      <!--begin::Info-->
+                                      <div class="ms-xl-4 mt-4 mt-xl-0">
+                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">Upload banner</h3>
+                                        <span class="fs-7 fw-semibold text-gray-500">PNG, JPG, JPEG, GIF up to 10MB</span>
+                                      </div>
+                                      <!--end::Info-->
+                                    </label>
+                                    <!--end::Message-->
+                                    <!--begin::Input-->
+                                    <input type="file" name="travelerPhoto" id="kt_file_uploader_add_traveler_image" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
+                                    <!--begin::Error Message-->
+                                    <div class="invalid-feedback d-block"></div>
+                                    <!--end::Error Message-->
+                                  </div>
+                                  <!--end::Preview Container-->
                                 </div>
-                                <!--end::Preview Container-->
+                                <!--end::Input group-->
                               </div>
                               <!--end::Input group-->
-                            </div>
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label required">Traveler NID</label>
-                              <!--end::Label-->
+
                               <!--begin::Input group-->
-                              <div class="fv-row">
-                                <!--begin::Preview Container-->
-                                <div class="kt-file-uploader">
-                                  <!--begin::Message-->
-                                  <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_add_traveler_nid">
-                                    <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
-                                    <!--begin::Info-->
-                                    <div class="ms-xl-4 mt-4 mt-xl-0">
-                                      <h3 class="fs-5 fw-bold text-gray-900 mb-1">Upload Traveler NID</h3>
-                                      <span class="fs-7 fw-semibold text-gray-500">PNG, JPG, JPEG, GIF up to 10MB</span>
-                                    </div>
-                                    <!--end::Info-->
-                                  </label>
-                                  <!--end::Message-->
-                                  <!--begin::Input-->
-                                  <input type="file" name="travelerNID" id="kt_file_uploader_add_traveler_nid" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
-                                  <!--begin::Error Message-->
-                                  <div class="invalid-feedback d-block"></div>
-                                  <!--end::Error Message-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Traveler NID</label>
+                                <!--end::Label-->
+                                <!--begin::Input group-->
+                                <div class="fv-row">
+                                  <!--begin::Preview Container-->
+                                  <div class="kt-file-uploader">
+                                    <!--begin::Message-->
+                                    <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_add_traveler_nid">
+                                      <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+                                      <!--begin::Info-->
+                                      <div class="ms-xl-4 mt-4 mt-xl-0">
+                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">Upload NID</h3>
+                                        <span class="fs-7 fw-semibold text-gray-500">PNG, JPG, JPEG, GIF up to 10MB</span>
+                                      </div>
+                                      <!--end::Info-->
+                                    </label>
+                                    <!--end::Message-->
+                                    <!--begin::Input-->
+                                    <input type="file" name="travelerNID" id="kt_file_uploader_add_traveler_nid" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
+                                    <!--begin::Error Message-->
+                                    <div class="invalid-feedback d-block"></div>
+                                    <!--end::Error Message-->
+                                  </div>
+                                  <!--end::Preview Container-->
                                 </div>
-                                <!--end::Preview Container-->
+                                <!--end::Input group-->
                               </div>
                               <!--end::Input group-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label required">Traveler Covid Certificate</label>
-                              <!--end::Label-->
+
                               <!--begin::Input group-->
-                              <div class="fv-row">
-                                <!--begin::Preview Container-->
-                                <div class="kt-file-uploader">
-                                  <!--begin::Message-->
-                                  <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_add_traveler_covid_certificate">
-                                    <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
-                                    <!--begin::Info-->
-                                    <div class="ms-xl-4 mt-4 mt-xl-0">
-                                      <h3 class="fs-5 fw-bold text-gray-900 mb-1">Upload Covid Certificate</h3>
-                                      <span class="fs-7 fw-semibold text-gray-500">PNG, JPG, JPEG, GIF up to 10MB</span>
-                                    </div>
-                                    <!--end::Info-->
-                                  </label>
-                                  <!--end::Message-->
-                                  <!--begin::Input-->
-                                  <input type="file" name="travelerCovidCertificate" id="kt_file_uploader_add_traveler_covid_certificate" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
-                                  <!--begin::Error Message-->
-                                  <div class="invalid-feedback d-block"></div>
-                                  <!--end::Error Message-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Traveler Covid Certificate</label>
+                                <!--end::Label-->
+                                <!--begin::Input group-->
+                                <div class="fv-row">
+                                  <!--begin::Preview Container-->
+                                  <div class="kt-file-uploader">
+                                    <!--begin::Message-->
+                                    <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_add_traveler_covid_certificate">
+                                      <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+                                      <!--begin::Info-->
+                                      <div class="ms-xl-4 mt-4 mt-xl-0">
+                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">Upload Covid Certificate</h3>
+                                        <span class="fs-7 fw-semibold text-gray-500">PNG, JPG, JPEG, GIF up to 10MB</span>
+                                      </div>
+                                      <!--end::Info-->
+                                    </label>
+                                    <!--end::Message-->
+                                    <!--begin::Input-->
+                                    <input type="file" name="travelerCovidCertificate" id="kt_file_uploader_add_traveler_covid_certificate" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
+                                    <!--begin::Error Message-->
+                                    <div class="invalid-feedback d-block"></div>
+                                    <!--end::Error Message-->
+                                  </div>
+                                  <!--end::Preview Container-->
                                 </div>
-                                <!--end::Preview Container-->
+                                <!--end::Input group-->
                               </div>
                               <!--end::Input group-->
-                            </div>
-                            <!--end::Input group-->
 
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Traveler Type</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <select name="travelerType" aria-label="Select traveler type" data-control="select2" data-hide-search="true" data-placeholder="Select Traveler Type" class="form-select form-select-solid form-select-lg">
+                                  <option value=""></option>
+                                  <option value="adult">Adult</option>
+                                  <option value="child">Child</option>
+                                  <option value="infant">Infant</option>
+                                </select>
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
 
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                              <!--begin::Label-->
-                              <label class="fs-5 fw-semibold form-label mb-5 required">
-                                Rating:
-                              </label>
-                              <!--end::Label-->
-                              <!--begin::Input-->
-                              <select data-control="select2" data-placeholder="Select gender" data-hide-search="true" name="gender" class="form-select form-select-solid">
-                                <option></option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                              </select>
-                              <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">First Name</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="firstName" class="form-control form-control-lg" placeholder="Enter first name" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
 
-                            <!--begin::Input group-->
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Last Name</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="lastName" class="form-control form-control-lg" placeholder="Enter last name" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
+
+                              <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label required">Date of Birth</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="dateOfBirth" value="" data-flatpickr="date_of_birth_date_picker" />
+                                <input type="date" name="dateOfBirth" class="form-control form-control-lg" placeholder="Select Date of Birth" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
 
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label required">Country</label>
-                              <!--end::Label-->
-                              <!--begin::Input-->
-                              <input type="text" class="form-control form-control-lg form-control-solid" name="country" value="" placeholder="Enter country name" />
-                              <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Country</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="country" class="form-control form-control-lg" placeholder="Enter Country" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
 
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label required">City</label>
-                              <!--end::Label-->
-                              <!--begin::Input-->
-                              <input type="text" class="form-control form-control-lg form-control-solid" name="city" value="" placeholder="Enter City Name" />
-                              <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">City Name</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="cityName" class="form-control form-control-lg" placeholder="Enter City Name" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
 
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label required">Passport Number</label>
-                              <!--end::Label-->
-                              <!--begin::Input-->
-                              <input type="text" class="form-control form-control-lg form-control-solid" name="passportNumber" value="" placeholder="Enter passport number" />
-                              <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Passport Number</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="passportNumber" class="form-control form-control-lg" placeholder="Enter Passport Number" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
 
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Document Issue Country</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="documentIssueCountry" class="form-control form-control-lg" placeholder="Enter Document Issue Country" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
 
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label required">Document Issue Country</label>
-                              <!--end::Label-->
-                              <!--begin::Input-->
-                              <input type="text" class="form-control form-control-lg form-control-solid" name="documentIssueCountry" value="" placeholder="Enter document issue country" />
-                              <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-
-
-                            <!--begin::Input group-->
+                              <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label required">Passport Expiry Date</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="passportExpiryDate" value="" data-flatpickr="passport_date_picker" />
+                                <input type="date" name="passportExpiryDate" class="form-control form-control-lg" placeholder="Select Passport Expiry Date" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
 
-                            <!--begin::Input group-->
+                              <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label required">Present Address</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" placeholder="Enter present address" class="form-control form-control-solid" value="" name="presentAddress"  />
+                                <input type="text" name="presentAddress" class="form-control form-control-lg" placeholder="Enter Present Address" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
 
-                            <!--begin::Input group-->
+                              <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label required">Permanent Address</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" name="permanentAddress" type="text" value="" placeholder="Enter permanent address"/>
+                                <input type="text" name="permanentAddress" class="form-control form-control-lg" placeholder="Enter Permanent Address" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
 
-                            <!--begin::Input group-->
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Email</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="email" class="form-control form-control-lg" placeholder="Enter email" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
+
+                              <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label required">Emergency Contact Number</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" name="emergencyContactNumber" type="text" placeholder="Enter emergency contact number" value=""/>
+                                <input type="text" name="emergencyContactNo" class="form-control form-control-lg" placeholder="Enter Emergency Contact Number" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
 
-                            <!--begin::Input group-->
+                              <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label required">Phone Number</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" name="phoneNumber" type="text" placeholder="Enter phone number" value=""/>
+                                <input type="text" name="phone" class="form-control form-control-lg" placeholder="Enter Phone Number" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
-                          </div>
-                          <!--end::Scroll-->
-                          <!--begin::Actions-->
-                          <div class="text-center pt-10">
-                            <button type="reset" class="btn btn-light me-3" data-kt-add-traveler-modal-action="cancel">
-                              Discard
-                            </button>
-                            <button type="submit" class="btn btn-primary" data-kt-add-traveler-modal-action="submit">
-                              <span class="indicator-label">Submit</span>
-                              <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                          </div>
-                          <!--end::Actions-->
-                        </form>
-                        <!--end::Form-->
+
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Input-->
+                                <input type="text" name="umrahBooking" class="form-control form-control-lg" hidden value="<%= umrahBooking._id %>" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
+
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Input-->
+                                <input type="text" name="umrahPackage" class="form-control form-control-lg" hidden value="<%= umrahBooking.umrahPackage._id %>" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
+
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Input-->
+                                <input type="text" name="customerId" class="form-control form-control-lg" hidden value="<%= umrahBooking.customer._id %>" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
+
+                            </div>
+                            <!--end::Scroll-->
+                            <!--begin::Actions-->
+                            <div class="text-center pt-15">
+                              <button type="reset" class="btn btn-light me-3" data-kt-add-traveler-modal-action="cancel">Cancel</button>
+                              <button type="submit" class="btn btn-primary" data-kt-add-traveler-modal-action="submit">Add Traveler</button>
+                            </div>
+                            <!--end::Actions-->
+                          </form>
+                          <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
                       </div>
-                      <!--end::Modal body-->
+                      <!--end::Modal content-->
                     </div>
-                    <!--end::Modal content-->
+                    <!--end::Modal dialog-->
                   </div>
-                  <!--end::Modal dialog-->
-                 </div>
-                  <!--end::Modal - Add Traveler Modal-->
+                  <!--end::Modal - Add Traveler-->
+
+
+                  
                   <!--begin::Modal - Update booking status-->
                   <div
                     class="modal fade"
@@ -1658,8 +1723,9 @@
                         <!--begin::Form-->
                         <form
                           class="form"
-                          action="#"
+                          action="/api/invoice/<%= umrahBooking.invoiceDetails._id %>/partial-payment-time-limit"
                           id="kt_modal_extend_time_limit_form"
+                          method="post"
                         >
                           <!--begin::Modal header-->
                           <div
@@ -1672,7 +1738,7 @@
                             <!--begin::Close-->
                             <div
                               class="btn btn-icon btn-sm btn-active-icon-primary"
-                              data-kt-extend_time_limit-modal-action="close"
+                              data-kt-extend-time-limit-modal-action="close"
                             >
                               <i class="bi bi-x fs-2x"></i>
                             </div>
@@ -1692,7 +1758,7 @@
                               data-kt-scroll-wrappers="#kt_modal_update_user_scroll"
                               data-kt-scroll-offset="300px"
                             >
-                              <!--begin::Booking Status form-->
+                              <!--begin::Extend time limit form-->
                               <div>
                                 <!--begin::Input group-->
                                 <div class="extend-time-limit-input-group mb-5">
@@ -1720,6 +1786,7 @@
                                     id="kt-new-time-limit"
                                     class="form-control form-control-solid"
                                     placeholder="Select a date"
+                                    data-flatpickr="partialPaymentExpiryDate"
                                     name="partialPaymentExpiryDate"
                                     type="date"
                                   />
@@ -1727,7 +1794,7 @@
                                 </div>
                                 <!--end::Input group-->
                               </div>
-                              <!--end::Booking Status form-->
+                              <!--end::Extend time limit form-->
                             </div>
                             <!--end::Scroll-->
                           </div>
@@ -1738,7 +1805,7 @@
                             <button
                               type="reset"
                               class="btn btn-light me-3"
-                              data-kt-extend_time_limit-modal-action="cancel"
+                              data-kt-extend-time-limit-modal-action="cancel"
                             >
                               Discard
                             </button>
@@ -1747,8 +1814,7 @@
                             <button
                               type="submit"
                               class="btn btn-primary"
-                              data-kt-extend_time_limit-modal-url="/api/invoice/<%= umrahBooking.invoiceDetails._id %>/partial-payment-time-limit"
-                              data-kt-extend_time_limit-modal-action="submit"
+                              data-kt-extend-time-limit-modal-action="submit"
                             >
                               <span class="indicator-label">Submit</span>
                               <span class="indicator-progress">

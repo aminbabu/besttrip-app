@@ -23,7 +23,9 @@ module.exports = async (req, res, next) => {
         }
 
         // Send response
-        return res.status(200).json(invoice);
+        return res
+            .status(200)
+            .json({ message: 'Data retrieved successfully', invoice });
     } catch (error) {
         return next(error);
     }

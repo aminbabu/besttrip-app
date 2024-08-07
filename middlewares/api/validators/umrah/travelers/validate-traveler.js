@@ -15,7 +15,11 @@ const { travelersSchema } = require('../../../../../schemas/zod/travelers');
 module.exports = (req, res, next) => {
     // validate request body
     const { error, success } = travelersSchema
-        .omit({ id: true, ids: true })
+        .omit({
+            id: true,
+            ids: true,
+            customerId: req.user.role === 'admin' ? false : true,
+        })
         .safeParse(req.body);
 
     // check for errors

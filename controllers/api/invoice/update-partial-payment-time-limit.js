@@ -19,19 +19,36 @@ module.exports = async (req, res, next) => {
             return res.status(404).json({ message: 'Invoice not found' });
         }
 
-        // Update partialPaymentExpiryDate if provided in the request body
+        const newExpiryDate = new Date(req.body.partialPaymentExpiryDate);
+        const currentExpiryDate = new Date(invoice.partialPaymentExpiryDate);
+
+        // Ensure the new date is valid
+        if (isNaN(newExpiryDate.getTime())) {
+            return res
+                .status(200)
+                .json({ message: 'Invalid expiry date provided' });
+        }
+
+        // Check if the incoming date is greater than the previous expiry date
+        if (newExpiryDate <= currentExpiryDate) {
+            return res.status(200).json({
+                message:
+                    "New expiry date can't be less than or equal to the previous expiry date",
+            });
+        }
+
         if (
             req.body.partialPaymentExpiryDate &&
             invoice.partialPaymentExpiryDate
         ) {
+            // Update partialPaymentExpiryDate if provided in the request body
             invoice.partialPaymentExpiryDate =
                 req.body.partialPaymentExpiryDate;
-            await invoice.save(); // Save changes to the invoice
+            await invoice.save();
         } else {
-            // Send response
             return res.status(200).json({
                 message:
-                    "Partial payment expiry date can't be updated because the invoice is marked as 'full-payment'.",
+                    "Partial payment expiry date can't be updated because the invoice is marked as 'full-payment'",
             });
         }
 

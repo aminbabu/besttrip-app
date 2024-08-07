@@ -242,6 +242,7 @@ var KTContentBlogPostEdit = (function () {
         const closeButton = element.querySelector(
             '[data-kt-edit-content-blog-post-modal-action="close"]'
         );
+
         closeButton.addEventListener('click', (e) => {
             e.preventDefault();
 

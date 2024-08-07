@@ -152,5 +152,12 @@ module.exports = z
             .refine((id) => isMongoId(id), {
                 message: 'UmrahBooking ID must be a valid MongoDB ObjectID',
             }),
+        customerId: z
+            .string({
+                required_error: 'Customer ID is required',
+            })
+            .refine((id) => isMongoId(id), {
+                message: 'Customer ID must be a valid MongoDB ObjectID',
+            }),
     })
     .strict();
