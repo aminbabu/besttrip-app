@@ -23,6 +23,11 @@ module.exports =
         const { id } = req.params || {};
         const { travelerPhoto } = req.files || {};
 
+        // check if the req method is not post and travelerPhoto
+        if (req.method !== 'POST' && !travelerPhoto) {
+            return next();
+        }
+
         // check if id exists
         if (id) {
             // get traveler
@@ -46,6 +51,7 @@ module.exports =
             '/uploads/',
             `${dir}/${uuidv4()}_${travelerPhoto.name}`
         );
+
         const uploadLogoPath = path.join(
             __dirname,
             './../../../../public',

@@ -61,7 +61,6 @@ module.exports = z
                 required_error: 'Gender is required',
                 invalid_type_error: 'Invalid Gender',
             })
-            .default(TRAVELERS_GENDERS[0])
             .refine((gander) => TRAVELERS_GENDERS.includes(gander), {
                 message: 'Please provide a valid travelerType',
             }),

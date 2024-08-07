@@ -12,7 +12,6 @@ var KTModalUpdateBookingStatus = (function () {
     var modal;
     var url;
     var umrahStatusText;
-    var umrahDetailsUrl;
 
     // Init form inputs
     var initBookingStatusForm = function () {
@@ -221,45 +220,6 @@ var KTModalUpdateBookingStatus = (function () {
         });
     };
 
-    // Populate form data
-    const populateData = async () => {
-        try {
-            const response = await axios.get(umrahDetailsUrl);
-
-            if (response) {
-                const data = response.data.umrahBookings;
-
-                // Populate form fields with the fetched data
-                $(form)
-                    .find('select[name="status"]')
-                    .val(data.status)
-                    .trigger('change');
-            } else {
-                Swal.fire({
-                    text: 'Failed to fetch data. Please try again later.',
-                    icon: 'error',
-                    buttonsStyling: false,
-                    confirmButtonText: 'Ok, got it!',
-                    customClass: {
-                        confirmButton: 'btn btn-primary',
-                    },
-                });
-            }
-        } catch (error) {
-            Swal.fire({
-                text:
-                    error.response?.data?.message ||
-                    'Failed to fetch data. Please try again later.',
-                icon: 'error',
-                buttonsStyling: false,
-                confirmButtonText: 'Ok, got it!',
-                customClass: {
-                    confirmButton: 'btn btn-primary',
-                },
-            });
-        }
-    };
-
     return {
         // Public functions
         init: function () {
@@ -284,7 +244,6 @@ var KTModalUpdateBookingStatus = (function () {
                 '[data-kt-umrah-booking-status="umrah-status"]'
             );
             url = submitButton.getAttribute('data-kt-booking-status-modal-url');
-            umrahDetailsUrl = mainElement.getAttribute('data-kt-page-url');
             cancelButton = form.querySelector(
                 '[data-kt-booking-status-modal-action="cancel"]'
             );
@@ -293,8 +252,6 @@ var KTModalUpdateBookingStatus = (function () {
             );
 
             initBookingStatusForm();
-
-            populateData();
         },
     };
 })();

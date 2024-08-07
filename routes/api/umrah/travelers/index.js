@@ -32,6 +32,7 @@ const {
     validateTravelerPhoto,
     validateTravelerPassport,
     validateTravelerNID,
+    validateTravelerUpdate,
     validateTravelerCovidCertificate,
 } = require('../../../../middlewares/api/validators/umrah/travelers');
 const {
@@ -66,17 +67,17 @@ router.get(
 );
 
 /**
- * @description - get traveler by umrahBooking and traveler ID
+ * @description - get traveler by umrahBookingId and traveler ID
  * @param {string} path - '/api/umrah/travelers/:umrahBookingId/:travelerId'
  * @param {function} middleware - ['isAllowed', 'validateUmrahBookingId', 'validateTravelerId']
  * @param {function} controller - ['getTravelerById']
  * @returns {object} - router
- * @access private - ['customer']
+ * @access private - ['customer', 'admin']
  * @method GET
  */
 router.get(
     '/:umrahBookingId/:travelerId',
-    isAllowed(['customer']),
+    isAllowed(['customer', 'admin']),
     validateTravelerId,
     validateUmrahBookingId,
     getTravelerById
@@ -94,7 +95,6 @@ router.get(
 router.post(
     '/',
     isAllowed(['customer', 'admin']),
-    validateTraveler,
     validateTraveler,
     validateTravelerPhoto,
     validateTravelerPassport,
@@ -121,8 +121,7 @@ router.patch(
     isAllowed(['customer', 'admin']),
     validateTravelerId,
     validateUmrahBookingId,
-    validateTraveler,
-    validateTraveler,
+    validateTravelerUpdate,
     validateTravelerPhoto,
     validateTravelerPassport,
     validateTravelerNID,

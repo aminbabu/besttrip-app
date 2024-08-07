@@ -26,12 +26,14 @@ module.exports = async (req, res, next) => {
             travelerPhoto,
             travelerNID,
             travelerCovidCertificate,
-            customerId,
         } = req.files;
 
         const listedUmraStatus = await UmrahBooking.findOne({
             _id: req.params.umrahBookingId,
-            customer: req.user.role === 'admin' ? customerId : req.user._id,
+            customer:
+                req.user.role === 'admin'
+                    ? validatedData.customerId
+                    : req.user._id,
         });
 
         // customer can't update any more travelers if the package is already 'in-process' || 'under-review' || 'success' || 'booked' || 'cancelled' but admin can
@@ -41,7 +43,10 @@ module.exports = async (req, res, next) => {
         ) {
             const traveler = await Traveler.findOne({
                 _id: travelerId,
-                createdBy: req.user._id,
+                createdBy:
+                    req.user.role === 'admin'
+                        ? validatedData.customerId
+                        : req.user._id,
             });
 
             // check if traveler exists
@@ -53,11 +58,11 @@ module.exports = async (req, res, next) => {
             // update traveler
             traveler.set({
                 ...validatedData,
-                passport: passport.path || traveler.passport,
-                travelerPhoto: travelerPhoto.path || traveler.travelerPhoto,
-                travelerNID: travelerNID.path || traveler.travelerNID,
+                passport: passport?.path || traveler.passport,
+                travelerPhoto: travelerPhoto?.path || traveler.travelerPhoto,
+                travelerNID: travelerNID?.path || traveler.travelerNID,
                 travelerCovidCertificate:
-                    travelerCovidCertificate.path ||
+                    travelerCovidCertificate?.path ||
                     traveler.travelerCovidCertificate,
             });
 
@@ -66,7 +71,7 @@ module.exports = async (req, res, next) => {
 
             // send traveler
             return res.status(200).send({
-                message: 'Created updated successfully',
+                message: 'Traveler info updated successfully',
                 traveler,
             });
         } else {

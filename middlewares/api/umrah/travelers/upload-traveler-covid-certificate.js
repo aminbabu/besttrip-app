@@ -23,6 +23,11 @@ module.exports =
         const { id } = req.params || {};
         const { travelerCovidCertificate } = req.files || {};
 
+        // check if the req method is not post and covid certificate
+        if (req.method !== 'POST' && !travelerCovidCertificate) {
+            return next();
+        }
+
         // check if id exists
         if (id) {
             // get traveler

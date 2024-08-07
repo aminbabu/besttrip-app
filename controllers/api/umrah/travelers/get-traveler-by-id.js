@@ -12,16 +12,26 @@ const {
 } = require('../../../../constants/umrah-bookings');
 const { Traveler, UmrahBooking } = require('../../../../models');
 
-// dependencies
-
 // export get single traveler controller
 module.exports = async (req, res, next) => {
     try {
-        const traveler = await Traveler.findOne({
-            createdBy: req.user._id,
+        const query = {
             _id: req.params.travelerId,
             umrahBooking: req.params.umrahBookingId,
-        });
+        };
+
+        // Add customer filter if the user is not an admin
+        if (req.user.role !== 'admin') {
+            query.customer = req.user._id;
+        }
+
+        const traveler = await Traveler.findOne(query);
+
+        if (!traveler) {
+            return res.status(404).send({
+                message: 'Traveler not found',
+            });
+        }
 
         // send traveler
         return res.status(200).send({

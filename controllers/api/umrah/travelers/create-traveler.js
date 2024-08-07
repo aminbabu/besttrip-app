@@ -57,7 +57,10 @@ module.exports = async (req, res, next) => {
         }
 
         const listedTravelers = await Traveler.find({
-            createdBy: req.user._id,
+            createdBy:
+                req.user.role === 'admin'
+                    ? validatedData.customerId
+                    : req.user._id,
             umrahPackage: listedUmrah.umrahPackage,
         });
 

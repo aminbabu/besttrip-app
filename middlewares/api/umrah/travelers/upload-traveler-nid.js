@@ -23,6 +23,11 @@ module.exports =
         const { id } = req.params || {};
         const { travelerNID } = req.files || {};
 
+        // check if the req method is not post and travelerNID
+        if (req.method !== 'POST' && !travelerNID) {
+            return next();
+        }
+
         // check if id exists
         if (id) {
             // get traveler
