@@ -26,15 +26,19 @@ module.exports = async (req, res, next) => {
             travelerPhoto,
             travelerNID,
             travelerCovidCertificate,
+            customerId,
         } = req.files;
 
         const listedUmraStatus = await UmrahBooking.findOne({
             _id: req.params.umrahBookingId,
-            customer: req.user._id,
+            customer: req.user.role === 'admin' ? customerId : req.user._id,
         });
 
-        // customer can't update any more travelers if the package is already 'in-process' || 'under-review' || 'success' || 'booked' || 'cancelled'
-        if (listedUmraStatus.status === UMRAH_BOOKING_STATUS[0]) {
+        // customer can't update any more travelers if the package is already 'in-process' || 'under-review' || 'success' || 'booked' || 'cancelled' but admin can
+        if (
+            req.user.role === 'admin' ||
+            listedUmraStatus.status === UMRAH_BOOKING_STATUS[0]
+        ) {
             const traveler = await Traveler.findOne({
                 _id: travelerId,
                 createdBy: req.user._id,
