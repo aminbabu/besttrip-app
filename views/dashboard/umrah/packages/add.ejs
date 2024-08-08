@@ -541,7 +541,7 @@
                                 <select name="totalDaysAndNights" aria-label="Select total days" data-control="select2" data-hide-search="true" data-placeholder="Select total days.." class="form-select form-select-solid form-select-lg">
                                   <option></option>
                                   <% umrahPackageDurations?.forEach((duration) => { %>
-                                  <option value="<%= duration.days%>">
+                                  <option value="<%= duration._id%>">
                                     <%= duration.days %> Days | <%= duration.nights %> Nights
                                   </option>
                                   <% }); %>
@@ -561,9 +561,11 @@
                                   <option value="">
                                     Select package type..
                                   </option>
-                                  <option value="Economy">Economy</option>
-                                  <option value="Standard">Standard</option>
-                                  <option value="Premium">Premium</option>
+                                  <% umrahPackageTypes?.forEach((type) => { %>
+                                  <option value="<%= type._id%>">
+                                    <%= type.name %>
+                                  </option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>

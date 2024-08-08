@@ -94,17 +94,12 @@ module.exports = z
             ),
         type: z
             .string({
-                required_error: 'Type is required',
-                invalid_type_error: 'Please provide a valid type',
+                required_error: 'Id is required',
+                invalid_type_error: 'Please provide a valid id',
             })
-            .refine(
-                (type) => UMRAH_PACKAGE_TYPES.includes(type.toLowerCase()),
-                {
-                    message: `Please provide a valid type. Available types are: ${UMRAH_PACKAGE_TYPES.join(
-                        ', '
-                    )}`,
-                }
-            ),
+            .refine((id) => isMongoId(id), {
+                message: 'Please provide a valid id',
+            }),
         status: z
             .string({
                 required_error: 'Status is required',

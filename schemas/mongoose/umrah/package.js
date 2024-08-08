@@ -56,9 +56,9 @@ module.exports = new Schema(
             required: [true, 'Umrah package Duration ID is required'],
         },
         type: {
-            type: String,
-            enum: UMRAH_PACKAGE_TYPES,
-            required: [true, 'Type is required'],
+            type: Schema.Types.ObjectId,
+            ref: 'UmrahPackageType',
+            required: [true, 'Umrah package Duration ID is required'],
         },
         status: {
             type: String,
