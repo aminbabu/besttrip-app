@@ -50,6 +50,11 @@ module.exports = new Schema(
             type: Date,
             required: [true, 'Expiry date is required'],
         },
+        totalDaysAndNights: {
+            type: Schema.Types.ObjectId,
+            ref: 'UmrahPackageDuration',
+            required: [true, 'Umrah package Duration ID is required'],
+        },
         type: {
             type: String,
             enum: UMRAH_PACKAGE_TYPES,
@@ -136,28 +141,36 @@ module.exports = new Schema(
         outboundLayoverFirstDuration: {
             type: String,
             required: [
-                () => this.outboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
+                () =>
+                    this.outboundFlightStops ===
+                    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
                 'Layover 1st duration is required',
             ],
         },
         outboundLayoverFirstAirport: {
             type: String,
             required: [
-                () => this.outboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
+                () =>
+                    this.outboundFlightStops ===
+                    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
                 'Layover 1st airport is required',
             ],
         },
         outboundLayoverSecondDuration: {
             type: String,
             required: [
-                () => this.outboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
+                () =>
+                    this.outboundFlightStops ===
+                    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
                 'Layover 2nd duration is required',
             ],
         },
         outboundLayoverSecondAirport: {
             type: String,
             required: [
-                () => this.outboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
+                () =>
+                    this.outboundFlightStops ===
+                    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
                 'Layover 2nd airport is required',
             ],
         },
@@ -309,28 +322,36 @@ module.exports = new Schema(
         inboundLayoverFirstDuration: {
             type: String,
             required: [
-                () => this.inboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
+                () =>
+                    this.inboundFlightStops ===
+                    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
                 'Layover 1st duration is required',
             ],
         },
         inboundLayoverFirstAirport: {
             type: String,
             required: [
-                () => this.inboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
+                () =>
+                    this.inboundFlightStops ===
+                    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[1],
                 'Layover 1st airport is required',
             ],
         },
         inboundLayoverSecondDuration: {
             type: String,
             required: [
-                () => this.inboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
+                () =>
+                    this.inboundFlightStops ===
+                    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
                 'Layover 2nd duration is required',
             ],
         },
         inboundLayoverSecondAirport: {
             type: String,
             required: [
-                () => this.inboundFlightStops === UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
+                () =>
+                    this.inboundFlightStops ===
+                    UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS[2],
                 'Layover 2nd airport is required',
             ],
         },

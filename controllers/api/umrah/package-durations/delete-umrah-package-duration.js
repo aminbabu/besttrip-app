@@ -8,7 +8,7 @@
  */
 
 // dependencies
-const { UmrahPackageDuration } = require('../../../../models');
+const { UmrahPackageDuration, UmrahPackage } = require('../../../../models');
 
 // export delete umrah package duration controller
 module.exports = async (req, res, next) => {
@@ -23,6 +23,18 @@ module.exports = async (req, res, next) => {
         if (!umrahPackageDuration) {
             return res.status(200).json({
                 message: 'Umrah package duration not found',
+            });
+        }
+
+        // check if umrah package duration is referenced by Umrah Package model
+        const isReferenced = await UmrahPackage.exists({
+            totalDaysAndNights: id,
+        });
+
+        if (isReferenced) {
+            return res.status(400).json({
+                message:
+                    'Umrah package duration is referenced by other records and cannot be deleted',
             });
         }
 

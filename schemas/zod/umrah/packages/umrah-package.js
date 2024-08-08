@@ -16,6 +16,7 @@ const {
     UMRAH_PACKAGE_INCLUSIONS,
     UMRAH_PACKAGE_TYPES,
 } = require('../../../../constants');
+const { UMRAH_INCLUSIONS } = require('../../../../constants/umrah-offers');
 
 // export umrah package schema
 module.exports = z
@@ -58,40 +59,61 @@ module.exports = z
                 required_error: 'Schedule is required',
                 invalid_type_error: 'Please provide a valid schedule',
             })
-            .refine((schedule) => UMRAH_PACKAGE_SCHEDULES.includes(schedule.toLowerCase()), {
-                message: `Please provide a valid schedule. Available schedules are: ${UMRAH_PACKAGE_SCHEDULES.join(', ')}`,
-            }),
+            .refine(
+                (schedule) =>
+                    UMRAH_PACKAGE_SCHEDULES.includes(schedule.toLowerCase()),
+                {
+                    message: `Please provide a valid schedule. Available schedules are: ${UMRAH_PACKAGE_SCHEDULES.join(
+                        ', '
+                    )}`,
+                }
+            ),
         journeyDate: z
             .string({
                 required_error: 'Journey date is required',
                 invalid_type_error: 'Please provide a valid journey date',
             })
-            .refine((journeyDate) => moment(journeyDate, 'YYYY-MM-DD', true).isValid(), {
-                message: 'Please provide a valid journey date',
-            }),
+            .refine(
+                (journeyDate) =>
+                    moment(journeyDate, 'YYYY-MM-DD', true).isValid(),
+                {
+                    message: 'Please provide a valid journey date',
+                }
+            ),
         expiryDate: z
             .string({
                 required_error: 'Expiry date is required',
                 invalid_type_error: 'Please provide a valid expiry date',
             })
-            .refine((expiryDate) => moment(expiryDate, 'YYYY-MM-DD', true).isValid(), {
-                message: 'Please provide a valid expiry date',
-            }),
+            .refine(
+                (expiryDate) =>
+                    moment(expiryDate, 'YYYY-MM-DD', true).isValid(),
+                {
+                    message: 'Please provide a valid expiry date',
+                }
+            ),
         type: z
             .string({
                 required_error: 'Type is required',
                 invalid_type_error: 'Please provide a valid type',
             })
-            .refine((type) => UMRAH_PACKAGE_TYPES.includes(type.toLowerCase()), {
-                message: `Please provide a valid type. Available types are: ${UMRAH_PACKAGE_TYPES.join(', ')}`,
-            }),
+            .refine(
+                (type) => UMRAH_PACKAGE_TYPES.includes(type.toLowerCase()),
+                {
+                    message: `Please provide a valid type. Available types are: ${UMRAH_PACKAGE_TYPES.join(
+                        ', '
+                    )}`,
+                }
+            ),
         status: z
             .string({
                 required_error: 'Status is required',
                 invalid_type_error: 'Please provide a valid status',
             })
             .refine((status) => UMRAH_PACKAGE_STATUS.includes(status), {
-                message: `Please provide a valid status. Available statuses are: ${UMRAH_PACKAGE_STATUS.join(', ')}`,
+                message: `Please provide a valid status. Available statuses are: ${UMRAH_PACKAGE_STATUS.join(
+                    ', '
+                )}`,
             }),
         adultPrice: z
             .string({
@@ -104,7 +126,8 @@ module.exports = z
         adultPartialPrice: z
             .string({
                 required_error: 'Adult partial price is required',
-                invalid_type_error: 'Please provide a valid adult partial price',
+                invalid_type_error:
+                    'Please provide a valid adult partial price',
             })
             .refine((adultPartialPrice) => parseFloat(adultPartialPrice) >= 0, {
                 message: 'Please provide a valid adult partial price',
@@ -121,7 +144,8 @@ module.exports = z
         childPartialPrice: z
             .string({
                 required_error: 'Child partial price is required',
-                invalid_type_error: 'Please provide a valid child partial price',
+                invalid_type_error:
+                    'Please provide a valid child partial price',
             })
             .refine((childPartialPrice) => parseFloat(childPartialPrice) >= 0, {
                 message: 'Please provide a valid child partial price',
@@ -138,11 +162,15 @@ module.exports = z
         infantPartialPrice: z
             .string({
                 required_error: 'Infant partial price is required',
-                invalid_type_error: 'Please provide a valid infant partial price',
+                invalid_type_error:
+                    'Please provide a valid infant partial price',
             })
-            .refine((infantPartialPrice) => parseFloat(infantPartialPrice) >= 0, {
-                message: 'Please provide a valid infant partial price',
-            })
+            .refine(
+                (infantPartialPrice) => parseFloat(infantPartialPrice) >= 0,
+                {
+                    message: 'Please provide a valid infant partial price',
+                }
+            )
             .optional(),
         seats: z
             .string({
@@ -153,21 +181,31 @@ module.exports = z
                 message: 'Please provide a valid number of seats',
             }),
         inclusions: z
-            .array(
+            .union([
                 z
                     .string({
-                        required_error: 'Inclusion is required',
-                        invalid_type_error: 'Please provide a valid inclusion',
+                        invalid_type_error: 'Please provide valid inclusions',
                     })
-                    .refine((inclusion) => UMRAH_PACKAGE_INCLUSIONS.includes(inclusion), {
-                        message: `Please provide a valid inclusion. Available inclusions are: ${UMRAH_PACKAGE_INCLUSIONS.join(', ')}`,
-                    }),
-                {
-                    required_error: 'At least one inclusion is required',
-                }
+                    .transform((inclusion) => inclusion.split(',')),
+                z.array(
+                    z.string({
+                        invalid_type_error: 'Please provide valid inclusions',
+                    })
+                ),
+            ])
+            .transform((inclusions) =>
+                Array.isArray(inclusions) ? inclusions : [inclusions]
             )
-            .nonempty({
-                message: 'At least one inclusion is required',
-            }),
+            .refine(
+                (inclusions) =>
+                    inclusions.every((inclusion) =>
+                        UMRAH_INCLUSIONS.includes(inclusion)
+                    ),
+                {
+                    message: `Please provide valid inclusions. Available options are ${UMRAH_INCLUSIONS.join(
+                        ', '
+                    )}`,
+                }
+            ),
     })
     .strict();

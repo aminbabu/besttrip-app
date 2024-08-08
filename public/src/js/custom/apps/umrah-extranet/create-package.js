@@ -12,6 +12,9 @@ var KTCreatePackage = (function () {
     var stepperObj;
     var validations = [];
     var ktFileUploaderContent;
+    var dropZoneBasicThumbnails;
+    var dropZoneMakkahThumbnails;
+    var dropZoneMadinahThumbnails;
 
     // Private Functions
     var initStepper = function () {
@@ -90,14 +93,36 @@ var KTCreatePackage = (function () {
                     // Disable button to avoid multiple click
                     formSubmitButton.disabled = true;
 
-                    /* ===================================== */
+                    // construct form data
+                    const formData = new FormData(form);
+
+                    // Function to append Dropzone files to FormData
+                    const appendDropzoneFiles = (dropzone, fieldName) => {
+                        dropzone.files.forEach((file) => {
+                            formData.append(fieldName, file, file.name);
+                        });
+                    };
+
+                    // Append files from each Dropzone instance
+                    appendDropzoneFiles(
+                        dropZoneBasicThumbnails,
+                        'extraThumbnails'
+                    );
+                    appendDropzoneFiles(
+                        dropZoneMakkahThumbnails,
+                        'makkahHotelExtraThumbnails'
+                    );
+                    appendDropzoneFiles(
+                        dropZoneMadinahThumbnails,
+                        'madinahhHotelExtraThumbnails'
+                    );
 
                     axios
                         .post(
                             formSubmitButton
                                 .closest('form')
                                 .getAttribute('action'),
-                            new FormData(form)
+                            formData
                         )
                         .then((response) => {
                             if (response) {
@@ -115,9 +140,8 @@ var KTCreatePackage = (function () {
                                     allowOutsideClick: false,
                                 }).then(() => {
                                     // Reset form
-                                    form.reset();
-
-                                    location.reload();
+                                    // form.reset();
+                                    // location.reload();
                                 });
                             } else {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -265,10 +289,10 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    'basic_package_duration_days_&_nights': {
+                    totalDaysAndNights: {
                         validators: {
                             notEmpty: {
-                                message: 'Total days and is required',
+                                message: 'Total days and nights is required',
                             },
                         },
                     },
@@ -302,6 +326,23 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
+                    adultPartialPrice: {
+                        validators: {
+                            notEmpty: {
+                                message:
+                                    'Adult package partial price is required',
+                            },
+                            integer: {
+                                message: 'The value must be a number',
+                            },
+                            greaterThan: {
+                                min: 0,
+                                inclusive: false,
+                                message:
+                                    'Adult package partial price must be a positive number',
+                            },
+                        },
+                    },
                     childPrice: {
                         validators: {
                             notEmpty: {
@@ -318,6 +359,23 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
+                    childPartialPrice: {
+                        validators: {
+                            notEmpty: {
+                                message:
+                                    'Child package partial price is required',
+                            },
+                            integer: {
+                                message: 'The value must be a number',
+                            },
+                            greaterThan: {
+                                min: 0,
+                                inclusive: false,
+                                message:
+                                    'Child package partial price must be a positive number',
+                            },
+                        },
+                    },
                     infantPrice: {
                         validators: {
                             notEmpty: {
@@ -331,6 +389,23 @@ var KTCreatePackage = (function () {
                                 inclusive: false,
                                 message:
                                     'Infant package price must be a positive number',
+                            },
+                        },
+                    },
+                    infantPartialPrice: {
+                        validators: {
+                            notEmpty: {
+                                message:
+                                    'Infant package partial price is required',
+                            },
+                            integer: {
+                                message: 'The value must be a number',
+                            },
+                            greaterThan: {
+                                min: 0,
+                                inclusive: false,
+                                message:
+                                    'Infant package partial price must be a positive number',
                             },
                         },
                     },
@@ -1014,13 +1089,6 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    about_umrah_description: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Description is required',
-                            },
-                        },
-                    },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -1126,11 +1194,12 @@ var KTCreatePackage = (function () {
 
     // Add more thumbnails
     const addMoreThumbnails = () => {
-        const dropZoneBasicThumbnails = new Dropzone(
+        dropZoneBasicThumbnails = new Dropzone(
             '#kt_dropzonejs_basic_thumbnails',
             {
                 url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
+                // paramName: 'files', // The name that will be used to transfer the file
+                autoProcessQueue: false,
                 maxFiles: 10,
                 maxFilesize: 10, // MB
                 addRemoveLinks: true,
@@ -1143,11 +1212,12 @@ var KTCreatePackage = (function () {
                 },
             }
         );
-        const dropZoneMakkahThumbnails = new Dropzone(
+        dropZoneMakkahThumbnails = new Dropzone(
             '#kt_dropzonejs_makkah_hotel_thumbnails',
             {
                 url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
+                // paramName: 'files', // The name that will be used to transfer the file
+                autoProcessQueue: false,
                 maxFiles: 10,
                 maxFilesize: 10, // MB
                 addRemoveLinks: true,
@@ -1160,11 +1230,12 @@ var KTCreatePackage = (function () {
                 },
             }
         );
-        const dropZoneMadinahThumbnails = new Dropzone(
+        dropZoneMadinahThumbnails = new Dropzone(
             '#kt_dropzonejs_madinah_hotel_thumbnails',
             {
                 url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
+                // paramName: 'files', // The name that will be used to transfer the file
+                autoProcessQueue: false,
                 maxFiles: 10,
                 maxFilesize: 10, // MB
                 addRemoveLinks: true,
@@ -1180,27 +1251,36 @@ var KTCreatePackage = (function () {
     };
 
     // Init flatpickr
-    var initFlatPickr = function () {
-        const datepicker = form.querySelectorAll(
-            '[data-flatpickr=package_date_picker]'
-        );
-        const datetimepicker = form.querySelectorAll(
-            '[data-flatpickr=package_datetime_picker]'
-        );
-        const timepicker = form.querySelectorAll(
-            '[data-flatpickr=package_time_picker]'
-        );
+    var initFlatpickr = function () {
+        let datepicker;
+        let datetimepicker;
+        let timepicker;
 
         // Handle datepicker -- For more info on flatpickr plugin, please visit: https://flatpickr.js.org/
-        $(datepicker).flatpickr({
+        datepicker = $(
+            form.querySelectorAll('[data-flatpickr=package_date_picker]')
+        ).flatpickr({
             altInput: true,
             altFormat: 'j F, Y',
             minDate: 'today',
             maxDate: new Date().fp_incr(365), // 365 days from now
+            onChange: function (selectedDates, dateStr, instance) {
+                datepicker.forEach((dp) => {
+                    if (
+                        instance.input.name === 'journeyDate' &&
+                        dp.input.name === 'expiryDate'
+                    ) {
+                        dp.set('maxDate', dateStr);
+                        dp._input.disabled = false;
+                    }
+                });
+            },
         });
 
         // Handle datetimepicker -- For more info on flatpickr plugin, please visit: https://flatpickr.js.org/
-        $(datetimepicker).flatpickr({
+        datetimepicker = $(
+            form.querySelectorAll('[data-flatpickr=package_datetime_picker]')
+        ).flatpickr({
             enableTime: true,
             altInput: true,
             time_24hr: true,
@@ -1208,10 +1288,32 @@ var KTCreatePackage = (function () {
             altFormat: 'j F, Y H:i',
             minDate: 'today',
             maxDate: new Date().fp_incr(365), // 365 days from now
+            onChange: function (selectedDates, dateStr, instance) {
+                datetimepicker.forEach((dp) => {
+                    if (
+                        (instance.input.name === 'outboundDepartureDatetime' &&
+                            dp.input.name === 'outboundArrivalDatetime') ||
+                        (instance.input.name === 'inboundDepartureDatetime' &&
+                            dp.input.name === 'inboundArrivalDatetime')
+                    ) {
+                        dp.set('minDate', dateStr);
+                        dp._input.disabled = false;
+                    }
+
+                    if (
+                        instance.input.name === 'outboundDepartureDatetime' &&
+                        dp.input.name === 'inboundDepartureDatetime'
+                    ) {
+                        dp.set('minDate', dateStr);
+                    }
+                });
+            },
         });
 
         // Handle timepicker -- For more info on flatpickr plugin, please visit: https://flatpickr.js.org/
-        $(timepicker).flatpickr({
+        timepicker = $(
+            form.querySelectorAll('[data-flatpickr=package_time_picker]')
+        ).flatpickr({
             enableTime: true,
             noCalendar: true,
             dateFormat: 'H:i',
@@ -1506,7 +1608,7 @@ var KTCreatePackage = (function () {
             handleForm();
             initFileUploader();
             addMoreThumbnails();
-            initFlatPickr();
+            initFlatpickr();
             handleFlightStops();
             handleRepeater();
             initCKEditors();
