@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 28 April, 2024
- * @update_date 28 April, 2024
+ * @update_date 25 Jul, 2024
  */
 
 // dependencies
@@ -17,6 +17,7 @@ module.exports = new Schema(
         name: {
             type: String,
             required: [true, 'Name is required'],
+            unique: [true, 'Name must be unique'],
         },
         status: {
             type: String,

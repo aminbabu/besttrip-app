@@ -1,0 +1,11 @@
+[data-kt-app-layout='light-sidebar'] {
+    .flatpickr-current-month input.cur-year[disabled] {
+        color: $gray-500;
+    }
+}
+
+[data-bs-theme='dark'] {
+    .flatpickr-current-month input.cur-year[disabled] {
+        color: $gray-800;
+    }
+}

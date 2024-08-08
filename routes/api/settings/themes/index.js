@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 18 May, 2024
+ * @update_date 25 Jul, 2024
  */
 
 // dependencies
@@ -68,6 +68,11 @@ router.post(
     '/:theme',
     isAuthorized,
     isAllowed(['admin']),
+    (req, res, next) => {
+        console.log(req.body);
+
+        next();
+    },
     validateThemeSettingsKey,
     validateThemeSettingsFile,
     validateThemeSettings,

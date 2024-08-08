@@ -118,6 +118,10 @@ router.post(
     isAllowed(['admin']),
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
+    (req, res, next) => {
+        console.log('req.files', req.files);
+        next();
+    },
     validateUmrahPackageGallery,
     validateUmrahOutbound,
     validateMakkahHotelTumbnail,

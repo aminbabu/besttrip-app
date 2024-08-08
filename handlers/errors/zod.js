@@ -17,5 +17,8 @@ module.exports = (res, zodErr) => {
     }));
 
     // return error response
-    return res.status(200).json({ errors });
+    return res.status(400).json({
+        message: 'Validation error',
+        errors,
+    });
 };

@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 04 April, 2024
- * @update_date 19 April, 2024
+ * @update_date 25 Jul, 2024
  */
 
 // dependencies
@@ -15,8 +15,6 @@ const { zodErrorHandler } = require('../../../../../../handlers/errors');
 
 // export general settings validator middleware
 module.exports = (req, res, next) => {
-    console.log(req.body);
-
     // validate request body
     const { error, success } = generalSettingsSchema.safeParse(req.body);
 

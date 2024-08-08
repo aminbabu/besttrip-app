@@ -18,8 +18,6 @@ module.exports = async (req, res, next) => {
     // get thumbnail
     const { thumbnail } = req.files || {};
 
-    console.log(thumbnail);
-
     // check if the req method is not post and thumbnail
     if (req.method !== 'POST' && !thumbnail) {
         return next();

@@ -8,9 +8,13 @@
  */
 
 // dependencies
-const { umrahPackageSchema } = require('../../../../../schemas/zod/umrah/packages');
+const {
+    umrahPackageSchema,
+} = require('../../../../../schemas/zod/umrah/packages');
 const { zodErrorHandler } = require('../../../../../handlers/errors');
-const { filterReqFromZodSchema } = require('../../../../../utils/umrah/package');
+const {
+    filterReqFromZodSchema,
+} = require('../../../../../utils/umrah/package');
 
 // export umrah package validator middleware
 module.exports = (req, res, next) => {

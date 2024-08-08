@@ -25,7 +25,7 @@ eval("!function(e,t){if(true)module.exports=t();else { var o, n; }}(window,(func
   \*********************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// Fullscreen Lightbox - stylish lightbox without jQuery!: https://fslightbox.com/javascript/documentation/installation#package-manager\r\n__webpack_require__(/*! fslightbox */ \"./node_modules/fslightbox/index.js\");\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/fslightbox/fslightbox.js?");
+eval("// Fullscreen Lightbox - stylish lightbox without jQuery!: https://fslightbox.com/javascript/documentation/installation#package-manager\n__webpack_require__(/*! fslightbox */ \"./node_modules/fslightbox/index.js\");\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/fslightbox/fslightbox.js?");
 
 /***/ })
 

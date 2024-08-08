@@ -153,12 +153,15 @@ var KTContentAddTraveler = (function () {
 
         // Initialize Flatpickr for Passport Expiry Date
         flatpickr("input[name='passportExpiryDate']", {
+            enableTime: false,
             dateFormat: 'Y-m-d',
+            maxDate: 'today',
         });
 
         // Initialize Flatpickr
         flatpickr("input[name='dateOfBirth']", {
             dateFormat: 'Y-m-d',
+            maxDate: 'today',
         });
 
         // Submit button handler

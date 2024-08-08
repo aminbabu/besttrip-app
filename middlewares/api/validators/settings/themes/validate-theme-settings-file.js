@@ -33,8 +33,13 @@ module.exports = async (req, res, next) => {
     }
 
     // check if illustration is not an image of type jpg, jpeg, png
-    if (illustration && !DEFAULT_IMAGE_TYPES.includes(illustration.mimetype)) {
-        return res.status(200).json({
+    if (
+        illustration &&
+        ![...DEFAULT_IMAGE_TYPES, 'image/svg+xml'].includes(
+            illustration.mimetype
+        )
+    ) {
+        return res.status(400).json({
             message: `Illustration must be of type ${DEFAULT_IMAGE_TYPES.join(
                 ', '
             )}`,
@@ -43,7 +48,7 @@ module.exports = async (req, res, next) => {
 
     // check if illustration is of size greater than 5MB
     if (illustration?.size > DEFAULT_FILE_SIZE) {
-        return res.status(200).json({
+        return res.status(400).json({
             message: `Illustration must be of size less than ${(
                 DEFAULT_FILE_SIZE / ONE_MEGA_BYTE
             ).toFixed(2)} MB`,

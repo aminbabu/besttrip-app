@@ -43,22 +43,31 @@ var KTSettingsPolicy = (function () {
                         // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
+                        // Prepare formdata
+                        const formData = {
+                            'about-us':
+                                editors.kt_docs_ckeditor_about_us.getData(),
+                            'terms-and-conditions':
+                                editors.kt_docs_ckeditor_toc.getData(),
+                            'refund-policy':
+                                editors.kt_docs_ckeditor_refund_policy.getData(),
+                            'privacy-policy':
+                                editors.kt_docs_ckeditor_privacy_policy.getData(),
+                        };
+
+                        // Filter empty values
+                        Object.keys(formData).forEach(
+                            (key) =>
+                                formData[key] === '' && delete formData[key]
+                        );
+
                         // Check axios library docs: https://axios-http.com/docs/intro
                         axios
                             .post(
                                 submitButton
                                     .closest('form')
                                     .getAttribute('action'),
-                                {
-                                    'about-us':
-                                        editors.kt_docs_ckeditor_about_us.getData(),
-                                    'terms-and-conditions':
-                                        editors.kt_docs_ckeditor_toc.getData(),
-                                    'refund-policy':
-                                        editors.kt_docs_ckeditor_refund_policy.getData(),
-                                    'privacy-policy':
-                                        editors.kt_docs_ckeditor_privacy_policy.getData(),
-                                }
+                                formData
                             )
                             .then((response) => {
                                 if (response) {
