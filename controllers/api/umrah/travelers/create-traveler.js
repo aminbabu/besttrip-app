@@ -40,7 +40,7 @@ module.exports = async (req, res, next) => {
 
         // Validate if listedUmrah is found
         if (!listedUmrah) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message: 'Umrah Booked Package not found',
             });
         }
@@ -51,7 +51,7 @@ module.exports = async (req, res, next) => {
 
         // Validate if availableUmrahDetails is found
         if (!availableUmrahDetails) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message: 'Umrah Package Details not found',
             });
         }
@@ -66,14 +66,14 @@ module.exports = async (req, res, next) => {
 
         // Validate if availableUmrahDetails is found
         if (!listedTravelers) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message: 'Travelers not found',
             });
         }
 
         // alert message if the seats limit exceed
         if (availableUmrahDetails.seats <= listedTravelers.length)
-            return res.status(200).send({
+            return res.status(403).send({
                 message: `You can not add more than ${availableUmrahDetails.seats} travelers in this package`,
             });
 
@@ -99,12 +99,12 @@ module.exports = async (req, res, next) => {
             await traveler.save();
 
             // send traveler
-            return res.status(200).send({
+            return res.status(201).send({
                 message: 'Traveler created successfully',
                 traveler,
             });
         } else {
-            return res.status(200).send({
+            return res.status(403).send({
                 message: `You can't add more travelers to this package cause this package ${listedUmrah.status}`,
             });
         }

@@ -15,57 +15,56 @@ const {
 
 // export umrah day wise itinerary thumbnails validator
 module.exports = async (req, res, next) => {
-    let isInValidImageType = false;
-    let isInValidImageSize = false;
+    try {
+        // get day wise itinerary thumbnails from request
+        const { itineraryDays } = req.files || {};
 
-    // get day wise itinerary thumbnails from request
-    const { itineraryDays } = req.files || {};
+        // check if day wise itinerary thumbnails are not provided
+        if (!itineraryDays) {
+            return next();
+        }
 
-    // check if day wise itinerary thumbnails is not provided
-    if (!itineraryDays) {
+        // Check if day wise itinerary thumbnails is an array
+        if (!Array.isArray(itineraryDays)) {
+            return res.status(400).json({
+                message: 'Please upload valid day wise itinerary images.',
+            });
+        }
+
+        // Validate each itinerary thumbnail
+        for (const itinerary of itineraryDays) {
+            if (!itinerary?.thumbnail) {
+                continue;
+            }
+
+            // Check if thumbnail is not an image of allowed types
+            if (!DEFAULT_IMAGE_TYPES.includes(itinerary.thumbnail.mimetype)) {
+                return res.status(400).json({
+                    message: `Please upload day wise itinerary images of type ${DEFAULT_IMAGE_TYPES.join(
+                        ', '
+                    )}.`,
+                });
+            }
+
+            // Check if image size is greater than 1 MB
+            if (itinerary.thumbnail.size > ONE_MEGA_BYTE) {
+                return res.status(400).json({
+                    message: `Please upload day wise itinerary images of size less than ${(
+                        ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                    ).toFixed(2)} MB.`,
+                });
+            }
+        }
+
+        // Proceed to next middleware if all checks pass
         return next();
-    }
-
-    // Check if day wise itinerary thumbnails is not an array
-    if (!Array.isArray(itineraryDays)) {
-        return res.status(200).json({
-            message: 'Please upload valid day wise itinerary images',
+    } catch (error) {
+        console.error(
+            'Error validating day wise itinerary thumbnails:',
+            error.message
+        );
+        return res.status(500).json({
+            message: 'Internal server error. Please try again later.',
         });
     }
-
-    // Check each itinerary thumbnail
-    itineraryDays.forEach((itinerary) => {
-        // Check if thumbnail is not an image of type jpg, jpeg, png
-        if (!DEFAULT_IMAGE_TYPES.includes(itinerary?.thumbnail.mimetype)) {
-            isInValidImageType = true;
-        }
-
-        // Check if image size is greater than 1 MB
-        if (itinerary?.thumbnail.size > ONE_MEGA_BYTE) {
-            isInValidImageSize = true;
-        }
-
-        // Add return statement at the end of the arrow function
-        return null;
-    });
-
-    // Check if all checks pass
-    if (isInValidImageType) {
-        return res.status(200).json({
-            message: `Please upload valid day wise itinerary images of type ${DEFAULT_IMAGE_TYPES.join(
-                ', '
-            )}`,
-        });
-    }
-
-    if (isInValidImageSize) {
-        return res.status(200).json({
-            message: `Please upload day wise itinerary images of size less than ${(
-                ONE_MEGA_BYTE / ONE_MEGA_BYTE
-            ).toFixed(2)} MB`,
-        });
-    }
-
-    // Proceed to next middleware if all checks pass
-    return next();
 };

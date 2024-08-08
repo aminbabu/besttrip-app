@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
 
         // check if traveler exists
         if (!traveler) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message: 'Traveler not found',
             });
         }

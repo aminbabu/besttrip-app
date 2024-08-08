@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
 
         // check if umrah package type already exists
         if (existingUmrahPackageType) {
-            return res.status(200).json({
+            return res.status(409).json({
                 message: 'Umrah package type already exists',
             });
         }
@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
         await umrahPackageType.save();
 
         // send response
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'Created umrah package type successfully',
             umrahPackageType,
         });

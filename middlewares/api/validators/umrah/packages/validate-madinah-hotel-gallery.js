@@ -16,56 +16,51 @@ const {
 
 // export umrah package madinah hotel gallery validator middleware
 module.exports = async (req, res, next) => {
-    let isInValidImageType = false;
-    let isInValidImageSize = false;
+    try {
+        // get madinah hotel extra thumbnails
+        const { madinahHotelExtraThumbnails } = req.files || {};
 
-    // get madinah hotel extra thumbnails
-    const { madinahHotelExtraThumbnails } = req.files || {};
+        // check if madinah hotel extra thumbnails are not provided
+        if (!madinahHotelExtraThumbnails) {
+            return next();
+        }
 
-    // check if makka hotel extra thumbnails is not provided
-    if (!madinahHotelExtraThumbnails) {
+        // check if madinah hotel extra thumbnails is an array
+        if (!Array.isArray(madinahHotelExtraThumbnails)) {
+            return res.status(400).json({
+                message: 'Please upload valid images for Madinah hotel.',
+            });
+        }
+
+        // Validate each thumbnail
+        for (const thumbnail of madinahHotelExtraThumbnails) {
+            if (!thumbnail) continue;
+
+            // Check if thumbnail is not an image of allowed types
+            if (!DEFAULT_IMAGE_TYPES.includes(thumbnail.mimetype)) {
+                return res.status(400).json({
+                    message: `Please upload valid images for Madinah hotel of type ${DEFAULT_IMAGE_TYPES.join(
+                        ', '
+                    )}.`,
+                });
+            }
+
+            // Check if image size is greater than 1 MB
+            if (thumbnail.size > ONE_MEGA_BYTE) {
+                return res.status(400).json({
+                    message: `Please upload images for Madinah hotel of size less than ${(
+                        ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                    ).toFixed(2)} MB.`,
+                });
+            }
+        }
+
+        // Proceed to next middleware if all checks pass
         return next();
-    }
-
-    // check if makka hotel extra thumbnails is not an array
-    if (!Array.isArray(madinahHotelExtraThumbnails)) {
-        return res.status(200).json({
-            message: 'Please upload valid images of madinah hotel',
+    } catch (error) {
+        console.error('Error validating Madinah hotel gallery:', error.message);
+        return res.status(500).json({
+            message: 'Internal server error. Please try again later.',
         });
     }
-
-    // Check each extra thumbnail
-    madinahHotelExtraThumbnails.forEach((thumbnail) => {
-        // Check if thumbnail is not an image of type jpg, jpeg, png
-        if (!DEFAULT_IMAGE_TYPES.includes(thumbnail.mimetype)) {
-            isInValidImageType = true;
-        }
-
-        // Check if image size is greater than 1 MB
-        if (thumbnail.size > ONE_MEGA_BYTE) {
-            isInValidImageSize = true;
-        }
-
-        // Add return statement at the end of the arrow function
-        return null;
-    });
-
-    // Check if all checks pass
-    if (isInValidImageType) {
-        return res.status(200).json({
-            message: `Please upload valid images of madinah hotel of type 
-             ${DEFAULT_IMAGE_TYPES.join(', ')}`,
-        });
-    }
-
-    if (isInValidImageSize) {
-        return res.status(200).json({
-            message: `Please upload images of madinah hotel of size less than ${(
-                ONE_MEGA_BYTE / ONE_MEGA_BYTE
-            ).toFixed(2)} MB`,
-        });
-    }
-
-    // proceed to next middleware
-    return next();
 };

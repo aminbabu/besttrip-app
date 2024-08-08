@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
         });
 
         if (existingBooking) {
-            return res.status(200).json({
+            return res.status(400).json({
                 message: 'You have this Umrah package already in your list.',
             });
         }
@@ -56,7 +56,7 @@ module.exports = async (req, res, next) => {
         await newUmrahBooking.save();
 
         // Return success response
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'Umrah booking created successfully.',
             data: newUmrahBooking,
         });

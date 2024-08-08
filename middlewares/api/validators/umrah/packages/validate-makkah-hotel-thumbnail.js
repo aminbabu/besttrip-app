@@ -1,6 +1,6 @@
 /**
  * @file
- * /middlewares/api/validators/umrah/packages/validate-makkah-hotel-tumbnail.js
+ * /middlewares/api/validators/umrah/packages/validate-makkah-hotel-thumbnail.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -14,46 +14,57 @@ const {
     ONE_MEGA_BYTE,
 } = require('../../../../../constants');
 
-// export umrah package makkah hotel tumbnail validator middleware
+// export umrah package makkah hotel thumbnail validator middleware
 module.exports = async (req, res, next) => {
-    // get makka hotel thumbnail
-    const { makkahHotelThumbnail } = req.files || {};
+    try {
+        // get makkah hotel thumbnail
+        const { makkahHotelThumbnail } = req.files || {};
 
-    // check if makka hotel thumbnail is not provided
-    if (!makkahHotelThumbnail) {
-        return res.status(200).json({
-            message: 'Please upload a thumbnail of makkah hotel',
+        // check if makkah hotel thumbnail is not provided
+        if (!makkahHotelThumbnail) {
+            return res.status(400).json({
+                message: 'Please upload a thumbnail for the Makkah hotel.',
+            });
+        }
+
+        // check if makkah hotel thumbnail is an array
+        if (Array.isArray(makkahHotelThumbnail)) {
+            return res.status(400).json({
+                message:
+                    'Please upload only one thumbnail for the Makkah hotel.',
+            });
+        }
+
+        // check if makkah hotel thumbnail is not an image of allowed types
+        if (
+            makkahHotelThumbnail &&
+            !DEFAULT_IMAGE_TYPES.includes(makkahHotelThumbnail.mimetype)
+        ) {
+            return res.status(400).json({
+                message: `Please upload a thumbnail of the Makkah hotel of type ${DEFAULT_IMAGE_TYPES.join(
+                    ', '
+                )}.`,
+            });
+        }
+
+        // check if makkah hotel thumbnail size is greater than 1 MB
+        if (makkahHotelThumbnail?.size > ONE_MEGA_BYTE) {
+            return res.status(400).json({
+                message: `Please upload a thumbnail of the Makkah hotel that is less than ${(
+                    ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                ).toFixed(2)} MB.`,
+            });
+        }
+
+        // proceed to next middleware
+        return next();
+    } catch (error) {
+        console.error(
+            'Error validating Makkah hotel thumbnail:',
+            error.message
+        );
+        return res.status(500).json({
+            message: 'Internal server error. Please try again later.',
         });
     }
-
-    // check if makka hotel thumbnail is an array
-    if (Array.isArray(makkahHotelThumbnail)) {
-        return res.status(200).json({
-            message: 'Please upload only one thumbnail of makkah hotel',
-        });
-    }
-
-    // check if makka hotel thumbnail is not an image of type jpg, jpeg, png
-    if (
-        makkahHotelThumbnail &&
-        !DEFAULT_IMAGE_TYPES.includes(makkahHotelThumbnail.mimetype)
-    ) {
-        return res.status(200).json({
-            message: `Please upload a thumbnail of makkah hotel of type ${DEFAULT_IMAGE_TYPES.join(
-                ', '
-            )}`,
-        });
-    }
-
-    // check if makka hotel thumbnail size is greater than 1 MB
-    if (makkahHotelThumbnail?.size > ONE_MEGA_BYTE) {
-        return res.status(200).json({
-            message: `Please upload a thumbnail of makkah hotel of size less than ${(
-                ONE_MEGA_BYTE / ONE_MEGA_BYTE
-            ).toFixed(2)} MB`,
-        });
-    }
-
-    // proceed to next middleware
-    return next();
 };

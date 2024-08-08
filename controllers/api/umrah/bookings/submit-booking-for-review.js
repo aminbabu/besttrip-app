@@ -33,7 +33,7 @@ module.exports = async (req, res, next) => {
 
         // check if umrah booking exists
         if (!umrahBooking) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message:
                     'Umrah booking not found or this package is already booked',
             });
@@ -211,7 +211,7 @@ module.exports = async (req, res, next) => {
 
         // Check is there any adult traveler associated with this package or not
         if (!result?.priceByTravelers?.adult?.count) {
-            return res.status(200).send({
+            return res.status(400).send({
                 message:
                     'To book this package there should be one adult traveler',
             });
@@ -260,7 +260,7 @@ module.exports = async (req, res, next) => {
             // Update wallet balance
             if (walletDetails.balance < partialPaymentAmount) {
                 return res
-                    .status(200)
+                    .status(400)
                     .send({ message: 'Insufficient balance' });
             }
 
@@ -302,7 +302,7 @@ module.exports = async (req, res, next) => {
             // Update wallet balance
             if (walletDetails.balance < fullPaymentSubtotal) {
                 return res
-                    .status(200)
+                    .status(400)
                     .send({ message: 'Insufficient balance' });
             }
 

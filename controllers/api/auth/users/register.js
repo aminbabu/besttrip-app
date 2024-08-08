@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
 
         // check if user already exists
         if (user) {
-            return res.status(200).json({
+            return res.status(400).json({
                 message:
                     'User with role admin already exists. Please contact support.',
             });
@@ -75,7 +75,7 @@ module.exports = async (req, res, next) => {
         await newUser.save();
 
         // return response
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'User created successfully',
         });
     } catch (error) {

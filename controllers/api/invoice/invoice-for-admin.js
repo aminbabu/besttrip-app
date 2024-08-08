@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
         );
 
         if (!invoice) {
-            return res.status(200).json({ message: 'Invoice not found' });
+            return res.status(404).json({ message: 'Invoice not found' });
         }
 
         // Send response

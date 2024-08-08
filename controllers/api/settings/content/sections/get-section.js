@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
 
         // check if section exists
         if (!section) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'Content section not found',
             });
         }

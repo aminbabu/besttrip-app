@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
         // Ensure the new date is valid
         if (isNaN(newExpiryDate.getTime())) {
             return res
-                .status(200)
+                .status(400)
                 .json({ message: 'Invalid expiry date provided' });
         }
 
@@ -47,7 +47,7 @@ module.exports = async (req, res, next) => {
                 req.body.partialPaymentExpiryDate;
             await invoice.save();
         } else {
-            return res.status(200).json({
+            return res.status(400).json({
                 message:
                     "Partial payment expiry date can't be updated because the invoice is marked as 'full-payment'",
             });

@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
 
         // check if wallets exist
         if (!wallets.length) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'No wallets found',
             });
         }

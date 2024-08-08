@@ -28,14 +28,14 @@ module.exports = async (req, res, next) => {
         });
 
         if (!invoice) {
-            return res.status(200).send({ message: 'Invoice not found' });
+            return res.status(404).send({ message: 'Invoice not found' });
         }
 
         // Check if the partial payment expiry date has passed
         const currentDate = new Date();
         if (invoice.partialPaymentExpiryDate < currentDate) {
             return res
-                .status(200)
+                .status(400)
                 .send({ message: 'Payment is no longer valid due to expiry' });
         }
 
@@ -51,7 +51,7 @@ module.exports = async (req, res, next) => {
                 isNaN(invoice.partialPaymentRestAmount)
             ) {
                 return res
-                    .status(200)
+                    .status(400)
                     .send({ message: 'Invalid invoice amounts' });
             }
 
@@ -65,7 +65,7 @@ module.exports = async (req, res, next) => {
                         ? `You should pay only ${remainingAmount}. But you're trying to pay ${partialPaymentAmount}. Please adjust the amount.`
                         : 'Payment amount exceeds the remaining balance or the full payment has already been made.';
 
-                return res.status(200).send({ message });
+                return res.status(400).send({ message });
             }
 
             // Update invoice with new paid amount and rest amount
@@ -80,7 +80,7 @@ module.exports = async (req, res, next) => {
 
             if (walletDetails.balance < partialPaymentAmount) {
                 return res
-                    .status(200)
+                    .status(400)
                     .send({ message: 'Insufficient balance' });
             }
 

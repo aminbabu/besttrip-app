@@ -51,7 +51,7 @@ module.exports = async (req, res, next) => {
 
             // check if traveler exists
             if (!traveler) {
-                return res.status(200).send({
+                return res.status(404).send({
                     message: 'Traveler not found',
                 });
             }
@@ -75,7 +75,7 @@ module.exports = async (req, res, next) => {
                 traveler,
             });
         } else {
-            return res.status(200).send({
+            return res.status(403).send({
                 message: `You can't update any travelers details to this package cause this package ${listedUmraStatus.status}`,
             });
         }

@@ -7,18 +7,12 @@
  */
 
 // dependencies
-const mongoose = require('mongoose');
 const { UmrahBooking } = require('../../../../models');
 
 module.exports = async (req, res, next) => {
     try {
         // get ID from request params
         const { id } = req.params;
-
-        // Validate ID format
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(200).json({ message: 'Invalid ID format' });
-        }
 
         // Define aggregation stages
         const matchStage = {
@@ -103,7 +97,7 @@ module.exports = async (req, res, next) => {
 
         if (umrahBookingsWithTravelers.length === 0) {
             return res
-                .status(200)
+                .status(404)
                 .json({ message: 'No data found for the given ID' });
         }
 

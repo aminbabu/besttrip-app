@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
 
         // check if meta settings not found
         if (!metaSetting) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'Meta settings not found',
             });
         }

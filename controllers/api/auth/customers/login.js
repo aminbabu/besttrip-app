@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
             .populate('loginHistory');
 
         if (!customer) {
-            return res.status(200).json({
+            return res.status(401).json({
                 message: 'Please check your email and password',
             });
         }
@@ -37,21 +37,21 @@ module.exports = async (req, res, next) => {
 
         // check if password match
         if (!match) {
-            return res.status(200).json({
+            return res.status(401).json({
                 message: 'Please check your email and password',
             });
         }
 
         // check if customer status is active
         if (customer.status !== 'active') {
-            return res.status(200).json({
+            return res.status(403).json({
                 message: 'Customer is not active. Please contact support',
             });
         }
 
         // check if customer is verified
         if (!customer.isVerified) {
-            return res.status(200).json({
+            return res.status(403).json({
                 message: 'Please verify your email',
             });
         }
@@ -61,7 +61,7 @@ module.exports = async (req, res, next) => {
 
         // check if history status is blocked
         if (history.status === 'blocked') {
-            return res.status(200).json({
+            return res.status(403).json({
                 message: 'This account is blocked. Please contact support',
             });
         }

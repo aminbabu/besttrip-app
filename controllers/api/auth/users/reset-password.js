@@ -26,14 +26,14 @@ module.exports = async (req, res, next) => {
         });
 
         if (!resetPasswordToken) {
-            return res.status(200).json({
+            return res.status(400).json({
                 message: 'Invalid or expired token',
             });
         }
 
         // check if token is expired
         if (moment(resetPasswordToken.expires).isBefore(moment())) {
-            return res.status(200).json({
+            return res.status(400).json({
                 message: 'Invalid or expired token',
             });
         }
@@ -43,7 +43,7 @@ module.exports = async (req, res, next) => {
 
         // check if user exists
         if (!user) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'User not found',
             });
         }

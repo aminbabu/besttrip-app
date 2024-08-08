@@ -16,26 +16,26 @@ module.exports = async (req, res, next) => {
         // get validated data
         const validatedData = req.body;
 
-        // get payments settings
+        // Check if payments settings already exist
         const existingPaymentsSetting = await PaymentSettings.findOne({
             accountNumber: validatedData.accountNumber,
         });
 
-        // check if payments settings exist
         if (existingPaymentsSetting) {
-            return res.status(200).json({
-                message: 'Payments settings already exists',
+            return res.status(409).json({
+                message:
+                    'Payments settings with this account number already exists',
             });
         }
 
-        // create payments settings
+        // Create payments settings
         const paymentsSetting = new PaymentSettings(validatedData);
 
-        // save payments settings
+        // Save payments settings
         await paymentsSetting.save();
 
-        // return response
-        return res.status(200).json({
+        // Return response
+        return res.status(201).json({
             message: 'Created payments settings successfully',
             paymentsSetting,
         });

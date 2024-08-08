@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
 
         // check if any payment settings not found
         if (paymentsSetting.length === 0) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message: 'No payments settings found with the provided IDs',
             });
         }

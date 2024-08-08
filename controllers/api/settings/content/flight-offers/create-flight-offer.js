@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
         await flightOffer.save();
 
         // send response
-        return res.status(200).send({
+        return res.status(201).send({
             message: 'Created flight offer successfully',
             flightOffer,
         });

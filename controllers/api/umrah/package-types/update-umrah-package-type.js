@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
         // check if umrah package type not found
         if (!umrahPackageType) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'Umrah package type not found',
             });
         }
@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
 
         // check if umrah package type already exists
         if (existingUmrahPackageType) {
-            return res.status(200).json({
+            return res.status(409).json({
                 message: 'Umrah package type already exists',
             });
         }

@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
         const user = await User.findOne({ email }).select('+password');
 
         if (!user) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'Please check your email and password',
             });
         }
@@ -34,7 +34,7 @@ module.exports = async (req, res, next) => {
 
         // check if password match
         if (!match) {
-            return res.status(200).json({
+            return res.status(401).json({
                 message: 'Please check your email and password',
             });
         }

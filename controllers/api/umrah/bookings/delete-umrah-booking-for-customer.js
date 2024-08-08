@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
 
         // Check if the Umrah booking exist or not
         if (!umrahBooking) {
-            return res.status(200).json({ message: 'Umrah booking not found' });
+            return res.status(404).json({ message: 'Umrah booking not found' });
         }
 
         // Check if the booking status prohibits deletion
@@ -37,7 +37,7 @@ module.exports = async (req, res, next) => {
                 UMRAH_BOOKING_STATUS[4],
             ].includes(umrahBooking.status)
         ) {
-            return res.status(200).json({
+            return res.status(403).json({
                 message: `You can't delete this booking cause it is already ${umrahBooking.status}`,
             });
         }
@@ -63,7 +63,7 @@ module.exports = async (req, res, next) => {
 
         // Check if any travelers are found
         if (travelers.length === 0) {
-            return res.status(200).json({
+            return res.status(404).json({
                 success: false,
                 message: 'No travelers found for this Umrah booking.',
             });

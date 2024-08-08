@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
 
         // check if any hotel offers not found
         if (flightOffersToDelete.length === 0) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message: 'No hotel offers found with the provided IDs',
             });
         }

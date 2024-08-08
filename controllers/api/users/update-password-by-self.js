@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
         // check if user exists
         if (!user) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'User not found',
             });
         }
@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
 
         // check if password match
         if (!match) {
-            return res.status(200).json({
+            return res.status(401).json({
                 message: 'Current password is incorrect',
             });
         }

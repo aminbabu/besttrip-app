@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
         // check if blog post exists
         if (!blogPost) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message: 'Blog post not found',
             });
         }

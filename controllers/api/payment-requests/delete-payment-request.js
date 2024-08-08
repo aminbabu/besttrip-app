@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
 
         // check if payment request exist
         if (!paymentRequest) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'Payments request not found',
             });
         }

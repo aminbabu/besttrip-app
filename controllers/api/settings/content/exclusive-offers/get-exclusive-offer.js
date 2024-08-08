@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
 
         // check if exclusive offer exists
         if (!exclusiveOffer) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message: 'Exclusive offer not found',
             });
         }

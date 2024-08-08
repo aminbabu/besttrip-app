@@ -8,6 +8,7 @@
  * @update_date 03 Jul, 2024
  */
 
+// dependencies
 const {
     DEFAULT_IMAGE_TYPES,
     ONE_MEGA_BYTE,
@@ -15,46 +16,53 @@ const {
 
 // export exclusive offer file validator middleware
 module.exports = async (req, res, next) => {
-    // get thumbnail
-    const { thumbnail } = req.files || {};
+    try {
+        // get file
+        const { file } = req.files || {};
 
-    // check if the req method is not post and thumbnail
-    if (req.method !== 'POST' && !thumbnail) {
+        // check if the req method is not POST and file is not present
+        if (req.method !== 'POST' && !file) {
+            return next();
+        }
+
+        // check if file is not uploaded
+        if (!file) {
+            return res.status(400).json({
+                message: 'No file uploaded. Please upload a file.',
+            });
+        }
+
+        // check if file is an array
+        if (Array.isArray(file)) {
+            return res.status(400).json({
+                message: 'Please upload only one file.',
+            });
+        }
+
+        // check if file is not an image of allowed types
+        if (!DEFAULT_IMAGE_TYPES.includes(file.mimetype)) {
+            return res.status(400).json({
+                message: `Invalid file type. Please upload a file of type ${DEFAULT_IMAGE_TYPES.join(
+                    ', '
+                )}.`,
+            });
+        }
+
+        // check if file size is within the allowed limit (e.g., 1 MB)
+        if (file.size > ONE_MEGA_BYTE) {
+            return res.status(400).json({
+                message: `File size exceeds the limit. Please upload a file smaller than ${(
+                    ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                ).toFixed(2)} MB.`,
+            });
+        }
+
+        // proceed to next middleware
         return next();
-    }
-
-    if (!thumbnail) {
-        // check if thumbnail is not uploaded
-        return res.status(200).json({
-            message: 'Please upload a thumbnail',
+    } catch (error) {
+        console.error('Error validating exclusive offer file:', error.message);
+        return res.status(500).json({
+            message: 'Internal server error. Please try again later.',
         });
     }
-
-    // check if thumbnail is an array
-    if (Array.isArray(thumbnail)) {
-        return res.status(200).json({
-            message: 'Please upload only one thumbnail',
-        });
-    }
-
-    // check if thumbnail is not an image of type jpg, jpeg, png
-    if (thumbnail && !DEFAULT_IMAGE_TYPES.includes(thumbnail.mimetype)) {
-        return res.status(200).json({
-            message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(
-                ', '
-            )}`,
-        });
-    }
-
-    // check if thumbnail size is greater than 1 MB
-    if (thumbnail?.size > ONE_MEGA_BYTE) {
-        return res.status(200).json({
-            message: `Please upload a thumbnail of size less than ${(
-                ONE_MEGA_BYTE / ONE_MEGA_BYTE
-            ).toFixed(2)} MB`,
-        });
-    }
-
-    // proceed to next middleware
-    return next();
 };

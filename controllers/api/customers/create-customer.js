@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
 
         // check if customer already exists
         if (customer) {
-            return res.status(200).json({
+            return res.status(409).json({
                 message:
                     'Customer already exists. Please choose a different email or phone number.',
             });
@@ -78,7 +78,7 @@ module.exports = async (req, res, next) => {
         await newCustomer.save();
 
         // return response
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'Created customer successfully',
             customer,
         });

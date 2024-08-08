@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
 
         // check if theme exists
         if (!theme) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'Theme not found',
             });
         }

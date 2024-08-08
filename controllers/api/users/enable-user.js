@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
 
         // check if user exists
         if (!user) {
-            return res.status(200).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'User not found' });
         }
 
         // set user status to active
@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
         await user.save();
 
         // return response
-        return res.json({ message: 'Enabled user successfully' });
+        return res.status(200).json({ message: 'Enabled user successfully' });
     } catch (error) {
         return next(error);
     }

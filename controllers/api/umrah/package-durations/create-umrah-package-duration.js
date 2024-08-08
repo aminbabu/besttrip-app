@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
 
         // check if umrah package duration already exists
         if (existingUmrahPackageDuration) {
-            return res.status(200).json({
+            return res.status(409).json({
                 message: 'Umrah package duration already exists',
             });
         }
@@ -39,7 +39,7 @@ module.exports = async (req, res, next) => {
         await umrahPackageDuration.save();
 
         // send response
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'Created umrah package duration successfully',
             umrahPackageDuration,
         });

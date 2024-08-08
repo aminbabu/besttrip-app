@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
 
         // check if thumbnail is uploaded
         if (!thumbnail) {
-            return res.status(200).json({
+            return res.status(400).json({
                 message: 'Please upload a thumbnail',
             });
         }

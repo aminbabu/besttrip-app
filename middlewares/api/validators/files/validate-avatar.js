@@ -16,34 +16,48 @@ const {
 
 // export validate avatar middleware
 module.exports = (req, res, next) => {
-    // get avatar file
-    const { avatar } = req.files || {};
+    try {
+        // get avatar file
+        const { avatar } = req.files || {};
 
-    // check if file is an array
-    if (avatar && Array.isArray(avatar)) {
-        return res.status(200).json({
-            message: 'Please upload a valid image',
+        // check if file is not provided
+        if (!avatar) {
+            return res.status(400).json({
+                message: 'No file uploaded. Please upload an image.',
+            });
+        }
+
+        // check if file is an array (should be a single file)
+        if (Array.isArray(avatar)) {
+            return res.status(400).json({
+                message: 'Please upload a single image file.',
+            });
+        }
+
+        // check if file is an image of the allowed types
+        if (!DEFAULT_IMAGE_TYPES.includes(avatar.mimetype)) {
+            return res.status(400).json({
+                message: `Invalid file type. Please upload an image of type ${DEFAULT_IMAGE_TYPES.join(
+                    ', '
+                )}.`,
+            });
+        }
+
+        // check if file size is within the allowed limit (e.g., 0.5 MB)
+        if (avatar.size > HALF_MEGA_BYTE) {
+            return res.status(400).json({
+                message: `File size exceeds the limit. Please upload an image smaller than ${(
+                    HALF_MEGA_BYTE / ONE_MEGA_BYTE
+                ).toFixed(2)} MB.`,
+            });
+        }
+
+        // proceed to next middleware
+        next();
+    } catch (error) {
+        console.error('Error validating avatar:', error.message);
+        res.status(500).json({
+            message: 'Internal server error. Please try again later.',
         });
     }
-
-    // check if file is not an image of type jpeg, jpg, png
-    if (avatar && !DEFAULT_IMAGE_TYPES.includes(avatar.mimetype)) {
-        return res.status(200).json({
-            message: `Please upload an image of type ${DEFAULT_IMAGE_TYPES.join(
-                ', '
-            )}`,
-        });
-    }
-
-    // check if file size is greater than 0.5 MB
-    if (avatar && avatar.size > HALF_MEGA_BYTE) {
-        return res.status(200).json({
-            message: `Please upload an image of size less than ${(
-                HALF_MEGA_BYTE / ONE_MEGA_BYTE
-            ).toFixed(2)} MB`,
-        });
-    }
-
-    // proceed to next middleware
-    return next();
 };

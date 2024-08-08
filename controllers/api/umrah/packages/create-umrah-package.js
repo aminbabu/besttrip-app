@@ -66,7 +66,7 @@ module.exports = async (req, res, next) => {
         await umrahPackage.save();
 
         // send response
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'Created umrah package package successfully',
             umrahPackage,
         });

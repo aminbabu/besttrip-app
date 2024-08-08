@@ -26,14 +26,14 @@ module.exports = async (req, res, next) => {
 
     // check if covid certificate is not uploaded
     if (!travelerCovidCertificate) {
-        return res.status(200).json({
+        return res.status(400).json({
             message: 'Please upload a travelerCovidCertificate',
         });
     }
 
     // check if covid certificate is an array
     if (Array.isArray(travelerCovidCertificate)) {
-        return res.status(200).json({
+        return res.status(400).json({
             message: 'Please upload only one travelerCovidCertificate',
         });
     }
@@ -43,7 +43,7 @@ module.exports = async (req, res, next) => {
         travelerCovidCertificate &&
         !DEFAULT_IMAGE_TYPES.includes(travelerCovidCertificate.mimetype)
     ) {
-        return res.status(200).json({
+        return res.status(400).json({
             message: `Please upload a valid image of type ${DEFAULT_IMAGE_TYPES.join(
                 ', '
             )}`,
@@ -52,9 +52,10 @@ module.exports = async (req, res, next) => {
 
     // check if covid certificate size is greater than Max File Size
     if (travelerCovidCertificate?.size > MAX_FILE_SIZE) {
-        return res.status(200).json({
+        return res.status(400).json({
             message: `Please upload a travelerCovidCertificate of size less than ${(
-                MAX_FILE_SIZE / MAX_FILE_SIZE
+                MAX_FILE_SIZE /
+                (1024 * 1024)
             ).toFixed(2)} MB`,
         });
     }

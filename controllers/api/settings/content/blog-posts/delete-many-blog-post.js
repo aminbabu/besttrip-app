@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
 
         // check if any blog posts not found
         if (blogsPosts.length === 0) {
-            return res.status(200).send({
+            return res.status(404).send({
                 message: 'No blog posts found with the provided IDs',
             });
         }

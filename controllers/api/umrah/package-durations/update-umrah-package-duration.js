@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
         // check if umrah package duration not found
         if (!umrahPackageDuration) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'Umrah package duration not found',
             });
         }
@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
 
         // check if umrah package duration already exists
         if (existingUmrahPackageDuration) {
-            return res.status(200).json({
+            return res.status(409).json({
                 message: 'Umrah package duration already exists',
             });
         }

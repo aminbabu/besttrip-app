@@ -14,21 +14,21 @@ const {
     ONE_MEGA_BYTE,
 } = require('../../../../../constants');
 
-// export umrah package package thumbnail validator middleware
+// export umrah package thumbnail validator middleware
 module.exports = async (req, res, next) => {
     // get umrah package thumbnail
     const { umrahThumbnail } = req.files || {};
 
     // check if umrah thumbnail is not provided
     if (!umrahThumbnail) {
-        return res.status(200).json({
+        return res.status(400).json({
             message: 'Please upload a thumbnail of umrah package',
         });
     }
 
-    // check if makka hotel thumbnail is an array
+    // check if umrah thumbnail is an array
     if (Array.isArray(umrahThumbnail)) {
-        return res.status(200).json({
+        return res.status(400).json({
             message: 'Please upload only one thumbnail of umrah package',
         });
     }
@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
         umrahThumbnail &&
         !DEFAULT_IMAGE_TYPES.includes(umrahThumbnail.mimetype)
     ) {
-        return res.status(200).json({
+        return res.status(400).json({
             message: `Please upload a thumbnail of umrah package of type ${DEFAULT_IMAGE_TYPES.join(
                 ', '
             )}`,
@@ -47,7 +47,7 @@ module.exports = async (req, res, next) => {
 
     // check if umrah thumbnail size is greater than 1 MB
     if (umrahThumbnail?.size > ONE_MEGA_BYTE) {
-        return res.status(200).json({
+        return res.status(400).json({
             message: `Please upload a thumbnail of umrah package of size less than ${(
                 ONE_MEGA_BYTE / ONE_MEGA_BYTE
             ).toFixed(2)} MB`,

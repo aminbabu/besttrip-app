@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
 
         // check if there is no file
         if (!files || Object.keys(files).length === 0) {
-            return res.status(200).json({
+            return res.status(400).json({
                 message: 'No file uploaded',
             });
         }

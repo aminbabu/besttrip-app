@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
 
         // check if history exists
         if (!history) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: 'Login history not found',
             });
         }

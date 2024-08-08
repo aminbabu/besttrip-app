@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
         await wallet.save();
 
         // return response
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'Created wallet successfully',
             wallet,
         });
