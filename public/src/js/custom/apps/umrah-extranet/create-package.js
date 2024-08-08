@@ -126,6 +126,7 @@ var KTCreatePackage = (function () {
                         )
                         .then((response) => {
                             if (response) {
+                                console.log(response);
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
                                     text:

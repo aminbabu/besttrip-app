@@ -10,6 +10,7 @@
 // dependencies
 const { z } = require('zod');
 const moment = require('moment');
+const { isMongoId } = require('validator');
 const {
     UMRAH_PACKAGE_STATUS,
     UMRAH_PACKAGE_SCHEDULES,
@@ -92,6 +93,14 @@ module.exports = z
                     message: 'Please provide a valid expiry date',
                 }
             ),
+        totalDaysAndNights: z
+            .string({
+                required_error: 'Id is required',
+                invalid_type_error: 'Please provide a valid id',
+            })
+            .refine((id) => isMongoId(id), {
+                message: 'Please provide a valid id',
+            }),
         type: z
             .string({
                 required_error: 'Id is required',

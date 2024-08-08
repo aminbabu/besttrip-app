@@ -69,7 +69,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*************************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// vis-timeline - An interactive visualization chart to visualize data in time: https://github.com/visjs/vis-timeline\n\nwindow.vis = __webpack_require__(/*! vis-timeline/standalone */ \"./node_modules/vis-timeline/standalone/index.js\");\nwindow.Handlebars = __webpack_require__(/*! handlebars */ \"./node_modules/handlebars/dist/handlebars.js\");\n\n__webpack_require__(/*! vis-timeline/dist/vis-timeline-graph2d.css */ \"./node_modules/vis-timeline/dist/vis-timeline-graph2d.css\");\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/vis-timeline/vis-timeline.js?");
+eval("// vis-timeline - An interactive visualization chart to visualize data in time: https://github.com/visjs/vis-timeline\r\n\r\nwindow.vis = __webpack_require__(/*! vis-timeline/standalone */ \"./node_modules/vis-timeline/standalone/index.js\");\r\nwindow.Handlebars = __webpack_require__(/*! handlebars */ \"./node_modules/handlebars/dist/handlebars.js\");\r\n\r\n__webpack_require__(/*! vis-timeline/dist/vis-timeline-graph2d.css */ \"./node_modules/vis-timeline/dist/vis-timeline-graph2d.css\");\r\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/vis-timeline/vis-timeline.js?");
 
 /***/ })
 
