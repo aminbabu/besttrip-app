@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
         });
 
         // return render view
-        return res.render('dashboard/customers', {
+        return res.render('dashboard/customers/index', {
             title: 'Customers',
             user: req.user,
             customers,

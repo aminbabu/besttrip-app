@@ -14,7 +14,10 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewCustomers, viewCustomer } = require('../../../controllers/dashboard/customers');
+const {
+    viewCustomers,
+    viewCustomer,
+} = require('../../../controllers/dashboard/customers');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
@@ -40,7 +43,7 @@ router.get('/', viewCustomers);
 
 /**
  * @description - view customer view route
- * @param {string} path - '/dashboard/customers/view'
+ * @param {string} path - '/dashboard/customers/:id'
  * @param {function} controller - ['viewCustomer']
  * @returns {object} - router
  * @access private - ['all']

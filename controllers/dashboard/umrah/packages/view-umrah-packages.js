@@ -85,8 +85,6 @@ module.exports = async (req, res) => {
             projectStage,
         ]);
 
-        console.log(umrahPackages);
-
         // return render view
         return res.render('dashboard/umrah/packages', {
             title: 'Umrah Packages',

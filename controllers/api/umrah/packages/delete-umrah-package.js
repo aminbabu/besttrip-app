@@ -19,6 +19,8 @@ module.exports = async (req, res, next) => {
         // get umrah package
         const umrahPackage = await UmrahPackage.findById(id);
 
+        return console.log(umrahPackage);
+
         // check if umrah package exists
         if (!umrahPackage) {
             return res.status(404).json({

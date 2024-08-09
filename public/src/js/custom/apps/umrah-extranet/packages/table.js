@@ -112,6 +112,8 @@ var KTUmrahExtranetPackageList = (function () {
             d.addEventListener('click', function (e) {
                 e.preventDefault();
 
+                const url = d.getAttribute('href');
+
                 // Select parent row
                 const parent = e.target.closest('tr');
 
@@ -133,23 +135,35 @@ var KTUmrahExtranetPackageList = (function () {
                     },
                 }).then(function (result) {
                     if (result.value) {
-                        Swal.fire({
-                            text: 'You have deleted ' + packageName + '!.',
-                            icon: 'success',
-                            buttonsStyling: false,
-                            confirmButtonText: 'Ok, got it!',
-                            customClass: {
-                                confirmButton: 'btn fw-bold btn-primary',
-                            },
-                        })
-                            .then(function () {
-                                // Remove current row
-                                datatable.row($(parent)).remove().draw();
-                            })
-                            .then(function () {
-                                // Detect checked checkboxes
-                                toggleToolbars();
-                            });
+                        axios.delete(url).then((response) => {
+                            console.log(response);
+                            if (response) {
+                                Swal.fire({
+                                    text:
+                                        'You have deleted ' +
+                                        packageName +
+                                        '!.',
+                                    icon: 'success',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton:
+                                            'btn fw-bold btn-primary',
+                                    },
+                                })
+                                    .then(function () {
+                                        // Remove current row
+                                        datatable
+                                            .row($(parent))
+                                            .remove()
+                                            .draw();
+                                    })
+                                    .then(function () {
+                                        // Detect checked checkboxes
+                                        toggleToolbars();
+                                    });
+                            }
+                        });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
                             text: packageName + ' was not deleted.',
