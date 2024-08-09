@@ -118,10 +118,6 @@ router.post(
     isAllowed(['admin']),
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
-    (req, res, next) => {
-        console.log('req.files', req.files);
-        next();
-    },
     validateUmrahPackageGallery,
     validateUmrahOutbound,
     validateMakkahHotelTumbnail,
@@ -139,6 +135,9 @@ router.post(
     validateUmrahThumbnail,
     validateUmrah,
     validateTermsAndConditions,
+    /*    (req, res, next) => {
+        return console.log('req.files', req.files, 'req.body', req.body);
+    }, */
     uploadPackageThumbnail('/umrah/package'),
     uploadPackageGallery('/umrah/package'),
     uploadMakkahHotelThumbnail('/umrah/package'),

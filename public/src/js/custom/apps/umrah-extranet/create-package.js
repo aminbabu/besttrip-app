@@ -126,7 +126,6 @@ var KTCreatePackage = (function () {
                         )
                         .then((response) => {
                             if (response) {
-                                console.log(response);
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
                                     text:
@@ -327,23 +326,6 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    adultPartialPrice: {
-                        validators: {
-                            notEmpty: {
-                                message:
-                                    'Adult package partial price is required',
-                            },
-                            integer: {
-                                message: 'The value must be a number',
-                            },
-                            greaterThan: {
-                                min: 0,
-                                inclusive: false,
-                                message:
-                                    'Adult package partial price must be a positive number',
-                            },
-                        },
-                    },
                     childPrice: {
                         validators: {
                             notEmpty: {
@@ -360,23 +342,6 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    childPartialPrice: {
-                        validators: {
-                            notEmpty: {
-                                message:
-                                    'Child package partial price is required',
-                            },
-                            integer: {
-                                message: 'The value must be a number',
-                            },
-                            greaterThan: {
-                                min: 0,
-                                inclusive: false,
-                                message:
-                                    'Child package partial price must be a positive number',
-                            },
-                        },
-                    },
                     infantPrice: {
                         validators: {
                             notEmpty: {
@@ -390,23 +355,6 @@ var KTCreatePackage = (function () {
                                 inclusive: false,
                                 message:
                                     'Infant package price must be a positive number',
-                            },
-                        },
-                    },
-                    infantPartialPrice: {
-                        validators: {
-                            notEmpty: {
-                                message:
-                                    'Infant package partial price is required',
-                            },
-                            integer: {
-                                message: 'The value must be a number',
-                            },
-                            greaterThan: {
-                                min: 0,
-                                inclusive: false,
-                                message:
-                                    'Infant package partial price must be a positive number',
                             },
                         },
                     },
