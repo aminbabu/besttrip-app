@@ -205,8 +205,8 @@ var KTCreatePackage = (function () {
                                     allowOutsideClick: false,
                                 }).then(() => {
                                     // Reset form
-                                    // form.reset();
-                                    // location.reload();
+                                    form.reset();
+                                    location.reload();
                                 });
                             } else {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/

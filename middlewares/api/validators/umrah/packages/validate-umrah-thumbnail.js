@@ -11,6 +11,7 @@
 // dependencies
 const {
     DEFAULT_IMAGE_TYPES,
+    DEFAULT_FILE_SIZE,
     ONE_MEGA_BYTE,
 } = require('../../../../../constants');
 
@@ -45,11 +46,11 @@ module.exports = async (req, res, next) => {
         });
     }
 
-    // check if umrah thumbnail size is greater than 1 MB
-    if (umrahThumbnail?.size > ONE_MEGA_BYTE) {
+    // check if umrah thumbnail size is greater than 5 MB
+    if (umrahThumbnail?.size > DEFAULT_FILE_SIZE) {
         return res.status(400).json({
             message: `Please upload a thumbnail of umrah package of size less than ${(
-                ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                DEFAULT_FILE_SIZE / ONE_MEGA_BYTE
             ).toFixed(2)} MB`,
         });
     }

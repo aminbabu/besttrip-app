@@ -21,11 +21,16 @@ module.exports =
 
         // get validated data
         const { id } = req.params || {};
-        const { extraThumbnails } = req.files || {};
+        let { extraThumbnails } = req.files || {};
 
         // check if extra thumbnails exists
         if (!extraThumbnails) {
             return next();
+        }
+
+        // Convert extraThumbnails to an array if it's not already
+        if (!Array.isArray(extraThumbnails)) {
+            extraThumbnails = [extraThumbnails];
         }
 
         // check if id exists

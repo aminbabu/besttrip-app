@@ -407,15 +407,18 @@ module.exports = new Schema(
             required: [true, 'Transport type is required'],
         },
         transportAirportToHotel: {
-            type: Boolean,
+            type: String,
+            enum: ['Yes', 'No'],
             required: [true, 'Airport to hotel is required'],
         },
         transportVisitorPlaces: {
-            type: Boolean,
+            type: String,
+            enum: ['Yes', 'No'],
             required: [true, 'Visitor places is required'],
         },
         transportHotelToAirport: {
-            type: Boolean,
+            type: String,
+            enum: ['Yes', 'No'],
             required: [true, 'Hotel to airport is required'],
         },
         transportServices: {

@@ -11,6 +11,7 @@
 // dependencies
 const {
     DEFAULT_IMAGE_TYPES,
+    DEFAULT_FILE_SIZE,
     ONE_MEGA_BYTE,
 } = require('../../../../../constants');
 
@@ -43,11 +44,11 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // check if madinah hotel thumbnail size is greater than 1 MB
-        if (madinahHotelThumbnail.size > ONE_MEGA_BYTE) {
+        // check if madinah hotel thumbnail size is greater than 5 MB
+        if (madinahHotelThumbnail.size > DEFAULT_FILE_SIZE) {
             return res.status(400).json({
                 message: `Please upload a thumbnail for Madinah hotel of size less than ${(
-                    ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                    DEFAULT_FILE_SIZE / ONE_MEGA_BYTE
                 ).toFixed(2)} MB.`,
             });
         }

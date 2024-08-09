@@ -10,6 +10,7 @@
 // dependencies
 const {
     DEFAULT_IMAGE_TYPES,
+    DEFAULT_FILE_SIZE,
     ONE_MEGA_BYTE,
 } = require('../../../../../constants');
 
@@ -47,10 +48,10 @@ module.exports = async (req, res, next) => {
             }
 
             // Check if image size is greater than 1 MB
-            if (itinerary.thumbnail.size > ONE_MEGA_BYTE) {
+            if (itinerary.thumbnail.size > DEFAULT_FILE_SIZE) {
                 return res.status(400).json({
                     message: `Please upload day wise itinerary images of size less than ${(
-                        ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                        DEFAULT_FILE_SIZE / ONE_MEGA_BYTE
                     ).toFixed(2)} MB.`,
                 });
             }

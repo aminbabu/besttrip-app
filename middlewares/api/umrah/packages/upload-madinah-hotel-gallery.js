@@ -21,11 +21,16 @@ module.exports =
 
         // get validated data
         const { id } = req.params || {};
-        const { madinahhHotelExtraThumbnails } = req.files || {};
+        let { madinahhHotelExtraThumbnails } = req.files || {};
 
         // check if extra thumbnails exists
         if (!madinahhHotelExtraThumbnails) {
             return next();
+        }
+
+        // Convert madinahhHotelExtraThumbnails to an array if it's not already
+        if (!Array.isArray(madinahhHotelExtraThumbnails)) {
+            madinahhHotelExtraThumbnails = [madinahhHotelExtraThumbnails];
         }
 
         // check if id exists
@@ -41,7 +46,7 @@ module.exports =
                 (thumbnail) =>
                     thumbnail &&
                     fs.unlinkSync(
-                        path.join(__dirname, './../../../../public', thumbnail)
+                        path.join(__dirname, '../../../../public', thumbnail)
                     )
             );
         }
@@ -56,7 +61,7 @@ module.exports =
                 );
                 const uploadLogoPath = path.join(
                     __dirname,
-                    './../../../../public',
+                    '../../../../public',
                     thumbnailPath
                 );
 

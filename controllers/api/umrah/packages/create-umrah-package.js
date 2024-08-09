@@ -27,16 +27,16 @@ module.exports = async (req, res, next) => {
         } = req.files;
 
         console.log('validatedData', validatedData);
-        console.log({
-            thumbnail,
-            extraThumbnails,
-            makkahHotelThumbnail,
-            makkahHotelExtraThumbnails,
-            madinahHotelThumbnail,
-            madinahhHotelExtraThumbnails,
-            itineraryDays,
-            umrahThumbnail,
-        });
+        // console.log({
+        //     thumbnail,
+        //     extraThumbnails,
+        //     makkahHotelThumbnail,
+        //     makkahHotelExtraThumbnails,
+        //     madinahHotelThumbnail,
+        //     madinahhHotelExtraThumbnails,
+        //     itineraryDays,
+        //     umrahThumbnail,
+        // });
 
         // create umrah package
         const umrahPackage = new UmrahPackage({

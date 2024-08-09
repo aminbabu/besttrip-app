@@ -28,8 +28,7 @@ module.exports = z
                 invalid_type_error: 'Please provide a valid ziyarah Makkah',
             })
             .refine(
-                (ziyarahMakka) =>
-                    UMRAH_PACKAGE_BOOLEAN.includes(ziyarahMakka.toLowerCase()),
+                (ziyarahMakka) => UMRAH_PACKAGE_BOOLEAN.includes(ziyarahMakka),
                 {
                     message: `Please provide a valid ziyarah Makkah. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(
                         ', '
@@ -43,9 +42,7 @@ module.exports = z
             })
             .refine(
                 (ziyarahMadinah) =>
-                    UMRAH_PACKAGE_BOOLEAN.includes(
-                        ziyarahMadinah.toLowerCase()
-                    ),
+                    UMRAH_PACKAGE_BOOLEAN.includes(ziyarahMadinah),
                 {
                     message: `Please provide a valid ziyarah Madinah. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(
                         ', '
@@ -58,8 +55,7 @@ module.exports = z
                 invalid_type_error: 'Please provide a valid ziyarah Taif',
             })
             .refine(
-                (ziyarahTaif) =>
-                    UMRAH_PACKAGE_BOOLEAN.includes(ziyarahTaif.toLowerCase()),
+                (ziyarahTaif) => UMRAH_PACKAGE_BOOLEAN.includes(ziyarahTaif),
                 {
                     message: `Please provide a valid ziyarah Taif. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(
                         ', '

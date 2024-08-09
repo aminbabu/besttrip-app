@@ -21,11 +21,16 @@ module.exports =
 
         // get validated data
         const { id } = req.params || {};
-        const { makkahHotelExtraThumbnails } = req.files || {};
+        let { makkahHotelExtraThumbnails } = req.files || {};
 
         // check if extra thumbnails exists
         if (!makkahHotelExtraThumbnails) {
             return next();
+        }
+
+        // Convert makkahHotelExtraThumbnails to an array if it's not already
+        if (!Array.isArray(makkahHotelExtraThumbnails)) {
+            makkahHotelExtraThumbnails = [makkahHotelExtraThumbnails];
         }
 
         // check if id exists
