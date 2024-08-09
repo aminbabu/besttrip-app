@@ -36,7 +36,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \***********************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// Cookiealert -  A simple, good looking cookie alert for Bootstrap: https://github.com/Wruczek/Bootstrap-Cookie-Alert\r\n\r\n__webpack_require__(/*! bootstrap-cookie-alert/cookiealert.js */ \"./node_modules/bootstrap-cookie-alert/cookiealert.js\");\r\n\r\n__webpack_require__(/*! ./cookiealert.scss */ \"./webpack/plugins/custom/cookiealert/cookiealert.scss\");\r\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/cookiealert/cookiealert.js?");
+eval("// Cookiealert -  A simple, good looking cookie alert for Bootstrap: https://github.com/Wruczek/Bootstrap-Cookie-Alert\n\n__webpack_require__(/*! bootstrap-cookie-alert/cookiealert.js */ \"./node_modules/bootstrap-cookie-alert/cookiealert.js\");\n\n__webpack_require__(/*! ./cookiealert.scss */ \"./webpack/plugins/custom/cookiealert/cookiealert.scss\");\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/cookiealert/cookiealert.js?");
 
 /***/ })
 
