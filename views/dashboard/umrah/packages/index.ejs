@@ -246,10 +246,10 @@
                             </div>
                           </td>
                           <td>
-                            <a href="./package-details.html" class="link-primary-dark">
+                            <a href="#" class="link-primary-dark">
                               <div class="d-flex align-items-center">
                                 <div class="symbol symbol-35px me-5">
-                                  <img src="/assets/media/books/1.png" alt="" width="40" height="40" />
+                                  <img src="<%= package.thumbnail %>" alt="" width="40" height="40" />
                                 </div>
                                 <div><%= package.title %></div>
                               </div>
@@ -307,7 +307,7 @@
                               <!--end::Menu item-->
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-                                <a href="/umrah/packages/<%= package._id %>" class="menu-link px-3" data-kt-umrah-extranet-package-list-table-filter="delete_row">
+                                <a href="/api/umrah/packages/<%= package._id %>" class="menu-link px-3" data-kt-umrah-extranet-package-list-table-filter="delete_row">
                                   Delete
                                 </a>
                               </div>

@@ -136,7 +136,7 @@ var KTUmrahExtranetPackageList = (function () {
                 }).then(function (result) {
                     if (result.value) {
                         axios.delete(url).then((response) => {
-                            console.log(response);
+                            return console.log(response);
                             if (response) {
                                 Swal.fire({
                                     text:
