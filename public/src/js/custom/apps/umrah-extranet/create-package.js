@@ -1031,7 +1031,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    about_umrah_short_description: {
+                    umrahExcerpt: {
                         validators: {
                             notEmpty: {
                                 message: 'Short description is required',
@@ -1504,13 +1504,10 @@ var KTCreatePackage = (function () {
             $('#day_wise_itinearies_row').html(html);
         };
 
-        $('[name="basic_package_duration_days_&_nights"]').on(
-            'select2:select',
-            function (e) {
-                var data = e.params.data;
-                addDayWiseItineary(data.id);
-            }
-        );
+        $('[name="totalDaysAndNights"]').on('select2:select', function (e) {
+            var data = e.params.data;
+            addDayWiseItineary(data.id);
+        });
     };
 
     // Select2 initialization

@@ -541,7 +541,7 @@
                                 <select name="totalDaysAndNights" aria-label="Select total days" data-control="select2" data-hide-search="true" data-placeholder="Select total days.." class="form-select form-select-solid form-select-lg">
                                   <option></option>
                                   <% umrahPackageDurations?.forEach((duration) => { %>
-                                  <option value="<%= duration.days%>">
+                                  <option value="<%= duration._id%>">
                                     <%= duration.days %> Days | <%= duration.nights %> Nights
                                   </option>
                                   <% }); %>
@@ -3209,7 +3209,7 @@
                                 <label class="form-label required">Short Description</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="about_umrah_short_description" rows="3" placeholder=""></textarea>
+                                <textarea class="form-control form-control-solid" name="umrahExcerpt" rows="3" placeholder=""></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -3221,7 +3221,7 @@
                                 <label>Description</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="about_umrah_description" id="kt_docs_ckeditor_about_us_description" rows="3" placeholder="Write a description"></textarea>
+                                <textarea class="form-control form-control-solid" name="umrahDescription" id="kt_docs_ckeditor_about_us_description" rows="3" placeholder="Write a description"></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
