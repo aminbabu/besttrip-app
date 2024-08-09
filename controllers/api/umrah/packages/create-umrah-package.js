@@ -57,7 +57,7 @@ module.exports = async (req, res, next) => {
             ),
             itineraryDays: itineraryDays?.map((itineraryDay) => ({
                 ...itineraryDay,
-                thumbnail: itineraryDay.thumbnail.path,
+                thumbnail: itineraryDay.path,
             })),
             umrahThumbnail: umrahThumbnail.path,
         });

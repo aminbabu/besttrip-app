@@ -116,14 +116,10 @@ router.get(
 router.post(
     '/',
     isAllowed(['admin']),
-    /* 
-    visaOptions: 'sadf',
-  transportServices: 'asdf',
-  ziyarahMakkahDetails: 'asdf',
-  ziyarahMadinahDetails: 'asdf',
-  ziyarahTaifDetails: 'asdf'
-    */
     (req, res, next) => {
+        console.log(req.files);
+        console.log(req.body);
+
         [
             'visaOptions',
             'transportServices',

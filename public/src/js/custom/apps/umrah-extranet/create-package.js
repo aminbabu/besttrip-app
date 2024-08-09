@@ -113,6 +113,34 @@ var KTCreatePackage = (function () {
                         return arr;
                     };
 
+                    const makeArrayOfItineraryDays = () => {
+                        var arr = [];
+                        var i = 1;
+                        var title = `day_wise_itineary_title_${i}`;
+                        var description = `day_wise_itineary_description_${i}`;
+
+                        while (formData.get(title)) {
+                            var obj = { title: formData.get('title') };
+
+                            if (formData.get(description)) {
+                                obj.description = formData.get(description);
+                            }
+
+                            arr.push(obj);
+
+                            delete formData[title];
+                            delete formData[description];
+
+                            i++;
+
+                            title = `day_wise_itineary_title_${i}`;
+                            description = `day_wise_itineary_description_${i}`;
+                        }
+
+                        return arr;
+                    };
+
+                    formData.append('itinearyDays', makeArrayOfItineraryDays());
                     formData.append(
                         'visaOptions',
                         makeArray('kt_repeater_visa_required', 'visaOptions')
@@ -205,8 +233,8 @@ var KTCreatePackage = (function () {
                                     allowOutsideClick: false,
                                 }).then(() => {
                                     // Reset form
-                                    form.reset();
-                                    location.reload();
+                                    // form.reset();
+                                    // location.reload();
                                 });
                             } else {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -1525,7 +1553,7 @@ var KTCreatePackage = (function () {
                 <!--begin::Input-->
                 <input
                   type="file"
-                  name="day_wise_itineary_thumbnail_1"
+                  name="itineraryDaysThumbnails"
                   id="day_wise_itineary_thumbnail_${i + 1}"
                   accept=".png, .jpg, .jpeg"
                   data-kt-file-uploader-max-size="10"
