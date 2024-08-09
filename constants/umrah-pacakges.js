@@ -8,7 +8,7 @@
  */
 
 // umrah package package status
-const UMRAH_PACKAGE_STATUS = ['active', 'disabled'];
+const UMRAH_PACKAGE_STATUS = ['active', 'disabled', 'draft'];
 
 // umrah package package schudle
 const UMRAH_PACKAGE_SCHEDULES = [
@@ -27,7 +27,13 @@ const UMRAH_PACKAGE_SCHEDULES = [
 ];
 
 // umrah package package inclusions
-const UMRAH_PACKAGE_INCLUSIONS = ['flight', 'hotel', 'visa', 'transport', 'food'];
+const UMRAH_PACKAGE_INCLUSIONS = [
+    'flight',
+    'hotel',
+    'visa',
+    'transport',
+    'food',
+];
 
 // umrah package outbound flight stops
 const UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS = [0, 1, 2];

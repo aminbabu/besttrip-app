@@ -20,54 +20,40 @@ module.exports = z
                 invalid_type_error: 'Please provide a valid visa type',
             })
             .refine((visaType) => VISA_TYPES.includes(visaType.toLowerCase()), {
-                message: `Please provide a valid visa type. Available types are: ${VISA_TYPES.join(', ')}`,
+                message: `Please provide a valid visa type. Available types are: ${VISA_TYPES.join(
+                    ', '
+                )}`,
             }),
-        visaNoOfEntries: z
-            .string({
-                required_error: 'Visa no of entries is required',
-                invalid_type_error: 'Please provide a valid visa no of entries',
-            })
-            .refine((visaNoOfEntries) => visaNoOfEntries > 0, {
-                message: 'Please provide a valid visa no of entries',
-            }),
+        visaNoOfEntries: z.string({
+            required_error: 'Visa no of entries is required',
+            invalid_type_error: 'Please provide a valid visa no of entries',
+        }),
         visaDuration: z
-            .string({
-                required_error: 'Visa duration is required',
-                invalid_type_error: 'Please provide a valid visa duration',
-            })
-            .refine((visaDuration) => visaDuration > 0, {
+            .string()
+            .transform((val) => Number(val))
+            .refine((val) => !isNaN(val) && val > 0, {
                 message: 'Please provide a valid visa duration',
             }),
         visaValidity: z
-            .string({
-                required_error: 'Visa validity is required',
-                invalid_type_error: 'Please provide a valid visa validity',
-            })
-            .refine((visaValidity) => visaValidity > 0, {
-                message: 'Please provide a valid visa validity',
+            .string()
+            .transform((val) => Number(val))
+            .refine((val) => !isNaN(val) && val > 0, {
+                message: 'Visa validity must be greater than zero',
             }),
         visaOptions: z
-            .array(
+            .union([
                 z
                     .string({
-                        required_error: 'Visa option is required',
-                        invalid_type_error: 'Please provide a valid visa option',
+                        invalid_type_error: 'Please provide valid visa options',
                     })
-                    .trim()
-                    .min(1, {
-                        message: 'Visa option must be at least 1 characters',
+                    .transform((val) => val.split(',')),
+                z.array(
+                    z.string({
+                        invalid_type_error: 'Please provide valid visa option',
                     })
-                    .max(255, {
-                        message: 'Visa option must be at most 255 characters',
-                    }),
-                {
-                    required_error: 'At least one visa option is required',
-                    invalid_type_error: 'Please provide a valid visa option',
-                }
-            )
-            .nonempty({
-                message: 'At least one visa option is required',
-            }),
+                ),
+            ])
+            .transform((val) => (Array.isArray(val) ? val : [val])),
         visaNote: z
             .string({
                 required_error: 'Visa note is required',

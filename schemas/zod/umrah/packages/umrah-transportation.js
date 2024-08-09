@@ -28,23 +28,30 @@ module.exports = z
         transportAirportToHotel: z
             .string({
                 required_error: 'Transport airport to hotel is required',
-                invalid_type_error: 'Please provide a valid transport airport to hotel',
+                invalid_type_error:
+                    'Please provide a valid transport airport to hotel',
             })
             .refine(
                 (transportAirportToHotel) =>
-                    ['yes', 'no'].includes(transportAirportToHotel.toLowerCase()),
+                    ['yes', 'no'].includes(
+                        transportAirportToHotel.toLowerCase()
+                    ),
                 {
-                    message: 'Please provide a valid transport airport to hotel',
+                    message:
+                        'Please provide a valid transport airport to hotel',
                 }
             ),
         transportVisitorPlaces: z
             .string({
                 required_error: 'Transport visitor places is required',
-                invalid_type_error: 'Please provide a valid transport visitor places',
+                invalid_type_error:
+                    'Please provide a valid transport visitor places',
             })
             .refine(
                 (transportVisitorPlaces) =>
-                    ['yes', 'no'].includes(transportVisitorPlaces.toLowerCase()),
+                    ['yes', 'no'].includes(
+                        transportVisitorPlaces.toLowerCase()
+                    ),
                 {
                     message: 'Please provide a valid transport visitor places',
                 }
@@ -52,56 +59,50 @@ module.exports = z
         transportHotelToAirport: z
             .string({
                 required_error: 'Transport hotel to airport is required',
-                invalid_type_error: 'Please provide a valid transport hotel to airport',
+                invalid_type_error:
+                    'Please provide a valid transport hotel to airport',
             })
             .refine(
                 (transportHotelToAirport) =>
-                    ['yes', 'no'].includes(transportHotelToAirport.toLowerCase()),
+                    ['yes', 'no'].includes(
+                        transportHotelToAirport.toLowerCase()
+                    ),
                 {
-                    message: 'Please provide a valid transport hotel to airport',
+                    message:
+                        'Please provide a valid transport hotel to airport',
                 }
             ),
         transportServices: z
-            .array(
+            .union([
                 z
                     .string({
-                        required_error: 'Transport service is required',
-                        invalid_type_error: 'Please provide a valid transport service',
+                        invalid_type_error:
+                            'Please provide valid transport services',
                     })
-                    .trim()
-                    .min(1, {
-                        message: 'Transport service must be at least 1 characters',
-                    }),
-                {
-                    required_error: 'At least one transport service is required',
-                    invalid_type_error: 'Please provide a valid transport service',
-                }
-            )
-            .nonempty({
-                message: 'At least one transport service is required',
-            }),
+                    .transform((val) => val.split(',')),
+                z.array(
+                    z.string({
+                        invalid_type_error: 'Please provide transport services',
+                    })
+                ),
+            ])
+            .transform((val) => (Array.isArray(val) ? val : [val])),
         transportServiceTypes: z
-            .array(
+            .union([
                 z
                     .string({
-                        required_error: 'Transport service type is required',
-                        invalid_type_error: 'Please provide a valid transport service type',
+                        invalid_type_error:
+                            'Please provide valid transport service type',
                     })
-                    .trim()
-                    .min(1, {
-                        message: 'Transport service type must be at least 1 characters',
+                    .transform((val) => val.split(',')),
+                z.array(
+                    z.string({
+                        invalid_type_error:
+                            'Please provide transport service type',
                     })
-                    .max(255, {
-                        message: 'Transport service type must be at most 255 characters',
-                    }),
-                {
-                    required_error: 'At least one transport service type is required',
-                    invalid_type_error: 'Please provide a valid transport service type',
-                }
-            )
-            .nonempty({
-                message: 'At least one transport service type is required',
-            }),
+                ),
+            ])
+            .transform((val) => (Array.isArray(val) ? val : [val])),
         transportNote: z
             .string({
                 required_error: 'Transport note is required',

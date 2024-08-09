@@ -541,7 +541,7 @@
                                 <select name="totalDaysAndNights" aria-label="Select total days" data-control="select2" data-hide-search="true" data-placeholder="Select total days.." class="form-select form-select-solid form-select-lg">
                                   <option></option>
                                   <% umrahPackageDurations?.forEach((duration) => { %>
-                                  <option value="<%= duration._id%>">
+                                  <option value="<%= duration._id%>" data-kt-duration="<%= duration.days %>">
                                     <%= duration.days %> Days | <%= duration.nights %> Nights
                                   </option>
                                   <% }); %>
@@ -942,9 +942,9 @@
                                   <option value="">
                                     Select flight stops..
                                   </option>
-                                  <option value="non-stop">Non Stop</option>
-                                  <option value="one-stop">One Stop</option>
-                                  <option value="two-stop">Two Stop</option>
+                                  <option value="0">Non Stop</option>
+                                  <option value="1">One Stop</option>
+                                  <option value="2">Two Stop</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1453,7 +1453,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="makkah_hotel_stay_duration" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
+                                <select name="makkahHotelNoOfNights" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
                                   <option value="">
                                     Select stay duration..
                                   </option>
@@ -2102,9 +2102,9 @@
                                   <option value="">
                                     Select flight stops..
                                   </option>
-                                  <option value="non-stop">Non Stop</option>
-                                  <option value="one-stop">One Stop</option>
-                                  <option value="two-stop">Two Stop</option>
+                                  <option value="0">Non Stop</option>
+                                  <option value="1">One Stop</option>
+                                  <option value="2">Two Stop</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2574,14 +2574,14 @@
                                 <!--begin::Input-->
                                 <select name="visaType" aria-label="Select visa type" data-control="select2" data-placeholder="Select visa type" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select visa type</option>
-                                  <option value="Umrah Visa">
+                                  <option value="umrah">
                                     Umrah Visa
                                   </option>
-                                  <option value="Ziyara Visa">
+                                  <option value="ziyarah">
                                     Ziyara Visa
                                   </option>
-                                  <option value="Tourist Visa">
-                                    Tourist Visa
+                                  <option value="hajj">
+                                    Hajj Visa
                                   </option>
                                 </select>
                                 <!--end::Input-->
@@ -3218,7 +3218,7 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label>Description</label>
+                                <label class="form-label">Description</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <textarea class="form-control form-control-solid" name="umrahDescription" id="kt_docs_ckeditor_about_us_description" rows="3" placeholder="Write a description"></textarea>
@@ -3254,7 +3254,7 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label>Description</label>
+                                <label class="form-label">Description</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <textarea class="form-control form-control-solid" name="termsConditions" id="kt_docs_ckeditor_terms_&_conditions_description" rows="3" placeholder="Write a description"></textarea>

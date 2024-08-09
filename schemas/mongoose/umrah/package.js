@@ -384,15 +384,15 @@ module.exports = new Schema(
             required: [true, 'Visa type is required'],
         },
         visaNoOfEntries: {
-            type: Number,
+            type: String,
             required: [true, 'Visa entries is required'],
         },
         visaDuration: {
-            type: String,
+            type: Number,
             required: [true, 'Visa duration is required'],
         },
         visaValidity: {
-            type: String,
+            type: Number,
             required: [true, 'Visa validity is required'],
         },
         visaOptions: {

@@ -238,10 +238,11 @@
                         </tr>
                       </thead>
                       <tbody class="text-gray-600 fw-semibold">
+                        <% umrahPackages.forEach(package => { %>
                         <tr>
                           <td>
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                              <input class="form-check-input" type="checkbox" value="1" />
+                              <input class="form-check-input" type="checkbox" value="<%= package._id %>" />
                             </div>
                           </td>
                           <td>
@@ -250,202 +251,51 @@
                                 <div class="symbol symbol-35px me-5">
                                   <img src="/assets/media/books/1.png" alt="" width="40" height="40" />
                                 </div>
-                                <div>Umrah Package</div>
+                                <div><%= package.title %></div>
                               </div>
                             </a>
                           </td>
-                          <td>February</td>
-                          <td>14 Dec 2020</td>
-                          <td>Standard</td>
-                          <td>10 Days</td>
+                          <td><%= package.schedule %></td>
+                          <td><%= new Date(package.journeyDate).toLocaleDateString() %></td>
+                          <td><%= package.type %></td>
+                          <td><%= package.duration.days %> Days, <%= package.duration.nights %> Nights</td>
+                          <% if (package.seats === 0) { %>
                           <td class="d-flex gap-4 align-items-center">
                             <div class="badge badge-light-danger min-w-80px px-4 py-3 justify-content-center">
                               Sold Out
                             </div>
                           </td>
-                          <td>Dhaka, Bangladesh</td>
-                          <td>Flight, Hotel, Visa</td>
+                          <% } else { %>
                           <td>
+                            <%= package.seats %>
+                          </td>
+                          <% } %>
+                          <td><%= package.departureLocation %></td>
+                          <td><%= package.inclusions %></td>
+                          <td>
+                            <% if (package.status === 'active') { %>
                             <div class="badge badge-light-success min-w-80px px-4 py-3 justify-content-center">
                               Active
                             </div>
-                          </td>
-                          <td>10,000 BDT</td>
-                          <td>8,000 BDT</td>
-                          <td>5,000 BDT</td>
-                          <td>14 Dec 2020, 8:43 pm</td>
-                          <td class="text-end">
-                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                              <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-                            <!--begin::Menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="./package-details.html" class="menu-link px-3">
-                                  View Details
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-umrah-extranet-package-list-table-filter="delete_row">
-                                  Delete
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                              <input class="form-check-input" type="checkbox" value="1" />
-                            </div>
-                          </td>
-                          <td>
-                            <a href="./package-details.html" class="link-primary-dark">
-                              <div class="d-flex align-items-center">
-                                <div class="symbol symbol-35px me-5">
-                                  <img src="/assets/media/books/1.png" alt="" width="40" height="40" />
-                                </div>
-                                <div>Umrah Package</div>
-                              </div>
-                            </a>
-                          </td>
-                          <td>February</td>
-                          <td>14 Dec 2020</td>
-                          <td>Standard</td>
-                          <td>10 Days</td>
-                          <td>10</td>
-                          <td>Dhaka, Bangladesh</td>
-                          <td>Flight, Visa, Transport</td>
-                          <td>
+                            <% } else if (package.status === 'disabled') { %>
                             <div class="badge badge-light-primary min-w-80px px-4 py-3 justify-content-center">
                               Disabled
                             </div>
-                          </td>
-                          <td>10,000 BDT</td>
-                          <td>8,000 BDT</td>
-                          <td>5,000 BDT</td>
-                          <td>14 Dec 2020, 8:43 pm</td>
-                          <td class="text-end">
-                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                              <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-                            <!--begin::Menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="./package-details.html" class="menu-link px-3">
-                                  View Details
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-umrah-extranet-package-list-table-filter="delete_row">
-                                  Delete
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                              <input class="form-check-input" type="checkbox" value="1" />
-                            </div>
-                          </td>
-                          <td>
-                            <a href="./package-details.html" class="link-primary-dark">
-                              <div class="d-flex align-items-center">
-                                <div class="symbol symbol-35px me-5">
-                                  <img src="/assets/media/books/1.png" alt="" width="40" height="40" />
-                                </div>
-                                <div>Umrah Package</div>
-                              </div>
-                            </a>
-                          </td>
-                          <td>February</td>
-                          <td>14 Dec 2020</td>
-                          <td>Standard</td>
-                          <td>10 Days</td>
-                          <td class="d-flex gap-4 align-items-center">
-                            <div class="badge badge-light-danger min-w-80px px-4 py-3 justify-content-center">
-                              Sold Out
-                            </div>
-                          </td>
-                          <td>Dhaka, Bangladesh</td>
-                          <td>Flight, Hotel, Visa, Transport</td>
-                          <td>
+                            <% } else if (package.status === 'draft') { %>
                             <div class="badge badge-light-warning min-w-80px px-4 py-3 justify-content-center">
                               Draft
                             </div>
+                            <% }%>
                           </td>
-                          <td>10,000 BDT</td>
-                          <td>8,000 BDT</td>
-                          <td>5,000 BDT</td>
-                          <td>14 Dec 2020, 8:43 pm</td>
+                          <td><%= package.adultPrice %>
+                          </td>
+                          <td><%= package.adultPartialPrice %></td>
+                          <td><%= package.childPrice %></td>
+                          <td><%= new Date(package.updatedAt).toLocaleString() %></td>
                           <td class="text-end">
                             <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                              <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-                            <!--begin::Menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="./package-details.html" class="menu-link px-3">
-                                  View Details
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-umrah-extranet-package-list-table-filter="delete_row">
-                                  Delete
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                              <input class="form-check-input" type="checkbox" value="1" />
-                            </div>
-                          </td>
-                          <td>
-                            <a href="./package-details.html" class="link-primary-dark">
-                              <div class="d-flex align-items-center">
-                                <div class="symbol symbol-35px me-5">
-                                  <img src="/assets/media/books/1.png" alt="" width="40" height="40" />
-                                </div>
-                                <div>Umrah Package</div>
-                              </div>
+                              <i class="ki-duotone ki-down fs-5 ms-1"></i>
                             </a>
-                          </td>
-                          <td>February</td>
-                          <td>14 Dec 2020</td>
-                          <td>Standard</td>
-                          <td>10 Days</td>
-                          <td>10</td>
-                          <td>Dhaka, Bangladesh</td>
-                          <td>Flight, Hotel, Visa, Transport</td>
-                          <td>
-                            <div class="badge badge-light-primary min-w-80px px-4 py-3 justify-content-center">
-                              Disabled
-                            </div>
-                          </td>
-                          <td>10,000 BDT</td>
-                          <td>8,000 BDT</td>
-                          <td>5,000 BDT</td>
-                          <td>14 Dec 2020, 8:43 pm</td>
-                          <td class="text-end">
-                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                              <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
                             <!--begin::Menu-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                               <!--begin::Menu item-->
@@ -457,7 +307,7 @@
                               <!--end::Menu item-->
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-umrah-extranet-package-list-table-filter="delete_row">
+                                <a href="/umrah/packages/<%= package._id %>" class="menu-link px-3" data-kt-umrah-extranet-package-list-table-filter="delete_row">
                                   Delete
                                 </a>
                               </div>
@@ -466,120 +316,7 @@
                             <!--end::Menu-->
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                              <input class="form-check-input" type="checkbox" value="1" />
-                            </div>
-                          </td>
-                          <td>
-                            <a href="./package-details.html" class="link-primary-dark">
-                              <div class="d-flex align-items-center">
-                                <div class="symbol symbol-35px me-5">
-                                  <img src="/assets/media/books/1.png" alt="" width="40" height="40" />
-                                </div>
-                                <div>Umrah Package</div>
-                              </div>
-                            </a>
-                          </td>
-                          <td>February</td>
-                          <td>14 Dec 2020</td>
-                          <td>Standard</td>
-                          <td>10 Days</td>
-                          <td class="d-flex gap-4 align-items-center">
-                            <div class="badge badge-light-danger min-w-80px px-4 py-3 justify-content-center">
-                              Sold Out
-                            </div>
-                          </td>
-                          <td>Dhaka, Bangladesh</td>
-                          <td>Flight, Hotel, Visa, Transport</td>
-                          <td>
-                            <div class="badge badge-light-success min-w-80px px-4 py-3 justify-content-center">
-                              Active
-                            </div>
-                          </td>
-                          <td>10,000 BDT</td>
-                          <td>8,000 BDT</td>
-                          <td>5,000 BDT</td>
-                          <td>14 Dec 2020, 8:43 pm</td>
-                          <td class="text-end">
-                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                              <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-                            <!--begin::Menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="./package-details.html" class="menu-link px-3">
-                                  View Details
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-umrah-extranet-package-list-table-filter="delete_row">
-                                  Delete
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                              <input class="form-check-input" type="checkbox" value="1" />
-                            </div>
-                          </td>
-                          <td>
-                            <a href="./package-details.html" class="link-primary-dark">
-                              <div class="d-flex align-items-center">
-                                <div class="symbol symbol-35px me-5">
-                                  <img src="/assets/media/books/1.png" alt="" width="40" height="40" />
-                                </div>
-                                <div>Umrah Package</div>
-                              </div>
-                            </a>
-                          </td>
-                          <td>February</td>
-                          <td>14 Dec 2020</td>
-                          <td>Standard</td>
-                          <td>10 Days</td>
-                          <td>10</td>
-                          <td>Dhaka, Bangladesh</td>
-                          <td>Flight, Hotel, Visa, Transport</td>
-                          <td>
-                            <div class="badge badge-light-success min-w-80px px-4 py-3 justify-content-center">
-                              Active
-                            </div>
-                          </td>
-                          <td>10,000 BDT</td>
-                          <td>8,000 BDT</td>
-                          <td>5,000 BDT</td>
-                          <td>14 Dec 2020, 8:43 pm</td>
-                          <td class="text-end">
-                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                              <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-                            <!--begin::Menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="./package-details.html" class="menu-link px-3">
-                                  View Details
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-umrah-extranet-package-list-table-filter="delete_row">
-                                  Delete
-                                </a>
-                              </div>
-                              <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                          </td>
-                        </tr>
+                        <% }); %>
                       </tbody>
                     </table>
                     <!--end::Table-->

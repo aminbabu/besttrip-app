@@ -7,6 +7,7 @@ var KTCreatePackage = (function () {
     var form;
     var formSubmitButton;
     var formContinueButton;
+    var editors = {};
 
     // Variables
     var stepperObj;
@@ -98,8 +99,15 @@ var KTCreatePackage = (function () {
 
                     // Function to append Dropzone files to FormData
                     const appendDropzoneFiles = (dropzone, fieldName) => {
-                        dropzone.files.forEach((file) => {
-                            formData.append(fieldName, file, file.name);
+                        // Check if dropzone.files is an array
+                        const files = Array.isArray(dropzone.files)
+                            ? dropzone.files
+                            : [dropzone.files];
+
+                        // Ensure files is an array
+                        files.forEach((file) => {
+                            // Append each file to FormData with fieldName as array syntax
+                            formData.append(`${fieldName}[]`, file, file.name);
                         });
                     };
 
@@ -117,6 +125,20 @@ var KTCreatePackage = (function () {
                         'madinahhHotelExtraThumbnails'
                     );
 
+                    formData.append(
+                        'umrahDescription',
+                        editors[
+                            'kt_docs_ckeditor_about_us_description'
+                        ].getData()
+                    );
+
+                    formData.append(
+                        'termsConditions',
+                        editors[
+                            'kt_docs_ckeditor_terms_&_conditions_description'
+                        ].getData()
+                    );
+
                     axios
                         .post(
                             formSubmitButton
@@ -127,6 +149,7 @@ var KTCreatePackage = (function () {
                         .then((response) => {
                             if (response) {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                console.log(response);
                                 Swal.fire({
                                     text:
                                         response?.data?.message ||
@@ -526,7 +549,7 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    makkah_hotel_stay_duration: {
+                    makkahHotelNoOfNights: {
                         validators: {
                             notEmpty: {
                                 message: 'Stay duration is required',
@@ -1149,6 +1172,7 @@ var KTCreatePackage = (function () {
                 url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
                 // paramName: 'files', // The name that will be used to transfer the file
                 autoProcessQueue: false,
+                acceptedFiles: 'image/*',
                 maxFiles: 10,
                 maxFilesize: 10, // MB
                 addRemoveLinks: true,
@@ -1167,6 +1191,7 @@ var KTCreatePackage = (function () {
                 url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
                 // paramName: 'files', // The name that will be used to transfer the file
                 autoProcessQueue: false,
+                acceptedFiles: 'image/*',
                 maxFiles: 10,
                 maxFilesize: 10, // MB
                 addRemoveLinks: true,
@@ -1185,6 +1210,7 @@ var KTCreatePackage = (function () {
                 url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
                 // paramName: 'files', // The name that will be used to transfer the file
                 autoProcessQueue: false,
+                acceptedFiles: 'image/*',
                 maxFiles: 10,
                 maxFilesize: 10, // MB
                 addRemoveLinks: true,
@@ -1221,6 +1247,7 @@ var KTCreatePackage = (function () {
                     ) {
                         dp.set('maxDate', dateStr);
                         dp._input.disabled = false;
+                        $('[name="expiryDate"]').attr('disabled', false);
                     }
                 });
             },
@@ -1247,6 +1274,14 @@ var KTCreatePackage = (function () {
                     ) {
                         dp.set('minDate', dateStr);
                         dp._input.disabled = false;
+                        $('[name="outboundArrivalDatetime"]').attr(
+                            'disabled',
+                            false
+                        );
+                        $('[name="inboundArrivalDatetime"]').attr(
+                            'disabled',
+                            false
+                        );
                     }
 
                     if (
@@ -1381,7 +1416,7 @@ var KTCreatePackage = (function () {
         textareas.forEach((id) => {
             ClassicEditor.create(document.getElementById(id))
                 .then((editor) => {
-                    console.log(editor);
+                    editors[id] = editor;
                 })
                 .catch((error) => {
                     console.error(error);
@@ -1506,7 +1541,8 @@ var KTCreatePackage = (function () {
 
         $('[name="totalDaysAndNights"]').on('select2:select', function (e) {
             var data = e.params.data;
-            addDayWiseItineary(data.id);
+            var days = $(this).find('option:selected').data('kt-duration');
+            addDayWiseItineary(days);
         });
     };
 
