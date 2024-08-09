@@ -17,7 +17,7 @@ const {
 module.exports = async (req, res, next) => {
     try {
         // get day wise itinerary thumbnails from request
-        const { itineraryDays } = req.files || {};
+        let { itineraryDays } = req.files || {};
 
         // check if day wise itinerary thumbnails are not provided
         if (!itineraryDays) {

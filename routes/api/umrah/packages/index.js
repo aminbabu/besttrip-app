@@ -116,9 +116,9 @@ router.get(
 router.post(
     '/',
     isAllowed(['admin']),
-    (req, res, next) => {
-        return console.log('req.body', req.body);
-    },
+    // (req, res, next) => {
+    //     return console.log('req.body', req.body);
+    // },
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
     validateUmrahPackageGallery,
@@ -138,9 +138,9 @@ router.post(
     validateUmrahThumbnail,
     validateUmrah,
     validateTermsAndConditions,
-    /* (req, res, next) => {
-        return console.log('req.files', req.files, 'req.body', req.body);
-    }, */
+    (req, res, next) => {
+        return console.log('req.body', req.body);
+    },
     uploadPackageThumbnail('/umrah/package'),
     uploadPackageGallery('/umrah/package'),
     uploadMakkahHotelThumbnail('/umrah/package'),

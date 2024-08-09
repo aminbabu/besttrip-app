@@ -11,6 +11,7 @@
 // dependencies
 const {
     DEFAULT_IMAGE_TYPES,
+    DEFAULT_FILE_SIZE,
     ONE_MEGA_BYTE,
 } = require('../../../../../constants');
 
@@ -18,7 +19,7 @@ const {
 module.exports = async (req, res, next) => {
     try {
         // get extra thumbnails
-        const { extraThumbnails } = req.files || {};
+        let { extraThumbnails } = req.files || {};
 
         // check if extra thumbnails is not provided
         if (!extraThumbnails) {
@@ -27,9 +28,7 @@ module.exports = async (req, res, next) => {
 
         // check if extra thumbnails is not an array
         if (!Array.isArray(extraThumbnails)) {
-            return res.status(400).json({
-                message: 'Extra thumbnails must be an array of images.',
-            });
+            extraThumbnails = [extraThumbnails];
         }
 
         // check if there are invalid image types or sizes
@@ -42,8 +41,8 @@ module.exports = async (req, res, next) => {
                 isInvalidImageType = true;
             }
 
-            // check if thumbnail size exceeds 1 MB
-            if (thumbnail.size > ONE_MEGA_BYTE) {
+            // check if thumbnail size exceeds 5 MB
+            if (thumbnail.size > DEFAULT_FILE_SIZE) {
                 isInvalidImageSize = true;
             }
         });
@@ -60,7 +59,7 @@ module.exports = async (req, res, next) => {
         if (isInvalidImageSize) {
             return res.status(400).json({
                 message: `Please upload extra thumbnails of size less than ${(
-                    ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                    DEFAULT_FILE_SIZE / ONE_MEGA_BYTE
                 ).toFixed(2)} MB.`,
             });
         }

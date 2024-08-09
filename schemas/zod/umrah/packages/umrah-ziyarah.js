@@ -27,18 +27,29 @@ module.exports = z
                 required_error: 'Ziyarah Makkah is required',
                 invalid_type_error: 'Please provide a valid ziyarah Makkah',
             })
-            .refine((ziyarahMakka) => UMRAH_PACKAGE_BOOLEAN.includes(ziyarahMakka.toLowerCase()), {
-                message: `Please provide a valid ziyarah Makkah. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(', ')}`,
-            }),
+            .refine(
+                (ziyarahMakka) =>
+                    UMRAH_PACKAGE_BOOLEAN.includes(ziyarahMakka.toLowerCase()),
+                {
+                    message: `Please provide a valid ziyarah Makkah. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(
+                        ', '
+                    )}`,
+                }
+            ),
         ziyarahMadinah: z
             .string({
                 required_error: 'Ziyarah Madinah is required',
                 invalid_type_error: 'Please provide a valid ziyarah Madinah',
             })
             .refine(
-                (ziyarahMadinah) => UMRAH_PACKAGE_BOOLEAN.includes(ziyarahMadinah.toLowerCase()),
+                (ziyarahMadinah) =>
+                    UMRAH_PACKAGE_BOOLEAN.includes(
+                        ziyarahMadinah.toLowerCase()
+                    ),
                 {
-                    message: `Please provide a valid ziyarah Madinah. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(', ')}`,
+                    message: `Please provide a valid ziyarah Madinah. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(
+                        ', '
+                    )}`,
                 }
             ),
         ziyarahTaif: z
@@ -46,75 +57,65 @@ module.exports = z
                 required_error: 'Ziyarah Taif is required',
                 invalid_type_error: 'Please provide a valid ziyarah Taif',
             })
-            .refine((ziyarahTaif) => UMRAH_PACKAGE_BOOLEAN.includes(ziyarahTaif.toLowerCase()), {
-                message: `Please provide a valid ziyarah Taif. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(', ')}`,
-            }),
+            .refine(
+                (ziyarahTaif) =>
+                    UMRAH_PACKAGE_BOOLEAN.includes(ziyarahTaif.toLowerCase()),
+                {
+                    message: `Please provide a valid ziyarah Taif. Available options are: ${UMRAH_PACKAGE_BOOLEAN.join(
+                        ', '
+                    )}`,
+                }
+            ),
         ziyarahMakkahDetails: z
-            .array(
+            .union([
                 z
                     .string({
-                        required_error: 'Ziyarah Makkah detail is required',
-                        invalid_type_error: 'Please provide a valid ziyarah Makkah detail',
+                        invalid_type_error:
+                            'Please provide valid ziyarah makkah details',
                     })
-                    .trim()
-                    .min(1, {
-                        message: 'Ziyarah Makkah detail must be at least 1 characters',
+                    .transform((val) => val.split(',')),
+                z.array(
+                    z.string({
+                        invalid_type_error:
+                            'Please provide ziyarah makkah details',
                     })
-                    .max(255, {
-                        message: 'Ziyarah Makkah detail must be at most 255 characters',
-                    }),
-                {
-                    required_error: 'At least one ziyarah Makkah detail is required',
-                    invalid_type_error: 'Please provide a valid ziyarah Makkah detail',
-                }
-            )
-            .nonempty({
-                message: 'At least one ziyarah Makkah detail is required',
-            }),
+                ),
+            ])
+            .transform((val) => (Array.isArray(val) ? val : [val])),
         ziyarahMadinahDetails: z
-            .array(
+            .union([
                 z
                     .string({
-                        required_error: 'Ziyarah Madinah detail is required',
-                        invalid_type_error: 'Please provide a valid ziyarah Madinah detail',
+                        invalid_type_error:
+                            'Please provide valid ziyarah madinah details',
                     })
-                    .trim()
-                    .min(1, {
-                        message: 'Ziyarah Madinah detail must be at least 1 characters',
+                    .transform((val) => val.split(',')),
+                z.array(
+                    z.string({
+                        invalid_type_error:
+                            'Please provide ziyarah madinah details',
                     })
-                    .max(255, {
-                        message: 'Ziyarah Madinah detail must be at most 255 characters',
-                    }),
-                {
-                    required_error: 'At least one ziyarah Madinah detail is required',
-                    invalid_type_error: 'Please provide a valid ziyarah Madinah detail',
-                }
-            )
-            .nonempty({
-                message: 'At least one ziyarah Madinah detail is required',
-            }),
+                ),
+            ])
+            .transform((val) => (Array.isArray(val) ? val : [val])),
+
         ziyarahTaifDetails: z
-            .array(
+            .union([
                 z
                     .string({
-                        required_error: 'Ziyarah Taif detail is required',
-                        invalid_type_error: 'Please provide a valid ziyarah Taif detail',
+                        invalid_type_error:
+                            'Please provide valid ziyarah taif details',
                     })
-                    .trim()
-                    .min(1, {
-                        message: 'Ziyarah Taif detail must be at least 1 characters',
+                    .transform((val) => val.split(',')),
+                z.array(
+                    z.string({
+                        invalid_type_error:
+                            'Please provide ziyarah taif details',
                     })
-                    .max(255, {
-                        message: 'Ziyarah Taif detail must be at most 255 characters',
-                    }),
-                {
-                    required_error: 'At least one ziyarah Taif detail is required',
-                    invalid_type_error: 'Please provide a valid ziyarah Taif detail',
-                }
-            )
-            .nonempty({
-                message: 'At least one ziyarah Taif detail is required',
-            }),
+                ),
+            ])
+            .transform((val) => (Array.isArray(val) ? val : [val])),
+
         ziyarahNote: z
             .string({
                 required_error: 'Ziyarah note is required',

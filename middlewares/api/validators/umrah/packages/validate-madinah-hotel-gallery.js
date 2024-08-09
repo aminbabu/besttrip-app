@@ -11,6 +11,7 @@
 // dependencies
 const {
     DEFAULT_IMAGE_TYPES,
+    DEFAULT_FILE_SIZE,
     ONE_MEGA_BYTE,
 } = require('../../../../../constants');
 
@@ -18,7 +19,7 @@ const {
 module.exports = async (req, res, next) => {
     try {
         // get madinah hotel extra thumbnails
-        const { madinahHotelExtraThumbnails } = req.files || {};
+        let { madinahHotelExtraThumbnails } = req.files || {};
 
         // check if madinah hotel extra thumbnails are not provided
         if (!madinahHotelExtraThumbnails) {
@@ -27,9 +28,7 @@ module.exports = async (req, res, next) => {
 
         // check if madinah hotel extra thumbnails is an array
         if (!Array.isArray(madinahHotelExtraThumbnails)) {
-            return res.status(400).json({
-                message: 'Please upload valid images for Madinah hotel.',
-            });
+            madinahHotelExtraThumbnails = [madinahHotelExtraThumbnails];
         }
 
         // Validate each thumbnail
@@ -45,11 +44,11 @@ module.exports = async (req, res, next) => {
                 });
             }
 
-            // Check if image size is greater than 1 MB
-            if (thumbnail.size > ONE_MEGA_BYTE) {
+            // Check if image size is greater than 5 MB
+            if (thumbnail.size > DEFAULT_FILE_SIZE) {
                 return res.status(400).json({
                     message: `Please upload images for Madinah hotel of size less than ${(
-                        ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                        DEFAULT_FILE_SIZE / ONE_MEGA_BYTE
                     ).toFixed(2)} MB.`,
                 });
             }

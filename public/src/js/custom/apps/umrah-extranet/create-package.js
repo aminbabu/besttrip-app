@@ -97,7 +97,61 @@ var KTCreatePackage = (function () {
                     // construct form data
                     const formData = new FormData(form);
 
-                    const formEntries = {};
+                    const makeArray = (fieldKey, fieldName) => {
+                        var arr = [];
+                        var i = 0;
+                        var key = `${fieldKey}[${i}][${fieldName}]`;
+                        while (formData.get(key)) {
+                            arr.push(formData.get(key));
+
+                            delete formData[key];
+
+                            i++;
+
+                            key = `${fieldKey}[${i}][${fieldName}]`;
+                        }
+                        return arr;
+                    };
+
+                    formData.append(
+                        'visaOptions',
+                        makeArray('kt_repeater_visa_required', 'visaOptions')
+                    );
+                    formData.append(
+                        'transportServices',
+                        makeArray(
+                            'kt_repeater_transport_service',
+                            'transportServices'
+                        )
+                    );
+                    formData.append(
+                        'ziyarahMakkahDetails',
+                        makeArray(
+                            'kt_repeater_ziyara_makkah_details',
+                            'ziyarahMakkaDetails'
+                        )
+                    );
+                    formData.append(
+                        'ziyarahMadinahDetails',
+                        makeArray(
+                            'kt_repeater_ziyara_madinah_details',
+                            'ziyarahMadinaDetails'
+                        )
+                    );
+                    formData.append(
+                        'ziyarahTaifDetails',
+                        makeArray(
+                            'kt_repeater_ziyara_taif_details',
+                            'ziyarahTaifDetails'
+                        )
+                    );
+
+                    // Function to append Dropzone files to FormData
+                    const appendDropzoneFiles = (dropzone, fieldName) => {
+                        dropzone.files.forEach((file) => {
+                            formData.append(fieldName, file, file.name);
+                        });
+                    };
 
                     // Append files from each Dropzone instance
                     appendDropzoneFiles(
@@ -126,44 +180,6 @@ var KTCreatePackage = (function () {
                             'kt_docs_ckeditor_terms_&_conditions_description'
                         ].getData()
                     );
-
-                    var visaOptions = formData
-                        .get('kt_repeater_visa_required')
-                        .map((item) => item.visaOptions);
-                    var transportServices = formData
-                        .get('kt_repeater_transport_service')
-                        .map((item) => item.transportServices);
-                    var ziyarahMakkaDetails = formData
-                        .get('kt_repeater_ziyara_makkah_details')
-                        .map((item) => item.ziyarahMakkaDetails);
-                    var ziyarahMadinaDetails = formData
-                        .get('kt_repeater_ziyara_madinah_details')
-                        .map((item) => item.ziyarahMadinaDetails);
-                    var ziyarahTaifDetails = formData
-                        .get('kt_repeater_ziyara_taif_details')
-                        .map((item) => item.ziyarahTaifDetails);
-
-                    formData.append('visaOptions', visaOptions);
-                    formData.append('transportServices', transportServices);
-                    formData.append('ziyarahMakkaDetails', ziyarahMakkaDetails);
-                    formData.append(
-                        'ziyarahMadinaDetails',
-                        ziyarahMadinaDetails
-                    );
-                    formData.append('ziyarahTaifDetails', ziyarahTaifDetails);
-
-                    // Remove the specified keys
-                    const keysToRemove = [
-                        'kt_repeater_visa_required',
-                        'kt_repeater_transport_service',
-                        'kt_repeater_ziyara_makkah_details',
-                        'kt_repeater_ziyara_madinah_details',
-                        'kt_repeater_ziyara_taif_details',
-                    ];
-
-                    keysToRemove.forEach((key) => {
-                        delete formData[key];
-                    });
 
                     axios
                         .post(

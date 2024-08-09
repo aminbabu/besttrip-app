@@ -448,11 +448,11 @@ module.exports = new Schema(
             enum: UMRAH_PACKAGE_BOOLEAN,
             required: [true, 'Ziyara taif is required'],
         },
-        ziyarahMakkaDetails: {
+        ziyarahMakkahDetails: {
             type: [String],
             required: [true, 'Ziyara makkah details is required'],
         },
-        ziyarahMadinaDetails: {
+        ziyarahMadinahDetails: {
             type: [String],
             required: [true, 'Ziyara madinah details is required'],
         },
