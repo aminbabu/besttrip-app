@@ -44,7 +44,7 @@ router.get('/', viewUmrahPackages);
 
 /**
  * @description - umrah package add view route
- * @param {string} path - '/dashboard/umrah/package/add'
+ * @param {string} path - '/dashboard/umrah/packages/add'
  * @param {function} controller - ['viewAddUmrahPackage']
  * @returns {object} - router
  * @access private - ['all']
@@ -54,7 +54,7 @@ router.get('/add', viewAddUmrahPackage);
 
 /**
  * @description - umrah package edit view route
- * @param {string} path - '/dashboard/umrah/package/:id'
+ * @param {string} path - '/dashboard/umrah/packages/:id'
  * @param {function} controller - ['viewEditUmrahPackage']
  * @returns {object} - router
  * @access private - ['all']
