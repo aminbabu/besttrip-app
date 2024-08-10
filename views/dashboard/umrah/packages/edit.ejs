@@ -520,7 +520,7 @@
                                 <!--end::Label-->
                                 <%
                                   // Convert the date to YYYY-MM-DD format if necessary
-                                  const formatJourneyDate = (dateStr) => {
+                                  const formatDate = (dateStr) => {
                                     if (!dateStr) return '';
                                     const date = new Date(dateStr);
                                     const year = date.getFullYear();
@@ -529,10 +529,12 @@
                                     return `${year}-${month}-${day}`;
                                   };
 
-                                  const journeyDateFormatted = formatJourneyDate(umrahPackage.journeyDate);
+                                  const journeyDateFormatted = formatDate(umrahPackage.journeyDate);
                                 %>
                                 <!--begin::Input-->
                                 <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="journeyDate" data-flatpickr="package_date_picker" value="<%= journeyDateFormatted %>" />
+
+
 
                                 <!--end::Input-->
                               </div>
@@ -545,17 +547,7 @@
                                 <label class="form-label required">Package Expire Date</label>
                                 <!--end::Label-->
                                 <%
-                                // Convert the date to YYYY-MM-DD format if necessary
-                                const formatExpiryDate = (dateStr) => {
-                                  if (!dateStr) return '';
-                                  const date = new Date(dateStr);
-                                  const year = date.getFullYear();
-                                  const month = String(date.getMonth() + 1).padStart(2, '0');
-                                  const day = String(date.getDate()).padStart(2, '0');
-                                  return `${year}-${month}-${day}`;
-                                };
-
-                                const expiryDateFormatted = formatExpiryDate(umrahPackage.expiryDate);
+                                                            const expiryDateFormatted = formatDate(umrahPackage.expiryDate);
                               %>
                                 <!--begin::Input-->
                                 <input class="form-control form-control-solid" placeholder="Pick a date" name="expiryDate" data-flatpickr="package_date_picker" value="<%= expiryDateFormatted %>" disabled />
@@ -835,7 +827,7 @@
                                 <label class="form-label required">Flight No</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="outboundFlightNumber" value="" placeholder="" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="outboundFlightNumber" value="<%= umrahPackage.outboundFlightNumber || "" %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -849,12 +841,16 @@
                                 <!--begin::Input-->
                                 <select name="outboundBookingClass" aria-label="Select class" data-control="select2" data-placeholder="Select class" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select class</option>
-                                  <option value="Economy">Economy</option>
-                                  <option value="Premium Economy">
+                                  <option value="Economy" <% if (umrahPackage.outboundBookingClass === 'Economy') { %> selected <% } %>>
+                                    Economy
+                                  </option>
+                                  <option value="Premium Economy" <% if (umrahPackage.outboundBookingClass === 'Premium Economy') { %> selected <% } %>>
                                     Premium Economy
                                   </option>
-                                  <option value="Business">Business</option>
-                                  <option value="First Class">
+                                  <option value="Business" <% if (umrahPackage.outboundBookingClass === 'Business') { %> selected <% } %>>
+                                    Business
+                                  </option>
+                                  <option value="First Class" <% if (umrahPackage.outboundBookingClass === 'First Class') { %> selected <% } %>>
                                     First Class
                                   </option>
                                 </select>
@@ -872,21 +868,17 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="outboundDepartureAirport" aria-label="Select departure airport" data-control="select2" data-placeholder="Select departure airport" class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select departure airport
+                                  <option value="">Select departure airport</option>
+                                  <option value="DAC" <% if (umrahPackage.outboundDepartureAirport === 'DAC') { %> selected <% } %>>
+                                    Dhaka-Hazrat Shahjalal International Airport-DAC
                                   </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
+                                  <option value="CGP" <% if (umrahPackage.outboundDepartureAirport === 'CGP') { %> selected <% } %>>
+                                    Chittagong-Shah Amanat International Airport-CGP
                                   </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
+                                  <option value="Sylhet" <% if (umrahPackage.outboundDepartureAirport === 'Sylhet') { %> selected <% } %>>
                                     Sylhet-Osmani International Airport-ZYL
                                   </option>
-                                  <option value="RJH">
+                                  <option value="RJH" <% if (umrahPackage.outboundDepartureAirport === 'RJH') { %> selected <% } %>>
                                     Rajshahi-Shah Makhdum Airport-RJH
                                   </option>
                                 </select>
@@ -904,16 +896,14 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="outboundArrivalAirport" aria-label="Select arrival airport" data-control="select2" data-placeholder="Select arrival airport" class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select arrival airport
-                                  </option>
-                                  <option value="BDA">
+                                  <option value="">Select arrival airport</option>
+                                  <option value="BDA" <% if (umrahPackage.outboundArrivalAirport === 'BDA') { %> selected <% } %>>
                                     India-Blue Dart Aviation-BDA
                                   </option>
-                                  <option value="BWA">
+                                  <option value="BWA" <% if (umrahPackage.outboundArrivalAirport === 'BWA') { %> selected <% } %>>
                                     Bhutan-Bhutan Airlines-BWA
                                   </option>
-                                  <option value="BGH">
+                                  <option value="BGH" <% if (umrahPackage.outboundArrivalAirport === 'BGH') { %> selected <% } %>>
                                     Bulgaria-Balkan Holidays-BGH
                                   </option>
                                 </select>
@@ -929,20 +919,20 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="outboundAirCraftModel" aria-label="Select aircraft model" data-control="select2" data-placeholder="Select aircraft model" class="form-select form-select-solid form-select-lg">
-                                  <option></option>
-                                  <option value="Airbus A220">
+                                  <option value="">Select aircraft model</option>
+                                  <option value="Airbus A220" <% if (umrahPackage.outboundAirCraftModel === 'Airbus A220') { %> selected <% } %>>
                                     Airbus A220
                                   </option>
-                                  <option value="Boeing 777-200">
+                                  <option value="Boeing 777-200" <% if (umrahPackage.outboundAirCraftModel === 'Boeing 777-200') { %> selected <% } %>>
                                     Boeing 777-200
                                   </option>
-                                  <option value="Boeing 737-900">
+                                  <option value="Boeing 737-900" <% if (umrahPackage.outboundAirCraftModel === 'Boeing 737-900') { %> selected <% } %>>
                                     Boeing 737-900
                                   </option>
-                                  <option value="Airbus A320">
+                                  <option value="Airbus A320" <% if (umrahPackage.outboundAirCraftModel === 'Airbus A320') { %> selected <% } %>>
                                     Airbus A320
                                   </option>
-                                  <option value="Boeing 787-9">
+                                  <option value="Boeing 787-9" <% if (umrahPackage.outboundAirCraftModel === 'Boeing 787-9') { %> selected <% } %>>
                                     Boeing 787-9
                                   </option>
                                 </select>
@@ -957,7 +947,13 @@
                                 <label class="form-label required">Departure Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundDepartureDatetime" data-flatpickr="package_datetime_picker" />
+                                <%
+                             
+                                  // Format the outboundDepartureDatetime
+                                  const outboundDepartureDateFormatted = formatDate(umrahPackage.outboundDepartureDatetime);
+                                %>
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="outboundDepartureDatetime" data-flatpickr="package_date_picker" value="<%= outboundDepartureDateFormatted %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -968,9 +964,14 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Arrival Date & Time</label>
                                 <!--end::Label-->
+                                <%
+                                // Format the outboundArrivalDatetime
+                                const outboundArrivalDateFormatted = formatDate(umrahPackage.outboundArrivalDatetime);
+                              %>
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundArrivalDatetime" data-flatpickr="package_datetime_picker" disabled />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundArrivalDatetime" data-flatpickr="package_datetime_picker" value="<%= outboundArrivalDateFormatted %>" disabled />
                                 <!--end::Input-->
+
                               </div>
                               <!--end::Input group-->
                             </div>
@@ -985,9 +986,9 @@
                                   <option value="">
                                     Select flight stops..
                                   </option>
-                                  <option value="0">Non Stop</option>
-                                  <option value="1">One Stop</option>
-                                  <option value="2">Two Stop</option>
+                                  <option value="0" <% if (umrahPackage.outboundFlightStops === 0) { %> selected <% } %>>Non Stop</option>
+                                  <option value="1" <% if (umrahPackage.outboundFlightStops === 1) { %> selected <% } %>>One Stop</option>
+                                  <option value="2" <% if (umrahPackage.outboundFlightStops === 2) { %> selected <% } %>>Two Stop</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1002,7 +1003,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="outboundLayoverFirstDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="1st" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="outboundLayoverFirstDuration" value="<%= umrahPackage.outboundLayoverFirstDuration || "" %>" placeholder="Enter duration" data-flatpickr="package_time_picker" data-flatpickr-time="1st" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1020,18 +1021,16 @@
                                   <option value="">
                                     Select layover airport
                                   </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
+                                  <option value="DAC" <% if (umrahPackage.outboundLayoverFirstAirport === 'DAC') { %> selected <% } %>>
+                                    Dhaka-Hazrat Shahjalal International Airport-DAC
                                   </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
+                                  <option value="CGP" <% if (umrahPackage.outboundLayoverFirstAirport === 'CGP') { %> selected <% } %>>
+                                    Chittagong-Shah Amanat International Airport-CGP
                                   </option>
-                                  <option value="Sylhet">
+                                  <option value="Sylhet" <% if (umrahPackage.outboundLayoverFirstAirport === 'Sylhet') { %> selected <% } %>>
                                     Sylhet-Osmani International Airport-ZYL
                                   </option>
-                                  <option value="RJH">
+                                  <option value="RJH" <% if (umrahPackage.outboundLayoverFirstAirport === 'RJH') { %> selected <% } %>>
                                     Rajshahi-Shah Makhdum Airport-RJH
                                   </option>
                                 </select>
@@ -1048,7 +1047,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="outboundLayoverSecondDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="outboundLayoverSecondDuration" value="<%= umrahPackage.outboundLayoverSecondDuration || '' %>" placeholder="Enter layover duration" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1066,18 +1065,16 @@
                                   <option value="">
                                     Select layover airport
                                   </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
+                                  <option value="DAC" <% if (umrahPackage.outboundLayoverSecondAirport === 'DAC') { %> selected <% } %>>
+                                    Dhaka-Hazrat Shahjalal International Airport-DAC
                                   </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
+                                  <option value="CGP" <% if (umrahPackage.outboundLayoverSecondAirport === 'CGP') { %> selected <% } %>>
+                                    Chittagong-Shah Amanat International Airport-CGP
                                   </option>
-                                  <option value="Sylhet">
+                                  <option value="Sylhet" <% if (umrahPackage.outboundLayoverSecondAirport === 'Sylhet') { %> selected <% } %>>
                                     Sylhet-Osmani International Airport-ZYL
                                   </option>
-                                  <option value="RJH">
+                                  <option value="RJH" <% if (umrahPackage.outboundLayoverSecondAirport === 'RJH') { %> selected <% } %>>
                                     Rajshahi-Shah Makhdum Airport-RJH
                                   </option>
                                 </select>
@@ -1093,84 +1090,48 @@
                                 <!--begin::Input-->
                                 <select name="outboundAdultBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <option value="SB" <% if (umrahPackage.outboundAdultBaggageCheckin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '1 Pices') { %> selected <% } %>>1 Pices</option>
+                                  <option value="2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '2 Pices') { %> selected <% } %>>2 Pices</option>
+                                  <option value="1N" <% if (umrahPackage.outboundAdultBaggageCheckin === '1N') { %> selected <% } %>>1N</option>
+                                  <option value="2N" <% if (umrahPackage.outboundAdultBaggageCheckin === '2N') { %> selected <% } %>>2N</option>
+                                  <option value="0 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '0 KG') { %> selected <% } %>>0 KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KH" <% if (umrahPackage.outboundAdultBaggageCheckin === '7 KH') { %> selected <% } %>>7 KH</option>
+                                  <option value="10 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '20 KG') { %> selected <% } %>>20 KG</option>
+                                  <option value="22 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '22 KG') { %> selected <% } %>>22 KG</option>
+                                  <option value="23 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '23 KG') { %> selected <% } %>>23 KG</option>
+                                  <option value="23 KG 1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '23 KG 1 Pices') { %> selected <% } %>>23 KG 1 Pices</option>
+                                  <option value="23 KG 2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '23 KG 2 Pices') { %> selected <% } %>>23 KG 2 Pices</option>
+                                  <option value="25 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '25 KG') { %> selected <% } %>>25 KG</option>
+                                  <option value="25 KG 1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '25 KG 1 Pices') { %> selected <% } %>>25 KG 1 Pices</option>
+                                  <option value="25 KG 2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '25 KG 2 Pices') { %> selected <% } %>>25 KG 2 Pices</option>
+                                  <option value="27 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '27 KG') { %> selected <% } %>>27 KG</option>
+                                  <option value="30 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '30 KG') { %> selected <% } %>>30 KG</option>
+                                  <option value="30 KG 1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '30 KG 1 Pices') { %> selected <% } %>>30 KG 1 Pices</option>
+                                  <option value="30 KG 2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '30 KG 2 Pices') { %> selected <% } %>>30 KG 2 Pices</option>
+                                  <option value="35 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '35 KG') { %> selected <% } %>>35 KG</option>
+                                  <option value="35 KG 1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '35 KG 1 Pices') { %> selected <% } %>>35 KG 1 Pices</option>
+                                  <option value="35 KG 2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '35 KG 2 Pices') { %> selected <% } %>>35 KG 2 Pices</option>
+                                  <option value="40 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '40 KG') { %> selected <% } %>>40 KG</option>
+                                  <option value="40 KG 1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '40 KG 1 Pices') { %> selected <% } %>>40 KG 1 Pices</option>
+                                  <option value="40 KG 2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '40 KG 2 Pices') { %> selected <% } %>>40 KG 2 Pices</option>
+                                  <option value="45 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '45 KG') { %> selected <% } %>>45 KG</option>
+                                  <option value="45 KG 1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '45 KG 1 Pices') { %> selected <% } %>>45 KG 1 Pices</option>
+                                  <option value="45 KG 2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '45 KG 2 Pices') { %> selected <% } %>>45 KG 2 Pices</option>
+                                  <option value="46 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '46 KG') { %> selected <% } %>>46 KG</option>
+                                  <option value="46 KG 1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '46 KG 1 Pices') { %> selected <% } %>>46 KG 1 Pices</option>
+                                  <option value="46 KG 2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '46 KG 2 Pices') { %> selected <% } %>>46 KG 2 Pices</option>
+                                  <option value="50 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '50 KG') { %> selected <% } %>>50 KG</option>
+                                  <option value="50 KG 1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '50 KG 1 Pices') { %> selected <% } %>>50 KG 1 Pices</option>
+                                  <option value="50 KG 2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '50 KG 2 Pices') { %> selected <% } %>>50 KG 2 Pices</option>
+                                  <option value="56 KG" <% if (umrahPackage.outboundAdultBaggageCheckin === '56 KG') { %> selected <% } %>>56 KG</option>
+                                  <option value="56 KG 1 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '56 KG 1 Pices') { %> selected <% } %>>56 KG 1 Pices</option>
+                                  <option value="56 KG 2 Pices" <% if (umrahPackage.outboundAdultBaggageCheckin === '56 KG 2 Pices') { %> selected <% } %>>56 KG 2 Pices</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1184,15 +1145,15 @@
                                 <!--begin::Input-->
                                 <select name="outboundAdultBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <option value="SB" <% if (umrahPackage.outboundAdultBaggageCabin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="KG" <% if (umrahPackage.outboundAdultBaggageCabin === 'KG') { %> selected <% } %>>KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.outboundAdultBaggageCabin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.outboundAdultBaggageCabin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KG" <% if (umrahPackage.outboundAdultBaggageCabin === '7 KG') { %> selected <% } %>>7 KG</option>
+                                  <option value="10 KG" <% if (umrahPackage.outboundAdultBaggageCabin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.outboundAdultBaggageCabin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.outboundAdultBaggageCabin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.outboundAdultBaggageCabin === '20 KG') { %> selected <% } %>>20 KG</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1206,84 +1167,48 @@
                                 <!--begin::Input-->
                                 <select name="outboundChildBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <option value="SB" <% if (umrahPackage.outboundChildBaggageCheckin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '1 Pices') { %> selected <% } %>>1 Pices</option>
+                                  <option value="2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '2 Pices') { %> selected <% } %>>2 Pices</option>
+                                  <option value="1N" <% if (umrahPackage.outboundChildBaggageCheckin === '1N') { %> selected <% } %>>1N</option>
+                                  <option value="2N" <% if (umrahPackage.outboundChildBaggageCheckin === '2N') { %> selected <% } %>>2N</option>
+                                  <option value="0 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '0 KG') { %> selected <% } %>>0 KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KH" <% if (umrahPackage.outboundChildBaggageCheckin === '7 KH') { %> selected <% } %>>7 KH</option>
+                                  <option value="10 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '20 KG') { %> selected <% } %>>20 KG</option>
+                                  <option value="22 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '22 KG') { %> selected <% } %>>22 KG</option>
+                                  <option value="23 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '23 KG') { %> selected <% } %>>23 KG</option>
+                                  <option value="23 KG 1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '23 KG 1 Pices') { %> selected <% } %>>23 KG 1 Pices</option>
+                                  <option value="23 KG 2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '23 KG 2 Pices') { %> selected <% } %>>23 KG 2 Pices</option>
+                                  <option value="25 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '25 KG') { %> selected <% } %>>25 KG</option>
+                                  <option value="25 KG 1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '25 KG 1 Pices') { %> selected <% } %>>25 KG 1 Pices</option>
+                                  <option value="25 KG 2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '25 KG 2 Pices') { %> selected <% } %>>25 KG 2 Pices</option>
+                                  <option value="27 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '27 KG') { %> selected <% } %>>27 KG</option>
+                                  <option value="30 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '30 KG') { %> selected <% } %>>30 KG</option>
+                                  <option value="30 KG 1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '30 KG 1 Pices') { %> selected <% } %>>30 KG 1 Pices</option>
+                                  <option value="30 KG 2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '30 KG 2 Pices') { %> selected <% } %>>30 KG 2 Pices</option>
+                                  <option value="35 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '35 KG') { %> selected <% } %>>35 KG</option>
+                                  <option value="35 KG 1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '35 KG 1 Pices') { %> selected <% } %>>35 KG 1 Pices</option>
+                                  <option value="35 KG 2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '35 KG 2 Pices') { %> selected <% } %>>35 KG 2 Pices</option>
+                                  <option value="40 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '40 KG') { %> selected <% } %>>40 KG</option>
+                                  <option value="40 KG 1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '40 KG 1 Pices') { %> selected <% } %>>40 KG 1 Pices</option>
+                                  <option value="40 KG 2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '40 KG 2 Pices') { %> selected <% } %>>40 KG 2 Pices</option>
+                                  <option value="45 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '45 KG') { %> selected <% } %>>45 KG</option>
+                                  <option value="45 KG 1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '45 KG 1 Pices') { %> selected <% } %>>45 KG 1 Pices</option>
+                                  <option value="45 KG 2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '45 KG 2 Pices') { %> selected <% } %>>45 KG 2 Pices</option>
+                                  <option value="46 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '46 KG') { %> selected <% } %>>46 KG</option>
+                                  <option value="46 KG 1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '46 KG 1 Pices') { %> selected <% } %>>46 KG 1 Pices</option>
+                                  <option value="46 KG 2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '46 KG 2 Pices') { %> selected <% } %>>46 KG 2 Pices</option>
+                                  <option value="50 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '50 KG') { %> selected <% } %>>50 KG</option>
+                                  <option value="50 KG 1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '50 KG 1 Pices') { %> selected <% } %>>50 KG 1 Pices</option>
+                                  <option value="50 KG 2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '50 KG 2 Pices') { %> selected <% } %>>50 KG 2 Pices</option>
+                                  <option value="56 KG" <% if (umrahPackage.outboundChildBaggageCheckin === '56 KG') { %> selected <% } %>>56 KG</option>
+                                  <option value="56 KG 1 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '56 KG 1 Pices') { %> selected <% } %>>56 KG 1 Pices</option>
+                                  <option value="56 KG 2 Pices" <% if (umrahPackage.outboundChildBaggageCheckin === '56 KG 2 Pices') { %> selected <% } %>>56 KG 2 Pices</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1297,15 +1222,15 @@
                                 <!--begin::Input-->
                                 <select name="outboundChildBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <option value="SB" <% if (umrahPackage.outboundChildBaggageCabin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="KG" <% if (umrahPackage.outboundChildBaggageCabin === 'KG') { %> selected <% } %>>KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.outboundChildBaggageCabin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.outboundChildBaggageCabin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KG" <% if (umrahPackage.outboundChildBaggageCabin === '7 KG') { %> selected <% } %>>7 KG</option>
+                                  <option value="10 KG" <% if (umrahPackage.outboundChildBaggageCabin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.outboundChildBaggageCabin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.outboundChildBaggageCabin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.outboundChildBaggageCabin === '20 KG') { %> selected <% } %>>20 KG</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1319,84 +1244,48 @@
                                 <!--begin::Input-->
                                 <select name="outboundInfantBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <option value="SB" <% if (umrahPackage.outboundInfantBaggageCheckin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '1 Pices') { %> selected <% } %>>1 Pices</option>
+                                  <option value="2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '2 Pices') { %> selected <% } %>>2 Pices</option>
+                                  <option value="1N" <% if (umrahPackage.outboundInfantBaggageCheckin === '1N') { %> selected <% } %>>1N</option>
+                                  <option value="2N" <% if (umrahPackage.outboundInfantBaggageCheckin === '2N') { %> selected <% } %>>2N</option>
+                                  <option value="0 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '0 KG') { %> selected <% } %>>0 KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KH" <% if (umrahPackage.outboundInfantBaggageCheckin === '7 KH') { %> selected <% } %>>7 KH</option>
+                                  <option value="10 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '20 KG') { %> selected <% } %>>20 KG</option>
+                                  <option value="22 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '22 KG') { %> selected <% } %>>22 KG</option>
+                                  <option value="23 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '23 KG') { %> selected <% } %>>23 KG</option>
+                                  <option value="23 KG 1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '23 KG 1 Pices') { %> selected <% } %>>23 KG 1 Pices</option>
+                                  <option value="23 KG 2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '23 KG 2 Pices') { %> selected <% } %>>23 KG 2 Pices</option>
+                                  <option value="25 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '25 KG') { %> selected <% } %>>25 KG</option>
+                                  <option value="25 KG 1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '25 KG 1 Pices') { %> selected <% } %>>25 KG 1 Pices</option>
+                                  <option value="25 KG 2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '25 KG 2 Pices') { %> selected <% } %>>25 KG 2 Pices</option>
+                                  <option value="27 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '27 KG') { %> selected <% } %>>27 KG</option>
+                                  <option value="30 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '30 KG') { %> selected <% } %>>30 KG</option>
+                                  <option value="30 KG 1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '30 KG 1 Pices') { %> selected <% } %>>30 KG 1 Pices</option>
+                                  <option value="30 KG 2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '30 KG 2 Pices') { %> selected <% } %>>30 KG 2 Pices</option>
+                                  <option value="35 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '35 KG') { %> selected <% } %>>35 KG</option>
+                                  <option value="35 KG 1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '35 KG 1 Pices') { %> selected <% } %>>35 KG 1 Pices</option>
+                                  <option value="35 KG 2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '35 KG 2 Pices') { %> selected <% } %>>35 KG 2 Pices</option>
+                                  <option value="40 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '40 KG') { %> selected <% } %>>40 KG</option>
+                                  <option value="40 KG 1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '40 KG 1 Pices') { %> selected <% } %>>40 KG 1 Pices</option>
+                                  <option value="40 KG 2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '40 KG 2 Pices') { %> selected <% } %>>40 KG 2 Pices</option>
+                                  <option value="45 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '45 KG') { %> selected <% } %>>45 KG</option>
+                                  <option value="45 KG 1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '45 KG 1 Pices') { %> selected <% } %>>45 KG 1 Pices</option>
+                                  <option value="45 KG 2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '45 KG 2 Pices') { %> selected <% } %>>45 KG 2 Pices</option>
+                                  <option value="46 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '46 KG') { %> selected <% } %>>46 KG</option>
+                                  <option value="46 KG 1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '46 KG 1 Pices') { %> selected <% } %>>46 KG 1 Pices</option>
+                                  <option value="46 KG 2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '46 KG 2 Pices') { %> selected <% } %>>46 KG 2 Pices</option>
+                                  <option value="50 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '50 KG') { %> selected <% } %>>50 KG</option>
+                                  <option value="50 KG 1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '50 KG 1 Pices') { %> selected <% } %>>50 KG 1 Pices</option>
+                                  <option value="50 KG 2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '50 KG 2 Pices') { %> selected <% } %>>50 KG 2 Pices</option>
+                                  <option value="56 KG" <% if (umrahPackage.outboundInfantBaggageCheckin === '56 KG') { %> selected <% } %>>56 KG</option>
+                                  <option value="56 KG 1 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '56 KG 1 Pices') { %> selected <% } %>>56 KG 1 Pices</option>
+                                  <option value="56 KG 2 Pices" <% if (umrahPackage.outboundInfantBaggageCheckin === '56 KG 2 Pices') { %> selected <% } %>>56 KG 2 Pices</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1410,15 +1299,15 @@
                                 <!--begin::Input-->
                                 <select name="outboundInfantBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <option value="SB" <% if (umrahPackage.outboundInfantBaggageCabin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="KG" <% if (umrahPackage.outboundInfantBaggageCabin === 'KG') { %> selected <% } %>>KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.outboundInfantBaggageCabin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.outboundInfantBaggageCabin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KG" <% if (umrahPackage.outboundInfantBaggageCabin === '7 KG') { %> selected <% } %>>7 KG</option>
+                                  <option value="10 KG" <% if (umrahPackage.outboundInfantBaggageCabin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.outboundInfantBaggageCabin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.outboundInfantBaggageCabin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.outboundInfantBaggageCabin === '20 KG') { %> selected <% } %>>20 KG</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1497,39 +1386,10 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="makkahHotelNoOfNights" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select stay duration..
-                                  </option>
-                                  <option value="1">1 Night</option>
-                                  <option value="2">2 Nights</option>
-                                  <option value="3">3 Nights</option>
-                                  <option value="4">4 Nights</option>
-                                  <option value="5">5 Nights</option>
-                                  <option value="6">6 Nights</option>
-                                  <option value="7">7 Nights</option>
-                                  <option value="8">8 Nights</option>
-                                  <option value="9">9 Nights</option>
-                                  <option value="10">10 Nights</option>
-                                  <option value="11">11 Nights</option>
-                                  <option value="12">12 Nights</option>
-                                  <option value="13">13 Nights</option>
-                                  <option value="14">14 Nights</option>
-                                  <option value="15">15 Nights</option>
-                                  <option value="16">16 Nights</option>
-                                  <option value="17">17 Nights</option>
-                                  <option value="18">18 Nights</option>
-                                  <option value="19">19 Nights</option>
-                                  <option value="20">20 Nights</option>
-                                  <option value="21">21 Nights</option>
-                                  <option value="22">22 Nights</option>
-                                  <option value="23">23 Nights</option>
-                                  <option value="24">24 Nights</option>
-                                  <option value="25">25 Nights</option>
-                                  <option value="26">26 Nights</option>
-                                  <option value="27">27 Nights</option>
-                                  <option value="28">28 Nights</option>
-                                  <option value="29">29 Nights</option>
-                                  <option value="30">30 Nights</option>
+                                  <option value="">Select stay duration..</option>
+                                  <% for (let i = 1; i <= 30; i++) { %>
+                                  <option value="<%= i %>" <%= umrahPackage.makkahHotelNoOfNights == i ? 'selected' : '' %>><%= i %> Night<%= i > 1 ? 's' : '' %></option>
+                                  <% } %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1542,7 +1402,7 @@
                                 <label class="form-label required">Hotel Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="makkahHotelName" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="makkahHotelName" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.makkahHotelName || '' %>" placeholder="Enter hotel name" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1556,7 +1416,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="makkahHotelAddress" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="makkahHotelAddress" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.makkahHotelAddress || '' %>" placeholder="Enter hotel address" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1571,12 +1431,12 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="makkahHotelRating" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true">
-                                  <option></option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
+                                  <option value="" <%= !umrahPackage.makkahHotelRating ? 'selected' : '' %>></option>
+                                  <option value="1" <%= umrahPackage.makkahHotelRating === 1 ? 'selected' : '' %>>1</option>
+                                  <option value="2" <%= umrahPackage.makkahHotelRating === 2 ? 'selected' : '' %>>2</option>
+                                  <option value="3" <%= umrahPackage.makkahHotelRating === 3 ? 'selected' : '' %>>3</option>
+                                  <option value="4" <%= umrahPackage.makkahHotelRating === 4 ? 'selected' : '' %>>4</option>
+                                  <option value="5" <%= umrahPackage.makkahHotelRating === 5 ? 'selected' : '' %>>5</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1591,7 +1451,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" name="makkahHotelDistance" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="number" name="makkahHotelDistance" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.makkahHotelDistance || '' %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1606,12 +1466,10 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="makkahHotelDistanceUnit" aria-label="Select distance unit" data-control="select2" data-placeholder="Select distance unit.." class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select distance unit..
-                                  </option>
-                                  <option value="m">Meter</option>
-                                  <option value="km">Kilometer</option>
-                                  <option value="mile">Mile</option>
+                                  <option value="" <%= !umrahPackage.makkahHotelDistanceUnit ? 'selected' : '' %>>Select distance unit..</option>
+                                  <option value="m" <%= umrahPackage.makkahHotelDistanceUnit === 'm' ? 'selected' : '' %>>Meter</option>
+                                  <option value="km" <%= umrahPackage.makkahHotelDistanceUnit === 'km' ? 'selected' : '' %>>Kilometer</option>
+                                  <option value="mile" <%= umrahPackage.makkahHotelDistanceUnit === 'mile' ? 'selected' : '' %>>Mile</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1626,7 +1484,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" name="makkahHotelWalkDuration" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="number" name="makkahHotelWalkDuration" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.makkahHotelWalkDuration || '' %>" placeholder="Enter walk duration" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1640,7 +1498,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="makkahHotelLocation" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="makkahHotelLocation" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.makkahHotelLocation || '' %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1652,7 +1510,7 @@
                                 <label class="form-label"> Notes </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea name="makkahHotelNote" class="form-control form-control-lg form-control-solid" rows="3" placeholder="Write a note"></textarea>
+                                <textarea name="makkahHotelNote" class="form-control form-control-lg form-control-solid" rows="3" placeholder="Write a note"><%= umrahPackage.makkahHotelNote || '' %></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1758,39 +1616,10 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="madinahHotelNoOfNights" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select stay duration..
-                                  </option>
-                                  <option value="1">1 Night</option>
-                                  <option value="2">2 Nights</option>
-                                  <option value="3">3 Nights</option>
-                                  <option value="4">4 Nights</option>
-                                  <option value="5">5 Nights</option>
-                                  <option value="6">6 Nights</option>
-                                  <option value="7">7 Nights</option>
-                                  <option value="8">8 Nights</option>
-                                  <option value="9">9 Nights</option>
-                                  <option value="10">10 Nights</option>
-                                  <option value="11">11 Nights</option>
-                                  <option value="12">12 Nights</option>
-                                  <option value="13">13 Nights</option>
-                                  <option value="14">14 Nights</option>
-                                  <option value="15">15 Nights</option>
-                                  <option value="16">16 Nights</option>
-                                  <option value="17">17 Nights</option>
-                                  <option value="18">18 Nights</option>
-                                  <option value="19">19 Nights</option>
-                                  <option value="20">20 Nights</option>
-                                  <option value="21">21 Nights</option>
-                                  <option value="22">22 Nights</option>
-                                  <option value="23">23 Nights</option>
-                                  <option value="24">24 Nights</option>
-                                  <option value="25">25 Nights</option>
-                                  <option value="26">26 Nights</option>
-                                  <option value="27">27 Nights</option>
-                                  <option value="28">28 Nights</option>
-                                  <option value="29">29 Nights</option>
-                                  <option value="30">30 Nights</option>
+                                  <option value="">Select stay duration..</option>
+                                  <% for (let i = 1; i <= 30; i++) { %>
+                                  <option value="<%= i %>" <%= umrahPackage.madinahHotelNoOfNights == i ? 'selected' : '' %>><%= i %> Night<%= i > 1 ? 's' : '' %></option>
+                                  <% } %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1803,7 +1632,7 @@
                                 <label class="form-label required">Hotel Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="madinahHotelName" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="madinahHotelName" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.madinahHotelName || "" %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1817,7 +1646,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="madinahHotelAddress" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="madinahHotelAddress" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.madinahHotelAddress || "" %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1832,12 +1661,12 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="madinahHotelRating" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true">
-                                  <option></option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
+                                  <option value="" <% if (!umrahPackage.madinahHotelRating) { %> selected <% } %>></option>
+                                  <option value="1" <% if (umrahPackage.madinahHotelRating == 1) { %> selected <% } %>>1</option>
+                                  <option value="2" <% if (umrahPackage.madinahHotelRating == 2) { %> selected <% } %>>2</option>
+                                  <option value="3" <% if (umrahPackage.madinahHotelRating == 3) { %> selected <% } %>>3</option>
+                                  <option value="4" <% if (umrahPackage.madinahHotelRating == 4) { %> selected <% } %>>4</option>
+                                  <option value="5" <% if (umrahPackage.madinahHotelRating == 5) { %> selected <% } %>>5</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1852,7 +1681,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" name="madinahHotelDistance" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="number" name="madinahHotelDistance" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.madinahHotelDistance || "" %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1867,12 +1696,18 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="madinahHotelDistanceUnit" aria-label="Select distance unit" data-control="select2" data-placeholder="Select distance unit.." class="form-select form-select-solid form-select-lg">
-                                  <option value="">
+                                  <option value="" <% if (!umrahPackage.madinahHotelDistanceUnit) { %> selected <% } %>>
                                     Select distance unit..
                                   </option>
-                                  <option value="m">Meter</option>
-                                  <option value="km">Kilometer</option>
-                                  <option value="mile">Mile</option>
+                                  <option value="m" <% if (umrahPackage.madinahHotelDistanceUnit == 'm') { %> selected <% } %>>
+                                    Meter
+                                  </option>
+                                  <option value="km" <% if (umrahPackage.madinahHotelDistanceUnit == 'km') { %> selected <% } %>>
+                                    Kilometer
+                                  </option>
+                                  <option value="mile" <% if (umrahPackage.madinahHotelDistanceUnit == 'mile') { %> selected <% } %>>
+                                    Mile
+                                  </option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1888,7 +1723,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" name="madinahHotelWalkDuration" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="number" name="madinahHotelWalkDuration" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.madinahHotelWalkDuration || "" %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1902,7 +1737,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="madinahHotelLocation" class="form-control form-control-lg form-control-solid" value="" placeholder="" />
+                                <input type="text" name="madinahHotelLocation" class="form-control form-control-lg form-control-solid" value="<%= umrahPackage.madinahHotelLocation || "" %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1914,7 +1749,7 @@
                                 <label class="form-label"> Notes </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea name="madinahHotelNote" class="form-control form-control-lg form-control-solid" rows="3" placeholder="Write a note"></textarea>
+                                <textarea name="madinahHotelNote" class="form-control form-control-lg form-control-solid" rows="3" placeholder="Write a note"><%= umrahPackage.madinahHotelNote || '' %></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1995,7 +1830,7 @@
                                 <label class="form-label required">Flight No</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundFlightNumber" value="" placeholder="" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundFlightNumber" value="<%= umrahPackage.inboundFlightNumber || '' %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2009,14 +1844,10 @@
                                 <!--begin::Input-->
                                 <select name="inboundBookingClass" aria-label="Select class" data-control="select2" data-placeholder="Select class" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select class</option>
-                                  <option value="Economy">Economy</option>
-                                  <option value="Premium Economy">
-                                    Premium Economy
-                                  </option>
-                                  <option value="Business">Business</option>
-                                  <option value="First Class">
-                                    First Class
-                                  </option>
+                                  <option value="Economy" <% if (umrahPackage.inboundBookingClass === 'Economy') { %> selected <% } %>>Economy</option>
+                                  <option value="Premium Economy" <% if (umrahPackage.inboundBookingClass === 'Premium Economy') { %> selected <% } %>>Premium Economy</option>
+                                  <option value="Business" <% if (umrahPackage.inboundBookingClass === 'Business') { %> selected <% } %>>Business</option>
+                                  <option value="First Class" <% if (umrahPackage.inboundBookingClass === 'First Class') { %> selected <% } %>>First Class</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2032,23 +1863,11 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="inboundDepartureAirport" aria-label="Select departure airport" data-control="select2" data-placeholder="Select departure airport" class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select departure airport
-                                  </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
-                                  </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
-                                    Sylhet-Osmani International Airport-ZYL
-                                  </option>
-                                  <option value="RJH">
-                                    Rajshahi-Shah Makhdum Airport-RJH
-                                  </option>
+                                  <option value="">Select departure airport</option>
+                                  <option value="DAC" <% if (umrahPackage.inboundDepartureAirport === 'DAC') { %> selected <% } %>>Dhaka-Hazrat Shahjalal International Airport-DAC</option>
+                                  <option value="CGP" <% if (umrahPackage.inboundDepartureAirport === 'CGP') { %> selected <% } %>>Chittagong-Shah Amanat International Airport-CGP</option>
+                                  <option value="Sylhet" <% if (umrahPackage.inboundDepartureAirport === 'Sylhet') { %> selected <% } %>>Sylhet-Osmani International Airport-ZYL</option>
+                                  <option value="RJH" <% if (umrahPackage.inboundDepartureAirport === 'RJH') { %> selected <% } %>>Rajshahi-Shah Makhdum Airport-RJH</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2064,18 +1883,10 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="inboundArrivalAirport" aria-label="Select arrival airport" data-control="select2" data-placeholder="Select arrival airport" class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select arrival airport
-                                  </option>
-                                  <option value="BDA">
-                                    India-Blue Dart Aviation-BDA
-                                  </option>
-                                  <option value="BWA">
-                                    Bhutan-Bhutan Airlines-BWA
-                                  </option>
-                                  <option value="BGH">
-                                    Bulgaria-Balkan Holidays-BGH
-                                  </option>
+                                  <option value="">Select arrival airport</option>
+                                  <option value="BDA" <% if (umrahPackage.inboundArrivalAirport === 'BDA') { %> selected <% } %>>India-Blue Dart Aviation-BDA</option>
+                                  <option value="BWA" <% if (umrahPackage.inboundArrivalAirport === 'BWA') { %> selected <% } %>>Bhutan-Bhutan Airlines-BWA</option>
+                                  <option value="BGH" <% if (umrahPackage.inboundArrivalAirport === 'BGH') { %> selected <% } %>>Bulgaria-Balkan Holidays-BGH</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2089,22 +1900,12 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="inboundAirCraftModel" aria-label="Select aircraft model" data-control="select2" data-placeholder="Select aircraft model" class="form-select form-select-solid form-select-lg">
-                                  <option></option>
-                                  <option value="Airbus A220">
-                                    Airbus A220
-                                  </option>
-                                  <option value="Boeing 777-200">
-                                    Boeing 777-200
-                                  </option>
-                                  <option value="Boeing 737-900">
-                                    Boeing 737-900
-                                  </option>
-                                  <option value="Airbus A320">
-                                    Airbus A320
-                                  </option>
-                                  <option value="Boeing 787-9">
-                                    Boeing 787-9
-                                  </option>
+                                  <option value="">Select aircraft model</option>
+                                  <option value="Airbus A220" <% if (umrahPackage.inboundAirCraftModel === 'Airbus A220') { %> selected <% } %>>Airbus A220</option>
+                                  <option value="Boeing 777-200" <% if (umrahPackage.inboundAirCraftModel === 'Boeing 777-200') { %> selected <% } %>>Boeing 777-200</option>
+                                  <option value="Boeing 737-900" <% if (umrahPackage.inboundAirCraftModel === 'Boeing 737-900') { %> selected <% } %>>Boeing 737-900</option>
+                                  <option value="Airbus A320" <% if (umrahPackage.inboundAirCraftModel === 'Airbus A320') { %> selected <% } %>>Airbus A320</option>
+                                  <option value="Boeing 787-9" <% if (umrahPackage.inboundAirCraftModel === 'Boeing 787-9') { %> selected <% } %>>Boeing 787-9</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2117,7 +1918,11 @@
                                 <label class="form-label required">Departure Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundDepartureDatetime" data-flatpickr="package_datetime_picker" />
+                                <%
+                                  // Format the inboundDepartureDatetime
+                                  const inboundDepartureDatetime = formatDate(umrahPackage.inboundDepartureDatetime);
+                                %>
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundDepartureDatetime" data-flatpickr="package_datetime_picker" value="<%= inboundDepartureDatetime %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2129,7 +1934,11 @@
                                 <label class="form-label required">Arrival Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundArrivalDatetime" data-flatpickr="package_datetime_picker" disabled />
+                                <%
+                                  // Format the inboundArrivalDatetime
+                                  const inboundArrivalDatetime = formatDate(umrahPackage.inboundArrivalDatetime);
+                                %>
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundArrivalDatetime" data-flatpickr="package_datetime_picker" disabled value="<%= inboundArrivalDatetime %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2142,12 +1951,10 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="inboundFlightStops" aria-label="Select flight stops" data-control="select2" data-placeholder="Select flight stops.." class="form-select form-select-solid form-select-lg" data-kt-umrah-extranet-flight-stops-select="true">
-                                  <option value="">
-                                    Select flight stops..
-                                  </option>
-                                  <option value="0">Non Stop</option>
-                                  <option value="1">One Stop</option>
-                                  <option value="2">Two Stop</option>
+                                  <option value="">Select flight stops..</option>
+                                  <option value="0" <% if (umrahPackage.inboundFlightStops == 0) { %> selected <% } %>>Non Stop</option>
+                                  <option value="1" <% if (umrahPackage.inboundFlightStops == 1) { %> selected <% } %>>One Stop</option>
+                                  <option value="2" <% if (umrahPackage.inboundFlightStops == 2) { %> selected <% } %>>Two Stop</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2162,7 +1969,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverFirstDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="1st" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverFirstDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="1st" value="<%= umrahPackage.inboundLayoverFirstDuration || '' %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2177,23 +1984,11 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="inboundLayoverFirstAirport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="1st">
-                                  <option value="">
-                                    Select layover airport
-                                  </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
-                                  </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
-                                    Sylhet-Osmani International Airport-ZYL
-                                  </option>
-                                  <option value="RJH">
-                                    Rajshahi-Shah Makhdum Airport-RJH
-                                  </option>
+                                  <option value="">Select layover airport</option>
+                                  <option value="DAC" <% if (umrahPackage?.inboundLayoverFirstAirport === 'DAC') { %> selected <% } %>>Dhaka-Hazrat Shahjalal International Airport-DAC</option>
+                                  <option value="CGP" <% if (umrahPackage?.inboundLayoverFirstAirport === 'CGP') { %> selected <% } %>>Chittagong-Shah Amanat International Airport-CGP</option>
+                                  <option value="Sylhet" <% if (umrahPackage?.inboundLayoverFirstAirport === 'Sylhet') { %> selected <% } %>>Sylhet-Osmani International Airport-ZYL</option>
+                                  <option value="RJH" <% if (umrahPackage?.inboundLayoverFirstAirport === 'RJH') { %> selected <% } %>>Rajshahi-Shah Makhdum Airport-RJH</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2208,7 +2003,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverSecondDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverSecondDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" value="<%= umrahPackage.inboundLayoverSecondDuration || '' %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2223,23 +2018,11 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="inboundLayoverSecondAirport" aria-label="Select layover airport" data-control="select2" data-placeholder="Select layover airport" class="form-select form-select-solid form-select-lg" data-layover-airport="2nd">
-                                  <option value="">
-                                    Select layover airport
-                                  </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
-                                  </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
-                                    Sylhet-Osmani International Airport-ZYL
-                                  </option>
-                                  <option value="RJH">
-                                    Rajshahi-Shah Makhdum Airport-RJH
-                                  </option>
+                                  <option value="">Select layover airport</option>
+                                  <option value="DAC" <% if (umrahPackage.inboundLayoverSecondAirport === 'DAC') { %> selected <% } %>>Dhaka-Hazrat Shahjalal International Airport-DAC</option>
+                                  <option value="CGP" <% if (umrahPackage.inboundLayoverSecondAirport === 'CGP') { %> selected <% } %>>Chittagong-Shah Amanat International Airport-CGP</option>
+                                  <option value="Sylhet" <% if (umrahPackage.inboundLayoverSecondAirport === 'Sylhet') { %> selected <% } %>>Sylhet-Osmani International Airport-ZYL</option>
+                                  <option value="RJH" <% if (umrahPackage.inboundLayoverSecondAirport === 'RJH') { %> selected <% } %>>Rajshahi-Shah Makhdum Airport-RJH</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2253,84 +2036,48 @@
                                 <!--begin::Input-->
                                 <select name="inboundAdultBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <option value="SB" <% if (umrahPackage.inboundAdultBaggageCheckin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '1 Pices') { %> selected <% } %>>1 Pices</option>
+                                  <option value="2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '2 Pices') { %> selected <% } %>>2 Pices</option>
+                                  <option value="1N" <% if (umrahPackage.inboundAdultBaggageCheckin === '1N') { %> selected <% } %>>1N</option>
+                                  <option value="2N" <% if (umrahPackage.inboundAdultBaggageCheckin === '2N') { %> selected <% } %>>2N</option>
+                                  <option value="0 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '0 KG') { %> selected <% } %>>0 KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KH" <% if (umrahPackage.inboundAdultBaggageCheckin === '7 KH') { %> selected <% } %>>7 KH</option>
+                                  <option value="10 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '20 KG') { %> selected <% } %>>20 KG</option>
+                                  <option value="22 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '22 KG') { %> selected <% } %>>22 KG</option>
+                                  <option value="23 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '23 KG') { %> selected <% } %>>23 KG</option>
+                                  <option value="23 KG 1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '23 KG 1 Pices') { %> selected <% } %>>23 KG 1 Pices</option>
+                                  <option value="23 KG 2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '23 KG 2 Pices') { %> selected <% } %>>23 KG 2 Pices</option>
+                                  <option value="25 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '25 KG') { %> selected <% } %>>25 KG</option>
+                                  <option value="25 KG 1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '25 KG 1 Pices') { %> selected <% } %>>25 KG 1 Pices</option>
+                                  <option value="25 KG 2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '25 KG 2 Pices') { %> selected <% } %>>25 KG 2 Pices</option>
+                                  <option value="27 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '27 KG') { %> selected <% } %>>27 KG</option>
+                                  <option value="30 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '30 KG') { %> selected <% } %>>30 KG</option>
+                                  <option value="30 KG 1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '30 KG 1 Pices') { %> selected <% } %>>30 KG 1 Pices</option>
+                                  <option value="30 KG 2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '30 KG 2 Pices') { %> selected <% } %>>30 KG 2 Pices</option>
+                                  <option value="35 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '35 KG') { %> selected <% } %>>35 KG</option>
+                                  <option value="35 KG 1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '35 KG 1 Pices') { %> selected <% } %>>35 KG 1 Pices</option>
+                                  <option value="35 KG 2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '35 KG 2 Pices') { %> selected <% } %>>35 KG 2 Pices</option>
+                                  <option value="40 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '40 KG') { %> selected <% } %>>40 KG</option>
+                                  <option value="40 KG 1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '40 KG 1 Pices') { %> selected <% } %>>40 KG 1 Pices</option>
+                                  <option value="40 KG 2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '40 KG 2 Pices') { %> selected <% } %>>40 KG 2 Pices</option>
+                                  <option value="45 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '45 KG') { %> selected <% } %>>45 KG</option>
+                                  <option value="45 KG 1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '45 KG 1 Pices') { %> selected <% } %>>45 KG 1 Pices</option>
+                                  <option value="45 KG 2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '45 KG 2 Pices') { %> selected <% } %>>45 KG 2 Pices</option>
+                                  <option value="46 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '46 KG') { %> selected <% } %>>46 KG</option>
+                                  <option value="46 KG 1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '46 KG 1 Pices') { %> selected <% } %>>46 KG 1 Pices</option>
+                                  <option value="46 KG 2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '46 KG 2 Pices') { %> selected <% } %>>46 KG 2 Pices</option>
+                                  <option value="50 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '50 KG') { %> selected <% } %>>50 KG</option>
+                                  <option value="50 KG 1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '50 KG 1 Pices') { %> selected <% } %>>50 KG 1 Pices</option>
+                                  <option value="50 KG 2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '50 KG 2 Pices') { %> selected <% } %>>50 KG 2 Pices</option>
+                                  <option value="56 KG" <% if (umrahPackage.inboundAdultBaggageCheckin === '56 KG') { %> selected <% } %>>56 KG</option>
+                                  <option value="56 KG 1 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '56 KG 1 Pices') { %> selected <% } %>>56 KG 1 Pices</option>
+                                  <option value="56 KG 2 Pices" <% if (umrahPackage.inboundAdultBaggageCheckin === '56 KG 2 Pices') { %> selected <% } %>>56 KG 2 Pices</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2344,15 +2091,15 @@
                                 <!--begin::Input-->
                                 <select name="inboundAdultBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <option value="SB" <% if (umrahPackage.inboundAdultBaggageCabin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="KG" <% if (umrahPackage.inboundAdultBaggageCabin === 'KG') { %> selected <% } %>>KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.inboundAdultBaggageCabin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.inboundAdultBaggageCabin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KG" <% if (umrahPackage.inboundAdultBaggageCabin === '7 KG') { %> selected <% } %>>7 KG</option>
+                                  <option value="10 KG" <% if (umrahPackage.inboundAdultBaggageCabin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.inboundAdultBaggageCabin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.inboundAdultBaggageCabin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.inboundAdultBaggageCabin === '20 KG') { %> selected <% } %>>20 KG</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2366,84 +2113,48 @@
                                 <!--begin::Input-->
                                 <select name="inboundChildBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <option value="SB" <% if (umrahPackage.inboundChildBaggageCheckin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '1 Pices') { %> selected <% } %>>1 Pices</option>
+                                  <option value="2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '2 Pices') { %> selected <% } %>>2 Pices</option>
+                                  <option value="1N" <% if (umrahPackage.inboundChildBaggageCheckin === '1N') { %> selected <% } %>>1N</option>
+                                  <option value="2N" <% if (umrahPackage.inboundChildBaggageCheckin === '2N') { %> selected <% } %>>2N</option>
+                                  <option value="0 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '0 KG') { %> selected <% } %>>0 KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KH" <% if (umrahPackage.inboundChildBaggageCheckin === '7 KH') { %> selected <% } %>>7 KH</option>
+                                  <option value="10 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '20 KG') { %> selected <% } %>>20 KG</option>
+                                  <option value="22 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '22 KG') { %> selected <% } %>>22 KG</option>
+                                  <option value="23 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '23 KG') { %> selected <% } %>>23 KG</option>
+                                  <option value="23 KG 1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '23 KG 1 Pices') { %> selected <% } %>>23 KG 1 Pices</option>
+                                  <option value="23 KG 2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '23 KG 2 Pices') { %> selected <% } %>>23 KG 2 Pices</option>
+                                  <option value="25 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '25 KG') { %> selected <% } %>>25 KG</option>
+                                  <option value="25 KG 1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '25 KG 1 Pices') { %> selected <% } %>>25 KG 1 Pices</option>
+                                  <option value="25 KG 2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '25 KG 2 Pices') { %> selected <% } %>>25 KG 2 Pices</option>
+                                  <option value="27 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '27 KG') { %> selected <% } %>>27 KG</option>
+                                  <option value="30 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '30 KG') { %> selected <% } %>>30 KG</option>
+                                  <option value="30 KG 1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '30 KG 1 Pices') { %> selected <% } %>>30 KG 1 Pices</option>
+                                  <option value="30 KG 2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '30 KG 2 Pices') { %> selected <% } %>>30 KG 2 Pices</option>
+                                  <option value="35 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '35 KG') { %> selected <% } %>>35 KG</option>
+                                  <option value="35 KG 1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '35 KG 1 Pices') { %> selected <% } %>>35 KG 1 Pices</option>
+                                  <option value="35 KG 2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '35 KG 2 Pices') { %> selected <% } %>>35 KG 2 Pices</option>
+                                  <option value="40 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '40 KG') { %> selected <% } %>>40 KG</option>
+                                  <option value="40 KG 1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '40 KG 1 Pices') { %> selected <% } %>>40 KG 1 Pices</option>
+                                  <option value="40 KG 2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '40 KG 2 Pices') { %> selected <% } %>>40 KG 2 Pices</option>
+                                  <option value="45 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '45 KG') { %> selected <% } %>>45 KG</option>
+                                  <option value="45 KG 1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '45 KG 1 Pices') { %> selected <% } %>>45 KG 1 Pices</option>
+                                  <option value="45 KG 2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '45 KG 2 Pices') { %> selected <% } %>>45 KG 2 Pices</option>
+                                  <option value="46 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '46 KG') { %> selected <% } %>>46 KG</option>
+                                  <option value="46 KG 1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '46 KG 1 Pices') { %> selected <% } %>>46 KG 1 Pices</option>
+                                  <option value="46 KG 2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '46 KG 2 Pices') { %> selected <% } %>>46 KG 2 Pices</option>
+                                  <option value="50 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '50 KG') { %> selected <% } %>>50 KG</option>
+                                  <option value="50 KG 1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '50 KG 1 Pices') { %> selected <% } %>>50 KG 1 Pices</option>
+                                  <option value="50 KG 2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '50 KG 2 Pices') { %> selected <% } %>>50 KG 2 Pices</option>
+                                  <option value="56 KG" <% if (umrahPackage.inboundChildBaggageCheckin === '56 KG') { %> selected <% } %>>56 KG</option>
+                                  <option value="56 KG 1 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '56 KG 1 Pices') { %> selected <% } %>>56 KG 1 Pices</option>
+                                  <option value="56 KG 2 Pices" <% if (umrahPackage.inboundChildBaggageCheckin === '56 KG 2 Pices') { %> selected <% } %>>56 KG 2 Pices</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2457,15 +2168,15 @@
                                 <!--begin::Input-->
                                 <select name="inboundChildBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <option value="SB" <% if (umrahPackage.inboundChildBaggageCabin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="KG" <% if (umrahPackage.inboundChildBaggageCabin === 'KG') { %> selected <% } %>>KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.inboundChildBaggageCabin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.inboundChildBaggageCabin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KG" <% if (umrahPackage.inboundChildBaggageCabin === '7 KG') { %> selected <% } %>>7 KG</option>
+                                  <option value="10 KG" <% if (umrahPackage.inboundChildBaggageCabin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.inboundChildBaggageCabin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.inboundChildBaggageCabin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.inboundChildBaggageCabin === '20 KG') { %> selected <% } %>>20 KG</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2479,84 +2190,48 @@
                                 <!--begin::Input-->
                                 <select name="inboundInfantBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <option value="SB" <% if (umrahPackage.inboundInfantBaggageCheckin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '1 Pices') { %> selected <% } %>>1 Pices</option>
+                                  <option value="2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '2 Pices') { %> selected <% } %>>2 Pices</option>
+                                  <option value="1N" <% if (umrahPackage.inboundInfantBaggageCheckin === '1N') { %> selected <% } %>>1N</option>
+                                  <option value="2N" <% if (umrahPackage.inboundInfantBaggageCheckin === '2N') { %> selected <% } %>>2N</option>
+                                  <option value="0 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '0 KG') { %> selected <% } %>>0 KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KH" <% if (umrahPackage.inboundInfantBaggageCheckin === '7 KH') { %> selected <% } %>>7 KH</option>
+                                  <option value="10 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '20 KG') { %> selected <% } %>>20 KG</option>
+                                  <option value="22 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '22 KG') { %> selected <% } %>>22 KG</option>
+                                  <option value="23 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '23 KG') { %> selected <% } %>>23 KG</option>
+                                  <option value="23 KG 1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '23 KG 1 Pices') { %> selected <% } %>>23 KG 1 Pices</option>
+                                  <option value="23 KG 2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '23 KG 2 Pices') { %> selected <% } %>>23 KG 2 Pices</option>
+                                  <option value="25 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '25 KG') { %> selected <% } %>>25 KG</option>
+                                  <option value="25 KG 1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '25 KG 1 Pices') { %> selected <% } %>>25 KG 1 Pices</option>
+                                  <option value="25 KG 2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '25 KG 2 Pices') { %> selected <% } %>>25 KG 2 Pices</option>
+                                  <option value="27 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '27 KG') { %> selected <% } %>>27 KG</option>
+                                  <option value="30 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '30 KG') { %> selected <% } %>>30 KG</option>
+                                  <option value="30 KG 1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '30 KG 1 Pices') { %> selected <% } %>>30 KG 1 Pices</option>
+                                  <option value="30 KG 2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '30 KG 2 Pices') { %> selected <% } %>>30 KG 2 Pices</option>
+                                  <option value="35 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '35 KG') { %> selected <% } %>>35 KG</option>
+                                  <option value="35 KG 1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '35 KG 1 Pices') { %> selected <% } %>>35 KG 1 Pices</option>
+                                  <option value="35 KG 2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '35 KG 2 Pices') { %> selected <% } %>>35 KG 2 Pices</option>
+                                  <option value="40 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '40 KG') { %> selected <% } %>>40 KG</option>
+                                  <option value="40 KG 1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '40 KG 1 Pices') { %> selected <% } %>>40 KG 1 Pices</option>
+                                  <option value="40 KG 2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '40 KG 2 Pices') { %> selected <% } %>>40 KG 2 Pices</option>
+                                  <option value="45 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '45 KG') { %> selected <% } %>>45 KG</option>
+                                  <option value="45 KG 1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '45 KG 1 Pices') { %> selected <% } %>>45 KG 1 Pices</option>
+                                  <option value="45 KG 2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '45 KG 2 Pices') { %> selected <% } %>>45 KG 2 Pices</option>
+                                  <option value="46 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '46 KG') { %> selected <% } %>>46 KG</option>
+                                  <option value="46 KG 1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '46 KG 1 Pices') { %> selected <% } %>>46 KG 1 Pices</option>
+                                  <option value="46 KG 2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '46 KG 2 Pices') { %> selected <% } %>>46 KG 2 Pices</option>
+                                  <option value="50 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '50 KG') { %> selected <% } %>>50 KG</option>
+                                  <option value="50 KG 1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '50 KG 1 Pices') { %> selected <% } %>>50 KG 1 Pices</option>
+                                  <option value="50 KG 2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '50 KG 2 Pices') { %> selected <% } %>>50 KG 2 Pices</option>
+                                  <option value="56 KG" <% if (umrahPackage.inboundInfantBaggageCheckin === '56 KG') { %> selected <% } %>>56 KG</option>
+                                  <option value="56 KG 1 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '56 KG 1 Pices') { %> selected <% } %>>56 KG 1 Pices</option>
+                                  <option value="56 KG 2 Pices" <% if (umrahPackage.inboundInfantBaggageCheckin === '56 KG 2 Pices') { %> selected <% } %>>56 KG 2 Pices</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2570,15 +2245,15 @@
                                 <!--begin::Input-->
                                 <select name="inboundInfantBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <option value="SB" <% if (umrahPackage.inboundInfantBaggageCabin === 'SB') { %> selected <% } %>>SB</option>
+                                  <option value="KG" <% if (umrahPackage.inboundInfantBaggageCabin === 'KG') { %> selected <% } %>>KG</option>
+                                  <option value="2 KG" <% if (umrahPackage.inboundInfantBaggageCabin === '2 KG') { %> selected <% } %>>2 KG</option>
+                                  <option value="5 KG" <% if (umrahPackage.inboundInfantBaggageCabin === '5 KG') { %> selected <% } %>>5 KG</option>
+                                  <option value="7 KG" <% if (umrahPackage.inboundInfantBaggageCabin === '7 KG') { %> selected <% } %>>7 KG</option>
+                                  <option value="10 KG" <% if (umrahPackage.inboundInfantBaggageCabin === '10 KG') { %> selected <% } %>>10 KG</option>
+                                  <option value="12 KG" <% if (umrahPackage.inboundInfantBaggageCabin === '12 KG') { %> selected <% } %>>12 KG</option>
+                                  <option value="15 KG" <% if (umrahPackage.inboundInfantBaggageCabin === '15 KG') { %> selected <% } %>>15 KG</option>
+                                  <option value="20 KG" <% if (umrahPackage.inboundInfantBaggageCabin === '20 KG') { %> selected <% } %>>20 KG</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2617,15 +2292,9 @@
                                 <!--begin::Input-->
                                 <select name="visaType" aria-label="Select visa type" data-control="select2" data-placeholder="Select visa type" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select visa type</option>
-                                  <option value="umrah">
-                                    Umrah Visa
-                                  </option>
-                                  <option value="ziyarah">
-                                    Ziyara Visa
-                                  </option>
-                                  <option value="hajj">
-                                    Hajj Visa
-                                  </option>
+                                  <option value="umrah" <% if (umrahPackage.visaType === 'umrah') { %> selected <% } %>>Umrah Visa</option>
+                                  <option value="ziyarah" <% if (umrahPackage.visaType === 'ziyarah') { %> selected <% } %>>Ziyara Visa</option>
+                                  <option value="hajj" <% if (umrahPackage.visaType === 'hajj') { %> selected <% } %>>Hajj Visa</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2639,18 +2308,10 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="visaNoOfEntries" aria-label="Select visa entries" data-control="select2" data-placeholder="Select visa entries" class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select visa entries
-                                  </option>
-                                  <option value="Single Entry">
-                                    Single Entry
-                                  </option>
-                                  <option value="Double Entry">
-                                    Double Entry
-                                  </option>
-                                  <option value="Multiple Entry">
-                                    Multiple Entry
-                                  </option>
+                                  <option value="">Select visa entries</option>
+                                  <option value="Single Entry" <% if (umrahPackage.visaNoOfEntries === 'Single Entry') { %> selected <% } %>>Single Entry</option>
+                                  <option value="Double Entry" <% if (umrahPackage.visaNoOfEntries === 'Double Entry') { %> selected <% } %>>Double Entry</option>
+                                  <option value="Multiple Entry" <% if (umrahPackage.visaNoOfEntries === 'Multiple Entry') { %> selected <% } %>>Multiple Entry</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2663,7 +2324,7 @@
                                 <label class="form-label required">Visa Duration (Days)</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-solid" name="visaDuration" value="" placeholder="Enter visa duration" />
+                                <input type="number" class="form-control form-control-solid" name="visaDuration" value="<%= umrahPackage.visaDuration %>" placeholder="Enter visa duration" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2675,7 +2336,7 @@
                                 <label class="form-label required">Visa Validity (Days)</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-solid" name="visaValidity" value="" placeholder="Enter visa validity" />
+                                <input type="number" class="form-control form-control-solid" name="visaValidity" value="<%= umrahPackage.visaValidity %>" placeholder="Enter visa validity" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2695,18 +2356,28 @@
                                 <!--begin::Options-->
                                 <div data-repeater-list="kt_repeater_visa_required">
                                   <!--begin::Input group-->
-                                  <div class="fv-row mb-10" data-repeater-item>
-                                    <div class="d-flex gap-3">
-                                      <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="visaOptions" placeholder="Enter option" value="" />
-                                      <!--end::Input-->
-                                      <!--begin::Action-->
-                                      <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
-                                        <i class="ki-duotone ki-trash fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
-                                        Delete
-                                      </button>
-                                      <!--end::Action-->
+                                  <div data-repeater-list="visaOptions">
+                                    <% umrahPackage.visaOptions.forEach((option, index) => { %>
+                                    <div class="fv-row mb-10" data-repeater-item>
+                                      <div class="d-flex gap-3">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-solid" name="visaOptions" placeholder="Enter option" value="<%= option %>" />
+                                        <!--end::Input-->
+                                        <!--begin::Action-->
+                                        <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
+                                          <i class="ki-duotone ki-trash fs-5">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                            <span class="path4"></span>
+                                            <span class="path5"></span>
+                                          </i>
+                                          Delete
+                                        </button>
+                                        <!--end::Action-->
+                                      </div>
                                     </div>
+                                    <% }); %>
                                   </div>
                                   <!--end::Input group-->
                                 </div>
@@ -2721,7 +2392,7 @@
                                 <label class="form-label">Note</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="visaNote" rows="3" placeholder="Write a note"></textarea>
+                                <textarea class="form-control form-control-solid" name="visaNote" rows="3" placeholder="Write a note"><%= umrahPackage.visaNote %></textarea>
                                 <!--end::Input-->
                               </div>
                             </div>
@@ -2757,26 +2428,16 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="transportType" aria-label="Select transport type" data-control="select2" data-placeholder="Select transport type" class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select transport type
-                                  </option>
-                                  <option value="Sedan car">Sedan car</option>
-                                  <option value="Suv">Suv</option>
-                                  <option value="Mvp">Mvp</option>
-                                  <option value="Microbus">Microbus</option>
-                                  <option value="Bus">Bus</option>
-                                  <option value="Luxury Sedan">
-                                    Luxury Sedan
-                                  </option>
-                                  <option value="Luxury Suv">
-                                    Luxury Suv
-                                  </option>
-                                  <option value="Luxury Mvp">
-                                    Luxury Mvp
-                                  </option>
-                                  <option value="Bullet Train">
-                                    Bullet Train
-                                  </option>
+                                  <option value="">Select transport type</option>
+                                  <option value="Sedan car" <%= umrahPackage.transportType === 'Sedan car' ? 'selected' : '' %>>Sedan car</option>
+                                  <option value="Suv" <%= umrahPackage.transportType === 'Suv' ? 'selected' : '' %>>Suv</option>
+                                  <option value="Mvp" <%= umrahPackage.transportType === 'Mvp' ? 'selected' : '' %>>Mvp</option>
+                                  <option value="Microbus" <%= umrahPackage.transportType === 'Microbus' ? 'selected' : '' %>>Microbus</option>
+                                  <option value="Bus" <%= umrahPackage.transportType === 'Bus' ? 'selected' : '' %>>Bus</option>
+                                  <option value="Luxury Sedan" <%= umrahPackage.transportType === 'Luxury Sedan' ? 'selected' : '' %>>Luxury Sedan</option>
+                                  <option value="Luxury Suv" <%= umrahPackage.transportType === 'Luxury Suv' ? 'selected' : '' %>>Luxury Suv</option>
+                                  <option value="Luxury Mvp" <%= umrahPackage.transportType === 'Luxury Mvp' ? 'selected' : '' %>>Luxury Mvp</option>
+                                  <option value="Bullet Train" <%= umrahPackage.transportType === 'Bullet Train' ? 'selected' : '' %>>Bullet Train</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2791,8 +2452,8 @@
                                 <!--begin::Input-->
                                 <select name="transportAirportToHotel" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
-                                  <option value="Yes">Yes</option>
-                                  <option value="No">No</option>
+                                  <option value="Yes" <%= umrahPackage.transportAirportToHotel === 'Yes' ? 'selected' : '' %>>Yes</option>
+                                  <option value="No" <%= umrahPackage.transportAirportToHotel === 'No' ? 'selected' : '' %>>No</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2807,8 +2468,8 @@
                                 <!--begin::Input-->
                                 <select name="transportVisitorPlaces" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
-                                  <option value="Yes">Yes</option>
-                                  <option value="No">No</option>
+                                  <option value="Yes" <%= umrahPackage.transportVisitorPlaces === 'Yes' ? 'selected' : '' %>>Yes</option>
+                                  <option value="No" <%= umrahPackage.transportVisitorPlaces === 'No' ? 'selected' : '' %>>No</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2823,8 +2484,8 @@
                                 <!--begin::Input-->
                                 <select name="transportHotelToAirport" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
-                                  <option value="Yes">Yes</option>
-                                  <option value="No">No</option>
+                                  <option value="Yes" <%= umrahPackage.transportHotelToAirport === 'Yes' ? 'selected' : '' %>>Yes</option>
+                                  <option value="No" <%= umrahPackage.transportHotelToAirport === 'No' ? 'selected' : '' %>>No</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2845,18 +2506,28 @@
                                 <!--begin::Options-->
                                 <div data-repeater-list="kt_repeater_transport_service">
                                   <!--begin::Input group-->
-                                  <div class="fv-row mb-10" data-repeater-item>
-                                    <div class="d-flex gap-3">
-                                      <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="transportServices" placeholder="Enter option" value="" />
-                                      <!--end::Input-->
-                                      <!--begin::Action-->
-                                      <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
-                                        <i class="ki-duotone ki-trash fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
-                                        Delete
-                                      </button>
-                                      <!--end::Action-->
+                                  <div data-repeater-list="transportServices">
+                                    <% umrahPackage.transportServices.forEach((service, index) => { %>
+                                    <div class="fv-row mb-10" data-repeater-item>
+                                      <div class="d-flex gap-3">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-solid" name="transportServices" placeholder="Enter option" value="<%= service %>" />
+                                        <!--end::Input-->
+                                        <!--begin::Action-->
+                                        <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
+                                          <i class="ki-duotone ki-trash fs-5">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                            <span class="path4"></span>
+                                            <span class="path5"></span>
+                                          </i>
+                                          Delete
+                                        </button>
+                                        <!--end::Action-->
+                                      </div>
                                     </div>
+                                    <% }); %>
                                   </div>
                                   <!--end::Input group-->
                                 </div>
@@ -2874,54 +2545,63 @@
                                 <div class="d-grid gap-4 mt-3">
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Sedan car (4 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Sedan car (4 Seater)" <%= umrahPackage.transportServiceTypes.includes('Sedan car (4 Seater)') ? 'checked' : '' %> />
                                     <span class="fw-semibold ps-2 fs-6">Sedan car (4 Seater)</span>
                                   </label>
                                   <!--end::Option-->
+
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Suv (6 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Suv (6 Seater)" <%= umrahPackage.transportServiceTypes.includes('Suv (6 Seater)') ? 'checked' : '' %> />
                                     <span class="fw-semibold ps-2 fs-6">Suv (6 Seater)</span>
                                   </label>
                                   <!--end::Option-->
+
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Mvp (8 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Mvp (8 Seater)" <%= umrahPackage.transportServiceTypes.includes('Mvp (8 Seater)') ? 'checked' : '' %> />
                                     <span class="fw-semibold ps-2 fs-6">Mvp (8 Seater)</span>
                                   </label>
                                   <!--end::Option-->
+
+                                  <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Microbus (10 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Microbus (10 Seater)" <%= umrahPackage.transportServiceTypes.includes('Microbus (10 Seater)') ? 'checked' : '' %> />
                                     <span class="fw-semibold ps-2 fs-6">Microbus (10 Seater)</span>
                                   </label>
                                   <!--end::Option-->
-                                  <!--end::Option-->
+
+                                  <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Bus (42 seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Bus (42 seater)" <%= umrahPackage.transportServiceTypes.includes('Bus (42 seater)') ? 'checked' : '' %> />
                                     <span class="fw-semibold ps-2 fs-6">Bus (42 seater)</span>
                                   </label>
                                   <!--end::Option-->
+
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Luxury Sedan (4 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Luxury Sedan (4 Seater)" <%= umrahPackage.transportServiceTypes.includes('Luxury Sedan (4 Seater)') ? 'checked' : '' %> />
                                     <span class="fw-semibold ps-2 fs-6">Luxury Sedan (4 Seater)</span>
                                   </label>
                                   <!--end::Option-->
+
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Luxury Suv (6 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Luxury Suv (6 Seater)" <%= umrahPackage.transportServiceTypes.includes('Luxury Suv (6 Seater)') ? 'checked' : '' %> />
                                     <span class="fw-semibold ps-2 fs-6">Luxury Suv (6 Seater)</span>
                                   </label>
                                   <!--end::Option-->
+
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Luxury Mvp (8 Seater)" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Luxury Mvp (8 Seater)" <%= umrahPackage.transportServiceTypes.includes('Luxury Mvp (8 Seater)') ? 'checked' : '' %> />
                                     <span class="fw-semibold ps-2 fs-6">Luxury Mvp (8 Seater)</span>
                                   </label>
                                   <!--end::Option-->
+
                                   <!--begin::Option-->
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Bullet Train" />
+                                    <input class="form-check-input" name="transportServiceTypes" type="checkbox" value="Bullet Train" <%= umrahPackage.transportServiceTypes.includes('Bullet Train') ? 'checked' : '' %> />
                                     <span class="fw-semibold ps-2 fs-6">Bullet Train</span>
                                   </label>
                                   <!--end::Option-->
@@ -2937,7 +2617,7 @@
                                 <label class="form-label">Note</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="transportNote" rows="3" placeholder="Write a note"></textarea>
+                                <textarea class="form-control form-control-solid" name="transportNote" rows="3" placeholder="Write a note"><%= umrahPackage.transportNote %></textarea>
                                 <!--end::Input-->
                               </div>
                             </div>
@@ -2972,7 +2652,7 @@
                                 <label class="form-label required">Ziyara Days</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-solid" name="ziyarahDays" value="" placeholder="" />
+                                <input type="number" class="form-control form-control-solid" name="ziyarahDays" value="<%= umrahPackage.ziyarahDays %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2986,10 +2666,8 @@
                                 <!--begin::Input-->
                                 <select name="ziyarahMakkah" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
-                                  <option value="Yes">Included</option>
-                                  <option value="No">
-                                    Not Included
-                                  </option>
+                                  <option value="Yes" <%= umrahPackage.ziyarahMakkah === 'Yes' ? 'selected' : '' %>>Included</option>
+                                  <option value="No" <%= umrahPackage.ziyarahMakkah === 'No' ? 'selected' : '' %>>Not Included</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -3004,10 +2682,8 @@
                                 <!--begin::Input-->
                                 <select name="ziyarahMadinah" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
-                                  <option value="Yes">Included</option>
-                                  <option value="No">
-                                    Not Included
-                                  </option>
+                                  <option value="Yes" <%= umrahPackage.ziyarahMadinah === 'Yes' ? 'selected' : '' %>>Included</option>
+                                  <option value="No" <%= umrahPackage.ziyarahMadinah === 'No' ? 'selected' : '' %>>Not Included</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -3024,10 +2700,8 @@
                                 <!--begin::Input-->
                                 <select name="ziyarahTaif" aria-label="Select option" data-control="select2" data-placeholder="Select option" class="form-select form-select-solid form-select-lg">
                                   <option value="">Select option</option>
-                                  <option value="Yes">Included</option>
-                                  <option value="No">
-                                    Not Included
-                                  </option>
+                                  <option value="Yes" <%= umrahPackage.ziyarahTaif === 'Yes' ? 'selected' : '' %>>Included</option>
+                                  <option value="No" <%= umrahPackage.ziyarahTaif === 'No' ? 'selected' : '' %>>Not Included</option>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -3049,11 +2723,12 @@
                                 </div>
                                 <!--begin::Options-->
                                 <div data-repeater-list="kt_repeater_ziyara_makkah_details">
+                                  <% umrahPackage.ziyarahMakkahDetails.forEach(function(detail, index) { %>
                                   <!--begin::Input group-->
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyarahMakkahDetails" placeholder="Enter option" value="" />
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMakkahDetails" placeholder="Enter option" value="<%= detail %>" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -3064,6 +2739,7 @@
                                     </div>
                                   </div>
                                   <!--end::Input group-->
+                                  <% }); %>
                                 </div>
                                 <!--end::Options-->
                               </div>
@@ -3084,11 +2760,13 @@
                                 </div>
                                 <!--begin::Options-->
                                 <div data-repeater-list="kt_repeater_ziyara_madinah_details">
+                                  <!-- Iterate over the array in EJS -->
+                                  <% umrahPackage.ziyarahMadinahDetails.forEach(function(detail, index) { %>
                                   <!--begin::Input group-->
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyarahMadinahDetails" placeholder="Enter option" value="" />
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMadinahDetails" placeholder="Enter option" value="<%= detail %>" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -3099,6 +2777,7 @@
                                     </div>
                                   </div>
                                   <!--end::Input group-->
+                                  <% }); %>
                                 </div>
                                 <!--end::Options-->
                               </div>
@@ -3120,18 +2799,25 @@
                                 <!--begin::Options-->
                                 <div data-repeater-list="kt_repeater_ziyara_taif_details">
                                   <!--begin::Input group-->
-                                  <div class="fv-row mb-10" data-repeater-item>
-                                    <div class="d-flex gap-3">
-                                      <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyarahTaifDetails" placeholder="Enter option" value="" />
-                                      <!--end::Input-->
-                                      <!--begin::Action-->
-                                      <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
-                                        <i class="ki-duotone ki-trash fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
-                                        Delete
-                                      </button>
-                                      <!--end::Action-->
+                                  <div data-repeater-list="kt_repeater_ziyara_taif_details">
+                                    <!-- Iterate over the array in EJS -->
+                                    <% umrahPackage.ziyarahTaifDetails.forEach(function(detail, index) { %>
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10" data-repeater-item>
+                                      <div class="d-flex gap-3">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-solid" name="ziyarahTaifDetails" placeholder="Enter option" value="<%= detail %>" />
+                                        <!--end::Input-->
+                                        <!--begin::Action-->
+                                        <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
+                                          <i class="ki-duotone ki-trash fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
+                                          Delete
+                                        </button>
+                                        <!--end::Action-->
+                                      </div>
                                     </div>
+                                    <!--end::Input group-->
+                                    <% }); %>
                                   </div>
                                   <!--end::Input group-->
                                 </div>
@@ -3145,7 +2831,7 @@
                                 <label class="form-label">Note</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="ziyarahNote" rows="3" placeholder="Write a note"></textarea>
+                                <textarea class="form-control form-control-solid" name="ziyarahNote" rows="3" placeholder="Write a note"><%= umrahPackage.ziyarahNote %></textarea>
                                 <!--end::Input-->
                               </div>
                             </div>
