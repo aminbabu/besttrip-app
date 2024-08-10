@@ -8,14 +8,21 @@
  */
 
 // dependencies
-const { umrahDayWiseItinerarySchema } = require('../../../../../schemas/zod/umrah/packages');
+const {
+    umrahDayWiseItinerarySchema,
+} = require('../../../../../schemas/zod/umrah/packages');
 const { zodErrorHandler } = require('../../../../../handlers/errors');
-const { filterReqFromZodSchema } = require('../../../../../utils/umrah/package');
+const {
+    filterReqFromZodSchema,
+} = require('../../../../../utils/umrah/package');
 
 // export umrah day wise itinerary validation middleware
 module.exports = (req, res, next) => {
     // filter request body object according to schema
-    const data = filterReqFromZodSchema(req.body, umrahDayWiseItinerarySchema.shape);
+    const data = filterReqFromZodSchema(
+        req.body,
+        umrahDayWiseItinerarySchema.shape
+    );
 
     // validate request body
     const { error, success } = umrahDayWiseItinerarySchema.safeParse(data);

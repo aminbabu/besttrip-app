@@ -97,83 +97,6 @@ var KTCreatePackage = (function () {
                     // construct form data
                     const formData = new FormData(form);
 
-                    const makeArray = (fieldKey, fieldName) => {
-                        var arr = [];
-                        var i = 0;
-                        var key = `${fieldKey}[${i}][${fieldName}]`;
-                        while (formData.get(key)) {
-                            arr.push(formData.get(key));
-
-                            delete formData[key];
-
-                            i++;
-
-                            key = `${fieldKey}[${i}][${fieldName}]`;
-                        }
-                        return arr;
-                    };
-
-                    const makeArrayOfItineraryDays = () => {
-                        var arr = [];
-                        var i = 1;
-                        var title = `day_wise_itineary_title_${i}`;
-                        var description = `day_wise_itineary_description_${i}`;
-
-                        while (formData.get(title)) {
-                            var obj = { title: formData.get('title') };
-
-                            if (formData.get(description)) {
-                                obj.description = formData.get(description);
-                            }
-
-                            arr.push(obj);
-
-                            delete formData[title];
-                            delete formData[description];
-
-                            i++;
-
-                            title = `day_wise_itineary_title_${i}`;
-                            description = `day_wise_itineary_description_${i}`;
-                        }
-
-                        return arr;
-                    };
-
-                    formData.append('itinearyDays', makeArrayOfItineraryDays());
-                    formData.append(
-                        'visaOptions',
-                        makeArray('kt_repeater_visa_required', 'visaOptions')
-                    );
-                    formData.append(
-                        'transportServices',
-                        makeArray(
-                            'kt_repeater_transport_service',
-                            'transportServices'
-                        )
-                    );
-                    formData.append(
-                        'ziyarahMakkahDetails',
-                        makeArray(
-                            'kt_repeater_ziyara_makkah_details',
-                            'ziyarahMakkaDetails'
-                        )
-                    );
-                    formData.append(
-                        'ziyarahMadinahDetails',
-                        makeArray(
-                            'kt_repeater_ziyara_madinah_details',
-                            'ziyarahMadinaDetails'
-                        )
-                    );
-                    formData.append(
-                        'ziyarahTaifDetails',
-                        makeArray(
-                            'kt_repeater_ziyara_taif_details',
-                            'ziyarahTaifDetails'
-                        )
-                    );
-
                     // Function to append Dropzone files to FormData
                     const appendDropzoneFiles = (dropzone, fieldName) => {
                         dropzone.files.forEach((file) => {
@@ -234,7 +157,7 @@ var KTCreatePackage = (function () {
                                 }).then(() => {
                                     // Reset form
                                     // form.reset();
-                                    // location.reload();
+                                    location.reload();
                                 });
                             } else {
                                 // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -1553,7 +1476,7 @@ var KTCreatePackage = (function () {
                 <!--begin::Input-->
                 <input
                   type="file"
-                  name="itineraryDaysThumbnails"
+                  name="day_wise_itineary_thumbnail_${i + 1}"
                   id="day_wise_itineary_thumbnail_${i + 1}"
                   accept=".png, .jpg, .jpeg"
                   data-kt-file-uploader-max-size="10"

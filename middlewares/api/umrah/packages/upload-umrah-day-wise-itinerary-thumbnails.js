@@ -21,7 +21,7 @@ module.exports =
 
         // get validated data
         const { id } = req.params || {};
-        const { itineraryDays } = req.files || {};
+        const { itineraryDays } = req.body || {};
 
         // check if extra thumbnails exists
         if (!itineraryDays) {
@@ -43,32 +43,32 @@ module.exports =
                     fs.unlinkSync(
                         path.join(
                             __dirname,
-                            './../../../../public',
+                            '../../../../public',
                             itinerary.thumbnail
                         )
                     )
             );
         }
-
         // prepare file path
         const updateItineraryDays = itineraryDays.map((itinerary) => {
             const updatedItinerary = { ...itinerary };
-            const thumbnailPath = path.join(
-                '/uploads/',
-                `${dir}/${uuidv4()}_${updatedItinerary.thumbnail.name}`
-            );
-            const uploadLogoPath = path.join(
-                __dirname,
-                './../../../../public',
-                thumbnailPath
-            );
+            if (updatedItinerary.thumbnail) {
+                const thumbnailPath = path.join(
+                    '/uploads/',
+                    `${dir}/${uuidv4()}_${updatedItinerary.thumbnail.name}`
+                );
+                const uploadLogoPath = path.join(
+                    __dirname,
+                    '../../../../public',
+                    thumbnailPath
+                );
 
-            // move file to upload path
-            updatedItinerary.thumbnail.mv(uploadLogoPath);
+                // move file to upload path
+                updatedItinerary.thumbnail.mv(uploadLogoPath);
 
-            // set file path to thumbnail object
-            updatedItinerary.thumbnail.path = thumbnailPath;
-
+                // set file path to thumbnail object
+                updatedItinerary.thumbnail.path = thumbnailPath;
+            }
             return updatedItinerary;
         });
 

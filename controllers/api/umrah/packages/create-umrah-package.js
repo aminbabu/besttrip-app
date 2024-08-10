@@ -22,21 +22,10 @@ module.exports = async (req, res, next) => {
             makkahHotelExtraThumbnails,
             madinahHotelThumbnail,
             madinahhHotelExtraThumbnails,
-            itineraryDays,
             umrahThumbnail,
         } = req.files;
 
-        console.log('validatedData', validatedData);
-        // console.log({
-        //     thumbnail,
-        //     extraThumbnails,
-        //     makkahHotelThumbnail,
-        //     makkahHotelExtraThumbnails,
-        //     madinahHotelThumbnail,
-        //     madinahhHotelExtraThumbnails,
-        //     itineraryDays,
-        //     umrahThumbnail,
-        // });
+        console.log(validatedData);
 
         // create umrah package
         const umrahPackage = new UmrahPackage({
@@ -55,9 +44,9 @@ module.exports = async (req, res, next) => {
                 (madinahhHotelExtraThumbnail) =>
                     madinahhHotelExtraThumbnail.path
             ),
-            itineraryDays: itineraryDays?.map((itineraryDay) => ({
+            itineraryDays: validatedData.itineraryDays?.map((itineraryDay) => ({
                 ...itineraryDay,
-                thumbnail: itineraryDay.path,
+                thumbnail: itineraryDay.thumbnail.path,
             })),
             umrahThumbnail: umrahThumbnail.path,
         });

@@ -117,27 +117,57 @@ router.post(
     '/',
     isAllowed(['admin']),
     (req, res, next) => {
-        console.log(req.files);
-        console.log(req.body);
-
         [
-            'visaOptions',
-            'transportServices',
-            'ziyarahMakkahDetails',
-            'ziyarahMadinahDetails',
-            'ziyarahTaifDetails',
-            'transportServiceTypes',
-        ].forEach((field) => {
-            if (req.body[field]) {
-                // If the value is a string, convert it to an array
-                if (typeof req.body[field] === 'string') {
-                    req.body[field] = [req.body[field]];
-                }
-            } else {
-                // Initialize as an empty array if the field is not present
-                req.body[field] = [];
-            }
+            {
+                key: 'kt_repeater_visa_required',
+                modifiedKey: 'visaOptions',
+            },
+            {
+                key: 'kt_repeater_transport_service',
+                modifiedKey: 'transportServices',
+            },
+            {
+                key: 'kt_repeater_ziyara_makkah_details',
+                modifiedKey: 'ziyarahMakkahDetails',
+            },
+            {
+                key: 'kt_repeater_ziyara_madinah_details',
+                modifiedKey: 'ziyarahMadinahDetails',
+            },
+            {
+                key: 'kt_repeater_ziyara_taif_details',
+                modifiedKey: 'ziyarahTaifDetails',
+            },
+        ].forEach(({ key, modifiedKey }) => {
+            req.body[modifiedKey] = req.body[key]?.map(
+                (item) => item[modifiedKey]
+            );
+
+            delete req.body[key];
         });
+
+        // console.log(req.body);
+
+        return next();
+    },
+    (req, res, next) => {
+        const arr = [];
+        let i = 1;
+
+        while (req.body[`day_wise_itineary_title_${i}`] !== undefined) {
+            arr.push({
+                thumbnail: req.files[`day_wise_itineary_thumbnail_${i}`] || '',
+                title: req.body[`day_wise_itineary_title_${i}`],
+                description: req.body[`day_wise_itineary_description_${i}`],
+            });
+
+            delete req.body[`day_wise_itineary_title_${i}`];
+            delete req.body[`day_wise_itineary_description_${i}`];
+
+            i++;
+        }
+
+        req.body.itineraryDays = arr;
 
         return next();
     },

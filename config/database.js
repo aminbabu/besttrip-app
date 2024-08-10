@@ -14,7 +14,7 @@ const { MONGODB_URI, MONGODB_LIVE_URI } = require('./env');
 // connect to database
 const connect = async () => {
     try {
-        await mongoose.connect(/* MONGODB_LIVE_URI || */ MONGODB_URI);
+        await mongoose.connect(MONGODB_LIVE_URI || MONGODB_URI);
         console.log(`Database connected in ${process.env.NODE_ENV} mode`);
     } catch (error) {
         console.error('Database connection failed');

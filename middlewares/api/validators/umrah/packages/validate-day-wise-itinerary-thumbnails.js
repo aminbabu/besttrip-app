@@ -18,26 +18,21 @@ const {
 module.exports = async (req, res, next) => {
     try {
         // get day wise itinerary thumbnails from request
-        let { itineraryDaysThumbnails } = req.files || {};
+        let { itineraryDays } = req.body || {};
 
         // check if day wise itinerary thumbnails are not provided
-        if (!itineraryDaysThumbnails) {
+        if (!itineraryDays) {
             return next();
         }
 
-        // Check if day wise itinerary thumbnails is an array
-        if (!Array.isArray(itineraryDaysThumbnails)) {
-            itineraryDaysThumbnails = [itineraryDaysThumbnails];
-        }
-
         // Validate each itinerary thumbnail
-        for (const itinerary of itineraryDaysThumbnails) {
-            if (!itinerary) {
+        for (const itinerary of itineraryDays) {
+            if (!itinerary.thumbnail) {
                 continue;
             }
 
             // Check if thumbnail is not an image of allowed types
-            if (!DEFAULT_IMAGE_TYPES.includes(itinerary.mimetype)) {
+            if (!DEFAULT_IMAGE_TYPES.includes(itinerary.thumbnail.mimetype)) {
                 return res.status(400).json({
                     message: `Please upload day wise itinerary images of type ${DEFAULT_IMAGE_TYPES.join(
                         ', '
@@ -46,7 +41,7 @@ module.exports = async (req, res, next) => {
             }
 
             // Check if image size is greater than 1 MB
-            if (itinerary.size > DEFAULT_FILE_SIZE) {
+            if (itinerary.thumbnail.size > DEFAULT_FILE_SIZE) {
                 return res.status(400).json({
                     message: `Please upload day wise itinerary images of size less than ${(
                         DEFAULT_FILE_SIZE / ONE_MEGA_BYTE

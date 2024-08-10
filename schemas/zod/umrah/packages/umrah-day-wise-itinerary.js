@@ -9,6 +9,11 @@
 
 // dependencies
 const { z } = require('zod');
+const {
+    DEFAULT_IMAGE_TYPES,
+    DEFAULT_FILE_SIZE,
+    ONE_MEGA_BYTE,
+} = require('../../../../constants');
 
 // export umrah day wise itinerary schema
 module.exports = z
@@ -19,27 +24,26 @@ module.exports = z
                     title: z
                         .string({
                             required_error: 'Itinerary day title is required',
-                            invalid_type_error: 'Please provide a valid itinerary day title',
+                            invalid_type_error:
+                                'Please provide a valid itinerary day title',
                         })
                         .trim()
-                        .min(1, {
-                            message: 'Itinerary day title must be at least 1 characters',
-                        })
                         .max(255, {
-                            message: 'Itinerary day title must be at most 255 characters',
+                            message:
+                                'Itinerary day title must be at most 255 characters',
                         })
                         .optional(),
                     description: z
                         .string({
-                            required_error: 'Itinerary day description is required',
-                            invalid_type_error: 'Please provide a valid itinerary day description',
+                            required_error:
+                                'Itinerary day description is required',
+                            invalid_type_error:
+                                'Please provide a valid itinerary day description',
                         })
                         .trim()
-                        .min(1, {
-                            message: 'Itinerary day description must be at least 1 characters',
-                        })
                         .max(255, {
-                            message: 'Itinerary day description must be at most 255 characters',
+                            message:
+                                'Itinerary day description must be at most 255 characters',
                         })
                         .optional(),
                 }),
