@@ -36,7 +36,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \***************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// Cropper -  A simple jQuery image cropping plugin: https://fengyuanchen.github.io/cropper/\r\n\r\nwindow.Cropper = __webpack_require__(/*! cropperjs/dist/cropper.js */ \"./node_modules/cropperjs/dist/cropper.js\");\r\n\r\n__webpack_require__(/*! ./cropper.scss */ \"./webpack/plugins/custom/cropper/cropper.scss\");\r\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/cropper/cropper.js?");
+eval("// Cropper -  A simple jQuery image cropping plugin: https://fengyuanchen.github.io/cropper/\n\nwindow.Cropper = __webpack_require__(/*! cropperjs/dist/cropper.js */ \"./node_modules/cropperjs/dist/cropper.js\");\n\n__webpack_require__(/*! ./cropper.scss */ \"./webpack/plugins/custom/cropper/cropper.scss\");\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/cropper/cropper.js?");
 
 /***/ })
 

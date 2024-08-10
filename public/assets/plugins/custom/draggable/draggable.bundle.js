@@ -26,7 +26,7 @@ eval("(function (global, factory) {\n   true ? factory(exports) :\n  0;\n})(this
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _shopify_draggable_build_umd__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @shopify/draggable/build/umd */ \"./node_modules/@shopify/draggable/build/umd/index.js\");\n/* harmony import */ var _shopify_draggable_build_umd__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_shopify_draggable_build_umd__WEBPACK_IMPORTED_MODULE_0__);\n// Draggable - a lightweight, responsive, modern drag & drop library: https://shopify.github.io/draggable/\r\n\r\n\r\nwindow.Draggable = (_shopify_draggable_build_umd__WEBPACK_IMPORTED_MODULE_0___default());\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/draggable/draggable.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _shopify_draggable_build_umd__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @shopify/draggable/build/umd */ \"./node_modules/@shopify/draggable/build/umd/index.js\");\n/* harmony import */ var _shopify_draggable_build_umd__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_shopify_draggable_build_umd__WEBPACK_IMPORTED_MODULE_0__);\n// Draggable - a lightweight, responsive, modern drag & drop library: https://shopify.github.io/draggable/\n\n\nwindow.Draggable = (_shopify_draggable_build_umd__WEBPACK_IMPORTED_MODULE_0___default());\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/draggable/draggable.js?");
 
 /***/ })
 
