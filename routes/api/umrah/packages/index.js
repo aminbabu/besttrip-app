@@ -117,7 +117,29 @@ router.post(
     '/',
     isAllowed(['admin']),
     (req, res, next) => {
-        return console.log('req.body', req.body);
+        console.log(req.files);
+        console.log(req.body);
+
+        [
+            'visaOptions',
+            'transportServices',
+            'ziyarahMakkahDetails',
+            'ziyarahMadinahDetails',
+            'ziyarahTaifDetails',
+            'transportServiceTypes',
+        ].forEach((field) => {
+            if (req.body[field]) {
+                // If the value is a string, convert it to an array
+                if (typeof req.body[field] === 'string') {
+                    req.body[field] = [req.body[field]];
+                }
+            } else {
+                // Initialize as an empty array if the field is not present
+                req.body[field] = [];
+            }
+        });
+
+        return next();
     },
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
@@ -138,9 +160,6 @@ router.post(
     validateUmrahThumbnail,
     validateUmrah,
     validateTermsAndConditions,
-    /* (req, res, next) => {
-        return console.log('req.files', req.files, 'req.body', req.body);
-    }, */
     uploadPackageThumbnail('/umrah/package'),
     uploadPackageGallery('/umrah/package'),
     uploadMakkahHotelThumbnail('/umrah/package'),

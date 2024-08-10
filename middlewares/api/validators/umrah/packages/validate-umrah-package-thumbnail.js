@@ -11,6 +11,7 @@
 // dependencies
 const {
     DEFAULT_IMAGE_TYPES,
+    DEFAULT_FILE_SIZE,
     ONE_MEGA_BYTE,
 } = require('../../../../../constants');
 
@@ -43,11 +44,11 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // check if thumbnail size exceeds 1 MB
-        if (thumbnail.size > ONE_MEGA_BYTE) {
+        // check if thumbnail size exceeds 5 MB
+        if (thumbnail.size > DEFAULT_FILE_SIZE) {
             return res.status(400).json({
                 message: `Please upload a thumbnail of size less than ${(
-                    ONE_MEGA_BYTE / ONE_MEGA_BYTE
+                    DEFAULT_FILE_SIZE / ONE_MEGA_BYTE
                 ).toFixed(2)} MB.`,
             });
         }

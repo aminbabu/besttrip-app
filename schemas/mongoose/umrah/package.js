@@ -407,15 +407,18 @@ module.exports = new Schema(
             required: [true, 'Transport type is required'],
         },
         transportAirportToHotel: {
-            type: Boolean,
+            type: String,
+            enum: ['Yes', 'No'],
             required: [true, 'Airport to hotel is required'],
         },
         transportVisitorPlaces: {
-            type: Boolean,
+            type: String,
+            enum: ['Yes', 'No'],
             required: [true, 'Visitor places is required'],
         },
         transportHotelToAirport: {
-            type: Boolean,
+            type: String,
+            enum: ['Yes', 'No'],
             required: [true, 'Hotel to airport is required'],
         },
         transportServices: {
@@ -448,11 +451,11 @@ module.exports = new Schema(
             enum: UMRAH_PACKAGE_BOOLEAN,
             required: [true, 'Ziyara taif is required'],
         },
-        ziyarahMakkaDetails: {
+        ziyarahMakkahDetails: {
             type: [String],
             required: [true, 'Ziyara makkah details is required'],
         },
-        ziyarahMadinaDetails: {
+        ziyarahMadinahDetails: {
             type: [String],
             required: [true, 'Ziyara madinah details is required'],
         },

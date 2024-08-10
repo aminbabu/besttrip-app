@@ -42,7 +42,7 @@ const UMRAH_PACKAGE_OUTBOUND_FLIGHT_STOPS = [0, 1, 2];
 const UMRAH_PACKAGE_DISTANCE_UNITS = ['m', 'km', 'mile'];
 
 // umrah package includes
-const UMRAH_PACKAGE_BOOLEAN = ['yes', 'no'];
+const UMRAH_PACKAGE_BOOLEAN = ['Yes', 'No'];
 
 // export umrah packages constants
 module.exports = {
