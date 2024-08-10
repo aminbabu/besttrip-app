@@ -25,7 +25,7 @@ eval("// jquery.repeater version 1.2.1\n// https://github.com/DubFriend/jquery.r
   \*************************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// Form Repeater - Creates an interface to add and remove a repeatable group of input elements: https://github.com/DubFriend/jquery.repeater\r\n__webpack_require__(/*! jquery.repeater */ \"./node_modules/jquery.repeater/jquery.repeater.js\");\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/formrepeater/formrepeater.js?");
+eval("// Form Repeater - Creates an interface to add and remove a repeatable group of input elements: https://github.com/DubFriend/jquery.repeater\n__webpack_require__(/*! jquery.repeater */ \"./node_modules/jquery.repeater/jquery.repeater.js\");\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/formrepeater/formrepeater.js?");
 
 /***/ })
 
