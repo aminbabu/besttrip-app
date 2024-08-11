@@ -10,7 +10,18 @@
   <%- include('../../partials/theme-mode.ejs') %>
   <!--end::Theme mode setup on page load-->
   <!--begin::App-->
-  <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+  <% 
+     // Convert the date to YYYY-MM-DD format if necessary
+     const formatDate = (dateStr) => {
+     if (!dateStr) return '';
+     const date = new Date(dateStr);
+     const year = date.getFullYear();
+     const month = String(date.getMonth() + 1).padStart(2, '0');
+     const day = String(date.getDate()).padStart(2, '0');
+     return `${year}-${month}-${day}`;
+     };
+%>
+  <div class="d-flex flex-column flex-root app-root" id="kt_app_root" data-kt->
     <!--begin::Page-->
     <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
       <!--begin::Header-->
@@ -362,7 +373,7 @@
                   <!--begin::Content-->
                   <div class="card d-flex flex-row-fluid flex-center">
                     <!--begin::Form-->
-                    <form class="card-body py-20 w-100 mw-xl-700px px-9" novalidate="novalidate" id="kt_umrah_extranet_package_add_form" action="/api/umrah/packages" method="post" enctype="multipart/form-data">
+                    <form class="card-body py-20 w-100 mw-xl-700px px-9" novalidate="novalidate" id="kt_umrah_extranet_package_add_form" action="/api/umrah/packages/<%= umrahPackage._id %>" method="post" enctype="multipart/form-data">
                       <!--begin::Step 1-->
                       <div class="current" data-kt-stepper-element="content">
                         <!--begin::Wrapper-->
@@ -519,23 +530,10 @@
                                 <label class="form-label required">Journey Date</label>
                                 <!--end::Label-->
                                 <%
-                                  // Convert the date to YYYY-MM-DD format if necessary
-                                  const formatDate = (dateStr) => {
-                                    if (!dateStr) return '';
-                                    const date = new Date(dateStr);
-                                    const year = date.getFullYear();
-                                    const month = String(date.getMonth() + 1).padStart(2, '0');
-                                    const day = String(date.getDate()).padStart(2, '0');
-                                    return `${year}-${month}-${day}`;
-                                  };
-
                                   const journeyDateFormatted = formatDate(umrahPackage.journeyDate);
                                 %>
                                 <!--begin::Input-->
                                 <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="journeyDate" data-flatpickr="package_date_picker" value="<%= journeyDateFormatted %>" />
-
-
-
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -547,8 +545,8 @@
                                 <label class="form-label required">Package Expire Date</label>
                                 <!--end::Label-->
                                 <%
-                                                            const expiryDateFormatted = formatDate(umrahPackage.expiryDate);
-                              %>
+                                  const expiryDateFormatted = formatDate(umrahPackage.expiryDate);
+                                %>
                                 <!--begin::Input-->
                                 <input class="form-control form-control-solid" placeholder="Pick a date" name="expiryDate" data-flatpickr="package_date_picker" value="<%= expiryDateFormatted %>" disabled />
                                 <!--end::Input-->
@@ -2926,7 +2924,7 @@
                                 <label class="form-label required">Title</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" name="umrahTitle" placeholder="" value="" />
+                                <input type="text" class="form-control form-control-solid" name="umrahTitle" placeholder="" value="<%= umrahPackage.umrahTitle %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2938,7 +2936,7 @@
                                 <label class="form-label required">Short Description</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="umrahExcerpt" rows="3" placeholder=""></textarea>
+                                <textarea class="form-control form-control-solid" name="umrahExcerpt" rows="3" placeholder=""><%= umrahPackage.umrahExcerpt %></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2950,7 +2948,7 @@
                                 <label class="form-label">Description</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="umrahDescription" id="kt_docs_ckeditor_about_us_description" rows="3" placeholder="Write a description"></textarea>
+                                <textarea class="form-control form-control-solid" name="umrahDescription" id="kt_docs_ckeditor_about_us_description" rows="3" placeholder="Write a description"><%= umrahPackage.umrahDescription %></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2986,7 +2984,7 @@
                                 <label class="form-label">Description</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-solid" name="termsConditions" id="kt_docs_ckeditor_terms_&_conditions_description" rows="3" placeholder="Write a description"></textarea>
+                                <textarea class="form-control form-control-solid" name="termsConditions" id="kt_docs_ckeditor_terms_&_conditions_description" rows="3" placeholder="Write a description"><%= umrahPackage.termsConditions %></textarea>
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
