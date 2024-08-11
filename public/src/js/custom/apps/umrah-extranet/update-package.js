@@ -1356,74 +1356,45 @@ var KTCreatePackage = (function () {
                 const data = response.data.umrahPackage;
                 console.log(data);
 
-                // Populate the file upload preview for thumbnail
-                const packageThumbnailPreviewContainer = form
-                    .querySelector('#kt_file_uploader_basic_thumbnail')
-                    .closest('.kt-file-uploader');
-                const packageThumbnailPreview = document.createElement('img');
-                packageThumbnailPreview.classList.add(
-                    'kt-file-uploader-preview'
-                );
-                packageThumbnailPreview.src = data.thumbnail;
-                packageThumbnailPreview.alt = data.title;
-                packageThumbnailPreviewContainer.querySelector(
-                    'label'
-                ).innerHTML = '';
-                packageThumbnailPreviewContainer
-                    .querySelector('label')
-                    .appendChild(packageThumbnailPreview);
+                // Populate the file upload preview for thumbnails
+                const thumbnails = [
+                    {
+                        selector: '#kt_file_uploader_basic_thumbnail',
+                        src: data.thumbnail,
+                        alt: data.title,
+                    },
+                    {
+                        selector: '#kt_file_uploader_makkah_hotel_thumbnail',
+                        src: data.makkahHotelThumbnail,
+                        alt: data.makkahHotelName,
+                    },
+                    {
+                        selector: '#kt_file_uploader_madinah_hotel_thumbnail',
+                        src: data.madinahHotelThumbnail,
+                        alt: data.madinahHotelName,
+                    },
+                    {
+                        selector: '#kt_docs_uploader_thumbnail',
+                        src: data.umrahThumbnail,
+                        alt: data.umrahTitle,
+                    },
+                ];
 
-                // Populate the file upload preview for makkah hotel thumbnail
-                const makkahThumbnailPreviewContainer = form
-                    .querySelector('#kt_file_uploader_makkah_hotel_thumbnail')
-                    .closest('.kt-file-uploader');
-                const makkahThumbnailPreview = document.createElement('img');
-                makkahThumbnailPreview.classList.add(
-                    'kt-file-uploader-preview'
-                );
-                makkahThumbnailPreview.src = data.makkahHotelThumbnail;
-                makkahThumbnailPreview.alt = data.makkahHotelName;
-                makkahThumbnailPreviewContainer.querySelector(
-                    'label'
-                ).innerHTML = '';
-                makkahThumbnailPreviewContainer
-                    .querySelector('label')
-                    .appendChild(makkahThumbnailPreview);
-
-                // Populate the file upload preview for madinah hotel thumbnail
-                const madinahThumbnailPreviewContainer = form
-                    .querySelector('#kt_file_uploader_madinah_hotel_thumbnail')
-                    .closest('.kt-file-uploader');
-                const madinahThumbnailPreview = document.createElement('img');
-                madinahThumbnailPreview.classList.add(
-                    'kt-file-uploader-preview'
-                );
-                madinahThumbnailPreview.src = data.madinahHotelThumbnail;
-                madinahThumbnailPreview.alt = data.madinahHotelName;
-                madinahThumbnailPreviewContainer.querySelector(
-                    'label'
-                ).innerHTML = '';
-                madinahThumbnailPreviewContainer
-                    .querySelector('label')
-                    .appendChild(madinahThumbnailPreview);
-
-                // Populate the file upload preview for about umrah thumbnail
-                const aboutUmrahThumbnailPreviewContainer = form
-                    .querySelector('#kt_docs_uploader_thumbnail')
-                    .closest('.kt-file-uploader');
-                const aboutUmrahThumbnailPreview =
-                    document.createElement('img');
-                aboutUmrahThumbnailPreview.classList.add(
-                    'kt-file-uploader-preview'
-                );
-                aboutUmrahThumbnailPreview.src = data.umrahThumbnail;
-                aboutUmrahThumbnailPreview.alt = data.umrahTitle;
-                aboutUmrahThumbnailPreviewContainer.querySelector(
-                    'label'
-                ).innerHTML = '';
-                aboutUmrahThumbnailPreviewContainer
-                    .querySelector('label')
-                    .appendChild(aboutUmrahThumbnailPreview);
+                thumbnails.forEach(({ selector, src, alt }) => {
+                    const previewContainer = form
+                        .querySelector(selector)
+                        .closest('.kt-file-uploader');
+                    if (src) {
+                        const preview = document.createElement('img');
+                        preview.classList.add('kt-file-uploader-preview');
+                        preview.src = src;
+                        preview.alt = alt;
+                        previewContainer.querySelector('label').innerHTML = '';
+                        previewContainer
+                            .querySelector('label')
+                            .appendChild(preview);
+                    }
+                });
 
                 form.setAttribute('action', href);
 
