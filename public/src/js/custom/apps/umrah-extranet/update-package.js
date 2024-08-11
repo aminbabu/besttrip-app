@@ -7,6 +7,7 @@ var KTCreatePackage = (function () {
     var form;
     var formSubmitButton;
     var formContinueButton;
+    var itineraryData;
 
     // Variables
     var stepperObj;
@@ -1223,7 +1224,7 @@ var KTCreatePackage = (function () {
 
     // Day wise itinearies
     const handleDayWiseItinearies = () => {
-        const addDayWiseItineary = (days) => {
+        const addDayWiseItineary = (days, data) => {
             let html = '';
 
             for (let i = 0; i < days; i++) {
@@ -1334,15 +1335,30 @@ var KTCreatePackage = (function () {
             }
 
             $('#day_wise_itinearies_row').html(html);
+
+            // Populate existing thumbnails if available
+            data.forEach((item, index) => {
+                const previewContainer = form
+                    .querySelector(`day_wise_itineary_thumbnail_${index + 1}`)
+                    .closest('.kt-file-uploader');
+                if (item.thumbnail) {
+                    const preview = document.createElement('img');
+                    preview.classList.add('kt-file-uploader-preview');
+                    preview.src = item.src;
+                    preview.alt = item.title;
+                    previewContainer.querySelector('label').innerHTML = '';
+                    previewContainer
+                        .querySelector('label')
+                        .appendChild(preview, itineraryData);
+                }
+            });
         };
 
-        $('[name="basic_package_duration_days_&_nights"]').on(
-            'select2:select',
-            function (e) {
-                var data = e.params.data;
-                addDayWiseItineary(data.id);
-            }
-        );
+        $('[name="totalDaysAndNights"]').on('select2:select', function (e) {
+            var data = e.params.data;
+            var days = $(this).find('option:selected').data('kt-duration');
+            addDayWiseItineary(days, itineraryData);
+        });
     };
 
     // Populate form data
@@ -1355,6 +1371,8 @@ var KTCreatePackage = (function () {
             if (response) {
                 const data = response.data.umrahPackage;
                 console.log(data);
+
+                itineraryData = data.itineraryDays;
 
                 // Populate the file upload preview for thumbnails
                 const thumbnails = [
