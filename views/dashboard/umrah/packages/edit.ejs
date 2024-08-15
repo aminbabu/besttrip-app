@@ -694,10 +694,10 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Partial Price Due Date</label>
+                                <label class="form-label required">Full Payment Amount</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="partialPaymentExpiryDate" data-flatpickr="package_date_picker" value="<%= umrahPackage?.partialPaymentExpiryDate %>" placeholder="Pick a date" />
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="totalPaymentAmount" value="<%= umrahPackage?.totalPaymentAmount %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -706,10 +706,37 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Seat Avaiable</label>
+                                <label class="form-label required">Partial Payment Amount</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="partialPaymentTotalAmount" value="<%= umrahPackage?.partialPaymentTotalAmount %>" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
+                            </div>
+                            <div class="col-lg-6">
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Seat Available</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="number" class="form-control form-control-lg form-control-solid" name="seats" value="<%= umrahPackage.seats %>" placeholder="" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
+                            </div>
+                            <div class="col-lg-6">
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Partial Price Due Date</label>
+                                <%
+                                  // Format the partialPaymentExpiryDate
+                                  const partialPaymentExpiryDateTime = formatDate(umrahPackage?.partialPaymentExpiryDate);
+                                %>
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="partialPaymentExpiryDate" data-flatpickr="package_date_picker" value="<%= partialPaymentExpiryDateTime %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->

@@ -217,119 +217,18 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // Calculate full payment subtotal
-        const fullPaymentSubtotal =
-            (result?.priceByTravelers?.adult?.subtotal || 0) +
-            (result?.priceByTravelers?.child?.subtotal || 0) +
-            (result?.priceByTravelers?.infant?.subtotal || 0);
-
-        // Calculate partial payment subtotal
-        const partialSubtotal =
-            (result?.priceByTravelers?.adult?.partialSubtotal || 0) +
-            (result?.priceByTravelers?.child?.partialSubtotal || 0) +
-            (result?.priceByTravelers?.infant?.partialSubtotal || 0);
-
-        // Get wallet details
-        const walletDetails = await Wallet.findOne({
-            customer: req.user._id,
+        // update umrah booking
+        umrahBooking.set({
+            status: UMRAH_BOOKING_STATUS[4],
+            invoiceId: invoice._id,
         });
 
-        let invoice = null;
+        // save umrah booking
+        await umrahBooking.save();
 
-        if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
-            // Generate invoice for partial payment
-            invoice = new Invoice({
-                invoiceId: `INV-${moment().format('YYYYMMDD')}-${Math.random()
-                    .toString(36)
-                    .substr(2, 6)
-                    .toUpperCase()}`,
-                bookingId: id,
-                customer: req.user._id,
-                totalAmount: partialSubtotal,
-                paymentType: paymentType,
-                partialPaymentExpiryDate: new Date(
-                    Date.now() + 15 * 24 * 60 * 60 * 1000
-                ), // 15 days from now
-                paidAmount: partialPaymentAmount,
-                partialPaymentRestAmount:
-                    partialSubtotal - partialPaymentAmount,
-            });
-
-            await invoice.save();
-
-            // Update wallet balance
-            if (walletDetails.balance < partialPaymentAmount) {
-                return res
-                    .status(400)
-                    .send({ message: 'Insufficient balance' });
-            }
-
-            walletDetails.balance -= partialPaymentAmount;
-            await walletDetails.save();
-
-            // update umrah booking
-            umrahBooking.set({
-                status: UMRAH_BOOKING_STATUS[4],
-                invoiceId: invoice._id,
-            });
-
-            // save umrah booking
-            await umrahBooking.save();
-
-            // send mail
-            await sendEmail(
-                (to = req.user.email),
-                (subject = 'Partial Payment Invoice'),
-                (text = `Your partial payment of ${partialPaymentAmount} has been received. Your invoice ID is ${invoice.invoiceId}. Please complete the payment by ${invoice.partialPaymentExpiryDate}. And if you are late then your previous payment will not be refundable.`),
-                (err) => console.log(err)
-            );
-        } else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
-            // Generate invoice for full payment
-            invoice = new Invoice({
-                invoiceId: `INV-${moment().format('YYYYMMDD')}-${Math.random()
-                    .toString(36)
-                    .substr(2, 6)
-                    .toUpperCase()}`,
-                bookingId: id,
-                customer: req.user._id,
-                totalAmount: fullPaymentSubtotal,
-                paymentType: paymentType,
-                paidAmount: fullPaymentSubtotal,
-            });
-
-            await invoice.save();
-
-            // Update wallet balance
-            if (walletDetails.balance < fullPaymentSubtotal) {
-                return res
-                    .status(400)
-                    .send({ message: 'Insufficient balance' });
-            }
-
-            walletDetails.balance -= fullPaymentSubtotal;
-            await walletDetails.save();
-
-            // update umrah booking
-            umrahBooking.set({
-                status: UMRAH_BOOKING_STATUS[4],
-                invoiceId: invoice._id,
-            });
-
-            // save umrah booking
-            await umrahBooking.save();
-
-            // send mail
-            await sendEmail(
-                (to = req.user.email),
-                (subject = 'Full Payment Invoice'),
-                (text = `Your full payment of ${fullPaymentSubtotal} has been received. Your invoice ID is ${invoice.invoiceId}.`),
-                (err) => console.log(err)
-            );
-        }
         // send response
         return res.status(200).send({
             message: `Your umrah package booked successfully and an email has sended to your email:${req.user.email}`,
-            invoice,
             bookedPackageDetails: result,
         });
     } catch (error) {

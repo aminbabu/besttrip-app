@@ -135,8 +135,7 @@ module.exports = z
             })
             .refine((adultPartialPrice) => parseFloat(adultPartialPrice) >= 0, {
                 message: 'Please provide a valid adult partial price',
-            })
-            .optional(),
+            }),
         childPrice: z
             .string({
                 required_error: 'Child price is required',
@@ -145,6 +144,17 @@ module.exports = z
             .refine((childPrice) => parseFloat(childPrice) >= 0, {
                 message: 'Please provide a valid child price',
             }),
+        totalPaymentAmount: z
+            .string({
+                required_error: 'Full payment amount is required',
+                invalid_type_error: 'Please provide a valid price',
+            })
+            .refine(
+                (totalPaymentAmount) => parseFloat(totalPaymentAmount) >= 0,
+                {
+                    message: 'Please provide a valid price',
+                }
+            ),
         childPartialPrice: z
             .string({
                 required_error: 'Child partial price is required',
@@ -153,8 +163,7 @@ module.exports = z
             })
             .refine((childPartialPrice) => parseFloat(childPartialPrice) >= 0, {
                 message: 'Please provide a valid child partial price',
-            })
-            .optional(),
+            }),
         infantPrice: z
             .string({
                 required_error: 'Infant price is required',
@@ -174,8 +183,19 @@ module.exports = z
                 {
                     message: 'Please provide a valid infant partial price',
                 }
-            )
-            .optional(),
+            ),
+        partialPaymentTotalAmount: z
+            .string({
+                required_error: 'Partial payment amount is required',
+                invalid_type_error: 'Please provide a valid price',
+            })
+            .refine(
+                (partialPaymentTotalAmount) =>
+                    parseFloat(partialPaymentTotalAmount) >= 0,
+                {
+                    message: 'Please provide a valid price',
+                }
+            ),
         partialPaymentExpiryDate: z
             .string({
                 required_error: 'Partial payment expiry date is required',
@@ -193,8 +213,7 @@ module.exports = z
                     message:
                         'Please provide a valid partial payment expiry date',
                 }
-            )
-            .optional(),
+            ),
         seats: z
             .string({
                 required_error: 'Seats is required',

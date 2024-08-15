@@ -27,3 +27,42 @@ planing:
 2. API BOOKING(filed) package booking এর জন্য এর?
 3. Documents (filed) এর value কিসের উপরে নির্ভর করে দেখাতে হবে?
 
+
+
+
+
+Payment er details
+
+/**
+ * @description - make rest of the partial payment
+ * @param {string} path - '/api/umrah/booking/:id/make-payment'
+ * @param {function} middleware - ['isAllowed', 'validateUmrahBookingId']
+ * @param {function} controller - ['makePayment']
+ * @returns {object} - router
+ * @access private - ['customer']
+ * @method POST
+ */
+
+
+
+
+==================================================================
+
+
+
+1. real time এ seat কতগুলো আছে সেটা ট্রাক করতে হবে।
+
+2. Only partial payment এর expiry date filed থাকবে package create করা লাগবে।
+
+3. Traveler এর সংখ্যা ট্রাক রাখতে হবে বুকিং এর সময়ে। যাতে সে নির্দিষ্ট সংখ্যার উপরে add না করতে পারে। 
+
+4. Under Review কে change করে pending করতে হবে, admin dashboard এ। 
+
+
+
+
+
+
+
+
+

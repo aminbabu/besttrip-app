@@ -44,13 +44,20 @@ module.exports = async (req, res, next) => {
         // Generate bookingRefId
         const bookingRefId = `BTU${moment().format('YYYYMMDD')}${count}`;
 
-        // Create new umrah booking
-        const newUmrahBooking = new UmrahBooking({
+        const newUmrahBookingData = {
             customer: req.user._id,
             status: UMRAH_BOOKING_STATUS[0],
             bookingRefId,
             ...req.body,
-        });
+        };
+
+        // Conditionally include `partialPaymentExpiryDate` if it exists
+        if (existingBooking?.partialPaymentExpiryDate) {
+            newUmrahBookingData.partialPaymentExpiryDate =
+                existingBooking.partialPaymentExpiryDate;
+        }
+
+        const newUmrahBooking = new UmrahBooking(newUmrahBookingData);
 
         // Save booking to database
         await newUmrahBooking.save();

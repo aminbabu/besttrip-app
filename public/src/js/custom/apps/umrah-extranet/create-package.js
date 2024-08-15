@@ -374,6 +374,22 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
+                    totalPaymentAmount: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Full Payment price is required',
+                            },
+                            integer: {
+                                message: 'The value must be a number',
+                            },
+                            greaterThan: {
+                                min: 0,
+                                inclusive: false,
+                                message:
+                                    'Full payment must be a positive number',
+                            },
+                        },
+                    },
                     seats: {
                         validators: {
                             notEmpty: {

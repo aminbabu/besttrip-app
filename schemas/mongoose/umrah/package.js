@@ -89,6 +89,14 @@ module.exports = new Schema(
             type: Number,
             default: 0,
         },
+        totalPaymentAmount: {
+            type: Number,
+            required: [true, 'Total price is required'],
+        },
+        partialPaymentTotalAmount: {
+            type: Number,
+            default: 0,
+        },
         partialPaymentExpiryDate: {
             type: Date,
         },

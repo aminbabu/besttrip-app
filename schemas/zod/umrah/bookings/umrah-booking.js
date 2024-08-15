@@ -59,16 +59,5 @@ module.exports = z
             .refine((type) => UMRAH_BOOKING_PAYMENT_TYPE.includes(type), {
                 message: 'Please provide a valid Payment Type',
             }),
-        partialPaymentAmount: z.union([
-            z
-                .string({
-                    invalid_type_error:
-                        'Partial Payment Amount must be a number or string',
-                })
-                .transform((val) => parseFloat(val)),
-            z.number({
-                invalid_type_error: 'Partial Payment Amount must be a number',
-            }),
-        ]),
     })
     .strict();
