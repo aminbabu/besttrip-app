@@ -3211,7 +3211,7 @@
                             Current Balance
                           </div>
                           <div class="fs-2 fw-bold" kt-modal-adjust-balance="current_balance">
-                            ৳32,487.57 BDT
+                            ৳ <%= customer?.wallet?.balance %> BDT
                           </div>
                         </div>
                         <div class="w-50 border border-dashed border-gray-300 rounded mx-2 p-4">
@@ -3258,7 +3258,7 @@
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->
-                        <div class="fv-row mb-7">
+                        <div class="fv-row mb-7 d-none">
                           <!--begin::Label-->
                           <label class="required fs-6 fw-semibold mb-2">
                             Date
