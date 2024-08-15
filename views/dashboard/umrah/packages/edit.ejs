@@ -661,7 +661,7 @@
                                 <label class="form-label required">Children Package Partial Price</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="childPartialPrice" value="<%= umrahPackage.childPartialPrice %>" placeholder="" />
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="childPartialPrice" value="<%= umrahPackage?.childPartialPrice %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -673,7 +673,7 @@
                                 <label class="form-label required">Infant Package Price</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="infantPrice" value="<%= umrahPackage.infantPrice %>" placeholder="" />
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="infantPrice" value="<%= umrahPackage?.infantPrice %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -685,12 +685,24 @@
                                 <label class="form-label required">Infant Package Partial Price</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="number" class="form-control form-control-lg form-control-solid" name="infantPartialPrice" value="<%= umrahPackage.infantPartialPrice %>" placeholder="" />
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="infantPartialPrice" value="<%= umrahPackage?.infantPartialPrice %>" placeholder="" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Partial Price Due Date</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="partialPaymentExpiryDate" data-flatpickr="package_date_picker" value="<%= umrahPackage?.partialPaymentExpiryDate %>" placeholder="Pick a date" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
+                            </div>
+                            <div class="col-lg-6">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
@@ -2727,12 +2739,13 @@
                                 </div>
                                 <!--begin::Options-->
                                 <div data-repeater-list="kt_repeater_ziyara_makkah_details">
+                                  <% if (umrahPackage?.ziyarahMakkahDetails && umrahPackage.ziyarahMakkahDetails.length > 0) { %>
                                   <% umrahPackage.ziyarahMakkahDetails.forEach(function(detail, index) { %>
                                   <!--begin::Input group-->
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyarahMakkahDetails" placeholder="Enter option" value="<%= detail %>" />
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMakkahDetails[<%= index %>]" placeholder="Enter option" value="<%= detail %>" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -2744,8 +2757,26 @@
                                   </div>
                                   <!--end::Input group-->
                                   <% }); %>
+                                  <% } else { %>
+                                  <!--begin::Input group-->
+                                  <div class="fv-row mb-10" data-repeater-item>
+                                    <div class="d-flex gap-3">
+                                      <!--begin::Input-->
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMakkahDetails[0]" placeholder="Enter option" />
+                                      <!--end::Input-->
+                                      <!--begin::Action-->
+                                      <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
+                                        <i class="ki-duotone ki-trash fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
+                                        Delete
+                                      </button>
+                                      <!--end::Action-->
+                                    </div>
+                                  </div>
+                                  <!--end::Input group-->
+                                  <% } %>
                                 </div>
                                 <!--end::Options-->
+
                               </div>
                             </div>
                             <div class="col-lg-12">
@@ -2764,13 +2795,15 @@
                                 </div>
                                 <!--begin::Options-->
                                 <div data-repeater-list="kt_repeater_ziyara_madinah_details">
+                                  <!-- Check if the array exists and has items -->
+                                  <% if (umrahPackage?.ziyarahMadinahDetails && umrahPackage.ziyarahMadinahDetails.length > 0) { %>
                                   <!-- Iterate over the array in EJS -->
                                   <% umrahPackage.ziyarahMadinahDetails.forEach(function(detail, index) { %>
                                   <!--begin::Input group-->
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyarahMadinahDetails" placeholder="Enter option" value="<%= detail %>" />
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMadinahDetails[<%= index %>]" placeholder="Enter option" value="<%= detail %>" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -2782,8 +2815,27 @@
                                   </div>
                                   <!--end::Input group-->
                                   <% }); %>
+                                  <% } else { %>
+                                  <!-- Default input group if the array is empty -->
+                                  <!--begin::Input group-->
+                                  <div class="fv-row mb-10" data-repeater-item>
+                                    <div class="d-flex gap-3">
+                                      <!--begin::Input-->
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMadinahDetails[0]" placeholder="Enter option" />
+                                      <!--end::Input-->
+                                      <!--begin::Action-->
+                                      <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
+                                        <i class="ki-duotone ki-trash fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
+                                        Delete
+                                      </button>
+                                      <!--end::Action-->
+                                    </div>
+                                  </div>
+                                  <!--end::Input group-->
+                                  <% } %>
                                 </div>
                                 <!--end::Options-->
+
                               </div>
                             </div>
                             <div class="col-lg-12">

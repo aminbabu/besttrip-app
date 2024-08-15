@@ -176,6 +176,25 @@ module.exports = z
                 }
             )
             .optional(),
+        partialPaymentExpiryDate: z
+            .string({
+                required_error: 'Partial payment expiry date is required',
+                invalid_type_error:
+                    'Please provide a valid partial payment expiry date',
+            })
+            .refine(
+                (partialPaymentExpiryDate) =>
+                    moment(
+                        partialPaymentExpiryDate,
+                        'YYYY-MM-DD',
+                        true
+                    ).isValid(),
+                {
+                    message:
+                        'Please provide a valid partial payment expiry date',
+                }
+            )
+            .optional(),
         seats: z
             .string({
                 required_error: 'Seats is required',
