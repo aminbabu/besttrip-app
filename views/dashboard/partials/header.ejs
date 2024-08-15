@@ -217,7 +217,7 @@
           <!--begin::Menu wrapper-->
           <div class="cursor-pointer symbol symbol-35px symbol-md-40px symbol-circle" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
             <%  if (user?.avatar) { %>
-            <img src="/<%= user.avatar %>" alt="<%= user.name %>" />
+            <img src="<%= user.avatar %>" alt="<%= user.name %>" />
             <% } else { %>
             <span class="symbol-label bg-primary text-inverse-primary fw-bolder">
               <%= user.name[0] %>

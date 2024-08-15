@@ -76,8 +76,11 @@
                         <div class="d-flex flex-center flex-column py-5">
                           <!--begin::Avatar-->
                           <div class="symbol symbol-100px symbol-circle mb-7">
+
+
+
                             <% if (user?.avatar) { %>
-                            <img src="/<%= user?.avatar %>" alt="<%= user?.name %>" />
+                            <img src="<%= user?.avatar %>" alt="<%= user?.name %>" />
                             <% } else { %>
                             <span class="symbol-label fs-2 fw-bold text-uppercase"><%= user?.name[0] %></span>
                             <% } %>
@@ -514,13 +517,11 @@
                                   <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
                                     <!--begin::Preview existing avatar-->
                                     <% if (user?.avatar) { %>
-                                    <div class="image-input-wrapper w-125px h-125px" style="
-                                          background-image: url('/<%= user?.avatar %>');
-                                        "></div>
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url('<%= user?.avatar %>');">
+                                    </div>
                                     <% } else { %>
-                                    <div class="image-input-wrapper w-125px h-125px" style="
-                                          background-image: url('/assets/media/avatars/blank.png');
-                                        "></div>
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url('/assets/media/avatars/blank.png');">
+                                    </div>
                                     <% } %>
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Edit-->
@@ -1317,3 +1318,9 @@
 <!--end::Body-->
 
 </html>
+
+
+<!-- 
+user?.avatar
+
+-->
