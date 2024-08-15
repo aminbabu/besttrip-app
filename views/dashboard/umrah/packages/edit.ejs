@@ -1403,7 +1403,7 @@
                                 <!--begin::Input-->
                                 <select name="makkahHotelNoOfNights" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select stay duration..</option>
-                                  <% for (let i = 1; i <= 30; i++) { %>
+                                  <% for (let i = 1; i <= 90; i++) { %>
                                   <option value="<%= i %>" <%= umrahPackage.makkahHotelNoOfNights == i ? 'selected' : '' %>><%= i %> Night<%= i > 1 ? 's' : '' %></option>
                                   <% } %>
                                 </select>
@@ -1633,7 +1633,7 @@
                                 <!--begin::Input-->
                                 <select name="madinahHotelNoOfNights" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select stay duration..</option>
-                                  <% for (let i = 1; i <= 30; i++) { %>
+                                  <% for (let i = 1; i <= 90; i++) { %>
                                   <option value="<%= i %>" <%= umrahPackage.madinahHotelNoOfNights == i ? 'selected' : '' %>><%= i %> Night<%= i > 1 ? 's' : '' %></option>
                                   <% } %>
                                 </select>

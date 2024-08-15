@@ -1472,40 +1472,12 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="makkahHotelNoOfNights" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select stay duration..
-                                  </option>
-                                  <option value="1">1 Night</option>
-                                  <option value="2">2 Nights</option>
-                                  <option value="3">3 Nights</option>
-                                  <option value="4">4 Nights</option>
-                                  <option value="5">5 Nights</option>
-                                  <option value="6">6 Nights</option>
-                                  <option value="7">7 Nights</option>
-                                  <option value="8">8 Nights</option>
-                                  <option value="9">9 Nights</option>
-                                  <option value="10">10 Nights</option>
-                                  <option value="11">11 Nights</option>
-                                  <option value="12">12 Nights</option>
-                                  <option value="13">13 Nights</option>
-                                  <option value="14">14 Nights</option>
-                                  <option value="15">15 Nights</option>
-                                  <option value="16">16 Nights</option>
-                                  <option value="17">17 Nights</option>
-                                  <option value="18">18 Nights</option>
-                                  <option value="19">19 Nights</option>
-                                  <option value="20">20 Nights</option>
-                                  <option value="21">21 Nights</option>
-                                  <option value="22">22 Nights</option>
-                                  <option value="23">23 Nights</option>
-                                  <option value="24">24 Nights</option>
-                                  <option value="25">25 Nights</option>
-                                  <option value="26">26 Nights</option>
-                                  <option value="27">27 Nights</option>
-                                  <option value="28">28 Nights</option>
-                                  <option value="29">29 Nights</option>
-                                  <option value="30">30 Nights</option>
+                                  <option value="">Select stay duration..</option>
+                                  <% for (let i = 1; i <= 90; i++) { %>
+                                  <option value="<%= i %>"><%= i %> Night<%= i > 1 ? 's' : '' %></option>
+                                  <% } %>
                                 </select>
+
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1736,36 +1708,9 @@
                                   <option value="">
                                     Select stay duration..
                                   </option>
-                                  <option value="1">1 Night</option>
-                                  <option value="2">2 Nights</option>
-                                  <option value="3">3 Nights</option>
-                                  <option value="4">4 Nights</option>
-                                  <option value="5">5 Nights</option>
-                                  <option value="6">6 Nights</option>
-                                  <option value="7">7 Nights</option>
-                                  <option value="8">8 Nights</option>
-                                  <option value="9">9 Nights</option>
-                                  <option value="10">10 Nights</option>
-                                  <option value="11">11 Nights</option>
-                                  <option value="12">12 Nights</option>
-                                  <option value="13">13 Nights</option>
-                                  <option value="14">14 Nights</option>
-                                  <option value="15">15 Nights</option>
-                                  <option value="16">16 Nights</option>
-                                  <option value="17">17 Nights</option>
-                                  <option value="18">18 Nights</option>
-                                  <option value="19">19 Nights</option>
-                                  <option value="20">20 Nights</option>
-                                  <option value="21">21 Nights</option>
-                                  <option value="22">22 Nights</option>
-                                  <option value="23">23 Nights</option>
-                                  <option value="24">24 Nights</option>
-                                  <option value="25">25 Nights</option>
-                                  <option value="26">26 Nights</option>
-                                  <option value="27">27 Nights</option>
-                                  <option value="28">28 Nights</option>
-                                  <option value="29">29 Nights</option>
-                                  <option value="30">30 Nights</option>
+                                  <% for (let i = 1; i <= 90; i++) { %>
+                                  <option value="<%= i %>"><%= i %> Night<%= i > 1 ? 's' : '' %></option>
+                                  <% } %>
                                 </select>
                                 <!--end::Input-->
                               </div>
