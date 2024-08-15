@@ -42,6 +42,8 @@ module.exports = async (req, res) => {
             return modifiedPaymentRequest;
         });
 
+        console.log(paymentRequests);
+
         // return render view
         return res.render('dashboard/payment-requests/', {
             title: 'Payment Requests',
