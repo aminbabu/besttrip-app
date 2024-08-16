@@ -59,5 +59,16 @@ module.exports = z
             .refine((type) => UMRAH_BOOKING_PAYMENT_TYPE.includes(type), {
                 message: 'Please provide a valid Payment Type',
             }),
+        totalTravelers: z
+            .number({
+                required_error: 'Total Travelers is required',
+                invalid_type_error: 'Total Travelers must be a number',
+            })
+            .int({
+                message: 'Total Travelers must be an integer',
+            })
+            .nonnegative({
+                message: 'Total Travelers must be a non-negative number',
+            }),
     })
     .strict();

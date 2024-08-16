@@ -131,7 +131,7 @@ router.post(
     '/:id/submit-review',
     isAllowed(['customer']),
     validateUmrahBookingId,
-    validateUmrahBookingPayment,
+    // validateUmrahBookingPayment,
     submitBookingForReview
 );
 

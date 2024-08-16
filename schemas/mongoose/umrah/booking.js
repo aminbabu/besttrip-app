@@ -28,10 +28,9 @@ module.exports = new Schema(
             type: String,
             required: [true, 'Booking Reference Id is required'],
         },
-        partialPaymentExpiryDate: {
-            type: Date,
-            required: [true, 'Partial Payment Date is required'],
-            default: null,
+        totalTravelers: {
+            type: Number,
+            required: [true, 'Total Travelers is required'],
         },
         invoiceId: {
             type: Schema.Types.ObjectId,

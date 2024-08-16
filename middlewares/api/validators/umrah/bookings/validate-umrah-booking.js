@@ -23,7 +23,6 @@ module.exports = (req, res, next) => {
             status: true,
             ids: true,
             paymentType: true,
-            partialPaymentAmount: true,
         })
         .safeParse(req.body);
 

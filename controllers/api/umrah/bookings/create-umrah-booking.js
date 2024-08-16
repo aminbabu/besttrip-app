@@ -11,7 +11,7 @@
 const {
     UMRAH_BOOKING_STATUS,
 } = require('../../../../constants/umrah-bookings');
-const { UmrahBooking } = require('../../../../models');
+const { UmrahBooking, UmrahPackage } = require('../../../../models');
 const moment = require('moment');
 
 // export create umrah booking controller
@@ -27,6 +27,22 @@ module.exports = async (req, res, next) => {
         if (existingBooking) {
             return res.status(400).json({
                 message: 'You have this Umrah package already in your list.',
+            });
+        }
+
+        // Deduct the seat count from the UmrahPackage model
+        const umrahPackage = await UmrahPackage.findById(req.body.umrahPackage);
+
+        if (!umrahPackage) {
+            return res.status(404).json({
+                message: 'Umrah package not found.',
+            });
+        }
+
+        const totalTravelers = req.body.totalTravelers;
+        if (umrahPackage.seats < totalTravelers) {
+            return res.status(400).json({
+                message: 'Not enough seats available.',
             });
         }
 
@@ -51,16 +67,14 @@ module.exports = async (req, res, next) => {
             ...req.body,
         };
 
-        // Conditionally include `partialPaymentExpiryDate` if it exists
-        if (existingBooking?.partialPaymentExpiryDate) {
-            newUmrahBookingData.partialPaymentExpiryDate =
-                existingBooking.partialPaymentExpiryDate;
-        }
-
         const newUmrahBooking = new UmrahBooking(newUmrahBookingData);
 
         // Save booking to database
         await newUmrahBooking.save();
+
+        // Save deduct the seat count from the UmrahPackage model
+        umrahPackage.seats -= totalTravelers;
+        await umrahPackage.save();
 
         // Return success response
         return res.status(201).json({
