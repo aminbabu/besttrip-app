@@ -9,8 +9,8 @@
 
 // export umrah package validators
 module.exports = {
-    validateUmrahPackagesForCustomers: require('./validate-umrah-packages-for-customers'),
     validateUmrahPackageId: require('./validate-umrah-package-id'),
+    validateUmrahPackagesForCustomers: require('./validate-umrah-packages-for-customers'),
     validateUmrahPackageThumbnail: require('./validate-umrah-package-thumbnail'),
     validateUmrahPackage: require('./validate-umrah-package'),
     validateUmrahPackageGallery: require('./validate-umrah-package-gallery'),

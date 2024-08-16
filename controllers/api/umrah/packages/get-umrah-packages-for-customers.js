@@ -52,48 +52,44 @@ module.exports = async (req, res, next) => {
             throw new Error('Infants travelers must be a non-negative number');
         }
 
+        // Validate and convert  packageDuration, and lastItemId to ObjectIds if provided
+        const packageDurationObjectId = mongoose.Types.ObjectId.isValid(
+            packageDuration
+        )
+            ? new mongoose.Types.ObjectId(packageDuration)
+            : null;
+
+        const packageTypeObjectId = mongoose.Types.ObjectId.isValid(
+            packageDuration
+        )
+            ? new mongoose.Types.ObjectId(packageType)
+            : null;
+
+        const lastItemObjectId = mongoose.Types.ObjectId.isValid(lastItemId)
+            ? new mongoose.Types.ObjectId(lastItemId)
+            : null;
+
         // Ensure the total number of travelers does not exceed the number of seats
         const totalTravelers =
             parsedAdultTravelers +
             parsedChildTravelers +
             parsedInfantsTravelers;
 
-        // Convert lastItemId to ObjectId if it's provided
-        const lastItemObjectId = lastItemId
-            ? new mongoose.Types.ObjectId(lastItemId)
-            : null;
-
         // Stage to filter documents based on provided criteria
         const matchingStage = {
             $match: {
-                $and: [
-                    { status: 'active' }, // Ensure status is 'active'
-                    packageSchedule ? { schedule: packageSchedule } : {},
-                    packageType ? { type: packageType } : {},
-                    {
-                        $expr: {
-                            $gte: [
-                                {
-                                    $subtract: ['$expiryDate', '$journeyDate'],
-                                },
-                                packageDuration * 24 * 60 * 60 * 1000, // convert days to milliseconds
-                            ],
-                        },
-                    },
-                    {
-                        $expr: {
-                            $gte: [
-                                { $subtract: ['$seats', totalTravelers] },
-                                0,
-                            ],
-                        },
-                    },
-                ],
+                status: 'active', // Ensure status is 'active'
+                schedule: packageSchedule,
+                type: packageTypeObjectId,
+                totalDaysAndNights: packageDurationObjectId,
+                $expr: {
+                    $gte: [{ $subtract: ['$seats', totalTravelers] }, 0], // Ensure sufficient seats
+                },
             },
         };
 
         // Stage to calculate subtotal and partialSubtotal for each package
-        const addNewFieldsOfPrices = {
+        /*         const addNewFieldsOfPrices = {
             $addFields: {
                 subtotal: {
                     $add: [
@@ -110,7 +106,7 @@ module.exports = async (req, res, next) => {
                     ],
                 },
             },
-        };
+        }; */
 
         // Stage to specify which fields to include in the output
         const projectionStage = {
@@ -223,6 +219,8 @@ module.exports = async (req, res, next) => {
                 umrahExcerpt: 1,
                 umrahDescription: 1,
                 termsConditions: 1,
+                totalDaysAndNights: 1,
+                partialPaymentExpiryDate: 1,
             },
         };
 
@@ -247,7 +245,7 @@ module.exports = async (req, res, next) => {
         // apply aggregation
         const [result] = await UmrahPackage.aggregate([
             matchingStage,
-            addNewFieldsOfPrices,
+            // addNewFieldsOfPrices,
             projectionStage,
             paginationStage,
         ]);

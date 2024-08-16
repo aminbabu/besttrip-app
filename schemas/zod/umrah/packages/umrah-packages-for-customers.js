@@ -45,24 +45,19 @@ module.exports = z
             ),
         packageType: z
             .string({
-                invalid_type_error: 'Please provide a valid package type',
+                invalid_type_error: 'Package type must be a valid ObjectId',
             })
-            .refine(
-                (type) =>
-                    !type || UMRAH_PACKAGE_TYPES.includes(type.toLowerCase()),
-                {
-                    message: `Please provide a valid type. Available types are: ${UMRAH_PACKAGE_TYPES.join(
-                        ', '
-                    )}`,
-                }
-            ),
+            .refine((id) => !id || isValidObjectId(id), {
+                message:
+                    'Please provide a valid MongoDB ObjectId for package type',
+            }),
         packageDuration: z
             .string({
-                invalid_type_error: 'Package duration must be a number',
+                invalid_type_error: 'Package duration must be a valid ObjectId',
             })
-            .transform((value) => parseFloat(value))
-            .refine((value) => !isNaN(value) && value >= 1, {
-                message: 'Package duration must be at least 1 day',
+            .refine((id) => !id || isValidObjectId(id), {
+                message:
+                    'Please provide a valid MongoDB ObjectId for package duration',
             }),
         dataLength: z
             .string({

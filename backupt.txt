@@ -56,7 +56,9 @@ Payment er details
 
 3. Traveler এর সংখ্যা ট্রাক রাখতে হবে বুকিং এর সময়ে। যাতে সে নির্দিষ্ট সংখ্যার উপরে add না করতে পারে। 
 
-4. Under Review কে change করে pending করতে হবে, admin dashboard এ। 
+4. Traveler এর সংখ্যার সমান Traveler add এর পরেই সে submit for booking করতে পারবে। 
+
+5. Under Review কে change করে pending করতে হবে, admin dashboard এ। 
 
 
 
