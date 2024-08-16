@@ -60,6 +60,7 @@ Payment er details
 
 5. Under Review কে change করে pending করতে হবে, admin dashboard এ। 
 
+5. Customer যদি চায় তার Traveler সংখ্যার উর্ধ্বে Traveler add করতে payment করার পরও সেক্ষেত্রে Admin এর পাশ থেকে লজিকটা কেমন হবে?
 
 
 
