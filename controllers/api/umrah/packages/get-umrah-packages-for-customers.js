@@ -88,26 +88,6 @@ module.exports = async (req, res, next) => {
             },
         };
 
-        // Stage to calculate subtotal and partialSubtotal for each package
-        /*         const addNewFieldsOfPrices = {
-            $addFields: {
-                subtotal: {
-                    $add: [
-                        { $ifNull: ['$adultPrice', 0] },
-                        { $ifNull: ['$childPrice', 0] },
-                        { $ifNull: ['$infantPrice', 0] },
-                    ],
-                },
-                partialSubtotal: {
-                    $add: [
-                        { $ifNull: ['$adultPartialPrice', 0] },
-                        { $ifNull: ['$childPartialPrice', 0] },
-                        { $ifNull: ['$infantPartialPrice', 0] },
-                    ],
-                },
-            },
-        }; */
-
         // Stage to specify which fields to include in the output
         const projectionStage = {
             $project: {
