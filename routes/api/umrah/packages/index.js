@@ -91,7 +91,7 @@ router.get('/', isAllowed(['admin']), getUmrahPackages);
  */
 router.get(
     '/:id',
-    isAllowed(['admin']),
+    isAllowed(['admin', 'customer']),
     validateUmrahPackageId,
     getUmrahPackage
 );
