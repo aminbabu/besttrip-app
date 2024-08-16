@@ -10,12 +10,25 @@
 // dependencies
 const fs = require('fs');
 const path = require('path');
-const { Traveler } = require('../../../../models');
+const { Traveler, UmrahBooking } = require('../../../../models');
+const {
+    UMRAH_BOOKING_STATUS,
+} = require('../../../../constants/umrah-bookings');
 
 // export delete traveler controller
 module.exports = async (req, res, next) => {
     try {
         const { travelerId, umrahBookingId } = req.params;
+
+        const umrahBooking = await UmrahBooking.findById(umrahBookingId);
+
+        // Check if the booking status allows deletion
+        if (UMRAH_BOOKING_STATUS[0] !== umrahBooking.status) {
+            return res.status(400).send({
+                message:
+                    'Cannot delete traveler as the booking status does not allow it',
+            });
+        }
 
         // get traveler
         const traveler = await Traveler.findOne({

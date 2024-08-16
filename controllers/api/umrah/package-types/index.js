@@ -10,6 +10,7 @@
 // export umrah package types controllers
 module.exports = {
     getUmrahPackageTypes: require('./get-umrah-package-types'),
+    getUmrahPackageTypesCustomers: require('./get-umrah-package-types-customers'),
     getUmrahPackageType: require('./get-umrah-package-type'),
     createUmrahPackageType: require('./create-umrah-package-type'),
     updateUmrahPackageType: require('./update-umrah-package-type'),

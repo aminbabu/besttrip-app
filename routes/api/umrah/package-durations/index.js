@@ -16,6 +16,7 @@ const router = express.Router();
 // controllers
 const {
     getUmrahPackageDurations,
+    getUmrahPackageDurationsCustomer,
     getUmrahPackageDuration,
     createUmrahPackageDuration,
     updateUmrahPackageDuration,
@@ -49,7 +50,17 @@ router.use(isAuthorized);
  * @access private - ['admin']
  * @method GET
  */
-router.get('/', isAllowed(['admin']), getUmrahPackageDurations);
+router.get('/', isAllowed(['admin', 'customer']), getUmrahPackageDurations);
+
+/**
+ * @description get all umrah package durations for customers (no middleware)
+ * @param {string} path - /umrah/package-durations/customer
+ * @param {function} controller - ['getUmrahPackageDurations']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/customer', getUmrahPackageDurationsCustomer);
 
 /**
  * @description get umrah package duration

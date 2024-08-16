@@ -17,6 +17,7 @@ const router = express.Router();
 const {
     getUmrahPackages,
     getUmrahPackage,
+    getUmrahPackageCustomer,
     createUmrahPackage,
     updateUmrahPackage,
     deleteUmrahPackage,
@@ -95,6 +96,18 @@ router.get(
     validateUmrahPackageId,
     getUmrahPackage
 );
+
+/**
+ * @description get umrah package package
+ * @param {string} path - /umrah/packages/:id/customers
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateUmrahPackageId']
+ * @param {function} controller - ['getUmrahPackage']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method GET
+ */
+router.get('/:id/customers', validateUmrahPackageId, getUmrahPackageCustomer);
 
 /**
  * @description create umrah package package
