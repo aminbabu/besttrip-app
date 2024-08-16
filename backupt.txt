@@ -48,7 +48,7 @@ Payment er details
 
 ==================================================================
 
-
+// have to create get invoice fot the customer so that he can able to see all the prices filed during the payment.
 
 1. real time এ seat কতগুলো আছে সেটা ট্রাক করতে হবে।
 
