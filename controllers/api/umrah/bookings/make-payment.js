@@ -24,51 +24,177 @@ module.exports = async (req, res, next) => {
         const { paymentType } = req.body;
 
         // Define matching stage
-        const matchStage = {
+        const matchingStage = {
             $match: {
+                customer: new mongoose.Types.ObjectId(req.user._id),
                 umrahPackage: new mongoose.Types.ObjectId(id),
             },
         };
 
-        // Define umrah package lookup stage
-        const lookupUmrahPackageStage = {
+        // Lookup umrah package details
+        const umrahPackageLookUp = {
             $lookup: {
                 from: 'umrahpackages',
                 localField: 'umrahPackage',
                 foreignField: '_id',
-                as: 'package',
+                as: 'umrahPackage',
             },
         };
 
-        // Define umrah package unwind stage
-        const unwindUmrahPackageStage = {
+        // Unwind the umrah package details array
+        const umrahUnwindStage = {
             $unwind: {
-                path: '$package',
+                path: '$umrahPackage',
                 preserveNullAndEmptyArrays: true,
             },
         };
-        // Define umrah package projection stage
-        const umrahBookingProjection = {
-            $project: {
-                _id: 1,
-                status: 1,
-                bookingRefId: 1,
-                invoiceId: 1,
-                package: {
-                    partialPaymentExpiryDate: 1,
-                    partialPaymentTotalAmount: 1,
-                    totalPaymentAmount: 1,
+
+        // Lookup travelers details
+        const travelersLookupStage = {
+            $lookup: {
+                from: 'travelers',
+                localField: '_id',
+                foreignField: 'umrahBooking',
+                as: 'travelers',
+            },
+        };
+
+        // Unwind the travelers array
+        const travelersUnwindStage = {
+            $unwind: {
+                path: '$travelers',
+                preserveNullAndEmptyArrays: true,
+            },
+        };
+
+        // Group by traveler type and calculate counts and subtotals
+        const groupByTravelersStage = {
+            $group: {
+                _id: '$_id',
+                adultCount: {
+                    $sum: {
+                        $cond: [
+                            { $eq: ['$travelers.travelerType', 'adult'] },
+                            1,
+                            0,
+                        ],
+                    },
+                },
+                childCount: {
+                    $sum: {
+                        $cond: [
+                            { $eq: ['$travelers.travelerType', 'child'] },
+                            1,
+                            0,
+                        ],
+                    },
+                },
+                infantCount: {
+                    $sum: {
+                        $cond: [
+                            { $eq: ['$travelers.travelerType', 'infant'] },
+                            1,
+                            0,
+                        ],
+                    },
+                },
+                umrahPackage: { $first: '$umrahPackage' },
+            },
+        };
+
+        // Calculate subtotals based on traveler counts and package prices
+        const calculateSubtotalsStage = {
+            $addFields: {
+                priceByTravelers: {
+                    adult: {
+                        count: { $ifNull: ['$adultCount', 0] },
+                        subtotal: {
+                            $multiply: [
+                                { $ifNull: ['$adultCount', 0] },
+                                { $ifNull: ['$umrahPackage.adultPrice', 0] },
+                            ],
+                        },
+                        partialSubtotal: {
+                            $multiply: [
+                                { $ifNull: ['$adultCount', 0] },
+                                {
+                                    $ifNull: [
+                                        '$umrahPackage.adultPartialPrice',
+                                        0,
+                                    ],
+                                },
+                            ],
+                        },
+                    },
+                    child: {
+                        count: { $ifNull: ['$childCount', 0] },
+                        subtotal: {
+                            $multiply: [
+                                { $ifNull: ['$childCount', 0] },
+                                { $ifNull: ['$umrahPackage.childPrice', 0] },
+                            ],
+                        },
+                        partialSubtotal: {
+                            $multiply: [
+                                { $ifNull: ['$childCount', 0] },
+                                {
+                                    $ifNull: [
+                                        '$umrahPackage.childPartialPrice',
+                                        0,
+                                    ],
+                                },
+                            ],
+                        },
+                    },
+                    infant: {
+                        count: { $ifNull: ['$infantCount', 0] },
+                        subtotal: {
+                            $multiply: [
+                                { $ifNull: ['$infantCount', 0] },
+                                { $ifNull: ['$umrahPackage.infantPrice', 0] },
+                            ],
+                        },
+                        partialSubtotal: {
+                            $multiply: [
+                                { $ifNull: ['$infantCount', 0] },
+                                {
+                                    $ifNull: [
+                                        '$umrahPackage.infantPartialPrice',
+                                        0,
+                                    ],
+                                },
+                            ],
+                        },
+                    },
                 },
             },
         };
 
-        // Aggregate umrah bookings with travelers
+        // Define the projection stage to control data delivery
+        const projectionStage = {
+            $project: {
+                _id: 1,
+                umrahPackage: 1,
+                priceByTravelers: 1,
+            },
+        };
+
+        // Perform aggregation
         const [umrahBooking] = await UmrahBooking.aggregate([
-            matchStage,
-            lookupUmrahPackageStage,
-            unwindUmrahPackageStage,
-            umrahBookingProjection,
+            matchingStage,
+            umrahPackageLookUp,
+            umrahUnwindStage,
+            travelersLookupStage,
+            travelersUnwindStage,
+            groupByTravelersStage,
+            calculateSubtotalsStage,
+            projectionStage,
         ]);
+
+        const bookingDetails = await UmrahBooking.findOne({
+            customer: new mongoose.Types.ObjectId(req.user._id),
+            umrahPackage: new mongoose.Types.ObjectId(id),
+        });
 
         if (!umrahBooking) {
             return res.status(404).send({ message: 'Umrah Booking not found' });
@@ -86,45 +212,79 @@ module.exports = async (req, res, next) => {
             return res.status(404).send({ message: 'Wallet not found' });
         }
 
+        // return res.send({ bookingDetails });
+
         // Declare the invoice variable outside the conditional blocks
         let invoice;
 
-        if (umrahBooking?.invoiceId) {
+        if (bookingDetails?.invoiceId) {
             invoice = await Invoice.findById({
-                _id: umrahBooking?.invoiceId,
+                _id: bookingDetails?.invoiceId,
             });
         }
 
-        if (invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
-            return console.log(invoice);
-        } else {
-            return console.log(invoice);
-        }
+        // Handling the second partial payment here
+        if (invoice && invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
+            if (invoice.partialPaymentExpiryDate < currentDate) {
+                return res.status(400).send({
+                    message: 'Payment is no longer valid due to expiry.',
+                });
+            }
 
-        if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
-            // For partial payment logic
-            if (umrahBooking.package.partialPaymentExpiryDate) {
+            // Update wallet balance
+            if (walletDetails.balance < invoice.partialPaymentRestAmount) {
+                return res
+                    .status(400)
+                    .send({ message: 'Insufficient balance' });
+            }
+
+            // Deduct the partial payment from the wallet
+            walletDetails.balance -= invoice.partialPaymentRestAmount;
+
+            await walletDetails.save();
+
+            // Updating the invoice details
+            invoice.paidAmount = invoice.totalAmount;
+            invoice.partialPaymentRestAmount = 0;
+            await invoice.save();
+
+            return res.status(200).send({
+                message: 'Partial payment has been completed successfully.',
+                invoice,
+            });
+        }
+        // For first time partial payment logic
+        else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
+            if (umrahBooking.umrahPackage.partialPaymentExpiryDate) {
                 if (
-                    umrahBooking.package.partialPaymentExpiryDate < currentDate
+                    umrahBooking.umrahPackage.partialPaymentExpiryDate <
+                    currentDate
                 ) {
                     return res.status(400).send({
                         message: 'Payment is no longer valid due to expiry.',
                     });
                 }
 
+                const totalPartialPaidAmount =
+                    umrahBooking?.priceByTravelers?.adult?.partialSubtotal +
+                    umrahBooking?.priceByTravelers?.child?.partialSubtotal +
+                    umrahBooking?.priceByTravelers?.infant?.partialSubtotal;
+
+                const totalAmount =
+                    umrahBooking?.priceByTravelers?.adult?.subtotal +
+                    umrahBooking?.priceByTravelers?.child?.subtotal +
+                    umrahBooking?.priceByTravelers?.infant?.subtotal;
+
                 // Update wallet balance
-                if (
-                    walletDetails.balance <
-                    umrahBooking.package.partialPaymentTotalAmount
-                ) {
+                if (walletDetails.balance < totalPartialPaidAmount) {
                     return res
                         .status(400)
                         .send({ message: 'Insufficient balance' });
                 }
 
                 // Deduct the partial payment from the wallet
-                walletDetails.balance -=
-                    umrahBooking.package.partialPaymentTotalAmount;
+                walletDetails.balance -= totalPartialPaidAmount;
+
                 await walletDetails.save();
 
                 // Create the invoice for the partial payment
@@ -137,14 +297,13 @@ module.exports = async (req, res, next) => {
                         .toUpperCase()}`,
                     bookingId: umrahBooking._id,
                     customer: req.user._id,
-                    totalAmount: umrahBooking.package.totalPaymentAmount,
+                    totalAmount: totalAmount,
                     paymentType: paymentType,
                     partialPaymentExpiryDate:
-                        umrahBooking.package.partialPaymentExpiryDate,
-                    paidAmount: umrahBooking.package.partialPaymentTotalAmount,
+                        umrahBooking.umrahPackage.partialPaymentExpiryDate,
+                    paidAmount: totalPartialPaidAmount,
                     partialPaymentRestAmount:
-                        umrahBooking.package.totalPaymentAmount -
-                        umrahBooking.package.partialPaymentTotalAmount,
+                        totalAmount - totalPartialPaidAmount,
                 });
 
                 // Update the umrah booking status
@@ -161,7 +320,7 @@ module.exports = async (req, res, next) => {
                 await sendEmail(
                     (to = req.user.email),
                     (subject = 'Partial Payment Invoice'),
-                    (text = `Your partial payment of ${umrahBooking.package.partialPaymentTotalAmount} has been received. Your invoice ID is ${invoice.invoiceId}. Please complete the payment by ${invoice.partialPaymentExpiryDate}. And if you are late then your previous payment will not be refundable.`),
+                    (text = `Your partial payment of ${totalPartialPaidAmount} has been received. Your invoice ID is ${invoice.invoiceId}. Please complete the payment by ${invoice.partialPaymentExpiryDate}. And if you are late then your previous payment will not be refundable.`),
                     (err) => console.log(err)
                 );
             } else {
@@ -170,18 +329,29 @@ module.exports = async (req, res, next) => {
                         'This package has no partial payment option. You have to do the full payment.',
                 });
             }
-        } else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
+        }
+        // For full payment logic
+        else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
+            if (invoice) {
+                return res.status(404).send({
+                    message:
+                        ' You may have already completed the full payment.',
+                });
+            }
+            const totalAmount =
+                umrahBooking?.priceByTravelers?.adult?.subtotal +
+                umrahBooking?.priceByTravelers?.child?.subtotal +
+                umrahBooking?.priceByTravelers?.infant?.subtotal;
+
             // Update wallet balance
-            if (
-                walletDetails.balance < umrahBooking.package.totalPaymentAmount
-            ) {
+            if (walletDetails.balance < totalAmount) {
                 return res
                     .status(400)
                     .send({ message: 'Insufficient balance' });
             }
 
             // Deduct the full payment from the wallet
-            walletDetails.balance -= umrahBooking.package.totalPaymentAmount;
+            walletDetails.balance -= totalAmount;
             await walletDetails.save();
 
             // Create the invoice for the full payment
@@ -192,9 +362,9 @@ module.exports = async (req, res, next) => {
                     .toUpperCase()}`,
                 bookingId: umrahBooking._id,
                 customer: req.user._id,
-                totalAmount: umrahBooking.package.totalPaymentAmount,
+                totalAmount: totalAmount,
                 paymentType: paymentType,
-                paidAmount: umrahBooking.package.totalPaymentAmount,
+                paidAmount: totalAmount,
             });
 
             // Update the umrah booking status
@@ -211,7 +381,7 @@ module.exports = async (req, res, next) => {
             await sendEmail(
                 (to = req.user.email),
                 (subject = 'Full Payment Invoice'),
-                (text = `Your full payment of ${umrahBooking.package.totalPaymentAmount} has been received. Your invoice ID is ${invoice.invoiceId}.`),
+                (text = `Your full payment of ${totalAmount} has been received. Your invoice ID is ${invoice.invoiceId}.`),
                 (err) => console.log(err)
             );
         }
@@ -219,7 +389,6 @@ module.exports = async (req, res, next) => {
         return res.status(200).send({
             message: `Your payment received successfully and an email has sended to your email:${req.user.email}`,
             invoice,
-            bookedPackageDetails: umrahBooking,
         });
     } catch (error) {
         return next(error);

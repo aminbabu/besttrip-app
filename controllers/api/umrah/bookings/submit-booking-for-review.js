@@ -22,7 +22,6 @@ module.exports = async (req, res, next) => {
     try {
         // get validated data
         const { id } = req.params;
-        const { paymentType, partialPaymentAmount } = req.body;
 
         // get umrah booking
         const umrahBooking = await UmrahBooking.findOne({
@@ -79,6 +78,24 @@ module.exports = async (req, res, next) => {
         const travelersUnwindStage = {
             $unwind: {
                 path: '$travelers',
+                preserveNullAndEmptyArrays: true,
+            },
+        };
+
+        // Lookup umrah package total days and nights details
+        const umrahTotalDaysAndNightsLookUp = {
+            $lookup: {
+                from: 'umrahpackagedurations',
+                localField: 'totalDaysAndNights',
+                foreignField: '_id',
+                as: 'totalDaysAndNights',
+            },
+        };
+
+        // Unwind the umrah package total days and nights details
+        const unwindUmrahTotalDaysAndNightsTypeStage = {
+            $unwind: {
+                path: '$totalDaysAndNights',
                 preserveNullAndEmptyArrays: true,
             },
         };
@@ -192,7 +209,18 @@ module.exports = async (req, res, next) => {
                 _id: 1,
                 bookingId: 1,
                 customer: 1,
-                umrahPackage: 1,
+                umrahPackage: {
+                    title: 1,
+                    subtitle: 1,
+                    title: 1,
+                    departureLocation: 1,
+                    journeyDate: 1,
+                    inclusions: 1,
+                    totalDaysAndNights: {
+                        days: 1,
+                        nights: 1,
+                    },
+                },
                 priceByTravelers: 1,
             },
         };
@@ -204,6 +232,8 @@ module.exports = async (req, res, next) => {
             umrahUnwindStage,
             travelersLookupStage,
             travelersUnwindStage,
+            umrahTotalDaysAndNightsLookUp,
+            unwindUmrahTotalDaysAndNightsTypeStage,
             groupByTravelersStage,
             calculateSubtotalsStage,
             projectionStage,
