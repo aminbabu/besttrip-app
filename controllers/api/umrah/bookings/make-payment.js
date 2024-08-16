@@ -231,8 +231,13 @@ module.exports = async (req, res, next) => {
                 });
             }
 
-            // Update wallet balance
+            if (invoice.partialPaymentRestAmount === 0) {
+                return res.status(400).send({
+                    message: 'You may have already completed the full payment.',
+                });
+            }
             if (walletDetails.balance < invoice.partialPaymentRestAmount) {
+                // Update wallet balance
                 return res
                     .status(400)
                     .send({ message: 'Insufficient balance' });
@@ -334,8 +339,7 @@ module.exports = async (req, res, next) => {
         else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
             if (invoice) {
                 return res.status(404).send({
-                    message:
-                        ' You may have already completed the full payment.',
+                    message: 'You may have already completed the full payment.',
                 });
             }
             const totalAmount =
