@@ -21,29 +21,8 @@ module.exports = (req, res, next) => {
     // filter request body object according to schema
     const data = filterReqFromZodSchema(req.body, umrahPackageSchema.shape);
 
-    // Determine if partial fields should be included in the validation
-    const hasPartialFields =
-        data.adultPartialPrice ||
-        data.childPartialPrice ||
-        data.infantPartialPrice ||
-        data.partialPaymentTotalAmount ||
-        data.partialPaymentExpiryDate;
-
-    let validationSchema = umrahPackageSchema;
-
-    if (!hasPartialFields) {
-        // Create a new schema that omits partial fields for validation
-        validationSchema = umrahPackageSchema.omit({
-            adultPartialPrice: true,
-            childPartialPrice: true,
-            infantPartialPrice: true,
-            partialPaymentTotalAmount: true,
-            partialPaymentExpiryDate: true,
-        });
-    }
-
     // validate request body
-    const { error, success } = validationSchema.safeParse(data);
+    const { error, success } = umrahPackageSchema.safeParse(data);
 
     // check for errors
     if (!success) {

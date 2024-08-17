@@ -374,22 +374,6 @@ var KTCreatePackage = (function () {
                             },
                         },
                     },
-                    totalPaymentAmount: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Full Payment price is required',
-                            },
-                            integer: {
-                                message: 'The value must be a number',
-                            },
-                            greaterThan: {
-                                min: 0,
-                                inclusive: false,
-                                message:
-                                    'Full payment must be a positive number',
-                            },
-                        },
-                    },
                     seats: {
                         validators: {
                             notEmpty: {
@@ -1258,6 +1242,17 @@ var KTCreatePackage = (function () {
                         dp._input.disabled = false;
                         $('[name="expiryDate"]').attr('disabled', false);
                     }
+                    if (
+                        instance.input.name === 'expiryDate' &&
+                        dp.input.name === 'partialPaymentExpiryDate'
+                    ) {
+                        dp.set('maxDate', dateStr);
+                        dp._input.disabled = false;
+                        $('[name="partialPaymentExpiryDate"]').attr(
+                            'disabled',
+                            false
+                        );
+                    }
                 });
             },
         });
@@ -1563,24 +1558,24 @@ var KTCreatePackage = (function () {
     };
 
     // Select2 initialization
-    const initSelect2 = async () => {
-        console.log();
-        // read json data and create select2
-        $.getJSON('../../../../../json/umrah/airlines.json', function (data) {
-            const airlines = data.map((item) => {
-                return {
-                    id: item.code,
-                    text: `${item.code} - ${item.name}`,
-                };
-            });
+    // const initSelect2 = async () => {
+    //     console.log();
+    //     // read json data and create select2
+    //     $.getJSON('../../../../../json/umrah/airlines.json', function (data) {
+    //         const airlines = data.map((item) => {
+    //             return {
+    //                 id: item.code,
+    //                 text: `${item.code} - ${item.name}`,
+    //             };
+    //         });
 
-            // Create select2
-            $('[data-control="select2-country"]').select2({
-                placeholder: 'Select an option',
-                data: airlines,
-            });
-        });
-    };
+    //         // Create select2
+    //         $('[data-control="select2-country"]').select2({
+    //             placeholder: 'Select an option',
+    //             data: airlines,
+    //         });
+    //     });
+    // };
 
     return {
         // Public Functions
@@ -1611,7 +1606,7 @@ var KTCreatePackage = (function () {
             handleRepeater();
             initCKEditors();
             handleDayWiseItinearies();
-            initSelect2();
+            // initSelect2();
         },
     };
 })();
