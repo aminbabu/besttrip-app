@@ -22,6 +22,7 @@ const {
     viewResendVerificationEmail,
     viewEmailVerification,
     viewAccountActivation,
+    viewTwoStep,
 } = require('../../../controllers/dashboard/auth');
 
 // middlewares
@@ -125,6 +126,16 @@ router.get('/verify-email', viewEmailVerification);
  * @method GET
  */
 router.get('/account-activation', viewAccountActivation);
+
+/**
+ * @description - two-step view route
+ * @param {string} path - '/dashboard/auth/two-factor'
+ * @param {function} controller - ['viewTwoStep']
+ * @returns {object} - router
+ * @access public - ['all']
+ * @method GET
+ */
+router.get('/two-factor', viewTwoStep);
 
 // export router
 module.exports = router;

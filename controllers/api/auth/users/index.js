@@ -17,4 +17,5 @@ module.exports = {
     verifyEmail: require('./verify-email'),
     accountActivation: require('./account-activation'),
     twoStepAuth: require('./two-step-auth'),
+    twoStepValidateCode: require('./two-step-validate-code'),
 };

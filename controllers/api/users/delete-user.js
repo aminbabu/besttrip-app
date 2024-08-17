@@ -10,7 +10,8 @@
 // dependencies
 const fs = require('fs');
 const path = require('path');
-const { User } = require('../../../models');
+const { User, LoginHistory } = require('../../../models');
+const mongoose = require('mongoose');
 
 // export delete user by mongo id controller
 module.exports = async (req, res, next) => {
@@ -34,6 +35,11 @@ module.exports = async (req, res, next) => {
                 path.join(__dirname, `../../../public/${user.avatar}`)
             );
         }
+
+        // delete user login histories
+        await LoginHistory.deleteMany({
+            user: new mongoose.Types.ObjectId(id),
+        });
 
         // delete user
         await user.deleteOne();

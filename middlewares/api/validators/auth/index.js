@@ -15,4 +15,5 @@ module.exports = {
     validateResetPassword: require('./validate-reset-password'),
     validateSendVerificationEmail: require('./validate-send-verification-email'),
     validateVerifyEmail: require('./validate-verify-email'),
+    sendTwoStepEmail: require('./send-two-step-email'),
 };

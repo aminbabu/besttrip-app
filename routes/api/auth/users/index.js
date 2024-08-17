@@ -23,6 +23,7 @@ const {
     verifyEmail,
     accountActivation,
     twoStepAuth,
+    twoStepValidateCode,
 } = require('../../../../controllers/api/auth/users');
 
 // middlewares
@@ -88,7 +89,11 @@ router.post('/reset-password', validateResetPassword, resetPassword);
  * @access public
  * @method POST
  */
-router.post('/send-verification-email', validateSendVerificationEmail, resendVerificationEmail);
+router.post(
+    '/send-verification-email',
+    validateSendVerificationEmail,
+    resendVerificationEmail
+);
 
 /**
  * @description verify email
@@ -120,6 +125,16 @@ router.post('/account-activation', validateLogin, accountActivation);
  * @method PATCH
  */
 router.patch('/two-step', validateLogin, twoStepAuth);
+
+/**
+ * @description two step code validate
+ * @param {string} path - /api/auth/users/validate-two-step-code
+ * @param {function} controller - ['twoStepAuth']
+ * @returns {object} - router
+ * @access public
+ * @method PATCH
+ */
+router.patch('/validate-two-step-code', twoStepValidateCode);
 
 // export
 module.exports = router;

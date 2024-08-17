@@ -59,6 +59,12 @@ module.exports = new Schema(
             type: Boolean,
             default: false,
         },
+        twoStepCode: {
+            type: String,
+        },
+        twoStepCodeValidity: {
+            type: Date,
+        },
         dob: {
             type: Date,
         },

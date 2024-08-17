@@ -16,4 +16,5 @@ module.exports = {
     viewResendVerificationEmail: require('./view-resend-verification-email'),
     viewEmailVerification: require('./email-verification'),
     viewAccountActivation: require('./view-account-activation'),
+    viewTwoStep: require('./view-two-step'),
 };

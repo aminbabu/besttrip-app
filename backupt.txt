@@ -50,22 +50,23 @@ Payment er details
 
 // have to create get invoice fot the customer so that he can able to see all the prices filed during the payment.
 
-1. real time এ seat কতগুলো আছে সেটা ট্রাক করতে হবে।
 
-2. Only partial payment এর expiry date filed থাকবে package create করা লাগবে।
 
-3. Traveler এর সংখ্যা ট্রাক রাখতে হবে বুকিং এর সময়ে। যাতে সে নির্দিষ্ট সংখ্যার উপরে add না করতে পারে। 
-
-4. Traveler এর সংখ্যার সমান Traveler add এর পরেই সে submit for booking করতে পারবে। 
-
-5. Under Review কে change করে pending করতে হবে, admin dashboard এ। 
-
-5. Customer যদি চায় তার Traveler সংখ্যার উর্ধ্বে Traveler add করতে payment করার পরও সেক্ষেত্রে Admin এর পাশ থেকে লজিকটা কেমন হবে?
+1. Customer এর শুধু wallet id যাচ্ছে বাকি সবগুলো দিয়ে দিতে হবে next auth এ...............
+2. Under Review কে change করে pending করতে হবে, admin dashboard এ। 
 
 
 
+3. for two step
 
-
+/**
+ * @description two step code validate
+ * @param {string} path - /api/auth/users/validate-two-step-code
+ * @param {function} controller - ['twoStepAuth']
+ * @returns {object} - router
+ * @access public
+ * @method PATCH
+ */
 
 
 

@@ -11,6 +11,7 @@
 module.exports = {
     generateToken: require('./generate-token'),
     comparePassword: require('./compare-password'),
+    generateRandomCode: require('./generate-random-code'),
     verifyToken: require('./verify-token'),
     ipInfo: require('./ipinfo'),
     currencyFormatter: require('./currency-formatter'),

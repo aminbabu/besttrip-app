@@ -135,7 +135,10 @@ const KTSigninGeneral = (function () {
                                     'data-kt-redirect-url'
                                 );
 
-                                if (redirectUrl) {
+                                if (response.data?.redirect) {
+                                    location.href =
+                                        '/dashboard/auth/two-factor';
+                                } else {
                                     location.href = redirectUrl;
                                 }
                             } else {
