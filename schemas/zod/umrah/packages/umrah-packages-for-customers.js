@@ -60,7 +60,7 @@ module.exports = z
                     'Please provide a valid MongoDB ObjectId for package duration',
             }),
         dataLength: z
-            .string({
+            .number({
                 invalid_type_error: 'Default data length must be a number',
             })
             .transform((value) => parseFloat(value))
@@ -69,7 +69,7 @@ module.exports = z
             })
             .default(10), // Default value if not provided
         adultTravelers: z
-            .string({
+            .number({
                 invalid_type_error: 'Adult travelers must be a number',
             })
             .transform((value) => parseFloat(value))
@@ -78,29 +78,36 @@ module.exports = z
                     'Adult travelers must be a non-negative number or at least 1',
             }),
         childTravelers: z
-            .string({
+            .number({
                 invalid_type_error: 'Child travelers must be a number',
             })
             .transform((value) => parseFloat(value))
             .refine((value) => !isNaN(value) && value >= 0, {
                 message: 'Child travelers must be a non-negative number',
-            }),
+            })
+            .default(0),
         infantsTravelers: z
-            .string({
+            .number({
                 invalid_type_error: 'Infants travelers must be a number',
             })
             .transform((value) => parseFloat(value))
             .refine((value) => !isNaN(value) && value >= 0, {
                 message: 'Infants travelers must be a non-negative number',
-            }),
+            })
+            .default(0),
         lastItemId: z
-            .string({
-                invalid_type_error: 'Last item ID must be a valid ObjectId',
-            })
-            .refine((id) => !id || isValidObjectId(id), {
-                message:
-                    'Please provide a valid MongoDB ObjectId or leave it empty',
-            })
+            .union([
+                z
+                    .string({
+                        invalid_type_error:
+                            'Last item ID must be a valid ObjectId or null',
+                    })
+                    .refine((id) => !id || isValidObjectId(id), {
+                        message:
+                            'Please provide a valid MongoDB ObjectId or leave it empty',
+                    }),
+                z.null(),
+            ])
             .optional(),
     })
     .strict();
