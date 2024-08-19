@@ -8,6 +8,7 @@
  */
 
 // dependencies
+const { THEME_NAMES } = require('../../../../constants');
 const { ThemeSettings } = require('../../../../models');
 
 // export update/create theme controller
@@ -38,6 +39,7 @@ module.exports = async (req, res, next) => {
                 illustration: illustration?.path,
                 title,
                 description,
+                status: key === THEME_NAMES ? 'active' : 'disabled',
             });
         }
 

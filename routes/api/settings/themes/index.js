@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 25 Jul, 2024
+ * @update_date 19 Aug, 2024
  */
 
 // dependencies
@@ -44,13 +44,12 @@ router.get('/', isAuthorized, isAllowed(['admin']), getThemes);
 /**
  * @description get theme by key
  * @param {string} path - '/api/settings/themes/:key'
- * @param {function} validator - ['validateThemeSettingsKey']
  * @param {function} controller - ['getTheme']
  * @returns {object} - router
  * @access public
  * @method GET
  */
-router.get('/:theme', validateThemeSettingsKey, getTheme);
+router.get('/active', getTheme);
 
 /**
  * @description update or create theme
@@ -68,11 +67,6 @@ router.post(
     '/:theme',
     isAuthorized,
     isAllowed(['admin']),
-    (req, res, next) => {
-        console.log(req.body);
-
-        next();
-    },
     validateThemeSettingsKey,
     validateThemeSettingsFile,
     validateThemeSettings,
