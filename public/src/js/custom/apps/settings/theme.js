@@ -356,6 +356,77 @@ var KTAppThemeSettings = (function () {
         }
     };
 
+    // Switching theme
+    const switchTheme = () => {
+        const trigger = document.getElementById('kt_theme_switcher');
+
+        if (!trigger) {
+            return;
+        }
+
+        trigger.addEventListener('change', async () => {
+            let url = trigger.getAttribute('data-kt-theme-url');
+
+            url = `${url}/${trigger.checked ? 'default' : 'alternative'}`;
+
+            // Check axios library docs: https://axios-http.com/docs/intro
+            axios
+                .patch(url)
+                .then((response) => {
+                    if (response) {
+                        Swal.fire({
+                            text:
+                                response?.data?.message ||
+                                'Status has been updated successfully!',
+                            icon: 'success',
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ok, got it!',
+                            customClass: {
+                                confirmButton: 'btn btn-primary',
+                            },
+                            allowOutsideClick: false,
+                        });
+                    } else {
+                        // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                        Swal.fire({
+                            text:
+                                response?.data?.message ||
+                                'Sorry, we ran into an error! Please try again.',
+                            icon: 'error',
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ok, got it!',
+                            customClass: {
+                                confirmButton: 'btn btn-primary',
+                            },
+                        });
+                    }
+                })
+                .catch((error) => {
+                    const errors = error.response?.data?.message
+                        ? error.response?.data?.message
+                        : error?.response?.data?.errors;
+
+                    Swal.fire({
+                        html: `${
+                            errors instanceof Array
+                                ? `<ul class="text-start">${Object.values(
+                                      error.response.data.errors
+                                  )
+                                      .map((err) => `<li>${err?.message}</li>`)
+                                      .join('')}</ul>`
+                                : errors
+                        }`,
+                        icon: 'error',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                    });
+                });
+        });
+    };
+
     // Public methods
     return {
         init: function () {
@@ -363,6 +434,7 @@ var KTAppThemeSettings = (function () {
             initTagify();
             initSelect2Flags();
             initFileUploader();
+            switchTheme();
         },
     };
 })();

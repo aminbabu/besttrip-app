@@ -17,6 +17,7 @@ const router = express.Router();
 const {
     getThemes,
     getTheme,
+    updateThemeStatus,
     updateOrCreateTheme,
 } = require('../../../../controllers/api/settings/themes');
 
@@ -43,13 +44,30 @@ router.get('/', isAuthorized, isAllowed(['admin']), getThemes);
 
 /**
  * @description get active theme
- * @param {string} path - '/api/settings/themes/:key'
+ * @param {string} path - '/api/settings/themes/active'
  * @param {function} controller - ['getTheme']
  * @returns {object} - router
  * @access public
  * @method GET
  */
 router.get('/active', getTheme);
+
+/**
+ * @description get theme status
+ * @param {string} path - '/api/settings/themes/status/:theme'
+ * @param {function} validator - ['validateThemeSettings']
+ * @param {function} controller - ['getTheme']
+ * @returns {object} - router
+ * @access public
+ * @method PATCH
+ */
+router.patch(
+    '/status/:theme',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateThemeSettingsKey,
+    updateThemeStatus
+);
 
 /**
  * @description get theme by key
