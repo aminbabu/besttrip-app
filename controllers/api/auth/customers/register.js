@@ -55,6 +55,12 @@ module.exports = async (req, res, next) => {
             type: 'verify-email',
         });
 
+        // save token
+        await tokenDoc.save();
+
+        // save customer
+        await newCustomer.save();
+
         // prepare email
         const info = welcome({ user: newCustomer.toObject(), token });
 
@@ -67,12 +73,6 @@ module.exports = async (req, res, next) => {
             info.attachments,
             (err, info) => (err ? console.log(err) : console.log(info))
         );
-
-        // save token
-        await tokenDoc.save();
-
-        // save customer
-        await newCustomer.save();
 
         // return response
         return res.status(201).json({
