@@ -1,10 +1,10 @@
 /**
- * @file /routes/api/customers/index.js
+ * @file /routes'/api/customers/index.js'
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 05 Jul, 2024
+ * @update_date 19 Aug, 2024
  */
 
 // dependencies
@@ -18,8 +18,10 @@ const {
     getAllCustomers,
     getCustomer,
     createCustomer,
+    updatePassword,
     updateAllCustomersWallet,
     updateCustomer,
+    updatePasswordSelf,
     updateCustomerBySelf,
     updateCustomerWallet,
     deleteCustomer,
@@ -40,7 +42,7 @@ const { uploadAvatar } = require('../../../middlewares/api/files');
 
 /**
  * @description check if user is authorized
- * @param {string} path - /api/customers
+ * @param {string} path - '/api/customers'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -49,7 +51,7 @@ router.use(isAuthorized);
 
 /**
  * @description get all customers
- * @param {string} path - /api/customers
+ * @param {string} path - '/api/customers'
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getAllCustomers']
  * @returns {object} - router
@@ -60,7 +62,7 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
 
 /**
  * @description get customer by mongo id
- * @param {string} path - /api/customers/:id
+ * @param {string} path - '/api/customers/:id'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateCustomerId']
  * @param {function} controller - ['getCustomer']
@@ -72,7 +74,7 @@ router.get('/:id', isAllowed(['admin']), validateCustomerId, getCustomer);
 
 /**
  * @description create a new customer
- * @param {string} path - /api/customers
+ * @param {string} path - '/api/customers'
  * @param {function} middleware - ['isAuthorized', 'isAllowed']
  * @param {function} validator - ['validateCustomer']
  * @param {function} controller - ['createCustomer']
@@ -84,7 +86,7 @@ router.post('/', isAllowed(['admin']), validateCustomer, createCustomer);
 
 /**
  * @description update all customers wallet
- * @param {string} path - /api/customers/wallet
+ * @param {string} path - '/api/customers/wallet'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateCustomerWallet']
  * @param {function} controller - ['updateAllCustomersWallet']
@@ -101,7 +103,7 @@ router.patch(
 
 /**
  * @description update customer by self
- * @param {string} path - /api/customers/self
+ * @param {string} path - '/api/customers/self'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateAvatar', 'validateCustomerAccount']
  * @param {function} validator - ['validateCustomerSelf']
@@ -122,7 +124,7 @@ router.patch(
 
 /**
  * @description update customer by mongo id
- * @param {string} path - /api/customers/:id
+ * @param {string} path - '/api/customers/:id'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateAvatar', 'validateCustomerAccount']
  * @param {function} validator - ['validateCustomerId', 'validateCustomer']
@@ -145,7 +147,7 @@ router.patch(
 
 /**
  * @description update customer wallet
- * @param {string} path - /api/customers/:id/wallet
+ * @param {string} path - '/api/customers/:id/wallet'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateCustomerId', 'validateCustomerWallet']
  * @param {function} controller - ['updateCustomerWallet']
@@ -163,7 +165,7 @@ router.patch(
 
 /**
  * @description delete customer by mongo id
- * @param {string} path - /api/customers/:id
+ * @param {string} path - '/api/customers/:id'
  * @param {function} middleware - ['isAllowed']
  * @param {function} validator - ['validateCustomerId']
  * @param {function} controller - ['deleteCustomer']
@@ -175,7 +177,7 @@ router.delete('/:id', isAllowed(['admin']), validateCustomerId, deleteCustomer);
 
 /**
  * @description delete customer by self
- * @param {string} path - /api/customers/self
+ * @param {string} path - '/api/customers/self'
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['deleteCustomerBySelf']
  * @returns {object} - router

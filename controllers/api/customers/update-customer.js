@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 19 April, 2024
+ * @update_date 19 Aug, 2024
  */
 
 // dependencies
@@ -28,29 +28,11 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // calculate wallet balance based on transaction type
-        if (validatedCustomer.wallet) {
-            switch (validatedCustomer.wallet.type) {
-                case 'top-up':
-                    customer.wallet.balance += validatedCustomer.wallet.balance;
-                    break;
-                case 'deduct':
-                    customer.wallet.balance -= validatedCustomer.wallet.balance;
-                    break;
-                default:
-                    break;
-            }
-        }
-
         // update customer
         customer.set({
             ...customer.toObject(),
-            avatar: avatar?.path || customer.avatar,
+            avatar: avatar?.path || customer?.avatar || '',
             ...validatedCustomer,
-            wallet: {
-                ...validatedCustomer.wallet,
-                balance: customer.wallet.balance,
-            },
         });
 
         // save customer

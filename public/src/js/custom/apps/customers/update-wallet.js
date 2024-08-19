@@ -12,83 +12,30 @@ var KTModalUpdateCustomer = (function () {
 
     // Init form inputs
     var initForm = function () {
-        // Init Datepicker --- For more info, please check Flatpickr's official documentation: https://flatpickr.js.org/
-        $('#kt_customer_birth_datepicker').flatpickr({
-            enableTime: false,
-            dateFormat: 'Y-m-d',
-            maxDate: 'today',
-        });
-
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validator = FormValidation.formValidation(form, {
             fields: {
-                name: {
+                balance: {
                     validators: {
                         notEmpty: {
-                            message: 'Customer name is required',
+                            message: 'Balance is required',
                         },
                     },
                 },
-                email: {
+                type: {
                     validators: {
                         notEmpty: {
-                            message: 'Customer email is required',
-                        },
-                        regexp: {
-                            regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                            message: 'The value is not a valid email address',
+                            message: 'Adjustment type is required',
                         },
                     },
                 },
-                phone: {
+                description: {
                     validators: {
                         notEmpty: {
-                            message: 'Customer phone is required',
+                            message: 'Description is required',
                         },
                     },
                 },
-                // dob: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: 'Customer birth date is required',
-                //         },
-                //     },
-                // },
-                // country: {
-                //   validators: {
-                //     notEmpty: {
-                //       message: "Country is required",
-                //     },
-                //   },
-                // },
-                // address1: {
-                //   validators: {
-                //     notEmpty: {
-                //       message: "Address 1 is required",
-                //     },
-                //   },
-                // },
-                // city: {
-                //   validators: {
-                //     notEmpty: {
-                //       message: "City is required",
-                //     },
-                //   },
-                // },
-                // state: {
-                //   validators: {
-                //     notEmpty: {
-                //       message: "State is required",
-                //     },
-                //   },
-                // },
-                // postcode: {
-                //   validators: {
-                //     notEmpty: {
-                //       message: "Postcode is required",
-                //     },
-                //   },
-                // },
             },
             plugins: {
                 trigger: new FormValidation.plugins.Trigger(),
@@ -114,54 +61,19 @@ var KTModalUpdateCustomer = (function () {
                         // Disable submit button whilst loading
                         submitButton.disabled = true;
 
-                        // Customer form data
-                        const customerFormData = new FormData();
-
-                        // Form fields
-                        const formFields = [
-                            'name',
-                            'email',
-                            'phone',
-                            'dob',
-                            'flyerNumber',
-                            'address',
-                            'city',
-                            'state',
-                            'country',
-                            'postalCode',
-                        ];
-
-                        // Append form data dynamically
-                        formFields.forEach(
-                            (field) =>
-                                form[field].value.trim() &&
-                                customerFormData.append(
-                                    field,
-                                    form[field].value.trim()
-                                )
-                        );
-
-                        // Append avatar
-                        if (form.avatar.files.length > 0) {
-                            customerFormData.append(
-                                'avatar',
-                                form.avatar.files[0]
-                            );
-                        }
-
                         // Check axios library docs: https://axios-http.com/docs/intro
                         axios
                             .patch(
                                 submitButton
                                     .closest('form')
                                     .getAttribute('action'),
-                                customerFormData
+                                new FormData(form)
                             )
                             .then((response) => {
                                 Swal.fire({
                                     text:
                                         response?.data?.message ||
-                                        'Form has been successfully submitted!',
+                                        'Wallet has been successfully updated!',
                                     icon: 'success',
                                     buttonsStyling: false,
                                     confirmButtonText: 'Ok, got it!',
@@ -170,14 +82,9 @@ var KTModalUpdateCustomer = (function () {
                                     },
                                     allowOutsideClick: false,
                                 }).then((result) => {
-                                    // Get the redirect URL from the form
-                                    const redirectUrl = form.getAttribute(
-                                        'data-kt-redirect-url'
-                                    );
-
-                                    if (result.isConfirmed && redirectUrl) {
+                                    if (result.isConfirmed) {
                                         modal.hide();
-                                        location.href = redirectUrl;
+                                        location.reload();
                                     }
                                 });
                             })
@@ -295,26 +202,71 @@ var KTModalUpdateCustomer = (function () {
             });
         });
     };
+    const calculateNewBalance = () => {
+        const newBalanceEl = document.querySelector(
+            '[kt-modal-adjust-balance="new_balance"]'
+        );
+        const currentBalanceEl = document.querySelector(
+            '[kt-modal-adjust-balance="current_balance"] span'
+        );
+        const input = document.querySelector('input[name="balance"]');
+        const $select = $('select[name="type"]');
+
+        if (!input || !newBalanceEl || !$select?.length) {
+            return;
+        }
+
+        // Function to update the balance
+        const updateBalance = () => {
+            const value = Number(input.value); // Get the value from the input
+            const currentBalance = Number(currentBalanceEl.innerHTML);
+            const type = $select.val(); // Get the selected type (top-up or deduct)
+
+            console.log(type);
+
+            let balance;
+
+            if (type === 'top-up') {
+                balance = currentBalance + value;
+            } else if (type === 'deduct') {
+                balance = currentBalance - value;
+            } else {
+                balance = currentBalance;
+            }
+
+            newBalanceEl.innerHTML = balance ? `৳ ${balance} BDT` : '--';
+        };
+
+        // Listen for changes in the balance input and the select input
+        input.addEventListener('input', updateBalance);
+        $select.select2().on('select2:select', updateBalance);
+    };
 
     return {
         // Public functions
         init: function () {
             // Elements
-            element = document.querySelector('#kt_modal_update_customer');
+            element = document.querySelector('#kt_modal_adjust_balance');
+
+            if (!element) {
+                return;
+            }
+
             modal = new bootstrap.Modal(element);
 
-            form = element.querySelector('#kt_modal_update_customer_form');
+            form = element.querySelector('#kt_modal_adjust_balance_form');
             submitButton = form.querySelector(
-                '#kt_modal_update_customer_submit'
+                '#kt_modal_adjust_balance_submit'
             );
             cancelButton = form.querySelector(
-                '#kt_modal_update_customer_cancel'
+                '#kt_modal_adjust_balance_cancel'
             );
             closeButton = element.querySelector(
-                '#kt_modal_update_customer_close'
+                '#kt_modal_adjust_balance_close'
             );
 
             initForm();
+            calculateNewBalance();
         },
     };
 })();

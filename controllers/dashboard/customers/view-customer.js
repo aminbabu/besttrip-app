@@ -18,8 +18,6 @@ const {
 } = require('../../../models');
 const { countries } = require('countries-list');
 const prepareRoleDefination = require('../../../utils/global/prepare-role-defination');
-const { currencyFormatter } = require('../../../utils/global');
-const { ObjectId } = mongoose.Types;
 
 // export customer view controller
 module.exports = async (req, res) => {
@@ -40,17 +38,13 @@ module.exports = async (req, res) => {
         const customer = existingCustomer.toObject();
 
         // Format customer dates
-        if (customer.createdAt) {
-            customer.createdAt = moment(customer.createdAt).format(
-                'DD MMM YYYY, h:mm a'
-            );
-        }
-        if (customer.updatedAt) {
-            customer.updatedAt = moment(customer.updatedAt).format(
-                'DD MMM YYYY, h:mm a'
-            );
-        }
-        if (customer.dob) {
+        customer.createdAt = moment(customer.createdAt).format(
+            'DD MMM YYYY, h:mm a'
+        );
+        customer.updatedAt = moment(customer.updatedAt).format(
+            'DD MMM YYYY, h:mm a'
+        );
+        if (customer?.dob) {
             customer.dob = moment(customer.dob).format('DD MMM YYYY');
         }
 
@@ -283,11 +277,10 @@ module.exports = async (req, res) => {
             projectUmrahBookingStage,
         ]);
 
-        console.log(umrahBookingList);
-
         // return rendered view
         return res.render('dashboard/customers/customer', {
             title: customer.name,
+            user: req.user,
             customer: prepareRoleDefination(customer),
             countries: Object.values(countries),
             paymentRequests,
@@ -295,7 +288,6 @@ module.exports = async (req, res) => {
             umrahBookingList,
         });
     } catch (error) {
-        console.error('Error viewing customer:', error); // Log the error for debugging
         return res.redirect('/dashboard/error/500');
     }
 };
