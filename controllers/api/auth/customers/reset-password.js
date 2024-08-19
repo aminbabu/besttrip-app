@@ -51,6 +51,12 @@ module.exports = async (req, res, next) => {
         // update customer password
         customer.password = password;
 
+        // delete token
+        await resetPasswordToken.deleteOne();
+
+        // save customer
+        await customer.save();
+
         // prepare email
         const info = await sendPasswordResetConfirmation(customer.toObject());
 
@@ -63,12 +69,6 @@ module.exports = async (req, res, next) => {
             info.attachments,
             (err, info) => (err ? console.log(err) : console.log(info))
         );
-
-        // delete token
-        await resetPasswordToken.deleteOne();
-
-        // save customer
-        await customer.save();
 
         // return response
         return res.status(200).json({
