@@ -16,8 +16,16 @@ module.exports = async (req, res, next) => {
         // get validated data
         const { theme: key } = req.params;
 
+        const query = {};
+
+        if (key) {
+            query.theme = key;
+        } else {
+            query.status = 'active';
+        }
+
         // get theme
-        const theme = await ThemeSettings.findOne({ theme: key });
+        const theme = await ThemeSettings.findOne(query);
 
         // check if theme exists
         if (!theme) {

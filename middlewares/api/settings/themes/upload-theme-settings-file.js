@@ -24,6 +24,11 @@ module.exports =
         const { theme } = req.params || {};
         const { illustration } = req.files || {};
 
+        // check if illustration is not provided
+        if (!illustration) {
+            return next();
+        }
+
         // check if illustration exists
         if (theme) {
             // get theme settings

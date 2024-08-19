@@ -16,10 +16,13 @@ module.exports = async (req, res) => {
         // get themes
         const themes = await ThemeSettings.find();
 
+        const defaultTheme = themes?.find((item) => item?.theme === 'default');
+
         // render themes view
         return res.render('dashboard/settings/themes', {
             title: 'Themes',
             themes,
+            defaultTheme,
         });
     } catch (error) {
         return res.redirect('/dashboard/error/500');

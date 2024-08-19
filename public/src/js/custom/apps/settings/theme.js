@@ -31,13 +31,13 @@ var KTAppThemeSettings = (function () {
             var detectedField;
             var validationFields = {
                 fields: {
-                    illustration: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Illustration is required',
-                            },
-                        },
-                    },
+                    // illustration: {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Illustration is required',
+                    //         },
+                    //     },
+                    // },
                     title: {
                         validators: {
                             notEmpty: {

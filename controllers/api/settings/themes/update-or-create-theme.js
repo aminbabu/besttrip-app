@@ -24,6 +24,10 @@ module.exports = async (req, res, next) => {
         // get theme
         let theme = await ThemeSettings.findOne({ theme: key });
 
+        console.log(theme);
+
+        return null;
+
         // check if theme exists
         if (theme) {
             theme.set({

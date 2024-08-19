@@ -42,7 +42,7 @@ const {
 router.get('/', isAuthorized, isAllowed(['admin']), getThemes);
 
 /**
- * @description get theme by key
+ * @description get active theme
  * @param {string} path - '/api/settings/themes/:key'
  * @param {function} controller - ['getTheme']
  * @returns {object} - router
@@ -50,6 +50,17 @@ router.get('/', isAuthorized, isAllowed(['admin']), getThemes);
  * @method GET
  */
 router.get('/active', getTheme);
+
+/**
+ * @description get theme by key
+ * @param {string} path - '/api/settings/themes/:key'
+ * @param {function} validator - ['validateThemeSettingsKey']
+ * @param {function} controller - ['getTheme']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/:theme', validateThemeSettingsKey, getTheme);
 
 /**
  * @description update or create theme
