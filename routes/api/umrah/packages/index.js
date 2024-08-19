@@ -61,6 +61,21 @@ const {
 } = require('../../../../middlewares/api/umrah/packages');
 
 /**
+ * @description get all umrah packages for customers
+ * @param {string} path - /umrah/packages/customer
+ * @param {function} validator - ['validateUmrahPackagesForCustomers']
+ * @param {function} controller - ['getUmrahPackagesForCustomers']
+ * @returns {object} - router
+ * @access public
+ * @method POST
+ */
+router.post(
+    '/customer',
+    validateUmrahPackagesForCustomers,
+    getUmrahPackagesForCustomers
+);
+
+/**
  * @description check if user is authorized
  * @param {string} path - /customers
  * @param {function} middleware - ['isAuthorized']
@@ -212,21 +227,6 @@ router.post(
     uploadUmrahDayWiseItineraryThumbnails('/umrah/package'),
     uploadUmrahThumbnail('/umrah/package'),
     createUmrahPackage
-);
-
-/**
- * @description get all umrah packages for customers
- * @param {string} path - /umrah/packages/customer
- * @param {function} validator - ['validateUmrahPackagesForCustomers']
- * @param {function} controller - ['getUmrahPackagesForCustomers']
- * @returns {object} - router
- * @access public
- * @method POST
- */
-router.post(
-    '/customer',
-    validateUmrahPackagesForCustomers,
-    getUmrahPackagesForCustomers
 );
 
 /**

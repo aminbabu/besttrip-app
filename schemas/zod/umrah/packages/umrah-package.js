@@ -144,17 +144,6 @@ module.exports = z
             .refine((childPrice) => parseFloat(childPrice) >= 0, {
                 message: 'Please provide a valid child price',
             }),
-        totalPaymentAmount: z
-            .string({
-                required_error: 'Full payment amount is required',
-                invalid_type_error: 'Please provide a valid price',
-            })
-            .refine(
-                (totalPaymentAmount) => parseFloat(totalPaymentAmount) >= 0,
-                {
-                    message: 'Please provide a valid price',
-                }
-            ),
         childPartialPrice: z
             .string({
                 required_error: 'Child partial price is required',
@@ -182,18 +171,6 @@ module.exports = z
                 (infantPartialPrice) => parseFloat(infantPartialPrice) >= 0,
                 {
                     message: 'Please provide a valid infant partial price',
-                }
-            ),
-        partialPaymentTotalAmount: z
-            .string({
-                required_error: 'Partial payment amount is required',
-                invalid_type_error: 'Please provide a valid price',
-            })
-            .refine(
-                (partialPaymentTotalAmount) =>
-                    parseFloat(partialPaymentTotalAmount) >= 0,
-                {
-                    message: 'Please provide a valid price',
                 }
             ),
         partialPaymentExpiryDate: z

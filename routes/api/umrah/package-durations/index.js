@@ -33,6 +33,16 @@ const {
 } = require('../../../../middlewares/api/validators/umrah/package-durations');
 
 /**
+ * @description get all umrah package durations for customers (no middleware)
+ * @param {string} path - /umrah/package-durations/customer
+ * @param {function} controller - ['getUmrahPackageDurations']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/customer', getUmrahPackageDurationsCustomer);
+
+/**
  * @description check if user is authorized
  * @param {string} path - /customers
  * @param {function} middleware - ['isAuthorized']
@@ -51,16 +61,6 @@ router.use(isAuthorized);
  * @method GET
  */
 router.get('/', isAllowed(['admin', 'customer']), getUmrahPackageDurations);
-
-/**
- * @description get all umrah package durations for customers (no middleware)
- * @param {string} path - /umrah/package-durations/customer
- * @param {function} controller - ['getUmrahPackageDurations']
- * @returns {object} - router
- * @access public
- * @method GET
- */
-router.get('/customer', getUmrahPackageDurationsCustomer);
 
 /**
  * @description get umrah package duration
