@@ -858,7 +858,7 @@
                           <!--begin::Input group=-->
                           <div class="fv-row mb-10">
                             <label class="required form-label fs-6 mb-2">Current Password</label>
-                            <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="current_password" autocomplete="off" />
+                            <input class="form-control form-control-lg" type="password" placeholder="Current Password" name="currentPassword" autocomplete="off" />
                           </div>
                           <!--end::Input group=-->
                           <% } %>
@@ -901,16 +901,16 @@
                           <!--end::Input group=-->
                           <div class="fv-row mb-8" data-kt-password-meter="false">
                             <!--begin::Label-->
-                            <label for="password_confirmation" class="fw-bold text-start text-gray-900 fs-6 mb-2 required">
-                              Repeat Password
+                            <label for="confirmPassword" class="fw-bold text-start text-gray-900 fs-6 mb-2 required">
+                              Confirm Password
                             </label>
                             <!--end::Label-->
 
                             <!--begin::Input wrapper-->
                             <div class="position-relative mb-3">
-                              <!--begin::Repeat Password-->
-                              <input placeholder="Repeat Password" name="password_confirmation" type="password" autocomplete="off" class="form-control bg-transparent" />
-                              <!--end::Repeat Password-->
+                              <!--begin::Confirm Password-->
+                              <input placeholder="Confirm Password" id="confirmPassword" name="confirmPassword" type="password" autocomplete="off" class="form-control bg-transparent" />
+                              <!--end::Confirm Password-->
                               <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
                                 <i class="fa-regular fa-eye"></i>
                                 <i class="fa-regular fa-eye-slash d-none"></i>
