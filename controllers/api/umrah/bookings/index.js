@@ -18,5 +18,5 @@ module.exports = {
     deleteUmrahBookingByIdForAdmin: require('./delete-umrah-booking-for-admin'),
     deleteUmrahBookingByIdForCustomer: require('./delete-umrah-booking-for-customer'),
     submitBookingForReview: require('./submit-booking-for-review'),
-    restOfThePartialPayment: require('./rest-of-the-partial-payment'),
+    makePayment: require('./make-payment'),
 };

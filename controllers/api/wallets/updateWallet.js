@@ -32,16 +32,13 @@ module.exports = async (req, res, next) => {
         // update wallet balance
         if (type === 'top-up') {
             wallet.set({
-                balance: wallet.balance + balance,
+                balance: wallet.balance + Number(balance),
                 type,
                 description,
             });
         } else {
             wallet.set({
-                balance:
-                    wallet.balance - balance <= 0
-                        ? 0
-                        : wallet.balance - balance,
+                balance: wallet.balance - Number(balance),
                 type,
                 description,
             });

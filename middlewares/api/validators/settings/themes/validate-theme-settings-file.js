@@ -21,9 +21,7 @@ module.exports = async (req, res, next) => {
 
         // check if illustration is not provided
         if (!illustration) {
-            return res.status(400).json({
-                message: 'Illustration is required.',
-            });
+            return next();
         }
 
         // check if illustration is an array

@@ -28,6 +28,10 @@ module.exports = new Schema(
             type: String,
             required: [true, 'Booking Reference Id is required'],
         },
+        totalTravelers: {
+            type: Number,
+            required: [true, 'Total Travelers is required'],
+        },
         invoiceId: {
             type: Schema.Types.ObjectId,
             default: null,

@@ -24,7 +24,7 @@ const {
     submitBookingForReview,
     deleteUmrahBookingByIdForAdmin,
     deleteUmrahBookingByIdForCustomer,
-    restOfThePartialPayment,
+    makePayment,
     // deleteManyUmrahBookingsForAdmin,
     // deleteManyUmrahBookingsForCustomer,
 } = require('../../../../controllers/api/umrah/bookings');
@@ -131,25 +131,25 @@ router.post(
     '/:id/submit-review',
     isAllowed(['customer']),
     validateUmrahBookingId,
-    validateUmrahBookingPayment,
+    // validateUmrahBookingPayment,
     submitBookingForReview
 );
 
 /**
  * @description - make rest of the partial payment
- * @param {string} path - '/api/umrah/booking/:id/rest-partial-payment'
+ * @param {string} path - '/api/umrah/booking/:id/make-payment'
  * @param {function} middleware - ['isAllowed', 'validateUmrahBookingId']
- * @param {function} controller - ['restOfThePartialPayment']
+ * @param {function} controller - ['makePayment']
  * @returns {object} - router
  * @access private - ['customer']
  * @method POST
  */
 router.post(
-    '/:id/rest-partial-payment',
+    '/:id/make-payment',
     isAllowed(['customer']),
     validateUmrahBookingId,
     validateUmrahBookingPayment,
-    restOfThePartialPayment
+    makePayment
 );
 
 /**

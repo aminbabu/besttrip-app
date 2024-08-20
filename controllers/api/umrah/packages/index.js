@@ -12,6 +12,7 @@ module.exports = {
     getUmrahPackages: require('./get-umrah-packages'),
     getUmrahPackagesForCustomers: require('./get-umrah-packages-for-customers'),
     getUmrahPackage: require('./get-umrah-package'),
+    getUmrahPackageCustomer: require('./get-umrah-package-customer'),
     createUmrahPackage: require('./create-umrah-package'),
     updateUmrahPackage: require('./update-umrah-package'),
     deleteUmrahPackage: require('./delete-umrah-package'),

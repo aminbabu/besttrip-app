@@ -8,34 +8,32 @@
  */
 
 // dependencies
-const { Wallet } = require("../../../models");
+const { Wallet } = require('../../../models');
 
 // export update all customers wallet controller
 module.exports = async (req, res, next) => {
-  try {
-    // get validated data
-    const { balance, type } = req.body;
+    try {
+        // get validated data
+        const { balance, type } = req.body;
 
-    // get customer's wallet
-    const wallets = await Wallet.find({}).select("customer balance");
+        // get customer's wallet
+        const wallets = await Wallet.find({}).select('customer balance');
 
-    // update all customers wallet
-    wallets.forEach(async (wallet) => {
-      wallet.balance =
-        type === "top-up"
-          ? wallet.balance + balance
-          : wallet.balance - balance < 0
-            ? 0
-            : wallet.balance - balance;
+        // update all customers wallet
+        wallets.forEach(async (wallet) => {
+            wallet.balance =
+                type === 'top-up'
+                    ? wallet.balance + Number(balance)
+                    : wallet.balance - Number(balance);
 
-      // save wallet
-      await wallet.save();
-    });
+            // save wallet
+            await wallet.save();
+        });
 
-    return res.status(200).json({
-      message: "Updated all customers wallet successfully",
-    });
-  } catch (error) {
-    return next(error);
-  }
+        return res.status(200).json({
+            message: 'Updated all customers wallet successfully',
+        });
+    } catch (error) {
+        return next(error);
+    }
 };

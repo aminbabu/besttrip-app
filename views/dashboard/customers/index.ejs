@@ -210,7 +210,7 @@
                           <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                             <a href="/dashboard/customers/<%= customer?._id %>">
                               <div class="symbol-label">
-                                <img src="/<%= customer?.avatar %>" alt="<%= customer?.name %>" class="w-100" />
+                                <img src="<%= customer?.avatar %>" alt="<%= customer?.name %>" class="w-100" />
                               </div>
                             </a>
                           </div>
@@ -225,8 +225,8 @@
                         </td>
                         <td><%= customer?.customerID %></td>
                         <td>
-                          <div class="badge badge-light-<% if (user?.status === 'disabled') { %>primary<% } else { %>success<% } %> min-w-80px px-4 py-3 justify-content-center text-capitalize">
-                            <%= user.status %>
+                          <div class="badge badge-light-<% if (customer?.status === 'disabled') { %>primary<% } else { %>success<% } %> min-w-80px px-4 py-3 justify-content-center text-capitalize">
+                            <%= customer.status %>
                           </div>
                         </td>
                         <td><%= customer?.phone %></td>

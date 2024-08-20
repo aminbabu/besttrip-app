@@ -4,49 +4,49 @@
  * @version 0.0.0
  * @author best-trip
  * @date 08 April, 2024
- * @update_date 22 June, 2024
+ * @update_date 20 Aug, 2024
  */
 
 // dependencies
-const express = require("express");
+const express = require('express');
 
 // express router
 const router = express.Router();
 
 // controllers
 const {
-  getAllUsers,
-  getUser,
-  createUser,
-  updateUser,
-  updatePassword,
-  updateRole,
-  updateUserBySelf,
-  disableUserBySelf,
-  disableUser,
-  enableUser,
-  updatePasswordBySelf,
-  deleteUser,
-  deleteUserBySelf,
-  deleteUserLoginHistory,
-  deleteUserLoginHistoryBySelf,
-} = require("../../../controllers/api/users");
+    getAllUsers,
+    getUser,
+    createUser,
+    updateUser,
+    updatePassword,
+    updateRole,
+    updateUserBySelf,
+    disableUserBySelf,
+    disableUser,
+    enableUser,
+    updatePasswordBySelf,
+    deleteUser,
+    deleteUserBySelf,
+    deleteUserLoginHistory,
+    deleteUserLoginHistoryBySelf,
+} = require('../../../controllers/api/users');
 
 // middlewares
-const { isAuthorized, isAllowed } = require("../../../middlewares/api/auth");
+const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
-  validateUserId,
-  validateUser,
-  validatePassword,
-  validateUserSelf,
-  validatePasswordSelf,
-  validateRole,
-} = require("../../../middlewares/api/validators/users");
-const { validateAvatar } = require("../../../middlewares/api/validators/files");
-const { uploadAvatar } = require("../../../middlewares/api/files");
+    validateUserId,
+    validateUser,
+    validatePassword,
+    validateUserSelf,
+    validatePasswordSelf,
+    validateRole,
+} = require('../../../middlewares/api/validators/users');
+const { validateAvatar } = require('../../../middlewares/api/validators/files');
+const { uploadAvatar } = require('../../../middlewares/api/files');
 
 // constants
-const { USER_ROLES } = require("../../../constants");
+const { USER_ROLES } = require('../../../constants');
 
 /**
  * @description check if user is authorized
@@ -66,7 +66,7 @@ router.use(isAuthorized);
  * @access private - ['admin']
  * @method GET
  */
-router.get("/", isAllowed(["admin"]), getAllUsers);
+router.get('/', isAllowed(['admin']), getAllUsers);
 
 /**
  * @description get user by mongo id
@@ -78,7 +78,7 @@ router.get("/", isAllowed(["admin"]), getAllUsers);
  * @access private - ['admin']
  * @method GET
  */
-router.get("/:id", isAllowed(["admin"]), validateUserId, getUser);
+router.get('/:id', isAllowed(['admin']), validateUserId, getUser);
 
 /**
  * @description disable user by self
@@ -89,7 +89,7 @@ router.get("/:id", isAllowed(["admin"]), validateUserId, getUser);
  * @access private - ['all']
  * @method GET
  */
-router.get("/self/disable", isAllowed(USER_ROLES), disableUserBySelf);
+router.get('/self/disable', isAllowed(USER_ROLES), disableUserBySelf);
 
 /**
  * @description disable user by mongo id
@@ -100,7 +100,7 @@ router.get("/self/disable", isAllowed(USER_ROLES), disableUserBySelf);
  * @access private - ['admin']
  * @method GET
  */
-router.get("/:id/disable", isAllowed("admin"), disableUser);
+router.get('/:id/disable', isAllowed('admin'), validateUserId, disableUser);
 
 /**
  * @description enable user by mongo id
@@ -111,7 +111,7 @@ router.get("/:id/disable", isAllowed("admin"), disableUser);
  * @access private - ['admin']
  * @method GET
  */
-router.get("/:id/enable", isAllowed("admin"), enableUser);
+router.get('/:id/enable', isAllowed('admin'), validateUserId, enableUser);
 
 /**
  * @description add user
@@ -124,7 +124,7 @@ router.get("/:id/enable", isAllowed("admin"), enableUser);
  * @access private - ['admin']
  * @method POST
  */
-router.post("/", isAllowed(["admin"]), validateUser, createUser);
+router.post('/', isAllowed(['admin']), validateUser, createUser);
 
 /**
  * @description update user by self
@@ -138,12 +138,12 @@ router.post("/", isAllowed(["admin"]), validateUser, createUser);
  * @method PATCH
  */
 router.patch(
-  "/self",
-  isAllowed(USER_ROLES),
-  validateAvatar,
-  validateUserSelf,
-  uploadAvatar("avatars/users"),
-  updateUserBySelf
+    '/self',
+    isAllowed(USER_ROLES),
+    validateAvatar,
+    validateUserSelf,
+    uploadAvatar('avatars/users'),
+    updateUserBySelf
 );
 
 /**
@@ -158,13 +158,13 @@ router.patch(
  * @method PATCH
  */
 router.patch(
-  "/:id",
-  isAllowed(["admin"]),
-  validateAvatar,
-  validateUserId,
-  validateUser,
-  uploadAvatar("avatars/users"),
-  updateUser
+    '/:id',
+    isAllowed(['admin']),
+    validateAvatar,
+    validateUserId,
+    validateUser,
+    uploadAvatar('avatars/users'),
+    updateUser
 );
 
 /**
@@ -178,10 +178,10 @@ router.patch(
  * @method PATCH
  */
 router.patch(
-  "/self/password",
-  isAllowed(USER_ROLES),
-  validatePasswordSelf,
-  updatePasswordBySelf
+    '/self/password',
+    isAllowed(USER_ROLES),
+    validatePasswordSelf,
+    updatePasswordBySelf
 );
 
 /**
@@ -195,11 +195,11 @@ router.patch(
  * @method PATCH
  */
 router.patch(
-  "/:id/password",
-  isAllowed(["admin"]),
-  validateUserId,
-  validatePassword,
-  updatePassword
+    '/:id/password',
+    isAllowed(['admin']),
+    validateUserId,
+    validatePassword,
+    updatePassword
 );
 
 /**
@@ -212,7 +212,7 @@ router.patch(
  * @access private - ['admin']
  * @method PATCH
  */
-router.patch("/:id/role", isAllowed(["admin"]), validateRole, updateRole);
+router.patch('/:id/role', isAllowed(['admin']), validateRole, updateRole);
 
 /**
  * @description delete user by self
@@ -223,7 +223,7 @@ router.patch("/:id/role", isAllowed(["admin"]), validateRole, updateRole);
  * @access private - all
  * @method DELETE
  */
-router.delete("/self", isAllowed(USER_ROLES), deleteUserBySelf);
+router.delete('/self', isAllowed(USER_ROLES), deleteUserBySelf);
 
 /**
  * @description delete user by mongo id
@@ -235,7 +235,7 @@ router.delete("/self", isAllowed(USER_ROLES), deleteUserBySelf);
  * @access private - ['admin']
  * @method DELETE
  */
-router.delete("/:id", isAllowed(["admin"]), validateUserId, deleteUser);
+router.delete('/:id', isAllowed(['admin']), validateUserId, deleteUser);
 
 /**
  * @description delete user's login history by self
@@ -247,9 +247,9 @@ router.delete("/:id", isAllowed(["admin"]), validateUserId, deleteUser);
  * @method DELETE
  */
 router.delete(
-  "/self/login-history/all",
-  isAllowed(USER_ROLES),
-  deleteUserLoginHistoryBySelf
+    '/self/login-history/all',
+    isAllowed(USER_ROLES),
+    deleteUserLoginHistoryBySelf
 );
 
 /**
@@ -263,10 +263,10 @@ router.delete(
  * @method DELETE
  */
 router.delete(
-  "/:id/login-history/all",
-  isAllowed(["admin"]),
-  validateUserId,
-  deleteUserLoginHistory
+    '/:id/login-history/all',
+    isAllowed(['admin']),
+    validateUserId,
+    deleteUserLoginHistory
 );
 
 // export

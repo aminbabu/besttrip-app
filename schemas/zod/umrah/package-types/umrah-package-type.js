@@ -36,19 +36,10 @@ module.exports = z
             .refine((id) => isMongoId(id), {
                 message: 'Please provide a valid id',
             }),
-        name: z
-            .string({
-                required_error: 'Name is required',
-                invalid_type_error: 'Please provide a valid name',
-            })
-            .refine(
-                (name) => UMRAH_PACKAGE_TYPES.includes(name.toLowerCase()),
-                {
-                    message: `Please provide a valid name. Valid names are: ${UMRAH_PACKAGE_TYPES.join(
-                        ', '
-                    )}`,
-                }
-            ),
+        name: z.string({
+            required_error: 'Name is required',
+            invalid_type_error: 'Please provide a valid name',
+        }),
         status: z
             .string({
                 required_error: 'Status is required',

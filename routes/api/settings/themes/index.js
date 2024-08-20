@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 20 April, 2024
- * @update_date 25 Jul, 2024
+ * @update_date 19 Aug, 2024
  */
 
 // dependencies
@@ -17,6 +17,7 @@ const router = express.Router();
 const {
     getThemes,
     getTheme,
+    updateThemeStatus,
     updateOrCreateTheme,
 } = require('../../../../controllers/api/settings/themes');
 
@@ -40,6 +41,33 @@ const {
  * @method GET
  */
 router.get('/', isAuthorized, isAllowed(['admin']), getThemes);
+
+/**
+ * @description get active theme
+ * @param {string} path - '/api/settings/themes/active'
+ * @param {function} controller - ['getTheme']
+ * @returns {object} - router
+ * @access public
+ * @method GET
+ */
+router.get('/active', getTheme);
+
+/**
+ * @description get theme status
+ * @param {string} path - '/api/settings/themes/status/:theme'
+ * @param {function} validator - ['validateThemeSettings']
+ * @param {function} controller - ['getTheme']
+ * @returns {object} - router
+ * @access public
+ * @method PATCH
+ */
+router.patch(
+    '/status/:theme',
+    isAuthorized,
+    isAllowed(['admin']),
+    validateThemeSettingsKey,
+    updateThemeStatus
+);
 
 /**
  * @description get theme by key
@@ -68,11 +96,6 @@ router.post(
     '/:theme',
     isAuthorized,
     isAllowed(['admin']),
-    (req, res, next) => {
-        console.log(req.body);
-
-        next();
-    },
     validateThemeSettingsKey,
     validateThemeSettingsFile,
     validateThemeSettings,

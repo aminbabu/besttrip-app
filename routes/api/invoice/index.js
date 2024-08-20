@@ -69,7 +69,7 @@ router.get(
  * @param {function} middleware - ['isAllowed', 'validateInvoiceId']
  * @param {function} controller - ['getInvoiceForCustomer']
  * @returns {object} - router
- * @access private - ['admin']
+ * @access private - ['customer']
  * @method GET
  */
 router.get(

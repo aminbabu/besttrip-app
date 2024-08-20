@@ -47,13 +47,13 @@ var KTModalUpdateCustomer = (function () {
                         },
                     },
                 },
-                birth_date: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Customer birth date is required',
-                        },
-                    },
-                },
+                // dob: {
+                //     validators: {
+                //         notEmpty: {
+                //             message: 'Customer birth date is required',
+                //         },
+                //     },
+                // },
                 // country: {
                 //   validators: {
                 //     notEmpty: {
@@ -114,31 +114,108 @@ var KTModalUpdateCustomer = (function () {
                         // Disable submit button whilst loading
                         submitButton.disabled = true;
 
-                        setTimeout(function () {
-                            submitButton.removeAttribute('data-kt-indicator');
+                        // Customer form data
+                        const customerFormData = new FormData();
 
-                            Swal.fire({
-                                text: 'Form has been successfully submitted!',
-                                icon: 'success',
-                                buttonsStyling: false,
-                                confirmButtonText: 'Ok, got it!',
-                                customClass: {
-                                    confirmButton: 'btn btn-primary',
-                                },
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
-                                    // Hide modal
-                                    modal.hide();
+                        // Form fields
+                        const formFields = [
+                            'name',
+                            'email',
+                            'phone',
+                            'dob',
+                            'flyerNumber',
+                            'address',
+                            'city',
+                            'state',
+                            'country',
+                            'postalCode',
+                        ];
 
-                                    // Enable submit button after loading
-                                    submitButton.disabled = false;
+                        // Append form data dynamically
+                        formFields.forEach(
+                            (field) =>
+                                form[field].value.trim() &&
+                                customerFormData.append(
+                                    field,
+                                    form[field].value.trim()
+                                )
+                        );
 
-                                    // Redirect to customers list page
-                                    window.location =
-                                        form.getAttribute('data-kt-redirect');
-                                }
+                        // Append avatar
+                        if (form.avatar.files.length > 0) {
+                            customerFormData.append(
+                                'avatar',
+                                form.avatar.files[0]
+                            );
+                        }
+
+                        // Check axios library docs: https://axios-http.com/docs/intro
+                        axios
+                            .patch(
+                                submitButton
+                                    .closest('form')
+                                    .getAttribute('action'),
+                                customerFormData
+                            )
+                            .then((response) => {
+                                Swal.fire({
+                                    text:
+                                        response?.data?.message ||
+                                        'Form has been successfully submitted!',
+                                    icon: 'success',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                    allowOutsideClick: false,
+                                }).then((result) => {
+                                    // Get the redirect URL from the form
+                                    const redirectUrl = form.getAttribute(
+                                        'data-kt-redirect-url'
+                                    );
+
+                                    if (result.isConfirmed && redirectUrl) {
+                                        modal.hide();
+                                        location.href = redirectUrl;
+                                    }
+                                });
+                            })
+                            .catch((error) => {
+                                const errors = error.response?.data?.message
+                                    ? error.response?.data?.message
+                                    : error?.response?.data?.errors;
+
+                                Swal.fire({
+                                    html: `${
+                                        errors instanceof Array
+                                            ? `<ul class="text-start">${Object.values(
+                                                  error.response.data.errors
+                                              )
+                                                  .map(
+                                                      (err) =>
+                                                          `<li>${err?.message}</li>`
+                                                  )
+                                                  .join('')}</ul>`
+                                            : errors
+                                    }`,
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
+                            })
+                            .then(() => {
+                                // Hide loading indication
+                                submitButton.removeAttribute(
+                                    'data-kt-indicator'
+                                );
+
+                                // Enable button
+                                submitButton.disabled = false;
                             });
-                        }, 2000);
                     } else {
                         Swal.fire({
                             text: 'Sorry, looks like there are some errors detected, please try again.',

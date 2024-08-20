@@ -157,12 +157,12 @@ const KTUsersUpdatePassword = (function () {
                         // Prepare form data to sumbit
                         const payload = {
                             password: form.password.value,
-                            confirmPassword: form.password_confirmation.value,
+                            confirmPassword: form.confirmPassword.value,
                         };
 
                         if (url.includes('self')) {
                             payload.currentPassword =
-                                form.current_password.value;
+                                form.currentPassword.value;
                         }
 
                         // Check axios library docs: https://axios-http.com/docs/intro

@@ -34,6 +34,10 @@ module.exports = async (req, res) => {
         user.createdAt = moment(user.createdAt).format('DD MMM YYYY, h:mm a');
         user.updatedAt = moment(user.updatedAt).format('DD MMM YYYY, h:mm a');
 
+        if (user?.dob) {
+            user.dob = moment(user.dob).format('DD MMM YYYY');
+        }
+
         // format login history
         user.loginHistory = user.loginHistory
             .map((history) => {

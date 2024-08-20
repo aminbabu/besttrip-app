@@ -135,8 +135,7 @@ module.exports = z
             })
             .refine((adultPartialPrice) => parseFloat(adultPartialPrice) >= 0, {
                 message: 'Please provide a valid adult partial price',
-            })
-            .optional(),
+            }),
         childPrice: z
             .string({
                 required_error: 'Child price is required',
@@ -153,8 +152,7 @@ module.exports = z
             })
             .refine((childPartialPrice) => parseFloat(childPartialPrice) >= 0, {
                 message: 'Please provide a valid child partial price',
-            })
-            .optional(),
+            }),
         infantPrice: z
             .string({
                 required_error: 'Infant price is required',
@@ -174,8 +172,25 @@ module.exports = z
                 {
                     message: 'Please provide a valid infant partial price',
                 }
-            )
-            .optional(),
+            ),
+        partialPaymentExpiryDate: z
+            .string({
+                required_error: 'Partial payment expiry date is required',
+                invalid_type_error:
+                    'Please provide a valid partial payment expiry date',
+            })
+            .refine(
+                (partialPaymentExpiryDate) =>
+                    moment(
+                        partialPaymentExpiryDate,
+                        'YYYY-MM-DD',
+                        true
+                    ).isValid(),
+                {
+                    message:
+                        'Please provide a valid partial payment expiry date',
+                }
+            ),
         seats: z
             .string({
                 required_error: 'Seats is required',

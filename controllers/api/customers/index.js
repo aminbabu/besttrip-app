@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 29 March, 2024
- * @update_date 05 Jul, 2024
+ * @update_date 20 Aug, 2024
  */
 
 // export all controllers
@@ -18,4 +18,7 @@ module.exports = {
     updateCustomerWallet: require('./update-customer-wallet'),
     deleteCustomer: require('./delete-customer'),
     deleteCustomerBySelf: require('./delete-customer-by-self'),
+    updatePassword: require('./update-password'),
+    disableCustomer: require('./disable-customer'),
+    enableCustomer: require('./enable-customer'),
 };

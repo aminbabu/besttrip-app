@@ -190,7 +190,7 @@
                         </td>
                         <td>
                           <a href="/dashboard/umrah/bookings/booking-details/<%= details.bookingRefId %>" class="link-primary-dark">
-                           <%= details.bookingRefId %>
+                            <%= details.bookingRefId %>
                           </a>
                           <!-- <a href="/dashboard/umrah/bookings/booking-details/<%= details.bookingRefId %>" class="link-primary-dark">
                            <%= details.bookingRefId %>
@@ -212,8 +212,8 @@
                         <td><%= new Date(details.umrahPackage.journeyDate).toLocaleString() %></td>
                         <td><%= details.travelers.length %> Travellers</td>
                         <td><%= details.customer.name %></td>
-                        <td>Yes</td>
-                        <td>Yes</td>
+                        <td>No</td>
+                        <td>No</td>
                         <td>
                           <% 
                             const allFieldsPresent = details.travelers.every(traveler =>
@@ -222,7 +222,7 @@
                           %>
                           <%= allFieldsPresent ? 'Yes' : 'No' %>
                         </td>
-                        <td><%= details.invoiceDetails.paidAmount.toLocaleString() %>  BDT</td>
+                        <td><%= details.invoiceDetails.paidAmount.toLocaleString() %> BDT</td>
                       </tr>
                       <% }); %>
                     </tbody>

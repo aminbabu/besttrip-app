@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
         // check if customer exists
         const customer = await Customer.findOne({ email })
             .select('+password')
-            .populate('loginHistory');
+            .populate('loginHistory wallet');
 
         if (!customer) {
             return res.status(401).json({

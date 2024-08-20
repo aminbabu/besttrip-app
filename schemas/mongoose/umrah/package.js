@@ -89,6 +89,9 @@ module.exports = new Schema(
             type: Number,
             default: 0,
         },
+        partialPaymentExpiryDate: {
+            type: Date,
+        },
         seats: {
             type: Number,
             required: [true, 'Seats is required'],

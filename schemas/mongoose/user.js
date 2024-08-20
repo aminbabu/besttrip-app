@@ -53,11 +53,17 @@ module.exports = new Schema(
         status: {
             type: String,
             enum: USER_STATUS,
-            default: USER_STATUS[1],
+            default: USER_STATUS[0],
         },
         twoStepAuth: {
             type: Boolean,
             default: false,
+        },
+        twoStepCode: {
+            type: String,
+        },
+        twoStepCodeValidity: {
+            type: Date,
         },
         dob: {
             type: Date,

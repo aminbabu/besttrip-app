@@ -23,12 +23,9 @@ module.exports = (req, res, next) => {
     const { paymentType } = req.body;
 
     // validate request body
-    const { error, success } =
-        paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]
-            ? umrahBookingSchema.pick({ paymentType: true }).safeParse(req.body)
-            : umrahBookingSchema
-                  .pick({ paymentType: true, partialPaymentAmount: true })
-                  .safeParse(req.body);
+    const { error, success } = umrahBookingSchema
+        .pick({ paymentType: true })
+        .safeParse(req.body);
 
     // check for errors
     if (!success) {

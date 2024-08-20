@@ -9,22 +9,15 @@
 
 // dependencies
 const { z } = require('zod');
-const {
-    UMRAH_PACKAGE_TYPES,
-} = require('../../../../constants/umrah-package-types');
+const mongoose = require('mongoose');
 const {
     UMRAH_PACKAGE_SCHEDULES,
 } = require('../../../../constants/umrah-pacakges');
-const mongoose = require('mongoose');
 
 // Helper function to validate MongoDB ObjectId
-const isValidObjectId = (id) => {
-    try {
-        return new mongoose.Types.ObjectId(id).toString() === id;
-    } catch (error) {
-        return false;
-    }
-};
+const isValidObjectId = (id) =>
+    mongoose.Types.ObjectId.isValid(id) &&
+    (new mongoose.Types.ObjectId(id).toString() === id || id === null);
 
 // export get umrah packages schema
 module.exports = z
@@ -45,64 +38,54 @@ module.exports = z
             ),
         packageType: z
             .string({
-                invalid_type_error: 'Please provide a valid package type',
+                invalid_type_error: 'Package type must be a valid ObjectId',
             })
-            .refine(
-                (type) =>
-                    !type || UMRAH_PACKAGE_TYPES.includes(type.toLowerCase()),
-                {
-                    message: `Please provide a valid type. Available types are: ${UMRAH_PACKAGE_TYPES.join(
-                        ', '
-                    )}`,
-                }
-            ),
+            .refine((id) => !id || isValidObjectId(id), {
+                message:
+                    'Please provide a valid MongoDB ObjectId for package type',
+            }),
         packageDuration: z
             .string({
-                invalid_type_error: 'Package duration must be a number',
+                invalid_type_error: 'Package duration must be a valid ObjectId',
             })
-            .transform((value) => parseFloat(value))
-            .refine((value) => !isNaN(value) && value >= 1, {
-                message: 'Package duration must be at least 1 day',
+            .refine((id) => !id || isValidObjectId(id), {
+                message:
+                    'Please provide a valid MongoDB ObjectId for package duration',
             }),
         dataLength: z
-            .string({
-                invalid_type_error: 'Default data length must be a number',
-            })
+            .union([z.string(), z.number()])
             .transform((value) => parseFloat(value))
             .refine((value) => !isNaN(value) && value >= 1, {
                 message: 'Default data length must be at least 1',
             })
             .default(10), // Default value if not provided
         adultTravelers: z
-            .string({
-                invalid_type_error: 'Adult travelers must be a number',
-            })
+            .union([z.string(), z.number()])
             .transform((value) => parseFloat(value))
             .refine((value) => !isNaN(value) && value >= 1, {
                 message:
                     'Adult travelers must be a non-negative number or at least 1',
             }),
         childTravelers: z
-            .string({
-                invalid_type_error: 'Child travelers must be a number',
-            })
+            .union([z.string(), z.number()])
             .transform((value) => parseFloat(value))
             .refine((value) => !isNaN(value) && value >= 0, {
                 message: 'Child travelers must be a non-negative number',
-            }),
-        infantsTravelers: z
-            .string({
-                invalid_type_error: 'Infants travelers must be a number',
             })
+            .default(0),
+        infantsTravelers: z
+            .union([z.string(), z.number()])
             .transform((value) => parseFloat(value))
             .refine((value) => !isNaN(value) && value >= 0, {
                 message: 'Infants travelers must be a non-negative number',
-            }),
+            })
+            .default(0),
         lastItemId: z
             .string({
-                invalid_type_error: 'Last item ID must be a valid ObjectId',
+                invalid_type_error:
+                    'Last item ID must be a valid ObjectId or null',
             })
-            .refine((id) => !id || isValidObjectId(id), {
+            .refine((id) => id === '' || isValidObjectId(id), {
                 message:
                     'Please provide a valid MongoDB ObjectId or leave it empty',
             })

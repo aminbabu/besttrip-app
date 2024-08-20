@@ -10,28 +10,23 @@
 const {
     UMRAH_BOOKING_STATUS,
 } = require('../../../../constants/umrah-bookings');
-const {
-    Traveler,
-    UmrahBooking,
-    UmrahPackage,
-} = require('./../../../../models');
-
-// dependencies
+const { Traveler, UmrahBooking, UmrahPackage } = require('../../../../models');
 
 // export create traveler controller
 module.exports = async (req, res, next) => {
     try {
-        // get validated data
+        // Get validated data
         const validatedData = req.body;
         const {
             passport,
             travelerPhoto,
             travelerNID,
             travelerCovidCertificate,
-        } = req.files;
+        } = req.files || {};
 
+        // Find the Umrah booking associated with the traveler
         const listedUmrah = await UmrahBooking.findOne({
-            _id: req.body.umrahBooking,
+            _id: validatedData.umrahBooking,
             customer:
                 req.user.role === 'admin'
                     ? validatedData.customerId
@@ -45,6 +40,7 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // Find the associated Umrah package details
         const availableUmrahDetails = await UmrahPackage.findOne({
             _id: listedUmrah.umrahPackage,
         });
@@ -56,34 +52,36 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // Find the travelers associated with the current booking
         const listedTravelers = await Traveler.find({
             createdBy:
                 req.user.role === 'admin'
                     ? validatedData.customerId
                     : req.user._id,
-            umrahPackage: listedUmrah.umrahPackage,
+            umrahBooking: listedUmrah._id,
         });
 
-        // Validate if availableUmrahDetails is found
+        // Ensure travelers exist for this booking
         if (!listedTravelers) {
             return res.status(404).send({
                 message: 'Travelers not found',
             });
         }
 
-        // alert message if the seats limit exceed
-        if (availableUmrahDetails.seats <= listedTravelers.length)
+        // Check if adding more travelers exceeds the booking's total allowed travelers
+        if (listedTravelers.length >= listedUmrah.totalTravelers) {
             return res.status(403).send({
-                message: `You can not add more than ${availableUmrahDetails.seats} travelers in this package`,
+                message: `You cannot add more than ${listedUmrah.totalTravelers} travelers to this package.`,
             });
+        }
 
-        // customer can't add more travelers if the package is already 'in-process' || 'under-review' || 'success' || 'booked' || 'cancelled' but admin can
+        // Customer can't add more travelers if the package is already 'pending' || 'in-process' || 'under-review' || 'success' || 'booked' || 'cancelled', but admin can
         if (
             req.user.role === 'admin' ||
             listedUmrah.status === UMRAH_BOOKING_STATUS[0]
         ) {
-            // create traveler
-            const traveler = new Traveler({
+            // Create the traveler object
+            const travelerData = {
                 ...validatedData,
                 passport: passport.path,
                 travelerPhoto: travelerPhoto.path,
@@ -93,19 +91,20 @@ module.exports = async (req, res, next) => {
                     req.user.role === 'admin'
                         ? validatedData.customerId
                         : req.user._id,
-            });
+            };
 
-            // save traveler
+            // Save the new traveler to the database
+            const traveler = new Traveler(travelerData);
             await traveler.save();
 
-            // send traveler
+            // Return success response
             return res.status(201).send({
                 message: 'Traveler created successfully',
                 traveler,
             });
         } else {
             return res.status(403).send({
-                message: `You can't add more travelers to this package cause this package ${listedUmrah.status}`,
+                message: `You can't add more travelers to this package because its status is ${listedUmrah.status}.`,
             });
         }
     } catch (error) {

@@ -152,7 +152,7 @@
                                       <!--begin::Message-->
                                       <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_logo">
                                         <% if (general?.logo) { %>
-                                        <img src="/<%= general.logo %>" class="mw-100 mh-100px mb-5 mb-xl-0" alt="<%= general?.title %> Logo" />
+                                        <img src="<%= general.logo %>" class="mw-100 mh-100px mb-5 mb-xl-0" alt="<%= general?.title %> Logo" />
                                         <% } else { %>
                                         <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
                                         <!--begin::Info-->
@@ -201,20 +201,25 @@
                                   <!--begin::Input group-->
                                   <div class="fv-row">
                                     <!--begin::Preview Container-->
+
                                     <div class="kt-file-uploader">
                                       <!--begin::Message-->
                                       <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="kt_file_uploader_favicon">
+                                        <% if (general?.favicon) { %>
+                                        <img src="<%= general.favicon %>" class="mw-100 mh-100px mb-5 mb-xl-0" alt="<%= general?.title %> Logo" />
+                                        <% } else { %>
                                         <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
                                         <!--begin::Info-->
                                         <div class="ms-xl-4 mt-4 mt-xl-0">
                                           <h3 class="fs-5 fw-bold text-gray-900 mb-1">
-                                            Upload favicon
+                                            Upload logo
                                           </h3>
                                           <span class="fs-7 fw-semibold text-gray-500">
                                             ICO, PNG, GIF, SVG up to 1MB
                                           </span>
                                         </div>
                                         <!--end::Info-->
+                                        <% } %>
                                       </label>
                                       <!--end::Message-->
                                       <!--begin::Input-->

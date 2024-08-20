@@ -606,7 +606,7 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Adult Package Partial Price</label>
+                                <label class="form-label">Adult Package Partial Price</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="number" class="form-control form-control-lg form-control-solid" name="adultPartialPrice" value="" placeholder="" />
@@ -630,7 +630,7 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Children Package Partial Price</label>
+                                <label class="form-label">Children Package Partial Price</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="number" class="form-control form-control-lg form-control-solid" name="childPartialPrice" value="" placeholder="" />
@@ -654,7 +654,7 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Infant Package Partial Price</label>
+                                <label class="form-label">Infant Package Partial Price</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="number" class="form-control form-control-lg form-control-solid" name="infantPartialPrice" value="" placeholder="" />
@@ -662,14 +662,26 @@
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Seat Avaiable</label>
+                                <label class="form-label required">Seat Available</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="number" class="form-control form-control-lg form-control-solid" name="seats" value="" placeholder="" />
+                                <!--end::Input-->
+                              </div>
+                              <!--end::Input group-->
+                            </div>
+                            <div class="col-lg-6">
+                              <!--begin::Input group-->
+                              <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label required">Partial Price Due Date</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="number" class="form-control form-control-lg form-control-solid" name="partialPaymentExpiryDate" disabled data-flatpickr="package_date_picker" value="" placeholder="Pick a date" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -709,6 +721,12 @@
                                   <label class="form-check form-check-custom form-check-inline form-check-solid">
                                     <input class="form-check-input" name="inclusions" type="checkbox" value="food" />
                                     <span class="fw-semibold ps-2 fs-6">Food</span>
+                                  </label>
+                                  <!--end::Option-->
+                                  <!--end::Option-->
+                                  <label class="form-check form-check-custom form-check-inline form-check-solid">
+                                    <input class="form-check-input" name="Guide" type="checkbox" value="guide" />
+                                    <span class="fw-semibold ps-2 fs-6">Guide</span>
                                   </label>
                                   <!--end::Option-->
                                 </div>
@@ -775,11 +793,13 @@
                                 <label class="form-label required">Airline Code</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="outboundAirlineCode" aria-label="Select airline code" data-control="select2-country" data-placeholder="Select airline code" class="form-select form-select-solid form-select-lg">
+                                <select name="outboundAirlineCode" aria-label="Select airline " data-control="select2" data-placeholder="Select airline " class="form-select form-select-solid form-select-lg">
                                   <option value="">
-                                    Select airline code
+                                    Select airline
                                   </option>
-
+                                  <% airlines.forEach(function(airline) { %>
+                                  <option value="<%= airline.code %>"><%= airline.name %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -832,20 +852,11 @@
                                   <option value="">
                                     Select departure airport
                                   </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
+                                  <% airPorts.forEach(function(airport) { %>
+                                  <option value="<%= airport.code %>">
+                                    <%= airport.city %> - <%= airport.name %> - <%= airport.code %>
                                   </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
-                                    Sylhet-Osmani International Airport-ZYL
-                                  </option>
-                                  <option value="RJH">
-                                    Rajshahi-Shah Makhdum Airport-RJH
-                                  </option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -864,15 +875,11 @@
                                   <option value="">
                                     Select arrival airport
                                   </option>
-                                  <option value="BDA">
-                                    India-Blue Dart Aviation-BDA
+                                  <% airPorts.forEach(function(airport) { %>
+                                  <option value="<%= airport.code %>">
+                                    <%= airport.city %> - <%= airport.name %> - <%= airport.code %>
                                   </option>
-                                  <option value="BWA">
-                                    Bhutan-Bhutan Airlines-BWA
-                                  </option>
-                                  <option value="BGH">
-                                    Bulgaria-Balkan Holidays-BGH
-                                  </option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -887,21 +894,9 @@
                                 <!--begin::Input-->
                                 <select name="outboundAirCraftModel" aria-label="Select aircraft model" data-control="select2" data-placeholder="Select aircraft model" class="form-select form-select-solid form-select-lg">
                                   <option></option>
-                                  <option value="Airbus A220">
-                                    Airbus A220
-                                  </option>
-                                  <option value="Boeing 777-200">
-                                    Boeing 777-200
-                                  </option>
-                                  <option value="Boeing 737-900">
-                                    Boeing 737-900
-                                  </option>
-                                  <option value="Airbus A320">
-                                    Airbus A320
-                                  </option>
-                                  <option value="Boeing 787-9">
-                                    Boeing 787-9
-                                  </option>
+                                  <% aircraftModels.forEach(function(model) { %>
+                                  <option value="<%= model %>"><%= model %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -977,20 +972,11 @@
                                   <option value="">
                                     Select layover airport
                                   </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
+                                  <% airPorts.forEach(function(airport) { %>
+                                  <option value="<%= airport.code %>">
+                                    <%= airport.city %> - <%= airport.name %> - <%= airport.code %>
                                   </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
-                                    Sylhet-Osmani International Airport-ZYL
-                                  </option>
-                                  <option value="RJH">
-                                    Rajshahi-Shah Makhdum Airport-RJH
-                                  </option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1023,20 +1009,11 @@
                                   <option value="">
                                     Select layover airport
                                   </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
+                                  <% airPorts.forEach(function(airport) { %>
+                                  <option value="<%= airport.code %>">
+                                    <%= airport.city %> - <%= airport.name %> - <%= airport.code %>
                                   </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
-                                    Sylhet-Osmani International Airport-ZYL
-                                  </option>
-                                  <option value="RJH">
-                                    Rajshahi-Shah Makhdum Airport-RJH
-                                  </option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1046,88 +1023,13 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Adult Baggage Checkin</label>
+                                <label class="form-label required">Adult Baggage Checking</label>
                                 <!--begin::Input-->
                                 <select name="outboundAdultBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <% baggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1141,15 +1043,9 @@
                                 <!--begin::Input-->
                                 <select name="outboundAdultBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <% cabinBaggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1159,88 +1055,13 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Children Baggage Checkin</label>
+                                <label class="form-label required">Children Baggage Checking</label>
                                 <!--begin::Input-->
                                 <select name="outboundChildBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <% baggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1254,15 +1075,9 @@
                                 <!--begin::Input-->
                                 <select name="outboundChildBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <% cabinBaggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1272,88 +1087,13 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Infant Baggage Checkin</label>
+                                <label class="form-label required">Infant Baggage Checking</label>
                                 <!--begin::Input-->
                                 <select name="outboundInfantBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <% baggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1367,15 +1107,9 @@
                                 <!--begin::Input-->
                                 <select name="outboundInfantBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <% cabinBaggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1454,40 +1188,12 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="makkahHotelNoOfNights" aria-label="Select stay duration" data-control="select2" data-placeholder="Select stay duration.." class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select stay duration..
-                                  </option>
-                                  <option value="1">1 Night</option>
-                                  <option value="2">2 Nights</option>
-                                  <option value="3">3 Nights</option>
-                                  <option value="4">4 Nights</option>
-                                  <option value="5">5 Nights</option>
-                                  <option value="6">6 Nights</option>
-                                  <option value="7">7 Nights</option>
-                                  <option value="8">8 Nights</option>
-                                  <option value="9">9 Nights</option>
-                                  <option value="10">10 Nights</option>
-                                  <option value="11">11 Nights</option>
-                                  <option value="12">12 Nights</option>
-                                  <option value="13">13 Nights</option>
-                                  <option value="14">14 Nights</option>
-                                  <option value="15">15 Nights</option>
-                                  <option value="16">16 Nights</option>
-                                  <option value="17">17 Nights</option>
-                                  <option value="18">18 Nights</option>
-                                  <option value="19">19 Nights</option>
-                                  <option value="20">20 Nights</option>
-                                  <option value="21">21 Nights</option>
-                                  <option value="22">22 Nights</option>
-                                  <option value="23">23 Nights</option>
-                                  <option value="24">24 Nights</option>
-                                  <option value="25">25 Nights</option>
-                                  <option value="26">26 Nights</option>
-                                  <option value="27">27 Nights</option>
-                                  <option value="28">28 Nights</option>
-                                  <option value="29">29 Nights</option>
-                                  <option value="30">30 Nights</option>
+                                  <option value="">Select stay duration..</option>
+                                  <% for (let i = 1; i <= 90; i++) { %>
+                                  <option value="<%= i %>"><%= i %> Night<%= i > 1 ? 's' : '' %></option>
+                                  <% } %>
                                 </select>
+
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1718,36 +1424,9 @@
                                   <option value="">
                                     Select stay duration..
                                   </option>
-                                  <option value="1">1 Night</option>
-                                  <option value="2">2 Nights</option>
-                                  <option value="3">3 Nights</option>
-                                  <option value="4">4 Nights</option>
-                                  <option value="5">5 Nights</option>
-                                  <option value="6">6 Nights</option>
-                                  <option value="7">7 Nights</option>
-                                  <option value="8">8 Nights</option>
-                                  <option value="9">9 Nights</option>
-                                  <option value="10">10 Nights</option>
-                                  <option value="11">11 Nights</option>
-                                  <option value="12">12 Nights</option>
-                                  <option value="13">13 Nights</option>
-                                  <option value="14">14 Nights</option>
-                                  <option value="15">15 Nights</option>
-                                  <option value="16">16 Nights</option>
-                                  <option value="17">17 Nights</option>
-                                  <option value="18">18 Nights</option>
-                                  <option value="19">19 Nights</option>
-                                  <option value="20">20 Nights</option>
-                                  <option value="21">21 Nights</option>
-                                  <option value="22">22 Nights</option>
-                                  <option value="23">23 Nights</option>
-                                  <option value="24">24 Nights</option>
-                                  <option value="25">25 Nights</option>
-                                  <option value="26">26 Nights</option>
-                                  <option value="27">27 Nights</option>
-                                  <option value="28">28 Nights</option>
-                                  <option value="29">29 Nights</option>
-                                  <option value="30">30 Nights</option>
+                                  <% for (let i = 1; i <= 90; i++) { %>
+                                  <option value="<%= i %>"><%= i %> Night<%= i > 1 ? 's' : '' %></option>
+                                  <% } %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1935,11 +1614,11 @@
                                 <label class="form-label required">Airline Code</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <select name="inboundAirlineCode" aria-label="Select airline code" data-control="select2-country" data-placeholder="Select airline code" class="form-select form-select-solid form-select-lg">
-                                  <option value="">
-                                    Select airline code
-                                  </option>
-
+                                <select name="inboundAirlineCode" aria-label="Select airline" data-control="select2" data-placeholder="Select airline" class="form-select form-select-solid form-select-lg">
+                                  <option value="">Select airline </option>
+                                  <% airlines.forEach(function(airline) { %>
+                                  <option value="<%= airline.code %>"><%= airline.name %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -1992,20 +1671,11 @@
                                   <option value="">
                                     Select departure airport
                                   </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
+                                  <% airPorts.forEach(function(airport) { %>
+                                  <option value="<%= airport.code %>">
+                                    <%= airport.city %> - <%= airport.name %> - <%= airport.code %>
                                   </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
-                                    Sylhet-Osmani International Airport-ZYL
-                                  </option>
-                                  <option value="RJH">
-                                    Rajshahi-Shah Makhdum Airport-RJH
-                                  </option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2024,15 +1694,11 @@
                                   <option value="">
                                     Select arrival airport
                                   </option>
-                                  <option value="BDA">
-                                    India-Blue Dart Aviation-BDA
+                                  <% airPorts.forEach(function(airport) { %>
+                                  <option value="<%= airport.code %>">
+                                    <%= airport.city %> - <%= airport.name %> - <%= airport.code %>
                                   </option>
-                                  <option value="BWA">
-                                    Bhutan-Bhutan Airlines-BWA
-                                  </option>
-                                  <option value="BGH">
-                                    Bulgaria-Balkan Holidays-BGH
-                                  </option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2047,21 +1713,9 @@
                                 <!--begin::Input-->
                                 <select name="inboundAirCraftModel" aria-label="Select aircraft model" data-control="select2" data-placeholder="Select aircraft model" class="form-select form-select-solid form-select-lg">
                                   <option></option>
-                                  <option value="Airbus A220">
-                                    Airbus A220
-                                  </option>
-                                  <option value="Boeing 777-200">
-                                    Boeing 777-200
-                                  </option>
-                                  <option value="Boeing 737-900">
-                                    Boeing 737-900
-                                  </option>
-                                  <option value="Airbus A320">
-                                    Airbus A320
-                                  </option>
-                                  <option value="Boeing 787-9">
-                                    Boeing 787-9
-                                  </option>
+                                  <% aircraftModels.forEach(function(model) { %>
+                                  <option value="<%= model %>"><%= model %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2137,20 +1791,11 @@
                                   <option value="">
                                     Select layover airport
                                   </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
+                                  <% airPorts.forEach(function(airport) { %>
+                                  <option value="<%= airport.code %>">
+                                    <%= airport.city %> - <%= airport.name %> - <%= airport.code %>
                                   </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
-                                    Sylhet-Osmani International Airport-ZYL
-                                  </option>
-                                  <option value="RJH">
-                                    Rajshahi-Shah Makhdum Airport-RJH
-                                  </option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2183,20 +1828,11 @@
                                   <option value="">
                                     Select layover airport
                                   </option>
-                                  <option value="DAC">
-                                    Dhaka-Hazrat Shahjalal International
-                                    Airport-DAC
+                                  <% airPorts.forEach(function(airport) { %>
+                                  <option value="<%= airport.code %>">
+                                    <%= airport.city %> - <%= airport.name %> - <%= airport.code %>
                                   </option>
-                                  <option value="CGP">
-                                    Chittagong-Shah Amanat International
-                                    Airport-CGP
-                                  </option>
-                                  <option value="Sylhet">
-                                    Sylhet-Osmani International Airport-ZYL
-                                  </option>
-                                  <option value="RJH">
-                                    Rajshahi-Shah Makhdum Airport-RJH
-                                  </option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2206,88 +1842,13 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Adult Baggage Checkin</label>
+                                <label class="form-label required">Adult Baggage Checking</label>
                                 <!--begin::Input-->
                                 <select name="inboundAdultBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <% baggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2301,15 +1862,9 @@
                                 <!--begin::Input-->
                                 <select name="inboundAdultBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <% cabinBaggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2319,88 +1874,13 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Children Baggage Checkin</label>
+                                <label class="form-label required">Children Baggage Checking</label>
                                 <!--begin::Input-->
                                 <select name="inboundChildBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <% baggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2414,15 +1894,9 @@
                                 <!--begin::Input-->
                                 <select name="inboundChildBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <% cabinBaggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2432,88 +1906,13 @@
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label required">Infant Baggage Checkin</label>
+                                <label class="form-label required">Infant Baggage Checking</label>
                                 <!--begin::Input-->
                                 <select name="inboundInfantBaggageCheckin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="1 Pices">1 Pices</option>
-                                  <option value="2 Pices">2 Pices</option>
-                                  <option value="1N">1N</option>
-                                  <option value="2N">2N</option>
-                                  <option value="0 KG">0 KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KH">7 KH</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
-                                  <option value="22 KG">22 KG</option>
-                                  <option value="23 KG">23 KG</option>
-                                  <option value="23 KG 1 Pices">
-                                    23 KG 1 Pices
-                                  </option>
-                                  <option value="23 KG 2 Pices">
-                                    23 KG 2 Pices
-                                  </option>
-                                  <option value="25 KG">25 KG</option>
-                                  <option value="25 KG 1 Pices">
-                                    25 KG 1 Pices
-                                  </option>
-                                  <option value="25 KG 2 Pices">
-                                    25 KG 2 Pices
-                                  </option>
-                                  <option value="27 KG">27 KG</option>
-                                  <option value="30 KG">30 KG</option>
-                                  <option value="30 KG 1 Pices">
-                                    30 KG 1 Pices
-                                  </option>
-                                  <option value="30 KG 2 Pices">
-                                    30 KG 2 Pices
-                                  </option>
-                                  <option value="35 KG">35 KG</option>
-                                  <option value="35 KG 1 Pices">
-                                    35 KG 1 Pices
-                                  </option>
-                                  <option value="35 KG 2 Pices">
-                                    35 KG 2 Pices
-                                  </option>
-                                  <option value="40 KG">40 KG</option>
-                                  <option value="40 KG 1 Pices">
-                                    40 KG 1 Pices
-                                  </option>
-                                  <option value="40 KG 2 Pices">
-                                    40 KG 2 Pices
-                                  </option>
-                                  <option value="45 KG">45 KG</option>
-                                  <option value="45 KG 1 Pices">
-                                    45 KG 1 Pices
-                                  </option>
-                                  <option value="45 KG 2 Pices">
-                                    45 KG 2 Pices
-                                  </option>
-                                  <option value="46 KG">46 KG</option>
-                                  <option value="46 KG 1 Pices">
-                                    46 KG 1 Pices
-                                  </option>
-                                  <option value="46 KG 2 Pices">
-                                    46 KG 2 Pices
-                                  </option>
-                                  <option value="50 KG">50 KG</option>
-                                  <option value="50 KG 1 Pices">
-                                    50 KG 1 Pices
-                                  </option>
-                                  <option value="50 KG 2 Pices">
-                                    50 KG 2 Pices
-                                  </option>
-                                  <option value="56 KG">56 KG</option>
-                                  <option value="56 KG 1 Pices">
-                                    56 KG 1 Pices
-                                  </option>
-                                  <option value="56 KG 2 Pices">
-                                    56 KG 2 Pices
-                                  </option>
+                                  <% baggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>
@@ -2527,15 +1926,9 @@
                                 <!--begin::Input-->
                                 <select name="inboundInfantBaggageCabin" aria-label="Select unit" data-control="select2" data-placeholder="Select unit.." class="form-select form-select-solid form-select-lg">
                                   <option value="">Select unit..</option>
-                                  <option value="SB">SB</option>
-                                  <option value="KG">KG</option>
-                                  <option value="2 KG">2 KG</option>
-                                  <option value="5 KG">5 KG</option>
-                                  <option value="7 KG">7 KG</option>
-                                  <option value="10 KG">10 KG</option>
-                                  <option value="12 KG">12 KG</option>
-                                  <option value="15 KG">15 KG</option>
-                                  <option value="20 KG">20 KG</option>
+                                  <% cabinBaggageOptions.forEach(function(option) { %>
+                                  <option value="<%= option %>"><%= option %></option>
+                                  <% }); %>
                                 </select>
                                 <!--end::Input-->
                               </div>

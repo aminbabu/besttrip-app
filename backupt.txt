@@ -27,3 +27,46 @@ planing:
 2. API BOOKING(filed) package booking এর জন্য এর?
 3. Documents (filed) এর value কিসের উপরে নির্ভর করে দেখাতে হবে?
 
+
+
+
+
+Payment er details
+
+/**
+ * @description - make rest of the partial payment
+ * @param {string} path - '/api/umrah/booking/:id/make-payment'
+ * @param {function} middleware - ['isAllowed', 'validateUmrahBookingId']
+ * @param {function} controller - ['makePayment']
+ * @returns {object} - router
+ * @access private - ['customer']
+ * @method POST
+ */
+
+
+
+
+==================================================================
+
+// have to create get invoice fot the customer so that he can able to see all the prices filed during the payment.
+
+
+
+1. Customer এর শুধু wallet id যাচ্ছে বাকি সবগুলো দিয়ে দিতে হবে next auth এ...............
+2. Under Review কে change করে pending করতে হবে, admin dashboard এ। 
+
+
+
+3. for two step
+
+/**
+ * @description two step code validate
+ * @param {string} path - /api/auth/users/validate-two-step-code
+ * @param {function} controller - ['twoStepAuth']
+ * @returns {object} - router
+ * @access public
+ * @method PATCH
+ */
+
+
+

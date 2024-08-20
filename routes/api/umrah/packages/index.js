@@ -17,6 +17,7 @@ const router = express.Router();
 const {
     getUmrahPackages,
     getUmrahPackage,
+    getUmrahPackageCustomer,
     createUmrahPackage,
     updateUmrahPackage,
     deleteUmrahPackage,
@@ -60,6 +61,21 @@ const {
 } = require('../../../../middlewares/api/umrah/packages');
 
 /**
+ * @description get all umrah packages for customers
+ * @param {string} path - /umrah/packages/customer
+ * @param {function} validator - ['validateUmrahPackagesForCustomers']
+ * @param {function} controller - ['getUmrahPackagesForCustomers']
+ * @returns {object} - router
+ * @access public
+ * @method POST
+ */
+router.post(
+    '/customer',
+    validateUmrahPackagesForCustomers,
+    getUmrahPackagesForCustomers
+);
+
+/**
  * @description check if user is authorized
  * @param {string} path - /customers
  * @param {function} middleware - ['isAuthorized']
@@ -91,10 +107,22 @@ router.get('/', isAllowed(['admin']), getUmrahPackages);
  */
 router.get(
     '/:id',
-    isAllowed(['admin']),
+    isAllowed(['admin', 'customer']),
     validateUmrahPackageId,
     getUmrahPackage
 );
+
+/**
+ * @description get umrah package package
+ * @param {string} path - /umrah/packages/:id/customers
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateUmrahPackageId']
+ * @param {function} controller - ['getUmrahPackage']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method GET
+ */
+router.get('/:id/customers', validateUmrahPackageId, getUmrahPackageCustomer);
 
 /**
  * @description create umrah package package
@@ -199,21 +227,6 @@ router.post(
     uploadUmrahDayWiseItineraryThumbnails('/umrah/package'),
     uploadUmrahThumbnail('/umrah/package'),
     createUmrahPackage
-);
-
-/**
- * @description get all umrah packages for customers
- * @param {string} path - /umrah/packages/customer
- * @param {function} validator - ['validateUmrahPackagesForCustomers']
- * @param {function} controller - ['getUmrahPackagesForCustomers']
- * @returns {object} - router
- * @access public
- * @method POST
- */
-router.post(
-    '/customer',
-    validateUmrahPackagesForCustomers,
-    getUmrahPackagesForCustomers
 );
 
 /**

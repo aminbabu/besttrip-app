@@ -82,7 +82,7 @@ const uploadFavicon =
             fs.unlinkSync(
                 path.join(
                     __dirname,
-                    '../../../../public',
+                    '../../../../../public',
                     generalSettings.favicon
                 )
             );
@@ -95,7 +95,7 @@ const uploadFavicon =
         );
         const uploadFaviconPath = path.join(
             __dirname,
-            '../../../../public',
+            '../../../../../public',
             faviconPath
         );
 

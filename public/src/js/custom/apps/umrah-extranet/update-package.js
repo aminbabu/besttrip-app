@@ -7,6 +7,7 @@ var KTCreatePackage = (function () {
     var form;
     var formSubmitButton;
     var formContinueButton;
+    var itineraryData;
 
     // Variables
     var stepperObj;
@@ -1007,71 +1008,6 @@ var KTCreatePackage = (function () {
         );
     };
 
-    // Init File Uploader
-    const initFileUploader = () => {
-        const handleFileInputChange = (input) => {
-            const previewContainer = input.closest('.kt-file-uploader');
-            const label = previewContainer.querySelector(
-                '.kt-file-uploader-label'
-            );
-            const maxFileSize = parseInt(
-                input.getAttribute('data-kt-file-uploader-max-size')
-            );
-            const invalidMessage =
-                previewContainer.querySelector('.invalid-feedback');
-            const file = input.files[0];
-
-            if (!file) {
-                return;
-            }
-
-            // remove error message
-            invalidMessage.classList.add('d-none');
-
-            // create preview element and append to the container
-            const preview = document.createElement('img');
-
-            if (file?.size > 1024 * 1024 * maxFileSize) {
-                const message = `File size should not exceed ${maxFileSize}MB`;
-
-                if (ktFileUploaderContent) {
-                    // restore label content
-                    label.innerHTML = ktFileUploaderContent;
-                }
-
-                // empty input value
-                input.value = '';
-
-                // append error message
-                invalidMessage.innerHTML = message;
-                invalidMessage.classList.remove('d-none');
-                return;
-            }
-
-            // add was-invalid class to the container
-            if (!previewContainer.classList.contains('was-invalided')) {
-                ktFileUploaderContent = label.innerHTML;
-                previewContainer.classList.add('was-invalided');
-            }
-
-            // remove content and append preview
-            label.innerHTML = '';
-            preview.classList.add('kt-file-uploader-preview');
-            preview.src = URL.createObjectURL(file);
-            preview.alt = file.name;
-            label.appendChild(preview);
-        };
-
-        form.addEventListener('change', function (event) {
-            const target = event.target;
-
-            // Check if the changed element is an input with type file
-            if (target.tagName === 'INPUT' && target.type === 'file') {
-                handleFileInputChange(target);
-            }
-        });
-    };
-
     // Add more thumbnails
     const addMoreThumbnails = () => {
         const dropZoneBasicThumbnails = new Dropzone(
@@ -1288,7 +1224,7 @@ var KTCreatePackage = (function () {
 
     // Day wise itinearies
     const handleDayWiseItinearies = () => {
-        const addDayWiseItineary = (days) => {
+        const addDayWiseItineary = (days, data) => {
             let html = '';
 
             for (let i = 0; i < days; i++) {
@@ -1399,15 +1335,177 @@ var KTCreatePackage = (function () {
             }
 
             $('#day_wise_itinearies_row').html(html);
+
+            // Populate existing thumbnails if available
+            data.forEach((item, index) => {
+                const previewContainer = form
+                    .querySelector(`day_wise_itineary_thumbnail_${index + 1}`)
+                    .closest('.kt-file-uploader');
+                if (item.thumbnail) {
+                    const preview = document.createElement('img');
+                    preview.classList.add('kt-file-uploader-preview');
+                    preview.src = item.src;
+                    preview.alt = item.title;
+                    previewContainer.querySelector('label').innerHTML = '';
+                    previewContainer
+                        .querySelector('label')
+                        .appendChild(preview, itineraryData);
+                }
+            });
         };
 
-        $('[name="basic_package_duration_days_&_nights"]').on(
-            'select2:select',
-            function (e) {
-                var data = e.params.data;
-                addDayWiseItineary(data.id);
+        $('[name="totalDaysAndNights"]').on('select2:select', function (e) {
+            var data = e.params.data;
+            var days = $(this).find('option:selected').data('kt-duration');
+            addDayWiseItineary(days, itineraryData);
+        });
+    };
+
+    // Populate form data
+    const populateData = async () => {
+        const href = form.getAttribute('action');
+
+        try {
+            const response = await axios.get(href);
+
+            if (response) {
+                const data = response.data.umrahPackage;
+
+                itineraryData = data.itineraryDays;
+
+                // Populate the file upload preview for thumbnails
+                const thumbnails = [
+                    {
+                        selector: '#kt_file_uploader_basic_thumbnail',
+                        src: data.thumbnail,
+                        alt: data.title,
+                    },
+                    {
+                        selector: '#kt_file_uploader_makkah_hotel_thumbnail',
+                        src: data.makkahHotelThumbnail,
+                        alt: data.makkahHotelName,
+                    },
+                    {
+                        selector: '#kt_file_uploader_madinah_hotel_thumbnail',
+                        src: data.madinahHotelThumbnail,
+                        alt: data.madinahHotelName,
+                    },
+                    {
+                        selector: '#kt_docs_uploader_thumbnail',
+                        src: data.umrahThumbnail,
+                        alt: data.umrahTitle,
+                    },
+                ];
+
+                thumbnails.forEach(({ selector, src, alt }) => {
+                    const previewContainer = form
+                        .querySelector(selector)
+                        .closest('.kt-file-uploader');
+                    if (src) {
+                        const preview = document.createElement('img');
+                        preview.classList.add('kt-file-uploader-preview');
+                        preview.src = src;
+                        preview.alt = alt;
+                        previewContainer.querySelector('label').innerHTML = '';
+                        previewContainer
+                            .querySelector('label')
+                            .appendChild(preview);
+                    }
+                });
+
+                form.setAttribute('action', href);
+
+                // Initialize file uploader after populating data
+                initFileUploader();
+            } else {
+                Swal.fire({
+                    text: 'Failed to fetch data. Please try again later.',
+                    icon: 'error',
+                    buttonsStyling: false,
+                    confirmButtonText: 'Ok, got it!',
+                    customClass: {
+                        confirmButton: 'btn btn-primary',
+                    },
+                });
             }
-        );
+        } catch (error) {
+            Swal.fire({
+                text:
+                    error.response?.data?.message ||
+                    'Failed to fetch data. Please try again later.',
+                icon: 'error',
+                buttonsStyling: false,
+                confirmButtonText: 'Ok, got it!',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                },
+            });
+        }
+    };
+
+    // Init File Uploader
+    const initFileUploader = () => {
+        const handleFileInputChange = (input) => {
+            const previewContainer = input.closest('.kt-file-uploader');
+            const label = previewContainer.querySelector(
+                '.kt-file-uploader-label'
+            );
+            const maxFileSize = parseInt(
+                input.getAttribute('data-kt-file-uploader-max-size')
+            );
+            const invalidMessage =
+                previewContainer.querySelector('.invalid-feedback');
+            const file = input.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            // remove error message
+            invalidMessage.classList.add('d-none');
+
+            // create preview element and append to the container
+            const preview = document.createElement('img');
+
+            if (file?.size > 1024 * 1024 * maxFileSize) {
+                const message = `File size should not exceed ${maxFileSize}MB`;
+
+                if (ktFileUploaderContent) {
+                    // restore label content
+                    label.innerHTML = ktFileUploaderContent;
+                }
+
+                // empty input value
+                input.value = '';
+
+                // append error message
+                invalidMessage.innerHTML = message;
+                invalidMessage.classList.remove('d-none');
+                return;
+            }
+
+            // add was-invalid class to the container
+            if (!previewContainer.classList.contains('was-invalided')) {
+                ktFileUploaderContent = label.innerHTML;
+                previewContainer.classList.add('was-invalided');
+            }
+
+            // remove content and append preview
+            label.innerHTML = '';
+            preview.classList.add('kt-file-uploader-preview');
+            preview.src = URL.createObjectURL(file);
+            preview.alt = file.name;
+            label.appendChild(preview);
+        };
+
+        form.addEventListener('change', function (event) {
+            const target = event.target;
+
+            // Check if the changed element is an input with type file
+            if (target.tagName === 'INPUT' && target.type === 'file') {
+                handleFileInputChange(target);
+            }
+        });
     };
 
     return {
@@ -1439,6 +1537,7 @@ var KTCreatePackage = (function () {
             handleRepeater();
             initCKEditors();
             handleDayWiseItinearies();
+            populateData();
         },
     };
 })();

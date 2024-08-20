@@ -14,4 +14,5 @@ module.exports = {
     verifyEmail: require('./verify-email'),
     confirmEmailVerification: require('./confirm-email-verification'),
     sendPasswordResetConfirmation: require('./send-password-reset-confirmation'),
+    sendTwoStep: require('./send-two-step'),
 };

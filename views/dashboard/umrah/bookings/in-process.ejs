@@ -181,7 +181,7 @@
                       </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-semibold">
-                       <% umrahBookings?.forEach((details) => { %>
+                      <% umrahBookings?.forEach((details) => { %>
                       <tr>
                         <td>
                           <div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -190,9 +190,9 @@
                         </td>
                         <td>
                           <a href="/dashboard/umrah/bookings/booking-details/<%= details.bookingRefId %>" class="link-primary-dark">
-                           <%= details.bookingRefId %>
+                            <%= details.bookingRefId %>
                           </a>
-                        </t>
+                          </t>
                         <td>
                           <div class="badge badge-grayish-blue px-4 py-3 min-w-80px justify-content-center">
                             <%= details.status.charAt(0).toUpperCase() + details.status.slice(1) %>
@@ -209,8 +209,8 @@
                         <td><%= new Date(details.umrahPackage.journeyDate).toLocaleString() %></td>
                         <td><%= details.travelers.length %> Travellers</td>
                         <td><%= details.customer.name %></td>
-                        <td>Yes</td>
-                        <td>Yes</td>
+                        <td>No</td>
+                        <td>No</td>
                         <td>
                           <% 
                             const allFieldsPresent = details.travelers.every(traveler =>
@@ -219,7 +219,7 @@
                           %>
                           <%= allFieldsPresent ? 'Yes' : 'No' %>
                         </td>
-                        <td><%= details.invoiceDetails.paidAmount.toLocaleString() %>  BDT</td>
+                        <td><%= details.invoiceDetails.paidAmount.toLocaleString() %> BDT</td>
                       </tr>
                       <% }); %>
                     </tbody>

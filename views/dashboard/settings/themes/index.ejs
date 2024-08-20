@@ -71,9 +71,9 @@
                     <div class="fv-row d-flex justify-content-end mb-10">
                       <div class="form-check form-switch form-check-solid">
                         <label class="form-check-label">
-                          <input class="form-check-input form-check-input-custom" type="checkbox" checked value="" />
-                          <span class="enabled">Alternative Theme</span>
-                          <span class="disabled">Default Theme</span>
+                          <input class="form-check-input form-check-input-custom" type="checkbox" id="kt_theme_switcher" data-kt-theme-url="/api/settings/themes/status" <% if (defaultTheme?.status === 'active') { %> checked <% } %> />
+                          <span class="enabled">Default Theme</span>
+                          <span class="disabled">Alternative Theme</span>
                         </label>
                       </div>
                     </div>
@@ -121,7 +121,7 @@
                             <div class="col-md-3 text-md-end">
                               <!--begin::Label-->
                               <label class="fs-6 fw-semibold form-label mt-3">
-                                <span class="required">
+                                <span>
                                   Illustration Image
                                 </span>
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Upload your website Logo.">
@@ -255,7 +255,7 @@
                             <div class="col-md-3 text-md-end">
                               <!--begin::Label-->
                               <label class="fs-6 fw-semibold form-label mt-3">
-                                <span class="required">
+                                <span>
                                   Illustration Image
                                 </span>
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Upload your website Logo.">

@@ -75,7 +75,7 @@
                         <!--begin::Avatar-->
                         <div class="symbol symbol-100px symbol-circle mb-7">
                           <% if (customer?.avatar) { %>
-                          <img src="/<%= customer.avatar %>" alt="<%= customer.name %>" />
+                          <img src="<%= customer.avatar %>" alt="<%= customer.name %>" />
                           <% } else { %>
                           <span class="symbol-label fs-2 fw-bold text-uppercase"><%= customer?.name[0] %></span>
                           <% } %>
@@ -133,22 +133,24 @@
                           </div>
                           <!--begin::Details item-->
                           <!--begin::Details item-->
-                          <% if (user?.address) { %>
+                          <% if (customer?.address) { %>
                           <!--begin::Details item-->
                           <div class="fw-bold mt-5">Address</div>
                           <div class="text-gray-600">
-                            <%= user?.address %>, <br>
-                            <%= user?.city %> - <%= user?.postalCode %>, <br>
-                            <%= user?.state %>, <%= user?.country %>
+                            <%= customer?.address %>, <br>
+                            <%= customer?.city %> - <%= customer?.postalCode %>, <br>
+                            <%= customer?.state %>, <%= customer?.country %>
                           </div>
                           <!--begin::Details item-->
                           <% } %>
+                          <% if (customer?.flyerNumber) { %>
                           <!--begin::Details item-->
                           <div class="fw-bold mt-5">
                             Frequent Flyer Number
                           </div>
-                          <div class="text-gray-600"><%= customer?.flyerNumber %></div>
+                          <div class="text-gray-600"><%= customer.flyerNumber %></div>
                           <!--end::Details item-->
+                          <% } %>
                           <% if (customer?.umrahBookings?.[0]) { %>
                           <!--begin::Details item-->
                           <div class="fw-bold mt-5">Last Booking Date</div>
@@ -198,89 +200,32 @@
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
                           <div class="menu-content text-muted pb-2 px-5 fs-7 text-uppercase">
-                            Payments
-                          </div>
-                        </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                          <a href="#" class="menu-link px-5">Create invoice</a>
-                        </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                          <a href="#" class="menu-link flex-stack px-5">Create payments
-                            <span class="ms-2" data-bs-toggle="tooltip" title="Specify a target name for future usage and reference">
-                              <i class="ki-duotone ki-information fs-7">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                              </i> </span></a>
-                        </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-                          <a href="#" class="menu-link px-5">
-                            <span class="menu-title">Subscription</span>
-                            <span class="menu-arrow"></span>
-                          </a>
-                          <!--begin::Menu sub-->
-                          <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                              <a href="#" class="menu-link px-5">Apps</a>
-                            </div>
-                            <!--end::Menu item-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                              <a href="#" class="menu-link px-5">Billing</a>
-                            </div>
-                            <!--end::Menu item-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                              <a href="#" class="menu-link px-5">Statements</a>
-                            </div>
-                            <!--end::Menu item-->
-                            <!--begin::Menu separator-->
-                            <div class="separator my-2"></div>
-                            <!--end::Menu separator-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                              <div class="menu-content px-3">
-                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                  <input class="form-check-input w-30px h-20px" type="checkbox" value="" name="notifications" checked="checked" id="kt_customer_menu_notifications" />
-                                  <span class="form-check-label text-muted fs-6" for="kt_customer_menu_notifications">Notifications</span>
-                                </label>
-                              </div>
-                            </div>
-                            <!--end::Menu item-->
-                          </div>
-                          <!--end::Menu sub-->
-                        </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu separator-->
-                        <div class="separator my-3"></div>
-                        <!--end::Menu separator-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                          <div class="menu-content text-muted pb-2 px-5 fs-7 text-uppercase">
                             Account
                           </div>
                         </div>
                         <!--end::Menu item-->
+                        <% if (customer?.status === 'disabled') { %>
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                          <a href="#" class="menu-link px-5">Reports</a>
+                          <a href="/api/customers/<%= customer?._id %>/enable" class="menu-link px-5" id="kt_customers_enable_account">
+                            Enable Account
+                          </a>
                         </div>
                         <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5 my-1">
-                          <a href="#" class="menu-link px-5">Account Settings</a>
-                        </div>
-                        <!--end::Menu item-->
+                        <% } else { %>
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                          <a href="#" class="menu-link text-danger px-5">Delete customer</a>
+                          <a href="/api/customers/<%= customer?._id %>/disable" class="menu-link px-5" id="kt_customers_disable_account">
+                            Disable Account
+                          </a>
+                        </div>
+                        <!--end::Menu item-->
+                        <% } %>
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-5">
+                          <a href="/api/customers/<%= customer?._id %>" class="menu-link text-danger px-5" id="kt_customers_delete_account">
+                            Delete Account
+                          </a>
                         </div>
                         <!--end::Menu item-->
                       </div>
@@ -407,7 +352,7 @@
                           <!--begin::Toolbar-->
                           <div class="card-toolbar m-0">
                             <!--begin::Tab nav-->
-                            <ul class="nav nav-stretch fs-5 fw-semibold nav-line-tabs nav-line-tabs-2x border-transparent" role="tablist">
+                            <ul class="nav nav-stretch fs-5 fw-semibold nav-line-tabs nav-line-tabs-2x border-transparent d-none" role="tablist">
                               <li class="nav-item" role="presentation">
                                 <a id="kt_referrals_year_tab" class="nav-link text-active-primary active" data-bs-toggle="tab" role="tab" href="#kt_customer_details_invoices_1">This Year</a>
                               </li>
@@ -1897,7 +1842,7 @@
                           <!--begin::Toolbar-->
                           <div class="card-toolbar">
                             <!--begin::Tab nav-->
-                            <ul class="nav nav-stretch fs-5 fw-semibold nav-line-tabs nav-line-tabs-2x border-transparent" role="tablist">
+                            <!-- <ul class="nav nav-stretch fs-5 fw-semibold nav-line-tabs nav-line-tabs-2x border-transparent" role="tablist">
                               <li class="nav-item" role="presentation">
                                 <a class="nav-link text-active-primary active" data-bs-toggle="tab" role="tab" href="#kt_customer_view_statement_1">This Year</a>
                               </li>
@@ -1910,7 +1855,7 @@
                               <li class="nav-item" role="presentation">
                                 <a class="nav-link text-active-primary ms-3" data-bs-toggle="tab" role="tab" href="#kt_customer_view_statement_4">2018</a>
                               </li>
-                            </ul>
+                            </ul> -->
                             <!--end::Tab nav-->
                           </div>
                           <!--end::Toolbar-->
@@ -3206,7 +3151,7 @@
                             Current Balance
                           </div>
                           <div class="fs-2 fw-bold" kt-modal-adjust-balance="current_balance">
-                            ৳32,487.57 BDT
+                            ৳ <span><%= customer?.wallet?.balance %></span> BDT
                           </div>
                         </div>
                         <div class="w-50 border border-dashed border-gray-300 rounded mx-2 p-4">
@@ -3227,17 +3172,17 @@
                       </div>
                       <!--end::Balance preview-->
                       <!--begin::Form-->
-                      <form id="kt_modal_adjust_balance_form" class="form" action="#">
+                      <form id="kt_modal_adjust_balance_form" class="form" action="/api/customers/<%= customer?._id %>/wallet" method="post">
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                           <!--begin::Label-->
                           <label class="required fs-6 fw-semibold form-label mb-2">Adjustment type</label>
                           <!--end::Label-->
                           <!--begin::Dropdown-->
-                          <select class="form-select form-select-solid fw-bold" name="adjustment" aria-label="Select an option" data-control="select2" data-dropdown-parent="#kt_modal_adjust_balance" data-placeholder="Select an option" data-hide-search="true">
+                          <select class="form-select form-select-solid fw-bold" name="type" aria-label="Select an option" data-control="select2" data-dropdown-parent="#kt_modal_adjust_balance" data-placeholder="Select an option" data-hide-search="true">
                             <option></option>
-                            <option value="1">Topup</option>
-                            <option value="2">Deduct</option>
+                            <option value="top-up">Topup</option>
+                            <option value="deduct">Deduct</option>
                           </select>
                           <!--end::Dropdown-->
                         </div>
@@ -3248,19 +3193,7 @@
                           <label class="required fs-6 fw-semibold form-label mb-2">Amount</label>
                           <!--end::Label-->
                           <!--begin::Input-->
-                          <input id="kt_modal_inputmask" type="text" class="form-control form-control-solid" name="amount" value="" />
-                          <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                          <!--begin::Label-->
-                          <label class="required fs-6 fw-semibold mb-2">
-                            Date
-                          </label>
-                          <!--end::Label-->
-                          <!--begin::Input-->
-                          <input class="form-control form-control-solid" name="birth_date" id="kt_customer_adjustment_datepicker" placeholder="Pick a date" />
+                          <input id="kt_modal_inputmask" type="number" class="form-control form-control-solid" name="balance" value="" />
                           <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -3313,11 +3246,11 @@
                   <!--begin::Modal content-->
                   <div class="modal-content">
                     <!--begin::Form-->
-                    <form class="form" action="#" id="kt_modal_update_customer_form">
+                    <form class="form" id="kt_modal_update_customer_form" data-kt-redirect-url="/dashboard/customers/<%= customer?._id %>" action="/api/customers/<%= customer?._id %>" method="post">
                       <!--begin::Modal header-->
                       <div class="modal-header" id="kt_modal_update_customer_header">
                         <!--begin::Modal title-->
-                        <h2 class="fw-bold">Update Customer</h2>
+                        <h2 class="fw-bold">Update Customer Details</h2>
                         <!--end::Modal title-->
                         <!--begin::Close-->
                         <div id="kt_modal_update_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary">
@@ -3335,7 +3268,7 @@
                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_customer_header" data-kt-scroll-wrappers="#kt_modal_update_customer_scroll" data-kt-scroll-offset="300px">
                           <!--begin::User toggle-->
                           <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_customer_customer_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_customer_customer_info">
-                            User Information
+                            Customer Information
                             <span class="ms-2 rotate-180">
                               <i class="ki-duotone ki-down fs-3"></i>
                             </span>
@@ -3357,16 +3290,28 @@
                                 </span>
                               </label>
                               <!--end::Label-->
-                              <!--begin::Image input wrapper-->
                               <div class="mt-1">
+                                <!--begin::Image placeholder-->
+                                <style>
+                                  .image-input-placeholder {
+                                    background-image: url("/assets/media/svg/avatars/blank.svg");
+                                  }
+
+                                  [data-bs-theme="dark"] .image-input-placeholder {
+                                    background-image: url("/assets/media/svg/avatars/blank-dark.svg");
+                                  }
+                                </style>
+                                <!--end::Image placeholder-->
                                 <!--begin::Image input-->
-                                <div class="image-input image-input-outline" data-kt-image-input="true" style="
-                                        background-image: url('assets/media/svg/avatars/blank.svg');
-                                      ">
+                                <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
                                   <!--begin::Preview existing avatar-->
-                                  <div class="image-input-wrapper w-125px h-125px" style="
-                                          background-image: url('../assets/media/avatars/300-1.jpg');
-                                        "></div>
+                                  <% if (customer?.avatar) { %>
+                                  <div class="image-input-wrapper w-125px h-125px" style="background-image: url('<%= customer?.avatar %>');">
+                                  </div>
+                                  <% } else { %>
+                                  <div class="image-input-wrapper w-125px h-125px" style="background-image: url('/assets/media/avatars/blank.png');">
+                                  </div>
+                                  <% } %>
                                   <!--end::Preview existing avatar-->
                                   <!--begin::Edit-->
                                   <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -3393,8 +3338,8 @@
                                 </div>
                                 <!--end::Image input-->
                               </div>
-                              <!--end::Image input wrapper-->
                             </div>
+                            <!--end::Input group-->
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
@@ -3404,7 +3349,7 @@
                               </label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="Sean Bean" />
+                              <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="<%= customer?.name %>" />
                               <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -3412,38 +3357,47 @@
                             <div class="fv-row mb-7">
                               <!--begin::Label-->
                               <label class="fs-6 fw-semibold mb-2">
-                                <span class="required">Email</span>
+                                <span class="required">Email Address</span>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Email address must be active">
+                                  <i class="ki-duotone ki-information fs-7">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                  </i>
+                                </span>
                               </label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="sean@dellito.com" />
+                              <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="<%= customer?.email %>" />
                               <!--end::Input-->
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                               <!--begin::Label-->
-                              <label class="fs-6 fw-semibold mb-2">
-                                <span class="required">Phone</span>
-                              </label>
+                              <label class="fs-6 fw-semibold mb-2">Phone Number</label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <input type="tel" class="form-control form-control-solid" placeholder="" name="phone" value="+8801976984756" />
+                              <input type="text" class="form-control form-control-solid" placeholder="" name="phone" value="<%= customer?.phone %>" />
                               <!--end::Input-->
                             </div>
-                            <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                               <!--begin::Label-->
-                              <label class="fs-6 fw-semibold mb-2">
-                                <span class="required">Birth Date</span>
-                              </label>
+                              <label class="fs-6 fw-semibold mb-2">Date of Birth</label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <input class="form-control form-control-solid" name="birth_date" id="kt_customer_birth_datepicker" placeholder="Pick a date" value="1984-10-26" />
+                              <input class="form-control form-control-solid" name="dob" placeholder="Pick a date" id="kt_datepicker_user_dob" />
                               <!--end::Input-->
+                              <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                  flatpickr("#kt_datepicker_user_dob", {
+                                    defaultDate: "<%= customer?.dob %>",
+                                    dateFormat: "Y-m-d"
+                                  });
+                                });
+                              </script>
                             </div>
-                            <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="fv-row mb-15">
                               <!--begin::Label-->
@@ -3452,17 +3406,7 @@
                               </label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" placeholder="" name="flyer_number" value="5874564000" />
-                              <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-15">
-                              <!--begin::Label-->
-                              <label class="fs-6 fw-semibold mb-2">Description</label>
-                              <!--end::Label-->
-                              <!--begin::Input-->
-                              <input type="text" class="form-control form-control-solid" placeholder="" name="description" />
+                              <input type="text" class="form-control form-control-solid" placeholder="" name="flyerNumber" value="<%= customer?.flyerNumber %>" />
                               <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -3481,20 +3425,10 @@
                             <!--begin::Input group-->
                             <div class="d-flex flex-column mb-7 fv-row">
                               <!--begin::Label-->
-                              <label class="fs-6 fw-semibold mb-2">Address Line 1</label>
+                              <label class="fs-6 fw-semibold mb-2">Address</label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <input class="form-control form-control-solid" placeholder="" name="address1" value="101, Collins Street" />
-                              <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-7 fv-row">
-                              <!--begin::Label-->
-                              <label class="fs-6 fw-semibold mb-2">Address Line 2</label>
-                              <!--end::Label-->
-                              <!--begin::Input-->
-                              <input class="form-control form-control-solid" placeholder="" name="address2" />
+                              <input class="form-control form-control-solid" placeholder="" name="address" value="<%= customer?.address %>" />
                               <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -3504,7 +3438,7 @@
                               <label class="fs-6 fw-semibold mb-2">City</label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <input class="form-control form-control-solid" placeholder="" name="city" value="Melbourne" />
+                              <input class="form-control form-control-solid" placeholder="" name="city" value="<%= customer?.city %>" />
                               <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -3516,7 +3450,7 @@
                                 <label class="fs-6 fw-semibold mb-2">State</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="" name="state" value="Victoria" />
+                                <input class="form-control form-control-solid" placeholder="" name="state" value="<%= customer?.state %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Col-->
@@ -3526,7 +3460,7 @@
                                 <label class="fs-6 fw-semibold mb-2">Post Code</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="" name="postcode" value="3000" />
+                                <input class="form-control form-control-solid" placeholder="" name="postalCode" value="<%= customer?.postalCode %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Col-->
@@ -3547,298 +3481,15 @@
                               </label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <select name="country" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_update_customer" class="form-select form-select-solid fw-bold">
+                              <select name="country" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." class="form-select form-select-solid" data-dropdown-parent="#kt_modal_update_customer" name="country">
                                 <option value="">
                                   Select a Country...
                                 </option>
-                                <option value="AF">Afghanistan</option>
-                                <option value="AX">Aland Islands</option>
-                                <option value="AL">Albania</option>
-                                <option value="DZ">Algeria</option>
-                                <option value="AS">American Samoa</option>
-                                <option value="AD">Andorra</option>
-                                <option value="AO">Angola</option>
-                                <option value="AI">Anguilla</option>
-                                <option value="AG">
-                                  Antigua and Barbuda
+                                <% countries.forEach(country => { %>
+                                <option value="<%= country.name %>" <%= country.name == customer?.country ? 'selected' : '' %>>
+                                  <%= country.name %>
                                 </option>
-                                <option value="AR">Argentina</option>
-                                <option value="AM">Armenia</option>
-                                <option value="AW">Aruba</option>
-                                <option value="AU">Australia</option>
-                                <option value="AT">Austria</option>
-                                <option value="AZ">Azerbaijan</option>
-                                <option value="BS">Bahamas</option>
-                                <option value="BH">Bahrain</option>
-                                <option value="BD">Bangladesh</option>
-                                <option value="BB">Barbados</option>
-                                <option value="BY">Belarus</option>
-                                <option value="BE">Belgium</option>
-                                <option value="BZ">Belize</option>
-                                <option value="BJ">Benin</option>
-                                <option value="BM">Bermuda</option>
-                                <option value="BT">Bhutan</option>
-                                <option value="BO">
-                                  Bolivia, Plurinational State of
-                                </option>
-                                <option value="BQ">
-                                  Bonaire, Sint Eustatius and Saba
-                                </option>
-                                <option value="BA">
-                                  Bosnia and Herzegovina
-                                </option>
-                                <option value="BW">Botswana</option>
-                                <option value="BR">Brazil</option>
-                                <option value="IO">
-                                  British Indian Ocean Territory
-                                </option>
-                                <option value="BN">
-                                  Brunei Darussalam
-                                </option>
-                                <option value="BG">Bulgaria</option>
-                                <option value="BF">Burkina Faso</option>
-                                <option value="BI">Burundi</option>
-                                <option value="KH">Cambodia</option>
-                                <option value="CM">Cameroon</option>
-                                <option value="CA">Canada</option>
-                                <option value="CV">Cape Verde</option>
-                                <option value="KY">Cayman Islands</option>
-                                <option value="CF">
-                                  Central African Republic
-                                </option>
-                                <option value="TD">Chad</option>
-                                <option value="CL">Chile</option>
-                                <option value="CN">China</option>
-                                <option value="CX">Christmas Island</option>
-                                <option value="CC">
-                                  Cocos (Keeling) Islands
-                                </option>
-                                <option value="CO">Colombia</option>
-                                <option value="KM">Comoros</option>
-                                <option value="CK">Cook Islands</option>
-                                <option value="CR">Costa Rica</option>
-                                <option value="CI">Côte d'Ivoire</option>
-                                <option value="HR">Croatia</option>
-                                <option value="CU">Cuba</option>
-                                <option value="CW">Curaçao</option>
-                                <option value="CZ">Czech Republic</option>
-                                <option value="DK">Denmark</option>
-                                <option value="DJ">Djibouti</option>
-                                <option value="DM">Dominica</option>
-                                <option value="DO">
-                                  Dominican Republic
-                                </option>
-                                <option value="EC">Ecuador</option>
-                                <option value="EG">Egypt</option>
-                                <option value="SV">El Salvador</option>
-                                <option value="GQ">
-                                  Equatorial Guinea
-                                </option>
-                                <option value="ER">Eritrea</option>
-                                <option value="EE">Estonia</option>
-                                <option value="ET">Ethiopia</option>
-                                <option value="FK">
-                                  Falkland Islands (Malvinas)
-                                </option>
-                                <option value="FJ">Fiji</option>
-                                <option value="FI">Finland</option>
-                                <option value="FR">France</option>
-                                <option value="PF">French Polynesia</option>
-                                <option value="GA">Gabon</option>
-                                <option value="GM">Gambia</option>
-                                <option value="GE">Georgia</option>
-                                <option value="DE">Germany</option>
-                                <option value="GH">Ghana</option>
-                                <option value="GI">Gibraltar</option>
-                                <option value="GR">Greece</option>
-                                <option value="GL">Greenland</option>
-                                <option value="GD">Grenada</option>
-                                <option value="GU">Guam</option>
-                                <option value="GT">Guatemala</option>
-                                <option value="GG">Guernsey</option>
-                                <option value="GN">Guinea</option>
-                                <option value="GW">Guinea-Bissau</option>
-                                <option value="HT">Haiti</option>
-                                <option value="VA">
-                                  Holy See (Vatican City State)
-                                </option>
-                                <option value="HN">Honduras</option>
-                                <option value="HK">Hong Kong</option>
-                                <option value="HU">Hungary</option>
-                                <option value="IS">Iceland</option>
-                                <option value="IN">India</option>
-                                <option value="ID">Indonesia</option>
-                                <option value="IR">
-                                  Iran, Islamic Republic of
-                                </option>
-                                <option value="IQ">Iraq</option>
-                                <option value="IE">Ireland</option>
-                                <option value="IM">Isle of Man</option>
-                                <option value="IL">Israel</option>
-                                <option value="IT">Italy</option>
-                                <option value="JM">Jamaica</option>
-                                <option value="JP">Japan</option>
-                                <option value="JE">Jersey</option>
-                                <option value="JO">Jordan</option>
-                                <option value="KZ">Kazakhstan</option>
-                                <option value="KE">Kenya</option>
-                                <option value="KI">Kiribati</option>
-                                <option value="KP">
-                                  Korea, Democratic People's Republic of
-                                </option>
-                                <option value="KW">Kuwait</option>
-                                <option value="KG">Kyrgyzstan</option>
-                                <option value="LA">
-                                  Lao People's Democratic Republic
-                                </option>
-                                <option value="LV">Latvia</option>
-                                <option value="LB">Lebanon</option>
-                                <option value="LS">Lesotho</option>
-                                <option value="LR">Liberia</option>
-                                <option value="LY">Libya</option>
-                                <option value="LI">Liechtenstein</option>
-                                <option value="LT">Lithuania</option>
-                                <option value="LU">Luxembourg</option>
-                                <option value="MO">Macao</option>
-                                <option value="MG">Madagascar</option>
-                                <option value="MW">Malawi</option>
-                                <option value="MY">Malaysia</option>
-                                <option value="MV">Maldives</option>
-                                <option value="ML">Mali</option>
-                                <option value="MT">Malta</option>
-                                <option value="MH">Marshall Islands</option>
-                                <option value="MQ">Martinique</option>
-                                <option value="MR">Mauritania</option>
-                                <option value="MU">Mauritius</option>
-                                <option value="MX">Mexico</option>
-                                <option value="FM">
-                                  Micronesia, Federated States of
-                                </option>
-                                <option value="MD">
-                                  Moldova, Republic of
-                                </option>
-                                <option value="MC">Monaco</option>
-                                <option value="MN">Mongolia</option>
-                                <option value="ME">Montenegro</option>
-                                <option value="MS">Montserrat</option>
-                                <option value="MA">Morocco</option>
-                                <option value="MZ">Mozambique</option>
-                                <option value="MM">Myanmar</option>
-                                <option value="NA">Namibia</option>
-                                <option value="NR">Nauru</option>
-                                <option value="NP">Nepal</option>
-                                <option value="NL">Netherlands</option>
-                                <option value="NZ">New Zealand</option>
-                                <option value="NI">Nicaragua</option>
-                                <option value="NE">Niger</option>
-                                <option value="NG">Nigeria</option>
-                                <option value="NU">Niue</option>
-                                <option value="NF">Norfolk Island</option>
-                                <option value="MP">
-                                  Northern Mariana Islands
-                                </option>
-                                <option value="NO">Norway</option>
-                                <option value="OM">Oman</option>
-                                <option value="PK">Pakistan</option>
-                                <option value="PW">Palau</option>
-                                <option value="PS">
-                                  Palestinian Territory, Occupied
-                                </option>
-                                <option value="PA">Panama</option>
-                                <option value="PG">Papua New Guinea</option>
-                                <option value="PY">Paraguay</option>
-                                <option value="PE">Peru</option>
-                                <option value="PH">Philippines</option>
-                                <option value="PL">Poland</option>
-                                <option value="PT">Portugal</option>
-                                <option value="PR">Puerto Rico</option>
-                                <option value="QA">Qatar</option>
-                                <option value="RO">Romania</option>
-                                <option value="RU">
-                                  Russian Federation
-                                </option>
-                                <option value="RW">Rwanda</option>
-                                <option value="BL">Saint Barthélemy</option>
-                                <option value="KN">
-                                  Saint Kitts and Nevis
-                                </option>
-                                <option value="LC">Saint Lucia</option>
-                                <option value="MF">
-                                  Saint Martin (French part)
-                                </option>
-                                <option value="VC">
-                                  Saint Vincent and the Grenadines
-                                </option>
-                                <option value="WS">Samoa</option>
-                                <option value="SM">San Marino</option>
-                                <option value="ST">
-                                  Sao Tome and Principe
-                                </option>
-                                <option value="SA">Saudi Arabia</option>
-                                <option value="SN">Senegal</option>
-                                <option value="RS">Serbia</option>
-                                <option value="SC">Seychelles</option>
-                                <option value="SL">Sierra Leone</option>
-                                <option value="SG">Singapore</option>
-                                <option value="SX">
-                                  Sint Maarten (Dutch part)
-                                </option>
-                                <option value="SK">Slovakia</option>
-                                <option value="SI">Slovenia</option>
-                                <option value="SB">Solomon Islands</option>
-                                <option value="SO">Somalia</option>
-                                <option value="ZA">South Africa</option>
-                                <option value="KR">South Korea</option>
-                                <option value="SS">South Sudan</option>
-                                <option value="ES">Spain</option>
-                                <option value="LK">Sri Lanka</option>
-                                <option value="SD">Sudan</option>
-                                <option value="SR">Suriname</option>
-                                <option value="SZ">Swaziland</option>
-                                <option value="SE">Sweden</option>
-                                <option value="CH">Switzerland</option>
-                                <option value="SY">
-                                  Syrian Arab Republic
-                                </option>
-                                <option value="TW">
-                                  Taiwan, Province of China
-                                </option>
-                                <option value="TJ">Tajikistan</option>
-                                <option value="TZ">
-                                  Tanzania, United Republic of
-                                </option>
-                                <option value="TH">Thailand</option>
-                                <option value="TG">Togo</option>
-                                <option value="TK">Tokelau</option>
-                                <option value="TO">Tonga</option>
-                                <option value="TT">
-                                  Trinidad and Tobago
-                                </option>
-                                <option value="TN">Tunisia</option>
-                                <option value="TR">Turkey</option>
-                                <option value="TM">Turkmenistan</option>
-                                <option value="TC">
-                                  Turks and Caicos Islands
-                                </option>
-                                <option value="TV">Tuvalu</option>
-                                <option value="UG">Uganda</option>
-                                <option value="UA">Ukraine</option>
-                                <option value="AE">
-                                  United Arab Emirates
-                                </option>
-                                <option value="GB">United Kingdom</option>
-                                <option value="US">United States</option>
-                                <option value="UY">Uruguay</option>
-                                <option value="UZ">Uzbekistan</option>
-                                <option value="VU">Vanuatu</option>
-                                <option value="VE">
-                                  Venezuela, Bolivarian Republic of
-                                </option>
-                                <option value="VN">Vietnam</option>
-                                <option value="VI">Virgin Islands</option>
-                                <option value="YE">Yemen</option>
-                                <option value="ZM">Zambia</option>
-                                <option value="ZW">Zimbabwe</option>
+                                <% }); %>
                               </select>
                               <!--end::Input-->
                             </div>
@@ -4090,6 +3741,8 @@
     ],
     customJavascripts: [
         '/assets/js/custom/apps/customers/update.js',
+        '/assets/js/custom/apps/customers/update-wallet.js',
+        '/assets/js/custom/apps/customers/update-utils.js',
         '/assets/js/custom/apps/customers/payment-records-table.js',
         '/assets/js/custom/apps/customers/invoice-records-table.js',
         '/assets/js/custom/apps/customers/statement-list-table.js',

@@ -9,7 +9,7 @@
 
 // dependencies
 const { Schema } = require('mongoose');
-const { THEME_NAMES } = require('../../../constants');
+const { THEME_NAMES, THEME_STATUS } = require('../../../constants');
 
 // export theme settings schema
 module.exports = new Schema(
@@ -27,6 +27,10 @@ module.exports = new Schema(
         title: {
             type: String,
             required: [true, 'Title is required'],
+        },
+        status: {
+            type: String,
+            enum: THEME_STATUS,
         },
         description: {
             type: String,

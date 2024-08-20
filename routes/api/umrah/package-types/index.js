@@ -16,6 +16,7 @@ const router = express.Router();
 // controllers
 const {
     getUmrahPackageTypes,
+    getUmrahPackageTypesCustomers,
     getUmrahPackageType,
     createUmrahPackageType,
     updateUmrahPackageType,
@@ -32,6 +33,17 @@ const {
     validateUmrahPackageType,
     validateUmrahPackageTypeStatus,
 } = require('../../../../middlewares/api/validators/umrah/package-types');
+
+/**
+ * @description get all umrah package types for customers
+ * @param {string} path - /umrah/package-types/customers
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} controller - ['getUmrahPackageTypes']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method GET
+ */
+router.get('/customers', getUmrahPackageTypesCustomers);
 
 /**
  * @description check if user is authorized

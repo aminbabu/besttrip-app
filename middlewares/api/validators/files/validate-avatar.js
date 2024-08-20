@@ -22,9 +22,7 @@ module.exports = (req, res, next) => {
 
         // check if file is not provided
         if (!avatar) {
-            return res.status(400).json({
-                message: 'No file uploaded. Please upload an image.',
-            });
+            return next();
         }
 
         // check if file is an array (should be a single file)

@@ -11,7 +11,14 @@
 const UMRAH_STATUS = ['active', 'disabled'];
 
 // umrah inclusions
-const UMRAH_INCLUSIONS = ['flight', 'hotel', 'visa', 'food', 'transport'];
+const UMRAH_INCLUSIONS = [
+    'flight',
+    'hotel',
+    'visa',
+    'food',
+    'transport',
+    'guide',
+];
 
 // export umrah constants
 module.exports = {

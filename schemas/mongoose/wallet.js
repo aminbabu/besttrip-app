@@ -21,6 +21,7 @@ module.exports = new Schema(
                 (self) => (self?.customer ? false : true),
                 'User is required',
             ],
+            sparse: true,
             unique: [true, 'User already has a wallet'],
         },
         customer: {
@@ -30,6 +31,7 @@ module.exports = new Schema(
                 (self) => (self?.user ? false : true),
                 'Customer is required',
             ],
+            sparse: true,
             unique: [true, 'Customer already has a wallet'],
         },
         balance: {
