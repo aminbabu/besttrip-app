@@ -19,9 +19,10 @@ const {
     getCustomer,
     createCustomer,
     updatePassword,
+    disableCustomer,
+    enableCustomer,
     updateAllCustomersWallet,
     updateCustomer,
-    updatePasswordSelf,
     updateCustomerBySelf,
     updateCustomerWallet,
     deleteCustomer,
@@ -33,6 +34,7 @@ const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
     validateCustomerId,
     validateCustomer,
+    validatePassword,
     validateCustomerSelf,
     validateCustomerWallet,
     validateCustomerAccount,
@@ -41,7 +43,7 @@ const { validateAvatar } = require('../../../middlewares/api/validators/files');
 const { uploadAvatar } = require('../../../middlewares/api/files');
 
 /**
- * @description check if user is authorized
+ * @description check if customers is authorized
  * @param {string} path - '/api/customers'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
@@ -161,6 +163,56 @@ router.patch(
     validateCustomerId,
     validateCustomerWallet,
     updateCustomerWallet
+);
+
+/**
+ * @description disable customers by mongo id
+ * @param {string} path - /api/customers/:id/disable
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} controller - ['disableCustomer']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method GET
+ */
+router.get(
+    '/:id/disable',
+    isAllowed('admin'),
+    validateCustomerId,
+    disableCustomer
+);
+
+/**
+ * @description enable customers by mongo id
+ * @param {string} path - /api/customers/:id/enable
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} controller - ['enableCustomer']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method GET
+ */
+router.get(
+    '/:id/enable',
+    isAllowed('admin'),
+    validateCustomerId,
+    enableCustomer
+);
+
+/**
+ * @description update password by id
+ * @param {string} path - /api/customers/:id/update-password
+ * @param {function} middleware - ['isAuthorized', 'isAllowed']
+ * @param {function} validator - ['validatePassword']
+ * @param {function} controller - ['updatePassword']
+ * @returns {object} - router
+ * @access private - ['admin', 'customer']
+ * @method PATCH
+ */
+router.patch(
+    '/:id/update-password',
+    isAllowed(['admin', 'customer']),
+    validateCustomerId,
+    validatePassword,
+    updatePassword
 );
 
 /**
