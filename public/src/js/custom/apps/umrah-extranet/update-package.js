@@ -1370,7 +1370,6 @@ var KTCreatePackage = (function () {
 
             if (response) {
                 const data = response.data.umrahPackage;
-                console.log(data);
 
                 itineraryData = data.itineraryDays;
 
