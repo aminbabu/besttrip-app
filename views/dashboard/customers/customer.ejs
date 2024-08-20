@@ -207,16 +207,15 @@
                         <% if (customer?.status === 'disabled') { %>
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                          <a href="/api/customers/<%= customer?._id %>/enable" class="menu-link px-5" id="kt_users_enable_account">
+                          <a href="/api/customers/<%= customer?._id %>/enable" class="menu-link px-5" id="kt_customers_enable_account">
                             Enable Account
                           </a>
                         </div>
                         <!--end::Menu item-->
-                        <% } %>
-                        <% if (user?.status === 'active') { %>
+                        <% } else { %>
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                          <a href="/api/customers/<%= customer?._id %>/disable" class="menu-link px-5" id="kt_users_disable_account">
+                          <a href="/api/customers/<%= customer?._id %>/disable" class="menu-link px-5" id="kt_customers_disable_account">
                             Disable Account
                           </a>
                         </div>
@@ -224,7 +223,7 @@
                         <% } %>
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                          <a href="/api/customers/<%= customer?._id %>" class="menu-link text-danger px-5" id="kt_users_delete_account">
+                          <a href="/api/customers/<%= customer?._id %>" class="menu-link text-danger px-5" id="kt_customers_delete_account">
                             Delete Account
                           </a>
                         </div>

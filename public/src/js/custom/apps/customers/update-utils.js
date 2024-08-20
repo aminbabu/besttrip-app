@@ -1,24 +1,30 @@
 // Class definition
-const KTUsersUpdateUtils = (function () {
+const KTCustomersUpdateUtils = (function () {
     // Shared variables
-    const userDisableBtn = document.getElementById('kt_users_disable_account');
-    const userEnableBtn = document.getElementById('kt_users_enable_account');
-    const userDeleteBtn = document.querySelector('#kt_users_delete_account');
+    const customerDisableBtn = document.getElementById(
+        'kt_customers_disable_account'
+    );
+    const customerEnableBtn = document.getElementById(
+        'kt_customers_enable_account'
+    );
+    const customerDeleteBtn = document.querySelector(
+        '#kt_customers_delete_account'
+    );
 
-    // Disable user account
+    // Disable customer account
     const initDisableStatus = () => {
-        if (!userDisableBtn) {
+        if (!customerDisableBtn) {
             return;
         }
 
-        userDisableBtn.addEventListener('click', (e) => {
+        customerDisableBtn.addEventListener('click', (e) => {
             e.preventDefault();
 
-            const url = userDisableBtn.getAttribute('href');
+            const url = customerDisableBtn.getAttribute('href');
 
             // Show confirm popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
             Swal.fire({
-                text: 'Are you sure you want to disable this user account?',
+                text: 'Are you sure you want to disable this customer account?',
                 icon: 'warning',
                 buttonsStyling: false,
                 showCancelButton: true,
@@ -37,7 +43,7 @@ const KTUsersUpdateUtils = (function () {
                             Swal.fire({
                                 text:
                                     response?.data?.message ||
-                                    'User account has been disabled. Redirecting to the login page...',
+                                    'Customer account has been disabled.',
                                 icon: 'success',
                                 buttonsStyling: false,
                                 confirmButtonText: 'Ok, got it!',
@@ -48,9 +54,7 @@ const KTUsersUpdateUtils = (function () {
                                 showCancelButton: false,
                             }).then((outcome) => {
                                 if (outcome.isConfirmed) {
-                                    location.href = url.includes('self')
-                                        ? '/dashboard/login'
-                                        : `/dashboard/users/${response.data.user._id}`;
+                                    location.reload();
                                 }
                             });
                         })
@@ -85,18 +89,18 @@ const KTUsersUpdateUtils = (function () {
         });
     };
 
-    // Enable user account
+    // Enable customer account
     const initEnableStatus = () => {
-        if (!userEnableBtn) {
+        if (!customerEnableBtn) {
             return;
         }
 
-        userEnableBtn.addEventListener('click', (e) => {
+        customerEnableBtn.addEventListener('click', (e) => {
             e.preventDefault();
 
             // Show confirm popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
             Swal.fire({
-                text: 'Are you sure you want to enable this user account?',
+                text: 'Are you sure you want to enable this customer account?',
                 icon: 'warning',
                 buttonsStyling: false,
                 showCancelButton: true,
@@ -109,13 +113,13 @@ const KTUsersUpdateUtils = (function () {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios
-                        .get(userEnableBtn.getAttribute('href'))
+                        .get(customerEnableBtn.getAttribute('href'))
                         .then((response) => {
                             // Show success message. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
                                 text:
                                     response?.data?.message ||
-                                    'User account has been enabled successfully.',
+                                    'Customer account has been enabled successfully.',
                                 icon: 'success',
                                 buttonsStyling: false,
                                 confirmButtonText: 'Ok, got it!',
@@ -161,20 +165,20 @@ const KTUsersUpdateUtils = (function () {
         });
     };
 
-    // Delete user account
+    // Delete customer account
     const initDeleteAccount = () => {
-        if (!userDeleteBtn) {
+        if (!customerDeleteBtn) {
             return;
         }
 
-        userDeleteBtn.addEventListener('click', (e) => {
+        customerDeleteBtn.addEventListener('click', (e) => {
             e.preventDefault();
 
-            const url = userDeleteBtn.getAttribute('href');
+            const url = customerDeleteBtn.getAttribute('href');
 
             // Show confirm popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
             Swal.fire({
-                text: 'Are you sure you want to delete this user account?',
+                text: 'Are you sure you want to delete this customer account?',
                 icon: 'warning',
                 buttonsStyling: false,
                 showCancelButton: true,
@@ -193,9 +197,7 @@ const KTUsersUpdateUtils = (function () {
                             Swal.fire({
                                 text:
                                     response?.data?.message ||
-                                    url.includes('self')
-                                        ? 'Your account has been deleted. Redirecting to the login page...'
-                                        : 'User account has been deleted. Redirecting to the users list...',
+                                    'Customer account has been deleted. Redirecting to the customers list...',
                                 icon: 'success',
                                 buttonsStyling: false,
                                 confirmButtonText: 'Ok, got it!',
@@ -206,9 +208,7 @@ const KTUsersUpdateUtils = (function () {
                                 showCancelButton: false,
                             }).then((outcome) => {
                                 if (outcome.isConfirmed) {
-                                    location.href = url.includes('self')
-                                        ? '/dashboard/login'
-                                        : '/dashboard/users';
+                                    location.href = '/dashboard/customers';
                                 }
                             });
                         })
@@ -256,5 +256,5 @@ const KTUsersUpdateUtils = (function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(() => {
-    KTUsersUpdateUtils.init();
+    KTCustomersUpdateUtils.init();
 });
