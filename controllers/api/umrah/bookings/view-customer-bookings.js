@@ -39,6 +39,24 @@ module.exports = async (req, res, next) => {
             },
         };
 
+        // Perform a left outer join with the `invoices` collection to include invoice details.
+        const lookupInvoice = {
+            $lookup: {
+                from: 'invoices',
+                localField: 'invoiceId',
+                foreignField: '_id',
+                as: 'invoice',
+            },
+        };
+
+        // Flatten the `invoice` array to include a single `invoice` object in each document.
+        const unwindInvoice = {
+            $unwind: {
+                path: '$invoice',
+                preserveNullAndEmptyArrays: true,
+            },
+        };
+
         // Add a new field `statusOrder` that contains the index of the booking status in the `UMRAH_BOOKING_STATUS` array.
         const addStatusOrderField = {
             $addFields: {
@@ -80,6 +98,8 @@ module.exports = async (req, res, next) => {
             matchCustomerBookings,
             lookupUmrahPackage,
             unwindUmrahPackage,
+            lookupInvoice,
+            unwindInvoice,
             addStatusOrderField,
             lookupTravelersStage,
             sortByStatusOrder,
