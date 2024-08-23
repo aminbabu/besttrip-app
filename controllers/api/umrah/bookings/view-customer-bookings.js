@@ -63,6 +63,13 @@ module.exports = async (req, res, next) => {
             },
         };
 
+        // Add the `bookingType` field to each document
+        const addBookingTypeField = {
+            $addFields: {
+                bookingType: 'Umrah Package',
+            },
+        };
+
         //  Exclude the `statusOrder` field from the final output to keep the response clean.
         const projectWithoutStatusOrder = {
             $project: { statusOrder: 0 },
@@ -76,6 +83,7 @@ module.exports = async (req, res, next) => {
             addStatusOrderField,
             lookupTravelersStage,
             sortByStatusOrder,
+            addBookingTypeField,
             projectWithoutStatusOrder,
         ]);
 
