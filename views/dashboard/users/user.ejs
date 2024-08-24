@@ -401,7 +401,7 @@
                                     <div class="d-flex flex-column">
                                       <span class="text-muted fw-bold"><%= history.lastLoginDaysAgo %></span>
 
-                                      <span><%= new Date(history.lastLogin).toLocaleString('en-US', { timeZone:"Asia/Dhaka" }) %></span>
+                                      <span><%= new Date(history.lastLogin).toLocaleString() %></span>
                                     </div>
                                   </td>
                                   <td><%= history.ipAddress %></td>

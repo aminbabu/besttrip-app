@@ -61,6 +61,22 @@ module.exports = async (req, res, next) => {
             },
         };
 
+        const lookupPackageDurationsStage = {
+            $lookup: {
+                from: 'umrahpackagedurations',
+                localField: 'umrahPackage.totalDaysAndNights',
+                foreignField: '_id',
+                as: 'umrahPackage.totalDaysAndNights',
+            },
+        };
+
+        const unwindPackageDurationsStage = {
+            $unwind: {
+                path: '$umrahPackage.totalDaysAndNights',
+                preserveNullAndEmptyArrays: true,
+            },
+        };
+
         const projectStage = {
             $project: {
                 _id: 1,
@@ -93,6 +109,8 @@ module.exports = async (req, res, next) => {
             lookupUmrahPackageStage,
             unwindUmrahPackageStage,
             lookupTravelersStage,
+            lookupPackageDurationsStage,
+            unwindPackageDurationsStage,
             projectStage,
         ]);
 

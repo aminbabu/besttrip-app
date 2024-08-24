@@ -1253,6 +1253,17 @@ var KTCreatePackage = (function () {
                             false
                         );
                     }
+                    if (
+                        instance.input.name === 'journeyDate' &&
+                        dp.input.name === 'outboundDepartureDatetime'
+                    ) {
+                        dp.set('minDate', dateStr);
+                        dp._input.disabled = false;
+                        $('[name="outboundDepartureDatetime"]').attr(
+                            'disabled',
+                            false
+                        );
+                    }
                 });
             },
         });

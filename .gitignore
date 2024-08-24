@@ -47,7 +47,7 @@ node_modules/
 jspm_packages/
 
 # Uploads directory
-public/uploads
+# public/uploads
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
