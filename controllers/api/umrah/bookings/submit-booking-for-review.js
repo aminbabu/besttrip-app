@@ -250,7 +250,6 @@ module.exports = async (req, res, next) => {
         // update umrah booking
         umrahBooking.set({
             status: UMRAH_BOOKING_STATUS[4],
-            invoiceId: invoice._id,
         });
 
         // save umrah booking
