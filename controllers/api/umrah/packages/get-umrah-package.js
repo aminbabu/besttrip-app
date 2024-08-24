@@ -19,9 +19,9 @@ module.exports = async (req, res, next) => {
 
         // Build the query object based on user role
         const query = { _id: new mongoose.Types.ObjectId(id) };
-        if (req.user.role === 'customer') {
-            query.status = 'active'; // Add status condition for customers
-        }
+        // if (req.user.role === 'customer') {
+        //     query.status = 'active'; // Add status condition for customers
+        // }
 
         // Define the aggregation pipeline
         const pipeline = [

@@ -46,7 +46,7 @@ module.exports = async (req, res, next) => {
             ),
             itineraryDays: validatedData.itineraryDays?.map((itineraryDay) => ({
                 ...itineraryDay,
-                thumbnail: itineraryDay.thumbnail.path,
+                thumbnail: req.file?.itineraryDays[0]?.thumbnail?.path,
             })),
             umrahThumbnail: umrahThumbnail.path,
         });
