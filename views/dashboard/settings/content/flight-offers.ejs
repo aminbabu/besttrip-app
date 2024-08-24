@@ -137,23 +137,23 @@
                           </td>
                           <td>
                             <div class="symbol symbol-40px">
-                              <img src="<%= flight.thumbnail %>" alt="<%= flight.airline %>" />
+                              <img src="<%= flight?.thumbnail %>" alt="<%= flight?.airline %>" />
                             </div>
                           </td>
-                          <td><%= flight.departure %></td>
-                          <td><%= flight.arrival %></td>
-                          <td><%= flight.airline %></td>
-                          <td><%= flight.price %> BDT</td>
+                          <td><%= flight?.departure %></td>
+                          <td><%= flight?.arrival %></td>
+                          <td><%= flight?.airline %></td>
+                          <td><%= flight?.price %> BDT</td>
                           <td>
                             <div class="form-check form-switch form-check-solid">
                               <label class="form-check-label">
-                                <input class="form-check-input form-check-input-custom" type="checkbox" <% if (flight?.status === 'active') { %> checked <% } %> value="<%= flight.status %>" data-kt-flight-offer-url="/api/settings/content/flight-offers/<%= flight?._id %>/status" />
+                                <input class="form-check-input form-check-input-custom" type="checkbox" <% if (flight?.status === 'active') { %> checked <% } %> value="<%= flight?.status %>" data-kt-flight-offer-url="/api/settings/content/flight-offers/<%= flight?._id %>/status" />
                                 <span class="enabled">Active</span>
                                 <span class="disabled">Disabled</span>
                               </label>
                             </div>
                           </td>
-                          <td><%= new Date(flight.updatedAt).toLocaleString() %></td>
+                          <td><%= new Date(flight?.updatedAt).toLocaleString() %></td>
                           <td class="text-end">
                             <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                               Actions
