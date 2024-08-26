@@ -147,9 +147,9 @@ module.exports = async (req, res, next) => {
             lookupInvoice,
             unwindInvoice,
             lookupTravelersStage,
-            lookupInvoiceStage,
             lookupPackageDurationsStage,
             unwindPackageDurationsStage,
+            lookupInvoiceStage,
             unwindInvoiceStage,
             projectStage,
         ]);

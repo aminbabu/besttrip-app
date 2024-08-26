@@ -328,6 +328,11 @@ module.exports = async (req, res, next) => {
                     (text = `Your partial payment of ${totalPartialPaidAmount} has been received. Your invoice ID is ${invoice.invoiceId}. Please complete the payment by ${invoice.partialPaymentExpiryDate}. And if you are late then your previous payment will not be refundable.`),
                     (err) => console.log(err)
                 );
+
+                return res.status(200).send({
+                    message: `Your payment received successfully and an email has sended to your email:${req.user.email}`,
+                    invoice,
+                });
             } else {
                 return res.status(400).send({
                     message:
@@ -342,6 +347,7 @@ module.exports = async (req, res, next) => {
                     message: 'You may have already completed the full payment.',
                 });
             }
+
             const totalAmount =
                 umrahBooking?.priceByTravelers?.adult?.subtotal +
                 umrahBooking?.priceByTravelers?.child?.subtotal +
@@ -388,12 +394,12 @@ module.exports = async (req, res, next) => {
                 (text = `Your full payment of ${totalAmount} has been received. Your invoice ID is ${invoice.invoiceId}.`),
                 (err) => console.log(err)
             );
-        }
 
-        return res.status(200).send({
-            message: `Your payment received successfully and an email has sended to your email:${req.user.email}`,
-            invoice,
-        });
+            return res.status(200).send({
+                message: `Your payment received successfully and an email has sended to your email:${req.user.email}`,
+                invoice,
+            });
+        }
     } catch (error) {
         return next(error);
     }
