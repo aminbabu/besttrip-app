@@ -212,8 +212,6 @@ module.exports = async (req, res, next) => {
             return res.status(404).send({ message: 'Wallet not found' });
         }
 
-        // return res.send({ bookingDetails });
-
         // Declare the invoice variable outside the conditional blocks
         let invoice;
 
@@ -225,9 +223,14 @@ module.exports = async (req, res, next) => {
 
         // Handling the second partial payment here
         if (invoice && invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
-            if (invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
-                return res.status(400).send({
-                    message: 'You may have already completed the full payment.',
+            if (
+                paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1] &&
+                invoice &&
+                invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]
+            ) {
+                return res.status(404).send({
+                    message:
+                        'You can not make full payment cause you already made an partial payment. Now for the rest of the payment you have to select the partial payment type again.',
                 });
             }
 
@@ -360,7 +363,7 @@ module.exports = async (req, res, next) => {
             ) {
                 return res.status(404).send({
                     message:
-                        'You can not make full payment cause you already made a partial payment. Now for the rest of the payment you have to select the partial payment type again.',
+                        'You can not make full payment cause you already made an partial payment. Now for the rest of the payment you have to select the partial payment type again.',
                 });
             }
 
