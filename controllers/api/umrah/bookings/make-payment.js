@@ -360,7 +360,7 @@ module.exports = async (req, res, next) => {
             ) {
                 return res.status(404).send({
                     message:
-                        'You can not make full payment cause you already made an partial payment. Now for the rest of the payment you have to select the partial payment type again.',
+                        'You can not make full payment cause you already made a partial payment. Now for the rest of the payment you have to select the partial payment type again.',
                 });
             }
 
