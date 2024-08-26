@@ -266,6 +266,12 @@ module.exports = async (req, res, next) => {
         }
         // For first time partial payment logic
         else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
+            if (invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
+                return res.status(400).send({
+                    message: 'You may have already completed the full payment.',
+                });
+            }
+
             if (umrahBooking.umrahPackage.partialPaymentExpiryDate) {
                 if (
                     umrahBooking.umrahPackage.partialPaymentExpiryDate <
