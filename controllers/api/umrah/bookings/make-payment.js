@@ -354,6 +354,13 @@ module.exports = async (req, res, next) => {
         }
         // For full payment logic
         else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
+
+            if (invoice & && invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0] ) {
+                return res.status(404).send({
+                    message: 'You can not make full payment cause you already made an partial payment. Now for the rest of the payment you have to select the partial payment type again.',
+                });
+            }
+
             if (invoice) {
                 return res.status(404).send({
                     message: 'You may have already completed the full payment.',
