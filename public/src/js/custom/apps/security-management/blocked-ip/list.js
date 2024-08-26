@@ -303,6 +303,71 @@ var KTSecurityBlockedIPList = (function () {
             mode: 'range',
         });
     };
+    // Unblock ip
+    const unblockBtnInt = async () => {
+        // Use querySelectorAll to select all matching elements
+        const unblockBtns = document.querySelectorAll(
+            '[data-kt-unblock-btn="unblock-btn"]'
+        );
+
+        // Check if there are any buttons found
+        if (unblockBtns.length === 0) {
+            return;
+        }
+
+        unblockBtns.forEach((button) => {
+            button.addEventListener('click', async () => {
+                const url = button.getAttribute('data-kt-unblock-url');
+
+                try {
+                    const response = await axios.patch(url, {
+                        status: 'active',
+                    });
+
+                    // Display success message
+                    Swal.fire({
+                        text:
+                            response?.data?.message ||
+                            'Status has been updated successfully!',
+                        icon: 'success',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                        allowOutsideClick: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reload the page after confirmation
+                            location.reload();
+                        }
+                    });
+                } catch (error) {
+                    // Display error message
+                    const errors =
+                        error.response?.data?.message ||
+                        error.response?.data?.errors;
+
+                    Swal.fire({
+                        html:
+                            errors instanceof Array
+                                ? `<ul class="text-start">${Object.values(
+                                      error.response.data.errors
+                                  )
+                                      .map((err) => `<li>${err?.message}</li>`)
+                                      .join('')}</ul>`
+                                : errors,
+                        icon: 'error',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                    });
+                }
+            });
+        });
+    };
 
     return {
         // Public functions
@@ -312,7 +377,7 @@ var KTSecurityBlockedIPList = (function () {
             if (!table) {
                 return;
             }
-
+            unblockBtnInt();
             initDatatable();
             initToggleToolbar();
             handleSearch();

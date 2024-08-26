@@ -304,6 +304,71 @@ var KTSecurityLastIPList = (function () {
         });
     };
 
+    // Block ip
+    const blockBtnInt = async () => {
+        // Use querySelectorAll to select all matching elements
+        const blockBtns = document.querySelectorAll(
+            '[data-kt-block-btn="block-btn"]'
+        );
+
+        // Check if there are any buttons found
+        if (blockBtns.length === 0) {
+            return;
+        }
+        blockBtns.forEach((button) => {
+            button.addEventListener('click', async () => {
+                const url = button.getAttribute('data-kt-block-url');
+
+                try {
+                    const response = await axios.patch(url, {
+                        status: 'blocked',
+                    });
+
+                    // Display success message
+                    Swal.fire({
+                        text:
+                            response?.data?.message ||
+                            'Status has been updated successfully!',
+                        icon: 'success',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                        allowOutsideClick: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reload the page after confirmation
+                            location.reload();
+                        }
+                    });
+                } catch (error) {
+                    // Display error message
+                    const errors =
+                        error.response?.data?.message ||
+                        error.response?.data?.errors;
+
+                    Swal.fire({
+                        html:
+                            errors instanceof Array
+                                ? `<ul class="text-start">${Object.values(
+                                      error.response.data.errors
+                                  )
+                                      .map((err) => `<li>${err?.message}</li>`)
+                                      .join('')}</ul>`
+                                : errors,
+                        icon: 'error',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                        },
+                    });
+                }
+            });
+        });
+    };
+
     return {
         // Public functions
         init: function () {
@@ -315,6 +380,7 @@ var KTSecurityLastIPList = (function () {
 
             initDatatable();
             initToggleToolbar();
+            blockBtnInt();
             handleSearch();
             handleRowDeletion();
             handleFilter();
