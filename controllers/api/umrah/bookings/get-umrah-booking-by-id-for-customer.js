@@ -114,6 +114,7 @@ module.exports = async (req, res, next) => {
                 bookingRefId: 1,
                 umrahPackage: 1,
                 status: 1,
+                invoice: 1,
                 travelers: 1,
             },
         };
