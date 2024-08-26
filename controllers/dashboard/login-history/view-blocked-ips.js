@@ -107,8 +107,6 @@ module.exports = async (req, res) => {
         // Execute the aggregation pipeline
         const blockedIps = await LoginHistory.aggregate(pipeline);
 
-        console.log(blockedIps);
-
         // render blocked ips view
         return res.render('dashboard/login-history/blocked-ips', {
             title: 'Blocked IPs',

@@ -107,8 +107,6 @@ module.exports = async (req, res) => {
         // Execute the aggregation pipeline
         const loginHistory = await LoginHistory.aggregate(pipeline);
 
-        console.log(loginHistory);
-
         // Render login history view
         return res.render('dashboard/login-history', {
             title: 'Login History',
