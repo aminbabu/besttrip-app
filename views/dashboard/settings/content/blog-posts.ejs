@@ -131,23 +131,23 @@
                         <tr>
                           <td>
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                              <input class="form-check-input form-check-input-toggle" type="checkbox" value="<%= blog._id %>" />
+                              <input class="form-check-input form-check-input-toggle" type="checkbox" value="<%= blog?._id %>" />
                             </div>
                           </td>
                           <td>
                             <div class="symbol symbol-40px">
-                              <img src="<%= blog.banner %>" alt="Banner" />
+                              <img src="<%= blog?.banner %>" alt="Banner" />
                             </div>
                           </td>
                           <td>
                             <a href="#" class="text-gray-800 text-hover-primary">
-                              <%= blog.title %>
+                              <%= blog?.title %>
                             </a>
                           </td>
                           <td>
                             <div class="rating">
                               <% for (let i = 0; i < 5; i++) { %>
-                              <% if (i < blog.rating) { %>
+                              <% if (i < blog?.rating) { %>
                               <i class="bi bi-star-fill"></i>
                               <% } else { %>
                               <i class="bi bi-star"></i>
@@ -155,17 +155,17 @@
                               <% } %>
                             </div>
                           </td>
-                          <td><%= blog.location %></td>
+                          <td><%= blog?.location %></td>
                           <td>
                             <div class="form-check form-switch form-check-solid">
                               <label class="form-check-label">
-                                <input class="form-check-input form-check-input-custom" type="checkbox" <% if (blog?.status === 'active') { %> checked <% } %> value="<%= blog.status %>" data-kt-blog-posts-url="/api/settings/content/blog-posts/<%= blog?._id %>/status" />
+                                <input class="form-check-input form-check-input-custom" type="checkbox" <% if (blog?.status === 'active') { %> checked <% } %> value="<%= blog?.status %>" data-kt-blog-posts-url="/api/settings/content/blog-posts/<%= blog?._id %>/status" />
                                 <span class="enabled">Active</span>
                                 <span class="disabled">Disabled</span>
                               </label>
                             </div>
                           </td>
-                          <td><%= new Date(blog.updatedAt).toLocaleString() %></td>
+                          <td><%= new Date(blog?.updatedAt).toLocaleString() %></td>
                           <td class="text-end">
                             <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                               Actions

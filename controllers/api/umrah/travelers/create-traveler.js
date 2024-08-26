@@ -43,6 +43,7 @@ module.exports = async (req, res, next) => {
         // Find the associated Umrah package details
         const availableUmrahDetails = await UmrahPackage.findOne({
             _id: listedUmrah.umrahPackage,
+            status: 'active',
         });
 
         // Validate if availableUmrahDetails is found
@@ -61,17 +62,25 @@ module.exports = async (req, res, next) => {
             umrahBooking: listedUmrah._id,
         });
 
-        // Ensure travelers exist for this booking
-        if (!listedTravelers) {
-            return res.status(404).send({
-                message: 'Travelers not found',
-            });
-        }
-
         // Check if adding more travelers exceeds the booking's total allowed travelers
         if (listedTravelers.length >= listedUmrah.totalTravelers) {
             return res.status(403).send({
                 message: `You cannot add more than ${listedUmrah.totalTravelers} travelers to this package.`,
+            });
+        }
+
+        // Ensure there is at least one adult traveler before adding a non-adult traveler
+        const adultTravelerExists = listedTravelers.some(
+            (traveler) => traveler.travelerType === 'adult'
+        );
+
+        // Check if the first traveler is being added, or if there are travelers but no adults
+        if (
+            (listedTravelers.length === 0 || !adultTravelerExists) &&
+            validatedData.travelerType !== 'adult'
+        ) {
+            return res.status(403).send({
+                message: 'The first traveler added must be an adult.',
             });
         }
 

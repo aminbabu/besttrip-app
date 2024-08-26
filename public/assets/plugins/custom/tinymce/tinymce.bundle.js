@@ -45,7 +45,7 @@ eval("/**\n * Copyright (c) Tiny Technologies, Inc. All rights reserved.\n * Lic
   \***************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// TinyMCE: The rich text editor built to scale, designed to innovate, and developed in open source: https://www.tiny.cloud/\n\n__webpack_require__(/*! tinymce/tinymce.js */ \"./node_modules/tinymce/tinymce.js\");\n__webpack_require__(/*! tinymce/icons/default/icons.js */ \"./node_modules/tinymce/icons/default/icons.js\");\n__webpack_require__(/*! tinymce/themes/silver/theme.js */ \"./node_modules/tinymce/themes/silver/theme.js\");\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/tinymce/tinymce.js?");
+eval("// TinyMCE: The rich text editor built to scale, designed to innovate, and developed in open source: https://www.tiny.cloud/\r\n\r\n__webpack_require__(/*! tinymce/tinymce.js */ \"./node_modules/tinymce/tinymce.js\");\r\n__webpack_require__(/*! tinymce/icons/default/icons.js */ \"./node_modules/tinymce/icons/default/icons.js\");\r\n__webpack_require__(/*! tinymce/themes/silver/theme.js */ \"./node_modules/tinymce/themes/silver/theme.js\");\r\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/tinymce/tinymce.js?");
 
 /***/ })
 

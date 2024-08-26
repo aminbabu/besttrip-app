@@ -76,6 +76,21 @@ router.post(
 );
 
 /**
+ * @description get umrah package package
+ * @param {string} path - /umrah/packages/:id
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} validator - ['validateUmrahPackageId']
+ * @param {function} controller - ['getUmrahPackage']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method GET
+ */
+router.get(
+    '/:id',
+    getUmrahPackage
+);
+
+/**
  * @description check if user is authorized
  * @param {string} path - /customers
  * @param {function} middleware - ['isAuthorized']
@@ -94,23 +109,6 @@ router.use(isAuthorized);
  * @method GET
  */
 router.get('/', isAllowed(['admin']), getUmrahPackages);
-
-/**
- * @description get umrah package package
- * @param {string} path - /umrah/packages/:id
- * @param {function} middleware - ['isAllowed']
- * @param {function} validator - ['validateUmrahPackageId']
- * @param {function} controller - ['getUmrahPackage']
- * @returns {object} - router
- * @access private - ['admin']
- * @method GET
- */
-router.get(
-    '/:id',
-    isAllowed(['admin', 'customer']),
-    validateUmrahPackageId,
-    getUmrahPackage
-);
 
 /**
  * @description get umrah package package

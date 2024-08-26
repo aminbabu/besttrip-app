@@ -69,7 +69,7 @@
                             <li>: <%= umrahBooking?.customer.phone %></li>
                             <li>
                               :
-                              <span class="text-success" data-kt-umrah-booking-status="umrah-status"><%= umrahBooking.status.charAt(0).toUpperCase() + umrahBooking.status.slice(1) %></span>
+                              <span class="text-success" data-kt-umrah-booking-status="umrah-status"><%= umrahBooking?.status.charAt(0).toUpperCase() + umrahBooking?.status.slice(1) %></span>
                             </li>
                           </ul>
                         </div>
@@ -82,12 +82,12 @@
                             <li>Supplier</li>
                           </ul>
                           <ul class="col-span-2 d-grid gap-5">
-                            <li>: <%= new Date(umrahBooking?.umrahPackage.updatedAt).toLocaleString() %></li>
-                            <li>: <%= umrahBooking?.invoiceDetails.paymentType.charAt(0).toUpperCase() + umrahBooking?.invoiceDetails.paymentType.slice(1) %></li>
+                            <li>: <%= new Date(umrahBooking?.umrahPackage?.updatedAt).toLocaleString() %></li>
+                            <li>: <%= umrahBooking?.invoiceDetails?.paymentType.charAt(0).toUpperCase() + umrahBooking?.invoiceDetails?.paymentType.slice(1) %></li>
                             <li>:
                               <!-- 18 February, 2024 - 22:00:22 -->
                             </li>
-                            <li>: <%= umrahBooking?.invoiceDetails.invoiceId %></li>
+                            <li>: <%= umrahBooking?.invoiceDetails?.invoiceId %></li>
                             <li>:
                               <!-- Best Trip Travel -->
                             </li>
@@ -101,14 +101,14 @@
                     <div class="card mb-6 mb-xl-9">
                       <!--begin::Card body-->
                       <div class="details-card-content">
-                        <image src="<%= umrahBooking?.umrahPackage.thumbnail %>" alt="booking pic" class="details-card-img" />
+                        <image src="<%= umrahBooking?.umrahPackage?.thumbnail %>" alt="booking pic" class="details-card-img" />
                         <div class="details-card-text-content">
                           <div>
                             <h4 class="details-card-title">
-                              <%= umrahBooking?.umrahPackage.title %>
+                              <%= umrahBooking?.umrahPackage?.title %>
                             </h4>
                             <p class="package-duration">
-                              <%= umrahBooking?.umrahPackage.subtitle %>
+                              <%= umrahBooking?.umrahPackage?.subtitle %>
                             </p>
                             <div class="details-card-specs">
                               <ul class="details-card-specs-list">
@@ -118,7 +118,7 @@
                                     <path fillRule="evenodd" clipRule="evenodd" d="M11.1945 12.0807C11.7365 12.2434 12.1832 12.4447 12.4919 12.6807C12.6919 12.8327 12.8385 12.9814 12.8385 13.1627C12.8385 13.2694 12.7779 13.3661 12.6925 13.4627C12.5512 13.6221 12.3412 13.7654 12.0812 13.8987C11.1625 14.3687 9.67721 14.6627 8.00521 14.6627C6.33321 14.6627 4.84787 14.3687 3.92921 13.8987C3.66921 13.7654 3.45921 13.6221 3.31787 13.4627C3.23254 13.3661 3.17187 13.2694 3.17187 13.1627C3.17187 12.9814 3.31854 12.8327 3.51854 12.6807C3.82721 12.4447 4.27387 12.2434 4.81587 12.0807C4.94291 12.0425 5.04958 11.9555 5.1124 11.8386C5.17523 11.7218 5.18907 11.5848 5.15087 11.4577C5.11268 11.3307 5.02559 11.224 4.90876 11.1612C4.79192 11.0984 4.65491 11.0845 4.52787 11.1227C3.70254 11.3714 3.06121 11.7121 2.67588 12.0887C2.33721 12.4187 2.17188 12.7881 2.17188 13.1627C2.17188 13.6307 2.43654 14.0974 2.97454 14.4867C3.91854 15.1694 5.81454 15.6627 8.00521 15.6627C10.1959 15.6627 12.0919 15.1694 13.0359 14.4867C13.5739 14.0974 13.8385 13.6307 13.8385 13.1627C13.8385 12.7881 13.6732 12.4187 13.3345 12.0887C12.9492 11.7121 12.3079 11.3714 11.4825 11.1227C11.4196 11.1038 11.3536 11.0975 11.2883 11.1041C11.2229 11.1107 11.1595 11.1301 11.1017 11.1612C11.0438 11.1923 10.9927 11.2345 10.9511 11.2854C10.9096 11.3363 10.8785 11.3948 10.8595 11.4577C10.8406 11.5206 10.8343 11.5867 10.8409 11.652C10.8475 11.7174 10.8669 11.7808 10.898 11.8386C10.9291 11.8965 10.9713 11.9476 11.0222 11.9892C11.0731 12.0307 11.1316 12.0618 11.1945 12.0807Z" fill="currentColor" />
                                   </svg>
                                   <span class="flex-shrink-0 details-card-text">
-                                    From <%= umrahBooking?.umrahPackage.departureLocation %>
+                                    From <%= umrahBooking?.umrahPackage?.departureLocation %>
                                   </span>
                                 </li>
                                 <li class="text-t-600">
@@ -128,7 +128,7 @@
                                     <path d="M0.335938 5V12.6667C0.335938 13.0203 0.476413 13.3594 0.726462 13.6095C0.97651 13.8595 1.31565 14 1.66927 14H12.3359C12.6896 14 13.0287 13.8595 13.2787 13.6095C13.5288 13.3594 13.6693 13.0203 13.6693 12.6667V5H0.335938ZM4.33594 11.6667C4.33594 11.8435 4.2657 12.013 4.14068 12.1381C4.01565 12.2631 3.84608 12.3333 3.66927 12.3333H3.0026C2.82579 12.3333 2.65622 12.2631 2.5312 12.1381C2.40618 12.013 2.33594 11.8435 2.33594 11.6667V11C2.33594 10.8232 2.40618 10.6536 2.5312 10.5286C2.65622 10.4036 2.82579 10.3333 3.0026 10.3333H3.66927C3.84608 10.3333 4.01565 10.4036 4.14068 10.5286C4.2657 10.6536 4.33594 10.8232 4.33594 11V11.6667ZM4.33594 8C4.33594 8.17681 4.2657 8.34638 4.14068 8.4714C4.01565 8.59643 3.84608 8.66667 3.66927 8.66667H3.0026C2.82579 8.66667 2.65622 8.59643 2.5312 8.4714C2.40618 8.34638 2.33594 8.17681 2.33594 8V7.33333C2.33594 7.15652 2.40618 6.98695 2.5312 6.86193C2.65622 6.73691 2.82579 6.66667 3.0026 6.66667H3.66927C3.84608 6.66667 4.01565 6.73691 4.14068 6.86193C4.2657 6.98695 4.33594 7.15652 4.33594 7.33333V8ZM8.0026 11.6667C8.0026 11.8435 7.93237 12.013 7.80734 12.1381C7.68232 12.2631 7.51275 12.3333 7.33594 12.3333H6.66927C6.49246 12.3333 6.32289 12.2631 6.19787 12.1381C6.07284 12.013 6.0026 11.8435 6.0026 11.6667V11C6.0026 10.8232 6.07284 10.6536 6.19787 10.5286C6.32289 10.4036 6.49246 10.3333 6.66927 10.3333H7.33594C7.51275 10.3333 7.68232 10.4036 7.80734 10.5286C7.93237 10.6536 8.0026 10.8232 8.0026 11V11.6667ZM8.0026 8C8.0026 8.17681 7.93237 8.34638 7.80734 8.4714C7.68232 8.59643 7.51275 8.66667 7.33594 8.66667H6.66927C6.49246 8.66667 6.32289 8.59643 6.19787 8.4714C6.07284 8.34638 6.0026 8.17681 6.0026 8V7.33333C6.0026 7.15652 6.07284 6.98695 6.19787 6.86193C6.32289 6.73691 6.49246 6.66667 6.66927 6.66667H7.33594C7.51275 6.66667 7.68232 6.73691 7.80734 6.86193C7.93237 6.98695 8.0026 7.15652 8.0026 7.33333V8ZM11.6693 11.6667C11.6693 11.8435 11.599 12.013 11.474 12.1381C11.349 12.2631 11.1794 12.3333 11.0026 12.3333H10.3359C10.1591 12.3333 9.98956 12.2631 9.86453 12.1381C9.73951 12.013 9.66927 11.8435 9.66927 11.6667V11C9.66927 10.8232 9.73951 10.6536 9.86453 10.5286C9.98956 10.4036 10.1591 10.3333 10.3359 10.3333H11.0026C11.1794 10.3333 11.349 10.4036 11.474 10.5286C11.599 10.6536 11.6693 10.8232 11.6693 11V11.6667ZM11.6693 8C11.6693 8.17681 11.599 8.34638 11.474 8.4714C11.349 8.59643 11.1794 8.66667 11.0026 8.66667H10.3359C10.1591 8.66667 9.98956 8.59643 9.86453 8.4714C9.73951 8.34638 9.66927 8.17681 9.66927 8V7.33333C9.66927 7.15652 9.73951 6.98695 9.86453 6.86193C9.98956 6.73691 10.1591 6.66667 10.3359 6.66667H11.0026C11.1794 6.66667 11.349 6.73691 11.474 6.86193C11.599 6.98695 11.6693 7.15652 11.6693 7.33333V8ZM13.6693 4.33333V2.33333C13.6693 1.97971 13.5288 1.64057 13.2787 1.39052C13.0287 1.14048 12.6896 1 12.3359 1H12.0026V1.33333C12.0026 2.06867 11.4046 2.66667 10.6693 2.66667C9.93394 2.66667 9.33594 2.06867 9.33594 1.33333V1H4.66927V1.33333C4.66927 2.06867 4.07127 2.66667 3.33594 2.66667C2.6006 2.66667 2.0026 2.06867 2.0026 1.33333V1H1.66927C1.31565 1 0.97651 1.14048 0.726462 1.39052C0.476413 1.64057 0.335938 1.97971 0.335938 2.33333V4.33333H13.6693Z" fill="currentColor" />
                                   </svg>
                                   <span class="flex-shrink-0 details-card-text">
-                                    <%= new Date(umrahBooking?.umrahPackage.journeyDate).toLocaleString() %>
+                                    <%= new Date(umrahBooking?.umrahPackage?.journeyDate).toLocaleString() %>
                                   </span>
                                 </li>
                                 <li class="text-t-600">
@@ -145,7 +145,7 @@
                                   <svg width="16" height="17" viewBox="0 0 16 17" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.04609 4.05412C8.66259 4.51344 9.09489 5.2907 9.17359 6.19293C9.4321 6.33744 9.71423 6.41251 9.99992 6.41281C11.08 6.41281 11.9554 5.37256 11.9554 4.08931C11.9554 2.80587 11.08 1.76562 9.99992 1.76562C8.93016 1.76602 8.0624 2.78768 8.04609 4.05412ZM6.76501 8.81183C7.84509 8.81183 8.7205 7.77139 8.7205 6.48814C8.7205 5.20489 7.84492 4.16465 6.76501 4.16465C5.68509 4.16465 4.80919 5.20509 4.80919 6.48834C4.80919 7.77159 5.68509 8.81183 6.76501 8.81183ZM7.59449 8.97021H5.93519C4.5546 8.97021 3.43142 10.3051 3.43142 11.9456V14.3569L3.43658 14.3947L3.57636 14.4467C4.89388 14.9358 6.03852 15.099 6.98066 15.099C8.82083 15.099 9.88743 14.4755 9.95316 14.4358L10.0838 14.3573H10.0978V11.9456C10.0983 10.3051 8.97508 8.97021 7.59449 8.97021ZM10.8297 6.57138H9.18324C9.16652 7.32685 8.89916 8.04383 8.43945 8.56605C9.66663 8.99967 10.5645 10.3519 10.5645 11.9492V12.6922C12.1902 12.6214 13.127 12.0739 13.1887 12.0372L13.3194 11.9585H13.3333V9.54639C13.3333 7.90604 12.2102 6.57138 10.8297 6.57138ZM3.33375 6.4132C3.71629 6.4132 4.07222 6.28053 4.37373 6.05452C4.46833 5.32738 4.79389 4.67098 5.28341 4.22041C5.28541 4.17691 5.28891 4.1338 5.28891 4.08991C5.28891 2.80646 4.41333 1.76622 3.33375 1.76622C2.2535 1.76622 1.37826 2.80646 1.37826 4.08991C1.37826 5.37276 2.2535 6.4132 3.33375 6.4132ZM5.0899 8.56605C4.63274 8.04633 4.36579 7.33392 4.3466 6.58246C4.28554 6.57712 4.22513 6.57138 4.1629 6.57138H2.50376C1.12317 6.57138 0 7.90604 0 9.54639V11.9581L0.00515828 11.9952L0.144931 12.0476C1.20188 12.4397 2.14518 12.6204 2.96452 12.6774V11.9492C2.96485 10.3519 3.86239 9.00007 5.0899 8.56605Z" fill="currentColor" />
                                   </svg>
-                                  <span class="flex-shrink-0 details-card-text">Package Type : <%= umrahBooking?.umrahPackage.type.charAt(0).toUpperCase() + umrahBooking?.umrahPackage.type.slice(1) %></span>
+                                  <span class="flex-shrink-0 details-card-text">Package Type : <%= umrahBooking?.umrahPackage?.type.charAt(0).toUpperCase() + umrahBooking?.umrahPackage?.type.slice(1) %></span>
                                 </li>
                               </ul>
                               <div class="detail-inclusions d-flex flex-column">
@@ -153,7 +153,7 @@
                                   Package Inclusion
                                 </div>
                                 <ul class="detail-inclusions-list">
-                                  <% if (umrahBooking?.umrahPackage.inclusions.includes('flight')) { %>
+                                  <% if (umrahBooking?.umrahPackage?.inclusions.includes('flight')) { %>
                                   <li class="text-t-600">
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                       <g clip-path="url(#clip0_2147_9793)">
@@ -168,7 +168,7 @@
                                     Flight
                                   </li>
                                   <% } %>
-                                  <% if (umrahBooking?.umrahPackage.inclusions.includes('hotel')) { %>
+                                  <% if (umrahBooking?.umrahPackage?.inclusions.includes('hotel')) { %>
                                   <li class="flex flex-col items-center gap-y-1 text-xs lg:text-sm text-t-600 capitalize">
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                       <g clip-path="url(#clip0_2147_9805)">
@@ -184,7 +184,7 @@
                                     hotel
                                   </li>
                                   <% } %>
-                                  <% if (umrahBooking?.umrahPackage.inclusions.includes('visa')) { %>
+                                  <% if (umrahBooking?.umrahPackage?.inclusions.includes('visa')) { %>
                                   <li class="flex flex-col items-center gap-y-1 text-xs lg:text-sm text-t-600 capitalize">
                                     <svg width="16" height="16" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M9.6257 1.31451C9.62444 1.2117 9.59904 1.11062 9.55154 1.01943C9.50405 0.928238 9.43579 0.849482 9.35227 0.789512C9.26687 0.726764 9.16754 0.685632 9.06278 0.669632C8.95802 0.653632 8.85094 0.663241 8.7507 0.697637L4.47852 2.18951H9.6257V1.31451ZM7.21945 8.64264C7.32445 8.64264 7.61539 8.11764 7.65695 7.11139H6.78195C6.82352 8.11764 7.11445 8.64264 7.21945 8.64264ZM7.21945 5.14264C7.11445 5.14264 6.82352 5.66764 6.78195 6.67389H7.65695C7.61539 5.66764 7.32445 5.14264 7.21945 5.14264ZM6.6157 8.53326C6.44364 8.07859 6.35185 7.59748 6.34445 7.11139H5.48477C5.52507 7.4292 5.65184 7.72986 5.85126 7.98058C6.05069 8.23131 6.31511 8.42248 6.6157 8.53326ZM6.6157 5.25201C6.31511 5.36279 6.05069 5.55397 5.85126 5.80469C5.65184 6.05541 5.52507 6.35607 5.48477 6.67389H6.34445C6.35185 6.1878 6.44364 5.70669 6.6157 5.25201Z" fill="currentColor" />
@@ -194,7 +194,7 @@
                                     visa
                                   </li>
                                   <% } %>
-                                  <% if (umrahBooking?.umrahPackage.inclusions.includes('transport')) { %>
+                                  <% if (umrahBooking?.umrahPackage?.inclusions.includes('transport')) { %>
                                   <li class="flex flex-col items-center gap-y-1 text-xs lg:text-sm text-t-600 capitalize">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M8 0C12.2 0 15 1.1 15 2.5V3V4C15.5531 4 16 4.44687 16 5V7C16 7.55313 15.5531 8 15 8V13C15 13.5531 14.5531 14 14 14V15C14 15.5531 13.5531 16 13 16H12C11.4469 16 11 15.5531 11 15V14H5V15C5 15.5531 4.55313 16 4 16H3C2.44687 16 2 15.5531 2 15V14C1.44687 14 1 13.5531 1 13V8C0.446875 8 0 7.55313 0 7V5C0 4.44687 0.446875 4 1 4V3V2.5C1 1.1 3.8 0 8 0ZM3 5V8C3 8.55313 3.44687 9 4 9H7.5V4H4C3.44687 4 3 4.44687 3 5ZM8.5 9H12C12.5531 9 13 8.55313 13 8V5C13 4.44687 12.5531 4 12 4H8.5V9ZM3.5 12.5C3.76522 12.5 4.01957 12.3946 4.20711 12.2071C4.39464 12.0196 4.5 11.7652 4.5 11.5C4.5 11.2348 4.39464 10.9804 4.20711 10.7929C4.01957 10.6054 3.76522 10.5 3.5 10.5C3.23478 10.5 2.98043 10.6054 2.79289 10.7929C2.60536 10.9804 2.5 11.2348 2.5 11.5C2.5 11.7652 2.60536 12.0196 2.79289 12.2071C2.98043 12.3946 3.23478 12.5 3.5 12.5ZM12.5 12.5C12.7652 12.5 13.0196 12.3946 13.2071 12.2071C13.3946 12.0196 13.5 11.7652 13.5 11.5C13.5 11.2348 13.3946 10.9804 13.2071 10.7929C13.0196 10.6054 12.7652 10.5 12.5 10.5C12.2348 10.5 11.9804 10.6054 11.7929 10.7929C11.6054 10.9804 11.5 11.2348 11.5 11.5C11.5 11.7652 11.6054 12.0196 11.7929 12.2071C11.9804 12.3946 12.2348 12.5 12.5 12.5ZM11 2.5C11 2.225 10.775 2 10.5 2H5.5C5.225 2 5 2.225 5 2.5C5 2.775 5.225 3 5.5 3H10.5C10.775 3 11 2.775 11 2.5Z" fill="currentColor" />
@@ -202,7 +202,7 @@
                                     Transport
                                   </li>
                                   <% } %>
-                                  <% if (umrahBooking?.umrahPackage.inclusions.includes('food')) { %>
+                                  <% if (umrahBooking?.umrahPackage?.inclusions.includes('food')) { %>
                                   <li class="flex flex-col items-center gap-y-1 text-xs lg:text-sm text-t-600 capitalize">
                                     <svg width="17" height="15" viewBox="0 0 17 15" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M15.3571 0C14.7857 0 10.7857 0.9375 10.7857 5.15625V8.4375C10.7857 9.47168 11.8107 10.3125 13.0714 10.3125H14.2143V14.0625C14.2143 14.5811 14.725 15 15.3571 15C15.9893 15 16.5 14.5811 16.5 14.0625V10.3125V7.03125V0.9375C16.5 0.418945 15.9893 0 15.3571 0ZM2.78571 0.46875C2.78571 0.228516 2.56786 0.0292969 2.275 0.00292969C1.98214 -0.0234375 1.72143 0.134766 1.65714 0.366211L0.575 4.35938C0.525 4.54395 0.5 4.73145 0.5 4.91895C0.5 6.26367 1.75357 7.36816 3.35714 7.48828V14.0625C3.35714 14.5811 3.86786 15 4.5 15C5.13214 15 5.64286 14.5811 5.64286 14.0625V7.48828C7.24643 7.36816 8.5 6.26367 8.5 4.91895C8.5 4.73145 8.475 4.54395 8.425 4.35938L7.34286 0.366211C7.27857 0.131836 7.01071 -0.0234375 6.72143 0.00292969C6.43214 0.0292969 6.21429 0.228516 6.21429 0.46875V4.40039C6.21429 4.55859 6.05714 4.6875 5.86429 4.6875C5.68214 4.6875 5.53214 4.57324 5.51429 4.42383L5.06786 0.427734C5.04286 0.18457 4.79643 0 4.5 0C4.20357 0 3.95714 0.18457 3.93214 0.427734L3.48929 4.42383C3.47143 4.57324 3.32143 4.6875 3.13929 4.6875C2.94643 4.6875 2.78929 4.55859 2.78929 4.40039V0.46875H2.78571ZM4.51071 4.92188H4.5H4.48929L4.5 4.90137L4.51071 4.92188Z" />
@@ -247,43 +247,43 @@
                               <li class="border">0</li>
                               <li class="border"><%= umrahBooking?.priceByTravelers.adult.count %></li>
                               <li class="col-span-4 border">
-                                <% if (umrahBooking?.invoiceDetails && umrahBooking?.invoiceDetails.paymentType === "full-payment") { %>
-                                <%= umrahBooking?.priceByTravelers.adult.subtotal.toLocaleString() %>
-                                <% } else { %>
-                                <%= umrahBooking?.priceByTravelers.adult.partialSubtotal.toLocaleString() %>
-                                <% } %>
+
+                                <%= umrahBooking?.priceByTravelers?.adult?.subtotal.toLocaleString() %>
+
                               </li>
                             </ul>
                             <ul class="fare-summary-table-row d-grid grid-cols-7 bg-white">
                               <li class="border">Child</li>
                               <!-- <li class="col-span-2 border">1,00,000</li> -->
                               <li class="border">0</li>
-                              <li class="border"><%= umrahBooking?.priceByTravelers.child.count %></li>
+                              <li class="border"><%= umrahBooking?.priceByTravelers?.child?.count %></li>
                               <li class="col-span-4 border">
-                                <% if (umrahBooking?.invoiceDetails && umrahBooking?.invoiceDetails.paymentType === "full-payment") { %>
-                                <%= umrahBooking?.priceByTravelers.child.subtotal.toLocaleString() %>
-                                <% } else { %>
-                                <%= umrahBooking?.priceByTravelers.child.partialSubtotal.toLocaleString() %>
-                                <% } %>
+
+                                <%= umrahBooking?.priceByTravelers?.child?.subtotal.toLocaleString() %>
+
                               </li>
                             </ul>
                             <ul class="fare-summary-table-row d-grid grid-cols-7 bg-white">
                               <li class="border">Infant</li>
                               <!-- <li class="col-span-2 border">1,00,000</li> -->
                               <li class="border">0</li>
-                              <li class="border"><%= umrahBooking?.priceByTravelers.infant.count %></li>
+                              <li class="border"><%= umrahBooking?.priceByTravelers?.infant?.count %></li>
                               <li class="col-span-4 border">
-                                <% if (umrahBooking?.invoiceDetails && umrahBooking?.invoiceDetails.paymentType === "full-payment") { %>
-                                <%= umrahBooking?.priceByTravelers.infant.subtotal.toLocaleString() %>
-                                <% } else { %>
-                                <%= umrahBooking?.priceByTravelers.infant.partialSubtotal.toLocaleString() %>
-                                <% } %>
+
+                                <%= umrahBooking?.priceByTravelers?.infant?.subtotal.toLocaleString() %>
+
                               </li>
                             </ul>
                             <ul class="fare-summary-table-row d-grid grid-cols-7 bg-white">
                               <li class="col-span-2 border">Sub-total</li>
-                              <li class="border"><%= umrahBooking?.priceByTravelers.adult.count + umrahBooking?.priceByTravelers.child.count +umrahBooking?.priceByTravelers.infant.count %></li>
-                              <li class="col-span-4 border"><%= umrahBooking?.invoiceDetails.totalAmount %></li>
+                              <li class="border"><%= umrahBooking?.priceByTravelers?.adult?.count + umrahBooking?.priceByTravelers?.child?.count +umrahBooking?.priceByTravelers?.infant?.count %></li>
+                              <li class="col-span-4 border">
+                                <%= 
+                               ((umrahBooking?.priceByTravelers?.adult?.count || 0) * (umrahBooking?.umrahPackage?.adultPrice || 0) +
+                                (umrahBooking?.priceByTravelers?.child?.count || 0) * (umrahBooking?.umrahPackage?.childPrice || 0) +
+                                (umrahBooking?.priceByTravelers?.infant?.count || 0) * (umrahBooking?.umrahPackage?.infantPrice || 0)).toLocaleString()
+                                %>
+                              </li>
                             </ul>
                           </div>
                         </div>
@@ -779,7 +779,7 @@
                             <!--begin::Input group-->
                             <div class="fv-row mb-10">
                               <!--begin::Input-->
-                              <input type="text" name="umrahPackage" class="form-control form-control-lg" hidden value="<%= umrahBooking?.umrahPackage._id %>" />
+                              <input type="text" name="umrahPackage" class="form-control form-control-lg" hidden value="<%= umrahBooking?.umrahPackage?._id %>" />
                               <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -1706,7 +1706,7 @@
                           </button>
                           <!--end::Button-->
                           <!--begin::Button-->
-                          <button type="submit" class="btn btn-primary" data-kt-extend-time-limit-modal-action="submit" data-kt-extend-time-limit-modal-url="/api/invoice/<%= umrahBooking?.invoiceDetails._id %>/partial-payment-time-limit">
+                          <button type="submit" class="btn btn-primary" data-kt-extend-time-limit-modal-action="submit" data-kt-extend-time-limit-modal-url="/api/invoice/<%= umrahBooking?.invoiceDetails?._id %>/partial-payment-time-limit">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
                               <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

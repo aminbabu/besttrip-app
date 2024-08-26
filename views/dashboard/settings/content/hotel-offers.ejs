@@ -132,20 +132,20 @@
                         <tr>
                           <td>
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                              <input class="form-check-input form-check-input-toggle" type="checkbox" value="<%= hotel._id %>" />
+                              <input class="form-check-input form-check-input-toggle" type="checkbox" value="<%= hotel?._id %>" />
                             </div>
                           </td>
                           <td>
                             <div class="symbol symbol-40px">
-                              <img src="<%= hotel.thumbnail %>" alt="" />
+                              <img src="<%= hotel?.thumbnail %>" alt="" />
                             </div>
                           </td>
-                          <td><%= hotel.title %></td>
-                          <td><%= hotel.location %></td>
+                          <td><%= hotel?.title %></td>
+                          <td><%= hotel?.location %></td>
                           <td>
                             <div class="rating">
                               <% for (let i = 0; i < 5; i++) { %>
-                              <% if (i < hotel.rating) { %>
+                              <% if (i < hotel?.rating) { %>
                               <i class="bi bi-star-fill"></i>
                               <% } else { %>
                               <i class="bi bi-star"></i>
@@ -153,17 +153,17 @@
                               <% } %>
                             </div>
                           </td>
-                          <td><%= hotel.price %> BDT</td>
+                          <td><%= hotel?.price %> BDT</td>
                           <td>
                             <div class="form-check form-switch form-check-solid">
                               <label class="form-check-label">
-                                <input class="form-check-input form-check-input-custom" type="checkbox" <% if (hotel?.status === 'active') { %> checked <% } %> value="<%= hotel.status %>" data-kt-hotel-offers-url="/api/settings/content/hotel-offers/<%= hotel?._id %>/status" />
+                                <input class="form-check-input form-check-input-custom" type="checkbox" <% if (hotel?.status === 'active') { %> checked <% } %> value="<%= hotel?.status %>" data-kt-hotel-offers-url="/api/settings/content/hotel-offers/<%= hotel?._id %>/status" />
                                 <span class="enabled">Active</span>
                                 <span class="disabled">Disabled</span>
                               </label>
                             </div>
                           </td>
-                          <td><%= new Date(hotel.updatedAt).toLocaleString() %></td>
+                          <td><%= new Date(hotel?.updatedAt).toLocaleString() %></td>
                           <td class="text-end">
                             <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                               Actions

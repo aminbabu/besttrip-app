@@ -19,9 +19,9 @@ module.exports = async (req, res, next) => {
 
         // Build the query object based on user role
         const query = { _id: new mongoose.Types.ObjectId(id) };
-        if (req.user.role === 'customer') {
-            query.status = 'active'; // Add status condition for customers
-        }
+        // if (req.user.role === 'customer') {
+        //     query.status = 'active'; // Add status condition for customers
+        // }
 
         // Define the aggregation pipeline
         const pipeline = [
@@ -154,8 +154,8 @@ module.exports = async (req, res, next) => {
                     ziyarahMakkah: 1,
                     ziyarahMadinah: 1,
                     ziyarahTaif: 1,
-                    ziyarahMakkaDetails: 1,
-                    ziyarahMadinaDetails: 1,
+                    ziyarahMakkahDetails: 1,
+                    ziyarahMadinahDetails: 1,
                     ziyarahTaifDetails: 1,
                     ziyarahNote: 1,
                     itineraryDays: 1,
