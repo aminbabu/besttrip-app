@@ -225,6 +225,12 @@ module.exports = async (req, res, next) => {
 
         // Handling the second partial payment here
         if (invoice && invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
+            if (invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
+                return res.status(400).send({
+                    message: 'You may have already completed the full payment.',
+                });
+            }
+
             if (invoice.partialPaymentExpiryDate < currentDate) {
                 return res.status(400).send({
                     message: 'Payment is no longer valid due to expiry.',
