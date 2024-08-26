@@ -52,6 +52,22 @@ module.exports = async (req, res, next) => {
             },
         };
 
+        const lookupInvoice = {
+            $lookup: {
+                from: 'invoices',
+                localField: 'invoiceId',
+                foreignField: '_id',
+                as: 'invoice',
+            },
+        };
+
+        const unwindInvoice = {
+            $unwind: {
+                path: '$invoice',
+                preserveNullAndEmptyArrays: true,
+            },
+        };
+
         const lookupTravelersStage = {
             $lookup: {
                 from: 'travelers',
@@ -112,6 +128,7 @@ module.exports = async (req, res, next) => {
                     customerID: 1,
                     wallet: 1,
                 },
+                bookingRefId: 1,
                 umrahPackage: 1,
                 status: 1,
                 travelers: 1,
@@ -126,6 +143,8 @@ module.exports = async (req, res, next) => {
             unwindCustomerStage,
             lookupUmrahPackageStage,
             unwindUmrahPackageStage,
+            lookupInvoice,
+            unwindInvoice,
             lookupTravelersStage,
             lookupInvoiceStage,
             lookupPackageDurationsStage,
