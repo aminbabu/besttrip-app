@@ -16,7 +16,7 @@
   \************************************************************/
 /***/ (() => {
 
-eval("\r\n\r\n// Class definition\r\nvar KTAccountSettingsOverview = function () {\r\n    // Private functions\r\n    var initSettings = function() {\r\n\r\n    }\r\n\r\n    // Public methods\r\n    return {\r\n        init: function () {\r\n            initSettings();\r\n        }\r\n    }\r\n}();\r\n\r\n// On document ready\r\nKTUtil.onDOMContentLoaded(function() {\r\n    KTAccountSettingsOverview.init();\r\n});\r\n\n\n//# sourceURL=webpack://besttripbd/../public/src/js/custom/account/settings/overview.js?");
+eval("\n\n// Class definition\nvar KTAccountSettingsOverview = function () {\n    // Private functions\n    var initSettings = function() {\n\n    }\n\n    // Public methods\n    return {\n        init: function () {\n            initSettings();\n        }\n    }\n}();\n\n// On document ready\nKTUtil.onDOMContentLoaded(function() {\n    KTAccountSettingsOverview.init();\n});\n\n\n//# sourceURL=webpack://besttripbd/../public/src/js/custom/account/settings/overview.js?");
 
 /***/ })
 

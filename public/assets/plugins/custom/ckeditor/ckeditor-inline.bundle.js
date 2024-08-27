@@ -25,7 +25,7 @@ eval("/* module decorator */ module = __webpack_require__.nmd(module);\n!functio
   \************************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// CKEditor  - Rock-solid, free WYSIWYG editor with collaborative editing, 200+ features, full documentation and support: https://ckeditor.com/\r\n\r\n// CKEditor Inline\r\nwindow.InlineEditor = __webpack_require__(/*! @ckeditor/ckeditor5-build-inline/build/ckeditor.js */ \"./node_modules/@ckeditor/ckeditor5-build-inline/build/ckeditor.js\");\r\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/ckeditor/ckeditor-inline.js?");
+eval("// CKEditor  - Rock-solid, free WYSIWYG editor with collaborative editing, 200+ features, full documentation and support: https://ckeditor.com/\n\n// CKEditor Inline\nwindow.InlineEditor = __webpack_require__(/*! @ckeditor/ckeditor5-build-inline/build/ckeditor.js */ \"./node_modules/@ckeditor/ckeditor5-build-inline/build/ckeditor.js\");\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/ckeditor/ckeditor-inline.js?");
 
 /***/ })
 
