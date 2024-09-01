@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome Mail - 01</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    *,
+    ::after,
+    ::before {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow: auto;
+      background-color: #edf2f7;
+      height: 100%;
+      width: 100%;
+    }
+
+    main {
+      width: 100%;
+      height: 100%;
+      margin-inline: auto;
+      font-family: Poppins;
+      font-weight: 400;
+      font-size: 0.75rem;
+      color: #606060;
+    }
+
+    .container {
+      height: 100%;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      margin: 2.5rem auto;
+    }
+
+    .welcome-template {
+      margin-inline: 1.5rem;
+      border-radius: 0.625rem;
+      overflow: hidden;
+    }
+
+    .logo-container {
+      background-color: #f50308;
+      padding: 1.875rem 0;
+    }
+
+    .logo {
+      width: 33vw;
+      max-width: 180px;
+    }
+
+    .msg-container,
+    .footer {
+      padding: 1.25rem 1.875rem;
+      background-color: #fff;
+    }
+
+    .msg-header {
+      padding-bottom: 0.75rem;
+    }
+
+    .msg-icon {
+      width: 27vw;
+      max-width: 160px;
+    }
+
+    .msg-greeting {
+      font-size: 1.125rem;
+      color: #494949;
+      font-weight: 600;
+      line-height: 1.39;
+      padding-bottom: 0.5rem;
+      padding-top: 1.25rem;
+    }
+
+    .msg-body {
+      text-align: left;
+      padding-top: 0.625rem;
+    }
+
+    .msg-starting {
+      color: #494949;
+      font-size: 0.875rem;
+      font-weight: normal;
+      padding-bottom: 1.25rem;
+    }
+
+    .msg-text {
+      line-height: 1.67;
+      padding-bottom: 0.5rem;
+    }
+
+    .msg-red-text,
+    a {
+      color: #f50308;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .contact {
+      padding-top: 0.75rem;
+    }
+
+    .social-icon-container {
+      display: inline-flex;
+      gap: 0.75rem;
+      list-style: none;
+      padding: 0 0 1.25rem;
+      margin: -12px 0 0;
+    }
+
+    .social-icon-container li a {
+      background-color: #f50308;
+      height: 25px;
+      width: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5rem;
+      margin: 0 auto;
+    }
+
+    hr.dotted-line {
+      border: 0;
+      border-bottom: 1px dashed #ccc;
+      background: #999;
+      margin-bottom: 1.25rem;
+      margin-top: 0.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        margin: 7.375rem auto;
+      }
+
+      .welcome-template {
+        margin-inline: 0;
+      }
+
+      .msg-header {
+        padding-bottom: 2.375rem;
+      }
+
+      .msg-container,
+      .footer {
+        padding: 2.5rem 3.125rem 2.625rem;
+        background-color: #fff;
+      }
+
+      .logo-container {
+        padding: 2.5rem 0;
+      }
+
+      .msg-greeting {
+        font-size: 26px;
+        line-height: 1.5;
+        padding-bottom: 0.75rem;
+      }
+
+      .msg-starting {
+        font-size: 1rem;
+        font-weight: 500;
+        padding-bottom: 1.25rem;
+      }
+
+      .msg-text {
+        line-height: 1.7;
+        padding-bottom: 0.75rem;
+        font-size: 0.875rem;
+      }
+
+      .social-icon-container {
+        margin: 0;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <div class="welcome-template">
+        <div class="logo-container">
+          <img src="./img/Logo.svg" alt="logo" class="logo" />
+        </div>
+        <div class="msg-container">
+          <div class="msg-header">
+            <img src="./img/Welcome SMS.svg" alt="welcome sms" class="msg-icon" />
+            <h1 class="msg-greeting">Hi Welcome</h1>
+            <p class="msg-text">
+              This could be the start of something awesome.
+            </p>
+          </div>
+          <div class="msg-body">
+            <h4 class="msg-starting">Dear Md Irfanul Haque,</h4>
+            <p class="msg-text">
+              We are all excited to welcome you to our team!
+            </p>
+            <p class="msg-text">
+              As agreed, your start date is 06 November 2024.
+            </p>
+            <p class="msg-text">
+              At Best Trip, we care about giving our employees everything they
+              need to perform their best. Our team will help you set up your
+              computer, software, and online accounts on your first day
+            </p>
+            <p class="msg-text">
+              Our team is excited to meet you and look forward to introducing
+              themselves to you.
+            </p>
+            <div class="contact">
+              <p class="msg-text">
+                Feel free to call our customer care number :
+                <span class="msg-red-text">+880 9677-443333.</span>
+              </p>
+              <p class="msg-text">
+                You may reach us at :
+                <span class="msg-red-text">support@besttrip.travel</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <h4 class="msg-starting">Stay With Best Trip!</h4>
+          <ul class="social-icon-container">
+            <li>
+              <a href="#" class="social-icon">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.75 8.4375H10.3125L10.9375 5.9375H8.75V4.6875C8.75 4.04414 8.75 3.4375 10 3.4375H10.9375V1.33756C10.7339 1.31053 9.96438 1.25 9.15181 1.25C7.45525 1.25 6.25 2.28554 6.25 4.18732V5.9375H4.375V8.4375H6.25V13.75H8.75V8.4375Z" fill="white" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-icon">
+                <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 2.5H13C13.6875 2.5 14.25 3.0625 14.25 3.75V11.25C14.25 11.9375 13.6875 12.5 13 12.5H3C2.3125 12.5 1.75 11.9375 1.75 11.25V3.75C1.75 3.0625 2.3125 2.5 3 2.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M14.25 3.75L8 8.125L1.75 3.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-icon">
+                <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="15" height="15" transform="translate(0.5)" fill="#F50308" />
+                  <path d="M6.75 8.12498C7.01841 8.48381 7.36085 8.78072 7.75409 8.99557C8.14734 9.21041 8.58219 9.33818 9.02916 9.37019C9.47612 9.4022 9.92474 9.33771 10.3446 9.18109C10.7644 9.02448 11.1457 8.7794 11.4625 8.46248L13.3375 6.58748C13.9067 5.9981 14.2217 5.20871 14.2146 4.38935C14.2075 3.56998 13.8788 2.7862 13.2994 2.2068C12.72 1.6274 11.9362 1.29874 11.1169 1.29162C10.2975 1.2845 9.50813 1.59948 8.91875 2.16873L7.84375 3.23748" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M9.25 6.87502C8.9816 6.51619 8.63915 6.21928 8.24591 6.00443C7.85266 5.78958 7.41781 5.66182 6.97085 5.62981C6.52388 5.5978 6.07526 5.66229 5.65541 5.81891C5.23556 5.97552 4.85431 6.2206 4.5375 6.53752L2.6625 8.41252C2.09326 9.0019 1.77828 9.79128 1.7854 10.6106C1.79252 11.43 2.12117 12.2138 2.70057 12.7932C3.27997 13.3726 4.06376 13.7013 4.88312 13.7084C5.70249 13.7155 6.49187 13.4005 7.08125 12.8313L8.15 11.7625" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+          <p class="msg-text">
+            Copyright © 2024 Best Trip Travel. All Rights Reserved.
+          </p>
+          <p class="msg-text">
+            Feel free to call our customer care number : +880 9677-443333.
+          </p>
+          <hr class="dotted-line" />
+          <p class="msg-text">
+            Rajlaxmi complex, Lift-06, Rajlaxmi, Sector-03, Uttara Dhaka,
+            Bangladesh
+          </p>
+          <p class="msg-text">
+            If you no longer wish to receive mail from us, you can
+            <span class="msg-red-text">
+              <a href="#">Unsubscribe </a>{system@besttrip.travel}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

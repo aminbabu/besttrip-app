@@ -212,8 +212,6 @@ module.exports = async (req, res, next) => {
             return res.status(404).send({ message: 'Wallet not found' });
         }
 
-        // return res.send({ bookingDetails });
-
         // Declare the invoice variable outside the conditional blocks
         let invoice;
 
@@ -225,6 +223,17 @@ module.exports = async (req, res, next) => {
 
         // Handling the second partial payment here
         if (invoice && invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
+            if (
+                paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1] &&
+                invoice &&
+                invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]
+            ) {
+                return res.status(404).send({
+                    message:
+                        'You can not make full payment cause you already made an partial payment. Now for the rest of the payment you have to select the partial payment type again.',
+                });
+            }
+
             if (invoice.partialPaymentExpiryDate < currentDate) {
                 return res.status(400).send({
                     message: 'Payment is no longer valid due to expiry.',
@@ -260,6 +269,12 @@ module.exports = async (req, res, next) => {
         }
         // For first time partial payment logic
         else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]) {
+            if (invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
+                return res.status(400).send({
+                    message: 'You may have already completed the full payment.',
+                });
+            }
+
             if (umrahBooking.umrahPackage.partialPaymentExpiryDate) {
                 if (
                     umrahBooking.umrahPackage.partialPaymentExpiryDate <
@@ -328,6 +343,11 @@ module.exports = async (req, res, next) => {
                     (text = `Your partial payment of ${totalPartialPaidAmount} has been received. Your invoice ID is ${invoice.invoiceId}. Please complete the payment by ${invoice.partialPaymentExpiryDate}. And if you are late then your previous payment will not be refundable.`),
                     (err) => console.log(err)
                 );
+
+                return res.status(200).send({
+                    message: `Your payment received successfully and an email has sended to your email:${req.user.email}`,
+                    invoice,
+                });
             } else {
                 return res.status(400).send({
                     message:
@@ -337,11 +357,22 @@ module.exports = async (req, res, next) => {
         }
         // For full payment logic
         else if (paymentType === UMRAH_BOOKING_PAYMENT_TYPE[1]) {
+            if (
+                invoice &&
+                invoice?.paymentType === UMRAH_BOOKING_PAYMENT_TYPE[0]
+            ) {
+                return res.status(404).send({
+                    message:
+                        'You can not make full payment cause you already made an partial payment. Now for the rest of the payment you have to select the partial payment type again.',
+                });
+            }
+
             if (invoice) {
                 return res.status(404).send({
                     message: 'You may have already completed the full payment.',
                 });
             }
+
             const totalAmount =
                 umrahBooking?.priceByTravelers?.adult?.subtotal +
                 umrahBooking?.priceByTravelers?.child?.subtotal +
@@ -388,12 +419,12 @@ module.exports = async (req, res, next) => {
                 (text = `Your full payment of ${totalAmount} has been received. Your invoice ID is ${invoice.invoiceId}.`),
                 (err) => console.log(err)
             );
-        }
 
-        return res.status(200).send({
-            message: `Your payment received successfully and an email has sended to your email:${req.user.email}`,
-            invoice,
-        });
+            return res.status(200).send({
+                message: `Your payment received successfully and an email has sended to your email:${req.user.email}`,
+                invoice,
+            });
+        }
     } catch (error) {
         return next(error);
     }

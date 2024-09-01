@@ -52,6 +52,22 @@ module.exports = async (req, res, next) => {
             },
         };
 
+        const lookupInvoice = {
+            $lookup: {
+                from: 'invoices',
+                localField: 'invoiceId',
+                foreignField: '_id',
+                as: 'invoice',
+            },
+        };
+
+        const unwindInvoice = {
+            $unwind: {
+                path: '$invoice',
+                preserveNullAndEmptyArrays: true,
+            },
+        };
+
         const lookupTravelersStage = {
             $lookup: {
                 from: 'travelers',
@@ -77,6 +93,23 @@ module.exports = async (req, res, next) => {
             },
         };
 
+        // Adjusted to look up the correct collection for invoices
+        const lookupInvoiceStage = {
+            $lookup: {
+                from: 'invoices', // Ensure this matches the correct collection name
+                localField: 'invoiceId',
+                foreignField: '_id',
+                as: 'invoice',
+            },
+        };
+
+        const unwindInvoiceStage = {
+            $unwind: {
+                path: '$invoice',
+                preserveNullAndEmptyArrays: true,
+            },
+        };
+
         const projectStage = {
             $project: {
                 _id: 1,
@@ -95,9 +128,12 @@ module.exports = async (req, res, next) => {
                     customerID: 1,
                     wallet: 1,
                 },
+                bookingRefId: 1,
                 umrahPackage: 1,
                 status: 1,
+                invoice: 1,
                 travelers: 1,
+                invoice: 1,
             },
         };
 
@@ -108,9 +144,13 @@ module.exports = async (req, res, next) => {
             unwindCustomerStage,
             lookupUmrahPackageStage,
             unwindUmrahPackageStage,
+            lookupInvoice,
+            unwindInvoice,
             lookupTravelersStage,
             lookupPackageDurationsStage,
             unwindPackageDurationsStage,
+            lookupInvoiceStage,
+            unwindInvoiceStage,
             projectStage,
         ]);
 
@@ -119,6 +159,9 @@ module.exports = async (req, res, next) => {
                 .status(404)
                 .json({ message: 'No data found for the given ID' });
         }
+
+        // Log the result for debugging purposes
+        console.log(JSON.stringify(umrahBookingsWithTravelers, null, 2));
 
         // Return bookings with travelers
         return res.status(200).json({
