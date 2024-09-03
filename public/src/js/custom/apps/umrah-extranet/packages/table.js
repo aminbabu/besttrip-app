@@ -180,6 +180,88 @@ var KTUmrahExtranetPackageList = (function () {
         });
     };
 
+    // duplicate package
+    var handleDuplicatePackage = function () {
+        // Select all delete buttons
+        const duplicateButtons = table.querySelectorAll(
+            '[data-kt-umrah-extranet-package-list-table-filter="duplicate"]'
+        );
+
+        duplicateButtons.forEach((d) => {
+            // Delete button on click
+            d.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const url = d.getAttribute('href');
+
+                // Select parent row
+                const parent = e.target.closest('tr');
+
+                // Get package name
+                const packageName = parent.querySelectorAll('td')[1].innerText;
+
+                // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+                Swal.fire({
+                    text:
+                        'Are you sure you want to duplicate ' +
+                        packageName +
+                        '?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: 'Yes, duplicate!',
+                    cancelButtonText: 'No, cancel',
+                    customClass: {
+                        confirmButton: 'btn fw-bold btn-danger',
+                        cancelButton: 'btn fw-bold btn-active-light-primary',
+                    },
+                }).then(function (result) {
+                    if (result.value) {
+                        axios.post(url).then((response) => {
+                            if (response) {
+                                Swal.fire({
+                                    text:
+                                        response?.data?.message ||
+                                        'Form has been successfully submitted!',
+                                    icon: 'success',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                    allowOutsideClick: false,
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                Swal.fire({
+                                    text: 'Sorry, looks like there are some errors detected, please try again.',
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
+                            }
+                        });
+                    } else if (result.dismiss === 'cancel') {
+                        Swal.fire({
+                            text: packageName + ' was not duplicate.',
+                            icon: 'error',
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ok, got it!',
+                            customClass: {
+                                confirmButton: 'btn fw-bold btn-primary',
+                            },
+                        });
+                    }
+                });
+            });
+        });
+    };
+
     // Init toggle toolbar
     var initToggleToolbar = () => {
         // Toggle selected action toolbar
@@ -327,6 +409,7 @@ var KTUmrahExtranetPackageList = (function () {
             handleSearch();
             handleFilterDatatable();
             handleRowDeletion();
+            handleDuplicatePackage();
             toggleToolbars();
             initFlatpickr();
             handleFilterResetForm();
