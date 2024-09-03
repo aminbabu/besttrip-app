@@ -22,6 +22,7 @@ const {
     updateUmrahPackage,
     deleteUmrahPackage,
     getUmrahPackagesForCustomers,
+    duplicatePackage,
 } = require('../../../../controllers/api/umrah/packages');
 
 // middlewares
@@ -85,10 +86,7 @@ router.post(
  * @access private - ['admin']
  * @method GET
  */
-router.get(
-    '/:id',
-    getUmrahPackage
-);
+router.get('/:id', getUmrahPackage);
 
 /**
  * @description check if user is authorized
@@ -109,6 +107,17 @@ router.use(isAuthorized);
  * @method GET
  */
 router.get('/', isAllowed(['admin']), getUmrahPackages);
+
+/**
+ * @description duplicate umrah package
+ * @param {string} path - /umrah/packages/:id/duplicate
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} controller - ['duplicatePackage']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method POST
+ */
+router.post('/:id/duplicate', isAllowed(['admin']), duplicatePackage);
 
 /**
  * @description get umrah package package

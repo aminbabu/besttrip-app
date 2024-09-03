@@ -16,4 +16,5 @@ module.exports = {
     createUmrahPackage: require('./create-umrah-package'),
     updateUmrahPackage: require('./update-umrah-package'),
     deleteUmrahPackage: require('./delete-umrah-package'),
+    duplicatePackage: require('./duplicate-package'),
 };
