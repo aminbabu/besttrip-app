@@ -10,6 +10,8 @@
   <%- include('../../partials/theme-mode.ejs') %>
   <!--end::Theme mode setup on page load-->
   <!--begin::App-->
+
+  <% const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;%>
   <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
     <!--begin::Page-->
     <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
@@ -82,7 +84,17 @@
                             <li>Supplier</li>
                           </ul>
                           <ul class="col-span-2 d-grid gap-5">
-                            <li>: <%= new Date(umrahBooking?.umrahPackage?.updatedAt).toLocaleString() %></li>
+                            <li>: <%= new Date(umrahBooking?.umrahPackage?.updatedAt).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %>
+                            </li>
                             <li>: <%= umrahBooking?.invoiceDetails?.paymentType.charAt(0).toUpperCase() + umrahBooking?.invoiceDetails?.paymentType.slice(1) %></li>
                             <li>:
                               <!-- 18 February, 2024 - 22:00:22 -->
@@ -128,7 +140,16 @@
                                     <path d="M0.335938 5V12.6667C0.335938 13.0203 0.476413 13.3594 0.726462 13.6095C0.97651 13.8595 1.31565 14 1.66927 14H12.3359C12.6896 14 13.0287 13.8595 13.2787 13.6095C13.5288 13.3594 13.6693 13.0203 13.6693 12.6667V5H0.335938ZM4.33594 11.6667C4.33594 11.8435 4.2657 12.013 4.14068 12.1381C4.01565 12.2631 3.84608 12.3333 3.66927 12.3333H3.0026C2.82579 12.3333 2.65622 12.2631 2.5312 12.1381C2.40618 12.013 2.33594 11.8435 2.33594 11.6667V11C2.33594 10.8232 2.40618 10.6536 2.5312 10.5286C2.65622 10.4036 2.82579 10.3333 3.0026 10.3333H3.66927C3.84608 10.3333 4.01565 10.4036 4.14068 10.5286C4.2657 10.6536 4.33594 10.8232 4.33594 11V11.6667ZM4.33594 8C4.33594 8.17681 4.2657 8.34638 4.14068 8.4714C4.01565 8.59643 3.84608 8.66667 3.66927 8.66667H3.0026C2.82579 8.66667 2.65622 8.59643 2.5312 8.4714C2.40618 8.34638 2.33594 8.17681 2.33594 8V7.33333C2.33594 7.15652 2.40618 6.98695 2.5312 6.86193C2.65622 6.73691 2.82579 6.66667 3.0026 6.66667H3.66927C3.84608 6.66667 4.01565 6.73691 4.14068 6.86193C4.2657 6.98695 4.33594 7.15652 4.33594 7.33333V8ZM8.0026 11.6667C8.0026 11.8435 7.93237 12.013 7.80734 12.1381C7.68232 12.2631 7.51275 12.3333 7.33594 12.3333H6.66927C6.49246 12.3333 6.32289 12.2631 6.19787 12.1381C6.07284 12.013 6.0026 11.8435 6.0026 11.6667V11C6.0026 10.8232 6.07284 10.6536 6.19787 10.5286C6.32289 10.4036 6.49246 10.3333 6.66927 10.3333H7.33594C7.51275 10.3333 7.68232 10.4036 7.80734 10.5286C7.93237 10.6536 8.0026 10.8232 8.0026 11V11.6667ZM8.0026 8C8.0026 8.17681 7.93237 8.34638 7.80734 8.4714C7.68232 8.59643 7.51275 8.66667 7.33594 8.66667H6.66927C6.49246 8.66667 6.32289 8.59643 6.19787 8.4714C6.07284 8.34638 6.0026 8.17681 6.0026 8V7.33333C6.0026 7.15652 6.07284 6.98695 6.19787 6.86193C6.32289 6.73691 6.49246 6.66667 6.66927 6.66667H7.33594C7.51275 6.66667 7.68232 6.73691 7.80734 6.86193C7.93237 6.98695 8.0026 7.15652 8.0026 7.33333V8ZM11.6693 11.6667C11.6693 11.8435 11.599 12.013 11.474 12.1381C11.349 12.2631 11.1794 12.3333 11.0026 12.3333H10.3359C10.1591 12.3333 9.98956 12.2631 9.86453 12.1381C9.73951 12.013 9.66927 11.8435 9.66927 11.6667V11C9.66927 10.8232 9.73951 10.6536 9.86453 10.5286C9.98956 10.4036 10.1591 10.3333 10.3359 10.3333H11.0026C11.1794 10.3333 11.349 10.4036 11.474 10.5286C11.599 10.6536 11.6693 10.8232 11.6693 11V11.6667ZM11.6693 8C11.6693 8.17681 11.599 8.34638 11.474 8.4714C11.349 8.59643 11.1794 8.66667 11.0026 8.66667H10.3359C10.1591 8.66667 9.98956 8.59643 9.86453 8.4714C9.73951 8.34638 9.66927 8.17681 9.66927 8V7.33333C9.66927 7.15652 9.73951 6.98695 9.86453 6.86193C9.98956 6.73691 10.1591 6.66667 10.3359 6.66667H11.0026C11.1794 6.66667 11.349 6.73691 11.474 6.86193C11.599 6.98695 11.6693 7.15652 11.6693 7.33333V8ZM13.6693 4.33333V2.33333C13.6693 1.97971 13.5288 1.64057 13.2787 1.39052C13.0287 1.14048 12.6896 1 12.3359 1H12.0026V1.33333C12.0026 2.06867 11.4046 2.66667 10.6693 2.66667C9.93394 2.66667 9.33594 2.06867 9.33594 1.33333V1H4.66927V1.33333C4.66927 2.06867 4.07127 2.66667 3.33594 2.66667C2.6006 2.66667 2.0026 2.06867 2.0026 1.33333V1H1.66927C1.31565 1 0.97651 1.14048 0.726462 1.39052C0.476413 1.64057 0.335938 1.97971 0.335938 2.33333V4.33333H13.6693Z" fill="currentColor" />
                                   </svg>
                                   <span class="flex-shrink-0 details-card-text">
-                                    <%= new Date(umrahBooking?.umrahPackage?.journeyDate).toLocaleString() %>
+                                    <%= new Date(umrahBooking?.umrahPackage?.journeyDate).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %>
                                   </span>
                                 </li>
                                 <li class="text-t-600">
@@ -368,11 +389,29 @@
                               <td><%= traveler.firstName + " " + traveler.lastName %></td>
                               <td><%= traveler.gender.charAt(0).toUpperCase() + traveler.gender.slice(1) %></td>
                               <td><%= traveler.travelerType.charAt(0).toUpperCase() + traveler.travelerType.slice(1) %></td>
-                              <td><%= new Date(traveler.dateOfBirth).toLocaleDateString() %></td>
+                              <td><%= new Date(traveler.dateOfBirth).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %></td>
                               <td><%= traveler.cityName %></td>
                               <td><%= traveler.passportNumber %></td>
                               <td><%= traveler.documentIssueCountry %></td>
-                              <td><%= new Date(traveler.passportExpiryDate).toLocaleDateString() %></td>
+                              <td><%= new Date(traveler.passportExpiryDate).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %></td>
                               <td><%= traveler.phone %></td>
                               <td><%= traveler.emergencyContactNo %></td>
                               <td class="text-end">
@@ -1677,7 +1716,16 @@
                                 <label class="fs-6 fw-semibold mb-2">Previous Time Limit</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="" name="prev_time_limit" id="prev_time_limit" value="<%= new Date(umrahBooking?.invoiceDetails?.partialPaymentExpiryDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }) %>" disabled />
+                                <input class="form-control form-control-solid" placeholder="" name="prev_time_limit" id="prev_time_limit" value="<%= new Date(umrahBooking?.invoiceDetails?.partialPaymentExpiryDate).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %>" disabled />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->

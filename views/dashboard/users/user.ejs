@@ -10,6 +10,7 @@
   <%- include('../partials/theme-mode.ejs') %>
   <!--end::Theme mode setup on page load-->
   <!--begin::App-->
+  <% const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;%>
   <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
     <!--begin::Page-->
     <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
@@ -149,7 +150,16 @@
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Joined Date</div>
                             <div class="text-gray-600">
-                              <%= user?.createdAt %>
+                              <%= new Date(user?.createdAt).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %>
                             </div>
                             <!--begin::Details item-->
                             <% if (user?.loginHistory.lastLogin) { %>
@@ -400,8 +410,16 @@
                                   <td>
                                     <div class="d-flex flex-column">
                                       <span class="text-muted fw-bold"><%= history.lastLoginDaysAgo %></span>
-
-                                      <span><%= new Date(history.lastLogin).toLocaleString() %></span>
+                                      <span><%= new Date(history.lastLogin).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %></span>
                                     </div>
                                   </td>
                                   <td><%= history.ipAddress %></td>
