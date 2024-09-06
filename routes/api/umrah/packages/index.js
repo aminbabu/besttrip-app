@@ -314,7 +314,7 @@ router.patch(
         return next();
     },
     (req, res, next) => {
-        return console.log(req.body);
+        return console.log('data from the controller', req.body);
     },
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
