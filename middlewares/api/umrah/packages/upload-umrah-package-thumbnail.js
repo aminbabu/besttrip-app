@@ -23,8 +23,12 @@ module.exports =
         const { id } = req.params || {};
         const { thumbnail } = req.files || {};
 
-        // check if id exists
+        if (req.method === 'PATCH' && !thumbnail) {
+            return next();
+        }
+
         if (id) {
+            // check if id exists
             // get umrah package
             umrahPackage = await UmrahPackage.findById(id);
         }

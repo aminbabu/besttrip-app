@@ -21,6 +21,10 @@ module.exports = async (req, res, next) => {
         // get thumbnail
         const { thumbnail } = req.files || {};
 
+        if (req.method === 'PATCH' && !thumbnail) {
+            return next();
+        }
+
         // check if thumbnail is not provided
         if (!thumbnail) {
             return res.status(400).json({

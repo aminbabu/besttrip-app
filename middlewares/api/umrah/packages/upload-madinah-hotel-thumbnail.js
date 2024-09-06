@@ -23,6 +23,10 @@ module.exports =
         const { id } = req.params || {};
         const { madinahHotelThumbnail } = req.files || {};
 
+        if (req.method === 'PATCH' && !madinahHotelThumbnail) {
+            return next();
+        }
+
         // check if id exists
         if (id) {
             // get umrah package

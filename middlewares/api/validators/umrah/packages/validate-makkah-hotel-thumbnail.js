@@ -21,6 +21,10 @@ module.exports = async (req, res, next) => {
         // get makkah hotel thumbnail
         const { makkahHotelThumbnail } = req.files || {};
 
+        if (req.method === 'PATCH' && !makkahHotelThumbnail) {
+            return next();
+        }
+
         // check if makkah hotel thumbnail is not provided
         if (!makkahHotelThumbnail) {
             return res.status(400).json({

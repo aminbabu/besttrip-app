@@ -7,13 +7,18 @@ var KTCreatePackage = (function () {
     var form;
     var formSubmitButton;
     var formContinueButton;
-    var itineraryData;
+    var editors = {};
 
     // Variables
     var stepperObj;
     var validations = [];
     var ktFileUploaderContent;
+    var dropZoneBasicThumbnails;
+    var dropZoneMakkahThumbnails;
+    var dropZoneMadinahThumbnails;
     var umrahPackageDetails;
+    var numberOfDays;
+    var initialItinearyItems;
 
     // Private Functions
     var initStepper = function () {
@@ -86,47 +91,142 @@ var KTCreatePackage = (function () {
 
             validator.validate().then(function (status) {
                 if (status == 'Valid') {
-                    // Prevent default button action
-                    e.preventDefault();
+                    // Show loading indication
+                    formSubmitButton.setAttribute('data-kt-indicator', 'on');
 
                     // Disable button to avoid multiple click
                     formSubmitButton.disabled = true;
 
-                    // Show loading indication
-                    formSubmitButton.setAttribute('data-kt-indicator', 'on');
+                    // construct form data
+                    const formData = new FormData(form);
 
-                    // Simulate form submission
-                    setTimeout(function () {
-                        // Hide loading indication
-                        formSubmitButton.removeAttribute('data-kt-indicator');
-
-                        // Enable button
-                        formSubmitButton.disabled = false;
-
-                        // Show popup confirmation
-                        Swal.fire({
-                            text: 'Form has been successfully submitted!',
-                            icon: 'success',
-                            buttonsStyling: false,
-                            confirmButtonText: 'Ok, got it!',
-                            customClass: {
-                                confirmButton: 'btn btn-primary',
-                            },
-                        }).then(function (result) {
-                            // stepperObj.goNext();
+                    // Function to append Dropzone files to FormData
+                    const appendDropzoneFiles = (dropzone, fieldName) => {
+                        dropzone.files.forEach((file) => {
+                            formData.append(fieldName, file, file.name);
                         });
-                    }, 2000);
+                    };
+
+                    // Append files from each Dropzone instance
+                    appendDropzoneFiles(
+                        dropZoneBasicThumbnails,
+                        'extraThumbnails'
+                    );
+                    appendDropzoneFiles(
+                        dropZoneMakkahThumbnails,
+                        'makkahHotelExtraThumbnails'
+                    );
+                    appendDropzoneFiles(
+                        dropZoneMadinahThumbnails,
+                        'madinahhHotelExtraThumbnails'
+                    );
+
+                    formData.append(
+                        'umrahDescription',
+                        editors[
+                            'kt_docs_ckeditor_about_us_description'
+                        ].getData()
+                    );
+
+                    formData.append(
+                        'termsConditions',
+                        editors[
+                            'kt_docs_ckeditor_terms_&_conditions_description'
+                        ].getData()
+                    );
+
+                    if (initialItinearyItems.length > numberOfDays) {
+                        formData.append(
+                            'itemsToRemove',
+                            initialItinearyItems.length - numberOfDays
+                        );
+                    }
+
+                    axios
+                        .patch(
+                            formSubmitButton
+                                .closest('form')
+                                .getAttribute('action'),
+                            formData
+                        )
+                        .then((response) => {
+                            if (response) {
+                                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                console.log(response);
+                                Swal.fire({
+                                    text:
+                                        response?.data?.message ||
+                                        'Form has been successfully submitted!',
+                                    icon: 'success',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                    allowOutsideClick: false,
+                                }).then(() => {
+                                    // Reset form
+                                    // form.reset();
+                                    location.reload();
+                                });
+                            } else {
+                                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                Swal.fire({
+                                    text: 'Sorry, looks like there are some errors detected, please try again.',
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            const errors = error.response?.data?.message
+                                ? error.response?.data?.message
+                                : error?.response?.data?.errors;
+
+                            Swal.fire({
+                                html: `${
+                                    errors instanceof Array
+                                        ? `<ul class="text-start">${Object.values(
+                                              error.response.data.errors
+                                          )
+                                              .map(
+                                                  (err) =>
+                                                      `<li>${err?.message}</li>`
+                                              )
+                                              .join('')}</ul>`
+                                        : errors
+                                }`,
+                                icon: 'error',
+                                buttonsStyling: false,
+                                confirmButtonText: 'Ok, got it!',
+                                customClass: {
+                                    confirmButton: 'btn btn-primary',
+                                },
+                            });
+                        })
+                        .then(() => {
+                            // Hide loading indication
+                            formSubmitButton.removeAttribute(
+                                'data-kt-indicator'
+                            );
+
+                            // Enable button
+                            formSubmitButton.disabled = false;
+                        });
                 } else {
+                    // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
                         text: 'Sorry, looks like there are some errors detected, please try again.',
                         icon: 'error',
                         buttonsStyling: false,
                         confirmButtonText: 'Ok, got it!',
                         customClass: {
-                            confirmButton: 'btn btn-light',
+                            confirmButton: 'btn btn-primary',
                         },
-                    }).then(function () {
-                        KTUtil.scrollTop();
                     });
                 }
             });
@@ -1027,7 +1127,7 @@ var KTCreatePackage = (function () {
             const madinahHotelExtraThumbnails =
                 umrahPackage.madinahHotelExtraThumbnails || [];
 
-            const dropZoneBasicThumbnails = new Dropzone(
+            dropZoneBasicThumbnails = new Dropzone(
                 '#kt_dropzonejs_basic_thumbnails',
                 {
                     url: 'https://keenthemes.com/scripts/void.php', // Set to actual upload URL
@@ -1053,7 +1153,7 @@ var KTCreatePackage = (function () {
                 }
             );
 
-            const dropZoneMakkahThumbnails = new Dropzone(
+            dropZoneMakkahThumbnails = new Dropzone(
                 '#kt_dropzonejs_makkah_hotel_thumbnails',
                 {
                     url: 'https://keenthemes.com/scripts/void.php', // Set to actual upload URL
@@ -1079,7 +1179,7 @@ var KTCreatePackage = (function () {
                 }
             );
 
-            const dropZoneMadinahThumbnails = new Dropzone(
+            dropZoneMadinahThumbnails = new Dropzone(
                 '#kt_dropzonejs_madinah_hotel_thumbnails',
                 {
                     url: 'https://keenthemes.com/scripts/void.php', // Set to actual upload URL
@@ -1153,8 +1253,6 @@ var KTCreatePackage = (function () {
     // Flight stops handler
     const handleFlightStops = () => {
         const select = $('[data-kt-umrah-extranet-flight-stops-select="true"]');
-
-        console.log(select);
         let stepper;
         let firstTimepicker;
         let secondTimepicker;
@@ -1172,31 +1270,32 @@ var KTCreatePackage = (function () {
             );
 
             switch (value) {
-                case 'one-stop': {
-                    showFirstTimePicker();
-                    showFirstAirportInput();
-                    hideSecondTimePicker();
-                    hideSecondAirportInput();
-                    console.log(value);
-
-                    break;
-                }
-                case 'two-stop': {
-                    showFirstTimePicker();
-                    showFirstAirportInput();
-                    showSecondTimePicker();
-                    showSecondAirportInput();
-                    console.log(value);
-
-                    break;
-                }
-                case 'non-stop': {
+                case '0': {
+                    // showFirstTimePicker();
+                    // showFirstAirportInput();
                     hideFirstTimePicker();
                     hideFirstAirportInput();
                     hideSecondTimePicker();
                     hideSecondAirportInput();
-                    console.log(value);
+                    break;
+                }
+                case '1': {
+                    showFirstTimePicker();
+                    showFirstAirportInput();
+                    hideSecondTimePicker();
+                    hideSecondAirportInput();
 
+                    break;
+                }
+                case '2': {
+                    showFirstTimePicker();
+                    showFirstAirportInput();
+                    showSecondTimePicker();
+                    showSecondAirportInput();
+                    // hideFirstTimePicker();
+                    // hideFirstAirportInput();
+                    // hideSecondTimePicker();
+                    // hideSecondAirportInput();
                     break;
                 }
                 default:
@@ -1258,35 +1357,23 @@ var KTCreatePackage = (function () {
         });
     };
 
-    // CKEditors
-    const initCKEditors = () => {
-        const textareas = [
-            'kt_docs_ckeditor_about_us_description',
-            'kt_docs_ckeditor_terms_&_conditions_description',
-        ];
-
-        textareas.forEach((id) => {
-            ClassicEditor.create(document.getElementById(id))
-                .then((editor) => {
-                    console.log(editor);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        });
-    };
-
     // Day wise itinearies
     const handleDayWiseItinearies = () => {
-        const addDayWiseItineary = (days, data) => {
+        initialItinearyItems = $('.itineary_item');
+
+        numberOfDays = initialItinearyItems.length;
+
+        const addDayWiseItineary = (days) => {
             let html = '';
 
             for (let i = 0; i < days; i++) {
+                const serial = initialItinearyItems.length + i + 1;
+
                 html += `
-        <div class="row border-bottom">
+        <div class="row border-bottom mb-5">
         <div class="col-lg-12">
           <h3 class="fs-4 mb-4 pb-4 border-bottom">
-            Day ${i + 1 > 9 ? i + 1 : '0' + (i + 1)}
+            Day ${serial}
           </h3>
         </div>
         <div class="col-lg-12">
@@ -1328,7 +1415,7 @@ var KTCreatePackage = (function () {
                 <!--begin::Input-->
                 <input
                   type="file"
-                  name="day_wise_itineary_thumbnail_1"
+                  name="day_wise_itineary_thumbnail_${i + 1}"
                   id="day_wise_itineary_thumbnail_${i + 1}"
                   accept=".png, .jpg, .jpeg"
                   data-kt-file-uploader-max-size="10"
@@ -1388,30 +1475,29 @@ var KTCreatePackage = (function () {
       </div>`;
             }
 
-            $('#day_wise_itinearies_row').html(html);
-
-            // Populate existing thumbnails if available
-            data.forEach((item, index) => {
-                const previewContainer = form
-                    .querySelector(`day_wise_itineary_thumbnail_${index + 1}`)
-                    .closest('.kt-file-uploader');
-                if (item.thumbnail) {
-                    const preview = document.createElement('img');
-                    preview.classList.add('kt-file-uploader-preview');
-                    preview.src = item.src;
-                    preview.alt = item.title;
-                    previewContainer.querySelector('label').innerHTML = '';
-                    previewContainer
-                        .querySelector('label')
-                        .appendChild(preview, itineraryData);
-                }
-            });
+            return html;
         };
 
         $('[name="totalDaysAndNights"]').on('select2:select', function (e) {
             var data = e.params.data;
             var days = $(this).find('option:selected').data('kt-duration');
-            addDayWiseItineary(days, itineraryData);
+            if (days > initialItinearyItems.length) {
+                const createNewDays = days - initialItinearyItems.length;
+                const result = addDayWiseItineary(createNewDays);
+                initialItinearyItems.removeClass('d-none');
+
+                $('#day_wise_itinearies_row').append(result);
+
+                numberOfDays = createNewDays + initialItinearyItems.length;
+            } else {
+                const removeDays = initialItinearyItems.length - days;
+
+                numberOfDays = initialItinearyItems.length - removeDays;
+
+                initialItinearyItems.slice(numberOfDays).addClass('d-none');
+            }
+
+            console.log(numberOfDays);
         });
     };
 
@@ -1424,8 +1510,6 @@ var KTCreatePackage = (function () {
 
             if (response) {
                 const data = response.data.umrahPackage;
-
-                itineraryData = data.itineraryDays;
 
                 // Populate the file upload preview for thumbnails
                 const thumbnails = [
@@ -1495,6 +1579,24 @@ var KTCreatePackage = (function () {
                 },
             });
         }
+    };
+
+    // CKEditors
+    const initCKEditors = () => {
+        const textareas = [
+            'kt_docs_ckeditor_about_us_description',
+            'kt_docs_ckeditor_terms_&_conditions_description',
+        ];
+
+        textareas.forEach((id) => {
+            ClassicEditor.create(document.getElementById(id))
+                .then((editor) => {
+                    editors[id] = editor;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        });
     };
 
     // Init File Uploader
@@ -1573,7 +1675,9 @@ var KTCreatePackage = (function () {
                 return;
             }
 
-            form = stepper.querySelector('#kt_umrah_extranet_package_add_form');
+            form = stepper.querySelector(
+                '#kt_umrah_extranet_package_edit_form'
+            );
             formSubmitButton = stepper.querySelector(
                 '[data-kt-stepper-action="submit"]'
             );

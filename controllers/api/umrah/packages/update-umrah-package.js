@@ -23,7 +23,6 @@ module.exports = async (req, res, next) => {
             makkahHotelExtraThumbnails,
             madinahHotelThumbnail,
             madinahhHotelExtraThumbnails,
-            itineraryDays,
             umrahThumbnail,
         } = req.files;
 
@@ -37,28 +36,58 @@ module.exports = async (req, res, next) => {
             });
         }
 
-        // update umrah package
+        // Remove outbound flight layover details if outboundFlightStops is '0'
+        if (validatedData.outboundFlightStops === '0') {
+            delete validatedData.outboundLayoverFirstDuration;
+            delete validatedData.outboundLayoverFirstAirport;
+            delete validatedData.outboundLayoverSecondDuration;
+            delete validatedData.outboundLayoverSecondAirport;
+        } else if (validatedData.outboundFlightStops === '1') {
+            delete validatedData.outboundLayoverSecondDuration;
+            delete validatedData.outboundLayoverSecondAirport;
+        }
+
+        // Remove inbound flight layover details if inboundFlightStops is '0'
+        if (validatedData.inboundFlightStops === '0') {
+            delete validatedData.inboundLayoverFirstDuration;
+            delete validatedData.inboundLayoverFirstAirport;
+            delete validatedData.inboundLayoverSecondDuration;
+            delete validatedData.inboundLayoverSecondAirport;
+        } else if (validatedData.inboundFlightStops === '1') {
+            delete validatedData.inboundLayoverSecondDuration;
+            delete validatedData.inboundLayoverSecondAirport;
+        }
+
+        // Log the validatedData after delete operations
+        return console.log('Validated Data after delete:', validatedData);
+
         umrahPackage.set({
             ...validatedData,
             schedule: validatedData.schedule.toLowerCase(),
-            thumbnail: thumbnail.path,
+            thumbnail: thumbnail ? thumbnail.path : umrahPackage.thumbnail,
             extraThumbnails: extraThumbnails?.map(
                 (extraThumbnail) => extraThumbnail.path
             ),
-            makkahHotelThumbnail: makkahHotelThumbnail.path,
+            makkahHotelThumbnail: makkahHotelThumbnail
+                ? makkahHotelThumbnail.path
+                : umrahPackage.makkahHotelThumbnail,
             makkahHotelExtraThumbnails: makkahHotelExtraThumbnails?.map(
                 (makkahHotelExtraThumbnail) => makkahHotelExtraThumbnail.path
             ),
-            madinahHotelThumbnail: madinahHotelThumbnail.path,
+            madinahHotelThumbnail: madinahHotelThumbnail
+                ? madinahHotelThumbnail.path
+                : umrahPackage.madinahHotelThumbnail,
             madinahhHotelExtraThumbnails: madinahhHotelExtraThumbnails?.map(
                 (madinahhHotelExtraThumbnail) =>
                     madinahhHotelExtraThumbnail.path
             ),
-            itineraryDays: itineraryDays?.map((itineraryDay) => ({
+            itineraryDays: validatedData.itineraryDays?.map((itineraryDay) => ({
                 ...itineraryDay,
-                thumbnail: itineraryDay.thumbnail.path,
+                thumbnail: itineraryDay?.thumbnail?.path,
             })),
-            umrahThumbnail: umrahThumbnail.path,
+            umrahThumbnail: umrahThumbnail
+                ? umrahThumbnail.path
+                : umrahPackage.umrahThumbnail,
         });
 
         // save umrah package

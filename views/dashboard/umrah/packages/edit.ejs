@@ -10,17 +10,7 @@
   <%- include('../../partials/theme-mode.ejs') %>
   <!--end::Theme mode setup on page load-->
   <!--begin::App-->
-  <% 
-     // Convert the date to YYYY-MM-DD format if necessary
-     const formatDate = (dateStr) => {
-     if (!dateStr) return '';
-     const date = new Date(dateStr);
-     const year = date.getFullYear();
-     const month = String(date.getMonth() + 1).padStart(2, '0');
-     const day = String(date.getDate()).padStart(2, '0');
-     return `${year}-${month}-${day}`;
-     };
-%>
+
   <div class="d-flex flex-column flex-root app-root" id="kt_app_root" data-kt->
     <!--begin::Page-->
     <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
@@ -373,7 +363,7 @@
                   <!--begin::Content-->
                   <div class="card d-flex flex-row-fluid flex-center">
                     <!--begin::Form-->
-                    <form class="card-body py-20 w-100 mw-xl-700px px-9" novalidate="novalidate" id="kt_umrah_extranet_package_add_form" action="/api/umrah/packages/<%= umrahPackage._id %>" method="post" enctype="multipart/form-data">
+                    <form class="card-body py-20 w-100 mw-xl-700px px-9" novalidate="novalidate" id="kt_umrah_extranet_package_edit_form" action="/api/umrah/packages/<%= umrahPackage._id %>" method="post" enctype="multipart/form-data">
                       <!--begin::Step 1-->
                       <div class="current" data-kt-stepper-element="content">
                         <!--begin::Wrapper-->
@@ -465,7 +455,7 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <select name="departureLocation" aria-label="Select a location" data-control="select2" data-placeholder="Select a location.." class="form-select form-select-solid form-select-lg">
-                                  <option value="" disabled>Select a location..</option>
+                                  <option value="">Select a location..</option>
                                   <option value="Dhaka, Bangladesh" <%= umrahPackage.departureLocation === 'Dhaka, Bangladesh' ? 'selected' : '' %>>
                                     Dhaka, Bangladesh
                                   </option>
@@ -538,11 +528,8 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Journey Date</label>
                                 <!--end::Label-->
-                                <%
-                                  const journeyDateFormatted = formatDate(umrahPackage.journeyDate);
-                                %>
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="journeyDate" data-flatpickr="package_date_picker" value="<%= journeyDateFormatted %>" />
+                                <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="journeyDate" data-flatpickr="package_date_picker" value="<%= umrahPackage.journeyDate.toISOString() %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -553,11 +540,8 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Package Expire Date</label>
                                 <!--end::Label-->
-                                <%
-                                  const expiryDateFormatted = formatDate(umrahPackage.expiryDate);
-                                %>
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="expiryDate" data-flatpickr="package_date_picker" value="<%= expiryDateFormatted %>" disabled />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="expiryDate" data-flatpickr="package_date_picker" value="<%= umrahPackage.expiryDate.toISOString() %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -716,12 +700,8 @@
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label required">Partial Price Due Date</label>
-                                <%
-                                  // Format the partialPaymentExpiryDate
-                                  const partialPaymentExpiryDateTime = formatDate(umrahPackage?.partialPaymentExpiryDate);
-                                %>
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="partialPaymentExpiryDate" data-flatpickr="package_date_picker" value="<%= partialPaymentExpiryDateTime %>" />
+                                <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="partialPaymentExpiryDate" data-flatpickr="package_date_picker" value="<%= umrahPackage?.partialPaymentExpiryDate.toISOString() %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -956,13 +936,8 @@
                                 <label class="form-label required">Departure Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <%
-                             
-                                  // Format the outboundDepartureDatetime
-                                  const outboundDepartureDateFormatted = formatDate(umrahPackage.outboundDepartureDatetime);
-                                %>
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Pick a date" name="outboundDepartureDatetime" data-flatpickr="package_date_picker" value="<%= outboundDepartureDateFormatted %>" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundDepartureDatetime" data-flatpickr="package_datetime_picker" value="<%= umrahPackage.outboundDepartureDatetime.toISOString() %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -973,12 +948,8 @@
                                 <!--begin::Label-->
                                 <label class="form-label required">Arrival Date & Time</label>
                                 <!--end::Label-->
-                                <%
-                                // Format the outboundArrivalDatetime
-                                const outboundArrivalDateFormatted = formatDate(umrahPackage.outboundArrivalDatetime);
-                              %>
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundArrivalDatetime" data-flatpickr="package_datetime_picker" value="<%= outboundArrivalDateFormatted %>" disabled />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="outboundArrivalDatetime" data-flatpickr="package_datetime_picker" value="<%= umrahPackage.outboundArrivalDatetime.toISOString() %>" />
                                 <!--end::Input-->
 
                               </div>
@@ -1787,11 +1758,7 @@
                                 <label class="form-label required">Departure Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <%
-                                  // Format the inboundDepartureDatetime
-                                  const inboundDepartureDatetime = formatDate(umrahPackage.inboundDepartureDatetime);
-                                %>
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundDepartureDatetime" data-flatpickr="package_datetime_picker" value="<%= inboundDepartureDatetime %>" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundDepartureDatetime" data-flatpickr="package_datetime_picker" value="<%= umrahPackage.inboundDepartureDatetime.toISOString() %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -1803,11 +1770,7 @@
                                 <label class="form-label required">Arrival Date & Time</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <%
-                                  // Format the inboundArrivalDatetime
-                                  const inboundArrivalDatetime = formatDate(umrahPackage.inboundArrivalDatetime);
-                                %>
-                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundArrivalDatetime" data-flatpickr="package_datetime_picker" disabled value="<%= inboundArrivalDatetime %>" />
+                                <input class="form-control form-control-solid" placeholder="Pick a date" name="inboundArrivalDatetime" data-flatpickr="package_datetime_picker" value="<%= umrahPackage.inboundArrivalDatetime.toISOString() %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
@@ -2465,7 +2428,7 @@
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyarahMakkahDetails[<%= index %>]" placeholder="Enter option" value="<%= detail %>" />
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMakkahDetails" placeholder="Enter option" value="<%= detail %>" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -2523,7 +2486,7 @@
                                   <div class="fv-row mb-10" data-repeater-item>
                                     <div class="d-flex gap-3">
                                       <!--begin::Input-->
-                                      <input type="text" class="form-control form-control-solid" name="ziyarahMadinahDetails[<%= index %>]" placeholder="Enter option" value="<%= detail %>" />
+                                      <input type="text" class="form-control form-control-solid" name="ziyarahMadinahDetails" placeholder="Enter option" value="<%= detail %>" />
                                       <!--end::Input-->
                                       <!--begin::Action-->
                                       <button type="button" data-repeater-delete class="btn btn-sm btn-light-primary d-inline-flex align-items-center">
@@ -2634,7 +2597,87 @@
                             <!--end::Notice-->
                           </div>
                           <!--end::Heading-->
-                          <div id="day_wise_itinearies_row"></div>
+                          <div id="day_wise_itinearies_row">
+                            <% umrahPackage?.itineraryDays?.forEach(function(detail, index) { %>
+                            <div class="row border-bottom itineary_item mb-5">
+                              <div class="col-lg-12">
+                                <h3 class="fs-4 mb-4 pb-4 border-bottom">
+                                  Day <%=  index + 1 %>
+                                </h3>
+                              </div>
+                              <div class="col-lg-12">
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10">
+                                  <!--begin::Label-->
+                                  <label class="form-label">Thumbnail</label>
+                                  <!--end::Label-->
+                                  <!--begin::Input group-->
+                                  <div class="fv-row">
+                                    <!--begin::Preview Container-->
+                                    <div class="kt-file-uploader">
+                                      <!--begin::Message-->
+                                      <label class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start" for="day_wise_itineary_thumbnail_<%= index + 1 %>">
+
+
+                                        <% if (detail?.thumbnail) { %>
+                                        <img class="kt-file-uploader-preview" src="<%=detail.thumbnail%>" alt="<%=detail.title%>" />
+                                        <% } else { %>
+                                        <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span>
+                                        </i>
+
+                                        <!--begin::Info-->
+                                        <div class="ms-xl-4 mt-4 mt-xl-0">
+                                          <h3 class="fs-5 fw-bold text-gray-900 mb-1">
+                                            Upload thumbnail
+                                          </h3>
+                                          <span class="fs-7 fw-semibold text-gray-500">
+                                            PNG, JPG, JPEG up to 10MB
+                                          </span>
+                                        </div>
+                                        <!--end::Info-->
+                                        <% } %>
+                                      </label>
+                                      <!--end::Message-->
+                                      <!--begin::Input-->
+                                      <input type="file" name="day_wise_itineary_thumbnail_<%= index + 1 %>" id="day_wise_itineary_thumbnail_<%= index + 1 %>" accept=".png, .jpg, .jpeg" data-kt-file-uploader-max-size="10" hidden class="d-none" />
+                                      <!--end::Input-->
+                                      <!--begin::Error Message -->
+                                      <div class="invalid-feedback d-block"></div>
+                                      <!--end::Error Message-->
+                                    </div>
+                                    <!--end::Preview Container-->
+                                  </div>
+                                  <!--end::Input group-->
+                                </div>
+                                <!--end::Input group-->
+                              </div>
+                              <div class="col-lg-12">
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10">
+                                  <!--begin::Label-->
+                                  <label class="form-label">Title</label>
+                                  <!--end::Label-->
+                                  <!--begin::Input-->
+                                  <input type="text" class="form-control form-control-solid" name="day_wise_itineary_title_<%= index + 1 %>" placeholder="" value=<%= detail?.title %> />
+                                  <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                              </div>
+                              <div class="col-lg-12">
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-10">
+                                  <!--begin::Label-->
+                                  <label class="form-label">Description</label>
+                                  <!--end::Label-->
+                                  <!--begin::Input-->
+                                  <textarea class="form-control form-control-solid" name="day_wise_itineary_description_<%= index + 1 %>" rows="3" placeholder=""><%= detail?.description %> </textarea>
+                                  <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                              </div>
+                            </div>
+                            <% }) %>
+                          </div>
                         </div>
                         <!--end::Wrapper-->
                       </div>

@@ -23,6 +23,10 @@ module.exports =
         const { id } = req.params || {};
         const { umrahThumbnail } = req.files || {};
 
+        if (req.method === 'PATCH' && !umrahThumbnail) {
+            return next();
+        }
+
         // check if id exists
         if (id) {
             // get umrah package
