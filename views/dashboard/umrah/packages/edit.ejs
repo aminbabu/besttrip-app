@@ -1003,7 +1003,7 @@
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-6 d-none">
+                            <div class="col-lg-6 <% if (umrahPackage.outboundFlightStops === 0) { %> d-none <% } %>">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
@@ -1017,7 +1017,7 @@
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-6 d-none">
+                            <div class="col-lg-6 <% if (umrahPackage.outboundFlightStops === 0) { %> d-none <% } %>">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
@@ -1040,7 +1040,7 @@
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-6 d-none">
+                            <div class="col-lg-6 <% if (umrahPackage.outboundFlightStops === 0 && umrahPackage.outboundFlightStops === 1 ) { %> d-none <% } %>">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
@@ -1054,7 +1054,7 @@
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-6 d-none">
+                            <div class="col-lg-6 <% if (umrahPackage.outboundFlightStops === 0 && umrahPackage.outboundFlightStops === 1 ) { %> d-none <% } %>">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
@@ -1829,7 +1829,7 @@
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-6 d-none">
+                            <div class="col-lg-6 <% if (umrahPackage.inboundFlightStops === 0) { %> d-none <% } %>">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
@@ -1838,12 +1838,12 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverFirstDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="1st" value="<%= umrahPackage.inboundLayoverFirstDuration || '' %>" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverFirstDuration" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="1st" value="<%= umrahPackage.inboundLayoverFirstDuration || '' %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-6 d-none">
+                            <div class="col-lg-6 <% if (umrahPackage.inboundFlightStops === 0) { %> d-none <% } %>">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
@@ -1864,7 +1864,7 @@
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-6 d-none">
+                            <div class="col-lg-6 <% if (umrahPackage.inboundFlightStops === 0 && umrahPackage.inboundFlightStops === 1 ) { %> d-none <% } %>">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->
@@ -1873,12 +1873,12 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverSecondDuration" value="" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" value="<%= umrahPackage.inboundLayoverSecondDuration || '' %>" />
+                                <input type="text" class="form-control form-control-lg form-control-solid" name="inboundLayoverSecondDuration" placeholder="" data-flatpickr="package_time_picker" data-flatpickr-time="2nd" value="<%= umrahPackage.inboundLayoverSecondDuration || '' %>" />
                                 <!--end::Input-->
                               </div>
                               <!--end::Input group-->
                             </div>
-                            <div class="col-lg-6 d-none">
+                            <div class="col-lg-6 <% if (umrahPackage.inboundFlightStops === 0 && umrahPackage.inboundFlightStops === 1 ) { %> d-none <% } %>">
                               <!--begin::Input group-->
                               <div class="fv-row mb-10">
                                 <!--begin::Label-->

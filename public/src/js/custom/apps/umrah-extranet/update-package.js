@@ -13,6 +13,7 @@ var KTCreatePackage = (function () {
     var stepperObj;
     var validations = [];
     var ktFileUploaderContent;
+    var umrahPackageDetails;
 
     // Private Functions
     var initStepper = function () {
@@ -1009,58 +1010,103 @@ var KTCreatePackage = (function () {
     };
 
     // Add more thumbnails
-    const addMoreThumbnails = () => {
-        const dropZoneBasicThumbnails = new Dropzone(
-            '#kt_dropzonejs_basic_thumbnails',
-            {
-                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
-                maxFiles: 10,
-                maxFilesize: 10, // MB
-                addRemoveLinks: true,
-                accept: function (file, done) {
-                    if (file.name == 'wow.jpg') {
-                        done("Naha, you don't.");
-                    } else {
+    const addMoreThumbnails = async () => {
+        try {
+            // Get form action URL (assuming form is globally accessible)
+            const form = document.querySelector('form');
+            const href = form.getAttribute('action');
+
+            // Fetch umrah package data
+            const response = await axios.get(href);
+            const umrahPackage = response.data.umrahPackage;
+
+            // Get existing thumbnails
+            const extraThumbnails = umrahPackage.extraThumbnails || [];
+            const makkahHotelExtraThumbnails =
+                umrahPackage.makkahHotelExtraThumbnails || [];
+            const madinahHotelExtraThumbnails =
+                umrahPackage.madinahHotelExtraThumbnails || [];
+
+            const dropZoneBasicThumbnails = new Dropzone(
+                '#kt_dropzonejs_basic_thumbnails',
+                {
+                    url: 'https://keenthemes.com/scripts/void.php', // Set to actual upload URL
+                    paramName: 'file',
+                    maxFiles: 10,
+                    maxFilesize: 10, // MB
+                    addRemoveLinks: true,
+                    init: function () {
+                        extraThumbnails.forEach((thumbnail) => {
+                            let mockFile = { name: thumbnail, size: 12345 };
+                            this.emit('addedfile', mockFile);
+                            this.emit(
+                                'thumbnail',
+                                mockFile,
+                                thumbnail.replace(/\\/g, '/')
+                            ); // Fix path slashes
+                            this.emit('complete', mockFile);
+                        });
+                    },
+                    accept: function (file, done) {
                         done();
-                    }
-                },
-            }
-        );
-        const dropZoneMakkahThumbnails = new Dropzone(
-            '#kt_dropzonejs_makkah_hotel_thumbnails',
-            {
-                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
-                maxFiles: 10,
-                maxFilesize: 10, // MB
-                addRemoveLinks: true,
-                accept: function (file, done) {
-                    if (file.name == 'wow.jpg') {
-                        done("Naha, you don't.");
-                    } else {
+                    },
+                }
+            );
+
+            const dropZoneMakkahThumbnails = new Dropzone(
+                '#kt_dropzonejs_makkah_hotel_thumbnails',
+                {
+                    url: 'https://keenthemes.com/scripts/void.php', // Set to actual upload URL
+                    paramName: 'file',
+                    maxFiles: 10,
+                    maxFilesize: 10, // MB
+                    addRemoveLinks: true,
+                    init: function () {
+                        makkahHotelExtraThumbnails.forEach((thumbnail) => {
+                            let mockFile = { name: thumbnail, size: 12345 };
+                            this.emit('addedfile', mockFile);
+                            this.emit(
+                                'thumbnail',
+                                mockFile,
+                                thumbnail.replace(/\\/g, '/')
+                            ); // Fix path slashes
+                            this.emit('complete', mockFile);
+                        });
+                    },
+                    accept: function (file, done) {
                         done();
-                    }
-                },
-            }
-        );
-        const dropZoneMadinahThumbnails = new Dropzone(
-            '#kt_dropzonejs_madinah_hotel_thumbnails',
-            {
-                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
-                maxFiles: 10,
-                maxFilesize: 10, // MB
-                addRemoveLinks: true,
-                accept: function (file, done) {
-                    if (file.name == 'wow.jpg') {
-                        done("Naha, you don't.");
-                    } else {
+                    },
+                }
+            );
+
+            const dropZoneMadinahThumbnails = new Dropzone(
+                '#kt_dropzonejs_madinah_hotel_thumbnails',
+                {
+                    url: 'https://keenthemes.com/scripts/void.php', // Set to actual upload URL
+                    paramName: 'file',
+                    maxFiles: 10,
+                    maxFilesize: 10, // MB
+                    addRemoveLinks: true,
+                    init: function () {
+                        madinahHotelExtraThumbnails.forEach((thumbnail) => {
+                            let mockFile = { name: thumbnail, size: 12345 };
+                            this.emit('addedfile', mockFile);
+                            this.emit(
+                                'thumbnail',
+                                mockFile,
+                                thumbnail.replace(/\\/g, '/')
+                            ); // Fix path slashes
+                            this.emit('complete', mockFile);
+                        });
+                    },
+                    accept: function (file, done) {
                         done();
-                    }
-                },
-            }
-        );
+                    },
+                }
+            );
+        } catch (error) {
+            console.error('Error loading thumbnails:', error);
+        }
     };
 
     // Init flatpickr
