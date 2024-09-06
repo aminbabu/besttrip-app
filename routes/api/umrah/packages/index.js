@@ -313,9 +313,9 @@ router.patch(
 
         return next();
     },
-    // (req, res, next) => {
-    //     return console.log(req.body);
-    // },
+    (req, res, next) => {
+        return console.log(req.body);
+    },
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
     validateUmrahPackageGallery,

@@ -128,6 +128,8 @@ var KTCreatePackage = (function () {
                         ].getData()
                     );
 
+                    return console.log(formData.get('umrahDescription'));
+
                     formData.append(
                         'termsConditions',
                         editors[
