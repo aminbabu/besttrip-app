@@ -1153,6 +1153,8 @@ var KTCreatePackage = (function () {
     // Flight stops handler
     const handleFlightStops = () => {
         const select = $('[data-kt-umrah-extranet-flight-stops-select="true"]');
+
+        console.log(select);
         let stepper;
         let firstTimepicker;
         let secondTimepicker;
@@ -1175,6 +1177,8 @@ var KTCreatePackage = (function () {
                     showFirstAirportInput();
                     hideSecondTimePicker();
                     hideSecondAirportInput();
+                    console.log(value);
+
                     break;
                 }
                 case 'two-stop': {
@@ -1182,6 +1186,8 @@ var KTCreatePackage = (function () {
                     showFirstAirportInput();
                     showSecondTimePicker();
                     showSecondAirportInput();
+                    console.log(value);
+
                     break;
                 }
                 case 'non-stop': {
@@ -1189,6 +1195,8 @@ var KTCreatePackage = (function () {
                     hideFirstAirportInput();
                     hideSecondTimePicker();
                     hideSecondAirportInput();
+                    console.log(value);
+
                     break;
                 }
                 default:
