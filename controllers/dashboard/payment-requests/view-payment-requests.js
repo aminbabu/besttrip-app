@@ -19,30 +19,44 @@ module.exports = async (req, res) => {
         const { status } = req.params;
 
         // get payment requests by sorting descending
-        let paymentRequests = await PaymentRequest.find({ status })
-            .populate(
-                'customer',
-                '-password  -twoStepAuth -isVerified -loginHistory -createdAt -updatedAt'
-            )
-            .sort({
-                createdAt: 'desc',
-            });
+        let paymentRequests = await PaymentRequest.aggregate([
+            { $match: { status } },
+            {
+                $lookup: {
+                    from: 'customers',
+                    localField: 'customer',
+                    foreignField: '_id',
+                    as: 'customer',
+                },
+            },
+            { $unwind: '$customer' },
+            {
+                $project: {
+                    'customer.password': 0,
+                    'customer.twoStepAuth': 0,
+                    'customer.isVerified': 0,
+                    'customer.loginHistory': 0,
+                    'customer.createdAt': 0,
+                    'customer.updatedAt': 0,
+                    'customer.avatar': 0,
+                    'customer.wallet': 0,
+                    'customer.dob': 0,
+                    'customer.customerID': 0,
+                    'customer.role:': 0,
+                    'customer.status:': 0,
+                },
+            },
+            { $sort: { createdAt: -1 } },
+        ]);
 
         // format payment requests
         paymentRequests = paymentRequests.map((paymentRequest) => {
-            const modifiedPaymentRequest = { ...paymentRequest.toObject() };
-
-            modifiedPaymentRequest.amount = currencyFormatter(
-                paymentRequest.amount
+            paymentRequest.amount = currencyFormatter(paymentRequest.amount);
+            paymentRequest.createdAt = moment(paymentRequest.createdAt).format(
+                'DD MMM YYYY, h:mm a'
             );
-            modifiedPaymentRequest.createdAt = moment(
-                paymentRequest.createdAt
-            ).format('DD MMM YYYY, h:mm a');
-
-            return modifiedPaymentRequest;
+            return paymentRequest;
         });
-
-        console.log(paymentRequests);
 
         // return render view
         return res.render('dashboard/payment-requests/', {
