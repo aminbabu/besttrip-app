@@ -298,10 +298,10 @@
                             </div>
                             <% }%>
                           </td>
-                          <td><%= package.adultPrice %>
+                          <td><%= package.adultPrice.toLocaleString() %>
                           </td>
-                          <td><%= package.adultPartialPrice %></td>
-                          <td><%= package.childPrice %></td>
+                          <td><%= package.adultPartialPrice.toLocaleString() %></td>
+                          <td><%= package.childPrice.toLocaleString() %></td>
                           <td><%= new Date(package.updatedAt).toLocaleString('en-US', {
                           year: 'numeric',
                           month: 'long',
