@@ -1,7 +1,7 @@
 /**
  * @file controllers/api/invoice/get-all-invoice-by-payment-type.js
  * @project best-trip
- * @version 0.0.0
+ * @version 0.0.1
  * @author best-trip
  * @date 01 August, 2024
  */
@@ -68,22 +68,31 @@ module.exports = async (req, res, next) => {
         // Stage 6: Projection stage
         const projectStage = {
             $project: {
-                // Exclude sensitive fields from the customer
-                'customerDetails.password': 0,
-                'customerDetails.loginHistory': 0,
-                'customerDetails.twoStepAuth': 0,
-                'customerDetails.wallet': 0,
-                'customerDetails.dob': 0,
-                'customerDetails.avatar': 0,
-                'customerDetails.updatedAt': 0,
-                'customerDetails.createdAt': 0,
-                'customerDetails.__v': 0,
-                bookingId: 0,
-                customer: 0,
-                'bookingDetails.customer': 0,
-                'bookingDetails.invoiceId': 0,
-                'bookingDetails.createdAt': 0,
-                'bookingDetails.updatedAt': 0,
+                _id: 1,
+                invoiceId: 1,
+                totalAmount: 1,
+                paymentType: 1,
+                partialPaymentExpiryDate: 1,
+                paidAmount: 1,
+                partialPaymentRestAmount: 1,
+                customer: {
+                    _id: '$customerDetails._id',
+                    name: '$customerDetails.name',
+                    email: '$customerDetails.email',
+                    phone: '$customerDetails.phone',
+                    role: '$customerDetails.role',
+                    isVerified: '$customerDetails.isVerified',
+                    status: '$customerDetails.status',
+                    customerID: '$customerDetails.customerID',
+                },
+                bookingDetails: {
+                    _id: '$bookingDetails._id',
+                    umrahPackage: '$bookingDetails.bookingNumber',
+                    bookingRefId: '$bookingDetails.bookingRefId',
+                    totalTravelers: '$bookingDetails.totalTravelers',
+                    status: '$bookingDetails.status',
+                    // Add any other booking fields you want to include
+                },
             },
         };
 
