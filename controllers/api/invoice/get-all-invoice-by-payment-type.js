@@ -65,7 +65,25 @@ module.exports = async (req, res, next) => {
             },
         };
 
-        // Stage 6: Projection stage
+        // Stage 6: Lookup the umrah package details
+        const umrahPackageLookupStage = {
+            $lookup: {
+                from: 'umrahpackages', // Collection to join with
+                localField: 'bookingDetails.umrahPackage', // Field from bookingDetails
+                foreignField: '_id', // Field from umrahpackages
+                as: 'umrahPackageDetails',
+            },
+        };
+
+        // Stage 7: Unwind the umrah package details
+        const umrahPackageUnwindStage = {
+            $unwind: {
+                path: '$umrahPackageDetails', // Unwind array to single object
+                preserveNullAndEmptyArrays: true, // Keep documents without matching umrahPackageDetails
+            },
+        };
+
+        // Stage 8: Projection stage
         const projectStage = {
             $project: {
                 _id: 1,
@@ -87,7 +105,8 @@ module.exports = async (req, res, next) => {
                 },
                 bookingDetails: {
                     _id: '$bookingDetails._id',
-                    umrahPackage: '$bookingDetails.bookingNumber',
+                    umrahPackage: '$umrahPackageDetails._id',
+                    journeyDate: '$umrahPackageDetails.journeyDate',
                     bookingRefId: '$bookingDetails.bookingRefId',
                     totalTravelers: '$bookingDetails.totalTravelers',
                     status: '$bookingDetails.status',
@@ -102,6 +121,8 @@ module.exports = async (req, res, next) => {
             customerUnwindStage,
             bookingLookupStage,
             bookingUnwindStage,
+            umrahPackageLookupStage,
+            umrahPackageUnwindStage,
             projectStage,
         ];
 
