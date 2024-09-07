@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
         const { _id } = req.user;
 
         // get customer
-        const customer = await Customer.findById(_id);
+        const customer = await Customer.findById(_id).populate('wallet');
 
         // check if customer exists
         if (!customer) {
