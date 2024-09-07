@@ -21,16 +21,16 @@ module.exports =
 
         // get validated data
         const { id } = req.params || {};
-        let { madinahhHotelExtraThumbnails } = req.files || {};
+        let { madinahHotelExtraThumbnails } = req.files || {};
 
         // check if extra thumbnails exists
-        if (!madinahhHotelExtraThumbnails) {
+        if (!madinahHotelExtraThumbnails) {
             return next();
         }
 
-        // Convert madinahhHotelExtraThumbnails to an array if it's not already
-        if (!Array.isArray(madinahhHotelExtraThumbnails)) {
-            madinahhHotelExtraThumbnails = [madinahhHotelExtraThumbnails];
+        // Convert madinahHotelExtraThumbnails to an array if it's not already
+        if (!Array.isArray(madinahHotelExtraThumbnails)) {
+            madinahHotelExtraThumbnails = [madinahHotelExtraThumbnails];
         }
 
         // check if id exists
@@ -39,34 +39,41 @@ module.exports =
             umrahPackage = await UmrahPackage.findById(id);
         }
 
-        // check if umrah package madinahh hotel extra thumbnails exists
-        if (umrahPackage?.madinahhHotelExtraThumbnails?.length > 0) {
+        // check if umrah package madinah hotel extra thumbnails exist
+        if (umrahPackage?.madinahHotelExtraThumbnails?.length > 0) {
             // delete previous extra thumbnails
-            madinahhHotelExtraThumbnails.forEach(
-                (thumbnail) =>
-                    thumbnail &&
-                    fs.unlinkSync(
-                        path.join(__dirname, '../../../../public', thumbnail)
-                    )
-            );
+            umrahPackage.madinahHotelExtraThumbnails.forEach((thumbnail) => {
+                if (thumbnail) {
+                    const previousThumbnailPath = path.join(
+                        __dirname,
+                        '../../../../public',
+                        thumbnail
+                    );
+
+                    // Only delete the file if it exists
+                    if (fs.existsSync(previousThumbnailPath)) {
+                        fs.unlinkSync(previousThumbnailPath);
+                    }
+                }
+            });
         }
 
-        // prepare file path
-        const updateExtraThumbnails = madinahhHotelExtraThumbnails.map(
+        // prepare file paths for new thumbnails
+        const updateExtraThumbnails = madinahHotelExtraThumbnails.map(
             (thumbnail) => {
                 const updatedThumbnail = { ...thumbnail };
                 const thumbnailPath = path.join(
                     '/uploads/',
                     `${dir}/${uuidv4()}_${updatedThumbnail.name}`
                 );
-                const uploadLogoPath = path.join(
+                const uploadPath = path.join(
                     __dirname,
                     '../../../../public',
                     thumbnailPath
                 );
 
                 // move file to upload path
-                updatedThumbnail.mv(uploadLogoPath);
+                updatedThumbnail.mv(uploadPath);
 
                 // set file path to thumbnail object
                 updatedThumbnail.path = thumbnailPath;
@@ -75,8 +82,8 @@ module.exports =
             }
         );
 
-        // set file path to request body
-        req.files.madinahhHotelExtraThumbnails = updateExtraThumbnails;
+        // set updated file paths to request body
+        req.files.madinahHotelExtraThumbnails = updateExtraThumbnails;
 
         // proceed to next middleware
         return next();

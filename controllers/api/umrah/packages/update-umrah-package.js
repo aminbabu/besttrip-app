@@ -58,8 +58,15 @@ module.exports = async (req, res, next) => {
             delete validatedData.inboundLayoverSecondAirport;
         }
 
-        // Log the validatedData after delete operations
-        return console.log('Validated Data after delete:', validatedData);
+        console.log(
+            'Items to remove from Itinearys: ',
+            validatedData.itemsToRemoveFromItineary
+        );
+        console.log(
+            'Items to add in Itinearys: ',
+            validatedData.itemsToAddItineary
+        );
+        return;
 
         umrahPackage.set({
             ...validatedData,

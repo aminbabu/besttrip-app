@@ -23,29 +23,31 @@ module.exports =
         const { id } = req.params || {};
         const { thumbnail } = req.files || {};
 
+        // If request method is PATCH and no new thumbnail is provided, skip the update
         if (req.method === 'PATCH' && !thumbnail) {
             return next();
         }
 
+        // If id exists, retrieve the corresponding UmrahPackage
         if (id) {
-            // check if id exists
-            // get umrah package
             umrahPackage = await UmrahPackage.findById(id);
         }
 
-        // check if umrah package thumbnail exists
+        // Check if the umrahPackage has a previous thumbnail and if the file exists
         if (umrahPackage?.thumbnail) {
-            // delete previous thumbnail
-            fs.unlinkSync(
-                path.join(
-                    __dirname,
-                    './../../../../public',
-                    umrahPackage.thumbnail
-                )
+            const previousThumbnailPath = path.join(
+                __dirname,
+                './../../../../public',
+                umrahPackage.thumbnail
             );
+
+            // If the file exists, delete the previous thumbnail
+            if (fs.existsSync(previousThumbnailPath)) {
+                fs.unlinkSync(previousThumbnailPath);
+            }
         }
 
-        // prepare file path
+        // Prepare new thumbnail file path
         const thumbnailPath = path.join(
             '/uploads/',
             `${dir}/${uuidv4()}_${thumbnail.name}`
@@ -56,12 +58,12 @@ module.exports =
             thumbnailPath
         );
 
-        // move file to upload path
+        // Move the uploaded thumbnail to the defined path
         await thumbnail.mv(uploadLogoPath);
 
-        // set file path to request body
+        // Set the new thumbnail path in the request body
         req.files.thumbnail.path = thumbnailPath;
 
-        // proceed to next middleware
+        // Proceed to the next middleware
         return next();
     };

@@ -288,7 +288,15 @@ router.patch(
             delete req.body[key];
         });
 
-        // console.log(req.body);
+        // Replace the value of 'umrahDescription' and 'termsConditions' with their second array item
+        const replaceSecondItem = (key) => {
+            if (Array.isArray(req.body[key]) && req.body[key].length > 1) {
+                req.body[key] = req.body[key][1]; // Replace with the second item
+            }
+        };
+
+        replaceSecondItem('umrahDescription');
+        replaceSecondItem('termsConditions');
 
         return next();
     },
@@ -313,9 +321,9 @@ router.patch(
 
         return next();
     },
-    (req, res, next) => {
-        return console.log('data from the controller', req.body);
-    },
+    // (req, res, next) => {
+    //     return console.log('data from the controller', req.body);
+    // },
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
     validateUmrahPackageGallery,

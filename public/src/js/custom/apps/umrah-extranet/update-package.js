@@ -135,10 +135,19 @@ var KTCreatePackage = (function () {
                         ].getData()
                     );
 
+                    // return console.log(formData.get('umrahDescription'));
+
                     if (initialItinearyItems.length > numberOfDays) {
                         formData.append(
-                            'itemsToRemove',
+                            'itemsToRemoveFromItineary',
                             initialItinearyItems.length - numberOfDays
+                        );
+                    }
+
+                    if (numberOfDays > initialItinearyItems.length) {
+                        formData.append(
+                            'itemsToAddItineary',
+                            numberOfDays - initialItinearyItems.length
                         );
                     }
 

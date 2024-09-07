@@ -13,7 +13,7 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const { UmrahPackage } = require('../../../../models');
 
-// export umrah day wise itinerary thumbnail upload middleware
+// export umrah day-wise itinerary thumbnail upload middleware
 module.exports =
     (dir = '/umrah/package') =>
     async (req, res, next) => {
@@ -21,11 +21,16 @@ module.exports =
 
         // get validated data
         const { id } = req.params || {};
-        const { itineraryDays } = req.body || {};
+        let { itineraryDays } = req.body || {};
 
-        // check if extra thumbnails exists
+        // check if itineraryDays exists
         if (!itineraryDays) {
             return next();
+        }
+
+        // Convert itineraryDays to an array if it's not already
+        if (!Array.isArray(itineraryDays)) {
+            itineraryDays = [itineraryDays];
         }
 
         // check if id exists
@@ -34,47 +39,55 @@ module.exports =
             umrahPackage = await UmrahPackage.findById(id);
         }
 
-        // check if umrah package extra thumbnails exists
+        // check if umrah package has existing itinerary thumbnails and delete them
         if (umrahPackage?.itineraryDays?.length > 0) {
-            // delete previous extra thumbnails
-            umrahPackage.itineraryDays.forEach(
-                (itinerary) =>
-                    itinerary?.thumbnail &&
-                    fs.unlinkSync(
-                        path.join(
-                            __dirname,
-                            '../../../../public',
-                            itinerary.thumbnail
-                        )
-                    )
-            );
+            umrahPackage.itineraryDays.forEach((itinerary) => {
+                if (itinerary?.thumbnail) {
+                    const previousThumbnailPath = path.join(
+                        __dirname,
+                        '../../../../public',
+                        itinerary.thumbnail
+                    );
+
+                    // Only delete the file if it exists
+                    if (fs.existsSync(previousThumbnailPath)) {
+                        fs.unlinkSync(previousThumbnailPath);
+                    }
+                }
+            });
         }
-        // prepare file path
-        const updateItineraryDays = itineraryDays.map((itinerary) => {
+
+        // Prepare file path for new thumbnails and upload them
+        const updatedItineraryDays = itineraryDays.map((itinerary) => {
             const updatedItinerary = { ...itinerary };
-            if (updatedItinerary.thumbnail) {
-                const thumbnailPath = path.join(
-                    '/uploads/',
-                    `${dir}/${uuidv4()}_${updatedItinerary.thumbnail.name}`
-                );
-                const uploadLogoPath = path.join(
-                    __dirname,
-                    '../../../../public',
-                    thumbnailPath
-                );
+            if (req.files && updatedItinerary.thumbnail) {
+                const thumbnailFile = req.files[updatedItinerary.thumbnail];
 
-                // move file to upload path
-                updatedItinerary.thumbnail.mv(uploadLogoPath);
+                // Check if the file exists before moving
+                if (thumbnailFile) {
+                    const thumbnailPath = path.join(
+                        '/uploads/',
+                        `${dir}/${uuidv4()}_${thumbnailFile.name}`
+                    );
+                    const uploadPath = path.join(
+                        __dirname,
+                        '../../../../public',
+                        thumbnailPath
+                    );
 
-                // set file path to thumbnail object
-                updatedItinerary.thumbnail.path = thumbnailPath;
+                    // Move file to upload path
+                    thumbnailFile.mv(uploadPath);
+
+                    // Set file path to thumbnail object
+                    updatedItinerary.thumbnail = thumbnailPath;
+                }
             }
             return updatedItinerary;
         });
 
-        // set file path to request body
-        req.files.itineraryDays = updateItineraryDays;
+        // Set updated file paths to request body
+        req.body.itineraryDays = updatedItineraryDays;
 
-        // proceed to next middleware
+        // Proceed to next middleware
         return next();
     };
