@@ -43,7 +43,10 @@ module.exports = async (req, res, next) => {
         // success response
         return res.status(200).json({
             message: 'Updated customer successfully',
-            customer,
+            customer: {
+                ...customer,
+                accessToken: req.token,
+            },
         });
     } catch (error) {
         return next(error);
