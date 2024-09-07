@@ -6,14 +6,14 @@
  * @date 20 Aug, 2024
  * @update_date 20 Aug, 2024
  */
-
+const bcrypt = require('bcrypt');
 const { Customer } = require('../../../models');
 
 // export update password controller
 module.exports = async (req, res, next) => {
     try {
         // get validated data
-        const { password } = req.body;
+        const { password, currentPassword } = req.body;
         const { id } = req.params;
 
         // get customer
@@ -24,6 +24,20 @@ module.exports = async (req, res, next) => {
             return res.status(404).json({
                 message: 'Customer not found',
             });
+        }
+
+        const userRole = req.user?.role;
+
+        if (userRole !== 'admin') {
+            const passwordMatched = bcrypt.compareSync(
+                currentPassword,
+                customer.password
+            );
+            if (!passwordMatched) {
+                return res.status(400).json({
+                    message: 'Current Password is incorrect',
+                });
+            }
         }
 
         // set new password
