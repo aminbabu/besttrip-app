@@ -91,7 +91,6 @@ module.exports = async (req, res, next) => {
                     bookingRefId: '$bookingDetails.bookingRefId',
                     totalTravelers: '$bookingDetails.totalTravelers',
                     status: '$bookingDetails.status',
-                    // Add any other booking fields you want to include
                 },
             },
         };
