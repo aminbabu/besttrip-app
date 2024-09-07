@@ -11,4 +11,5 @@
 module.exports = {
     validateInvoiceId: require('./validate-invoice-id'),
     validatePartialPaymentTimeLimit: require('./validate-partial-payment-time-limit'),
+    validateInvoicePaymentType: require('./validate-invoice-payment-type'),
 };

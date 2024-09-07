@@ -13,4 +13,5 @@ module.exports = {
     getInvoiceForCustomer: require('./invoice-for-customer'),
     getAllInvoicesForAdmin: require('./get-all-invoice-for-admin'),
     updatePartialPaymentTimeLimit: require('./update-partial-payment-time-limit'),
+    getAllInvoicesByPaymentType: require('./get-all-invoice-by-payment-type'),
 };

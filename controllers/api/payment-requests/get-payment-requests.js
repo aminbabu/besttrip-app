@@ -9,6 +9,7 @@
 
 // dependencies
 const { PaymentRequest } = require('../../../models');
+const mongoose = require('mongoose');
 
 // export get payment requests controller
 module.exports = async (req, res, next) => {
@@ -20,7 +21,7 @@ module.exports = async (req, res, next) => {
             if (req.user.role === 'customer') {
                 // Fetch payment requests only for the authenticated customer
                 paymentRequests = await PaymentRequest.find({
-                    customer: req.user._id,
+                    customer: new mongoose.Types.ObjectId(req.user._id),
                 }).populate(
                     'customer',
                     '-password  -twoStepAuth -isVerified -loginHistory -createdAt -updatedAt'

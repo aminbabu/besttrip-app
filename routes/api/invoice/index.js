@@ -18,6 +18,7 @@ const {
     getInvoiceForCustomer,
     getAllInvoicesForAdmin,
     updatePartialPaymentTimeLimit,
+    getAllInvoicesByPaymentType,
 } = require('../../../controllers/api/invoice');
 
 // middlewares
@@ -25,6 +26,7 @@ const { isAuthorized, isAllowed } = require('../../../middlewares/api/auth');
 const {
     validateInvoiceId,
     validatePartialPaymentTimeLimit,
+    validateInvoicePaymentType,
 } = require('../../../middlewares/api/validators/invoice');
 
 /**
@@ -46,6 +48,22 @@ router.use(isAuthorized);
  * @method GET
  */
 router.get('/admin', isAllowed(['admin']), getAllInvoicesForAdmin);
+
+/**
+ * @description get all invoices for customers by payment type
+ * @param {string} path - /api/invoice/:paymentType
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} controller - ['getAllInvoicesForAdmin']
+ * @returns {object} - router
+ * @access private - ['admin','customer']
+ * @method GET
+ */
+router.get(
+    '/:paymentType',
+    isAllowed(['admin', 'customer']),
+    validateInvoicePaymentType,
+    getAllInvoicesByPaymentType
+);
 
 /**
  * @description get invoice for admin
