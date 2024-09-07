@@ -44,7 +44,7 @@ module.exports = async (req, res, next) => {
         return res.status(200).json({
             message: 'Updated customer successfully',
             customer: {
-                ...customer,
+                ...customer.toObject(),
                 accessToken: req.token,
             },
         });
