@@ -67,7 +67,7 @@ const KTPaymentRequests = (function () {
                                         text:
                                             response?.data?.message ||
                                             'Payment request has been changed to rejected!',
-                                        icon: 'error',
+                                        icon: 'success',
                                         buttonsStyling: false,
                                         confirmButtonText: 'Ok, got it!',
                                         customClass: {
