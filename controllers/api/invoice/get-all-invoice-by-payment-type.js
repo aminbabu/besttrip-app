@@ -80,6 +80,10 @@ module.exports = async (req, res, next) => {
                 'customerDetails.__v': 0,
                 bookingId: 0,
                 customer: 0,
+                'bookingDetails.customer': 0,
+                'bookingDetails.invoiceId': 0,
+                'bookingDetails.createdAt': 0,
+                'bookingDetails.updatedAt': 0,
             },
         };
 
