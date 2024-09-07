@@ -55,6 +55,13 @@ var KTContentBlogPostAdd = (function () {
                         },
                     },
                 },
+                numberOfReviews: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Number of reviews is required',
+                        },
+                    },
+                },
                 description: {
                     validators: {
                         notEmpty: {

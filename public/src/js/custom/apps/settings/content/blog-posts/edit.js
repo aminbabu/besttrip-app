@@ -43,6 +43,13 @@ var KTContentBlogPostEdit = (function () {
                         },
                     },
                 },
+                numberOfReviews: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Number of reviews is required',
+                        },
+                    },
+                },
                 description: {
                     validators: {
                         notEmpty: {
@@ -373,6 +380,8 @@ var KTContentBlogPostEdit = (function () {
                             .find('select[name="rating"]')
                             .val(data.rating)
                             .trigger('change');
+                        form.querySelector('[name="numberOfReviews"]').value =
+                            data.numberOfReviews;
                         $(form)
                             .find('select[name="status"]')
                             .val(data.status)

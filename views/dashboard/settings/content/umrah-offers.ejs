@@ -147,7 +147,7 @@
                           <td><%= offer?.location %></td>
                           <td><%= offer?.duration %> Days | <%= offer?.duration - 1 %> Nights</td>
                           <td><%= offer?.inclusions.join(", ") %></td>
-                          <td><%= offer?.price %> BDT</td>
+                          <td><%= offer?.price.toLocaleString() %> BDT</td>
                           <td>
                             <div class="form-check form-switch form-check-solid">
                               <label class="form-check-label">

@@ -14,10 +14,10 @@ var KTContentTravelers = (function () {
         datatable = $(table).DataTable({
             info: false,
             order: [],
-            pageLength: 10,
+            pageLength: 12,
             columnDefs: [
                 { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
-                { orderable: false, targets: 11 }, // Disable ordering on column 6 (actions)
+                { orderable: false, targets: 12 }, // Disable ordering on column 6 (actions)
             ],
         });
 

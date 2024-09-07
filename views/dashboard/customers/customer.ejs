@@ -275,7 +275,7 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
                           <div class="fw-bold fs-2">
-                            ৳ <%= customer?.wallet?.balance %>
+                            ৳ <%= customer?.wallet?.balance.toLocaleString() %>
                             <span class="text-muted fs-4 fw-semibold">BDT</span>
                           </div>
                         </div>
@@ -1062,7 +1062,7 @@
                                     <td>Yes</td>
                                     <td>Yes</td>
                                     <td>Yes</td>
-                                    <td><%= item.totalAmount %> BDT</td>
+                                    <td><%= item.totalAmount.toLocaleString() %> BDT</td>
                                   </tr>
                                   <% }) %>
 
@@ -3201,7 +3201,7 @@
                             Current Balance
                           </div>
                           <div class="fs-2 fw-bold" kt-modal-adjust-balance="current_balance">
-                            ৳ <span><%= customer?.wallet?.balance %></span> BDT
+                            ৳ <span><%= customer?.wallet?.balance.toLocaleString() %></span> BDT
                           </div>
                         </div>
                         <div class="w-50 border border-dashed border-gray-300 rounded mx-2 p-4">

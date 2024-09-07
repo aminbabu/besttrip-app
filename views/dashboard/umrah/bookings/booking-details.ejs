@@ -373,13 +373,13 @@
                               <th class="min-w-125px">Document Issue Country</th>
                               <th class="min-w-125px">Passport Expiry Date</th>
                               <th class="min-w-125px">Phone</th>
-                              <th class="min-w-125px">emergencyContactNo</th>
+                              <th class="min-w-125px">Emergency Contact No</th>
                               <th class="min-w-125px">Actions</th>
                             </tr>
                           </thead>
                           <tbody class="text-gray-600 fw-semibold">
-                            <% if (umrahBooking.travelers.length > 0) { %>
-                            <% umrahBooking.travelers.forEach(function(traveler) { %>
+
+                            <% umrahBooking?.travelers?.forEach(function(traveler) { %>
                             <tr>
                               <td>
                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -440,11 +440,7 @@
                               </td>
                             </tr>
                             <% }); %>
-                            <% } else { %>
-                            <tr>
-                              <td colspan="12" class="text-center">No travelers found.</td>
-                            </tr>
-                            <% } %>
+
                           </tbody>
                         </table>
                       </div>

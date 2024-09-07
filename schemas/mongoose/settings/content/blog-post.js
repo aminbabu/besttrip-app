@@ -34,6 +34,10 @@ module.exports = new Schema(
             type: Number,
             required: [true, 'Rating is required'],
         },
+        numberOfReviews: {
+            type: Number,
+            required: [true, 'Number of reviews is required'],
+        },
         description: {
             type: String,
             required: [true, 'Description is required'],
