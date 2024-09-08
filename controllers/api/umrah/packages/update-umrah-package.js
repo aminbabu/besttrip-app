@@ -7,19 +7,13 @@ module.exports = async (req, res, next) => {
         // get validated data
         const { id } = req.params;
         const validatedData = req.body;
+
         const {
             thumbnail,
-            extraThumbnails,
-            makkahHotelThumbnail,
-            makkahHotelExtraThumbnails,
             madinahHotelThumbnail,
-            madinahHotelExtraThumbnails,
+            makkahHotelThumbnail,
             umrahThumbnail,
         } = req.files;
-
-        console.log(validatedData);
-
-        return;
 
         // get umrah package
         const umrahPackage = await UmrahPackage.findById(id);
@@ -94,22 +88,32 @@ module.exports = async (req, res, next) => {
             ...validatedData,
             schedule: validatedData.schedule.toLowerCase(),
             thumbnail: thumbnail ? thumbnail.path : umrahPackage.thumbnail,
-            extraThumbnails: extraThumbnails?.map(
-                (extraThumbnail) => extraThumbnail.path
-            ),
+            extraThumbnails: validatedData?.extraThumbnails
+                ? [
+                      ...validatedData?.extraThumbnails,
+                      ...umrahPackage.extraThumbnails,
+                  ]
+                : umrahPackage.extraThumbnails,
             makkahHotelThumbnail: makkahHotelThumbnail
                 ? makkahHotelThumbnail.path
                 : umrahPackage.makkahHotelThumbnail,
-            makkahHotelExtraThumbnails: makkahHotelExtraThumbnails?.map(
-                (makkahHotelExtraThumbnail) => makkahHotelExtraThumbnail.path
-            ),
+            makkahHotelExtraThumbnails:
+                validatedData?.makkahHotelExtraThumbnails
+                    ? [
+                          ...validatedData?.makkahHotelExtraThumbnails,
+                          ...umrahPackage.makkahHotelExtraThumbnails,
+                      ]
+                    : umrahPackage.makkahHotelExtraThumbnails,
             madinahHotelThumbnail: madinahHotelThumbnail
                 ? madinahHotelThumbnail.path
                 : umrahPackage.madinahHotelThumbnail,
-            madinahHotelExtraThumbnails: madinahHotelExtraThumbnails?.map(
-                (madinahhHotelExtraThumbnail) =>
-                    madinahhHotelExtraThumbnail.path
-            ),
+            madinahHotelExtraThumbnails:
+                validatedData?.madinahHotelExtraThumbnails
+                    ? [
+                          ...validatedData?.madinahHotelExtraThumbnails,
+                          ...umrahPackage.madinahHotelExtraThumbnails,
+                      ]
+                    : umrahPackage.madinahHotelExtraThumbnails,
             itineraryDays: updatedItineraryDays,
             umrahThumbnail: umrahThumbnail
                 ? umrahThumbnail.path
@@ -118,6 +122,10 @@ module.exports = async (req, res, next) => {
 
         // save umrah package
         await umrahPackage.save();
+
+        console.log('updated');
+
+        return;
 
         // send response
         return res.status(200).json({
