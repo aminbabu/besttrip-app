@@ -317,13 +317,19 @@ router.patch(
             i++;
         }
 
+        if (Number(req.body?.itemsToRemoveFromItineary)) {
+            arr.splice(
+                -Number(req.body.itemsToRemoveFromItineary),
+                Number(req.body.itemsToRemoveFromItineary)
+            );
+
+            delete req.body.itemsToRemoveFromItineary;
+        }
+
         req.body.itineraryDays = arr;
 
         return next();
     },
-    // (req, res, next) => {
-    //     return console.log('data from the controller', req.body);
-    // },
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
     validateUmrahPackageGallery,

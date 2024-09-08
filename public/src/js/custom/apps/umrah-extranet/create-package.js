@@ -115,7 +115,7 @@ var KTCreatePackage = (function () {
                     );
                     appendDropzoneFiles(
                         dropZoneMadinahThumbnails,
-                        'madinahhHotelExtraThumbnails'
+                        'madinahHotelExtraThumbnails'
                     );
 
                     formData.append(

@@ -73,7 +73,7 @@ module.exports =
             }
 
             // Set the file path to request body for later use
-            req.body.umrahThumbnail = thumbnailPath;
+            req.files.umrahThumbnail.path = thumbnailPath;
         }
 
         // Proceed to the next middleware

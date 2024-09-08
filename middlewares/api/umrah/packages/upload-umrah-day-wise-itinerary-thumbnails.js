@@ -13,81 +13,96 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const { UmrahPackage } = require('../../../../models');
 
-// export umrah day-wise itinerary thumbnail upload middleware
+// Helper function to upload a file
+const uploadThumbnail = (fileData, dir) => {
+    const uniqueName = `${uuidv4()}_${fileData.name}`;
+    const thumbnailPath = path.join('/uploads/', `${dir}/${uniqueName}`);
+    const uploadPath = path.join(
+        __dirname,
+        '../../../../public',
+        thumbnailPath
+    );
+
+    // Save file to the desired directory
+    fileData.mv(uploadPath);
+
+    return thumbnailPath;
+};
+
+// Helper function to remove old thumbnail only if new one is provided
+const removeExistingThumbnail = (itinerary) => {
+    if (itinerary?.thumbnail) {
+        const previousThumbnailPath = path.join(
+            __dirname,
+            '../../../../public',
+            itinerary.thumbnail
+        );
+        if (fs.existsSync(previousThumbnailPath)) {
+            fs.unlinkSync(previousThumbnailPath);
+        }
+    }
+};
+
+// Middleware to handle itinerary thumbnail uploads
 module.exports =
     (dir = '/umrah/package') =>
     async (req, res, next) => {
+        let { id } = req.params || {};
+        let { itineraryDays } = req.body || {};
         let umrahPackage = {};
 
-        // get validated data
-        const { id } = req.params || {};
-        let { itineraryDays } = req.body || {};
+        if (!itineraryDays?.length) return next();
 
-        // check if itineraryDays exists
-        if (!itineraryDays.length) {
-            return next();
-        }
+        // Ensure itineraryDays is an array
+        itineraryDays = Array.isArray(itineraryDays)
+            ? itineraryDays
+            : [itineraryDays];
 
-        // Convert itineraryDays to an array if it's not already
-        if (!Array.isArray(itineraryDays)) {
-            itineraryDays = [itineraryDays];
-        }
+        // If id exists, find the Umrah package
+        if (id) umrahPackage = await UmrahPackage.findById(id);
 
-        // check if id exists
-        if (id) {
-            // get umrah package
-            umrahPackage = await UmrahPackage.findById(id);
-        }
+        // POST Method: Save incoming thumbnails
+        if (req.method === 'POST') {
+            const updatedItineraryDays = itineraryDays.map((itinerary) => {
+                const updatedItinerary = { ...itinerary };
 
-        // check if umrah package has existing itinerary thumbnails and delete them
-        if (umrahPackage?.itineraryDays?.length > 0) {
-            umrahPackage.itineraryDays.forEach((itinerary) => {
-                if (itinerary?.thumbnail) {
-                    const previousThumbnailPath = path.join(
-                        __dirname,
-                        '../../../../public',
-                        itinerary.thumbnail
+                // Handle thumbnail file if exists
+                if (updatedItinerary?.thumbnail) {
+                    updatedItinerary.thumbnail.path = uploadThumbnail(
+                        updatedItinerary?.thumbnail,
+                        dir
                     );
-
-                    // Only delete the file if it exists
-                    if (fs.existsSync(previousThumbnailPath)) {
-                        fs.unlinkSync(previousThumbnailPath);
-                    }
                 }
+
+                return updatedItinerary;
             });
+
+            // Set updated itinerary days to request body
+            req.body.itineraryDays = updatedItineraryDays;
         }
 
-        // Prepare file path for new thumbnails and upload them
-        const updatedItineraryDays = itineraryDays.map((itinerary) => {
-            const updatedItinerary = { ...itinerary };
-            if (req.files && updatedItinerary.thumbnail) {
-                const thumbnailFile = req.files[updatedItinerary.thumbnail];
+        // PATCH Method: Replace old thumbnails if new ones are provided, else retain old ones
+        if (req.method === 'PATCH') {
+            const updatedItineraryDays = itineraryDays.map(
+                (itinerary, index) => {
+                    const updatedItinerary = { ...itinerary };
 
-                // Check if the file exists before moving
-                if (thumbnailFile) {
-                    const thumbnailPath = path.join(
-                        '/uploads/',
-                        `${dir}/${uuidv4()}_${thumbnailFile.name}`
-                    );
-                    const uploadPath = path.join(
-                        __dirname,
-                        '../../../../public',
-                        thumbnailPath
-                    );
-
-                    // Move file to upload path
-                    thumbnailFile.mv(uploadPath);
-
-                    // Set file path to thumbnail object
-                    updatedItinerary.thumbnail = thumbnailPath;
+                    if (updatedItinerary?.thumbnail) {
+                        removeExistingThumbnail(
+                            umrahPackage.itineraryDays[index]
+                        );
+                        updatedItinerary.thumbnail.path = uploadThumbnail(
+                            updatedItinerary.thumbnail,
+                            dir
+                        );
+                    }
+                    return updatedItinerary;
                 }
-            }
-            return updatedItinerary;
-        });
+            );
 
-        // Set updated file paths to request body
-        req.body.itineraryDays = updatedItineraryDays;
+            // Set updated itinerary days to request body
+            req.body.itineraryDays = updatedItineraryDays;
+        }
 
-        // Proceed to next middleware
         return next();
     };

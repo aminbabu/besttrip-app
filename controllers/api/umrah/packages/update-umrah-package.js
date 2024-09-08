@@ -1,12 +1,3 @@
-/**
- * @file /controllers/api/umrah/packages/update-umrah-package.js
- * @project best-trip
- * @version 0.0.0
- * @author best-trip
- * @date 25 April, 2024
- * @update_date 17 May, 2024
- */
-
 // dependencies
 const { UmrahPackage } = require('../../../../models');
 
@@ -22,9 +13,13 @@ module.exports = async (req, res, next) => {
             makkahHotelThumbnail,
             makkahHotelExtraThumbnails,
             madinahHotelThumbnail,
-            madinahhHotelExtraThumbnails,
+            madinahHotelExtraThumbnails,
             umrahThumbnail,
         } = req.files;
+
+        console.log(validatedData);
+
+        return;
 
         // get umrah package
         const umrahPackage = await UmrahPackage.findById(id);
@@ -32,7 +27,7 @@ module.exports = async (req, res, next) => {
         // check if umrah package exists
         if (!umrahPackage) {
             return res.status(404).json({
-                message: 'Umrah package package not found',
+                message: 'Umrah package not found',
             });
         }
 
@@ -58,14 +53,43 @@ module.exports = async (req, res, next) => {
             delete validatedData.inboundLayoverSecondAirport;
         }
 
-        console.log(
-            'Items to remove from Itinearys: ',
-            Number(validatedData.itemsToRemoveFromItineary)
-        );
+        // Handle itinerary days: merge existing and incoming
+        const existingItineraryDays = umrahPackage.itineraryDays || [];
+        const incomingItineraryDays = validatedData.itineraryDays || [];
 
-        console.log('Items from Itinearys:', validatedData.itineraryDays);
-        return;
+        // Create a map to update by index
+        const updatedItineraryDays = [];
+        incomingItineraryDays.forEach((incomingDay, index) => {
+            if (existingItineraryDays[index]) {
+                // Update existing day
+                updatedItineraryDays[index] = {
+                    ...existingItineraryDays[index],
+                    ...incomingDay,
+                    thumbnail: incomingDay?.thumbnail
+                        ? incomingDay.thumbnail.path
+                        : existingItineraryDays[index].thumbnail,
+                };
+            } else {
+                // Insert new day
+                updatedItineraryDays[index] = {
+                    ...incomingDay,
+                    thumbnail: incomingDay?.thumbnail
+                        ? incomingDay.thumbnail.path
+                        : '',
+                };
+            }
+        });
 
+        // If there are more existing days than incoming, keep them
+        for (
+            let i = incomingItineraryDays.length;
+            i < existingItineraryDays.length;
+            i++
+        ) {
+            updatedItineraryDays[i] = existingItineraryDays[i];
+        }
+
+        // Set the updated itinerary days and other fields
         umrahPackage.set({
             ...validatedData,
             schedule: validatedData.schedule.toLowerCase(),
@@ -82,14 +106,11 @@ module.exports = async (req, res, next) => {
             madinahHotelThumbnail: madinahHotelThumbnail
                 ? madinahHotelThumbnail.path
                 : umrahPackage.madinahHotelThumbnail,
-            madinahhHotelExtraThumbnails: madinahhHotelExtraThumbnails?.map(
+            madinahHotelExtraThumbnails: madinahHotelExtraThumbnails?.map(
                 (madinahhHotelExtraThumbnail) =>
                     madinahhHotelExtraThumbnail.path
             ),
-            itineraryDays: validatedData.itineraryDays?.map((itineraryDay) => ({
-                ...itineraryDay,
-                thumbnail: itineraryDay?.thumbnail?.path,
-            })),
+            itineraryDays: updatedItineraryDays,
             umrahThumbnail: umrahThumbnail
                 ? umrahThumbnail.path
                 : umrahPackage.umrahThumbnail,
@@ -100,7 +121,7 @@ module.exports = async (req, res, next) => {
 
         // send response
         return res.status(200).json({
-            message: 'Updated umrah package package successfully',
+            message: 'Updated umrah package successfully',
             umrahPackage,
         });
     } catch (error) {

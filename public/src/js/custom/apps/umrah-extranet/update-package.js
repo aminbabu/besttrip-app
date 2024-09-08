@@ -17,7 +17,7 @@ var KTCreatePackage = (function () {
     var dropZoneMakkahThumbnails;
     var dropZoneMadinahThumbnails;
     var umrahPackageDetails;
-    var numberOfDays;
+    var totalNumberOfDays;
     var initialItinearyItems;
 
     // Private Functions
@@ -118,7 +118,7 @@ var KTCreatePackage = (function () {
                     );
                     appendDropzoneFiles(
                         dropZoneMadinahThumbnails,
-                        'madinahhHotelExtraThumbnails'
+                        'madinahHotelExtraThumbnails'
                     );
 
                     formData.append(
@@ -137,17 +137,10 @@ var KTCreatePackage = (function () {
 
                     // return console.log(formData.get('umrahDescription'));
 
-                    if (initialItinearyItems.length > numberOfDays) {
+                    if (initialItinearyItems.length > totalNumberOfDays) {
                         formData.append(
                             'itemsToRemoveFromItineary',
-                            initialItinearyItems.length - numberOfDays
-                        );
-                    }
-
-                    if (numberOfDays > initialItinearyItems.length) {
-                        formData.append(
-                            'itemsToAddItineary',
-                            numberOfDays - initialItinearyItems.length
+                            initialItinearyItems.length - totalNumberOfDays
                         );
                     }
 
@@ -1370,7 +1363,7 @@ var KTCreatePackage = (function () {
     const handleDayWiseItinearies = () => {
         initialItinearyItems = $('.itineary_item');
 
-        numberOfDays = initialItinearyItems.length;
+        totalNumberOfDays = initialItinearyItems.length;
 
         const addDayWiseItineary = (days) => {
             let html = '';
@@ -1497,16 +1490,18 @@ var KTCreatePackage = (function () {
 
                 $('#day_wise_itinearies_row').append(result);
 
-                numberOfDays = createNewDays + initialItinearyItems.length;
+                totalNumberOfDays = createNewDays + initialItinearyItems.length;
             } else {
                 const removeDays = initialItinearyItems.length - days;
 
-                numberOfDays = initialItinearyItems.length - removeDays;
+                totalNumberOfDays = initialItinearyItems.length - removeDays;
 
-                initialItinearyItems.slice(numberOfDays).addClass('d-none');
+                initialItinearyItems
+                    .slice(totalNumberOfDays)
+                    .addClass('d-none');
             }
 
-            console.log(numberOfDays);
+            console.log(totalNumberOfDays);
         });
     };
 

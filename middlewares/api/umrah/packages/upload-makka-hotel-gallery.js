@@ -73,15 +73,12 @@ module.exports =
                 // move file to upload path
                 updatedThumbnail.mv(uploadLogoPath);
 
-                // set file path to thumbnail object
-                updatedThumbnail.path = thumbnailPath;
-
-                return updatedThumbnail;
+                return thumbnailPath;
             }
         );
 
         // set updated file paths to request body
-        req.files.makkahHotelExtraThumbnails = updatedExtraThumbnails;
+        req.body.makkahHotelExtraThumbnails = updatedExtraThumbnails;
 
         // proceed to next middleware
         return next();
