@@ -4,7 +4,7 @@
  * @version 0.0.0
  * @author best-trip
  * @date 18 March, 2024
- * @update_date 04 June, 2024
+ * @update_date 09 Sept, 2024
  */
 
 // dependencies
@@ -17,10 +17,10 @@ dotenv.config();
 module.exports = {
     NODE_ENV: process.env.NODE_ENV,
     APP_NAME: process.env.APP_NAME,
-    APP_URL: process.env.APP_URL,
+    APP_URL: process.env.BACKEND_APP_URL,
+    PORT: process.env.BACKEND_PORT,
     FRONTEND_APP_URL: process.env.FRONTEND_APP_URL,
     FRONTEND_PORT: process.env.FRONTEND_PORT,
-    PORT: process.env.PORT,
     MONGODB_URI: process.env.MONGODB_URI,
     MONGODB_LIVE_URI: process.env.MONGODB_LIVE_URI,
     JWT_SECRET: process.env.JWT_SECRET,
