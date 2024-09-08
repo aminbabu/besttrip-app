@@ -69,10 +69,10 @@ router.get('/', isAllowed(['admin']), getAllCustomers);
  * @param {function} validator - ['validateCustomerId']
  * @param {function} controller - ['getCustomer']
  * @returns {object} - router
- * @access private - ['admin']
+ * @access private - ['admin','customer']
  * @method GET
  */
-router.get('/:id', isAllowed(['admin']), validateCustomerId, getCustomer);
+router.get('/:id', isAllowed(['admin','customer']), validateCustomerId, getCustomer);
 
 /**
  * @description create a new customer
