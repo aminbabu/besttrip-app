@@ -477,7 +477,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \***********************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// Tiny slider - for all purposes, inspired by Owl Carousel.\r\n\r\nwindow.tns = (__webpack_require__(/*! tiny-slider/src/tiny-slider.js */ \"./node_modules/tiny-slider/src/tiny-slider.js\").tns);\r\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/tiny-slider/tiny-slider.js?");
+eval("// Tiny slider - for all purposes, inspired by Owl Carousel.\n\nwindow.tns = (__webpack_require__(/*! tiny-slider/src/tiny-slider.js */ \"./node_modules/tiny-slider/src/tiny-slider.js\").tns);\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/tiny-slider/tiny-slider.js?");
 
 /***/ })
 
