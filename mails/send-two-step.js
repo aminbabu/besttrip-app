@@ -19,6 +19,11 @@ module.exports = ({ user, randomCode }) => {
             ? `${env.APP_URL}:${env.PORT}`
             : env.APP_URL;
 
+    const customerUrl =
+        env.NODE_ENV === 'development'
+            ? `${env.FRONTEND_APP_URL}:${env.FRONTEND_PORT}`
+            : env.FRONTEND_APP_URL;
+
     // read template file
     const template = fs.readFileSync(
         `${__dirname}/../templates/email/two-step.ejs`,
@@ -33,7 +38,7 @@ module.exports = ({ user, randomCode }) => {
             address: '123, Best Trip Street, Best Trip City',
             phone: '+1234567890',
             email: env.EMAIL_FROM,
-            website: `${appUrl}`,
+            website: user.role === 'customer' ? customerUrl : appUrl,
         },
         user,
         randomCode,

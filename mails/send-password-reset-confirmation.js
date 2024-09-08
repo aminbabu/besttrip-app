@@ -20,6 +20,11 @@ module.exports = async (user) => {
             ? `${env.APP_URL}:${env.PORT}`
             : env.APP_URL;
 
+    const customerUrl =
+        env.NODE_ENV === 'development'
+            ? `${env.FRONTEND_APP_URL}:${env.FRONTEND_PORT}`
+            : env.FRONTEND_APP_URL;
+
     // read template file
     const template = fs.readFileSync(
         `${__dirname}/../templates/email/send-password-reset-confirmation.ejs`,
@@ -28,9 +33,9 @@ module.exports = async (user) => {
 
     // set redirect url
     if (user.role === 'customer') {
-        redirectTo = `${appUrl}/auth/customers/login`;
+        redirectTo = `${customerUrl}/auth/customers/reset-password?token=${token}`;
     } else {
-        redirectTo = `${appUrl}/dashboard/auth/login`;
+        redirectTo = `${appUrl}/dashboard/auth/reset-password?token=${token}`;
     }
 
     // compile template
@@ -41,7 +46,7 @@ module.exports = async (user) => {
             address: '123, Best Trip Street, Best Trip City',
             phone: '+1234567890',
             email: env.EMAIL_FROM,
-            website: `${appUrl}`,
+            website: user.role === 'customer' ? customerUrl : appUrl,
         },
         user,
         redirectTo,

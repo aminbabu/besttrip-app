@@ -15,7 +15,6 @@ const { env } = require('../config');
 // export forgot password
 module.exports = ({ user, token }) => {
     let redirectTo;
-
     const appUrl =
         env.NODE_ENV === 'development'
             ? `${env.APP_URL}:${env.PORT}`
@@ -47,7 +46,7 @@ module.exports = ({ user, token }) => {
             address: '123, Best Trip Street, Best Trip City',
             phone: '+1234567890',
             email: env.EMAIL_FROM,
-            website: `${appUrl}`,
+            website: user.role === 'customer' ? customerUrl : appUrl,
         },
         user,
         redirectTo,
