@@ -1391,7 +1391,7 @@ var KTCreatePackage = (function () {
                 <!--begin::Message-->
                 <label
                   class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start"
-                  for="day_wise_itineary_thumbnail_${i + 1}"
+                  for="day_wise_itineary_thumbnail_${serial}"
                 >
                   <i
                     class="ki-duotone ki-file-up fs-3x text-primary"
@@ -1417,8 +1417,8 @@ var KTCreatePackage = (function () {
                 <!--begin::Input-->
                 <input
                   type="file"
-                  name="day_wise_itineary_thumbnail_${i + 1}"
-                  id="day_wise_itineary_thumbnail_${i + 1}"
+                  name="day_wise_itineary_thumbnail_${serial}"
+                  id="day_wise_itineary_thumbnail_${serial}"
                   accept=".png, .jpg, .jpeg"
                   data-kt-file-uploader-max-size="10"
                   hidden
@@ -1447,7 +1447,7 @@ var KTCreatePackage = (function () {
             <input
               type="text"
               class="form-control form-control-solid"
-              name="day_wise_itineary_title_${i + 1}"
+              name="day_wise_itineary_title_${serial}"
               placeholder=""
               value=""
             />
@@ -1466,7 +1466,7 @@ var KTCreatePackage = (function () {
             <!--begin::Input-->
             <textarea
               class="form-control form-control-solid"
-              name="day_wise_itineary_description_${i + 1}"
+              name="day_wise_itineary_description_${serial}"
               rows="3"
               placeholder=""
             ></textarea>

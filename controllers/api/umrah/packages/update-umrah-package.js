@@ -53,6 +53,7 @@ module.exports = async (req, res, next) => {
 
         // Create a map to update by index
         const updatedItineraryDays = [];
+
         incomingItineraryDays.forEach((incomingDay, index) => {
             if (existingItineraryDays[index]) {
                 // Update existing day
@@ -73,15 +74,6 @@ module.exports = async (req, res, next) => {
                 };
             }
         });
-
-        // If there are more existing days than incoming, keep them
-        for (
-            let i = incomingItineraryDays.length;
-            i < existingItineraryDays.length;
-            i++
-        ) {
-            updatedItineraryDays[i] = existingItineraryDays[i];
-        }
 
         // Set the updated itinerary days and other fields
         umrahPackage.set({
@@ -122,10 +114,6 @@ module.exports = async (req, res, next) => {
 
         // save umrah package
         await umrahPackage.save();
-
-        console.log('updated');
-
-        return;
 
         // send response
         return res.status(200).json({

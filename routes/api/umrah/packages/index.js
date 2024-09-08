@@ -301,9 +301,6 @@ router.patch(
         return next();
     },
     (req, res, next) => {
-        return console.log(req.body);
-    },
-    (req, res, next) => {
         const arr = [];
         let i = 1;
 
@@ -333,7 +330,6 @@ router.patch(
 
         return next();
     },
-
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
     validateUmrahPackageGallery,
