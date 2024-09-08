@@ -7,12 +7,18 @@ var KTCreatePackage = (function () {
     var form;
     var formSubmitButton;
     var formContinueButton;
-    var itineraryData;
+    var editors = {};
 
     // Variables
     var stepperObj;
     var validations = [];
     var ktFileUploaderContent;
+    var dropZoneBasicThumbnails;
+    var dropZoneMakkahThumbnails;
+    var dropZoneMadinahThumbnails;
+    var umrahPackageDetails;
+    var totalNumberOfDays;
+    var initialItinearyItems;
 
     // Private Functions
     var initStepper = function () {
@@ -85,47 +91,144 @@ var KTCreatePackage = (function () {
 
             validator.validate().then(function (status) {
                 if (status == 'Valid') {
-                    // Prevent default button action
-                    e.preventDefault();
+                    // Show loading indication
+                    formSubmitButton.setAttribute('data-kt-indicator', 'on');
 
                     // Disable button to avoid multiple click
                     formSubmitButton.disabled = true;
 
-                    // Show loading indication
-                    formSubmitButton.setAttribute('data-kt-indicator', 'on');
+                    // construct form data
+                    const formData = new FormData(form);
 
-                    // Simulate form submission
-                    setTimeout(function () {
-                        // Hide loading indication
-                        formSubmitButton.removeAttribute('data-kt-indicator');
-
-                        // Enable button
-                        formSubmitButton.disabled = false;
-
-                        // Show popup confirmation
-                        Swal.fire({
-                            text: 'Form has been successfully submitted!',
-                            icon: 'success',
-                            buttonsStyling: false,
-                            confirmButtonText: 'Ok, got it!',
-                            customClass: {
-                                confirmButton: 'btn btn-primary',
-                            },
-                        }).then(function (result) {
-                            // stepperObj.goNext();
+                    // Function to append Dropzone files to FormData
+                    const appendDropzoneFiles = (dropzone, fieldName) => {
+                        dropzone.files.forEach((file) => {
+                            formData.append(fieldName, file, file.name);
                         });
-                    }, 2000);
+                    };
+
+                    // Append files from each Dropzone instance
+                    appendDropzoneFiles(
+                        dropZoneBasicThumbnails,
+                        'extraThumbnails'
+                    );
+                    appendDropzoneFiles(
+                        dropZoneMakkahThumbnails,
+                        'makkahHotelExtraThumbnails'
+                    );
+                    appendDropzoneFiles(
+                        dropZoneMadinahThumbnails,
+                        'madinahHotelExtraThumbnails'
+                    );
+
+                    formData.append(
+                        'umrahDescription',
+                        editors[
+                            'kt_docs_ckeditor_about_us_description'
+                        ].getData()
+                    );
+
+                    formData.append(
+                        'termsConditions',
+                        editors[
+                            'kt_docs_ckeditor_terms_&_conditions_description'
+                        ].getData()
+                    );
+
+                    // return console.log(formData.get('umrahDescription'));
+
+                    if (initialItinearyItems.length > totalNumberOfDays) {
+                        formData.append(
+                            'itemsToRemoveFromItineary',
+                            initialItinearyItems.length - totalNumberOfDays
+                        );
+                    }
+
+                    axios
+                        .patch(
+                            formSubmitButton
+                                .closest('form')
+                                .getAttribute('action'),
+                            formData
+                        )
+                        .then((response) => {
+                            if (response) {
+                                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                console.log(response);
+                                Swal.fire({
+                                    text:
+                                        response?.data?.message ||
+                                        'Form has been successfully submitted!',
+                                    icon: 'success',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                    allowOutsideClick: false,
+                                }).then(() => {
+                                    // Reset form
+                                    // form.reset();
+                                    location.reload();
+                                });
+                            } else {
+                                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                Swal.fire({
+                                    text: 'Sorry, looks like there are some errors detected, please try again.',
+                                    icon: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: 'Ok, got it!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary',
+                                    },
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            const errors = error.response?.data?.message
+                                ? error.response?.data?.message
+                                : error?.response?.data?.errors;
+
+                            Swal.fire({
+                                html: `${
+                                    errors instanceof Array
+                                        ? `<ul class="text-start">${Object.values(
+                                              error.response.data.errors
+                                          )
+                                              .map(
+                                                  (err) =>
+                                                      `<li>${err?.message}</li>`
+                                              )
+                                              .join('')}</ul>`
+                                        : errors
+                                }`,
+                                icon: 'error',
+                                buttonsStyling: false,
+                                confirmButtonText: 'Ok, got it!',
+                                customClass: {
+                                    confirmButton: 'btn btn-primary',
+                                },
+                            });
+                        })
+                        .then(() => {
+                            // Hide loading indication
+                            formSubmitButton.removeAttribute(
+                                'data-kt-indicator'
+                            );
+
+                            // Enable button
+                            formSubmitButton.disabled = false;
+                        });
                 } else {
+                    // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
                         text: 'Sorry, looks like there are some errors detected, please try again.',
                         icon: 'error',
                         buttonsStyling: false,
                         confirmButtonText: 'Ok, got it!',
                         customClass: {
-                            confirmButton: 'btn btn-light',
+                            confirmButton: 'btn btn-primary',
                         },
-                    }).then(function () {
-                        KTUtil.scrollTop();
                     });
                 }
             });
@@ -1009,58 +1112,103 @@ var KTCreatePackage = (function () {
     };
 
     // Add more thumbnails
-    const addMoreThumbnails = () => {
-        const dropZoneBasicThumbnails = new Dropzone(
-            '#kt_dropzonejs_basic_thumbnails',
-            {
-                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
-                maxFiles: 10,
-                maxFilesize: 10, // MB
-                addRemoveLinks: true,
-                accept: function (file, done) {
-                    if (file.name == 'wow.jpg') {
-                        done("Naha, you don't.");
-                    } else {
+    const addMoreThumbnails = async () => {
+        try {
+            // Get form action URL (assuming form is globally accessible)
+            const form = document.querySelector('form');
+            const href = form.getAttribute('action');
+
+            // Fetch umrah package data
+            const response = await axios.get(href);
+            const umrahPackage = response.data.umrahPackage;
+
+            // Get existing thumbnails
+            const extraThumbnails = umrahPackage.extraThumbnails || [];
+            const makkahHotelExtraThumbnails =
+                umrahPackage.makkahHotelExtraThumbnails || [];
+            const madinahHotelExtraThumbnails =
+                umrahPackage.madinahHotelExtraThumbnails || [];
+
+            dropZoneBasicThumbnails = new Dropzone(
+                '#kt_dropzonejs_basic_thumbnails',
+                {
+                    url: 'https://keenthemes.com/scripts/void.php', // Set to actual upload URL
+                    paramName: 'file',
+                    maxFiles: 10,
+                    maxFilesize: 10, // MB
+                    addRemoveLinks: true,
+                    init: function () {
+                        extraThumbnails.forEach((thumbnail) => {
+                            let mockFile = { name: thumbnail, size: 12345 };
+                            this.emit('addedfile', mockFile);
+                            this.emit(
+                                'thumbnail',
+                                mockFile,
+                                thumbnail.replace(/\\/g, '/')
+                            ); // Fix path slashes
+                            this.emit('complete', mockFile);
+                        });
+                    },
+                    accept: function (file, done) {
                         done();
-                    }
-                },
-            }
-        );
-        const dropZoneMakkahThumbnails = new Dropzone(
-            '#kt_dropzonejs_makkah_hotel_thumbnails',
-            {
-                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
-                maxFiles: 10,
-                maxFilesize: 10, // MB
-                addRemoveLinks: true,
-                accept: function (file, done) {
-                    if (file.name == 'wow.jpg') {
-                        done("Naha, you don't.");
-                    } else {
+                    },
+                }
+            );
+
+            dropZoneMakkahThumbnails = new Dropzone(
+                '#kt_dropzonejs_makkah_hotel_thumbnails',
+                {
+                    url: 'https://keenthemes.com/scripts/void.php', // Set to actual upload URL
+                    paramName: 'file',
+                    maxFiles: 10,
+                    maxFilesize: 10, // MB
+                    addRemoveLinks: true,
+                    init: function () {
+                        makkahHotelExtraThumbnails.forEach((thumbnail) => {
+                            let mockFile = { name: thumbnail, size: 12345 };
+                            this.emit('addedfile', mockFile);
+                            this.emit(
+                                'thumbnail',
+                                mockFile,
+                                thumbnail.replace(/\\/g, '/')
+                            ); // Fix path slashes
+                            this.emit('complete', mockFile);
+                        });
+                    },
+                    accept: function (file, done) {
                         done();
-                    }
-                },
-            }
-        );
-        const dropZoneMadinahThumbnails = new Dropzone(
-            '#kt_dropzonejs_madinah_hotel_thumbnails',
-            {
-                url: 'https://keenthemes.com/scripts/void.php', // Set the url for your upload script location
-                paramName: 'file', // The name that will be used to transfer the file
-                maxFiles: 10,
-                maxFilesize: 10, // MB
-                addRemoveLinks: true,
-                accept: function (file, done) {
-                    if (file.name == 'wow.jpg') {
-                        done("Naha, you don't.");
-                    } else {
+                    },
+                }
+            );
+
+            dropZoneMadinahThumbnails = new Dropzone(
+                '#kt_dropzonejs_madinah_hotel_thumbnails',
+                {
+                    url: 'https://keenthemes.com/scripts/void.php', // Set to actual upload URL
+                    paramName: 'file',
+                    maxFiles: 10,
+                    maxFilesize: 10, // MB
+                    addRemoveLinks: true,
+                    init: function () {
+                        madinahHotelExtraThumbnails.forEach((thumbnail) => {
+                            let mockFile = { name: thumbnail, size: 12345 };
+                            this.emit('addedfile', mockFile);
+                            this.emit(
+                                'thumbnail',
+                                mockFile,
+                                thumbnail.replace(/\\/g, '/')
+                            ); // Fix path slashes
+                            this.emit('complete', mockFile);
+                        });
+                    },
+                    accept: function (file, done) {
                         done();
-                    }
-                },
-            }
-        );
+                    },
+                }
+            );
+        } catch (error) {
+            console.error('Error loading thumbnails:', error);
+        }
     };
 
     // Init flatpickr
@@ -1124,25 +1272,32 @@ var KTCreatePackage = (function () {
             );
 
             switch (value) {
-                case 'one-stop': {
-                    showFirstTimePicker();
-                    showFirstAirportInput();
-                    hideSecondTimePicker();
-                    hideSecondAirportInput();
-                    break;
-                }
-                case 'two-stop': {
-                    showFirstTimePicker();
-                    showFirstAirportInput();
-                    showSecondTimePicker();
-                    showSecondAirportInput();
-                    break;
-                }
-                case 'non-stop': {
+                case '0': {
+                    // showFirstTimePicker();
+                    // showFirstAirportInput();
                     hideFirstTimePicker();
                     hideFirstAirportInput();
                     hideSecondTimePicker();
                     hideSecondAirportInput();
+                    break;
+                }
+                case '1': {
+                    showFirstTimePicker();
+                    showFirstAirportInput();
+                    hideSecondTimePicker();
+                    hideSecondAirportInput();
+
+                    break;
+                }
+                case '2': {
+                    showFirstTimePicker();
+                    showFirstAirportInput();
+                    showSecondTimePicker();
+                    showSecondAirportInput();
+                    // hideFirstTimePicker();
+                    // hideFirstAirportInput();
+                    // hideSecondTimePicker();
+                    // hideSecondAirportInput();
                     break;
                 }
                 default:
@@ -1204,35 +1359,23 @@ var KTCreatePackage = (function () {
         });
     };
 
-    // CKEditors
-    const initCKEditors = () => {
-        const textareas = [
-            'kt_docs_ckeditor_about_us_description',
-            'kt_docs_ckeditor_terms_&_conditions_description',
-        ];
-
-        textareas.forEach((id) => {
-            ClassicEditor.create(document.getElementById(id))
-                .then((editor) => {
-                    console.log(editor);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        });
-    };
-
     // Day wise itinearies
     const handleDayWiseItinearies = () => {
-        const addDayWiseItineary = (days, data) => {
+        initialItinearyItems = $('.itineary_item');
+
+        totalNumberOfDays = initialItinearyItems.length;
+
+        const addDayWiseItineary = (days) => {
             let html = '';
 
             for (let i = 0; i < days; i++) {
+                const serial = initialItinearyItems.length + i + 1;
+
                 html += `
-        <div class="row border-bottom">
+        <div class="row border-bottom mb-5">
         <div class="col-lg-12">
           <h3 class="fs-4 mb-4 pb-4 border-bottom">
-            Day ${i + 1 > 9 ? i + 1 : '0' + (i + 1)}
+            Day ${serial}
           </h3>
         </div>
         <div class="col-lg-12">
@@ -1248,7 +1391,7 @@ var KTCreatePackage = (function () {
                 <!--begin::Message-->
                 <label
                   class="kt-file-uploader-label d-flex flex-column flex-xl-row align-items-center align-items-xl-start text-center text-xl-start"
-                  for="day_wise_itineary_thumbnail_${i + 1}"
+                  for="day_wise_itineary_thumbnail_${serial}"
                 >
                   <i
                     class="ki-duotone ki-file-up fs-3x text-primary"
@@ -1274,8 +1417,8 @@ var KTCreatePackage = (function () {
                 <!--begin::Input-->
                 <input
                   type="file"
-                  name="day_wise_itineary_thumbnail_1"
-                  id="day_wise_itineary_thumbnail_${i + 1}"
+                  name="day_wise_itineary_thumbnail_${serial}"
+                  id="day_wise_itineary_thumbnail_${serial}"
                   accept=".png, .jpg, .jpeg"
                   data-kt-file-uploader-max-size="10"
                   hidden
@@ -1304,7 +1447,7 @@ var KTCreatePackage = (function () {
             <input
               type="text"
               class="form-control form-control-solid"
-              name="day_wise_itineary_title_${i + 1}"
+              name="day_wise_itineary_title_${serial}"
               placeholder=""
               value=""
             />
@@ -1323,7 +1466,7 @@ var KTCreatePackage = (function () {
             <!--begin::Input-->
             <textarea
               class="form-control form-control-solid"
-              name="day_wise_itineary_description_${i + 1}"
+              name="day_wise_itineary_description_${serial}"
               rows="3"
               placeholder=""
             ></textarea>
@@ -1334,30 +1477,31 @@ var KTCreatePackage = (function () {
       </div>`;
             }
 
-            $('#day_wise_itinearies_row').html(html);
-
-            // Populate existing thumbnails if available
-            data.forEach((item, index) => {
-                const previewContainer = form
-                    .querySelector(`day_wise_itineary_thumbnail_${index + 1}`)
-                    .closest('.kt-file-uploader');
-                if (item.thumbnail) {
-                    const preview = document.createElement('img');
-                    preview.classList.add('kt-file-uploader-preview');
-                    preview.src = item.src;
-                    preview.alt = item.title;
-                    previewContainer.querySelector('label').innerHTML = '';
-                    previewContainer
-                        .querySelector('label')
-                        .appendChild(preview, itineraryData);
-                }
-            });
+            return html;
         };
 
         $('[name="totalDaysAndNights"]').on('select2:select', function (e) {
             var data = e.params.data;
             var days = $(this).find('option:selected').data('kt-duration');
-            addDayWiseItineary(days, itineraryData);
+            if (days > initialItinearyItems.length) {
+                const createNewDays = days - initialItinearyItems.length;
+                const result = addDayWiseItineary(createNewDays);
+                initialItinearyItems.removeClass('d-none');
+
+                $('#day_wise_itinearies_row').append(result);
+
+                totalNumberOfDays = createNewDays + initialItinearyItems.length;
+            } else {
+                const removeDays = initialItinearyItems.length - days;
+
+                totalNumberOfDays = initialItinearyItems.length - removeDays;
+
+                initialItinearyItems
+                    .slice(totalNumberOfDays)
+                    .addClass('d-none');
+            }
+
+            console.log(totalNumberOfDays);
         });
     };
 
@@ -1370,8 +1514,6 @@ var KTCreatePackage = (function () {
 
             if (response) {
                 const data = response.data.umrahPackage;
-
-                itineraryData = data.itineraryDays;
 
                 // Populate the file upload preview for thumbnails
                 const thumbnails = [
@@ -1441,6 +1583,24 @@ var KTCreatePackage = (function () {
                 },
             });
         }
+    };
+
+    // CKEditors
+    const initCKEditors = () => {
+        const textareas = [
+            'kt_docs_ckeditor_about_us_description',
+            'kt_docs_ckeditor_terms_&_conditions_description',
+        ];
+
+        textareas.forEach((id) => {
+            ClassicEditor.create(document.getElementById(id))
+                .then((editor) => {
+                    editors[id] = editor;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        });
     };
 
     // Init File Uploader
@@ -1519,7 +1679,9 @@ var KTCreatePackage = (function () {
                 return;
             }
 
-            form = stepper.querySelector('#kt_umrah_extranet_package_add_form');
+            form = stepper.querySelector(
+                '#kt_umrah_extranet_package_edit_form'
+            );
             formSubmitButton = stepper.querySelector(
                 '[data-kt-stepper-action="submit"]'
             );

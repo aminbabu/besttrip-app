@@ -30,5 +30,10 @@ module.exports = z
             .refine((date) => !isNaN(Date.parse(date)), {
                 message: 'Please provide a valid date',
             }),
+        paymentType: z.enum(['full-payment', 'partial-payment'], {
+            required_error: 'Payment type is required',
+            invalid_type_error:
+                'Payment type must be either full-payment or partial-payment',
+        }),
     })
     .strict();

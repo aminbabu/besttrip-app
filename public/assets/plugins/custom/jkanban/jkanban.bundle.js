@@ -36,7 +36,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \***************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// jKanban Board - Vanilla Javascript plugin for manage kanban boards: https://github.com/riktar/jkanban\n\n__webpack_require__(/*! jkanban/dist/jkanban.js */ \"./node_modules/jkanban/dist/jkanban.js\");\n\n__webpack_require__(/*! ./jkanban.scss */ \"./webpack/plugins/custom/jkanban/jkanban.scss\");\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/jkanban/jkanban.js?");
+eval("// jKanban Board - Vanilla Javascript plugin for manage kanban boards: https://github.com/riktar/jkanban\r\n\r\n__webpack_require__(/*! jkanban/dist/jkanban.js */ \"./node_modules/jkanban/dist/jkanban.js\");\r\n\r\n__webpack_require__(/*! ./jkanban.scss */ \"./webpack/plugins/custom/jkanban/jkanban.scss\");\r\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/jkanban/jkanban.js?");
 
 /***/ })
 

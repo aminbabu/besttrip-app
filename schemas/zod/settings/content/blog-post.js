@@ -68,6 +68,15 @@ module.exports = z
             .refine((ratting) => ratting >= 0 && ratting <= 5, {
                 message: 'Please provide a valid rating',
             }),
+        numberOfReviews: z
+            .string({
+                required_error: 'Number of reviews is required',
+                invalid_type_error: 'Please provide a valid number of reviews',
+            })
+            .refine((reviews) => reviews > 0, {
+                message:
+                    'Please provide a valid number of reviews greater than 0',
+            }),
         description: z
             .string({
                 required_error: 'Description is required',

@@ -23,25 +23,32 @@ module.exports =
         const { id } = req.params || {};
         const { madinahHotelThumbnail } = req.files || {};
 
+        // If PATCH method and no file uploaded, proceed to next middleware
+        if (req.method === 'PATCH' && !madinahHotelThumbnail) {
+            return next();
+        }
+
         // check if id exists
         if (id) {
             // get umrah package
             umrahPackage = await UmrahPackage.findById(id);
         }
 
-        // check if umrah package madinah hotel thumbnail exists
+        // check if umrah package madinah hotel thumbnail exists and delete if it does
         if (umrahPackage?.madinahHotelThumbnail) {
-            // delete previous madinah hotel thumbnail
-            fs.unlinkSync(
-                path.join(
-                    __dirname,
-                    './../../../../public',
-                    umrahPackage.madinahHotelThumbnail
-                )
+            const previousThumbnailPath = path.join(
+                __dirname,
+                './../../../../public',
+                umrahPackage.madinahHotelThumbnail
             );
+
+            // Only delete the file if it exists
+            if (fs.existsSync(previousThumbnailPath)) {
+                fs.unlinkSync(previousThumbnailPath);
+            }
         }
 
-        // prepare file path
+        // prepare file path for new thumbnail
         const madinahHotelThumbnailPath = path.join(
             '/uploads/',
             `${dir}/${uuidv4()}_${madinahHotelThumbnail.name}`

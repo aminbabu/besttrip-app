@@ -51,10 +51,10 @@ router.use(isAuthorized);
  * @param {function} middleware - ['isAllowed']
  * @param {function} controller - ['getPaymentRequests']
  * @returns {object} - router
- * @access private ['admin']
+ * @access private ['admin', 'customer']
  * @method GET
  */
-router.get('/', isAllowed(['admin']), getPaymentRequests);
+router.get('/', isAllowed(['admin', 'customer']), getPaymentRequests);
 
 /**
  * @description - get payment request by id

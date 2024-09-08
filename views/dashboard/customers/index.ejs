@@ -10,6 +10,7 @@
   <%- include('../partials/theme-mode.ejs') %>
   <!--end::Theme mode setup on page load-->
   <!--begin::App-->
+  <% const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;%>
   <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
     <!--begin::Page-->
     <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
@@ -231,7 +232,16 @@
                         </td>
                         <td><%= customer?.phone %></td>
                         <td><%= customer?.wallet?.balance %></td>
-                        <td><%= customer?.createdAt %></td>
+                        <td><%= new Date(customer?.createdAt).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %></td>
                         <td class="text-end">
                           <a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                             <i class="ki-duotone ki-down fs-5 ms-1"></i></a>

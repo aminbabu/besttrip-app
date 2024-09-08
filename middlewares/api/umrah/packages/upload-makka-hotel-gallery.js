@@ -41,18 +41,23 @@ module.exports =
 
         // check if umrah package makkah hotel extra thumbnails exists
         if (umrahPackage?.makkahHotelExtraThumbnails?.length > 0) {
-            // delete previous extra thumbnails
-            umrahPackage.makkahHotelExtraThumbnails.forEach(
-                (thumbnail) =>
-                    thumbnail &&
-                    fs.unlinkSync(
-                        path.join(__dirname, './../../../../public', thumbnail)
-                    )
-            );
+            // delete previous extra thumbnails only if they exist
+            umrahPackage.makkahHotelExtraThumbnails.forEach((thumbnail) => {
+                const previousThumbnailPath = path.join(
+                    __dirname,
+                    './../../../../public',
+                    thumbnail
+                );
+
+                // Only delete the file if it exists
+                if (fs.existsSync(previousThumbnailPath)) {
+                    fs.unlinkSync(previousThumbnailPath);
+                }
+            });
         }
 
-        // prepare file path
-        const updateExtraThumbnails = makkahHotelExtraThumbnails.map(
+        // prepare new file paths
+        const updatedExtraThumbnails = makkahHotelExtraThumbnails.map(
             (thumbnail) => {
                 const updatedThumbnail = { ...thumbnail };
                 const thumbnailPath = path.join(
@@ -61,22 +66,23 @@ module.exports =
                 );
                 const uploadLogoPath = path.join(
                     __dirname,
-                    './../../../../public',
+                    '../../../../public',
                     thumbnailPath
                 );
+
+                /* 
+                ./../../../../public
+                */
 
                 // move file to upload path
                 updatedThumbnail.mv(uploadLogoPath);
 
-                // set file path to thumbnail object
-                updatedThumbnail.path = thumbnailPath;
-
-                return updatedThumbnail;
+                return thumbnailPath;
             }
         );
 
-        // set file path to request body
-        req.files.makkahHotelExtraThumbnails = updateExtraThumbnails;
+        // set updated file paths to request body
+        req.body.makkahHotelExtraThumbnails = updatedExtraThumbnails;
 
         // proceed to next middleware
         return next();

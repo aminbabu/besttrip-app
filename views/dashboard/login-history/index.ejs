@@ -8,6 +8,9 @@
 <body id="kt_app_body" data-kt-app-layout="light-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
   <!--begin::Theme mode setup on page load-->
   <%- include('../partials/theme-mode.ejs') %>
+
+  <% const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone; %>
+
   <!--end::Theme mode setup on page load-->
   <!--begin::App-->
   <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -275,7 +278,16 @@
                         <td>
                           <div class="d-flex flex-column">
                             <span class="<%= timeAgo === 'Active' ? 'text-success fw-bold' : 'text-muted fw-bold' %>"><%= timeAgo %></span>
-                            <span><%= log.lastLogin.toLocaleString() %></span>
+                            <span><%= new Date(log.lastLogin).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %></span>
                           </div>
                         </td>
                         <td><%= log.ipAddress %></td>

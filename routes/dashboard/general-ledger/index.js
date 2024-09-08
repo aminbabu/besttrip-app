@@ -14,7 +14,9 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewGeneralLedger } = require('../../../controllers/dashboard/general-ledger');
+const {
+    viewGeneralLedger,
+} = require('../../../controllers/dashboard/general-ledger');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
@@ -28,15 +30,15 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
  */
 router.use(isAuthorized);
 
-/**
- * @description - general ledger view route
- * @param {string} path - '/dashboard/general-ledgers'
- * @param {function} controller - ['viewGeneralLedger']
- * @returns {object} - router
- * @access private - ['all']
- * @method GET
- */
-router.get('/', viewGeneralLedger);
+// /**
+//  * @description - general ledger view route
+//  * @param {string} path - '/dashboard/general-ledgers'
+//  * @param {function} controller - ['viewGeneralLedger']
+//  * @returns {object} - router
+//  * @access private - ['all']
+//  * @method GET
+//  */
+// router.get('/', viewGeneralLedger);
 
 // export router
 module.exports = router;

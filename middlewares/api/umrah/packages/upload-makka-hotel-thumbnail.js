@@ -23,25 +23,31 @@ module.exports =
         const { id } = req.params || {};
         const { makkahHotelThumbnail } = req.files || {};
 
-        // check if id exists
+        // If the request is PATCH and no thumbnail is provided, move to the next middleware
+        if (req.method === 'PATCH' && !makkahHotelThumbnail) {
+            return next();
+        }
+
+        // If an id is provided, retrieve the associated UmrahPackage
         if (id) {
-            // get umrah package
             umrahPackage = await UmrahPackage.findById(id);
         }
 
-        // check if umrah package makka hotel thumbnail exists
+        // Check if the UmrahPackage has an existing Makkah hotel thumbnail and delete it if the file exists
         if (umrahPackage?.makkahHotelThumbnail) {
-            // delete previous makka hotel thumbnail
-            fs.unlinkSync(
-                path.join(
-                    __dirname,
-                    './../../../../public',
-                    umrahPackage.makkahHotelThumbnail
-                )
+            const previousThumbnailPath = path.join(
+                __dirname,
+                './../../../../public',
+                umrahPackage.makkahHotelThumbnail
             );
+
+            // Only delete the file if it exists
+            if (fs.existsSync(previousThumbnailPath)) {
+                fs.unlinkSync(previousThumbnailPath);
+            }
         }
 
-        // prepare file path
+        // Prepare the file path for the new Makkah hotel thumbnail
         const makkahHotelThumbnailPath = path.join(
             '/uploads/',
             `${dir}/${uuidv4()}_${makkahHotelThumbnail.name}`
@@ -52,12 +58,12 @@ module.exports =
             makkahHotelThumbnailPath
         );
 
-        // move file to upload path
+        // Move the file to the upload directory
         await makkahHotelThumbnail.mv(uploadLogoPath);
 
-        // set file path to request body
+        // Set the new file path in the request body
         req.files.makkahHotelThumbnail.path = makkahHotelThumbnailPath;
 
-        // proceed to next middleware
+        // Proceed to the next middleware
         return next();
     };

@@ -13,6 +13,7 @@ const { zodErrorHandler } = require('../../../../handlers/errors');
 
 // export validate customer self middleware
 module.exports = (req, res, next) => {
+    console.log(req.body);
     // validate request body
     const { error, success } = customerSchema
         .omit({

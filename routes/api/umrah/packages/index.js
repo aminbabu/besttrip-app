@@ -22,6 +22,7 @@ const {
     updateUmrahPackage,
     deleteUmrahPackage,
     getUmrahPackagesForCustomers,
+    duplicatePackage,
 } = require('../../../../controllers/api/umrah/packages');
 
 // middlewares
@@ -85,10 +86,7 @@ router.post(
  * @access private - ['admin']
  * @method GET
  */
-router.get(
-    '/:id',
-    getUmrahPackage
-);
+router.get('/:id', getUmrahPackage);
 
 /**
  * @description check if user is authorized
@@ -109,6 +107,17 @@ router.use(isAuthorized);
  * @method GET
  */
 router.get('/', isAllowed(['admin']), getUmrahPackages);
+
+/**
+ * @description duplicate umrah package
+ * @param {string} path - /umrah/packages/:id/duplicate
+ * @param {function} middleware - ['isAllowed']
+ * @param {function} controller - ['duplicatePackage']
+ * @returns {object} - router
+ * @access private - ['admin']
+ * @method POST
+ */
+router.post('/:id/duplicate', isAllowed(['admin']), duplicatePackage);
 
 /**
  * @description get umrah package package
@@ -248,6 +257,79 @@ router.patch(
     '/:id',
     isAllowed(['admin']),
     validateUmrahPackageId,
+    isAllowed(['admin']),
+    (req, res, next) => {
+        [
+            {
+                key: 'kt_repeater_visa_required',
+                modifiedKey: 'visaOptions',
+            },
+            {
+                key: 'kt_repeater_transport_service',
+                modifiedKey: 'transportServices',
+            },
+            {
+                key: 'kt_repeater_ziyara_makkah_details',
+                modifiedKey: 'ziyarahMakkahDetails',
+            },
+            {
+                key: 'kt_repeater_ziyara_madinah_details',
+                modifiedKey: 'ziyarahMadinahDetails',
+            },
+            {
+                key: 'kt_repeater_ziyara_taif_details',
+                modifiedKey: 'ziyarahTaifDetails',
+            },
+        ].forEach(({ key, modifiedKey }) => {
+            req.body[modifiedKey] = req.body[key]?.map(
+                (item) => item[modifiedKey]
+            );
+
+            delete req.body[key];
+        });
+
+        // Replace the value of 'umrahDescription' and 'termsConditions' with their second array item
+        const replaceSecondItem = (key) => {
+            if (Array.isArray(req.body[key]) && req.body[key].length > 1) {
+                req.body[key] = req.body[key][1]; // Replace with the second item
+            }
+        };
+
+        replaceSecondItem('umrahDescription');
+        replaceSecondItem('termsConditions');
+
+        return next();
+    },
+    (req, res, next) => {
+        const arr = [];
+        let i = 1;
+
+        while (req.body[`day_wise_itineary_title_${i}`] !== undefined) {
+            arr.push({
+                thumbnail: req.files[`day_wise_itineary_thumbnail_${i}`] || '',
+                title: req.body[`day_wise_itineary_title_${i}`],
+                description: req.body[`day_wise_itineary_description_${i}`],
+            });
+
+            delete req.body[`day_wise_itineary_title_${i}`];
+            delete req.body[`day_wise_itineary_description_${i}`];
+
+            i++;
+        }
+
+        if (Number(req.body?.itemsToRemoveFromItineary)) {
+            arr.splice(
+                -Number(req.body.itemsToRemoveFromItineary),
+                Number(req.body.itemsToRemoveFromItineary)
+            );
+
+            delete req.body.itemsToRemoveFromItineary;
+        }
+
+        req.body.itineraryDays = arr;
+
+        return next();
+    },
     validateUmrahPackageThumbnail,
     validateUmrahPackage,
     validateUmrahPackageGallery,

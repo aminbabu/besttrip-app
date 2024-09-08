@@ -200,13 +200,34 @@
                         </td>
                         <!-- <td>1BU-01</td> -->
                         <td>Umrah Package</td>
-                        <td><%= new Date(details?.umrahPackage?.updatedAt).toLocaleString() %></td>
+                        <% 
+                        const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                        %>
+                        <td><%= new Date(details?.umrahPackage?.updatedAt).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %></td>
                         <td>
                           <a href="#" class="link-primary-dark">
                             <%= details?.customer?.name %>
                           </a>
                         </td>
-                        <td><%= new Date(details?.umrahPackage?.journeyDate).toLocaleString() %></td>
+                        <td><%= new Date(details?.umrahPackage?.journeyDate).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          timeZone: browserTimezone, // Browser timezone here
+                          // timeZoneName: 'short'
+                        }) %></td>
                         <td><%= details?.travelers.length %> Travellers</td>
                         <td><%= details?.customer?.name %></td>
                         <td>No</td>

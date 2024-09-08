@@ -115,7 +115,7 @@ var KTCreatePackage = (function () {
                     );
                     appendDropzoneFiles(
                         dropZoneMadinahThumbnails,
-                        'madinahhHotelExtraThumbnails'
+                        'madinahHotelExtraThumbnails'
                     );
 
                     formData.append(
@@ -1453,7 +1453,7 @@ var KTCreatePackage = (function () {
 
             for (let i = 0; i < days; i++) {
                 html += `
-        <div class="row border-bottom">
+        <div class="row border-bottom mb-5">
         <div class="col-lg-12">
           <h3 class="fs-4 mb-4 pb-4 border-bottom">
             Day ${i + 1 > 9 ? i + 1 : '0' + (i + 1)}

@@ -1873,7 +1873,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \*************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("__webpack_require__(/*! bootstrap/js/dist/tooltip */ \"./node_modules/bootstrap/js/dist/tooltip.js\");\n\n// jsTree - is jquery plugin, that provides interactive trees: https://www.jstree.com/\n__webpack_require__(/*! jstree/dist/jstree.js */ \"./node_modules/jstree/dist/jstree.js\");\n\n__webpack_require__(/*! ./jstree.scss */ \"./webpack/plugins/custom/jstree/jstree.scss\");\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/jstree/jstree.js?");
+eval("__webpack_require__(/*! bootstrap/js/dist/tooltip */ \"./node_modules/bootstrap/js/dist/tooltip.js\");\r\n\r\n// jsTree - is jquery plugin, that provides interactive trees: https://www.jstree.com/\r\n__webpack_require__(/*! jstree/dist/jstree.js */ \"./node_modules/jstree/dist/jstree.js\");\r\n\r\n__webpack_require__(/*! ./jstree.scss */ \"./webpack/plugins/custom/jstree/jstree.scss\");\r\n\n\n//# sourceURL=webpack://besttripbd/./webpack/plugins/custom/jstree/jstree.js?");
 
 /***/ })
 

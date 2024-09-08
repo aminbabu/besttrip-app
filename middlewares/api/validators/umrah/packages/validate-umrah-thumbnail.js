@@ -20,6 +20,10 @@ module.exports = async (req, res, next) => {
     // get umrah package thumbnail
     const { umrahThumbnail } = req.files || {};
 
+    if (req.method === 'PATCH' && !umrahThumbnail) {
+        return next();
+    }
+
     // check if umrah thumbnail is not provided
     if (!umrahThumbnail) {
         return res.status(400).json({

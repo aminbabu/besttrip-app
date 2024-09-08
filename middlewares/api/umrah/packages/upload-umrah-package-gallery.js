@@ -23,40 +23,42 @@ module.exports =
         const { id } = req.params || {};
         let { extraThumbnails } = req.files || {};
 
-        // check if extra thumbnails exists
+        // Check if extra thumbnails exist, if not, move to the next middleware
         if (!extraThumbnails) {
             return next();
         }
 
-        // Convert extraThumbnails to an array if it's not already
+        // Convert extraThumbnails to an array if it's not already an array
         if (!Array.isArray(extraThumbnails)) {
             extraThumbnails = [extraThumbnails];
         }
 
-        // check if id exists
+        // If an id is provided, retrieve the associated UmrahPackage
         if (id) {
-            // get umrah package
             umrahPackage = await UmrahPackage.findById(id);
         }
 
-        // check if umrah package extra thumbnails exists
+        // Check if the UmrahPackage has existing extra thumbnails and delete them
         if (umrahPackage?.extraThumbnails?.length > 0) {
-            // delete previous extra thumbnails
-            umrahPackage.extraThumbnails.forEach(
-                (thumbnail) =>
-                    thumbnail &&
-                    fs.unlinkSync(
-                        path.join(__dirname, './../../../../public', thumbnail)
-                    )
-            );
+            umrahPackage.extraThumbnails.forEach((thumbnail) => {
+                const previousThumbnailPath = path.join(
+                    __dirname,
+                    './../../../../public',
+                    thumbnail
+                );
+
+                // Only delete the file if it exists
+                if (fs.existsSync(previousThumbnailPath)) {
+                    fs.unlinkSync(previousThumbnailPath);
+                }
+            });
         }
 
-        // prepare file path
+        // Prepare file paths for the new extraThumbnails
         const updateExtraThumbnails = extraThumbnails.map((thumbnail) => {
-            const updatedThumbnail = { ...thumbnail };
             const thumbnailPath = path.join(
                 '/uploads/',
-                `${dir}/${uuidv4()}_${updatedThumbnail.name}`
+                `${dir}/${uuidv4()}_${thumbnail.name}`
             );
             const uploadLogoPath = path.join(
                 __dirname,
@@ -64,18 +66,16 @@ module.exports =
                 thumbnailPath
             );
 
-            // move file to upload path
-            updatedThumbnail.mv(uploadLogoPath);
+            // Move the file to the upload directory
+            thumbnail.mv(uploadLogoPath);
 
-            // set file path to thumbnail object
-            updatedThumbnail.path = thumbnailPath;
-
-            return updatedThumbnail;
+            // Return the updated path for the thumbnail
+            return thumbnailPath;
         });
 
-        // set file path to request body
-        req.files.extraThumbnails = updateExtraThumbnails;
+        // Set the updated extraThumbnails paths in the request body
+        req.body.extraThumbnails = updateExtraThumbnails;
 
-        // proceed to next middleware
+        // Proceed to the next middleware
         return next();
     };

@@ -21,7 +21,9 @@ module.exports = async (req, res, next) => {
         const { _id } = req.user;
 
         // get customer
-        const customer = await Customer.findById(_id);
+        const customer = await Customer.findById(_id)
+            .populate('wallet')
+            .select('-createdAt -updatedAt -customer');
 
         // check if customer exists
         if (!customer) {
@@ -43,7 +45,10 @@ module.exports = async (req, res, next) => {
         // success response
         return res.status(200).json({
             message: 'Updated customer successfully',
-            customer,
+            customer: {
+                ...customer.toObject(),
+                accessToken: req.token,
+            },
         });
     } catch (error) {
         return next(error);

@@ -6,13 +6,13 @@
 .dropzone {
     min-height: auto;
     padding: 1.5rem 1.75rem;
-	text-align: center;
-	cursor: pointer;
+    text-align: center;
+    cursor: pointer;
     border: 1px dashed var(--#{$prefix}primary);
     background-color: var(--#{$prefix}primary-light);
     border-radius: $border-radius !important;
 
-    .dz-message{
+    .dz-message {
         margin: 0;
         display: flex;
         text-align: left;
@@ -22,10 +22,16 @@
         border-radius: $border-radius !important;
         margin: 0.75rem;
 
-		.dz-image {
-			border-radius: $border-radius !important;
+        .dz-image {
+            border-radius: $border-radius !important;
             z-index: 1;
-		}
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
 
         &.dz-file-preview {
             .dz-image {
@@ -40,7 +46,7 @@
 
         margin-left: -(divide($size, 2)) !important;
         margin-top: -(divide($size, 2)) !important;
-        
+
         svg {
             height: $size !important;
             width: $size !important;
@@ -49,21 +55,21 @@
 
     .dz-remove {
         $size: 1.65rem;
-        display:flex;
-		justify-content: center;
-		align-items: center;
-		height: $size;
-		width: $size;
-		font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: $size;
+        width: $size;
+        font-size: 1rem;
         text-indent: -9999px;
-        white-space: nowrap;  
+        white-space: nowrap;
         position: absolute;
         z-index: 2;
-        background-color: var(--#{$prefix}body-bg) !important;        
-        box-shadow: var(--#{$prefix}box-shadow);        
-		border-radius: 100%;
-        top: -(divide($size,2));
-        right: -(divide($size,2));
+        background-color: var(--#{$prefix}body-bg) !important;
+        box-shadow: var(--#{$prefix}box-shadow);
+        border-radius: 100%;
+        top: -(divide($size, 2));
+        right: -(divide($size, 2));
 
         &:after {
             position: absolute;
@@ -72,16 +78,16 @@
             bottom: 0;
             right: 0;
             display: block;
-            content: "";
+            content: '';
             mask-size: 40%;
             -webkit-mask-size: 40%;
             @include svg-bg-icon(close, var(--#{$prefix}gray-600));
-        }       
+        }
 
         &:hover {
             &:after {
                 @include svg-bg-icon(close, var(--#{$prefix}primary));
-            } 
+            }
         }
     }
 
@@ -98,13 +104,13 @@
     background-color: transparent;
     text-align: left;
 
-    .dz-message{
+    .dz-message {
         display: none;
     }
 
     .dropzone-panel {
         .dropzone-upload,
-        .dropzone-remove-all{
+        .dropzone-remove-all {
             display: none;
         }
     }
@@ -180,7 +186,7 @@
                 }
             }
 
-            .dropzone-start{
+            .dropzone-start {
                 transition: $transition-link;
             }
         }

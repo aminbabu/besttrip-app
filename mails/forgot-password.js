@@ -15,10 +15,16 @@ const { env } = require('../config');
 // export forgot password
 module.exports = ({ user, token }) => {
     let redirectTo;
+
     const appUrl =
         env.NODE_ENV === 'development'
             ? `${env.APP_URL}:${env.PORT}`
             : env.APP_URL;
+
+    const customerUrl =
+        env.NODE_ENV === 'development'
+            ? `${env.FRONTEND_APP_URL}:${env.FRONTEND_PORT}`
+            : env.FRONTEND_APP_URL;
 
     // read template file
     const template = fs.readFileSync(
@@ -28,7 +34,7 @@ module.exports = ({ user, token }) => {
 
     // set redirect url
     if (user.role === 'customer') {
-        redirectTo = `${appUrl}/auth/customers/reset-password?token=${token}`;
+        redirectTo = `${customerUrl}/auth/customers/reset-password?token=${token}`;
     } else {
         redirectTo = `${appUrl}/dashboard/auth/reset-password?token=${token}`;
     }

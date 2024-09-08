@@ -17,36 +17,26 @@ module.exports = async (req, res, next) => {
         const validatedData = req.body;
         const {
             thumbnail,
-            extraThumbnails,
-            makkahHotelThumbnail,
-            makkahHotelExtraThumbnails,
             madinahHotelThumbnail,
-            madinahhHotelExtraThumbnails,
+            makkahHotelThumbnail,
             umrahThumbnail,
         } = req.files;
-
-        console.log(validatedData);
 
         // create umrah package
         const umrahPackage = new UmrahPackage({
             ...validatedData,
             schedule: validatedData.schedule.toLowerCase(),
             thumbnail: thumbnail.path,
-            extraThumbnails: extraThumbnails?.map(
-                (extraThumbnail) => extraThumbnail.path
-            ),
+            extraThumbnails: validatedData?.extraThumbnails,
             makkahHotelThumbnail: makkahHotelThumbnail.path,
-            makkahHotelExtraThumbnails: makkahHotelExtraThumbnails?.map(
-                (makkahHotelExtraThumbnail) => makkahHotelExtraThumbnail.path
-            ),
+            makkahHotelExtraThumbnails:
+                validatedData?.makkahHotelExtraThumbnails,
             madinahHotelThumbnail: madinahHotelThumbnail.path,
-            madinahhHotelExtraThumbnails: madinahhHotelExtraThumbnails?.map(
-                (madinahhHotelExtraThumbnail) =>
-                    madinahhHotelExtraThumbnail.path
-            ),
+            madinahHotelExtraThumbnails:
+                validatedData?.madinahHotelExtraThumbnails,
             itineraryDays: validatedData.itineraryDays?.map((itineraryDay) => ({
                 ...itineraryDay,
-                thumbnail: req.file?.itineraryDays[0]?.thumbnail?.path,
+                thumbnail: itineraryDay?.thumbnail?.path,
             })),
             umrahThumbnail: umrahThumbnail.path,
         });
