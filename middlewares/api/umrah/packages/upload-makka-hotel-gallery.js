@@ -59,8 +59,6 @@ module.exports =
         // prepare new file paths
         const updatedExtraThumbnails = makkahHotelExtraThumbnails.map(
             (thumbnail) => {
-                console.log(thumbnail);
-
                 const updatedThumbnail = { ...thumbnail };
                 const thumbnailPath = path.join(
                     '/uploads/',
