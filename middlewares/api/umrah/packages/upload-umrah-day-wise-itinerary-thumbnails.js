@@ -24,7 +24,7 @@ module.exports =
         let { itineraryDays } = req.body || {};
 
         // check if itineraryDays exists
-        if (!itineraryDays) {
+        if (!itineraryDays.length) {
             return next();
         }
 

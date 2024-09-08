@@ -60,12 +60,10 @@ module.exports = async (req, res, next) => {
 
         console.log(
             'Items to remove from Itinearys: ',
-            validatedData.itemsToRemoveFromItineary
+            Number(validatedData.itemsToRemoveFromItineary)
         );
-        console.log(
-            'Items to add in Itinearys: ',
-            validatedData.itemsToAddItineary
-        );
+
+        console.log('Items from Itinearys:', validatedData.itineraryDays);
         return;
 
         umrahPackage.set({
