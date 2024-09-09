@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/settings/content/sections/index.js
+ * @file routes/settings/content/sections/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -14,14 +14,16 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewSections } = require('../../../../../controllers/dashboard/settings/content/sections');
+const {
+    viewSections,
+} = require('../../../../../controllers/dashboard/settings/content/sections');
 
 // middlewares
 const { isAuthorized } = require('../../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/settings/content/sections'
+ * @param {string} path - '/settings/content/sections'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -30,7 +32,7 @@ router.use(isAuthorized);
 
 /**
  * @description - payments view route
- * @param {string} path - '/dashboard/settings/content/sections'
+ * @param {string} path - '/settings/content/sections'
  * @param {function} controller - ['viewSections']
  * @returns {object} - router
  * @access private - ['all']

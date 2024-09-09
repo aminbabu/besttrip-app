@@ -146,6 +146,6 @@ module.exports = async (req, res) => {
             umrahBookings: umrahBookingsWithTravelers,
         });
     } catch (error) {
-        return res.redirect('/dashboard/error/500');
+        return res.redirect('/error/500');
     }
 };

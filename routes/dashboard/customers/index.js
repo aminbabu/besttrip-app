@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/customers/index.js
+ * @file routes/customers/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -24,7 +24,7 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 
 /**
  * @description check if customer is authorized
- * @param {string} path - '/dashboard/customers'
+ * @param {string} path - '/customers'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -33,7 +33,7 @@ router.use(isAuthorized);
 
 /**
  * @description - customers view route
- * @param {string} path - '/dashboard/customers'
+ * @param {string} path - '/customers'
  * @param {function} controller - ['viewCustomers']
  * @returns {object} - router
  * @access private - ['all']
@@ -43,7 +43,7 @@ router.get('/', viewCustomers);
 
 /**
  * @description - view customer view route
- * @param {string} path - '/dashboard/customers/:id'
+ * @param {string} path - '/customers/:id'
  * @param {function} controller - ['viewCustomer']
  * @returns {object} - router
  * @access private - ['all']

@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/invoice/index.js
+ * @file routes/invoice/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -21,7 +21,7 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/invoices'
+ * @param {string} path - '/invoices'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -30,7 +30,7 @@ router.use(isAuthorized);
 
 /**
  * @description - invoices view route
- * @param {string} path - '/dashboard/invoices'
+ * @param {string} path - '/invoices'
  * @param {function} controller - ['viewInvoices']
  * @returns {object} - router
  * @access private - ['all']

@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/umrah//index.js
+ * @file routes/umrah//index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -25,7 +25,7 @@ const { isAuthorized } = require('../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/payment-requests'
+ * @param {string} path - '/payment-requests'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -34,7 +34,7 @@ router.use(isAuthorized);
 
 /**
  * @description - umrah packages view route
- * @param {string} path - '/dashboard/umrah/packages'
+ * @param {string} path - '/umrah/packages'
  * @param {function} controller - ['viewUmrahPackages']
  * @returns {object} - router
  * @access private - ['all']
@@ -44,7 +44,7 @@ router.get('/', viewUmrahPackages);
 
 /**
  * @description - umrah package add view route
- * @param {string} path - '/dashboard/umrah/packages/add'
+ * @param {string} path - '/umrah/packages/add'
  * @param {function} controller - ['viewAddUmrahPackage']
  * @returns {object} - router
  * @access private - ['all']
@@ -54,7 +54,7 @@ router.get('/add', viewAddUmrahPackage);
 
 /**
  * @description - umrah package edit view route
- * @param {string} path - '/dashboard/umrah/packages/:id'
+ * @param {string} path - '/umrah/packages/:id'
  * @param {function} controller - ['viewEditUmrahPackage']
  * @returns {object} - router
  * @access private - ['all']

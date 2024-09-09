@@ -43,6 +43,6 @@ module.exports = async (req, res) => {
             countries: Object.values(countries),
         });
     } catch (error) {
-        return res.redirect('/dashboard/error/500');
+        return res.redirect('/error/500');
     }
 };

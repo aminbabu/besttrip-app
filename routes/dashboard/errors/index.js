@@ -1,5 +1,5 @@
 /**
- * @file /routes/dashboard/errors/index.js
+ * @file /routes/errors/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip

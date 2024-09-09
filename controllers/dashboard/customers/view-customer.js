@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
 
         // Check if customer exists
         if (!existingCustomer) {
-            return res.redirect('/dashboard/error/404');
+            return res.redirect('/error/404');
         }
 
         const customer = existingCustomer.toObject();
@@ -288,6 +288,6 @@ module.exports = async (req, res) => {
             umrahBookingList,
         });
     } catch (error) {
-        return res.redirect('/dashboard/error/500');
+        return res.redirect('/error/500');
     }
 };

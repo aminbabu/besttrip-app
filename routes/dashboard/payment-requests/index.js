@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/payment-requests/index.js
+ * @file routes/payment-requests/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -14,14 +14,16 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewPaymentRequests } = require('../../../controllers/dashboard/payment-requests');
+const {
+    viewPaymentRequests,
+} = require('../../../controllers/dashboard/payment-requests');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/payment-requests'
+ * @param {string} path - '/payment-requests'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -30,7 +32,7 @@ router.use(isAuthorized);
 
 /**
  * @description - payment requests view route
- * @param {string} path - '/dashboard/payment-requests/:status'
+ * @param {string} path - '/payment-requests/:status'
  * @param {function} controller - ['viewProfile']
  * @returns {object} - router
  * @access private - ['all']

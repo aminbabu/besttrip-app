@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
 
         // check if umrah package not found
         if (!umrahPackage.length) {
-            return res.redirect('/dashboard/errors/404');
+            return res.redirect('/errors/404');
         }
 
         console.log(umrahPackage[0]);
@@ -559,6 +559,6 @@ module.exports = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        return res.redirect('/dashboard/error/500');
+        return res.redirect('/error/500');
     }
 };

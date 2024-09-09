@@ -114,6 +114,6 @@ module.exports = async (req, res) => {
         });
     } catch (error) {
         console.error(error); // Log the error for debugging
-        return res.redirect('/dashboard/error/500');
+        return res.redirect('/error/500');
     }
 };

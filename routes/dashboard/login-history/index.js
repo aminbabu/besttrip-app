@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/login-history/index.js
+ * @file routes/login-history/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -24,7 +24,7 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/login-history'
+ * @param {string} path - '/login-history'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -33,7 +33,7 @@ router.use(isAuthorized);
 
 /**
  * @description - login history view route
- * @param {string} path - '/dashboard/login-history'
+ * @param {string} path - '/login-history'
  * @param {function} controller - ['viewLoginHistory']
  * @returns {object} - router
  * @access private - ['all']
@@ -43,7 +43,7 @@ router.get('/', viewLoginHistory);
 
 /**
  * @description - blocked ip view route
- * @param {string} path - '/dashboard/login-history/blocked-ips'
+ * @param {string} path - '/login-history/blocked-ips'
  * @param {function} controller - ['viewBlockedIps']
  * @returns {object} - router
  * @access private - ['all']

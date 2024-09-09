@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/settings/site/index.js
+ * @file routes/settings/site/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -21,7 +21,7 @@ const { isAuthorized } = require('../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/settings/site'
+ * @param {string} path - '/settings/site'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -30,7 +30,7 @@ router.use(isAuthorized);
 
 /**
  * @description - site view route
- * @param {string} path - '/dashboard/settings/site'
+ * @param {string} path - '/settings/site'
  * @param {function} controller - ['viewSite']
  * @returns {object} - router
  * @access private - ['all']

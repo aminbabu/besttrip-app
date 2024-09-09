@@ -2,7 +2,7 @@
   <!--begin::Logo-->
   <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
     <!--begin::Logo image-->
-    <a href="/dashboard">
+    <a href="/">
       <img alt="Logo" src="/assets/media/logos/default.svg" class="h-30px app-sidebar-logo-default" />
     </a>
     <!--end::Logo image-->
@@ -25,7 +25,7 @@
         <!--begin::Menu-->
         <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold gap-4" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
           <div class="menu-item">
-            <a class="menu-link <%= url === '/dashboard' ? 'active' : '' %>" href="/dashboard">
+            <a class="menu-link <%= url === '/' ? 'active' : '' %>" href="/">
               <span class="menu-icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_2586_40922)">
@@ -67,7 +67,7 @@
             </span>
             <div class="menu-sub menu-sub-accordion">
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/payment-requests/requested') ? 'active' : '' %>" href="/dashboard/payment-requests/requested">
+                <a class="menu-link <%= url.startsWith('/dashboard/payment-requests/requested') ? 'active' : '' %>" href="/payment-requests/requested">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -75,7 +75,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/payment-requests/approved') ? 'active' : '' %>" href="/dashboard/payment-requests/approved">
+                <a class="menu-link <%= url.startsWith('/dashboard/payment-requests/approved') ? 'active' : '' %>" href="/payment-requests/approved">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -83,7 +83,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/payment-requests/rejected') ? 'active' : '' %>" href="/dashboard/payment-requests/rejected">
+                <a class="menu-link <%= url.startsWith('/dashboard/payment-requests/rejected') ? 'active' : '' %>" href="/payment-requests/rejected">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -135,7 +135,7 @@
             </span>
             <div class="menu-sub menu-sub-accordion">
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/in-process') ? 'active' : '' %>" href="/dashboard/umrah/bookings/pending">
+                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/in-process') ? 'active' : '' %>" href="/umrah/bookings/pending">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -143,7 +143,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/under-review') ? 'active' : '' %>" href="/dashboard/umrah/bookings/under-review">
+                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/under-review') ? 'active' : '' %>" href="/umrah/bookings/under-review">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -151,7 +151,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/success') ? 'active' : '' %>" href="/dashboard/umrah/bookings/success">
+                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/success') ? 'active' : '' %>" href="/umrah/bookings/success">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -159,7 +159,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/booked') ? 'active' : '' %>" href="/dashboard/umrah/bookings/booked">
+                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/booked') ? 'active' : '' %>" href="/umrah/bookings/booked">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -167,7 +167,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/cancelled') ? 'active' : '' %>" href="/dashboard/umrah/bookings/cancelled">
+                <a class="menu-link <%= url.startsWith('/dashboard/umrah/bookings/cancelled') ? 'active' : '' %>" href="/umrah/bookings/cancelled">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -276,7 +276,7 @@
             </span>
             <div class="menu-sub menu-sub-accordion">
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/users') ? 'active' : '' %>" href="/dashboard/users">
+                <a class="menu-link <%= url.startsWith('/dashboard/users') ? 'active' : '' %>" href="/users">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -284,7 +284,7 @@
                 </a>
               </div>
               <!-- <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/roles') ? 'active' : '' %>" href="/dashboard/roles">
+                <a class="menu-link <%= url.startsWith('/dashboard/roles') ? 'active' : '' %>" href="/roles">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -294,7 +294,7 @@
             </div>
           </div>
           <div class="menu-item">
-            <a class="menu-link <%= url.startsWith('/dashboard/customers') ? 'active' : '' %>" href="/dashboard/customers">
+            <a class="menu-link <%= url.startsWith('/dashboard/customers') ? 'active' : '' %>" href="/customers">
               <span class="menu-icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_2586_40855)">
@@ -311,7 +311,7 @@
             </a>
           </div>
           <div class="menu-item">
-            <a class="menu-link <%= url.startsWith('/dashboard/invoices') ? 'active' : '' %>" href="/dashboard/invoices">
+            <a class="menu-link <%= url.startsWith('/dashboard/invoices') ? 'active' : '' %>" href="/invoices">
               <span class="menu-icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M8.63008 2.14258C7.21133 2.14258 6.05711 3.29684 6.05711 4.71555C6.05711 6.13426 7.21133 7.28852 8.63008 7.28852C10.0488 7.28852 11.203 6.13426 11.203 4.71555C11.203 3.29684 10.0488 2.14258 8.63008 2.14258ZM8.63008 6.66352C7.55594 6.66352 6.68211 5.78965 6.68211 4.71555C6.68211 3.64145 7.55598 2.76758 8.63008 2.76758C9.70418 2.76758 10.578 3.64145 10.578 4.71555C10.578 5.78965 9.70422 6.66352 8.63008 6.66352ZM9.66152 5.20699C9.68852 5.42937 9.62816 5.63324 9.48691 5.79656C9.35906 5.94438 9.16543 6.05191 8.94262 6.10395V6.14598C8.94262 6.22886 8.90969 6.30834 8.85109 6.36695C8.79248 6.42555 8.713 6.45848 8.63012 6.45848C8.54724 6.45848 8.46775 6.42555 8.40915 6.36695C8.35054 6.30834 8.31762 6.22886 8.31762 6.14598V6.09844C7.95996 6.00336 7.68856 5.74758 7.60172 5.39922C7.59179 5.3594 7.5898 5.31801 7.59587 5.27742C7.60193 5.23684 7.61593 5.19784 7.63707 5.16266C7.6582 5.12748 7.68606 5.09681 7.71905 5.0724C7.75204 5.04799 7.78952 5.03032 7.82934 5.02039C7.99676 4.97891 8.16641 5.08055 8.20816 5.24801C8.25875 5.45082 8.47863 5.51863 8.65219 5.51383C8.8043 5.5102 8.95316 5.45836 9.01426 5.3877C9.0323 5.3668 9.04809 5.33961 9.04113 5.28234C9.03402 5.22402 9.01746 5.08734 8.5816 5.01582C7.81523 4.88992 7.68039 4.45004 7.66824 4.19898C7.64879 3.79855 7.90707 3.46078 8.31766 3.33859V3.28516C8.31766 3.20228 8.35058 3.12279 8.40919 3.06419C8.46779 3.00558 8.54728 2.97266 8.63016 2.97266C8.71304 2.97266 8.79252 3.00558 8.85113 3.06419C8.90973 3.12279 8.94266 3.20228 8.94266 3.28516V3.33578C9.20637 3.41156 9.45102 3.59172 9.58379 3.90793C9.61519 3.98422 9.61514 4.06983 9.58367 4.14608C9.5522 4.22234 9.49185 4.28306 9.41579 4.315C9.33972 4.34693 9.25412 4.3475 9.17764 4.31657C9.10116 4.28564 9.04002 4.22572 9.00754 4.14988C8.90785 3.9125 8.6591 3.89941 8.52793 3.9293C8.47063 3.9423 8.28426 3.99801 8.29254 4.16875C8.29453 4.21023 8.30066 4.33637 8.68289 4.3991C9.27899 4.49687 9.60828 4.76871 9.66152 5.20699ZM18.0031 8.23113V2.82125C18.0031 2.64664 17.9379 2.48906 17.8143 2.36551L15.95 0.50125C15.8266 0.377773 15.669 0.3125 15.4944 0.3125H5.31605C4.96066 0.3125 4.67152 0.601641 4.67152 0.957031V7.89539H4.45543C4.39228 7.89539 4.33061 7.91452 4.27855 7.95027C4.22649 7.98601 4.18648 8.03669 4.16379 8.09562L3.97211 8.59363C3.70719 8.66965 3.45178 8.77554 3.21078 8.90926L2.72273 8.6925C2.66502 8.66685 2.60089 8.65929 2.5388 8.67083C2.47671 8.68236 2.41957 8.71244 2.37492 8.75711L1.62738 9.50469C1.58273 9.54935 1.55266 9.60648 1.54112 9.66857C1.52959 9.73066 1.53714 9.79479 1.56277 9.8525L1.77949 10.3405C1.64577 10.5815 1.53986 10.8369 1.46379 11.1019L0.965859 11.2935C0.906924 11.3162 0.856246 11.3562 0.820501 11.4083C0.784757 11.4603 0.765624 11.522 0.765625 11.5852V12.6423C0.765624 12.7055 0.784757 12.7672 0.820501 12.8192C0.856246 12.8713 0.906924 12.9113 0.965859 12.934L1.46371 13.1256C1.53974 13.3906 1.64567 13.6462 1.77945 13.8872L1.56281 14.375C1.53717 14.4328 1.52962 14.4969 1.54115 14.559C1.55269 14.6211 1.58277 14.6782 1.62742 14.7229L2.375 15.4704C2.41967 15.515 2.4768 15.5451 2.53889 15.5566C2.60097 15.5682 2.6651 15.5606 2.72281 15.535L3.21082 15.3183C3.45183 15.452 3.70726 15.5579 3.97219 15.6339L4.16387 16.1319C4.18655 16.1908 4.22656 16.2415 4.27863 16.2772C4.33069 16.313 4.39236 16.3321 4.45551 16.3321H4.6716V16.7618C4.6716 17.1171 4.96074 17.4063 5.31613 17.4063H9.605V18.2093C9.605 19.0243 10.2681 19.6874 11.0831 19.6874H17.7555C18.5705 19.6874 19.2336 19.0243 19.2336 18.2093V9.68809C19.2335 8.9575 18.7006 8.34937 18.0031 8.23113ZM16.9362 2.37121H15.9444V1.37945L16.9362 2.37121ZM4.49793 15.2602C4.4797 15.2128 4.45022 15.1706 4.41201 15.1372C4.37381 15.1038 4.32804 15.0802 4.27867 15.0685C3.96615 14.9941 3.66752 14.8703 3.39406 14.7017C3.35084 14.6751 3.30179 14.6594 3.25114 14.656C3.2005 14.6526 3.14978 14.6616 3.1034 14.6822L2.66523 14.8768L2.22109 14.4327L2.41563 13.9947C2.43623 13.9483 2.44522 13.8976 2.44183 13.8469C2.43843 13.7963 2.42275 13.7472 2.39613 13.704C2.2275 13.4305 2.10366 13.1317 2.0293 12.8191C2.01754 12.7698 1.99394 12.724 1.96053 12.6858C1.92712 12.6476 1.8849 12.6181 1.83754 12.5999L1.39066 12.4279V11.7998L1.83762 11.6278C1.88499 11.6095 1.9272 11.58 1.96061 11.5418C1.99402 11.5036 2.01762 11.4579 2.02938 11.4085C2.10372 11.0959 2.22755 10.7973 2.39617 10.5239C2.42279 10.4806 2.43847 10.4316 2.44186 10.3809C2.44526 10.3303 2.43627 10.2796 2.41566 10.2332L2.22105 9.79492L2.6652 9.35082L3.1034 9.54543C3.14979 9.56603 3.2005 9.57503 3.25114 9.57163C3.30179 9.56823 3.35084 9.55255 3.39406 9.52594C3.66754 9.35739 3.96617 9.23357 4.27867 9.15914C4.32804 9.1474 4.37381 9.1238 4.41201 9.0904C4.45022 9.05699 4.4797 9.01478 4.49793 8.96742L4.67 8.52039H5.29809L5.47016 8.96742C5.48838 9.01478 5.51787 9.05699 5.55607 9.0904C5.59428 9.1238 5.64004 9.1474 5.68941 9.15914C6.00193 9.23353 6.30056 9.35735 6.57402 9.52594C6.61725 9.55253 6.66631 9.5682 6.71695 9.5716C6.76759 9.575 6.81829 9.56601 6.86469 9.54543L7.30289 9.35082L7.74703 9.79492L7.55254 10.2329C7.53193 10.2793 7.52294 10.33 7.52634 10.3807C7.52975 10.4313 7.54544 10.4804 7.57207 10.5236C7.74068 10.7971 7.86451 11.0958 7.93887 11.4084C7.95062 11.4578 7.97422 11.5036 8.00763 11.5418C8.04104 11.58 8.08326 11.6095 8.13063 11.6277L8.57746 11.7997V12.4278L8.13047 12.5998C8.0831 12.6181 8.04088 12.6476 8.00747 12.6858C7.97406 12.724 7.95046 12.7698 7.93871 12.8191C7.86435 13.1317 7.74053 13.4303 7.57195 13.7038C7.54534 13.747 7.52966 13.796 7.52626 13.8467C7.52286 13.8973 7.53186 13.948 7.55246 13.9944L7.74707 14.4326L7.30297 14.8767L6.865 14.6822C6.81861 14.6616 6.76789 14.6526 6.71723 14.656C6.66657 14.6594 6.61751 14.6751 6.5743 14.7018C6.30075 14.8703 6.00204 14.9942 5.68945 15.0686C5.64007 15.0803 5.5943 15.1039 5.55609 15.1373C5.51788 15.1707 5.48838 15.2129 5.47016 15.2603L5.29816 15.7071H4.67008L4.49793 15.2602ZM9.60492 9.68809V16.7814H5.31605C5.31094 16.7812 5.30608 16.7791 5.30246 16.7755C5.29884 16.7718 5.29672 16.767 5.29652 16.7619V16.3322H5.51266C5.57581 16.3322 5.63748 16.3131 5.68954 16.2774C5.7416 16.2416 5.78161 16.1909 5.8043 16.132L5.9959 15.6342C6.26093 15.5582 6.51645 15.4523 6.75754 15.3185L7.24535 15.5351C7.30306 15.5608 7.36719 15.5683 7.42928 15.5568C7.49137 15.5452 7.54851 15.5152 7.59316 15.4705L8.3407 14.7229C8.38536 14.6783 8.41543 14.6211 8.42698 14.5591C8.43852 14.497 8.43098 14.4328 8.40535 14.3751L8.18859 13.8871C8.32232 13.6461 8.42823 13.3907 8.50426 13.1258L9.00223 12.9341C9.06117 12.9114 9.11185 12.8714 9.1476 12.8194C9.18334 12.7673 9.20247 12.7056 9.20246 12.6425V11.5853C9.20246 11.5221 9.18333 11.4605 9.14758 11.4084C9.11184 11.3563 9.06116 11.3163 9.00223 11.2936L8.50445 11.102C8.42841 10.837 8.32248 10.5815 8.18871 10.3404L8.40535 9.85262C8.43099 9.7949 8.43854 9.73078 8.427 9.66869C8.41547 9.6066 8.38539 9.54946 8.34074 9.5048L7.59316 8.75723C7.5485 8.71259 7.49136 8.68253 7.42927 8.671C7.36719 8.65947 7.30307 8.667 7.24535 8.69262L6.75731 8.90938C6.51631 8.77566 6.26089 8.66977 5.99598 8.59375L5.8043 8.09574C5.78161 8.03681 5.7416 7.98613 5.68954 7.95038C5.63748 7.91464 5.57581 7.89551 5.51266 7.89551H5.29656V0.957031C5.29656 0.946797 5.30586 0.9375 5.31609 0.9375H15.3195V2.5177C15.3195 2.78156 15.5341 2.99621 15.798 2.99621H17.3782V8.20996H11.083C10.268 8.20996 9.60492 8.87301 9.60492 9.68809ZM18.6085 18.2093C18.6085 18.6798 18.2258 19.0625 17.7554 19.0625H11.083C10.6127 19.0625 10.2299 18.6798 10.2299 18.2093V9.68809C10.2299 9.21766 10.6126 8.83496 11.083 8.83496H17.7554C18.2258 8.83496 18.6086 9.21766 18.6086 9.68809V18.2093H18.6085ZM17.3668 9.88305H11.4716C11.1515 9.88305 10.8911 10.1434 10.8911 10.4635V11.5153C10.8911 11.8353 11.1515 12.0957 11.4716 12.0957H17.3668C17.6869 12.0957 17.9473 11.8353 17.9473 11.5153V10.4635C17.9473 10.1434 17.6869 9.88305 17.3668 9.88305ZM17.3223 11.4707H11.5161V10.508H17.3223V11.4707ZM12.7193 12.7469H11.7178C11.3977 12.7469 11.1373 13.0073 11.1373 13.3273V13.6757C11.1373 13.9958 11.3977 14.2562 11.7178 14.2562H12.7193C13.0394 14.2562 13.2998 13.9958 13.2998 13.6757V13.3273C13.2998 13.0073 13.0394 12.7469 12.7193 12.7469ZM12.6748 13.6312H11.7623V13.3719H12.6748V13.6312ZM14.92 12.7469H13.9184C13.5984 12.7469 13.338 13.0073 13.338 13.3273V13.6757C13.338 13.9958 13.5984 14.2562 13.9184 14.2562H14.92C15.24 14.2562 15.5004 13.9958 15.5004 13.6757V13.3273C15.5004 13.0073 15.24 12.7469 14.92 12.7469ZM14.8754 13.6312H13.963V13.3719H14.8754V13.6312ZM17.1206 12.7469H16.1191C15.799 12.7469 15.5386 13.0073 15.5386 13.3273V13.6757C15.5386 13.9958 15.799 14.2562 16.1191 14.2562H17.1206C17.4407 14.2562 17.7011 13.9958 17.7011 13.6757V13.3273C17.7011 13.0073 17.4407 12.7469 17.1206 12.7469ZM17.0761 13.6312H16.1636V13.3719H17.0761V13.6312ZM12.7193 14.626H11.7178C11.3977 14.626 11.1373 14.8864 11.1373 15.2065V15.5548C11.1373 15.8749 11.3977 16.1353 11.7178 16.1353H12.7193C13.0394 16.1353 13.2998 15.8749 13.2998 15.5548V15.2065C13.2998 14.8864 13.0394 14.626 12.7193 14.626ZM12.6748 15.5103H11.7623V15.251H12.6748V15.5103ZM14.92 14.626H13.9184C13.5984 14.626 13.338 14.8864 13.338 15.2065V15.5548C13.338 15.8749 13.5984 16.1353 13.9184 16.1353H14.92C15.24 16.1353 15.5004 15.8749 15.5004 15.5548V15.2065C15.5004 14.8864 15.24 14.626 14.92 14.626ZM14.8754 15.5103H13.963V15.251H14.8754V15.5103ZM17.1206 14.626H16.1191C15.799 14.626 15.5386 14.8864 15.5386 15.2065V15.5548C15.5386 15.8749 15.799 16.1353 16.1191 16.1353H17.1206C17.4407 16.1353 17.7011 15.8749 17.7011 15.5548V15.2065C17.7011 14.8864 17.4407 14.626 17.1206 14.626ZM17.0761 15.5103H16.1636V15.251H17.0761V15.5103ZM12.7193 16.5051H11.7178C11.3977 16.5051 11.1373 16.7655 11.1373 17.0855V17.4339C11.1373 17.754 11.3977 18.0144 11.7178 18.0144H12.7193C13.0394 18.0144 13.2998 17.754 13.2998 17.4339V17.0855C13.2998 16.7655 13.0394 16.5051 12.7193 16.5051ZM12.6748 17.3894H11.7623V17.1301H12.6748V17.3894ZM14.92 16.5051H13.9184C13.5984 16.5051 13.338 16.7655 13.338 17.0855V17.4339C13.338 17.754 13.5984 18.0144 13.9184 18.0144H14.92C15.24 18.0144 15.5004 17.754 15.5004 17.4339V17.0855C15.5004 16.7655 15.24 16.5051 14.92 16.5051ZM14.8754 17.3894H13.963V17.1301H14.8754V17.3894ZM17.1206 16.5051H16.1191C15.799 16.5051 15.5386 16.7655 15.5386 17.0855V17.4339C15.5386 17.754 15.799 18.0144 16.1191 18.0144H17.1206C17.4407 18.0144 17.7011 17.754 17.7011 17.4339V17.0855C17.7011 16.7655 17.4407 16.5051 17.1206 16.5051ZM17.0761 17.3894H16.1636V17.1301H17.0761V17.3894ZM7.14031 12.1138C7.14031 10.9248 6.17301 9.95758 4.98402 9.95758C3.79508 9.95758 2.82777 10.9249 2.82777 12.1138C2.82777 13.3028 3.79508 14.27 4.98402 14.27C6.17301 14.27 7.14031 13.3028 7.14031 12.1138ZM4.98402 13.645C4.13969 13.645 3.45277 12.9581 3.45277 12.1138C3.45277 11.2695 4.13969 10.5826 4.98402 10.5826C5.82836 10.5826 6.51531 11.2695 6.51531 12.1138C6.51531 12.9582 5.82836 13.645 4.98402 13.645ZM11.7508 4.71555C11.7508 4.63267 11.7837 4.55318 11.8423 4.49458C11.9009 4.43597 11.9804 4.40305 12.0633 4.40305H14.8145C14.8974 4.40305 14.9769 4.43597 15.0355 4.49458C15.0941 4.55318 15.127 4.63267 15.127 4.71555C15.127 4.79843 15.0941 4.87791 15.0355 4.93652C14.9769 4.99512 14.8974 5.02805 14.8145 5.02805H12.0633C11.9804 5.02805 11.9009 4.99512 11.8423 4.93652C11.7837 4.87791 11.7508 4.79843 11.7508 4.71555ZM11.7508 3.21289C11.7508 3.13001 11.7837 3.05052 11.8423 2.99192C11.9009 2.93331 11.9804 2.90039 12.0633 2.90039H14.8145C14.8974 2.90039 14.9769 2.93331 15.0355 2.99192C15.0941 3.05052 15.127 3.13001 15.127 3.21289C15.127 3.29577 15.0941 3.37526 15.0355 3.43386C14.9769 3.49247 14.8974 3.52539 14.8145 3.52539H12.0633C11.9804 3.52539 11.9009 3.49247 11.8423 3.43386C11.7837 3.37526 11.7508 3.29577 11.7508 3.21289ZM11.7508 6.2182C11.7508 6.13532 11.7837 6.05584 11.8423 5.99723C11.9009 5.93863 11.9804 5.9057 12.0633 5.9057H14.8145C14.8974 5.9057 14.9769 5.93863 15.0355 5.99723C15.0941 6.05584 15.127 6.13532 15.127 6.2182C15.127 6.30108 15.0941 6.38057 15.0355 6.43917C14.9769 6.49778 14.8974 6.5307 14.8145 6.5307H12.0633C11.9804 6.5307 11.9009 6.49778 11.8423 6.43917C11.7837 6.38057 11.7508 6.30108 11.7508 6.2182Z" fill="currentColor" />
@@ -467,7 +467,7 @@
             </span>
             <div class="menu-sub menu-sub-accordion">
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/umrah/types') ? 'active' : '' %>" href="/dashboard/umrah/types">
+                <a class="menu-link <%= url.startsWith('/dashboard/umrah/types') ? 'active' : '' %>" href="/umrah/types">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -475,7 +475,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/umrah/durations') ? 'active' : '' %>" href="/dashboard/umrah/durations">
+                <a class="menu-link <%= url.startsWith('/dashboard/umrah/durations') ? 'active' : '' %>" href="/umrah/durations">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -483,7 +483,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/umrah/packages') && !url.startsWith('/dashboard/umrah/packages/add') ? 'active' : '' %>" href="/dashboard/umrah/packages">
+                <a class="menu-link <%= url.startsWith('/dashboard/umrah/packages') && !url.startsWith('/dashboard/umrah/packages/add') ? 'active' : '' %>" href="/umrah/packages">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -491,7 +491,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/umrah/packages/add') ? 'active' : '' %>" href="/dashboard/umrah/packages/add">
+                <a class="menu-link <%= url.startsWith('/dashboard/umrah/packages/add') ? 'active' : '' %>" href="/umrah/packages/add">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -546,7 +546,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link" href="/dashboard/umrah/list">
+                <a class="menu-link" href="/umrah/list">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -722,7 +722,7 @@
           </div> -->
           <!--
           <div class="menu-item d-none">
-            <a class="menu-link <%= url.startsWith('/dashboard/general-ledger') ? 'active' : '' %>" href="/dashboard/general-ledger">
+            <a class="menu-link <%= url.startsWith('/dashboard/general-ledger') ? 'active' : '' %>" href="/general-ledger">
               <span class="menu-icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19.375 17.1875H17.1875V1.875C17.1875 1.01344 16.4866 0.3125 15.625 0.3125H1.875C1.01344 0.3125 0.3125 1.01344 0.3125 1.875V2.5C0.3125 2.58288 0.345424 2.66237 0.404029 2.72097C0.462634 2.77958 0.54212 2.8125 0.625 2.8125H2.8125V18.125C2.8125 18.9866 3.51344 19.6875 4.375 19.6875H18.125C18.9866 19.6875 19.6875 18.9866 19.6875 18.125V17.5C19.6875 17.4171 19.6546 17.3376 19.596 17.279C19.5374 17.2204 19.4579 17.1875 19.375 17.1875ZM0.9375 1.875C0.9375 1.35812 1.35812 0.9375 1.875 0.9375H14.3756C14.172 1.2076 14.0621 1.53675 14.0625 1.875V2.1875H0.9375V1.875ZM5.3125 17.5V18.125C5.3125 18.6419 4.89187 19.0625 4.375 19.0625C3.85812 19.0625 3.4375 18.6419 3.4375 18.125V2.8125H14.375C14.4579 2.8125 14.5374 2.77958 14.596 2.72097C14.6546 2.66237 14.6875 2.58288 14.6875 2.5V1.875C14.6875 1.35812 15.1081 0.9375 15.625 0.9375C16.1419 0.9375 16.5625 1.35812 16.5625 1.875V17.1875H5.625C5.54212 17.1875 5.46263 17.2204 5.40403 17.279C5.34542 17.3376 5.3125 17.4171 5.3125 17.5ZM19.0625 18.125C19.0625 18.6419 18.6419 19.0625 18.125 19.0625H5.62437C5.82799 18.7924 5.93793 18.4632 5.9375 18.125V17.8125H19.0625V18.125Z" fill="currentColor" />
@@ -750,7 +750,7 @@
             </span>
             <div class="menu-sub menu-sub-accordion">
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/login-history') ? 'active' : '' %>" href="/dashboard/login-history">
+                <a class="menu-link <%= url.startsWith('/dashboard/login-history') ? 'active' : '' %>" href="/login-history">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -758,7 +758,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/login-history/blocked-ips') ? 'active' : '' %>" href="/dashboard/login-history/blocked-ips">
+                <a class="menu-link <%= url.startsWith('/dashboard/login-history/blocked-ips') ? 'active' : '' %>" href="/login-history/blocked-ips">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -787,7 +787,7 @@
             </span>
             <div class="menu-sub menu-sub-accordion">
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/settings/site') ? 'active' : '' %>" href="/dashboard/settings/site">
+                <a class="menu-link <%= url.startsWith('/dashboard/settings/site') ? 'active' : '' %>" href="/settings/site">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -804,7 +804,7 @@
                 </span>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                   <div class="menu-item">
-                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/sections') ? 'active' : '' %>" href="/dashboard/settings/content/sections">
+                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/sections') ? 'active' : '' %>" href="/settings/content/sections">
                       <span class="menu-bullet">
                         <span class="bullet bullet-dot"></span>
                       </span>
@@ -812,7 +812,7 @@
                     </a>
                   </div>
                   <div class="menu-item">
-                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/exclusive-offers') ? 'active' : '' %>" href="/dashboard/settings/content/exclusive-offers">
+                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/exclusive-offers') ? 'active' : '' %>" href="/settings/content/exclusive-offers">
                       <span class="menu-bullet">
                         <span class="bullet bullet-dot"></span>
                       </span>
@@ -822,7 +822,7 @@
                     </a>
                   </div>
                   <div class="menu-item">
-                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/hotel-offers') ? 'active' : '' %>" href="/dashboard/settings/content/hotel-offers">
+                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/hotel-offers') ? 'active' : '' %>" href="/settings/content/hotel-offers">
                       <span class="menu-bullet">
                         <span class="bullet bullet-dot"></span>
                       </span>
@@ -830,7 +830,7 @@
                     </a>
                   </div>
                   <div class="menu-item">
-                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/flight-offers') ? 'active' : '' %>" href="/dashboard/settings/content/flight-offers">
+                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/flight-offers') ? 'active' : '' %>" href="/settings/content/flight-offers">
                       <span class="menu-bullet">
                         <span class="bullet bullet-dot"></span>
                       </span>
@@ -838,7 +838,7 @@
                     </a>
                   </div>
                   <div class="menu-item">
-                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/umrah-offers') ? 'active' : '' %>" href="/dashboard/settings/content/umrah-offers">
+                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/umrah-offers') ? 'active' : '' %>" href="/settings/content/umrah-offers">
                       <span class="menu-bullet">
                         <span class="bullet bullet-dot"></span>
                       </span>
@@ -846,7 +846,7 @@
                     </a>
                   </div>
                   <div class="menu-item">
-                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/blog-posts') ? 'active' : '' %>" href="/dashboard/settings/content/blog-posts">
+                    <a class="menu-link <%= url.startsWith('/dashboard/settings/content/blog-posts') ? 'active' : '' %>" href="/settings/content/blog-posts">
                       <span class="menu-bullet">
                         <span class="bullet bullet-dot"></span>
                       </span>
@@ -856,7 +856,7 @@
                 </div>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/settings/payments') ? 'active' : '' %>" href="/dashboard/settings/payments">
+                <a class="menu-link <%= url.startsWith('/dashboard/settings/payments') ? 'active' : '' %>" href="/settings/payments">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -864,7 +864,7 @@
                 </a>
               </div>
               <div class="menu-item">
-                <a class="menu-link <%= url.startsWith('/dashboard/settings/themes') ? 'active' : '' %>" href="/dashboard/settings/themes">
+                <a class="menu-link <%= url.startsWith('/dashboard/settings/themes') ? 'active' : '' %>" href="/settings/themes">
                   <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                   </span>
@@ -874,7 +874,7 @@
             </div>
           </div>
           <div class="menu-item">
-            <a class="menu-link" href="/dashboard/logout">
+            <a class="menu-link" href="/logout">
               <span class="menu-icon">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M11.4545 0.0429688C10.3153 0.0429688 9.39613 0.0429687 8.67363 0.140469C7.92363 0.240469 7.29196 0.457135 6.7903 0.957969C6.35363 1.39547 6.13196 1.93297 6.01613 2.56464C5.90363 3.1788 5.88196 3.92964 5.87696 4.8313C5.87608 4.99706 5.94108 5.15638 6.05766 5.27422C6.17425 5.39206 6.33287 5.45875 6.49863 5.45964C6.66439 5.46052 6.82371 5.39552 6.94155 5.27893C7.05938 5.16235 7.12608 5.00373 7.12696 4.83797C7.13196 3.92714 7.1553 3.2813 7.2453 2.79047C7.3328 2.3188 7.47196 2.04464 7.67446 1.84214C7.9053 1.6113 8.22946 1.4613 8.84113 1.3788C9.4703 1.29464 10.3045 1.29297 11.5003 1.29297H12.3336C13.5303 1.29297 14.3645 1.29464 14.9936 1.3788C15.6053 1.4613 15.9286 1.61214 16.1603 1.84214C16.392 2.07214 16.5403 2.3963 16.6228 3.0088C16.7078 3.63714 16.7086 4.47214 16.7086 5.66797V12.3346C16.7086 13.5305 16.7078 14.3655 16.6228 14.9946C16.5403 15.6063 16.3903 15.9296 16.1595 16.1605C15.9286 16.3913 15.6053 16.5413 14.9936 16.6238C14.3645 16.708 13.5303 16.7096 12.3336 16.7096H11.5003C10.3045 16.7096 9.4703 16.708 8.8403 16.6238C8.22946 16.5413 7.9053 16.3905 7.67446 16.1605C7.47196 15.958 7.3328 15.6838 7.2453 15.2121C7.1553 14.7213 7.13196 14.0755 7.12696 13.1646C7.12652 13.0826 7.10992 13.0014 7.07811 12.9257C7.0463 12.85 6.99989 12.7814 6.94155 12.7237C6.8832 12.6659 6.81406 12.6203 6.73806 12.5893C6.66206 12.5583 6.58071 12.5425 6.49863 12.543C6.41655 12.5434 6.33537 12.56 6.25971 12.5918C6.18404 12.6236 6.11539 12.67 6.05766 12.7284C5.99994 12.7867 5.95427 12.8559 5.92326 12.9319C5.89226 13.0079 5.87652 13.0892 5.87696 13.1713C5.88196 14.073 5.90363 14.8238 6.01613 15.438C6.1328 16.0696 6.35363 16.6071 6.79113 17.0446C7.29196 17.5463 7.92446 17.7613 8.67446 17.863C9.39613 17.9596 10.3153 17.9596 11.4545 17.9596H12.3795C13.5195 17.9596 14.4378 17.9596 15.1603 17.8621C15.9103 17.7621 16.542 17.5455 17.0436 17.0446C17.5453 16.543 17.7603 15.9113 17.862 15.1613C17.9586 14.4388 17.9586 13.5196 17.9586 12.3805V5.62214C17.9586 4.48297 17.9586 3.5638 17.862 2.8413C17.7611 2.0913 17.5453 1.45964 17.0436 0.957969C16.542 0.456302 15.9103 0.241302 15.1603 0.140469C14.4378 0.0429687 13.5186 0.0429688 12.3795 0.0429688H11.4545Z" fill="currentColor" />

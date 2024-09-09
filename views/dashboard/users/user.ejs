@@ -41,7 +41,7 @@
                   <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                      <a href="/dashboard" class="text-muted text-hover-primary">Home</a>
+                      <a href="/" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -476,7 +476,7 @@
                     <!--begin::Modal content-->
                     <div class="modal-content">
                       <!--begin::Form-->
-                      <form class="form" id="kt_modal_update_user_form" data-kt-redirect-url="/dashboard/users/<%= user?._id %>" action="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>" method="post">
+                      <form class="form" id="kt_modal_update_user_form" data-kt-redirect-url="/users/<%= user?._id %>" action="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>" method="post">
                         <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_update_user_header">
                           <!--begin::Modal title-->
@@ -870,7 +870,7 @@
                       <!--begin::Modal body-->
                       <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <!--begin::Form-->
-                        <form id="kt_modal_update_password_form" class="form" data-kt-redirect-url="/dashboard/users/<%= user?._id %>" action="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>/password" method="post">
+                        <form id="kt_modal_update_password_form" class="form" data-kt-redirect-url="/users/<%= user?._id %>" action="/api/users/<% if (loggedInUser?.email === user?.email) { %>self<% } else { %><%= user?._id %><% } %>/password" method="post">
                           <% if (loggedInUser?.email === user?.email) { %>
                           <!--begin::Input group=-->
                           <div class="fv-row mb-10">
@@ -979,7 +979,7 @@
                       <!--begin::Modal body-->
                       <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <!--begin::Form-->
-                        <form id="kt_modal_update_role_form" class="form" data-kt-redirect-url="/dashboard/users/<%= user?._id %>" action="/api/users/<%= user?._id %>/role" method="post">
+                        <form id="kt_modal_update_role_form" class="form" data-kt-redirect-url="/users/<%= user?._id %>" action="/api/users/<%= user?._id %>/role" method="post">
                           <!--begin::Notice-->
                           <!--begin::Notice-->
                           <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
@@ -1234,7 +1234,7 @@
                       <!--begin::Modal body-->
                       <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <!--begin::Form-->
-                        <form class="form" id="kt_modal_enable_2fa_form" data-kt-redirect-url="/dashboard/users/<%= user?._id %>" action="/api/auth/users/two-step" method="post">
+                        <form class="form" id="kt_modal_enable_2fa_form" data-kt-redirect-url="/users/<%= user?._id %>" action="/api/auth/users/two-step" method="post">
                           <!--begin::Label-->
                           <div class="fw-bold mb-9">
                             Enter your password to <% if (user?.twoStepAuth) { %>disable<% } else { %>enable<% } %>

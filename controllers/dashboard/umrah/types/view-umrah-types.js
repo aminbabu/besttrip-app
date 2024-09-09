@@ -22,6 +22,6 @@ module.exports = async (req, res) => {
             umrahPackageTypes,
         });
     } catch (error) {
-        return res.redirect('/dashboard/error/500');
+        return res.redirect('/error/500');
     }
 };

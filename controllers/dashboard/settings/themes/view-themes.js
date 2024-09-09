@@ -25,6 +25,6 @@ module.exports = async (req, res) => {
             defaultTheme,
         });
     } catch (error) {
-        return res.redirect('/dashboard/error/500');
+        return res.redirect('/error/500');
     }
 };

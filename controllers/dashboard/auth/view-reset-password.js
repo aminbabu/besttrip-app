@@ -17,6 +17,6 @@ module.exports = (req, res) => {
             token: req.query.token,
         });
     } catch (err) {
-        return res.redirect('/dashboard/errors/500');
+        return res.redirect('/errors/500');
     }
 };

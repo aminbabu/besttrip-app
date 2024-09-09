@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/index.js
+ * @file routes/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -28,12 +28,30 @@ router.use('/invoices', require('./invoices'));
 router.use('/general-ledger', require('./general-ledger'));
 router.use('/login-history', require('./login-history'));
 router.use('/settings/site', require('./settings/site'));
-router.use('/settings/content/sections', require('./settings/content/sections'));
-router.use('/settings/content/exclusive-offers', require('./settings/content/exclusive-offers'));
-router.use('/settings/content/hotel-offers', require('./settings/content/hotel-offers'));
-router.use('/settings/content/flight-offers', require('./settings/content/flight-offers'));
-router.use('/settings/content/umrah-offers', require('./settings/content/umrah-offers'));
-router.use('/settings/content/blog-posts', require('./settings/content/blog-posts'));
+router.use(
+    '/settings/content/sections',
+    require('./settings/content/sections')
+);
+router.use(
+    '/settings/content/exclusive-offers',
+    require('./settings/content/exclusive-offers')
+);
+router.use(
+    '/settings/content/hotel-offers',
+    require('./settings/content/hotel-offers')
+);
+router.use(
+    '/settings/content/flight-offers',
+    require('./settings/content/flight-offers')
+);
+router.use(
+    '/settings/content/umrah-offers',
+    require('./settings/content/umrah-offers')
+);
+router.use(
+    '/settings/content/blog-posts',
+    require('./settings/content/blog-posts')
+);
 router.use('/settings/payments', require('./settings/payments'));
 router.use('/settings/themes', require('./settings/themes'));
 router.use('/errors', require('./errors'));

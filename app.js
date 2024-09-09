@@ -67,8 +67,8 @@ app.use(ipinfo(ipInfo));
 app.use(routeUrl);
 
 // routes
+app.use('/', require('./routes/dashboard'));
 app.use('/api', require('./routes/api'));
-app.use('/dashboard', require('./routes/dashboard'));
 
 // catch 404 and forward to error handler
 app.use(notFound);

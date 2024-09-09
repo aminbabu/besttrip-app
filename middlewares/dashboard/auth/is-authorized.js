@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
 
     // check if authorization is not exist
     if (!authorization) {
-        return res.redirect('/dashboard/auth/login');
+        return res.redirect('/auth/login');
     }
 
     // get token
@@ -41,7 +41,7 @@ module.exports = async (req, res, next) => {
 
         // check if user is not exist
         if (!user) {
-            return res.redirect('/dashboard/auth/login');
+            return res.redirect('/auth/login');
         }
 
         // generate token
@@ -70,6 +70,6 @@ module.exports = async (req, res, next) => {
         // proceed to next middleware
         return next();
     } catch (error) {
-        return res.redirect('/dashboard/errors/500');
+        return res.redirect('/errors/500');
     }
 };

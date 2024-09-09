@@ -16,6 +16,6 @@ module.exports = (req, res) => {
                 'Please enter your email address to receive a password reset link.',
         });
     } catch (err) {
-        return res.redirect('/dashboard/errors/500');
+        return res.redirect('/errors/500');
     }
 };

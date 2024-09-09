@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/home/index.js
+ * @file routes/home/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -14,14 +14,17 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewDashboard, signOut } = require('../../../controllers/dashboard/home');
+const {
+    viewDashboard,
+    signOut,
+} = require('../../../controllers/dashboard/home');
 
 // middlewares
 const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 
 /**
  * @description - dashboard view route
- * @param {string} path - '/dashboard'
+ * @param {string} path - '/'
  * @param {function} middleware - ['isAuthorized']
  * @param {function} controller - ['viewDashboard']
  * @returns {object} - router
@@ -32,43 +35,43 @@ router.get('/', isAuthorized, viewDashboard);
 
 /**
  * @description - sign-up route
- * @param {string} path - '/dashboard/sign-up'
+ * @param {string} path - '/sign-up'
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/sign-up', (req, res) => res.redirect('/dashboard/auth/register'));
+router.get('/sign-up', (req, res) => res.redirect('/auth/register'));
 
 /**
  * @description - register route
- * @param {string} path - '/dashboard/register'
+ * @param {string} path - '/register'
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/register', (req, res) => res.redirect('/dashboard/auth/register'));
+router.get('/register', (req, res) => res.redirect('/auth/register'));
 
 /**
  * @description - sign-in route
- * @param {string} path - '/dashboard/sign-in'
+ * @param {string} path - '/sign-in'
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/sign-in', (req, res) => res.redirect('/dashboard/auth/login'));
+router.get('/sign-in', (req, res) => res.redirect('/auth/login'));
 
 /**
  * @description - login route
- * @param {string} path - '/dashboard/login'
+ * @param {string} path - '/login'
  * @returns {object} - router
  * @access private - ['all']
  * @method GET
  */
-router.get('/login', (req, res) => res.redirect('/dashboard/auth/login'));
+router.get('/login', (req, res) => res.redirect('/auth/login'));
 
 /**
  * @description - logout route
- * @param {string} path - '/dashboard/logout'
+ * @param {string} path - '/logout'
  * @param {function} controller - ['logout']
  * @returns {object} - router
  * @access private - ['all']
@@ -78,7 +81,7 @@ router.get('/logout', signOut);
 
 /**
  * @description - sign-out route
- * @param {string} path - '/dashboard/sign-out'
+ * @param {string} path - '/sign-out'
  * @param {function} controller - ['signOut']
  * @returns {object} - router
  * @access private - ['all']

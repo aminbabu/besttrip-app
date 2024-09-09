@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/umrah/types/index.js
+ * @file routes/umrah/types/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -14,14 +14,16 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewUmrahTypes } = require('../../../../controllers/dashboard/umrah/types');
+const {
+    viewUmrahTypes,
+} = require('../../../../controllers/dashboard/umrah/types');
 
 // middlewares
 const { isAuthorized } = require('../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/payment-requests'
+ * @param {string} path - '/payment-requests'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -30,7 +32,7 @@ router.use(isAuthorized);
 
 /**
  * @description - umrah package types view route
- * @param {string} path - '/dashboard/umrah/types'
+ * @param {string} path - '/umrah/types'
  * @param {function} controller - ['viewUmrahTypes']
  * @returns {object} - router
  * @access private - ['all']

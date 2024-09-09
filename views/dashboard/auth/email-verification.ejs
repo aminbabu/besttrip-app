@@ -20,7 +20,7 @@
           <div class="card-body py-15 py-lg-20">
             <!--begin::Logo-->
             <div class="mb-14">
-              <a href="/dashboard" class="">
+              <a href="/" class="">
                 <img alt="Logo" src="/assets/media/logos/default-small.svg" class="h-40px" />
               </a>
             </div>
@@ -33,9 +33,9 @@
             <!--end::Text-->
             <!--begin::Link-->
             <div class="mb-11 d-flex flex-column align-items-center gap-4">
-              <a href="/dashboard/auth/login" class="btn btn-sm btn-primary">Sign In</a>
+              <a href="/auth/login" class="btn btn-sm btn-primary">Sign In</a>
               <% if (data?.status !== 'Email Verified') { %>
-              <a href="/dashboard/auth/resend-verification-email" class="btn btn-sm btn-light-primary">Resend Verification Email</a>
+              <a href="/auth/resend-verification-email" class="btn btn-sm btn-light-primary">Resend Verification Email</a>
               <% } %>
             </div>
             <!--end::Link-->

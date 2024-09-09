@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/settings/content/blog-posts/index.js
+ * @file routes/settings/content/blog-posts/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -23,7 +23,7 @@ const { isAuthorized } = require('../../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/settings/content/blog-posts'
+ * @param {string} path - '/settings/content/blog-posts'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -32,7 +32,7 @@ router.use(isAuthorized);
 
 /**
  * @description - payments view route
- * @param {string} path - '/dashboard/settings/content/blog-posts'
+ * @param {string} path - '/settings/content/blog-posts'
  * @param {function} controller - ['viewBlogPosts']
  * @returns {object} - router
  * @access private - ['all']

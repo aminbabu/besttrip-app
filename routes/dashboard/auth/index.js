@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/auth/index.js
+ * @file routes/auth/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -39,7 +39,7 @@ router.use(isNotAuthorized);
 
 /**
  * @description - login view route
- * @param {string} path - '/dashboard/auth/login'
+ * @param {string} path - '/auth/login'
  * @param {function} controller - ['viewSignIn']
  * @returns {object} - router
  * @access public - ['all']
@@ -49,7 +49,7 @@ router.get('/login', viewSignIn);
 
 /**
  * @description - sign-in view route
- * @param {string} path - '/dashboard/auth/sign-in'
+ * @param {string} path - '/auth/sign-in'
  * @param {function} controller - ['viewSignIn']
  * @returns {object} - router
  * @access public - ['all']
@@ -59,7 +59,7 @@ router.get('/sign-in', viewSignIn);
 
 /**
  * @description - register view route
- * @param {string} path - '/dashboard/auth/register'
+ * @param {string} path - '/auth/register'
  * @param {function} controller - ['viewSignUp']
  * @returns {object} - router
  * @access public - ['all']
@@ -69,7 +69,7 @@ router.get('/register', viewSignUp);
 
 /**
  * @description - sign-up view route
- * @param {string} path - '/dashboard/auth/sign-up'
+ * @param {string} path - '/auth/sign-up'
  * @param {function} controller - ['viewSignUp']
  * @returns {object} - router
  * @access public - ['all']
@@ -79,7 +79,7 @@ router.get('/sign-up', viewSignUp);
 
 /**
  * @description - forgot-password view route
- * @param {string} path - '/dashboard/auth/forgot-password'
+ * @param {string} path - '/auth/forgot-password'
  * @param {function} controller - ['viewForgotPassword']
  * @returns {object} - router
  * @access public - ['all']
@@ -89,7 +89,7 @@ router.get('/forgot-password', viewForgotPassword);
 
 /**
  * @description - reset-password view route
- * @param {string} path - '/dashboard/auth/reset-password'
+ * @param {string} path - '/auth/reset-password'
  * @param {function} controller - ['viewResetPassword']
  * @returns {object} - router
  * @access public - ['all']
@@ -99,7 +99,7 @@ router.get('/reset-password', viewResetPassword);
 
 /**
  * @description - resend-verification view route
- * @param {string} path - '/dashboard/resend-verification'
+ * @param {string} path - '/resend-verification'
  * @param {function} controller - ['viewResendVerificationEmail']
  * @returns {object} - router
  * @access public - ['all']
@@ -109,7 +109,7 @@ router.get('/resend-verification-email', viewResendVerificationEmail);
 
 /**
  * @description - verify-email view route
- * @param {string} path - '/dashboard/auth/verify-email'
+ * @param {string} path - '/auth/verify-email'
  * @param {function} controller - ['viewEmailVerification']
  * @returns {object} - router
  * @access public - ['all']
@@ -119,7 +119,7 @@ router.get('/verify-email', viewEmailVerification);
 
 /**
  * @description - account-activation view route
- * @param {string} path - '/dashboard/auth/account-activation'
+ * @param {string} path - '/auth/account-activation'
  * @param {function} controller - ['viewAccountActivation']
  * @returns {object} - router
  * @access public - ['all']
@@ -129,7 +129,7 @@ router.get('/account-activation', viewAccountActivation);
 
 /**
  * @description - two-step view route
- * @param {string} path - '/dashboard/auth/two-factor'
+ * @param {string} path - '/auth/two-factor'
  * @param {function} controller - ['viewTwoStep']
  * @returns {object} - router
  * @access public - ['all']

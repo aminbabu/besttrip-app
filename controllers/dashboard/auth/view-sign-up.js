@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
         // check if user is not exists
         if (user) {
-            return res.redirect('/dashboard/auth/login');
+            return res.redirect('/auth/login');
         }
 
         // return render sign up view
@@ -30,6 +30,6 @@ module.exports = async (req, res) => {
             countries: Object.values(countries),
         });
     } catch (err) {
-        return res.redirect('/dashboard/errors/500');
+        return res.redirect('/errors/500');
     }
 };

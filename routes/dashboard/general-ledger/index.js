@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/general-ledger/index.js
+ * @file routes/general-ledger/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -23,7 +23,7 @@ const { isAuthorized } = require('../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/general-ledger'
+ * @param {string} path - '/general-ledger'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -32,7 +32,7 @@ router.use(isAuthorized);
 
 // /**
 //  * @description - general ledger view route
-//  * @param {string} path - '/dashboard/general-ledgers'
+//  * @param {string} path - '/general-ledgers'
 //  * @param {function} controller - ['viewGeneralLedger']
 //  * @returns {object} - router
 //  * @access private - ['all']

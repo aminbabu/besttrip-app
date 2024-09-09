@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/umrah/bookings/index.js
+ * @file routes/umrah/bookings/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -24,7 +24,7 @@ const { isAuthorized } = require('../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/umrah/bookings'
+ * @param {string} path - '/umrah/bookings'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -33,7 +33,7 @@ router.use(isAuthorized);
 
 /**
  * @description - umrah booking view route
- * @param {string} path - '/dashboard/umrah/bookings/booking-details/:id'
+ * @param {string} path - '/umrah/bookings/booking-details/:id'
  * @param {function} controller - ['bookingDetails']
  * @returns {object} - router
  * @access private - ['all']
@@ -43,7 +43,7 @@ router.get('/booking-details/:id', bookingDetails);
 
 /**
  * @description - umrah bookings view route
- * @param {string} path - '/dashboard/umrah/bookings/:status'
+ * @param {string} path - '/umrah/bookings/:status'
  * @param {function} controller - ['viewUmrahBookings']
  * @returns {object} - router
  * @access private - ['all']

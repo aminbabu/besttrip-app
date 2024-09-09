@@ -107,6 +107,6 @@ module.exports = async (req, res) => {
             },
         });
     } catch (err) {
-        return res.redirect('/dashboard/errors/500');
+        return res.redirect('/errors/500');
     }
 };

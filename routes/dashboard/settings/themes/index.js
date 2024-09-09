@@ -1,5 +1,5 @@
 /**
- * @file routes/dashboard/settings/themes/index.js
+ * @file routes/settings/themes/index.js
  * @project best-trip
  * @version 0.0.0
  * @author best-trip
@@ -14,14 +14,16 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const { viewThemes } = require('../../../../controllers/dashboard/settings/themes');
+const {
+    viewThemes,
+} = require('../../../../controllers/dashboard/settings/themes');
 
 // middlewares
 const { isAuthorized } = require('../../../../middlewares/dashboard/auth');
 
 /**
  * @description check if user is authorized
- * @param {string} path - '/dashboard/settings/themes'
+ * @param {string} path - '/settings/themes'
  * @param {function} middleware - ['isAuthorized']
  * @returns {object} - router
  * @method USE
@@ -30,7 +32,7 @@ router.use(isAuthorized);
 
 /**
  * @description - themes view route
- * @param {string} path - '/dashboard/settings/themes'
+ * @param {string} path - '/settings/themes'
  * @param {function} controller - ['viewThemes']
  * @returns {object} - router
  * @access private - ['all']
