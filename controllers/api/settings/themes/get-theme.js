@@ -13,19 +13,8 @@ const { ThemeSettings } = require('../../../../models');
 // export get theme controller
 module.exports = async (req, res, next) => {
     try {
-        // get validated data
-        const { theme: key } = req.params;
-
-        const query = {};
-
-        if (key) {
-            query.theme = key;
-        } else {
-            query.status = 'active';
-        }
-
         // get theme
-        const theme = await ThemeSettings.findOne(query);
+        const theme = await ThemeSettings.findOne({ status: 'active' });
 
         // check if theme exists
         if (!theme) {

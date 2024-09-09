@@ -50,7 +50,7 @@ router.get('/', isAuthorized, isAllowed(['admin']), getThemes);
  * @access public
  * @method GET
  */
-router.get('/active/:theme', getTheme);
+router.get('/active', getTheme);
 
 /**
  * @description get theme status
