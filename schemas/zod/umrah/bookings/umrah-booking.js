@@ -70,5 +70,39 @@ module.exports = z
             .nonnegative({
                 message: 'Total Travelers must be a non-negative number',
             }),
+        adultTravelers: z
+            .number({
+                required_error: 'AdultTravelers  is required',
+                invalid_type_error: 'AdultTravelers  must be a number',
+            })
+            .int({
+                message: 'AdultTravelers  must be an integer',
+            })
+            .nonnegative({
+                message: 'AdultTravelers  must be a non-negative number',
+            })
+            .default(1),
+        childTravelers: z
+            .number({
+                required_error: 'ChildTravelers  is required',
+                invalid_type_error: 'ChildTravelers  must be a number',
+            })
+            .int({
+                message: 'ChildTravelers  must be an integer',
+            })
+            .nonnegative({
+                message: 'ChildTravelers  must be a non-negative number',
+            }).default(0),
+        infantTravelers: z
+            .number({
+                required_error: 'InfantTravelers  is required',
+                invalid_type_error: 'InfantTravelers  must be a number',
+            })
+            .int({
+                message: 'InfantTravelers  must be an integer',
+            })
+            .nonnegative({
+                message: 'InfantTravelers  must be a non-negative number',
+            }).default(0),
     })
     .strict();

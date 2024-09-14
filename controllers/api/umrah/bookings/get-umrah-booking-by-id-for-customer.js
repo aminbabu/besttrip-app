@@ -134,6 +134,10 @@ module.exports = async (req, res, next) => {
                 invoice: 1,
                 travelers: 1,
                 invoice: 1,
+                totalTravelers: 1,
+                adultTravelers: 1,
+                childTravelers: 1,
+                infantTravelers: 1,
             },
         };
 

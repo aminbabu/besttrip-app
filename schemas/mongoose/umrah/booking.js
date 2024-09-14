@@ -32,6 +32,21 @@ module.exports = new Schema(
             type: Number,
             required: [true, 'Total Travelers is required'],
         },
+        adultTravelers: {
+            type: Number,
+            required: [true, 'Adult Travelers is required'],
+            default: 1,
+        },
+        childTravelers: {
+            type: Number,
+            required: [true, 'Child Travelers is required'],
+            default: 0,
+        },
+        infantTravelers: {
+            type: Number,
+            required: [true, 'Infant Travelers is required'],
+            default: 0,
+        },
         invoiceId: {
             type: Schema.Types.ObjectId,
             default: null,
