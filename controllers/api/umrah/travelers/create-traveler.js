@@ -105,7 +105,62 @@ module.exports = async (req, res, next) => {
             // Save the new traveler to the database
             const traveler = new Traveler(travelerData);
             await traveler.save();
-
+            if (validatedData.travelerType === 'adult') {
+                // if (!listedUmrah.adultTravelers < 0) {
+                //     listedUmrah.set({
+                //         adultTravelers: listedUmrah.adultTravelers - 1,
+                //     });
+                // }
+                await UmrahBooking.findOneAndUpdate(
+                    {
+                        _id: validatedData.umrahBooking,
+                        customer:
+                            req.user.role === 'admin'
+                                ? validatedData.customerId
+                                : req.user._id,
+                    },
+                    { $set: { adultTravelers: listedUmrah.adultTravelers - 1 } }
+                );
+            }
+            if (validatedData.travelerType === 'child') {
+                // if (!listedUmrah.childTravelers < 0) {
+                //     listedUmrah.set({
+                //         childTravelers: listedUmrah.childTravelers - 1,
+                //     });
+                // }
+                await UmrahBooking.findOneAndUpdate(
+                    {
+                        _id: validatedData.umrahBooking,
+                        customer:
+                            req.user.role === 'admin'
+                                ? validatedData.customerId
+                                : req.user._id,
+                    },
+                    { $set: { childTravelers: listedUmrah.childTravelers - 1 } }
+                );
+            }
+            if (validatedData.travelerType === 'infant') {
+                // if (!listedUmrah.infantTravelers < 0) {
+                //     listedUmrah.set({
+                //         infantTravelers: listedUmrah.infantTravelers - 1,
+                //     });
+                // }
+                await UmrahBooking.findOneAndUpdate(
+                    {
+                        _id: validatedData.umrahBooking,
+                        customer:
+                            req.user.role === 'admin'
+                                ? validatedData.customerId
+                                : req.user._id,
+                    },
+                    {
+                        $set: {
+                            infantTravelers: listedUmrah.infantTravelers - 1,
+                        },
+                    }
+                );
+            }
+            await listedUmrah.save();
             // Return success response
             return res.status(201).send({
                 message: 'Traveler created successfully',

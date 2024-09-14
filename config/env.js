@@ -17,8 +17,8 @@ dotenv.config();
 module.exports = {
     NODE_ENV: process.env.NODE_ENV,
     APP_NAME: process.env.APP_NAME,
-    APP_URL: process.env.BACKEND_APP_URL,
-    PORT: process.env.BACKEND_PORT,
+    APP_URL: process.env.APP_URL,
+    PORT: process.env.PORT,
     FRONTEND_APP_URL: process.env.FRONTEND_APP_URL,
     FRONTEND_PORT: process.env.FRONTEND_PORT,
     MONGODB_URI: process.env.MONGODB_URI,
