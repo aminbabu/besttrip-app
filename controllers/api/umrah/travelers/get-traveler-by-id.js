@@ -7,6 +7,7 @@
  * @update_date 08 May, 2024
  */
 
+const { default: mongoose } = require('mongoose');
 const {
     UMRAH_BOOKING_STATUS,
 } = require('../../../../constants/umrah-bookings');
@@ -16,15 +17,17 @@ const { Traveler, UmrahBooking } = require('../../../../models');
 module.exports = async (req, res, next) => {
     try {
         const query = {
-            _id: req.params.travelerId,
-            umrahBooking: req.params.umrahBookingId,
+            _id: new mongoose.Types.ObjectId(req.params.travelerId),
+            umrahBooking: new mongoose.Types.ObjectId(
+                req.params.umrahBookingId
+            ),
         };
-
+        // console.log(query);
         // Add customer filter if the user is not an admin
         if (req.user.role !== 'admin') {
-            query.customer = req.user._id;
+            query.createdBy = new mongoose.Types.ObjectId(req.user._id);
         }
-
+        console.log(query);
         const traveler = await Traveler.findOne(query);
 
         if (!traveler) {
