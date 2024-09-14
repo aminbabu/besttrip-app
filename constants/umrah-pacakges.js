@@ -33,6 +33,7 @@ const UMRAH_PACKAGE_INCLUSIONS = [
     'visa',
     'transport',
     'food',
+    'guide',
 ];
 
 // umrah package outbound flight stops
